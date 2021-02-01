@@ -15,8 +15,18 @@
  * @see Theming https://chakra-ui.com/docs/theming/component-style
  */
 
-import * as React from 'react'
+import { styled } from '@theme'
 
-export const Button = (props: any) => {
-  return <button {...props}>{props.children}</button>
-}
+export const Button = styled('button', {
+  backgroundColor: '$purple500',
+  borderRadius: '9999px',
+  fontSize: '13px',
+  lineHeight: '1',
+  fontWeight: 500,
+  paddingTop: '10px',
+  paddingBottom: '10px',
+  paddingLeft: '16px',
+  paddingRight: '16px',
+  border: '0',
+  color: 'white',
+})
