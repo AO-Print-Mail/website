@@ -18,7 +18,7 @@
 import { styled } from '@theme'
 
 export const Button = styled('button', {
-  backgroundColor: '$purple500',
+  backgroundColor: '$black',
   borderRadius: '9999px',
   fontSize: '13px',
   lineHeight: '1',

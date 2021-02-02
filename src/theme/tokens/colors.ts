@@ -4,4 +4,5 @@ export const colors = {
   $purple500: 'hsl(252,78%,60%)',
   $green500: 'hsl(148,60%,60%)',
   $red500: 'hsl(352,100%,62%)',
+  $black: '#10102B',
 }
