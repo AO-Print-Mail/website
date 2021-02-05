@@ -1,7 +1,9 @@
-import '../styles/globals.css'
 import Head from 'next/head'
+import { globalStyles } from '@theme'
+import '../styles/font-face.css'
 
 function MyApp({ Component, pageProps }) {
+  globalStyles()
   return (
     <>
       <Head>
@@ -13,6 +15,12 @@ function MyApp({ Component, pageProps }) {
         />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#10102B" />
+        <link
+          rel="preload"
+          href="/fonts/ao-rcltsmbld/ao-rcltsmb-alph.woff2"
+          as="font"
+          crossOrigin=""
+        />
       </Head>
       <Component {...pageProps} />
     </>

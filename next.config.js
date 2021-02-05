@@ -27,4 +27,4 @@ const withOffline = require('next-offline')({
   },
 })
 
-module.exports = withPlugins([withOffline])
+module.exports = withPlugins([])

@@ -2,6 +2,13 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { Button } from '@components/template'
 
+import { styled } from '@theme'
+
+const Heading = styled('h1', {
+  fontFamily: '$heading',
+  fontFeatureSettings: 'normal',
+})
+
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -11,9 +18,9 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <Heading className={styles.title}>
+          Exceptional Direct Mail &amp; Printing services
+        </Heading>
         <Button>Booya</Button>
         <p className={styles.description}>
           Get started by editing{' '}

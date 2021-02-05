@@ -1,0 +1,62 @@
+@font-face {
+  font-family: 'AoRcltSMB';
+  font-style: normal;
+  font-weight: 600;
+  font-display: auto;
+  src: url('/fonts/ao-rcltsmbld/ao-rcltsmb-alph.woff2') format('woff2'),
+    url('/fonts/ao-rcltsmbld/ao-rcltsmb-alph.woff') format('woff'),
+    url('/fonts/ao-rcltsmbld/ao-rcltsmb-alph.ttf') format('truetype');
+  unicode-range: U+0020-0021, U+0061-007A, U+003E-005A, U+002C-002E, U+0026;
+}
+@font-face {
+  font-family: 'AoRcltSMB';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/ao-rcltsmbld/ao-rcltsmb-num.woff2') format('woff2'),
+    url('/fonts/ao-rcltsmbld/ao-rcltsmb-num.woff') format('woff'),
+    url('/fonts/ao-rcltsmbld/ao-rcltsmb-num.ttf') format('truetype');
+  unicode-range: U+002F-003D;
+}
+@font-face {
+  font-family: 'AoRcltSMB';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/ao-rcltsmbld/ao-rcltsmb-punc.woff2') format('woff2'),
+    url('/fonts/ao-rcltsmbld/ao-rcltsmb-punc.woff') format('woff'),
+    url('/fonts/ao-rcltsmbld/ao-rcltsmb-punc.ttf') format('truetype');
+  unicode-range: U+0022-0025, U+0027-002B, U+005B-0060;
+}
+@font-face {
+  font-family: 'AoRcltSMB';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/ao-rcltsmbld/ao-rcltsmb-rest.woff2') format('woff2'),
+    url('/fonts/ao-rcltsmbld/ao-rcltsmb-rest.woff') format('woff'),
+    url('/fonts/ao-rcltsmbld/ao-rcltsmb-rest.ttf') format('truetype');
+  unicode-range: U+007B-F8FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: auto;
+  font-variant-alternates: stylistic();
+  src: url('/fonts/inter/intreg-sb.woff2') format('woff2'),
+    url('/fonts/inter/intreg-sb.woff') format('woff'),
+    url('/fonts/inter/intreg-sb.ttf') format('truetype');
+  unicode-range: U+007B-F8FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: auto;
+  font-variant-alternates: stylistic();
+  src: url('/fonts/inter/intregit-sb.woff2') format('woff2'),
+    url('/fonts/inter/intregit-sb.woff') format('woff'),
+    url('/fonts/inter/intregit-sb.ttf') format('truetype');
+  unicode-range: U+007B-F8FF;
+}

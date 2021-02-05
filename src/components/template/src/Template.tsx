@@ -18,7 +18,7 @@
 import { styled } from '@theme'
 
 export const Button = styled('button', {
-  backgroundColor: '$black',
+  backgroundColor: '$orange',
   borderRadius: '9999px',
   fontSize: '13px',
   lineHeight: '1',
@@ -28,5 +28,12 @@ export const Button = styled('button', {
   paddingLeft: '16px',
   paddingRight: '16px',
   border: '0',
-  color: 'white',
+  color: '$N80',
+  cursor: 'pointer',
+  '&:hover': {
+    backgroundColor: '$O30',
+  },
+  '&:active': {
+    backgroundColor: '$O40',
+  },
 })

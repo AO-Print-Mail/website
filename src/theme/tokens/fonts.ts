@@ -4,7 +4,10 @@ export const fontSizes = {
   $3: '15px',
 }
 
-export const fontFamilies = {
+export const fonts = {
+  $inter:
+    '"Inter",-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;',
+  $heading: '"AoRcltSMB", Georgia, serif;',
   $system:
     '-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;',
 }
