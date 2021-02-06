@@ -1,3 +1,7 @@
+/* -------------------- */
+/*       HEADINGS       */
+/* -------------------- */
+
 @font-face {
   font-family: 'AoRcltSMB';
   font-style: normal;
@@ -38,25 +42,117 @@
     url('/fonts/ao-rcltsmbld/ao-rcltsmb-rest.ttf') format('truetype');
   unicode-range: U+007B-F8FF;
 }
+
+/* -------------------- */
+/*       PARAGRAPHS     */
+/* -------------------- */
+
+/* REGULAR */
+/* Basic latin - preloaded */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-display: auto;
-  font-variant-alternates: stylistic();
-  src: url('/fonts/inter/intreg-sb.woff2') format('woff2'),
-    url('/fonts/inter/intreg-sb.woff') format('woff'),
-    url('/fonts/inter/intreg-sb.ttf') format('truetype');
-  unicode-range: U+007B-F8FF;
+  src: url('/fonts/inter/inter-reg-ltb.woff2') format('woff2'),
+    url('/fonts/inter/inter-reg-ltb.woff') format('woff');
+  unicode-range: U+0020-007F, U+00A9;
 }
+/* Latin supplement */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter/inter-reg-lts.woff2') format('woff2'),
+    url('/fonts/inter/inter-reg-lts.woff') format('woff');
+  unicode-range: U+00A0-00A8, U+00AA-00FF;
+}
+
+/* ITALIC */
+/* Basic latin */
 @font-face {
   font-family: 'Inter';
   font-style: italic;
   font-weight: 400;
   font-display: auto;
-  font-variant-alternates: stylistic();
-  src: url('/fonts/inter/intregit-sb.woff2') format('woff2'),
-    url('/fonts/inter/intregit-sb.woff') format('woff'),
-    url('/fonts/inter/intregit-sb.ttf') format('truetype');
-  unicode-range: U+007B-F8FF;
+  src: url('/fonts/inter/inter-italic-ltb.woff2') format('woff2'),
+    url('/fonts/inter/inter-italic-ltb.woff') format('woff');
+  unicode-range: U+0020-007F;
+}
+/* Latin supplement */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter/inter-italic-lts.woff2') format('woff2'),
+    url('/fonts/inter/inter-italic-lts.woff') format('woff');
+  unicode-range: U+00A0-00FF;
+}
+
+/* BOLD */
+/* Basic latin - preloaded */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: auto;
+  src: url('/fonts/inter/inter-bold-ltb.woff2') format('woff2'),
+    url('/fonts/inter/inter-bold-ltb.woff') format('woff');
+  unicode-range: U+0020-007F;
+}
+/* Latin supplement */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/inter/inter-bold-lts.woff2') format('woff2'),
+    url('/fonts/inter/inter-bold-lts.woff') format('woff');
+  unicode-range: U+00A0-00FF;
+}
+
+/* BOLD ITALIC */
+/* Basic latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 700;
+  font-display: auto;
+  src: url('/fonts/inter/inter-bldit-ltb.woff2') format('woff2'),
+    url('/fonts/inter/inter-bldit-ltb.woff') format('woff');
+  unicode-range: U+0020-007F;
+}
+/* Latin supplement */
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/inter/inter-bldit-lts.woff2') format('woff2'),
+    url('/fonts/inter/inter-bldit-lts.woff') format('woff');
+  unicode-range: U+00A0-00FF;
+}
+
+/* SEMI-BOLD */
+/* Basic latin - preloaded */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: auto;
+  src: url('/fonts/inter/inter-smb-ltb.woff2') format('woff2'),
+    url('/fonts/inter/inter-smb-ltb.woff') format('woff');
+  unicode-range: U+0020-007F;
+}
+/* Latin supplement */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter/inter-smb-lts.woff2') format('woff2'),
+    url('/fonts/inter/inter-smb-lts.woff') format('woff');
+  unicode-range: U+00A0-00FF;
 }
