@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import { Logo } from '@components/logo/src'
 
-import { styled } from '@theme'
+import { styled, css } from '@theme'
 
 const Heading = styled('h1', {
   fontFamily: '$heading',
@@ -11,12 +11,12 @@ const Heading = styled('h1', {
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Direct Mail Quote</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Logo />
+      <Logo size="large" />
 
       <main className={styles.main}>
         <Heading className={styles.title}>
@@ -64,8 +64,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
+          Powered by your mum's queefs
         </a>
       </footer>
     </div>

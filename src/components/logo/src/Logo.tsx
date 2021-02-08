@@ -17,6 +17,15 @@
 
 import { styled } from '@theme'
 
+const Svg = styled('svg', {
+  variants: {
+    size: {
+      regular: { height: '$6', tb: { height: '$7' }, sdk: { height: '$8' } },
+      large: { height: '$7', tb: { height: '$8' }, sdk: { height: '$9' } },
+    },
+  },
+})
+
 const Text = styled('path', {
   fill: '$darkBlue',
 })
@@ -25,9 +34,9 @@ const Leaf = styled('path', {
   fill: '$green',
 })
 
-export function Logo() {
+export const Logo = (props) => {
   return (
-    <svg>
+    <Svg {...props} viewBox="0 0 84 40">
       <path
         d="M60.06 25.26c0 2.64.9 4.84 2.7 6.58a8.52 8.52 0 006.17 2.59c2.53 0 4.66-.9 6.4-2.64a8.83 8.83 0 002.58-6.47c0-2.6-.84-4.73-2.58-6.47a8.5 8.5 0 00-6.34-2.65c-2.53 0-4.6.9-6.35 2.65a8.7 8.7 0 00-2.58 6.41z"
         fill="url(#paint0_linear)"
@@ -47,6 +56,6 @@ export function Logo() {
           <stop offset="1" stop-color="#F89E33" />
         </linearGradient>
       </defs>
-    </svg>
+    </Svg>
   )
 }

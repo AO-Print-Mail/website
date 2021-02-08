@@ -8,7 +8,7 @@
   font-family: 'AoRcltSMB';
   font-style: normal;
   font-weight: 600;
-  font-display: auto;
+  font-display: swap;
   src: url('/fonts/ao-rcltsmbld/ao-rcltsmb-alph.woff2') format('woff2'),
     url('/fonts/ao-rcltsmbld/ao-rcltsmb-alph.woff') format('woff'),
     url('/fonts/ao-rcltsmbld/ao-rcltsmb-alph.ttf') format('truetype');
@@ -58,7 +58,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-display: auto;
+  font-display: swap;
   src: url('/fonts/inter/inter-reg-ltb.woff2') format('woff2'),
     url('/fonts/inter/inter-reg-ltb.woff') format('woff');
   unicode-range: U+0020-007F, U+00A9;
@@ -146,7 +146,7 @@
   font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
-  font-display: auto;
+  font-display: swap;
   src: url('/fonts/inter/inter-smb-ltb.woff2') format('woff2'),
     url('/fonts/inter/inter-smb-ltb.woff') format('woff');
   unicode-range: U+0020-007F;

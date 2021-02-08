@@ -117,4 +117,15 @@ export default {
   linearGradient: (value: keyof typeof gradients | string) => {
     return { backgroundImage: `linear-gradient(${value})` }
   },
+
+  flexGap: {
+    '--gap': '12px',
+    display: 'inline-flex',
+    flexWrap: 'wrap',
+    margin: 'calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap))',
+    width: 'calc(100% + var(--gap))',
+    '& > *': {
+      margin: 'var(--gap) 0 0 var(--gap)',
+    },
+  },
 }
