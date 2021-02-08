@@ -14,7 +14,7 @@ export const globalStyles = css.global({
   },
   body: {
     margin: '0',
-    fontFamily: '$inter',
+    fontFamily: '$paragraph',
     fontFeatureSettings: '"salt"',
     backgroundColor: '$N10',
   },
@@ -22,16 +22,15 @@ export const globalStyles = css.global({
     boxSizing: 'border-box',
   },
   main: { display: 'block' },
-  h1: { fontSize: '2em', margin: '0.67em 0' },
   hr: { boxSizing: 'content-box', height: '0', overflow: 'visible' },
-  pre: { fontFamily: 'monospace, monospace', fontSize: '1em' },
+  pre: { fontFamily: '$monospace', fontSize: '1em' },
   a: {
     backgroundColor: 'transparent',
   },
   'abbr[title]': { borderBottom: 'none', textDecoration: 'underline' },
   'b, strong': { fontWeight: 'bolder' },
   'code, kbd, samp': {
-    fontFamily: 'monospace, monospace',
+    fontFamily: '$monospace',
     fontSize: '1em',
   },
   small: { fontSize: '80%' },

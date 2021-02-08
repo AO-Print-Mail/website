@@ -21,6 +21,18 @@ function MyApp({ Component, pageProps }) {
           as="font"
           crossOrigin=""
         />
+        <link
+          rel="preload"
+          href="'/fonts/inter/inter-smb-ltb.woff2'"
+          as="font"
+          crossOrigin=""
+        />
+        <link
+          rel="preload"
+          href="/fonts/inter/inter-reg-ltb.woff2"
+          as="font"
+          crossOrigin=""
+        />
       </Head>
       <Component {...pageProps} />
     </>

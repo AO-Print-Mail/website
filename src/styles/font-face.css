@@ -2,6 +2,8 @@
 /*       HEADINGS       */
 /* -------------------- */
 
+/* SEMIBOLD */
+/* Basic latin without numbers - preloaded */
 @font-face {
   font-family: 'AoRcltSMB';
   font-style: normal;
@@ -12,6 +14,7 @@
     url('/fonts/ao-rcltsmbld/ao-rcltsmb-alph.ttf') format('truetype');
   unicode-range: U+0020-0021, U+0061-007A, U+003E-005A, U+002C-002E, U+0026;
 }
+/* Numbers*/
 @font-face {
   font-family: 'AoRcltSMB';
   font-style: normal;
@@ -22,6 +25,7 @@
     url('/fonts/ao-rcltsmbld/ao-rcltsmb-num.ttf') format('truetype');
   unicode-range: U+002F-003D;
 }
+/* Extended puctuation*/
 @font-face {
   font-family: 'AoRcltSMB';
   font-style: normal;
@@ -32,6 +36,7 @@
     url('/fonts/ao-rcltsmbld/ao-rcltsmb-punc.ttf') format('truetype');
   unicode-range: U+0022-0025, U+0027-002B, U+005B-0060;
 }
+/* Latin extended */
 @font-face {
   font-family: 'AoRcltSMB';
   font-style: normal;
@@ -75,7 +80,7 @@
   font-family: 'Inter';
   font-style: italic;
   font-weight: 400;
-  font-display: auto;
+  font-display: swap;
   src: url('/fonts/inter/inter-italic-ltb.woff2') format('woff2'),
     url('/fonts/inter/inter-italic-ltb.woff') format('woff');
   unicode-range: U+0020-007F;
@@ -92,12 +97,12 @@
 }
 
 /* BOLD */
-/* Basic latin - preloaded */
+/* Basic latin*/
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-display: auto;
+  font-display: swap;
   src: url('/fonts/inter/inter-bold-ltb.woff2') format('woff2'),
     url('/fonts/inter/inter-bold-ltb.woff') format('woff');
   unicode-range: U+0020-007F;
@@ -119,7 +124,7 @@
   font-family: 'Inter';
   font-style: italic;
   font-weight: 700;
-  font-display: auto;
+  font-display: swap;
   src: url('/fonts/inter/inter-bldit-ltb.woff2') format('woff2'),
     url('/fonts/inter/inter-bldit-ltb.woff') format('woff');
   unicode-range: U+0020-007F;
