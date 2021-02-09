@@ -1,3 +1,16 @@
 {
-  "main": "src/index.ts"
+  "main": "src/index.ts",
+  "name": "@aomail/logo",
+  "version": "1.0.0",
+  "description": "{{description}}",
+  "keywords": [
+    "theme",
+    "theming",
+    "ui mode",
+    "ui"
+  ],
+  "author": "Oli Askew <oli@oaskew.co.uk>",
+  "peerDependencies": {
+    "react": ">=17.0.1"
+  }
 }
