@@ -16,7 +16,7 @@ export default function Home() {
         <title>Direct Mail Quote</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Logo size="large" />
+      <Logo size="large" color="primary" />
 
       <main className={styles.main}>
         <Heading className={styles.title}>

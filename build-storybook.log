@@ -1,0 +1,22 @@
+npm WARN exec The following package was not found and will be installed: run
+Watching /Users/oliaskew/Projects/website and all sub-directories not excluded by your .gitignore. Will not monitor dotfiles.
+Found & ignored ./node_modules ; is listed in .gitignore
+Found & ignored ./src/stories/button.css ; has ignored extension
+Found & ignored ./src/stories/header.css ; has ignored extension
+Found & ignored ./src/stories/page.css ; has ignored extension
+Found & ignored ./src/styles/Home.module.css ; has ignored extension
+Found & ignored ./src/styles/font-face.css ; has ignored extension
+
+Starting: build-storybook -- --output-dir /var/folders/8_/yyvy4yl56mb1xmjn0nz3ddtr0000gn/T/chromatic--98650-9yFTqSlykwWx
+node:internal/modules/cjs/loader:928
+  throw err;
+  ^
+
+Error: Cannot find module '/Users/oliaskew/Projects/website/build-storybook'
+    at Function.Module._resolveFilename (node:internal/modules/cjs/loader:925:15)
+    at Function.Module._load (node:internal/modules/cjs/loader:769:27)
+    at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:76:12)
+    at node:internal/main/run_main_module:17:47 {
+  code: 'MODULE_NOT_FOUND',
+  requireStack: []
+}
