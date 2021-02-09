@@ -36,7 +36,6 @@ const ButtonBg = styled('button', {
   fontFamily: '$paragraph',
   fontSize: '$2',
   fontWeight: 600,
-  fontVariantNumeric: 'tabular-nums',
 })
 
 export function Button({ onClick, ...props }: ButtonProps) {

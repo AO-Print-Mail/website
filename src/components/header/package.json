@@ -1,0 +1,22 @@
+{
+  "main": "src/index.ts",
+  "name": "@aomail/header",
+  "version": "1.0.0",
+  "description": "responsive extensible header bar",
+  "keywords": [
+    "theme",
+    "theming",
+    "ui mode",
+    "ui"
+  ],
+  "author": "Oli Askew <oli@oaskew.co.uk>",
+  "homepage": "https://github.com/chakra-ui/chakra-ui#readme",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "peerDependencies": {
+    "react": ">=17.0.1"
+  }
+}
