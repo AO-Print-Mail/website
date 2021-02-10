@@ -109,23 +109,19 @@ export default {
   pe: (value: any) => ({ pointerEvents: value }),
   us: (value: any) => ({ userSelect: value }),
 
-  // size: (value: keyof typeof theme['sizes'] | (string & {})) => ({
-  //   width: value,
-  //   height: value,
-  // }),
-
   linearGradient: (value: keyof typeof gradients | string) => {
-    return { backgroundImage: `linear-gradient(${value})` }
+    return { backgroundImage: `linear-gradient(${gradients[value]})` }
   },
-
-  flexGap: {
-    '--gap': '12px',
-    display: 'inline-flex',
-    flexWrap: 'wrap',
-    margin: 'calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap))',
-    width: 'calc(100% + var(--gap))',
-    '& > *': {
-      margin: 'var(--gap) 0 0 var(--gap)',
-    },
+  flexGap: (value: keyof typeof theme['space']) => {
+    return {
+      '--gap': value,
+      display: 'flex',
+      flexFlow: 'row wrap',
+      margin: 'calc(-1 * var(--gap)) 0 0 calc(-1 * var(--gap))',
+      width: 'calc(100% + var(--gap))',
+      '& > *': {
+        margin: 'var(--gap) 0 0 var(--gap)',
+      },
+    }
   },
 }

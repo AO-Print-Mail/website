@@ -1,2 +1,3 @@
-export { styled, css } from './stitches.config'
+export * from './stitches.config'
 export { globalStyles } from './globals'
+export * from './atoms'
