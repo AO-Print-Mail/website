@@ -1,0 +1,21 @@
+{
+  "main": "src/index.ts",
+  "name": "@aomail/Layout",
+  "version": "1.0.0",
+  "description": "An abstraction for the common page layout. Includes various props to control header, footer and head elements.",
+  "keywords": [
+    "theme",
+    "theming",
+    "ui mode",
+    "ui"
+  ],
+  "author": "Oli Askew <oli@oaskew.co.uk>",
+  "homepage": "https://github.com/chakra-ui/chakra-ui#readme",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "peerDependencies": {
+    "react": ">=17.0.1"
+  }
+}

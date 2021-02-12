@@ -4,9 +4,8 @@ export type ContainerProps = ThemeProps<typeof Container>
 export type ContainerVariants = ThemeVariants<typeof Container>
 
 export const Container = styled('div', {
-  maxWidth: '100%',
-  width: '100%',
   position: 'relative',
+  flex: '1 1 100%',
   mx: '$3',
   m: {
     mx: '$4',

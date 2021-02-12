@@ -4,13 +4,6 @@ export const globalStyles = css.global({
   html: {
     lineHeight: '1.15',
     textSizeAdjust: '100%',
-    '@font-face': {
-      fontFamily: 'AoRcltSMB',
-      fontStyle: 'normal',
-      fontWeight: 600,
-      fontDisplay: 'auto',
-      src: 'url("/fonts/ao-rcltsmb/ao-rcltsmb-alph.woff2") format("woff2")',
-    },
   },
   body: {
     margin: '0',

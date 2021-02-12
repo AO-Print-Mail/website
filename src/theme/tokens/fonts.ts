@@ -65,9 +65,9 @@ export const lineHeights = {
   $5: '1.5',
 }
 export const letterSpacings = {
-  $xcosy: '-0.025em',
-  $cosy: '-0.0125em',
-  $reg: '0',
-  $space: '0.0125em',
+  $xcosy: '-0.015em',
+  $cosy: '-0.01em',
+  $reg: '-0.005em',
+  $space: '0.01em',
   $xspace: '0.25em',
 }

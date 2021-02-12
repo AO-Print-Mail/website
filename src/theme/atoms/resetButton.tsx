@@ -15,7 +15,7 @@ export const ResetButton = styled('button', {
   outline: 'none',
   padding: '0',
   textDecoration: 'none',
-  userSelect: 'none',
+  cursor: 'pointer',
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
   '::before': {
     boxSizing: 'border-box',
