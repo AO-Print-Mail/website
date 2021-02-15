@@ -4,7 +4,7 @@ export type ContainerVariants = ThemeVariants<typeof Container>
 
 export const Container = styled('div', {
   position: 'relative',
-  width: '100%',
+  alignSelf: 'stretch',
   mx: '$3',
   when: {
     m: {
