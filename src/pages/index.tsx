@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Heading1, Paragraph2, Container, styled } from '@theme'
-import { Layout } from '@components/layout/src'
+import { Layout } from '@components/layout'
 
 const HeroText = styled('div', {
   maxWidth: '60rem',

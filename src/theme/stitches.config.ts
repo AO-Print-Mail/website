@@ -1,23 +1,16 @@
-import {
-  createStyled,
-  StitchesProps,
-  StitchesVariants,
-  TComponentStylesObject,
-} from '@stitches/react'
-import { breakpoints } from './breakpoints'
-import { tokens } from './tokens'
+import createCss, { StitchesCss, StitchesVariants } from '@stitches/react'
+import { breakpoints as conditions } from './breakpoints'
+import { theme } from './theme'
 import utils from './utils'
 
-export const { styled, css } = createStyled({
+export const stitchesConfig = createCss({
   prefix: '',
-  tokens,
-  breakpoints,
+  theme,
+  conditions,
   utils,
 })
 
-export type {
-  StitchesProps as ThemeProps,
-  StitchesVariants as ThemeVariants,
-  tokens as theme,
-  TComponentStylesObject as tcss,
-}
+export const { css, styled, getCssString, global } = stitchesConfig
+export { theme }
+export type CSS = StitchesCss<typeof stitchesConfig>
+export type ThemeVariants<T> = StitchesVariants<T>

@@ -1,6 +1,6 @@
 import { Container, Logo, UI1, ContentWrapper, styled } from '@theme'
 import Link from 'next/link'
-import { NakedButton } from '../../button/src/index'
+import { NakedButton } from '../../button'
 import { Phone } from '@theme/icons/phone'
 
 interface HeaderProps {
@@ -41,10 +41,10 @@ export function Header({ sticky = false, ...props }: HeaderProps) {
             />
           </a>
         </Link>
-        <NakedButton as="a" href="tel:+61403066036">
+        <NakedButton as="a" href="tel:+61296456777">
           <Phone css={{ mx: '$1', m: { mx: '$2' } }} />
           <UI1 color="unset" css={{ mx: '$1', m: { mx: '$2' } }}>
-            0403066036
+            (02) 9645 6777
           </UI1>
         </NakedButton>
       </Container>

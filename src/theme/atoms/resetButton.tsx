@@ -1,6 +1,5 @@
-import { styled, ThemeProps, ThemeVariants } from '..'
+import { styled, ThemeVariants } from '..'
 
-export type ResetButtonProps = ThemeProps<typeof ResetButton>
 export type ResetButtonVariants = ThemeVariants<typeof ResetButton>
 
 export const ResetButton = styled('button', {
@@ -15,6 +14,8 @@ export const ResetButton = styled('button', {
   outline: 'none',
   padding: '0',
   textDecoration: 'none',
+  transition: 'color background-color 0.1s ease-in-out',
+  willChange: 'color',
   cursor: 'pointer',
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
   '::before': {

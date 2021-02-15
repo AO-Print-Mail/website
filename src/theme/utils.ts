@@ -1,4 +1,4 @@
-import { tokens as theme } from './tokens'
+import { theme, stitchesConfig } from '.'
 
 const gradients = {
   $orange: '90deg, #EE3131 0%, #F89E33 100.02%',
@@ -12,107 +12,197 @@ const gradients = {
 type gradientColor = '' | '$green' | 'orange' | '$white' | '$dark'
 
 export default {
-  p: (value: any) => ({
+  p: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     paddingTop: value,
     paddingBottom: value,
     paddingLeft: value,
     paddingRight: value,
   }),
-  pt: (value: any) => ({
+  pt: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     paddingTop: value,
   }),
-  pr: (value: any) => ({
+  pr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     paddingRight: value,
   }),
-  pb: (value: any) => ({
+  pb: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     paddingBottom: value,
   }),
-  pl: (value: any) => ({
+  pl: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     paddingLeft: value,
   }),
-  px: (value: any) => ({
+  px: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     paddingLeft: value,
     paddingRight: value,
   }),
-  py: (value: any) => ({
+  py: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     paddingTop: value,
     paddingBottom: value,
   }),
 
-  m: (value: any) => ({
+  m: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     marginTop: value,
     marginBottom: value,
     marginLeft: value,
     marginRight: value,
   }),
-  mt: (value: any) => ({
+  mt: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     marginTop: value,
   }),
-  mr: (value: any) => ({
+  mr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     marginRight: value,
   }),
-  mb: (value: any) => ({
+  mb: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     marginBottom: value,
   }),
-  ml: (value: any) => ({
+  ml: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     marginLeft: value,
   }),
-  mx: (value: any) => ({
+  mx: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     marginLeft: value,
     marginRight: value,
   }),
-  my: (value: any) => ({
+  my: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
     marginTop: value,
     marginBottom: value,
   }),
 
-  ta: (value: any) => ({ textAlign: value }),
+  ta: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    textAlign: value,
+  }),
 
-  fd: (value: any) => ({ flexDirection: value }),
-  fw: (value: any) => ({ flexWrap: value }),
+  fd: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    flexDirection: value,
+  }),
+  fw: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    flexWrap: value,
+  }),
 
-  ai: (value: any) => ({ alignItems: value }),
-  ac: (value: any) => ({ alignContent: value }),
-  jc: (value: any) => ({ justifyContent: value }),
-  as: (value: any) => ({ alignSelf: value }),
-  fg: (value: any) => ({ flexGrow: value }),
-  fs: (value: any) => ({ flexShrink: value }),
-  fb: (value: any) => ({ flexBasis: value }),
+  ai: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    alignItems: value,
+  }),
+  ac: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    alignContent: value,
+  }),
+  jc: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    justifyContent: value,
+  }),
+  as: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    alignSelf: value,
+  }),
+  fg: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    flexGrow: value,
+  }),
+  fs: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    flexShrink: value,
+  }),
+  fb: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space'] | (string & {})
+  ) => ({
+    flexBasis: value,
+  }),
 
-  bc: (value: keyof typeof theme['colors'] | (string & {})) => ({
+  bc: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['colors'] | (string & {})
+  ) => ({
     backgroundColor: value,
   }),
 
-  br: (value: keyof typeof theme['radii'] | (string & {})) => ({
+  br: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['radii'] | (string & {})
+  ) => ({
     borderRadius: value,
   }),
-  btrr: (value: keyof typeof theme['radii'] | (string & {})) => ({
+  btrr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['radii'] | (string & {})
+  ) => ({
     borderTopRightRadius: value,
   }),
-  bbrr: (value: keyof typeof theme['radii'] | (string & {})) => ({
+  bbrr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['radii'] | (string & {})
+  ) => ({
     borderBottomRightRadius: value,
   }),
-  bblr: (value: keyof typeof theme['radii'] | (string & {})) => ({
+  bblr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['radii'] | (string & {})
+  ) => ({
     borderBottomLeftRadius: value,
   }),
-  btlr: (value: keyof typeof theme['radii'] | (string & {})) => ({
+  btlr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['radii'] | (string & {})
+  ) => ({
     borderTopLeftRadius: value,
   }),
 
-  bs: (value: any) => ({ boxShadow: value }),
+  bs: (config: typeof stitchesConfig) => (value: any) => ({ boxShadow: value }),
 
-  lh: (value: any) => ({ lineHeight: value }),
+  lh: (config: typeof stitchesConfig) => (value: any) => ({
+    lineHeight: value,
+  }),
 
-  ox: (value: any) => ({ overflowX: value }),
-  oy: (value: any) => ({ overflowY: value }),
+  ox: (config: typeof stitchesConfig) => (value: any) => ({ overflowX: value }),
+  oy: (config: typeof stitchesConfig) => (value: any) => ({ overflowY: value }),
 
-  pe: (value: any) => ({ pointerEvents: value }),
-  us: (value: any) => ({ userSelect: value }),
+  pe: (config: typeof stitchesConfig) => (value: any) => ({
+    pointerEvents: value,
+  }),
+  us: (config: typeof stitchesConfig) => (value: any) => ({
+    userSelect: value,
+  }),
 
-  linearGradient: (value: keyof typeof gradients | string) => {
+  linearGradient: (config: typeof stitchesConfig) => (
+    value: keyof typeof gradients | string
+  ) => {
     return { backgroundImage: `linear-gradient(${gradients[value]})` }
   },
-  flexGap: (value: keyof typeof theme['space']) => {
+  flexGap: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space']
+  ) => {
     return {
       '--gap': value,
       display: 'flex',

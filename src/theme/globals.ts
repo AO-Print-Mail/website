@@ -1,6 +1,6 @@
-import { css } from '@theme'
+import { global } from '@theme'
 
-export const globalStyles = css.global({
+export const globalStyles = global({
   html: {
     lineHeight: '1.15',
     textSizeAdjust: '100%',

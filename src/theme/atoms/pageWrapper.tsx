@@ -1,6 +1,5 @@
-import { styled, ThemeProps, ThemeVariants } from '..'
+import { styled, ThemeVariants } from '..'
 
-export type PageWrapperProps = ThemeProps<typeof PageWrapper>
 export type PageWrapperVariants = ThemeVariants<typeof PageWrapper>
 
 export const PageWrapper = styled('main', {
