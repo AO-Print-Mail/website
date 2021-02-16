@@ -1,1 +1,1 @@
-export * from './src/footer'
+export * from './src/footer-new'

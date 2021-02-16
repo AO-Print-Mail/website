@@ -13,7 +13,9 @@ import {
 import { Button } from '@components/button'
 import Link from 'next/link'
 
-interface FooterProps {}
+interface FooterProps {
+  css?: CSS
+}
 
 const FooterContainer = styled(ContentWrapper, {
   backgroundColor: '$N80',
