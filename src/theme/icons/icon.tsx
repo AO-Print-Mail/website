@@ -1,5 +1,5 @@
 import { ThemeVariants } from '@theme/stitches.config'
-import { styled, theme, css, tcss } from '..'
+import { styled, theme, CSS } from '..'
 
 const fallbackIcon = {
   path: (
@@ -24,6 +24,22 @@ export const Svg = styled('svg', {
   fill: 'none',
   verticalAlign: 'middle',
   lineHeight: '1em',
+  variants: {
+    size: {
+      matchFontSize: {
+        size: '1em',
+      },
+      regular: {
+        size: '24px',
+      },
+      small: {
+        size: '16px',
+      },
+    },
+  },
+  defaultVariants: {
+    size: 'matchFontSize',
+  },
 })
 
 export interface IconProps {
@@ -32,7 +48,7 @@ export interface IconProps {
   size?: string | keyof typeof theme['sizes']
   focusable?: boolean
   children?: React.ReactNode
-  css?: {}
+  css?: CSS
 }
 
 export const Icon = ({
@@ -40,17 +56,12 @@ export const Icon = ({
   color = 'currentColor',
   size = '1em',
   focusable = false,
-  d = fallbackIcon,
   css = {},
   children,
   ...props
 }) => {
   return (
-    <Svg
-      css={{ height: size, width: size, color, ...css }}
-      {...props}
-      viewBox={viewBox}
-    >
+    <Svg css={{ size, color, ...css }} {...props} viewBox={viewBox}>
       {children}
     </Svg>
   )

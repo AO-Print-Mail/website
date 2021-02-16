@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
 import { Icon, IconProps } from './icon'
+import { CSS, StitchesComponent } from '@theme'
 
 interface CreateIconOptions {
   /**
@@ -24,6 +25,8 @@ interface CreateIconOptions {
    * Default props automatically passed to the component; overwriteable
    */
   defaultProps?: IconProps
+
+  css?: CSS
 }
 
 const makePaths = (
@@ -40,9 +43,10 @@ export function createIcon({
   viewBox,
   d,
   path,
+  css,
   defaultProps = {},
 }: CreateIconOptions) {
-  const Comp = forwardRef<HTMLOrSVGElement, IconProps>((props, ref) => {
+  const Comp = forwardRef<StitchesComponent<'svg'>, IconProps>((props, ref) => {
     return (
       <Icon viewBox={viewBox} ref={ref} {...defaultProps} {...props}>
         {path ?? makePaths(d)}

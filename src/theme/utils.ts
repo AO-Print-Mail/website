@@ -194,6 +194,10 @@ export default {
   us: (config: typeof stitchesConfig) => (value: any) => ({
     userSelect: value,
   }),
+  size: (config: typeof stitchesConfig) => (value: any) => ({
+    height: value,
+    width: value,
+  }),
 
   linearGradient: (config: typeof stitchesConfig) => (
     value: keyof typeof gradients | string

@@ -14,8 +14,8 @@ export const ResetButton = styled('button', {
   outline: 'none',
   padding: '0',
   textDecoration: 'none',
-  transition: 'color background-color 0.1s ease-in-out',
-  willChange: 'color',
+  transition: 'color 0.1s ease-in-out, background-color 0.1s ease-in-out',
+  willChange: 'color, background-color',
   cursor: 'pointer',
   WebkitTapHighlightColor: 'rgba(0,0,0,0)',
   '::before': {

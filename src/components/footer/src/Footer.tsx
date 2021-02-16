@@ -3,12 +3,14 @@ import {
   ContentWrapper,
   Container,
   Logo,
-  UI1,
   Paragraph4,
   Paragraph5,
+  Phone,
+  CovidSafeBanner,
+  css,
+  CSS,
 } from '@theme'
-import { Phone } from '@theme/icons/phone'
-import { NakedButton } from '@components/button'
+import { Button } from '@components/button'
 import Link from 'next/link'
 
 interface FooterProps {}
@@ -19,38 +21,115 @@ const FooterContainer = styled(ContentWrapper, {
   pt: '$5',
 })
 
-export function Footer(props: FooterProps) {
+const LayoutGrid = styled(Container, {
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr 1fr 1fr',
+  gridGap: '$3',
+  when: {
+    m: { gridGap: '$4', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr' },
+    l: {
+      gridGap: '$5',
+      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+    },
+  },
+})
+
+const ContentColumn = styled('div', {
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  alignItems: 'flex-start',
+  justifyContent: 'flex-start',
+  gridColumnStart: '1',
+  gridColumnEnd: 'span 4',
+  when: {
+    m: {
+      gridColumnEnd: 'span 3',
+    },
+    l: {
+      gridColumnEnd: 'span 2',
+    },
+  },
+})
+const row3: CSS = css({
+  gridColumnStart: '1',
+  gridColumnEnd: 'span 4',
+  alignSelf: 'start',
+  when: {
+    s: {
+      gridColumnEnd: 'span 3',
+    },
+    m: {
+      gridColumnStart: '4',
+      gridColumnEnd: 'span 3',
+    },
+    l: {
+      gridColumnStart: '6',
+      gridColumnEnd: 'span 3',
+    },
+  },
+})
+
+export const Footer: React.FC<FooterProps> = (props: FooterProps) => {
   return (
     <FooterContainer as="footer">
-      <Container css={{ pb: '$5' }}>
-        <Link href="/">
-          <a>
-            <Logo
-              color="white"
-              size={{
-                initial: 'regular',
-                m: 'large',
-                l: 'xlarge',
-              }}
-            />
-          </a>
-        </Link>
-        <Paragraph4 color="light">
-          9 Clearview Pl
-          <br />
-          Brookvale NSW 2100
-        </Paragraph4>
-        <NakedButton
-          as="a"
-          href="tel:+61296456777"
-          css={{ ml: '-1.5rem', color: '$LA60' }}
-        >
-          <Phone css={{ mx: '$1', m: { mx: '$2' } }} />
-          <UI1 color="unset" css={{ mx: '$1', m: { mx: '$2' } }}>
+      <LayoutGrid css={{ pb: '$5' }}>
+        <ContentColumn>
+          <Link href="/">
+            <a>
+              <Logo
+                color="white"
+                size={{
+                  initial: 'regular',
+                  m: 'large',
+                  l: 'xlarge',
+                }}
+              />
+            </a>
+          </Link>
+          <Paragraph4 color="light">
+            9 Clearview Pl
+            <br />
+            Brookvale NSW 2100
+          </Paragraph4>
+          <Button
+            as="a"
+            href="tel:+61296456777"
+            leftIcon={<Phone size="1em" />}
+            color="light"
+            style="naked"
+            size="small"
+            offset="left"
+            css={{ mt: '$3', color: '$LA60' }}
+          >
             (02) 9645 6777
-          </UI1>
-        </NakedButton>
-      </Container>
+          </Button>
+        </ContentColumn>
+        <ContentColumn className={row3}>
+          <CovidSafeBanner className={row3} css={{ mt: '$2' }} />
+          <Button
+            as="a"
+            href="#"
+            color="light"
+            style="naked"
+            size="small"
+            offset="left"
+            css={{ display: 'flex', mt: '$4', color: '$LA60' }}
+          >
+            Privacy and Cookie Policies
+          </Button>
+          <Button
+            as="a"
+            href="#"
+            color="light"
+            style="naked"
+            size="small"
+            offset="left"
+            css={{ display: 'flex', mt: '$1', color: '$LA60' }}
+          >
+            Terms of Service
+          </Button>
+        </ContentColumn>
+      </LayoutGrid>
       <ContentWrapper css={{ backgroundColor: '$black' }}>
         <Container>
           <Paragraph5 css={{ color: '$LA40', my: '$2' }}>

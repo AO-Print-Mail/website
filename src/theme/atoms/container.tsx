@@ -4,17 +4,15 @@ export type ContainerVariants = ThemeVariants<typeof Container>
 
 export const Container = styled('div', {
   position: 'relative',
-  alignSelf: 'stretch',
-  mx: '$3',
+  width: '100%',
+  maxWidth: '96rem',
+  px: '$3',
   when: {
     m: {
-      mx: '$4',
+      px: '$4',
     },
     l: {
-      mx: '$5',
-    },
-    xl: {
-      maxWidth: '96rem',
+      px: '$5',
     },
   },
 })
