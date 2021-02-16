@@ -196,7 +196,7 @@ interface ButtonProps {
   css?: CSS
 }
 
-const defaultSpacing = (direction: 'left' | 'right'): CSS => {
+const defaultSpacing = (direction: 'left' | 'right') => {
   const key = {
     left: 'marginLeft',
     right: 'marginRight',
@@ -227,11 +227,11 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     ref
   ) => {
     const LeftIcn = leftIcon && (
-      <ButtonIcon css={defaultSpacing('right')}>{leftIcon}</ButtonIcon>
+      <ButtonIcon css={{ ...defaultSpacing('right') }}>{leftIcon}</ButtonIcon>
     )
 
     const RightIcn = rightIcon && (
-      <ButtonIcon css={defaultSpacing('left')}>{rightIcon}</ButtonIcon>
+      <ButtonIcon css={{ ...defaultSpacing('left') }}>{rightIcon}</ButtonIcon>
     )
 
     const _children =

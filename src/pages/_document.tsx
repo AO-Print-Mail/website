@@ -1,6 +1,8 @@
 import React from 'react'
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 
+declare var richSnippetReviewsWidgets: any
+
 export default class Document extends NextDocument {
   render() {
     return (
@@ -37,6 +39,10 @@ export default class Document extends NextDocument {
         <body>
           <Main />
           <NextScript />
+          <script
+            src="https://widget.reviews.io/rich-snippet-reviews-widgets/dist.js"
+            type="text/javascript"
+          ></script>
         </body>
       </Html>
     )

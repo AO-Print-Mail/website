@@ -44,7 +44,7 @@ export function Header({ sticky = false, ...props }: HeaderProps) {
         <Button
           as="a"
           href="tel:+61296456777"
-          leftIcon={<Phone size="1em" />}
+          leftIcon={<Phone size="matchFontSize" />}
           color="primary"
           style="naked"
         >

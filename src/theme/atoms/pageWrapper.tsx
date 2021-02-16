@@ -7,6 +7,6 @@ export const PageWrapper = styled('main', {
   display: 'flex',
   flexFlow: 'column nowrap',
   justifyContent: 'stretch',
-  alignItems: 'center',
+  alignItems: 'stretch',
   boxSizing: 'content-box',
 })

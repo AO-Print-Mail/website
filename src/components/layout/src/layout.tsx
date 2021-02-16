@@ -6,15 +6,13 @@ import { Footer } from '@components/footer'
 interface LayoutProps {
   title: string
   description: string
-  children: React.ReactChildren | React.ReactElement
 }
 
-export function Layout({
+export const Layout: React.FC<LayoutProps> = ({
   title,
   description,
-  children,
   ...props
-}: LayoutProps) {
+}) => {
   return (
     <>
       <Head>
@@ -24,7 +22,7 @@ export function Layout({
 
       <PageWrapper>
         <Header />
-        <ContentWrapper>{children}</ContentWrapper>
+        <ContentWrapper>{props.children}</ContentWrapper>
         <Footer />
       </PageWrapper>
     </>

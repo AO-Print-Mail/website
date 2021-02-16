@@ -25,8 +25,9 @@ interface CreateIconOptions {
    * Default props automatically passed to the component; overwriteable
    */
   defaultProps?: IconProps
-
-  css?: CSS
+  /**
+   * Styles for the surrounding svg element
+   */
 }
 
 const makePaths = (
@@ -43,16 +44,16 @@ export function createIcon({
   viewBox,
   d,
   path,
-  css,
   defaultProps = {},
-}: CreateIconOptions) {
-  const Comp = forwardRef<StitchesComponent<'svg'>, IconProps>((props, ref) => {
+}: CreateIconOptions): React.FC<IconProps> {
+  const Comp: React.FC<IconProps> = ({ children, ...props }) => {
     return (
-      <Icon viewBox={viewBox} ref={ref} {...defaultProps} {...props}>
+      //@ts-ignore
+      <Icon viewBox={viewBox} {...defaultProps} {...props} size={props.size}>
         {path ?? makePaths(d)}
       </Icon>
     )
-  })
+  }
 
   return Comp
 }

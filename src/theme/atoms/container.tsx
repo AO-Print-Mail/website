@@ -6,6 +6,7 @@ export const Container = styled('div', {
   position: 'relative',
   width: '100%',
   maxWidth: '96rem',
+  mx: 'auto',
   px: '$3',
   when: {
     m: {

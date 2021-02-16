@@ -1,12 +1,10 @@
-import { styled, ThemeProps, ThemeVariants } from '..'
+import { styled, theme, ThemeVariants, CSS } from '..'
 
 type LogoProps = {
-  size: SvgVariants['size']
-  color: TextVariants['color']
+  color?: ThemeVariants<typeof Leaf>
+  size?: ThemeVariants<typeof Svg>
+  css?: CSS
 }
-
-type SvgProps = ThemeProps<typeof Svg>
-type SvgVariants = ThemeVariants<typeof Svg>
 
 const Svg = styled('svg', {
   variants: {
@@ -17,9 +15,6 @@ const Svg = styled('svg', {
     },
   },
 })
-
-type TextProps = ThemeProps<typeof Text>
-type TextVariants = ThemeVariants<typeof Text>
 
 const Text = styled('path', {
   variants: {
@@ -37,9 +32,6 @@ const Text = styled('path', {
   },
 })
 
-type LeafProps = ThemeProps<typeof Leaf>
-type LeafVariants = ThemeVariants<typeof Leaf>
-
 const Leaf = styled('path', {
   variants: {
     color: {
@@ -55,9 +47,6 @@ const Leaf = styled('path', {
     },
   },
 })
-
-type OrangeProps = ThemeProps<typeof Orange>
-type OrangeVariants = ThemeVariants<typeof Orange>
 
 const Orange = styled('path', {
   variants: {
@@ -75,11 +64,11 @@ const Orange = styled('path', {
   },
 })
 
-export const Logo = ({
+export const Logo: React.FC<LogoProps> = ({
   color = 'primary',
   size = 'regular',
   ...props
-}: LogoProps) => {
+}) => {
   return (
     <Svg size={size} {...props} viewBox="0 0 84 40">
       <Orange

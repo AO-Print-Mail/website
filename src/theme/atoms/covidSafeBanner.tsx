@@ -22,7 +22,7 @@ const Background = styled('div', {
 export const CovidSafeBanner: React.FC<CovidSafeBannerProps> = (props) => {
   return (
     <Background {...props}>
-      <CovidSafe size="$9" css={{ flex: '0 0 $10' }} />
+      <CovidSafe css={{ flex: '0 0 $10', size: '$9' }} />
       <Paragraph5 css={{ ml: '$4', color: '$LA80', mt: '0', flex: '0 1 100%' }}>
         A&amp;O is fully open for business and operating with a COVID safe plan.
       </Paragraph5>

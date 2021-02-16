@@ -51,17 +51,14 @@ export interface IconProps {
   css?: CSS
 }
 
-export const Icon = ({
+export const Icon: React.FC<IconProps> = ({
   viewBox = '0 0 24 24',
-  color = 'currentColor',
-  size = '1em',
   focusable = false,
-  css = {},
   children,
   ...props
 }) => {
   return (
-    <Svg css={{ size, color, ...css }} {...props} viewBox={viewBox}>
+    <Svg {...props} viewBox={viewBox}>
       {children}
     </Svg>
   )
