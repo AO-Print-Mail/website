@@ -1,6 +1,5 @@
 import { styled, ResetButton, theme, CSS, UI1 } from '@theme'
 import { forwardRef } from 'react'
-import * as Icons from '@theme/icons'
 import * as React from 'react'
 import { __DEV__ } from '@utils/src'
 
@@ -244,7 +243,7 @@ export const Button: React.FC<ButtonProps> = forwardRef(
     return (
       <ButtonBg style={style} color={color} size={size} {...props} ref={ref}>
         {LeftIcn && LeftIcn}
-        {children}
+        {_children}
         {RightIcn && RightIcn}
       </ButtonBg>
     )

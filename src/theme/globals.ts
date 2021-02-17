@@ -1,10 +1,7 @@
 import { global } from '@theme'
-
+import { fontFace } from './font-face'
 export const globalStyles = global({
-  html: {
-    lineHeight: '1.15',
-    textSizeAdjust: '100%',
-  },
+  html: { lineHeight: '1.15', textSizeAdjust: '100%' },
   body: {
     margin: '0',
     fontFamily: '$paragraph',

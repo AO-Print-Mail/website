@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Heading1, Paragraph2, Container, styled, css } from '@theme'
 import { Layout } from '@components/layout'
+import { ClientLogoBanner } from '@components/client-logo-banner'
 
 const HeroText = styled('div', {
   maxWidth: '60rem',
@@ -8,7 +9,7 @@ const HeroText = styled('div', {
 const ReviewContainer = styled('div', { backgroundColor: '$white', py: '$4' })
 
 const ReviewWidgetGuff =
-  'richSnippetReviewsWidgets("carousel-widget", { store: "https-www.aomail.com.au", primaryClr: "#558c46", neutralClr: "#dbdcdd", reviewTextClr: "#32334A", widgetName: "carousel", layout: "fullWidth", numReviews: 40, contentMode: "company;third-party", hideDates: false,})'
+  'richSnippetReviewsWidgets("carousel-widget", { store: "https-www.aomail.com.au", primaryClr: "#FE9339", neutralClr: "#dbdcdd", reviewTextClr: "#32334A", widgetName: "carousel", layout: "fullWidth", numReviews: 40, contentMode: "company;third-party", hideDates: false,})'
 
 export default function Home() {
   const [widgetScript, setWidgetScript] = useState(null)
@@ -32,6 +33,7 @@ export default function Home() {
               Print, Direct Mail and Fulfilment services.
             </Paragraph2>
           </HeroText>
+          <ClientLogoBanner />
         </Container>
         <ReviewContainer>
           <Container>

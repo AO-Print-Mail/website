@@ -271,7 +271,7 @@ export const Paragraph3 = styled('p', {
   },
 })
 export const Paragraph4 = styled('p', {
-  color: '$DA65',
+  color: '$DA70',
   fontWeight: '$regular',
   fontFamily: '$paragraph',
   fontSize: '$p4m',
@@ -282,10 +282,10 @@ export const Paragraph4 = styled('p', {
   variants: {
     color: {
       primary: {
-        color: '$DBA60',
+        color: '$DBA70',
       },
       light: {
-        color: '$LA60',
+        color: '$LA70',
       },
     },
   },

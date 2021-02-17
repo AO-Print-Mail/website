@@ -96,7 +96,7 @@ export const Footer: React.FC<FooterProps> = (props: FooterProps) => {
           <Button
             as="a"
             href="tel:+61296456777"
-            leftIcon={<Phone size="1em" />}
+            leftIcon={<Phone size="matchFontSize" />}
             color="light"
             style="naked"
             size="small"
