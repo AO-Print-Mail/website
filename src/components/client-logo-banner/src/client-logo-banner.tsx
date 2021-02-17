@@ -4,11 +4,15 @@ import * as clientLogos from './logos'
 interface ClientLogoBannerProps {}
 
 const Logos = styled('div', {
-  px: '$3',
+  mt: '$4',
   display: 'flex',
   justifyContent: 'space-between',
   when: {
+    m: {
+      px: '$2',
+    },
     l: {
+      px: '$3',
       gridColumnStart: '3',
       gridColumnEnd: 'span 6',
     },
@@ -17,7 +21,7 @@ const Logos = styled('div', {
 
 const LeadText = styled(Paragraph4, {
   color: '$DA70',
-  mt: '$1',
+  mt: '$4',
   when: {
     l: {
       pr: '$4',
@@ -30,8 +34,22 @@ const LeadText = styled(Paragraph4, {
 })
 
 const LogoWrapper = styled('div', {
-  maxHeight: '$7',
-  maxWidth: '$10',
+  maxHeight: '$3',
+  maxWidth: '$6',
+  when: {
+    s: {
+      maxHeight: '$3',
+      maxWidth: '$6',
+    },
+    m: {
+      maxHeight: '$5',
+      maxWidth: '$9',
+    },
+    l: {
+      maxHeight: '$7',
+      maxWidth: '$10',
+    },
+  },
 })
 
 const Banner = styled('div', {
