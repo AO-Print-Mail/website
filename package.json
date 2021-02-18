@@ -4,15 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 1234",
-    "predev": "gen:gql",
+    "predev": "yarn gen:gql",
     "build": "next build",
     "start": "next start",
-    "prestart": "gen:gql",
+    "prestart": "yarn gen:gql",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest",
     "gen:gql": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen -r dotenv/config --config ./codegen.yml",
-    "gen:component": "ts-node scripts/plopfile.ts"
+    "plop:component": "ts-node scripts/plopfile.ts"
   },
   "dependencies": {
     "@stitches/react": "0.1.0-canary.6",
