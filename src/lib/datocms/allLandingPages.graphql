@@ -1,0 +1,12 @@
+query AllLandingPages {
+  allLandingPageV1s {
+    title
+    pageMeta {
+      title
+      twitterCard
+      description
+    }
+    pageContent
+    id
+  }
+}

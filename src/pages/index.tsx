@@ -1,30 +1,52 @@
-import { useState, useEffect } from 'react'
+import { gql, request } from '../lib/datocms/datocms'
 import { Heading1, Paragraph2, Container, styled, css } from '@theme'
 import { Layout } from '@components/layout'
 import { ClientLogoBanner } from '@components/client-logo-banner'
+import { ReviewsIoWidget } from '@components/reviews-io-widget'
+import { AllLandingPagesQuery } from '../lib/datocms/__generated__/types'
+
+interface PageProps {
+  data: AllLandingPagesQuery['allLandingPageV1s']
+}
 
 const HeroText = styled('div', {
   maxWidth: '60rem',
 })
-const ReviewContainer = styled('div', { backgroundColor: '$white', py: '$4' })
+const ReviewBackground = styled('div', { backgroundColor: '$white', py: '$4' })
 
-const ReviewWidgetGuff =
-  'richSnippetReviewsWidgets("carousel-widget", { store: "https-www.aomail.com.au", primaryClr: "#FE9339", neutralClr: "#dbdcdd", reviewTextClr: "#32334A", widgetName: "carousel", layout: "fullWidth", numReviews: 40, contentMode: "company;third-party", hideDates: false,})'
+export async function getStaticProps() {
+  const data = await request({
+    query: 'AllLandingPages',
+    variables: { limit: 1 },
+  })
+  return {
+    props: {
+      data,
+    },
+  }
+}
+export default function LandingPageContent({ data }) {
+  console.log(data)
+  const beforeFooter = (
+    <>
+      <Container>
+        <ClientLogoBanner />
+      </Container>
+      <ReviewBackground>
+        <Container>
+          <ReviewsIoWidget />
+        </Container>
+      </ReviewBackground>
+    </>
+  )
 
-export default function Home() {
-  const [widgetScript, setWidgetScript] = useState(null)
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.innerHTML = ReviewWidgetGuff
-    script.async = true
-    document.body.appendChild(script)
-    return () => {
-      document.body.removeChild(script)
-    }
-  }, [])
   return (
     <>
-      <Layout title="landing page" description="work in progress">
+      <Layout
+        title="landing page"
+        description="work in progress"
+        beforeFooter={beforeFooter}
+      >
         <Container as="section">
           <HeroText>
             <Heading1 color="primary">Australian Direct Mail Services</Heading1>
@@ -33,16 +55,8 @@ export default function Home() {
               Print, Direct Mail and Fulfilment services.
             </Paragraph2>
           </HeroText>
-          <ClientLogoBanner />
         </Container>
-        <ReviewContainer>
-          <Container>
-            <div id="carousel-widget"></div>
-          </Container>
-        </ReviewContainer>
       </Layout>
-
-      {widgetScript}
     </>
   )
 }

@@ -15,12 +15,23 @@ import Link from 'next/link'
 
 interface FooterProps {
   css?: CSS
+  beforeFooter?: React.ReactNode
 }
 
-const FooterContainer = styled(ContentWrapper, {
-  backgroundColor: '$N80',
+const FooterWrapper = styled(ContentWrapper, {
   flex: '0',
-  pt: '$5',
+  variants: {
+    style: {
+      none: {},
+      normal: {
+        pt: '$5',
+        backgroundColor: '$N80',
+      },
+    },
+  },
+  defaultVariants: {
+    style: 'normal',
+  },
 })
 
 const LayoutGrid = styled(Container, {
@@ -71,9 +82,12 @@ const row3: CSS = css({
   },
 })
 
-export const Footer: React.FC<FooterProps> = (props: FooterProps) => {
-  return (
-    <FooterContainer as="footer">
+export const Footer: React.FC<FooterProps> = ({
+  beforeFooter,
+  ...props
+}: FooterProps) => {
+  const footerContent = (
+    <>
       <LayoutGrid css={{ pb: '$5' }}>
         <ContentColumn>
           <Link href="/">
@@ -139,6 +153,19 @@ export const Footer: React.FC<FooterProps> = (props: FooterProps) => {
           </Paragraph5>
         </Container>
       </ContentWrapper>
-    </FooterContainer>
+    </>
+  )
+  if (beforeFooter) {
+    return (
+      <FooterWrapper style="none" {...props}>
+        {beforeFooter}
+        <FooterWrapper as="footer">{footerContent}</FooterWrapper>
+      </FooterWrapper>
+    )
+  }
+  return (
+    <FooterWrapper as="footer" {...props}>
+      {footerContent}
+    </FooterWrapper>
   )
 }

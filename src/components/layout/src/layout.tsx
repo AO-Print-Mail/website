@@ -6,11 +6,13 @@ import { Footer } from '@components/footer'
 interface LayoutProps {
   title: string
   description: string
+  beforeFooter?: React.ReactNode
 }
 
 export const Layout: React.FC<LayoutProps> = ({
   title,
   description,
+  beforeFooter,
   ...props
 }) => {
   return (
@@ -23,7 +25,7 @@ export const Layout: React.FC<LayoutProps> = ({
       <PageWrapper>
         <Header />
         <ContentWrapper>{props.children}</ContentWrapper>
-        <Footer />
+        <Footer beforeFooter={beforeFooter} />
       </PageWrapper>
     </>
   )

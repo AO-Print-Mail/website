@@ -66,16 +66,16 @@ const Banner = styled('div', {
 
 export const ClientLogoBanner: React.FC<ClientLogoBannerProps> = (props) => {
   const logoList = ['Chanel', 'RayWhite', 'Quantas', 'Nrl', 'Lush', 'Bmw']
-  const bannerLogos = logoList.map((name) => clientLogos[name])
+  const bannerLogos = logoList.map((name) => [name, clientLogos[name]])
   return (
     <Banner>
       <LeadText>
         Serving over 700 Australian and global brands, including:
       </LeadText>
       <Logos>
-        {bannerLogos.map((L, i) => (
-          <LogoWrapper>
-            <L key={i} css={{ size: '100%' }} />
+        {bannerLogos.map(([name, Component], i) => (
+          <LogoWrapper key={name}>
+            <Component css={{ size: '100%' }} />
           </LogoWrapper>
         ))}
       </Logos>

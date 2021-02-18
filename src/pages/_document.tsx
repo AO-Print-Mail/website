@@ -1,9 +1,31 @@
 import React from 'react'
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-
-declare var richSnippetReviewsWidgets: any
+import { getCssString, globalStyles } from '@theme'
 
 export default class Document extends NextDocument {
+  static async getInitialProps(ctx) {
+    try {
+      const initialProps = await NextDocument.getInitialProps(ctx)
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            <style
+              id="stitches"
+              dangerouslySetInnerHTML={{ __html: globalStyles() }}
+            />
+            <style
+              id="stitches"
+              dangerouslySetInnerHTML={{ __html: getCssString() }}
+            />
+          </>
+        ),
+      }
+    } finally {
+    }
+  }
+
   render() {
     return (
       <Html lang="en">
