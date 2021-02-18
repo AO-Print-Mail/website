@@ -2165,11 +2165,25 @@ export type AllLandingPagesQuery = (
   & { allLandingPageV1s: Array<(
     { __typename?: 'LandingPageV1Record' }
     & Pick<LandingPageV1Record, 'title' | 'pageContent' | 'id'>
-    & { pageMeta?: Maybe<(
-      { __typename?: 'SeoField' }
-      & Pick<SeoField, 'title' | 'twitterCard' | 'description'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'content' | 'attributes' | 'tag'>
     )> }
   )> }
+);
+
+export type GetFaviconsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFaviconsQuery = (
+  { __typename?: 'Query' }
+  & { site: (
+    { __typename?: 'Site' }
+    & { favicon: Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'attributes' | 'content' | 'tag'>
+    )> }
+  ) }
 );
 
 
@@ -2177,13 +2191,24 @@ export const AllLandingPagesDocument = gql`
     query AllLandingPages {
   allLandingPageV1s {
     title
-    pageMeta {
-      title
-      twitterCard
-      description
-    }
     pageContent
     id
+    _seoMetaTags {
+      content
+      attributes
+      tag
+    }
+  }
+}
+    `;
+export const GetFaviconsDocument = gql`
+    query GetFavicons {
+  site: _site {
+    favicon: faviconMetaTags {
+      attributes
+      content
+      tag
+    }
   }
 }
     `;
@@ -2196,6 +2221,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     AllLandingPages(variables?: AllLandingPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllLandingPagesQuery> {
       return withWrapper(() => client.request<AllLandingPagesQuery>(print(AllLandingPagesDocument), variables, requestHeaders));
+    },
+    GetFavicons(variables?: GetFaviconsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetFaviconsQuery> {
+      return withWrapper(() => client.request<GetFaviconsQuery>(print(GetFaviconsDocument), variables, requestHeaders));
     }
   };
 }

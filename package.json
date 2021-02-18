@@ -4,14 +4,14 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 1234",
-    "predev": "yarn generate",
+    "predev": "gen:gql",
     "build": "next build",
     "start": "next start",
-    "prestart": "yarn generate",
+    "prestart": "gen:gql",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest",
-    "generate": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen -r dotenv/config --config ./codegen.yml",
+    "gen:gql": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen -r dotenv/config --config ./codegen.yml",
     "gen:component": "ts-node scripts/plopfile.ts"
   },
   "dependencies": {

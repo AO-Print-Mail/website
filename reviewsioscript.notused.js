@@ -1,3 +1,5 @@
+//For reference only. Doesn't seem as though they generate much schema other than the basic org information
+
 var reviewsJsonLdRendered = reviewsJsonLdRendered || !1,
   floatingWidgetPosition = ''
 ;(richSnippetReviewsWidgets = function () {

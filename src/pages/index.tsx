@@ -6,7 +6,7 @@ import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import { AllLandingPagesQuery } from '../lib/datocms/__generated__/types'
 
 interface PageProps {
-  data: AllLandingPagesQuery['allLandingPageV1s']
+  data?: AllLandingPagesQuery
 }
 
 const HeroText = styled('div', {
@@ -25,8 +25,7 @@ export async function getStaticProps() {
     },
   }
 }
-export default function LandingPageContent({ data }) {
-  console.log(data)
+const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   const beforeFooter = (
     <>
       <Container>
@@ -46,6 +45,7 @@ export default function LandingPageContent({ data }) {
         title="landing page"
         description="work in progress"
         beforeFooter={beforeFooter}
+        metaData={data.allLandingPageV1s}
       >
         <Container as="section">
           <HeroText>
@@ -60,3 +60,5 @@ export default function LandingPageContent({ data }) {
     </>
   )
 }
+
+export default LandingPageContent
