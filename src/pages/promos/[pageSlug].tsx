@@ -4,8 +4,8 @@ import { Layout } from '@components/layout'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import {
+  GetLandingPageSlugsQuery,
   GetLandingPageQuery,
-  GetLandingPageQueryVariables,
 } from '@lib/datocms/__generated__/types'
 
 interface PageProps {
@@ -54,3 +54,29 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
 }
 
 export default LandingPageContent
+
+export async function getStaticPaths() {
+  //@ts-ignore
+  const allLandingPages: GetLandingPageSlugsQuery = await request({
+    query: 'GetLandingPageSlugs',
+  })
+  return {
+    paths: allLandingPages.allLandingPageV1s.map(
+      (page) => `/promos/${page.pageSlug}` || []
+    ),
+    fallback: false,
+  }
+}
+
+export async function getStaticProps({ params, preview = false }) {
+  const data = await request({
+    query: 'GetLandingPage',
+    preview,
+    variables: { pageSlug: params.pageSlug },
+  })
+  return {
+    props: {
+      data,
+    },
+  }
+}

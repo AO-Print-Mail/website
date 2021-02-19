@@ -1,16 +1,18 @@
 import { GraphQLClient, gql } from 'graphql-request'
 import { getSdk, Query } from './__generated__/types'
 
-type requestQuery = {
+interface requestQuery {
   preview?: boolean
   query: keyof ReturnType<typeof getSdk>
-  variables?: {}
+  variables?: Parameters<ReturnType<typeof getSdk>[requestQuery['query']]>[0]
+  pageHeaders?: Parameters<ReturnType<typeof getSdk>[requestQuery['query']]>[1]
 }
 
 export function request({
   query,
   preview,
-  variables = { limit: 20 },
+  pageHeaders,
+  variables,
 }: requestQuery) {
   const endpoint = preview
     ? `${process.env.NEXT_DATOCMS_GRAPHQL_URL}/preview`
@@ -23,7 +25,8 @@ export function request({
   })
 
   const sdk = getSdk(client)
-  return sdk[query](variables)
+  //@ts-ignore
+  return sdk[query](variables, pageHeaders)
 }
 
 export { gql }

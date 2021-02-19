@@ -2157,21 +2157,6 @@ export enum UploadOrderBy {
   IdDesc = 'id_DESC'
 }
 
-export type AllLandingPagesQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AllLandingPagesQuery = (
-  { __typename?: 'Query' }
-  & { allLandingPageV1s: Array<(
-    { __typename?: 'LandingPageV1Record' }
-    & Pick<LandingPageV1Record, 'title' | 'pageContent' | 'id'>
-    & { _seoMetaTags: Array<(
-      { __typename?: 'Tag' }
-      & Pick<Tag, 'content' | 'attributes' | 'tag'>
-    )> }
-  )> }
-);
-
 export type GetFaviconsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2186,21 +2171,35 @@ export type GetFaviconsQuery = (
   ) }
 );
 
+export type GetLandingPageQueryVariables = Exact<{
+  pageSlug: Scalars['String'];
+}>;
 
-export const AllLandingPagesDocument = gql`
-    query AllLandingPages {
-  allLandingPageV1s {
-    title
-    pageContent
-    id
-    _seoMetaTags {
-      content
-      attributes
-      tag
-    }
-  }
-}
-    `;
+
+export type GetLandingPageQuery = (
+  { __typename?: 'Query' }
+  & { landingPageV1?: Maybe<(
+    { __typename?: 'LandingPageV1Record' }
+    & Pick<LandingPageV1Record, 'title' | 'pageContent' | 'id'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'content' | 'tag' | 'attributes'>
+    )> }
+  )> }
+);
+
+export type GetLandingPageSlugsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLandingPageSlugsQuery = (
+  { __typename?: 'Query' }
+  & { allLandingPageV1s: Array<(
+    { __typename?: 'LandingPageV1Record' }
+    & Pick<LandingPageV1Record, 'pageSlug'>
+  )> }
+);
+
+
 export const GetFaviconsDocument = gql`
     query GetFavicons {
   site: _site {
@@ -2212,6 +2211,27 @@ export const GetFaviconsDocument = gql`
   }
 }
     `;
+export const GetLandingPageDocument = gql`
+    query GetLandingPage($pageSlug: String!) {
+  landingPageV1(filter: {pageSlug: {eq: $pageSlug}}) {
+    _seoMetaTags {
+      content
+      tag
+      attributes
+    }
+    title
+    pageContent
+    id
+  }
+}
+    `;
+export const GetLandingPageSlugsDocument = gql`
+    query GetLandingPageSlugs {
+  allLandingPageV1s {
+    pageSlug
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 
@@ -2219,11 +2239,14 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    AllLandingPages(variables?: AllLandingPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AllLandingPagesQuery> {
-      return withWrapper(() => client.request<AllLandingPagesQuery>(print(AllLandingPagesDocument), variables, requestHeaders));
-    },
     GetFavicons(variables?: GetFaviconsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetFaviconsQuery> {
       return withWrapper(() => client.request<GetFaviconsQuery>(print(GetFaviconsDocument), variables, requestHeaders));
+    },
+    GetLandingPage(variables: GetLandingPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPageQuery> {
+      return withWrapper(() => client.request<GetLandingPageQuery>(print(GetLandingPageDocument), variables, requestHeaders));
+    },
+    GetLandingPageSlugs(variables?: GetLandingPageSlugsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPageSlugsQuery> {
+      return withWrapper(() => client.request<GetLandingPageSlugsQuery>(print(GetLandingPageSlugsDocument), variables, requestHeaders));
     }
   };
 }

@@ -3,9 +3,9 @@ import Head from 'next/head'
 import { PageWrapper, ContentWrapper } from '@theme'
 import { Header } from '@components/header'
 import { Footer } from '@components/footer'
-import { request } from '../../../lib/datocms/datocms'
+import { request } from '@lib/datocms/datocms'
 import { renderMetaTags, SeoMetaTagType } from 'react-datocms'
-import { GetFaviconsQuery } from '../../../lib/datocms/__generated__/types'
+import { GetFaviconsQuery } from '@lib/datocms/__generated__/types'
 
 interface LayoutProps {
   title: string
@@ -27,11 +27,10 @@ export const Layout: React.FC<LayoutProps> = ({
   description,
   beforeFooter,
   metaData = [],
-  data: {
-    site: { favicon },
-  },
+  data,
   ...props
 }) => {
+  const favicon = data?.site?.favicon || []
   return (
     <>
       <Head>

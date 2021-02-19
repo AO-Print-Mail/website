@@ -19,11 +19,12 @@
       "@theme": ["src/theme"],
       "@components/*": ["src/components/*"],
       "@utils": ["src/utils"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@lib/*": ["src/lib/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src"],
-  "exclude": ["node_modules", "**/__generated__"],
+  "exclude": ["node_modules", "**/__generated__/*"],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS",
