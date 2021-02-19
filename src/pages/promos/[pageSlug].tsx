@@ -7,9 +7,10 @@ import {
   GetLandingPageSlugsQuery,
   GetLandingPageQuery,
 } from '@lib/datocms/__generated__/types'
+import { htmlToDast, markdownToHtml, markdownToDast } from '@utils/src'
 
 interface PageProps {
-  data?: GetLandingPageQuery
+  data?: ReturnType<typeof dataFunction>
 }
 
 const HeroText = styled('div', {
@@ -30,6 +31,11 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       </ReviewBackground>
     </>
   )
+  console.log(data.contentMarkdown)
+  console.log(JSON.stringify(data.contentDash, null, 4))
+  /*console.log(
+    data.contentMarkdown
+  )*/
 
   return (
     <>
@@ -37,7 +43,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         title="landing page"
         description="work in progress"
         beforeFooter={beforeFooter}
-        metaData={[]}
+        metaData={data._seoMetaTags}
       >
         <Container as="section">
           <HeroText>
@@ -68,15 +74,28 @@ export async function getStaticPaths() {
   }
 }
 
+function dataFunction({
+  landingPageV1: { pageContent, ...rest },
+}: GetLandingPageQuery) {
+  return {
+    contentMarkdown: pageContent,
+    contentDash: markdownToDast(pageContent),
+    ...rest,
+  }
+}
+
 export async function getStaticProps({ params, preview = false }) {
-  const data = await request({
+  const data: GetLandingPageQuery = await request({
     query: 'GetLandingPage',
     preview,
     variables: { pageSlug: params.pageSlug },
   })
+
+  const _data = await dataFunction(data)
+
   return {
     props: {
-      data,
+      data: _data,
     },
   }
 }

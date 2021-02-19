@@ -5761,6 +5761,11 @@ char-regex@^1.0.2:
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-1.0.2.tgz#d744358226217f981ed58f479b1d6bcc29545dcf"
   integrity sha512-kWWXztvZ5SBQV+eRgKFeh8q5sLuZY2+8WUIzlxWVTg+oGwY14qylx1KbKzHd8P6ZYkAg0xyIDU9JMHhyJMZ1jw==
 
+character-entities-html4@^1.0.0:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/character-entities-html4/-/character-entities-html4-1.1.4.tgz#0e64b0a3753ddbf1fdc044c5fd01d0199a02e125"
+  integrity sha512-HRcDxZuZqMx3/a+qrzxdBKBPUpxWEq9xw2OPZ3a/174ihfrQKVsFhqtthBInFy1zZ9GgZyFXOatNujm8M+El3g==
+
 character-entities-legacy@^1.0.0:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/character-entities-legacy/-/character-entities-legacy-1.1.4.tgz#94bc1845dce70a5bb9d2ecc748725661293d8fc1"
@@ -6548,6 +6553,11 @@ css-select@^2.0.2:
     domutils "^1.7.0"
     nth-check "^1.0.2"
 
+css-selector-parser@^1.0.0:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/css-selector-parser/-/css-selector-parser-1.4.1.tgz#03f9cb8a81c3e5ab2c51684557d5aaf6d2569759"
+  integrity sha512-HYPSb7y/Z7BNDCOrakL4raGO2zltZkbeXyAd6Tg9obzix6QhzxCotdBl6VT0Dv4vZfJGVz3WL/xaEI9Ly3ul0g==
+
 css-what@^3.2.1:
   version "3.4.2"
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-3.4.2.tgz#ea7026fcb01777edbde52124e21f327e7ae950e4"
@@ -6679,6 +6689,22 @@ date-format@0.0.2:
   resolved "https://registry.yarnpkg.com/date-format/-/date-format-0.0.2.tgz#fafd448f72115ef1e2b739155ae92f2be6c28dd1"
   integrity sha1-+v1Ej3IRXvHitzkVWukvK+bCjdE=
 
+datocms-html-to-structured-text@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/datocms-html-to-structured-text/-/datocms-html-to-structured-text-1.0.10.tgz#0155a847b3f4133d151e959e09b0069aae791e00"
+  integrity sha512-VloTPrJBzzIbS5JraZ1cLFNbXHmgXhdwcKyCg20kY0btBrO14ukWvcZMdDtGRo/W0eLzbT2ds31LWDnMsNa3Zw==
+  dependencies:
+    datocms-structured-text-utils "^1.0.10"
+    extend "^3.0.2"
+    hast-util-from-dom "^3.0.0"
+    hast-util-from-parse5 "^6.0.1"
+    hast-util-has-property "^1.0.4"
+    hast-util-is-element "^1.1.0"
+    hast-util-to-text "^2.0.1"
+    rehype-minify-whitespace "^4.0.5"
+    unist-util-is "^4.0.4"
+    unist-utils-core "^1.0.5"
+
 datocms-listen@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/datocms-listen/-/datocms-listen-0.1.3.tgz#e69f0587e3a67b2e3c1081a13651a8be28cd3c27"
@@ -6690,6 +6716,13 @@ datocms-structured-text-generic-html-renderer@^1.0.8:
   integrity sha512-A1K/z8TWU3Y8Fjp1vqNGQBlgvwYoUVvn090RVKmi4sczXeC1PxvVgAd33vw3q12AN4nB2LTOgki7sRq1i7pZMA==
   dependencies:
     datocms-structured-text-utils "^1.0.9"
+
+datocms-structured-text-utils@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/datocms-structured-text-utils/-/datocms-structured-text-utils-1.0.10.tgz#f7a79af80d7d1fc92b501573d4502f9f953158a6"
+  integrity sha512-zk1pK92qCvLIUq+R89uLT4lTXnJycVX8ra+CqnYQevEkjDS1Ec2gKXK+lm6KjdWi4/IROimgwFB+2To5k8dWPA==
+  dependencies:
+    lodash.flatten "^4.4.0"
 
 datocms-structured-text-utils@^1.0.8, datocms-structured-text-utils@^1.0.9:
   version "1.0.9"
@@ -6710,7 +6743,7 @@ debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.0, debug@^2.6.9:
   dependencies:
     ms "2.0.0"
 
-debug@4, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1:
+debug@4, debug@^4.0.0, debug@^4.0.1, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.1.tgz#f0d229c505e0c6d8c49ac553d1b13dc183f6b2ee"
   integrity sha512-doEwdvm4PCeK4K3RQN2ZC2BYUBaxwLARCqZmMjtF8a51J2Rb0xpVloFRnCODwqjpwnAoao4pelN8l3RJdv3gRQ==
@@ -7928,7 +7961,7 @@ extend-shallow@^3.0.0, extend-shallow@^3.0.2:
     assign-symbols "^1.0.0"
     is-extendable "^1.0.1"
 
-extend@^3.0.0, extend@~3.0.2:
+extend@^3.0.0, extend@^3.0.2, extend@~3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.2.tgz#f8b1136b4071fbd8eb140aff858b1019ec2915fa"
   integrity sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==
@@ -9008,7 +9041,22 @@ hast-to-hyperscript@^9.0.0:
     unist-util-is "^4.0.0"
     web-namespaces "^1.0.0"
 
-hast-util-from-parse5@^6.0.0:
+hast-util-embedded@^1.0.0:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/hast-util-embedded/-/hast-util-embedded-1.0.6.tgz#ea7007323351cc43e19e1d6256b7cde66ad1aa03"
+  integrity sha512-JQMW+TJe0UAIXZMjCJ4Wf6ayDV9Yv3PBDPsHD4ExBpAspJ6MOcCX+nzVF+UJVv7OqPcg852WEMSHQPoRA+FVSw==
+  dependencies:
+    hast-util-is-element "^1.1.0"
+
+hast-util-from-dom@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/hast-util-from-dom/-/hast-util-from-dom-3.0.0.tgz#e0ea87fafaf3ec64650fc9404ab1538238f32cb5"
+  integrity sha512-4vQuGiD5Y/wlD7fZiY4mZML/6oh0GOnH38UNyeDFcSTE4AHF0zjKHZfbd+ekVwPvsZXRl8choc99INHUwSPJlg==
+  dependencies:
+    hastscript "^6.0.0"
+    web-namespaces "^1.0.0"
+
+hast-util-from-parse5@^6.0.0, hast-util-from-parse5@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/hast-util-from-parse5/-/hast-util-from-parse5-6.0.1.tgz#554e34abdeea25ac76f5bd950a1f0180e0b3bc2a"
   integrity sha512-jeJUWiN5pSxW12Rh01smtVkZgZr33wBokLzKLwinYOUfSzm1Nl/c3GUGebDyOKjdsRgMvoVbV0VpAcpjF4NrJA==
@@ -9019,6 +9067,16 @@ hast-util-from-parse5@^6.0.0:
     vfile "^4.0.0"
     vfile-location "^3.2.0"
     web-namespaces "^1.0.0"
+
+hast-util-has-property@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/hast-util-has-property/-/hast-util-has-property-1.0.4.tgz#9f137565fad6082524b382c1e7d7d33ca5059f36"
+  integrity sha512-ghHup2voGfgFoHMGnaLHOjbYFACKrRh9KFttdCzMCbFoBMJXiNi2+XTrPP8+q6cDJM/RSqlCfVWrjp1H201rZg==
+
+hast-util-is-element@^1.0.0, hast-util-is-element@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/hast-util-is-element/-/hast-util-is-element-1.1.0.tgz#3b3ed5159a2707c6137b48637fbfe068e175a425"
+  integrity sha512-oUmNua0bFbdrD/ELDSSEadRVtWZOf3iF6Lbv81naqsIV99RnSCieTbWuWCY8BAeEfKJTKl0gRdokv+dELutHGQ==
 
 hast-util-parse-selector@^2.0.0:
   version "2.2.5"
@@ -9041,6 +9099,38 @@ hast-util-raw@6.0.1:
     xtend "^4.0.0"
     zwitch "^1.0.0"
 
+hast-util-raw@^6.0.0:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/hast-util-raw/-/hast-util-raw-6.0.2.tgz#0954c44e2e1c03dc5bb44c40ef5eee3185ebeabe"
+  integrity sha512-m7IlmqO8cytmG3EIMDMXUG8LjO2uyApWcxwL6apsGvikIClgykFg3UYps4rnt4kUpY3j8Mc7ANJ8zW6KPPLb+w==
+  dependencies:
+    "@types/hast" "^2.0.0"
+    hast-util-from-parse5 "^6.0.0"
+    hast-util-to-parse5 "^6.0.0"
+    html-void-elements "^1.0.0"
+    parse5 "^6.0.0"
+    unist-util-position "^3.0.0"
+    vfile "^4.0.0"
+    web-namespaces "^1.0.0"
+    xtend "^4.0.0"
+    zwitch "^1.0.0"
+
+hast-util-to-html@^7.1.1:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/hast-util-to-html/-/hast-util-to-html-7.1.2.tgz#db677f0ee483658cea0eecc9dec30aba42b67111"
+  integrity sha512-pu73bvORzdF6XZgwl9eID/0RjBb/jtRfoGRRSykpR1+o9rCdiAHpgkSukZsQBRlIqMg6ylAcd7F0F7myJUb09Q==
+  dependencies:
+    ccount "^1.0.0"
+    comma-separated-tokens "^1.0.0"
+    hast-util-is-element "^1.0.0"
+    hast-util-whitespace "^1.0.0"
+    html-void-elements "^1.0.0"
+    property-information "^5.0.0"
+    space-separated-tokens "^1.0.0"
+    stringify-entities "^3.0.1"
+    unist-util-is "^4.0.0"
+    xtend "^4.0.0"
+
 hast-util-to-parse5@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/hast-util-to-parse5/-/hast-util-to-parse5-6.0.0.tgz#1ec44650b631d72952066cea9b1445df699f8479"
@@ -9051,6 +9141,20 @@ hast-util-to-parse5@^6.0.0:
     web-namespaces "^1.0.0"
     xtend "^4.0.0"
     zwitch "^1.0.0"
+
+hast-util-to-text@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/hast-util-to-text/-/hast-util-to-text-2.0.1.tgz#04f2e065642a0edb08341976084aa217624a0f8b"
+  integrity sha512-8nsgCARfs6VkwH2jJU9b8LNTuR4700na+0h3PqCaEk4MAnMDeu5P0tP8mjk9LLNGxIeQRLbiDbZVw6rku+pYsQ==
+  dependencies:
+    hast-util-is-element "^1.0.0"
+    repeat-string "^1.0.0"
+    unist-util-find-after "^3.0.0"
+
+hast-util-whitespace@^1.0.0, hast-util-whitespace@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/hast-util-whitespace/-/hast-util-whitespace-1.0.4.tgz#e4fe77c4a9ae1cb2e6c25e02df0043d0164f6e41"
+  integrity sha512-I5GTdSfhYfAPNztx2xJRQpG8cuDSNt599/7YUn7Gx/WxNMsG+a835k97TDkFgk123cwjfwINaZknkKkphx/f2A==
 
 hastscript@^6.0.0:
   version "6.0.0"
@@ -11259,6 +11363,17 @@ mdast-util-definitions@^4.0.0:
   dependencies:
     unist-util-visit "^2.0.0"
 
+mdast-util-from-markdown@^0.8.0:
+  version "0.8.5"
+  resolved "https://registry.yarnpkg.com/mdast-util-from-markdown/-/mdast-util-from-markdown-0.8.5.tgz#d1ef2ca42bc377ecb0463a987910dae89bd9a28c"
+  integrity sha512-2hkTXtYYnr+NubD/g6KGBS/0mFmBcifAsI0yIWRiRo0PjVs6SSOSOdtzbp6kSGnShDN6G5aWZpKQ2lWRy27mWQ==
+  dependencies:
+    "@types/mdast" "^3.0.0"
+    mdast-util-to-string "^2.0.0"
+    micromark "~2.11.0"
+    parse-entities "^2.0.0"
+    unist-util-stringify-position "^2.0.0"
+
 mdast-util-to-hast@10.0.1:
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-10.0.1.tgz#0cfc82089494c52d46eb0e3edb7a4eb2aea021eb"
@@ -11273,10 +11388,29 @@ mdast-util-to-hast@10.0.1:
     unist-util-position "^3.0.0"
     unist-util-visit "^2.0.0"
 
+mdast-util-to-hast@^10.0.0:
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-10.2.0.tgz#61875526a017d8857b71abc9333942700b2d3604"
+  integrity sha512-JoPBfJ3gBnHZ18icCwHR50orC9kNH81tiR1gs01D8Q5YpV6adHNO9nKNuFBCJQ941/32PT1a63UF/DitmS3amQ==
+  dependencies:
+    "@types/mdast" "^3.0.0"
+    "@types/unist" "^2.0.0"
+    mdast-util-definitions "^4.0.0"
+    mdurl "^1.0.0"
+    unist-builder "^2.0.0"
+    unist-util-generated "^1.0.0"
+    unist-util-position "^3.0.0"
+    unist-util-visit "^2.0.0"
+
 mdast-util-to-string@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/mdast-util-to-string/-/mdast-util-to-string-1.1.0.tgz#27055500103f51637bd07d01da01eb1967a43527"
   integrity sha512-jVU0Nr2B9X3MU4tSK7JP1CMkSvOj7X5l/GboG1tKRw52lLF1x2Ju92Ms9tNetCcbfX3hzlM73zYo2NKkWSfF/A==
+
+mdast-util-to-string@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/mdast-util-to-string/-/mdast-util-to-string-2.0.0.tgz#b8cfe6a713e1091cb5b728fc48885a4767f8b97b"
+  integrity sha512-AW4DRS3QbBayY/jJmD8437V1Gombjf8RSOUCMFBuo5iHi58AGEgVCKQ+ezHkZZDpAQS75hcBMpLqjpJTjtUL7w==
 
 mdurl@^1.0.0:
   version "1.0.1"
@@ -11352,6 +11486,14 @@ microevent.ts@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/microevent.ts/-/microevent.ts-0.1.1.tgz#70b09b83f43df5172d0205a63025bce0f7357fa0"
   integrity sha512-jo1OfR4TaEwd5HOrt5+tAZ9mqT4jmpNAusXtyfNzqVm9uiSYFZlKM1wYL4oU7azZW/PxQW53wM0S6OR1JHNa2g==
+
+micromark@~2.11.0:
+  version "2.11.4"
+  resolved "https://registry.yarnpkg.com/micromark/-/micromark-2.11.4.tgz#d13436138eea826383e822449c9a5c50ee44665a"
+  integrity sha512-+WoovN/ppKolQOFIAajxi7Lu9kInbPxFuTBVEavFcL8eAfVstoc5MocPmqBeAdBOJV00uaVjegzH4+MA0DN/uA==
+  dependencies:
+    debug "^4.0.0"
+    parse-entities "^2.0.0"
 
 micromatch@^3.0.4, micromatch@^3.1.10, micromatch@^3.1.4:
   version "3.1.10"
@@ -11926,6 +12068,11 @@ normalize-url@^4.1.0:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.0.tgz#453354087e6ca96957bd8f5baf753f5982142129"
   integrity sha512-2s47yzUxdexf1OhyRi4Em83iQk0aPvwTddtFz4hnSSw9dCEsLEGf6SwIO8ss/19S9iBb5sJaOuTvTGDeZI00BQ==
 
+not@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/not/-/not-0.1.0.tgz#c9691c1746c55dcfbe54cbd8bd4ff041bc2b519d"
+  integrity sha1-yWkcF0bFXc++VMvYvU/wQbwrUZ0=
+
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -11956,6 +12103,13 @@ nth-check@^1.0.2:
   integrity sha512-WeBOdju8SnzPN5vTUJYxYUxLeXpCaVP5i5e0LF8fg7WORF2Wd7wFX/pk0tYZk7s8T+J7VLy0Da6J1+wCT0AtHg==
   dependencies:
     boolbase "~1.0.0"
+
+nth-check@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/nth-check/-/nth-check-2.0.0.tgz#1bb4f6dac70072fc313e8c9cd1417b5074c0a125"
+  integrity sha512-i4sc/Kj8htBrAiH1viZ0TgU8Y5XqCaV/FziYK6TBczxmeKm3AEFWqqF3195yKudrarqy7Zu80Ra5dobFjn9X/Q==
+  dependencies:
+    boolbase "^1.0.0"
 
 nullthrows@^1.1.1:
   version "1.1.1"
@@ -12438,7 +12592,7 @@ parse5@5.1.1:
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-5.1.1.tgz#f68e4e5ba1852ac2cadc00f4555fff6c2abb6178"
   integrity sha512-ugq4DFI0Ptb+WWjAdOK16+u/nHfiIrcE+sh8kZMaM0WllQKLI9rOUq6c2b7cwPkXdzfQESqvoqK6ug7U/Yyzug==
 
-parse5@^6.0.0:
+parse5@^6.0.0, parse5@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-6.0.1.tgz#e1a1c085c569b3dc08321184f19a39cc27f7c30b"
   integrity sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==
@@ -13132,7 +13286,7 @@ raw-body@2.4.1:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-raw-loader@^4.0.1:
+raw-loader@^4.0.1, raw-loader@^4.0.2:
   version "4.0.2"
   resolved "https://registry.yarnpkg.com/raw-loader/-/raw-loader-4.0.2.tgz#1aac6b7d1ad1501e66efdac1522c73e59a584eb6"
   integrity sha512-ZnScIV3ag9A4wPX/ZayxL/jZH+euYb6FcUinPcgiQW0+UBtEv0O6Q3lGd3cqJ+GHH+rksEv3Pj99oxJ3u3VIKA==
@@ -13589,6 +13743,30 @@ regjsparser@^0.6.4:
   dependencies:
     jsesc "~0.5.0"
 
+rehype-minify-whitespace@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/rehype-minify-whitespace/-/rehype-minify-whitespace-4.0.5.tgz#5b4781786116216f6d5d7ceadf84e2489dd7b3cd"
+  integrity sha512-QC3Z+bZ5wbv+jGYQewpAAYhXhzuH/TVRx7z08rurBmh9AbG8Nu8oJnvs9LWj43Fd/C7UIhXoQ7Wddgt+ThWK5g==
+  dependencies:
+    hast-util-embedded "^1.0.0"
+    hast-util-is-element "^1.0.0"
+    hast-util-whitespace "^1.0.4"
+    unist-util-is "^4.0.0"
+
+rehype-raw@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/rehype-raw/-/rehype-raw-5.0.0.tgz#3688e3e1132e958761e677a1b9b2ba358a465af8"
+  integrity sha512-q/MOBj4fs1WF/LSCh5uOtNhnm5OESuDcSvq1mDQP4/2t6Q52E9MHeVoLeMy9vOn93BEcgVBm4FCokcK2iXRDvA==
+  dependencies:
+    hast-util-raw "^6.0.0"
+
+rehype-stringify@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/rehype-stringify/-/rehype-stringify-8.0.0.tgz#9b6afb599bcf3165f10f93fc8548f9a03d2ec2ba"
+  integrity sha512-VkIs18G0pj2xklyllrPSvdShAV36Ff3yE5PUO9u36f6+2qJFnn22Z5gKwBOwgXviux4UC7K+/j13AnZfPICi/g==
+  dependencies:
+    hast-util-to-html "^7.1.1"
+
 relateurl@^0.2.7:
   version "0.2.7"
   resolved "https://registry.yarnpkg.com/relateurl/-/relateurl-0.2.7.tgz#54dbf377e51440aca90a4cd274600d3ff2d888a9"
@@ -13676,6 +13854,20 @@ remark-parse@8.0.3:
     vfile-location "^3.0.0"
     xtend "^4.0.1"
 
+remark-parse@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/remark-parse/-/remark-parse-9.0.0.tgz#4d20a299665880e4f4af5d90b7c7b8a935853640"
+  integrity sha512-geKatMwSzEXKHuzBNU1z676sGcDcFoChMK38TgdHJNAYfFtsfHDQG7MoJAjs6sgYMqyLduCYWDIWZIxiPeafEw==
+  dependencies:
+    mdast-util-from-markdown "^0.8.0"
+
+remark-rehype@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/remark-rehype/-/remark-rehype-8.0.0.tgz#5a8afc8262a59d205fba21dafb27a673fb3b92fa"
+  integrity sha512-gVvOH02TMFqXOWoL6iXU7NXMsDJguNkNuMrzfkQeA4V6WCyHQnOKptn+IQBVVPuIH2sMJBwo8hlrmtn1MLTh9w==
+  dependencies:
+    mdast-util-to-hast "^10.0.0"
+
 remark-slug@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/remark-slug/-/remark-slug-6.0.0.tgz#2b54a14a7b50407a5e462ac2f376022cce263e2c"
@@ -13723,7 +13915,7 @@ repeat-element@^1.1.2:
   resolved "https://registry.yarnpkg.com/repeat-element/-/repeat-element-1.1.3.tgz#782e0d825c0c5a3bb39731f84efee6b742e6b1ce"
   integrity sha512-ahGq0ZnV5m5XtZLMb+vP76kcAM5nkLqk0lpqAuojSKGgQtn4eRi4ZZGm2olo2zKFH+sMsWaqOCW1dqAnOru72g==
 
-repeat-string@^1.5.4, repeat-string@^1.6.1:
+repeat-string@^1.0.0, repeat-string@^1.5.0, repeat-string@^1.5.4, repeat-string@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/repeat-string/-/repeat-string-1.6.1.tgz#8dcae470e1c88abc2d600fff4a776286da75e637"
   integrity sha1-jcrkcOHIirwtYA//Sndihtp15jc=
@@ -14754,6 +14946,15 @@ string_decoder@~1.1.1:
   dependencies:
     safe-buffer "~5.1.0"
 
+stringify-entities@^3.0.1:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/stringify-entities/-/stringify-entities-3.1.0.tgz#b8d3feac256d9ffcc9fa1fefdcf3ca70576ee903"
+  integrity sha512-3FP+jGMmMV/ffZs86MoghGqAoqXAdxLrJP4GUdrDN1aIScYih5tuIO3eF4To5AJZ79KDZ8Fpdy7QJnK8SsL1Vg==
+  dependencies:
+    character-entities-html4 "^1.0.0"
+    character-entities-legacy "^1.0.0"
+    xtend "^4.0.0"
+
 stringify-object@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/stringify-object/-/stringify-object-3.3.0.tgz#703065aefca19300d3ce88af4f5b3956d7556629"
@@ -14895,7 +15096,7 @@ supports-color@^5.3.0:
   dependencies:
     has-flag "^3.0.0"
 
-supports-color@^6.1.0:
+supports-color@^6.0.0, supports-color@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/supports-color/-/supports-color-6.1.0.tgz#0764abc69c63d5ac842dd4867e8d025e880df8f3"
   integrity sha512-qe1jfm1Mg7Nq/NSh6XE24gPXROEVsWHxC1LIx//XNlD9iw7YZQGjZNjYN7xGaEG6iKdA8EtNFW6R0gjnVXp+wQ==
@@ -15369,7 +15570,7 @@ tsconfig-paths@^3.4.0, tsconfig-paths@^3.9.0:
     minimist "^1.2.0"
     strip-bom "^3.0.0"
 
-tslib@^1.10.0, tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.10.0, tslib@^1.13.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
@@ -15548,7 +15749,14 @@ unicode-property-aliases-ecmascript@^1.0.4:
   resolved "https://registry.yarnpkg.com/unicode-property-aliases-ecmascript/-/unicode-property-aliases-ecmascript-1.1.0.tgz#dd57a99f6207bedff4628abefb94c50db941c8f4"
   integrity sha512-PqSoPh/pWetQ2phoj5RLiaqIk4kCNwoV3CI+LfGmWLKI3rE3kl1h59XpX2BjgDrmbxD9ARtQobPGU1SguCYuQg==
 
-unified@9.2.0:
+unified-stream@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/unified-stream/-/unified-stream-1.0.6.tgz#0b291d93295eea6ba81db8fa58af660ea45e8865"
+  integrity sha512-04s1S5XCMz5DRMuzioZBSciB2BqCwZX/AaF1/1FuuGunerQd5F6BqbbJZp/GwgSNdWIVv3dcrZZnamHnAEtwmw==
+  dependencies:
+    once "^1.4.0"
+
+unified@9.2.0, unified@^9.2.0:
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/unified/-/unified-9.2.0.tgz#67a62c627c40589edebbf60f53edfd4d822027f8"
   integrity sha512-vx2Z0vY+a3YoTj8+pttM3tiJHCwY5UFbYdiWrwBEbHmK8pvsPj2rtAX2BFfgXen8T39CJWblWRDT4L5WGXtDdg==
@@ -15601,12 +15809,19 @@ unist-builder@2.0.3, unist-builder@^2.0.0:
   resolved "https://registry.yarnpkg.com/unist-builder/-/unist-builder-2.0.3.tgz#77648711b5d86af0942f334397a33c5e91516436"
   integrity sha512-f98yt5pnlMWlzP539tPc4grGMsFaQQlP/vM396b00jngsiINumNmsY8rkXjfoi1c6QaM8nQ3vaGDuoKWbe/1Uw==
 
+unist-util-find-after@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/unist-util-find-after/-/unist-util-find-after-3.0.0.tgz#5c65fcebf64d4f8f496db46fa8fd0fbf354b43e6"
+  integrity sha512-ojlBqfsBftYXExNu3+hHLfJQ/X1jYY/9vdm4yZWjIbf0VuWF6CRufci1ZyoD/wV2TYMKxXUoNuoqwy+CkgzAiQ==
+  dependencies:
+    unist-util-is "^4.0.0"
+
 unist-util-generated@^1.0.0:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/unist-util-generated/-/unist-util-generated-1.1.6.tgz#5ab51f689e2992a472beb1b35f2ce7ff2f324d4b"
   integrity sha512-cln2Mm1/CZzN5ttGK7vkoGw+RZ8VcUH6BtGbq98DDtRGquAAOXig1mrBQYelOwMXYS8rK+vZDyyojSjp7JX+Lg==
 
-unist-util-is@^4.0.0:
+unist-util-is@^4.0.0, unist-util-is@^4.0.2, unist-util-is@^4.0.4:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/unist-util-is/-/unist-util-is-4.0.4.tgz#3e9e8de6af2eb0039a59f50c9b3e99698a924f50"
   integrity sha512-3dF39j/u423v4BBQrk1AQ2Ve1FxY5W3JKwXxVFzBODQ6WEvccguhgp802qQLKSnxPODE6WuRZtV+ohlUg4meBA==
@@ -15629,6 +15844,17 @@ unist-util-remove@^2.0.0:
   integrity sha512-YtuetK6o16CMfG+0u4nndsWpujgsHDHHLyE0yGpJLLn5xSjKeyGyzEBOI2XbmoUHCYabmNgX52uxlWoQhcvR7Q==
   dependencies:
     unist-util-is "^4.0.0"
+
+unist-util-select@^3.0.1:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/unist-util-select/-/unist-util-select-3.0.4.tgz#702c9dc1db1b2bbbfe27f796fce99e43f25edc60"
+  integrity sha512-xf1zCu4okgPqGLdhCDpRnjwBNyv3EqjiXRUbz2SdK1+qnLMB7uXXajfzuBvvbHoQ+JLyp4AEbFCGndmc6S72sw==
+  dependencies:
+    css-selector-parser "^1.0.0"
+    not "^0.1.0"
+    nth-check "^2.0.0"
+    unist-util-is "^4.0.0"
+    zwitch "^1.0.0"
 
 unist-util-stringify-position@^2.0.0:
   version "2.0.3"
@@ -15653,6 +15879,15 @@ unist-util-visit@2.0.3, unist-util-visit@^2.0.0:
     "@types/unist" "^2.0.0"
     unist-util-is "^4.0.0"
     unist-util-visit-parents "^3.0.0"
+
+unist-utils-core@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/unist-utils-core/-/unist-utils-core-1.0.5.tgz#d96b712c0c43b4faa62496ee29b02698116624cd"
+  integrity sha512-pRLoK6qpHH8a3+lZADjqdSdt8ZwOJXWl4IoAXnoRqQN95dqlTvqoG3S8aaN4DAxv2UT0B5+qa11oBlGU+XlNVQ==
+  dependencies:
+    tslib "^1.13.0"
+    unist-util-is "^4.0.2"
+    unist-util-select "^3.0.1"
 
 universal-user-agent@^6.0.0:
   version "6.0.0"
@@ -15921,6 +16156,28 @@ vfile-message@^2.0.0:
   dependencies:
     "@types/unist" "^2.0.0"
     unist-util-stringify-position "^2.0.0"
+
+vfile-reporter@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/vfile-reporter/-/vfile-reporter-6.0.2.tgz#cbddaea2eec560f27574ce7b7b269822c191a676"
+  integrity sha512-GN2bH2gs4eLnw/4jPSgfBjo+XCuvnX9elHICJZjVD4+NM0nsUrMTvdjGY5Sc/XG69XVTgLwj7hknQVc6M9FukA==
+  dependencies:
+    repeat-string "^1.5.0"
+    string-width "^4.0.0"
+    supports-color "^6.0.0"
+    unist-util-stringify-position "^2.0.0"
+    vfile-sort "^2.1.2"
+    vfile-statistics "^1.1.0"
+
+vfile-sort@^2.1.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/vfile-sort/-/vfile-sort-2.2.2.tgz#720fe067ce156aba0b411a01bb0dc65596aa1190"
+  integrity sha512-tAyUqD2R1l/7Rn7ixdGkhXLD3zsg+XLAeUDUhXearjfIcpL1Hcsj5hHpCoy/gvfK/Ws61+e972fm0F7up7hfYA==
+
+vfile-statistics@^1.1.0:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/vfile-statistics/-/vfile-statistics-1.1.4.tgz#b99fd15ecf0f44ba088cc973425d666cb7a9f245"
+  integrity sha512-lXhElVO0Rq3frgPvFBwahmed3X03vjPF8OcjKMy8+F1xU/3Q3QU3tKEDp743SFtb74PdF0UWpxPvtOP0GCLheA==
 
 vfile@^4.0.0:
   version "4.2.1"
