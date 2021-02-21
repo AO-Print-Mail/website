@@ -3,6 +3,7 @@ import { globalStyles } from '@theme'
 import '../styles/font-face.css'
 
 function MyApp({ Component, pageProps }) {
+  globalStyles()
   return (
     <>
       <Head>

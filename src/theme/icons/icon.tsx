@@ -1,4 +1,4 @@
-import { ThemeVariants } from '@theme/stitches.config'
+import { forwardRef } from 'react'
 import { styled, theme, CSS } from '..'
 
 const fallbackIcon = {
@@ -51,15 +51,12 @@ export interface IconProps {
   css?: CSS
 }
 
-export const Icon: React.FC<IconProps> = ({
-  viewBox = '0 0 24 24',
-  focusable = false,
-  children,
-  ...props
-}) => {
-  return (
-    <Svg {...props} viewBox={viewBox}>
-      {children}
-    </Svg>
-  )
-}
+export const Icon: React.FC<IconProps> = forwardRef<SVGElement, IconProps>(
+  ({ viewBox = '0 0 24 24', focusable = false, children, ...props }, ref) => {
+    return (
+      <Svg ref={ref} {...props} viewBox={viewBox}>
+        {children}
+      </Svg>
+    )
+  }
+)

@@ -7,7 +7,7 @@ export const Heading1 = styled('h1', {
   fontSize: '$h1m',
   marginTop: '1em',
   lineHeight: '$1',
-  marginBottom: '-0.18em',
+  marginBottom: '0.32em',
   letterSpacing: '$xcosy',
   variants: {
     color: {

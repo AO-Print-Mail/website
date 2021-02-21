@@ -22,7 +22,8 @@ import {
   Paragraph4,
   Paragraph5,
   BlockQuote,
-  List,
+  UnorderedList,
+  OrderedList,
   ListItem,
   strikethroughClass,
   underlineClass,
@@ -65,16 +66,6 @@ export const structuredTextRules = ({
     }
   }),
   renderRule(isParagraph, ({ node, children, key }) => {
-    const renderChildren = (Component) => {
-      const l = children.length
-      const addBreaks = (acc, child, i) => [
-        ...acc,
-        child,
-        i < l - 1 && <br key={`br-${i}`} />,
-      ]
-      return <Component>{children.reduce(addBreaks, [])}</Component>
-    }
-
     switch (paragraphSize) {
       case 'Paragraph1':
         return <Paragraph1 {...paragraphProps} children={children} key={key} />
@@ -100,7 +91,7 @@ export const structuredTextRules = ({
         strikethrough: strikethroughClass,
       }
       const classNames: string = node.marks.reduce(
-        (acc, m) => (markLookup[m] ? acc.concat(' ' + acc) : acc),
+        (acc, m) => (markLookup[m] ? acc.concat(' ' + markLookup[m]) : acc),
         ''
       )
       return (
@@ -112,12 +103,15 @@ export const structuredTextRules = ({
   ),
   renderRule(isList, function ({ node, children, key }) {
     if (node.style === 'numbered') {
-      return <List as="ol" key={key} children={children} />
+      //@ts-ignore - expects component but we are still rendering dast tree
+      return <OrderedList key={key} children={children} />
     }
-    return <List key={key} children={children} />
+    //@ts-ignore - expects component but we are still rendering dast tree
+    return <UnorderedList key={key} children={children} />
   }),
   renderRule(isListItem, function ({ node, children, key }) {
-    return <ListItem key={key} children={children} />
+    //@ts-ignore - expects component but we are still rendering dast tree
+    return <ListItem icon="Check" key={key} children={children} />
   }),
   renderRule(isBlockquote, function ({ node, children, key }) {
     return <BlockQuote key={key}>{children}</BlockQuote>

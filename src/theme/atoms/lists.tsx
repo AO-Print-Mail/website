@@ -1,9 +1,13 @@
 import { styled } from '..'
+import { forwardRef } from 'react'
+import * as icons from '../icons'
 
-interface ListProps {}
+interface ListProps {
+  as?: string
+}
 
-export const _List: React.FC<ListProps> = (props) => {
-  return <div></div>
+interface listItemProps {
+  icon?: React.ReactNode | keyof typeof icons
 }
 
 export const List = styled('ul', {
@@ -11,10 +15,12 @@ export const List = styled('ul', {
   marginLeft: '0',
   listStyle: 'none',
   pl: '0',
+  my: '$2',
 })
 
-export const ListItem = styled('li', {
+export const _ListItem = styled('li', {
   display: 'flex',
+
   '&::before': {
     alignSelf: 'flex-end',
     color: '$DA70',
@@ -27,3 +33,23 @@ export const ListItem = styled('li', {
     verticalAlign: 'middle',
   },
 })
+
+export const UnorderedList = forwardRef<HTMLUListElement, ListProps>(
+  ({ as, ...props }, ref) => <List role={'list'} ref={ref} as={as} {...props} />
+)
+export const OrderedList = forwardRef<HTMLUListElement, ListProps>(
+  ({ as, ...props }, ref) => (
+    <List role={'list'} ref={ref} as={as ?? 'ol'} {...props} />
+  )
+)
+export const ListItem = forwardRef<HTMLUListElement, listItemProps>(
+  ({ children, icon, ...props }, ref) => {
+    const Mark = typeof icon === 'string' ? icons[icon] : icon
+    return (
+      <_ListItem role={'list'} ref={ref} {...props}>
+        {Mark && <Mark css={{ size: '1em' }} />}
+        {children}
+      </_ListItem>
+    )
+  }
+)

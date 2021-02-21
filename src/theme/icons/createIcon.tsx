@@ -1,6 +1,4 @@
-import { forwardRef } from 'react'
 import { Icon, IconProps } from './icon'
-import { CSS, StitchesComponent } from '@theme'
 
 interface CreateIconOptions {
   /**
@@ -46,7 +44,7 @@ export function createIcon({
   path,
   defaultProps = {},
 }: CreateIconOptions): React.FC<IconProps> {
-  const Comp: React.FC<IconProps> = ({ children, ...props }) => {
+  const Comp = ({ children, ...props }, ref) => {
     return (
       //@ts-ignore
       <Icon viewBox={viewBox} {...defaultProps} {...props} size={props.size}>
