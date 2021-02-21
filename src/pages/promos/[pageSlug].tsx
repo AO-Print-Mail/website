@@ -27,9 +27,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         <ClientLogoBanner />
       </Container>
       <ReviewBackground>
-        <Container>
-          <ReviewsIoWidget />
-        </Container>
+        <Container>{/*<ReviewsIoWidget />*/}</Container>
       </ReviewBackground>
     </>
   )
@@ -45,10 +43,6 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         <Container as="section">
           <HeroText>
             <Heading1 color="primary">{data.title}</Heading1>
-            <Paragraph2>
-              A&amp;O is Sydney’s premier Mail House, providing end-to-end
-              Print, Direct Mail and Fulfilment services.
-            </Paragraph2>
             <StructuredText
               data={data.content.document}
               customRules={structuredTextRules({

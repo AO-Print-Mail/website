@@ -1,7 +1,7 @@
 import { global } from '@theme'
 import { fontFace } from './font-face'
 export const globalStyles = global({
-  html: { lineHeight: '1.15', textSizeAdjust: '100%', '@font-face': fontFace },
+  html: { lineHeight: '1.15', textSizeAdjust: '100%' },
   body: {
     margin: '0',
     fontFamily: '$paragraph',
@@ -16,6 +16,9 @@ export const globalStyles = global({
   pre: { fontFamily: '$monospace', fontSize: '1em' },
   a: {
     backgroundColor: 'transparent',
+  },
+  code: {
+    maxWidth: '100%',
   },
   'abbr[title]': { borderBottom: 'none', textDecoration: 'underline' },
   'b, strong': { fontWeight: 'bolder' },

@@ -35,11 +35,12 @@ const FooterWrapper = styled(ContentWrapper, {
 })
 
 const LayoutGrid = styled(Container, {
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr 1fr 1fr',
-  gridGap: '$3',
   when: {
-    m: { gridGap: '$4', gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr' },
+    m: {
+      display: 'grid',
+      gridGap: '$4',
+      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
+    },
     l: {
       gridGap: '$5',
       gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
@@ -52,10 +53,9 @@ const ContentColumn = styled('div', {
   flexFlow: 'column nowrap',
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
-  gridColumnStart: '1',
-  gridColumnEnd: 'span 4',
   when: {
     m: {
+      gridColumnStart: '1',
       gridColumnEnd: 'span 3',
     },
     l: {
