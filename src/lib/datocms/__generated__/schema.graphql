@@ -84,6 +84,7 @@ type LandingPageV1Record {
   _updatedAt: DateTime!
   createdAt: DateTime!
   id: ItemId!
+  modularContent: [LandingPageV1ModelModularContentField]
   pageContent(
     """Process content as markdown"""
     markdown: Boolean
@@ -1669,6 +1670,85 @@ enum VideoMp4Res {
   high
 }
 
+union LandingPageV1ModelModularContentField = RichTextRecord | GalleryRecord | CtaRecord
+
+"""Record of type Rich text (rich_text)"""
+type RichTextRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  text(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  updatedAt: DateTime!
+}
+
+"""Record of type Gallery (gallery)"""
+type GalleryRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  images: [FileField!]!
+  updatedAt: DateTime!
+}
+
+"""Record of type CTA (cta)"""
+type CtaRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  colour: ColorField
+  createdAt: DateTime!
+  heading: String
+  id: ItemId!
+  subtext(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  updatedAt: DateTime!
+}
+
 input LandingPageV1ModelFilter {
   _createdAt: CreatedAtFilter
   createdAt: CreatedAtFilter
@@ -1681,10 +1761,10 @@ input LandingPageV1ModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
-  pageContent: TextFilter
+  pageMeta: SeoFilter
   pageSlug: SlugFilter
   title: StringFilter
-  pageMeta: SeoFilter
+  pageContent: TextFilter
   OR: [LandingPageV1ModelFilter]
 }
 
@@ -1820,24 +1900,12 @@ input BooleanFilter {
   eq: BooleanType
 }
 
-"""Specifies how to filter text fields"""
-input TextFilter {
-  """Filter records based on a regular expression"""
-  matches: StringMatchesFilter
-
-  """Exclude records based on a regular expression"""
-  notMatches: StringMatchesFilter
-
+"""Specifies how to filter SEO meta tags fields"""
+input SeoFilter {
   """
   Filter records with the specified field defined (i.e. with any value) or not
   """
   exists: BooleanType
-}
-
-input StringMatchesFilter {
-  pattern: String!
-  caseSensitive: BooleanType
-  regexp: BooleanType
 }
 
 """Specifies how to filter Slug fields"""
@@ -1881,8 +1949,20 @@ input StringFilter {
   notIn: [String]
 }
 
-"""Specifies how to filter SEO meta tags fields"""
-input SeoFilter {
+input StringMatchesFilter {
+  pattern: String!
+  caseSensitive: BooleanType
+  regexp: BooleanType
+}
+
+"""Specifies how to filter text fields"""
+input TextFilter {
+  """Filter records based on a regular expression"""
+  matches: StringMatchesFilter
+
+  """Exclude records based on a regular expression"""
+  notMatches: StringMatchesFilter
+
   """
   Filter records with the specified field defined (i.e. with any value) or not
   """

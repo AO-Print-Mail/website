@@ -7,10 +7,12 @@ import {
   GetLandingPageSlugsQuery,
   GetLandingPageQuery,
 } from '@lib/datocms/__generated__/types'
-import { htmlToDast, markdownToHtml, markdownToDast } from '@utils/src'
+import { markdownToDast, ThenArg } from '@utils/src'
+import { StructuredText, renderRule } from 'react-datocms'
+import { structuredTextRules } from '@lib/datocms/structuredTextRules'
 
 interface PageProps {
-  data?: ReturnType<typeof dataFunction>
+  data?: ThenArg<ReturnType<typeof dataFunction>>
 }
 
 const HeroText = styled('div', {
@@ -31,11 +33,6 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       </ReviewBackground>
     </>
   )
-  console.log(data.contentMarkdown)
-  console.log(JSON.stringify(data.contentDash, null, 4))
-  /*console.log(
-    data.contentMarkdown
-  )*/
 
   return (
     <>
@@ -47,11 +44,17 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       >
         <Container as="section">
           <HeroText>
-            <Heading1 color="primary">Australian Direct Mail Services</Heading1>
+            <Heading1 color="primary">{data.title}</Heading1>
             <Paragraph2>
               A&amp;O is Sydney’s premier Mail House, providing end-to-end
               Print, Direct Mail and Fulfilment services.
             </Paragraph2>
+            <StructuredText
+              data={data.content.document}
+              customRules={structuredTextRules({
+                headingProps: { color: 'primary' },
+              })}
+            />
           </HeroText>
         </Container>
       </Layout>
@@ -74,12 +77,13 @@ export async function getStaticPaths() {
   }
 }
 
-function dataFunction({
+async function dataFunction({
   landingPageV1: { pageContent, ...rest },
 }: GetLandingPageQuery) {
+  const content = await markdownToDast(pageContent)
   return {
     contentMarkdown: pageContent,
-    contentDash: markdownToDast(pageContent),
+    content,
     ...rest,
   }
 }

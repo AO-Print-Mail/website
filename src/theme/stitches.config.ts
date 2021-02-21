@@ -1,7 +1,7 @@
 import createCss, {
   StitchesCss,
   StitchesVariants,
-  StitchesComponent,
+  StyledInstance,
 } from '@stitches/react'
 import { breakpoints as conditions } from './breakpoints'
 import { theme } from './theme'
@@ -14,8 +14,9 @@ export const stitchesConfig = createCss({
   utils,
 })
 
+export type StyledStitchesComponent = StyledInstance<typeof stitchesConfig>
+
 export const { css, styled, getCssString, global } = stitchesConfig
 export { theme }
 export type CSS = StitchesCss<typeof stitchesConfig>
 export type ThemeVariants<T> = StitchesVariants<T>
-export type { StitchesComponent }

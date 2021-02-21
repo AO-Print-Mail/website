@@ -118,6 +118,7 @@ export type LandingPageV1Record = {
   _updatedAt: Scalars['DateTime'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
+  modularContent?: Maybe<Array<Maybe<LandingPageV1ModelModularContentField>>>;
   pageContent?: Maybe<Scalars['String']>;
   pageMeta?: Maybe<SeoField>;
   pageSlug?: Maybe<Scalars['String']>;
@@ -1584,6 +1585,100 @@ export enum VideoMp4Res {
   High = 'high'
 }
 
+export type LandingPageV1ModelModularContentField = RichTextRecord | GalleryRecord | CtaRecord;
+
+/** Record of type Rich text (rich_text) */
+export type RichTextRecord = {
+  __typename?: 'RichTextRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  text?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Rich text (rich_text) */
+export type RichTextRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** Record of type Rich text (rich_text) */
+export type RichTextRecordTextArgs = {
+  markdown?: Maybe<Scalars['Boolean']>;
+};
+
+/** Record of type Gallery (gallery) */
+export type GalleryRecord = {
+  __typename?: 'GalleryRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  images: Array<FileField>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Gallery (gallery) */
+export type GalleryRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+/** Record of type CTA (cta) */
+export type CtaRecord = {
+  __typename?: 'CtaRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  colour?: Maybe<ColorField>;
+  createdAt: Scalars['DateTime'];
+  heading?: Maybe<Scalars['String']>;
+  id: Scalars['ItemId'];
+  subtext?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type CTA (cta) */
+export type CtaRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** Record of type CTA (cta) */
+export type CtaRecordSubtextArgs = {
+  markdown?: Maybe<Scalars['Boolean']>;
+};
+
 export type LandingPageV1ModelFilter = {
   _createdAt?: Maybe<CreatedAtFilter>;
   createdAt?: Maybe<CreatedAtFilter>;
@@ -1596,10 +1691,10 @@ export type LandingPageV1ModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
-  pageContent?: Maybe<TextFilter>;
+  pageMeta?: Maybe<SeoFilter>;
   pageSlug?: Maybe<SlugFilter>;
   title?: Maybe<StringFilter>;
-  pageMeta?: Maybe<SeoFilter>;
+  pageContent?: Maybe<TextFilter>;
   OR?: Maybe<Array<Maybe<LandingPageV1ModelFilter>>>;
 };
 
@@ -1687,20 +1782,10 @@ export type BooleanFilter = {
   eq?: Maybe<Scalars['BooleanType']>;
 };
 
-/** Specifies how to filter text fields */
-export type TextFilter = {
-  /** Filter records based on a regular expression */
-  matches?: Maybe<StringMatchesFilter>;
-  /** Exclude records based on a regular expression */
-  notMatches?: Maybe<StringMatchesFilter>;
+/** Specifies how to filter SEO meta tags fields */
+export type SeoFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists?: Maybe<Scalars['BooleanType']>;
-};
-
-export type StringMatchesFilter = {
-  pattern: Scalars['String'];
-  caseSensitive?: Maybe<Scalars['BooleanType']>;
-  regexp?: Maybe<Scalars['BooleanType']>;
 };
 
 /** Specifies how to filter Slug fields */
@@ -1733,8 +1818,18 @@ export type StringFilter = {
   notIn?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
-/** Specifies how to filter SEO meta tags fields */
-export type SeoFilter = {
+export type StringMatchesFilter = {
+  pattern: Scalars['String'];
+  caseSensitive?: Maybe<Scalars['BooleanType']>;
+  regexp?: Maybe<Scalars['BooleanType']>;
+};
+
+/** Specifies how to filter text fields */
+export type TextFilter = {
+  /** Filter records based on a regular expression */
+  matches?: Maybe<StringMatchesFilter>;
+  /** Exclude records based on a regular expression */
+  notMatches?: Maybe<StringMatchesFilter>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists?: Maybe<Scalars['BooleanType']>;
 };

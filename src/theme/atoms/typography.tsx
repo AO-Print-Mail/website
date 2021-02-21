@@ -1,6 +1,6 @@
-import { styled } from '@theme'
+import { styled, StyledStitchesComponent } from '@theme'
 
-export const Heading1 = styled('h1', {
+export const Heading1: StyledStitchesComponent = styled('h1', {
   color: '$DA100',
   fontWeight: '$semibold',
   fontFamily: '$heading',
@@ -30,7 +30,7 @@ export const Heading1 = styled('h1', {
     },
   },
 })
-export const Heading2 = styled('h2', {
+export const Heading2: StyledInstance = styled('h2', {
   color: '$DA90',
   fontWeight: '$semibold',
   fontFamily: '$heading',
@@ -60,7 +60,7 @@ export const Heading2 = styled('h2', {
     },
   },
 })
-export const Heading3 = styled('h3', {
+export const Heading3: StyledInstance = styled('h3', {
   color: '$DA85',
   fontWeight: '$semibold',
   fontFamily: '$heading',
@@ -90,7 +90,7 @@ export const Heading3 = styled('h3', {
     },
   },
 })
-export const Heading4 = styled('h4', {
+export const Heading4: StyledInstance = styled('h4', {
   color: '$DA80',
   fontWeight: '$semibold',
   fontFamily: '$heading',
@@ -120,7 +120,7 @@ export const Heading4 = styled('h4', {
     },
   },
 })
-export const Heading5 = styled('h5', {
+export const Heading5: StyledInstance = styled('h5', {
   color: '$DA75',
   fontWeight: '$semibold',
   fontFamily: '$heading',
@@ -150,7 +150,7 @@ export const Heading5 = styled('h5', {
     },
   },
 })
-export const Heading6 = styled('h6', {
+export const Heading6: StyledInstance = styled('h6', {
   color: '$DA70',
   fontWeight: '$semibold',
   fontFamily: '$heading',
@@ -180,6 +180,7 @@ export const Heading6 = styled('h6', {
     },
   },
 })
+export const Paragraph = styled('p', {})
 export const Paragraph1 = styled('p', {
   color: '$DA90',
   fontWeight: '$regular',

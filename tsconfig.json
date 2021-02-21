@@ -24,7 +24,12 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src"],
-  "exclude": ["node_modules", "**/__generated__/*"],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/__generated__/*"
+  ],
   "ts-node": {
     "compilerOptions": {
       "module": "CommonJS",

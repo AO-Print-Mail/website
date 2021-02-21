@@ -1,5 +1,7 @@
 export type Merge<T, P> = P & Omit<T, keyof P>
 
+export type ThenArg<T> = T extends PromiseLike<infer U> ? U : T
+
 export type UnionStringArray<T extends Readonly<string[]>> = T[number]
 
 export type Omit<T, K> = Pick<T, Exclude<keyof T, K>>
