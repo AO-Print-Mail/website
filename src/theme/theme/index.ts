@@ -29,6 +29,8 @@ export const theme = {
       '0px 3px 20px -4px rgba(0, 35, 125, 0.04), 0px 8px 24px -2px rgba(17, 16, 43, 0.09)',
     '3':
       '0px 4px 36px -7px rgba(0, 35, 125, 0.06), 0px 10px 26px -4px rgba(17, 16, 43, 0.12)',
+    footer:
+      '0px 0px 36px -7px rgba(0, 35, 125, 0.07), 0px 3px 26px -4px rgba(17, 16, 43, 0.15)',
   },
   zIndices: {
     '1': '1',

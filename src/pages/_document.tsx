@@ -37,6 +37,7 @@ export default class Document extends NextDocument {
         <body>
           <Main />
           <NextScript />
+          <div id="portal-modal" />
           <script
             src="https://widget.reviews.io/rich-snippet-reviews-widgets/dist.js"
             type="text/javascript"

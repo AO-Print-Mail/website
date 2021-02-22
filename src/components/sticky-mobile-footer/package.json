@@ -1,0 +1,21 @@
+{
+  "main": "src/index.ts",
+  "name": "@aomail/sticky mobile footer",
+  "version": "1.0.0",
+  "description": "useful for displaying call to actions on mobile devices that would normally fit in the flow of the page",
+  "keywords": [
+    "theme",
+    "theming",
+    "ui mode",
+    "ui"
+  ],
+  "author": "Oli Askew <oli@oaskew.co.uk>",
+  "homepage": "https://github.com/chakra-ui/chakra-ui#readme",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "peerDependencies": {
+    "react": ">=17.0.1"
+  }
+}

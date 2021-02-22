@@ -1,6 +1,7 @@
 import { gql, request } from '@lib/datocms/datocms'
-import { Heading1, Paragraph2, Container, styled, css } from '@theme'
+import { Heading1, Box, Container, styled } from '@theme'
 import { Layout } from '@components/layout'
+import { Button } from '@components/button'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import {
@@ -16,8 +17,44 @@ interface PageProps {
 }
 
 const HeroText = styled('div', {
-  maxWidth: '60rem',
+  when: {
+    l: {
+      pr: '$2',
+      pl: '$3',
+      width: '50%',
+    },
+    xl: {
+      pr: '$3',
+      pl: '$4',
+    },
+  },
 })
+
+const FormBackground = styled('div', {
+  background: '$white',
+  minHeight: '$9',
+  position: 'fixed',
+  display: 'block',
+  zIndex: '$1',
+  left: '0',
+  bottom: '0',
+  right: '0',
+  boxShadow: '$footer',
+  when: {
+    l: {
+      boxShadow: '$3',
+      position: 'relative',
+      br: '$5',
+      ml: '$2',
+      mt: '$7',
+      width: '50%',
+    },
+    xl: {
+      width: 'calc(100% / 12 * 5)',
+    },
+  },
+})
+
 const ReviewBackground = styled('div', { backgroundColor: '$white', py: '$4' })
 
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
@@ -27,7 +64,9 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         <ClientLogoBanner />
       </Container>
       <ReviewBackground>
-        <Container>{/*<ReviewsIoWidget />*/}</Container>
+        <Container>
+          <ReviewsIoWidget />
+        </Container>
       </ReviewBackground>
     </>
   )
@@ -40,16 +79,29 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         beforeFooter={beforeFooter}
         metaData={data._seoMetaTags}
       >
-        <Container as="section">
+        <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
           <HeroText>
             <Heading1 color="primary">{data.title}</Heading1>
-            <StructuredText
-              data={data.content.document}
-              customRules={structuredTextRules({
-                headingProps: { color: 'primary' },
-              })}
-            />
+            <Box css={{ maxWidth: '60ch' }}>
+              <StructuredText
+                data={data.content.document}
+                customRules={structuredTextRules({
+                  headingProps: { color: 'primary' },
+                  listItemProps: {
+                    icon: 'Check',
+                    iconProps: { css: { color: '$green' } },
+                  },
+                })}
+              />
+            </Box>
           </HeroText>
+          <FormBackground>
+            <Container>
+              <Button fullWidth={{ initial: 'true', m: 'false', l: 'true' }}>
+                Start your direct mail quote
+              </Button>
+            </Container>
+          </FormBackground>
         </Container>
       </Layout>
     </>

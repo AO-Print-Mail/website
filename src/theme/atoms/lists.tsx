@@ -1,13 +1,17 @@
-import { styled } from '..'
+import { styled, CSS } from '..'
 import { forwardRef } from 'react'
 import * as icons from '../icons'
 
-interface ListProps {
+export interface ListProps {
   as?: string
+  icon?: React.ReactElement | string
 }
 
-interface listItemProps {
+export interface listItemProps {
   icon?: React.ReactNode | keyof typeof icons
+  iconProps?: {
+    css?: CSS
+  }
 }
 
 export const List = styled('ul', {
@@ -20,17 +24,26 @@ export const List = styled('ul', {
 
 export const _ListItem = styled('li', {
   display: 'flex',
-
-  '&::before': {
-    alignSelf: 'flex-end',
-    color: '$DA70',
-    left: '0',
-    content: `'•'`,
-    fontSize: '1.25em',
-    lineHeight: '1',
-    textAlign: 'center',
-    marginRight: '1em',
-    verticalAlign: 'middle',
+  variants: {
+    mark: {
+      enabled: {
+        '&::before': {
+          alignSelf: 'flex-end',
+          color: '$DA70',
+          left: '0',
+          content: `'•'`,
+          fontSize: '1.25em',
+          lineHeight: '1',
+          textAlign: 'center',
+          marginRight: '1em',
+          verticalAlign: 'middle',
+        },
+      },
+      disabled: {},
+    },
+    defaultVariants: {
+      mark: 'enabled',
+    },
   },
 })
 
@@ -43,11 +56,29 @@ export const OrderedList = forwardRef<HTMLUListElement, ListProps>(
   )
 )
 export const ListItem = forwardRef<HTMLUListElement, listItemProps>(
-  ({ children, icon, ...props }, ref) => {
+  ({ children, icon, iconProps, ...props }, ref) => {
     const Mark = typeof icon === 'string' ? icons[icon] : icon
+    const { css: iconCss, ...iconRest } = iconProps
     return (
-      <_ListItem role={'list'} ref={ref} {...props}>
-        {Mark && <Mark css={{ size: '1em' }} />}
+      <_ListItem
+        mark={Mark ? 'disabled' : 'enabled'}
+        role={'list'}
+        ref={ref}
+        {...props}
+      >
+        {Mark && (
+          <Mark
+            {...iconRest}
+            css={{
+              size: '$2',
+              marginRight: '$3',
+              alignSelf: 'flex-end',
+              position: 'relative',
+              top: '0.2em',
+              ...iconCss,
+            }}
+          />
+        )}
         {children}
       </_ListItem>
     )

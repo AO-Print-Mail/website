@@ -25,6 +25,7 @@ import {
   UnorderedList,
   OrderedList,
   ListItem,
+  listItemProps,
   strikethroughClass,
   underlineClass,
 } from '@theme'
@@ -39,6 +40,7 @@ type structuredTextConfig = {
       | 'Paragraph4'
       | 'Paragraph5'
   }
+  listItemProps?: listItemProps
 }
 
 export const structuredTextRules = ({
@@ -46,6 +48,7 @@ export const structuredTextRules = ({
   paragraphProps: { size: paragraphSize, ...paragraphProps } = {
     size: 'Paragraph2',
   },
+  listItemProps = {},
 }: structuredTextConfig) => [
   renderRule(isHeading, ({ node, children, key }) => {
     switch (node.level) {
@@ -109,11 +112,11 @@ export const structuredTextRules = ({
     //@ts-ignore - expects component but we are still rendering dast tree
     return <UnorderedList key={key} children={children} />
   }),
-  renderRule(isListItem, function ({ node, children, key }) {
+  renderRule(isListItem, function ({ children, key }) {
     //@ts-ignore - expects component but we are still rendering dast tree
-    return <ListItem icon="Check" key={key} children={children} />
+    return <ListItem {...listItemProps} children={children} />
   }),
-  renderRule(isBlockquote, function ({ node, children, key }) {
+  renderRule(isBlockquote, function ({ children, key }) {
     return <BlockQuote key={key}>{children}</BlockQuote>
   }),
 ]

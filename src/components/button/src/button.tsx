@@ -37,10 +37,10 @@ const ButtonBg = styled(ResetButton, {
     color: {
       primary: {
         backgroundColor: '$blue',
-        color: '$white',
+        color: '$LA90',
         '&:hover': {
-          backgroundColor: '$BA10',
-          color: '$DBA100',
+          backgroundColor: '$B50',
+          color: '$white',
         },
       },
       light: {
