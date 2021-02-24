@@ -12,7 +12,7 @@ const BackDrop = styled('div', {
   background: '$DA60',
 })
 
-const ModalWrapper = styled(Container, {
+export const ModalWrapper = styled(Container, {
   height: '100%',
   when: {
     m: {
@@ -27,8 +27,8 @@ const ModalWrapper = styled(Container, {
   },
 })
 
-const ModalBackground = styled('div', {
-  shadow: '$3',
+export const ModalBackground = styled('div', {
+  boxShadow: '$footer',
   position: 'absolute',
   m: '0',
   background: '$white',
@@ -36,8 +36,10 @@ const ModalBackground = styled('div', {
   right: '0',
   left: '0',
   bottom: '0',
+  overflow: 'hidden',
   when: {
     m: {
+      boxShadow: '$3',
       top: '$4',
       br: '$5',
       gridColumnStart: '2',

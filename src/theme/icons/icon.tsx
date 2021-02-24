@@ -1,25 +1,18 @@
 import { forwardRef } from 'react'
 import { styled, theme, CSS } from '..'
+import { toCamelCase } from '@utils/src/text-transforms'
 
-const fallbackIcon = {
-  path: (
-    <g stroke="currentColor" strokeWidth="1.5">
-      <path
-        strokeLinecap="round"
-        fill="none"
-        d="M9,9a3,3,0,1,1,4,2.829,1.5,1.5,0,0,0-1,1.415V14.25"
-      />
-      <path
-        fill="currentColor"
-        strokeLinecap="round"
-        d="M12,17.25a.375.375,0,1,0,.375.375A.375.375,0,0,0,12,17.25h0"
-      />
-      <circle fill="none" strokeMiterlimit="10" cx="12" cy="12" r="11.25" />
-    </g>
-  ),
-  viewBox: '0 0 24 24',
+export interface IconProps {
+  viewBox?: string
+  color?: string | keyof typeof theme['colors']
+  size?: string | keyof typeof theme['sizes']
+  focusable?: boolean
+  css?: CSS
+  role?: string
+  title?: string
+  description?: string
+  displayName?: string
 }
-
 export const Svg = styled('svg', {
   fill: 'none',
   verticalAlign: 'middle',
@@ -35,6 +28,7 @@ export const Svg = styled('svg', {
       small: {
         size: '16px',
       },
+      custom: { size: 'unset' },
     },
   },
   defaultVariants: {
@@ -42,19 +36,36 @@ export const Svg = styled('svg', {
   },
 })
 
-export interface IconProps {
-  viewBox?: string
-  color?: string | keyof typeof theme['colors']
-  size?: string | keyof typeof theme['sizes']
-  focusable?: boolean
-  children?: React.ReactNode
-  css?: CSS
-}
+export const Icon = forwardRef<SVGElement, IconProps>(
+  (
+    {
+      viewBox = '0 0 24 24',
+      focusable = false,
+      children,
+      role,
+      title,
+      displayName,
+      description,
+      ...props
+    },
+    ref
+  ) => {
+    const c = title && displayName && toCamelCase(title)
+    const cTitle = c && c + 'Title'
+    const cDesc = c && description && c + 'Desc'
+    const ariaLabelledBy = cTitle && `${cTitle}${cDesc ? ` ${cDesc}` : ``}`
 
-export const Icon: React.FC<IconProps> = forwardRef<SVGElement, IconProps>(
-  ({ viewBox = '0 0 24 24', focusable = false, children, ...props }, ref) => {
     return (
-      <Svg ref={ref} {...props} viewBox={viewBox}>
+      <Svg
+        ref={ref}
+        role={role}
+        aria-labelledby={ariaLabelledBy}
+        viewBox={viewBox}
+        xmlns="http://www.w3.org/2000/svg"
+        {...props}
+      >
+        {title && <title id={cTitle}>{title}</title>}
+        {description && <desc id={cDesc}>{description}</desc>}
         {children}
       </Svg>
     )

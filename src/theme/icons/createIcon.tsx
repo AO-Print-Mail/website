@@ -1,3 +1,4 @@
+import { cloneElement } from 'react'
 import { Icon, IconProps } from './icon'
 
 interface CreateIconOptions {
@@ -18,7 +19,7 @@ interface CreateIconOptions {
   /**
    * The display name useful in the dev tools
    */
-  displayName?: string
+  displayName: string
   /**
    * Default props automatically passed to the component; overwriteable
    */
@@ -38,20 +39,20 @@ const makePaths = (
 }
 
 export function createIcon({
-  displayName,
   viewBox,
   d,
   path,
-  defaultProps = {},
-}: CreateIconOptions): React.FC<IconProps> {
-  const Comp = ({ children, ...props }, ref) => {
+  displayName,
+  defaultProps = { displayName: 'Icon' },
+}: CreateIconOptions) {
+  const Comp: React.FC<IconProps> = ({ children, ...props }) => {
+    const _props = Object.assign({}, { ...defaultProps, displayName }, props)
     return (
       //@ts-ignore
-      <Icon viewBox={viewBox} {...defaultProps} {...props} size={props.size}>
-        {path ?? makePaths(d)}
+      <Icon viewBox={viewBox} {..._props}>
+        {path ?? makePaths(d) ?? children}
       </Icon>
     )
   }
-
   return Comp
 }

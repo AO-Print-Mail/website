@@ -1,7 +1,6 @@
-import { gql, request } from '@lib/datocms/datocms'
+import { request } from '@lib/datocms/datocms'
 import { Heading1, Box, Container, styled } from '@theme'
 import { Layout } from '@components/layout'
-import { Button } from '@components/button'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import {
@@ -9,8 +8,9 @@ import {
   GetLandingPageQuery,
 } from '@lib/datocms/__generated__/types'
 import { markdownToDast, ThenArg } from '@utils/src'
-import { StructuredText, renderRule } from 'react-datocms'
+import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof dataFunction>>
@@ -32,30 +32,31 @@ const HeroText = styled('div', {
 
 const FormBackground = styled('div', {
   background: '$white',
-  minHeight: '$9',
+  minHeight: '$10',
   position: 'fixed',
   display: 'block',
   zIndex: '$1',
   left: '0',
   bottom: '0',
   right: '0',
+  pb: '$6',
   boxShadow: '$footer',
+  overflow: 'hidden',
   when: {
     l: {
       boxShadow: '$3',
       position: 'relative',
       br: '$5',
       ml: '$2',
-      mt: '$7',
+      mr: '$2',
+      mt: '$6',
       width: '50%',
     },
     xl: {
-      width: 'calc(100% / 12 * 5)',
+      width: 'calc(100% / 12 * 5 - 64px)',
     },
   },
 })
-
-const ReviewBackground = styled('div', { backgroundColor: '$white', py: '$4' })
 
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   const beforeFooter = (
@@ -63,11 +64,11 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       <Container>
         <ClientLogoBanner />
       </Container>
-      <ReviewBackground>
+      <Box css={{ backgroundColor: '$white', py: '$4' }}>
         <Container>
           <ReviewsIoWidget />
         </Container>
-      </ReviewBackground>
+      </Box>
     </>
   )
 
@@ -88,19 +89,21 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
                 customRules={structuredTextRules({
                   headingProps: { color: 'primary' },
                   listItemProps: {
-                    icon: 'Check',
-                    iconProps: { css: { color: '$green' } },
+                    icon: 'CheckLeaf',
+                    iconProps: {
+                      css: {
+                        color: '$green',
+                        size: '1.125em',
+                        marginBottom: '0.125em',
+                      },
+                    },
                   },
                 })}
               />
             </Box>
           </HeroText>
           <FormBackground>
-            <Container>
-              <Button fullWidth={{ initial: 'true', m: 'false', l: 'true' }}>
-                Start your direct mail quote
-              </Button>
-            </Container>
+            <LandingPageQuoteForm keyword={'direct mail'} />
           </FormBackground>
         </Container>
       </Layout>
@@ -128,7 +131,6 @@ async function dataFunction({
 }: GetLandingPageQuery) {
   const content = await markdownToDast(pageContent)
   return {
-    contentMarkdown: pageContent,
     content,
     ...rest,
   }

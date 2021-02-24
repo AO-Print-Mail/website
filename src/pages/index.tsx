@@ -1,52 +1,41 @@
-import { gql, request } from '@lib/datocms/datocms'
-import { Heading1, Paragraph2, Container, styled, css } from '@theme'
-import { Layout } from '@components/layout'
-import { ClientLogoBanner } from '@components/client-logo-banner'
-import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import {
-  GetLandingPageQuery,
-  GetLandingPageQueryVariables,
-} from '@lib/datocms/__generated__/types'
+  Container,
+  Flex,
+  Box,
+  MailIllustration,
+  Heading4,
+  Paragraph3,
+  styled,
+} from '@theme'
+import { Layout } from '@components/layout'
+import { ModalWrapper, ModalBackground } from '@components/modal'
+import { Button } from '@components/button'
+import {
+  LandingPageQuoteForm,
+  Step1,
+  Step2,
+  ConfirmationPage,
+} from '@components/landing-page-quote-form'
 
 interface PageProps {
-  data?: GetLandingPageQuery
+  data?: {}
 }
 
-const HeroText = styled('div', {
-  maxWidth: '60rem',
-})
-const ReviewBackground = styled('div', { backgroundColor: '$white', py: '$4' })
-
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
-  const beforeFooter = (
-    <>
-      <Container>
-        <ClientLogoBanner />
-      </Container>
-      <ReviewBackground>
-        <Container>
-          <ReviewsIoWidget />
-        </Container>
-      </ReviewBackground>
-    </>
-  )
-
   return (
     <>
-      <Layout
-        title="landing page"
-        description="work in progress"
-        beforeFooter={beforeFooter}
-        metaData={[]}
-      >
-        <Container as="section">
-          <HeroText>
-            <Heading1 color="primary">Australian Direct Mail Services</Heading1>
-            <Paragraph2>
-              A&amp;O is Sydney’s premier Mail House, providing end-to-end
-              Print, Direct Mail and Fulfilment services.
-            </Paragraph2>
-          </HeroText>
+      <Layout title="landing page" description="work in progress" metaData={[]}>
+        <Container
+          as="section"
+          css={{ justifySelf: 'stretch', height: '824px', pb: '$4' }}
+        >
+          <ModalWrapper>
+            <ModalBackground>
+              {/* START GRAPHIC INNER */}
+              <ConfirmationPage />
+              {/* END GRAPHIC INNER */}
+            </ModalBackground>
+          </ModalWrapper>
         </Container>
       </Layout>
     </>

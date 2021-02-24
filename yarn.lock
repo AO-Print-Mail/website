@@ -10990,6 +10990,11 @@ listr@0.14.3, listr@^0.14.3:
     p-map "^2.0.0"
     rxjs "^6.3.3"
 
+little-state-machine@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/little-state-machine/-/little-state-machine-4.0.2.tgz#f1457566a735c03dee47e130848c574a8a239ed3"
+  integrity sha512-KMm04X40xI22dwOS6L6gLW79XwHyPkLQPJryqwCoDqQ+4Lsxfs94vEItUQwzqWZeNHauxU4yRGmwTFW0qYsHYg==
+
 load-json-file@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/load-json-file/-/load-json-file-2.0.0.tgz#7947e42149af80d696cbf797bcaabcfe1fe29ca8"
@@ -13566,6 +13571,11 @@ react-helmet-async@^1.0.2:
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
     shallowequal "^1.1.0"
+
+react-hook-form@^6.15.3:
+  version "6.15.3"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-6.15.3.tgz#ab4ccad9cde42a121fdfb828d9aff0d3d008441f"
+  integrity sha512-593jDlfP66NlMUOW5aNlCTzFWcFAOIyeFIGQtDreVLZ6n2o5D0DBIv/F+6mGZY0kCZs7yArs/YcgZBFLm1IXbg==
 
 react-hotkeys@2.0.0:
   version "2.0.0"

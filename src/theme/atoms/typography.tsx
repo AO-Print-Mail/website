@@ -18,7 +18,11 @@ export const Heading1 = styled('h1', {
         color: '$LA100',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
   },
+
   when: {
     m: {
       fontSize: '$h1t',
@@ -37,7 +41,7 @@ export const Heading2 = styled('h2', {
   fontSize: '$h2m',
   marginTop: '1em',
   lineHeight: '$1',
-  marginBottom: '-0.19em',
+  marginBottom: '0.31em',
   letterSpacing: '$cosy',
   variants: {
     color: {
@@ -48,7 +52,11 @@ export const Heading2 = styled('h2', {
         color: '$LA90',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
   },
+
   when: {
     m: {
       fontSize: '$h2t',
@@ -67,7 +75,7 @@ export const Heading3 = styled('h3', {
   fontSize: '$h3m',
   marginTop: '1em',
   lineHeight: '$2',
-  marginBottom: '-0.24em',
+  marginBottom: '0.26em',
   letterSpacing: '$cosy',
   variants: {
     color: {
@@ -78,7 +86,11 @@ export const Heading3 = styled('h3', {
         color: '$LA85',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
   },
+
   when: {
     m: {
       fontSize: '$h3t',
@@ -97,7 +109,7 @@ export const Heading4 = styled('h4', {
   fontSize: '$h4m',
   marginTop: '1em',
   lineHeight: '$2',
-  marginBottom: '-0.24em',
+  marginBottom: '0.26em',
   letterSpacing: '$cosy',
   variants: {
     color: {
@@ -108,7 +120,11 @@ export const Heading4 = styled('h4', {
         color: '$LA80',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
   },
+
   when: {
     m: {
       fontSize: '$h4t',
@@ -127,7 +143,7 @@ export const Heading5 = styled('h5', {
   fontSize: '$h5m',
   marginTop: '1em',
   lineHeight: '$3',
-  marginBottom: '-0.26em',
+  marginBottom: '0.24em',
   letterSpacing: '$cosy',
   variants: {
     color: {
@@ -138,7 +154,11 @@ export const Heading5 = styled('h5', {
         color: '$LA75',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
   },
+
   when: {
     m: {
       fontSize: '$h5t',
@@ -168,7 +188,11 @@ export const Heading6 = styled('h6', {
         color: '$LA70',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
   },
+
   when: {
     m: {
       fontSize: '$h6t',
@@ -198,7 +222,14 @@ export const Paragraph1 = styled('p', {
         color: '$LA80',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
+    bold: { true: { fontWeight: 'bold' } },
+    semiBold: { true: { fontWeight: '600' } },
+    italic: { true: { textStyle: 'italic' } },
   },
+
   when: {
     m: {
       fontSize: '$p1t',
@@ -228,7 +259,14 @@ export const Paragraph2 = styled('p', {
         color: '$LA75',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
+    bold: { true: { fontWeight: 'bold' } },
+    semiBold: { true: { fontWeight: '600' } },
+    italic: { true: { textStyle: 'italic' } },
   },
+
   when: {
     m: {
       fontSize: '$p2t',
@@ -258,7 +296,14 @@ export const Paragraph3 = styled('p', {
         color: '$LA70',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
+    bold: { true: { fontWeight: 'bold' } },
+    semiBold: { true: { fontWeight: '600' } },
+    italic: { true: { textStyle: 'italic' } },
   },
+
   when: {
     m: {
       fontSize: '$p3t',
@@ -288,7 +333,14 @@ export const Paragraph4 = styled('p', {
         color: '$LA70',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
+    bold: { true: { fontWeight: 'bold' } },
+    semiBold: { true: { fontWeight: '600' } },
+    italic: { true: { textStyle: 'italic' } },
   },
+
   when: {
     m: {
       fontSize: '$p4t',
@@ -318,7 +370,14 @@ export const Paragraph5 = styled('p', {
         color: '$LA60',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
+    bold: { true: { fontWeight: 'bold' } },
+    semiBold: { true: { fontWeight: '600' } },
+    italic: { true: { textStyle: 'italic' } },
   },
+
   when: {
     m: {
       fontSize: '$p5t',
@@ -362,6 +421,9 @@ const uiProperties = {
         fontWeight: '$semibold',
       },
     },
+    alignLeft: { true: { textAlign: 'left' } },
+    alignRight: { true: { textAlign: 'right' } },
+    alignCenter: { true: { textAlign: 'center' } },
   },
 }
 

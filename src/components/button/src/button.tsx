@@ -1,7 +1,24 @@
-import { styled, ResetButton, theme, CSS, UI1 } from '@theme'
+import { styled, ResetButton, theme, CSS, UI1, ThemeVariants } from '@theme'
 import { forwardRef } from 'react'
 import * as React from 'react'
 import { __DEV__ } from '@utils/src'
+
+interface ButtonProps {
+  style?: 'naked' | 'solid' | 'border' | 'icon'
+  color?: 'primary' | 'light' | 'dark' | 'success' | 'error'
+  state?: 'disabled' | 'loading'
+  size?: 'regular' | 'small'
+  offset?: 'left' | 'right'
+  fullWidth?: ThemeVariants<typeof ButtonBg>
+  leftIcon?: React.ReactElement
+  rightIcon?: React.ReactElement
+  iconSpacing?: keyof typeof theme['space']
+  as?: string
+  href?: string
+  css?: CSS
+  children?: React.ReactNode
+  type?: 'submit' | 'reset' | 'button'
+}
 
 export const NakedButton = styled(ResetButton, {
   backgroundColor: 'transparent',
@@ -37,7 +54,7 @@ const ButtonBg = styled(ResetButton, {
     color: {
       primary: {
         backgroundColor: '$blue',
-        color: '$LA90',
+        color: '$white',
         '&:hover': {
           backgroundColor: '$B50',
           color: '$white',
@@ -179,22 +196,6 @@ const ButtonBg = styled(ResetButton, {
   },
 })
 
-interface ButtonProps {
-  style?: 'naked' | 'solid' | 'border' | 'icon'
-  color?: 'primary' | 'light' | 'dark' | 'success' | 'error'
-  state?: 'disabled' | 'loading'
-  size?: 'regular' | 'small'
-  offset?: 'left' | 'right'
-  fullWidth?: 'true' | 'false'
-  leftIcon?: React.ReactElement
-  rightIcon?: React.ReactElement
-  iconSpacing?: keyof typeof theme['space']
-  isFullWidth?: boolean
-  as?: string
-  href?: string
-  css?: CSS
-}
-
 const defaultSpacing = (direction: 'left' | 'right') => {
   const key = {
     left: 'marginLeft',
@@ -210,7 +211,7 @@ const defaultSpacing = (direction: 'left' | 'right') => {
   }
 }
 
-export const Button: React.FC<ButtonProps> = forwardRef(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       style = 'solid',
@@ -219,7 +220,6 @@ export const Button: React.FC<ButtonProps> = forwardRef(
       state,
       leftIcon,
       rightIcon,
-      isFullWidth,
       children,
       ...props
     },

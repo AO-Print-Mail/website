@@ -1,5 +1,20 @@
 import { styled } from '@theme'
 
-export const Box = styled('div', {})
-export const Flex = styled('div', { display: 'flex' })
-export const Grid = styled('div', { display: 'grid' })
+export const Box = styled('div', {
+  variants: {
+    rel: {
+      true: { position: 'relative' },
+    },
+    fillHeight: {
+      true: { height: '100%' },
+    },
+    alignCenter: {
+      true: { mx: 'auto', alignSelf: 'center' },
+    },
+  },
+})
+export const Flex = styled(Box, {
+  display: 'flex',
+  variants: { column: { true: { flexDirection: 'column' } } },
+})
+export const Grid = styled(Box, { display: 'grid' })

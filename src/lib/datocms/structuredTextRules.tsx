@@ -114,7 +114,7 @@ export const structuredTextRules = ({
   }),
   renderRule(isListItem, function ({ children, key }) {
     //@ts-ignore - expects component but we are still rendering dast tree
-    return <ListItem {...listItemProps} children={children} />
+    return <ListItem {...listItemProps} key={key} children={children} />
   }),
   renderRule(isBlockquote, function ({ children, key }) {
     return <BlockQuote key={key}>{children}</BlockQuote>

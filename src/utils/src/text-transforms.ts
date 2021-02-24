@@ -46,3 +46,10 @@ export const markdownToDast = async (md: string) => {
   const dast = await htmlToDast(html).then((res) => res)
   return dast
 }
+
+export const toCamelCase = (str) =>
+  str
+    .replace(/(?:^\w|[A-Z]|\b\w)/g, (ltr, idx) =>
+      idx === 0 ? ltr.toLowerCase() : ltr.toUpperCase()
+    )
+    .replace(/\s+/g, '')
