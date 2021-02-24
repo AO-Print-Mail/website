@@ -1,5 +1,5 @@
 import { StateMachineProvider, createStore } from 'little-state-machine'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import { QuoteIntro } from './intro'
 import { JobInformation, Step1 } from './step1'
 import { AdditionalInformation, Step2 } from './step2'
@@ -21,11 +21,10 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   keyword,
   ...props
 }) => {
-  const {
-    query: { step },
-  } = useRouter()
+  const router = useRouter()
+
   let Component
-  switch (step) {
+  switch (router.query.step) {
     case '1':
       Component = Step1
       break
@@ -41,10 +40,16 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
     default:
       Component = QuoteIntro
   }
+  function changeStep(step: string) {
+    router.push({
+      pathname: `/promos/${router.query.pageSlug}`,
+      query: { step },
+    })
+  }
 
   return (
     <StateMachineProvider>
-      <Component keyword={keyword} {...props} />
+      <Component keyword={keyword} {...props} changeStep={changeStep} />
     </StateMachineProvider>
   )
 }

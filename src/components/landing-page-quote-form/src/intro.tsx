@@ -1,17 +1,17 @@
 import { Flex, Box, Heading4, Paragraph3, MailIllustration } from '@theme'
 import { Button } from '@components/button'
-
 interface QuoteIntroProps {
-  onClick: (e?: MouseEvent | PointerEvent) => unknown
+  changeStep: (step: string) => unknown
   keyword?: string
 }
 
 export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   keyword = 'direct mail',
+  changeStep,
   ...props
 }) => {
   return (
-    <Flex column rel fillHeight>
+    <Flex column rel fillHeight css={{ pb: '$6' }}>
       <MailIllustration
         css={{
           display: 'block',
@@ -45,6 +45,8 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
                 boxShadow: '$2',
               },
             }}
+            //@ts-expect-error
+            onClick={() => changeStep('1')}
           >
             Start your quote
           </Button>

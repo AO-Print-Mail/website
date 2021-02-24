@@ -1,10 +1,16 @@
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, Paragraph3, UI3, styled } from '@theme'
+import { Flex, Box, Paragraph3, UI3, styled, Phone } from '@theme'
 import { Button } from '@components/button'
 import { QuoteFormInputData } from './landing-page-quote-form'
+import {
+  updateContactInformation,
+  updateMarketingInformation,
+} from '@lib/little-state-machine'
 
-export interface Step3Props extends QuoteFormInputData {}
+export interface Step3Props extends QuoteFormInputData {
+  changeStep: (step: string) => unknown
+}
 
 export interface ContactAndMarketingInformation {
   contactInformation: ContactInformation
@@ -15,12 +21,11 @@ export interface ContactInformation {
   firstName: ''
   lastName: ''
   email: ''
-  telephoneNumber: ''
-  mobileNumber: ''
+  phone: ''
   country: ''
 }
 export interface MarketingInformation {
-  joinMailingList: ''
+  joinMailingList: boolean
   experienceRating: ''
   experienceComment: '[not provided]'
   ipAddress: ''
@@ -32,84 +37,89 @@ const Form = styled('form', {
   height: '100%',
 })
 
-export const Step3: React.FC<Step3Props> = () => {
+export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
+  const { state, actions } = useStateMachine({
+    updateContactInformation,
+    updateMarketingInformation,
+  })
   const {
     register,
     handleSubmit,
     watch,
     errors,
   } = useForm<ContactAndMarketingInformation>()
-  const onSubmit = (data) => console.log(data)
-
-  console.log(watch('example')) // watch input value by passing the name of it
-
+  const onSubmit = ({ joinMailingList, ...rest }) => {
+    //@ts-expect-error
+    actions.updateMarketingInformation({ joinMailingList })
+    //@ts-expect-error
+    actions.updateContactInformation({ ...rest })
+    changeStep('complete')
+  }
+  const {
+    firstName,
+    lastName,
+    email,
+    phone,
+    //@ts-expect-error
+  } = state.formData?.directMailForm?.contactInformation
+  const {
+    joinMailingList,
+    //@ts-expect-error
+  } = state.formData?.directMailForm?.marketingInformation
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Flex fillHeight column css={{ px: '$6', py: '$4' }}>
         {/* register your input into the hook by invoking the "register" function */}
         <Box css={{ flex: '1 1' }}>
-          <Paragraph3>Do you have artwork ready for printing?</Paragraph3>
+          <Paragraph3>Please provide your contact information</Paragraph3>
+          <Box css={{ mt: '$3', pb: '$2' }}>
+            <label htmlFor="firstName">First name</label>
+            <input
+              ref={register}
+              id="firstName"
+              name="firstName"
+              placeholder="Jane"
+              defaultValue={firstName}
+            />
+            <label htmlFor="lastName">Last name (optional)</label>
+            <input
+              ref={register}
+              id="lastName"
+              name="lastName"
+              placeholder="Appleseed"
+              defaultValue={lastName}
+            />
+            <label htmlFor="email">Email address</label>
+            <input
+              ref={register}
+              id="email"
+              name="email"
+              placeholder="jane@example.com.au"
+              type="email"
+              defaultValue={email}
+            />
+            <label htmlFor="phone">Preferred contact number</label>
+            <input
+              ref={register}
+              id="phone"
+              name="phone"
+              placeholder="04xx xxx xxx"
+              defaultValue={phone}
+            />
+          </Box>
           <Box css={{ mt: '$3', pb: '$2' }}>
             <input
-              type="radio"
-              id="artworkReady1"
-              name="artworkReady"
-              value="yes"
+              ref={register}
+              id="joinMailingList"
+              type="checkbox"
+              name="joinMailingList"
+              placeholder="04xx xxx xxx"
+              defaultChecked={joinMailingList}
             />
-            <label htmlFor="artworkReady1">Yes</label>
-            <input
-              type="radio"
-              id="artworkReady2"
-              name="artworkReady"
-              value="no"
-            />
-            <label htmlFor="artworkReady2">Not yet</label>
-            <input
-              type="radio"
-              id="artworkReady3"
-              name="artworkReady"
-              value="interested in print design"
-            />
-            <label htmlFor="artworkReady3">Interested in print design</label>
           </Box>
-          <Paragraph3>Is your address data ready to use?</Paragraph3>
-          <Box css={{ mt: '$3', pb: '$2' }}>
-            <input
-              type="radio"
-              id="addressDataReady1"
-              name="addressDataReady"
-              value="yes"
-            />
-            <label htmlFor="addressDataReady1">Yes</label>
-            <input
-              type="radio"
-              id="addressDataReady2"
-              name="addressDataReady"
-              value="no"
-            />
-            <label htmlFor="addressDataReady2">Not yet</label>
-            <input
-              type="radio"
-              id="addressDataReady3"
-              name="addressDataReady"
-              value="interested in buying a list"
-            />
-            <label htmlFor="addressDataReady3">
-              Interested in buying a list
-            </label>
-          </Box>
-          <Paragraph3 as="label" htmlFor="additionalInformation">
-            Additional information(optional)
-          </Paragraph3>
-          <Box css={{ mt: '$3', pb: '$2' }}>
-            <textarea
-              id="additionalInformation"
-              name="additionalInformation"
-              rows={5}
-              cols={33}
-              placeholder="Please include any additional information that is applicable to your job."
-            ></textarea>
-          </Box>
+          <label htmlFor="joinMailingList">
+            I’d like to keep updated with news and special offers at A&O
+          </label>
         </Box>
         <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
           <Button fullWidth type="submit" css={{ alignSelf: 'center' }}>

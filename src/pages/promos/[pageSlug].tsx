@@ -39,7 +39,6 @@ const FormBackground = styled('div', {
   left: '0',
   bottom: '0',
   right: '0',
-  pb: '$6',
   boxShadow: '$footer',
   overflow: 'hidden',
   when: {

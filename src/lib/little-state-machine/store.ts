@@ -1,4 +1,6 @@
-export const store = {
+import { GlobalState } from 'little-state-machine'
+
+export const store: GlobalState = {
   formData: {
     directMailForm: {
       jobInformation: {
@@ -14,7 +16,7 @@ export const store = {
         additionalInformation: '[none]',
       },
       contactInformation: {
-        firstName: 'Bollock Breath',
+        firstName: '',
         lastName: '',
         email: '',
         telephoneNumber: '',
@@ -22,7 +24,7 @@ export const store = {
         country: '',
       },
       marketingInformation: {
-        joinMailingList: '',
+        joinMailingList: true,
         experienceRating: '',
         experienceComment: '[not provided]',
         ipAddress: '',
