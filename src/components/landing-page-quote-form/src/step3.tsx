@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, Paragraph3, UI3, styled, Phone } from '@theme'
+import { Flex, Box, Paragraph3, UI3, styled, Input, Checkbox } from '@theme'
 import { Button } from '@components/button'
 import { QuoteFormInputData } from './landing-page-quote-form'
 import {
@@ -75,53 +75,56 @@ export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
             Your contact information
           </Paragraph3>
           <Box css={{ mt: '$3', pb: '$2' }}>
-            <label htmlFor="firstName">First name</label>
-            <input
-              ref={register}
-              id="firstName"
-              name="firstName"
-              placeholder="Jane"
-              defaultValue={firstName}
-            />
-            <label htmlFor="lastName">Last name (optional)</label>
-            <input
-              ref={register}
-              id="lastName"
-              name="lastName"
-              placeholder="Appleseed"
-              defaultValue={lastName}
-            />
-            <label htmlFor="email">Email address</label>
-            <input
+            <Flex css={{ mx: '-$2' }}>
+              <Input
+                ref={register}
+                id="firstName"
+                name="firstName"
+                placeholder="Jane"
+                defaultValue={firstName}
+                css={{ px: '$2' }}
+              >
+                First name
+              </Input>
+              <Input
+                ref={register}
+                id="lastName"
+                name="lastName"
+                placeholder="Appleseed"
+                defaultValue={lastName}
+                css={{ px: '$2' }}
+              >
+                Last name
+              </Input>
+            </Flex>
+            <Input
               ref={register}
               id="email"
               name="email"
               placeholder="jane@example.com.au"
               type="email"
               defaultValue={email}
-            />
-            <label htmlFor="phone">Preferred contact number</label>
-            <input
+            >
+              Email Address
+            </Input>
+            <Input
               ref={register}
               id="phone"
               name="phone"
               placeholder="04xx xxx xxx"
               defaultValue={phone}
-            />
+            >
+              Phone number
+            </Input>
           </Box>
-          <Box css={{ mt: '$3', pb: '$2' }}>
-            <input
-              ref={register}
-              id="joinMailingList"
-              type="checkbox"
-              name="joinMailingList"
-              placeholder="04xx xxx xxx"
-              defaultChecked={joinMailingList}
-            />
-          </Box>
-          <label htmlFor="joinMailingList">
+          <Checkbox
+            ref={register}
+            id="joinMailingList"
+            name="joinMailingList"
+            defaultChecked={joinMailingList}
+          >
             I’d like to keep updated with news and special offers at A&O
-          </label>
+          </Checkbox>
         </Box>
         <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
           <Button fullWidth type="submit" css={{ alignSelf: 'center' }}>

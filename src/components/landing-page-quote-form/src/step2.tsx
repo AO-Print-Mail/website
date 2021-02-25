@@ -1,6 +1,14 @@
-import { useForm, useWatch } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, Paragraph3, UI3, styled, RadioButton } from '@theme'
+import {
+  Flex,
+  Box,
+  Paragraph3,
+  UI3,
+  styled,
+  RadioButton,
+  TextArea,
+} from '@theme'
 import { Button } from '@components/button'
 import { QuoteFormInputData } from './landing-page-quote-form'
 import { updateAdditionalInformation } from '@lib/little-state-machine'
@@ -141,17 +149,20 @@ export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
             Additional information(optional)
           </Paragraph3>
           <Box css={{ mt: '$3', pb: '$2' }}>
-            <textarea
+            <TextArea
+              resizeVertical
               id="additionalInformation"
               name="additionalInformation"
-              rows={5}
-              cols={33}
+              rows={8}
+              cols={30}
               placeholder="Please include any additional information that is applicable to your job."
               ref={register}
+              autocomplete="off"
               defaultValue={
                 additionalInformation !== '[none]' ? additionalInformation : ''
               }
-            ></textarea>
+              css={{ width: '100%' }}
+            />
           </Box>
         </Box>
         <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>

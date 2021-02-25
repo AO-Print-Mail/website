@@ -1,14 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import {
-  Flex,
-  Box,
-  RadioButton,
-  NumberInput,
-  Paragraph3,
-  UI3,
-  styled,
-} from '@theme'
+import { Flex, Box, RadioButton, Input, Paragraph3, UI3, styled } from '@theme'
 import { Button } from '@components/button'
 import { updateJobInformation } from '@lib/little-state-machine'
 
@@ -145,7 +137,7 @@ export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
           </Paragraph3>
 
           <Box css={{ mt: '$3', pb: '$2' }}>
-            <NumberInput
+            <Input
               name="itemQuantity"
               id="quantity"
               ref={register}
