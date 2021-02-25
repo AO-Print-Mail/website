@@ -30,7 +30,7 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
     if (router.query.resetForm) {
       actions.resetFormData('directMailForm')
     }
-  }, [router.asPath])
+  }, [router])
 
   let Component: React.FC<any>
   switch (router.query.step) {

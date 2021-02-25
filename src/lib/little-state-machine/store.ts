@@ -13,15 +13,13 @@ export const store: GlobalState = {
       additionalInformation: {
         artworkReady: '[unknown]',
         addressDataReady: '[unknown]',
-        additionalInformation: '[none]',
+        additionalInformation: '',
       },
       contactInformation: {
         firstName: '',
         lastName: '',
         email: '',
-        telephoneNumber: '',
-        mobileNumber: '',
-        country: '',
+        phone: '',
       },
       marketingInformation: {
         joinMailingList: true,

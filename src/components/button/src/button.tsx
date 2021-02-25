@@ -3,13 +3,12 @@ import { forwardRef } from 'react'
 import * as React from 'react'
 import { __DEV__ } from '@utils/src'
 
-interface ButtonProps {
+interface ButtonProps extends React.ComponentProps<typeof ButtonBg> {
   style?: 'naked' | 'solid' | 'border' | 'icon'
   color?: 'primary' | 'light' | 'dark' | 'success' | 'error'
   state?: 'disabled' | 'loading'
-  size?: 'regular' | 'small'
+  size?: 'cta' | 'small'
   offset?: 'left' | 'right'
-  fullWidth?: ThemeVariants<typeof ButtonBg>
   leftIcon?: React.ReactElement
   rightIcon?: React.ReactElement
   iconSpacing?: keyof typeof theme['space']
@@ -60,6 +59,14 @@ const ButtonBg = styled(ResetButton, {
           color: '$white',
         },
       },
+      success: {
+        backgroundColor: '$green',
+        color: '$white',
+        '&:hover': {
+          backgroundColor: '$G40',
+          color: '$white',
+        },
+      },
       light: {
         backgroundColor: '$N10',
         color: '$BA90',
@@ -75,6 +82,18 @@ const ButtonBg = styled(ResetButton, {
         when: {
           m: { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
           l: { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
+        },
+      },
+      cta: {
+        height: '$5',
+        boxShadow: '$1',
+        '&:hover': {
+          boxShadow: '$2',
+        },
+        when: {
+          m: {
+            height: '$6',
+          },
         },
       },
     },
@@ -241,7 +260,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       )
 
     return (
-      <ButtonBg style={style} color={color} size={size} {...props} ref={ref}>
+      <ButtonBg style={style} color={color} size={size} ref={ref} {...props}>
         {LeftIcn && LeftIcn}
         {_children}
         {RightIcn && RightIcn}

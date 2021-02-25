@@ -210,11 +210,7 @@ export const Quantas = createIcon({
       />
       <Path
         d="M2.2 5.9C5.7 12 15 12.6 16 22.2l.2.5.5.2A31.7 31.7 0 0132 29.7a.2.2 0 000-.2 32 32 0 00-11.2-7.8l-1.4-.5a1.8 1.8 0 01-1-1.8c0-2.8 6.6-2.2 7.3-3.6l.1-.2c-1.4-1.2-3-2.1-4.8-2.6 0 .3.1.7.4 1 .4.6-.5 1.7-1.7.6v-.1C10.7 6 3.9 10.5.4 1l1.8 4.8z"
-        fill="L70"
-      />
-      <path
-        d="M23.7 15.4a2.8 2.8 0 01-2.3-1.4.7.7 0 01-.3 1h-.4v2.3l3-.6v-1.3z"
-        fill="url(#paint0_linear)"
+        fill="L75"
       />
       <path
         d="M17.8 23.1c5.2 1 10 3.3 14 6.6-9.4-8.1-13.6-6.7-14-6.6z"
@@ -230,22 +226,6 @@ export const Quantas = createIcon({
       />
       <defs>
         <linearGradient
-          id="paint0_linear"
-          x1="22.1"
-          y1="17.5"
-          x2="22.4"
-          y2="14.1"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset=".7" stopColor="#fff" stopOpacity="0" />
-          <stop offset=".7" stopColor="#EDEDED" stopOpacity=".2" />
-          <stop offset=".8" stopColor="#D7D7D7" stopOpacity=".5" />
-          <stop offset=".8" stopColor="#C6C6C6" stopOpacity=".7" />
-          <stop offset=".9" stopColor="#B9B9B9" stopOpacity=".9" />
-          <stop offset=".9" stopColor="#B2B2B2" />
-          <stop offset=".9" stopColor="#AFAFAF" />
-        </linearGradient>
-        <linearGradient
           id="paint1_linear"
           x1="17.8"
           y1="26.3"
@@ -257,7 +237,6 @@ export const Quantas = createIcon({
           <stop offset=".1" stopColor="#F3F3F3" stopOpacity=".1" />
           <stop offset=".2" stopColor="#DEDEDE" stopOpacity=".4" />
           <stop offset=".3" stopColor="#CDCDCD" stopOpacity=".6" />
-          <stop offset=".5" stopColor="silver" stopOpacity=".8" />
           <stop offset=".6" stopColor="#B7B7B7" stopOpacity=".9" />
           <stop offset=".8" stopColor="#B1B1B1" />
           <stop offset=".9" stopColor="#AFAFAF" />

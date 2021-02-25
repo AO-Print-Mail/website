@@ -27,14 +27,12 @@ declare module 'little-state-machine' {
             | 'no'
             | 'interested in print design'
             | '[n/a]'
-            | '[not provided]'
             | '[unknown]'
           addressDataReady:
             | 'yes'
             | 'no'
             | 'interested in buying a list'
             | '[n/a]'
-            | '[not provided]'
             | '[unknown]'
           additionalInformation?: string
           //fileAttachments: <filetype>[] -- To be built - allow multiple attachments
@@ -45,7 +43,6 @@ declare module 'little-state-machine' {
           lastName: string
           email: string
           phone: string
-          country: string
         }
         marketingInformation: {
           joinMailingList: boolean

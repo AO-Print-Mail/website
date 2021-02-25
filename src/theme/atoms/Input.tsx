@@ -1,8 +1,9 @@
 import { forwardRef, ReactNode } from 'react'
-import { styled, UI3, Box, CSS } from '..'
+import { styled, UI3, Box, CSS, ThemeVariants } from '..'
 import { Paragraph5 } from './typography'
 
-interface InputProps {
+interface InputProps
+  extends React.ComponentProps<typeof TextAreaStyles & typeof InputStyles> {
   id: string
   increment?: number
   value?: string | number
@@ -51,9 +52,11 @@ export const TextAreaStyles = styled(InputStyles, {
   },
 })
 
-const LabelStyles = styled(Paragraph5, { color: '$DA70' })
+const LabelStyles = styled(Paragraph5, { color: '$DA70', display: 'block' })
 
-export const TextArea = (props) => <TextAreaStyles {...props} as="textarea" />
+export const TextArea = forwardRef<HTMLInputElement, InputProps>(
+  (props, ref) => <TextAreaStyles ref={ref} {...props} as="textarea" />
+)
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (

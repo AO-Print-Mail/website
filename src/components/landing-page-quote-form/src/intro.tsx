@@ -36,16 +36,11 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
         </Paragraph3>
         <Box css={{ mx: '$6', pt: '$3' }}>
           <Button
+            fullWidth
+            size="cta"
             css={{
-              width: '$fill',
               mt: '$6',
-              height: '$7',
-              boxShadow: '$1',
-              '&:hover': {
-                boxShadow: '$2',
-              },
             }}
-            //@ts-expect-error
             onClick={() => changeStep('1')}
           >
             Start your quote

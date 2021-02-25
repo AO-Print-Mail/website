@@ -186,7 +186,12 @@ export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
           </Flex>
         </Box>
         <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
-          <Button fullWidth type="submit" css={{ alignSelf: 'center' }}>
+          <Button
+            fullWidth
+            size="cta"
+            type="submit"
+            css={{ alignSelf: 'center' }}
+          >
             <UI3 css={{ color: '$white' }}>Next</UI3>
           </Button>
         </Flex>
