@@ -15,6 +15,9 @@ export const Box = styled('div', {
 })
 export const Flex = styled(Box, {
   display: 'flex',
-  variants: { column: { true: { flexDirection: 'column' } } },
+  variants: {
+    column: { true: { flexDirection: 'column' } },
+    wrap: { true: { flexWrap: 'wrap' } },
+  },
 })
 export const Grid = styled(Box, { display: 'grid' })

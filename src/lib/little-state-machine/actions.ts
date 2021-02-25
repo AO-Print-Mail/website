@@ -79,7 +79,10 @@ export function updateMarketingInformation(
     },
   }
 }
-export function resetFormData(state, formName: string) {
+export function resetFormData(
+  state: GlobalState,
+  formName: string
+): GlobalState {
   return {
     ...state,
     formData: {

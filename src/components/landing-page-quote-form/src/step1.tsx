@@ -1,6 +1,14 @@
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, Paragraph3, UI3, styled } from '@theme'
+import {
+  Flex,
+  Box,
+  RadioButton,
+  NumberInput,
+  Paragraph3,
+  UI3,
+  styled,
+} from '@theme'
 import { Button } from '@components/button'
 import { updateJobInformation } from '@lib/little-state-machine'
 
@@ -9,7 +17,13 @@ export interface Step1Props extends JobInformation {
 }
 
 export interface JobInformation {
-  mailFormat: 'flyers' | 'brochures' | 'letters' | 'other' | '[not provided]'
+  mailFormat:
+    | 'flyers/postcards'
+    | 'brochures'
+    | 'letters'
+    | 'plastic wrap'
+    | 'other'
+    | '[not provided]'
   services: 'Print and mail' | 'Mail only' | '[not provided]'
   itemQuantity: number | '[not provided]'
   frequency: 'One-off' | 'daily' | 'weekly' | 'monthly' | '[not provided]'
@@ -40,9 +54,11 @@ export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
       <Flex fillHeight column css={{ px: '$6', py: '$4' }}>
         {/* register your input into the hook by invoking the "register" function */}
         <Box css={{ flex: '1 1' }}>
-          <Paragraph3>What are you sending?</Paragraph3>
-          <Box css={{ mt: '$3', pb: '$2' }}>
-            <input
+          <Paragraph3 css={{ color: '$DA80' }}>
+            What are you sending?
+          </Paragraph3>
+          <Flex wrap css={{ mt: '$3', pb: '$3' }}>
+            {/*<input
               type="radio"
               id="format1"
               name="mailFormat"
@@ -50,105 +66,132 @@ export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
               ref={register}
               defaultChecked={mailFormat === 'flyers'}
             />
-            <label htmlFor="format1">Flyers</label>
-            <input
-              type="radio"
+            <label htmlFor="format1">Flyers</label>*/}
+            <RadioButton
+              id="format1"
+              name="mailFormat"
+              ref={register}
+              value="flyers/postcards"
+              defaultChecked={mailFormat === 'flyers/postcards'}
+            >
+              Flyers / Postcards
+            </RadioButton>
+            <RadioButton
               id="format2"
               name="mailFormat"
-              value="brochures"
               ref={register}
+              value="brochures"
               defaultChecked={mailFormat === 'brochures'}
-            />
-            <label htmlFor="format2">Brochures</label>
-            <input
-              type="radio"
+            >
+              Brochures
+            </RadioButton>
+            <RadioButton
               id="format3"
               name="mailFormat"
-              value="letters"
               ref={register}
+              value="letters"
               defaultChecked={mailFormat === 'letters'}
-            />
-            <label htmlFor="format3">Letters</label>
-            <input
-              type="radio"
+            >
+              Letters
+            </RadioButton>
+            <RadioButton
               id="format4"
               name="mailFormat"
-              value="other"
               ref={register}
+              value="plastic wrap"
+              defaultChecked={mailFormat === 'plastic wrap'}
+            >
+              Plastic wrap
+            </RadioButton>
+            <RadioButton
+              id="format5"
+              name="mailFormat"
+              ref={register}
+              value="other"
               defaultChecked={mailFormat === 'other'}
-            />
-            <label htmlFor="format4">Something else</label>
-          </Box>
-          <Paragraph3>Which services do you need?</Paragraph3>
-          <Box css={{ mt: '$3', pb: '$2' }}>
-            <input
-              type="radio"
+            >
+              Something else
+            </RadioButton>
+          </Flex>
+          <Paragraph3 css={{ color: '$DA80' }}>
+            Which services do you need?
+          </Paragraph3>
+          <Flex wrap css={{ mt: '$3', pb: '$3' }}>
+            <RadioButton
               id="services1"
               name="services"
-              value="Print and mail"
               ref={register}
+              value="Print and mail"
               defaultChecked={services === 'Print and mail'}
-            />
-            <label htmlFor="services1">Printing and mailing</label>
-            <input
-              type="radio"
+            >
+              Printing and mailing
+            </RadioButton>
+            <RadioButton
               id="services2"
               name="services"
-              value="Mail only"
               ref={register}
+              value="Mail only"
               defaultChecked={services === 'Mail only'}
-            />
-            <label htmlFor="services2">Mailing only</label>
-          </Box>
-          <Paragraph3>How many items? (approximate is fine)</Paragraph3>
+            >
+              Mailing only
+            </RadioButton>
+          </Flex>
+          <Paragraph3
+            as="label"
+            htmlFor="quantity"
+            css={{ display: 'block', color: '$DA80' }}
+          >
+            How many items? (approximate is fine)
+          </Paragraph3>
 
           <Box css={{ mt: '$3', pb: '$2' }}>
-            <input
+            <NumberInput
               name="itemQuantity"
+              id="quantity"
               ref={register}
               type="number"
               defaultValue={itemQuantity}
             />
           </Box>
-          <Paragraph3>How often?</Paragraph3>
-          <Box css={{ mt: '$3', pb: '$2' }}>
-            <input
-              type="radio"
+          <Paragraph3 css={{ color: '$DA80' }}>How often?</Paragraph3>
+          <Flex wrap css={{ mt: '$3', pb: '$3' }}>
+            <RadioButton
               id="frequency1"
               name="frequency"
+              ref={register}
               value="One-off"
-              ref={register}
               defaultChecked={frequency === 'One-off'}
-            />
-            <label htmlFor="frequency1">Once-off</label>
-            <input
-              type="radio"
-              id="frequency1"
-              name="frequency"
-              value="daily"
-              ref={register}
-              defaultChecked={frequency === 'daily'}
-            />
-            <label htmlFor="frequency1">Daily</label>
-            <input
-              type="radio"
+            >
+              Once-off
+            </RadioButton>
+            <RadioButton
               id="frequency2"
               name="frequency"
-              value="weekly"
               ref={register}
-              defaultChecked={frequency === 'weekly'}
-            />
-            <label htmlFor="frequency2">Weekly</label>
-            <input
-              type="radio"
+              value="daily"
+              defaultChecked={frequency === 'daily'}
+            >
+              Daily
+            </RadioButton>
+            <RadioButton
               id="frequency3"
               name="frequency"
-              value="monthly"
               ref={register}
+              value="weekly"
+              defaultChecked={frequency === 'weekly'}
+            >
+              Weekly
+            </RadioButton>
+            <RadioButton
+              id="frequency4"
+              name="frequency"
+              ref={register}
+              value="monthly"
               defaultChecked={frequency === 'monthly'}
-            />
-            <label htmlFor="frequency3">Monthly</label>
-          </Box>
+            >
+              Monthly
+            </RadioButton>
+          </Flex>
         </Box>
         <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
           <Button fullWidth type="submit" css={{ alignSelf: 'center' }}>

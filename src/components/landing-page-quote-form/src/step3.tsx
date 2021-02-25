@@ -71,7 +71,9 @@ export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
       <Flex fillHeight column css={{ px: '$6', py: '$4' }}>
         {/* register your input into the hook by invoking the "register" function */}
         <Box css={{ flex: '1 1' }}>
-          <Paragraph3>Please provide your contact information</Paragraph3>
+          <Paragraph3 css={{ color: '$DA80' }}>
+            Your contact information
+          </Paragraph3>
           <Box css={{ mt: '$3', pb: '$2' }}>
             <label htmlFor="firstName">First name</label>
             <input

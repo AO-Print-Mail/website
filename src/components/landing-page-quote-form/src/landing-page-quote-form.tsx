@@ -1,10 +1,12 @@
-import { StateMachineProvider, createStore } from 'little-state-machine'
-import { Router, useRouter } from 'next/router'
+import { useStateMachine } from 'little-state-machine'
+import { useRouter } from 'next/router'
 import { QuoteIntro } from './intro'
 import { JobInformation, Step1 } from './step1'
 import { AdditionalInformation, Step2 } from './step2'
 import { ContactInformation, MarketingInformation, Step3 } from './step3'
 import { ConfirmationPage } from './confirmation'
+import { resetFormData } from '@lib/little-state-machine/actions'
+import { useEffect } from 'react'
 
 export type QuoteFormInputData = {
   jobInformation: JobInformation
@@ -23,7 +25,14 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
 }) => {
   const router = useRouter()
 
-  let Component
+  const { actions } = useStateMachine({ resetFormData })
+  useEffect(() => {
+    if (router.query.resetForm) {
+      actions.resetFormData('directMailForm')
+    }
+  }, [router.asPath])
+
+  let Component: React.FC<any>
   switch (router.query.step) {
     case '1':
       Component = Step1
@@ -47,9 +56,5 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
     })
   }
 
-  return (
-    <StateMachineProvider>
-      <Component keyword={keyword} {...props} changeStep={changeStep} />
-    </StateMachineProvider>
-  )
+  return <Component keyword={keyword} {...props} changeStep={changeStep} />
 }

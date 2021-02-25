@@ -2,16 +2,16 @@ import React from 'react'
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { getCssString } from '@theme'
 export default class Document extends NextDocument {
-  styles = getCssString()
+  //styles = getCssString()
   render() {
     return (
       <Html lang="en">
         <Head>
           {/* eslint-disable-next-line react/no-danger */}
-          <style
+          {/*<style
             id="stitches"
             dangerouslySetInnerHTML={{ __html: this.styles }}
-          />
+          />*/}
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <link rel="manifest" href="/manifest.json" />

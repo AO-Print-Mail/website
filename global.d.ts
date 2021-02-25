@@ -5,9 +5,10 @@ declare module 'little-state-machine' {
       directMailForm: {
         jobInformation: {
           mailFormat:
-            | 'flyers'
+            | 'flyers/postcards'
             | 'brochures'
             | 'letters'
+            | 'plastic wrap'
             | 'other'
             | '[not provided]'
           services: 'Print and mail' | 'Mail only' | '[not provided]'

@@ -1,6 +1,6 @@
 import { useForm, useWatch } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, Paragraph3, UI3, styled } from '@theme'
+import { Flex, Box, Paragraph3, UI3, styled, RadioButton } from '@theme'
 import { Button } from '@components/button'
 import { QuoteFormInputData } from './landing-page-quote-form'
 import { updateAdditionalInformation } from '@lib/little-state-machine'
@@ -61,79 +61,83 @@ export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
         <Box css={{ flex: '1 1' }}>
           {services === 'Print and mail' && (
             <>
-              <Paragraph3>Do you have artwork ready for printing?</Paragraph3>
-              <Box css={{ mt: '$3', pb: '$2' }}>
-                <input
-                  type="radio"
+              <Paragraph3 css={{ color: '$DA80' }}>
+                Do you have artwork ready for printing?
+              </Paragraph3>
+              <Flex wrap css={{ mt: '$3', pb: '$2' }}>
+                <RadioButton
                   id="artworkReady1"
                   name="artworkReady"
                   ref={register}
                   value="yes"
                   defaultChecked={artworkReady === 'yes'}
-                />
-                <label htmlFor="artworkReady1">Yes</label>
-                <input
-                  type="radio"
+                >
+                  Yes
+                </RadioButton>
+                <RadioButton
                   id="artworkReady2"
                   name="artworkReady"
-                  value="no"
                   ref={register}
+                  value="no"
                   defaultChecked={artworkReady === 'no'}
-                />
-                <label htmlFor="artworkReady2">Not yet</label>
-                <input
-                  type="radio"
+                >
+                  Not yet
+                </RadioButton>
+                <RadioButton
                   id="artworkReady3"
                   name="artworkReady"
-                  value="interested in print design"
                   ref={register}
+                  value="interested in print design"
                   defaultChecked={artworkReady === 'interested in print design'}
-                />
-                <label htmlFor="artworkReady3">
+                >
                   Interested in print design
-                </label>
-              </Box>
+                </RadioButton>
+              </Flex>
             </>
           )}
           {frequency === 'One-off' && (
             <>
-              <Paragraph3>Is your address data ready to use?</Paragraph3>
-              <Box css={{ mt: '$3', pb: '$2' }}>
-                <input
-                  type="radio"
+              <Paragraph3 css={{ color: '$DA80' }}>
+                Is your address data ready to process?
+              </Paragraph3>
+              <Flex wrap css={{ mt: '$3', pb: '$2' }}>
+                <RadioButton
                   id="addressDataReady1"
                   name="addressDataReady"
-                  value="yes"
                   ref={register}
+                  value="yes"
                   defaultChecked={addressDataReady === 'yes'}
-                />
-                <label htmlFor="addressDataReady1">Yes</label>
-                <input
-                  type="radio"
+                >
+                  Yes
+                </RadioButton>
+                <RadioButton
                   id="addressDataReady2"
                   name="addressDataReady"
-                  value="no"
                   ref={register}
+                  value="no"
                   defaultChecked={addressDataReady === 'no'}
-                />
-                <label htmlFor="addressDataReady2">Not yet</label>
-                <input
-                  type="radio"
+                >
+                  Not yet
+                </RadioButton>
+                <RadioButton
                   id="addressDataReady3"
                   name="addressDataReady"
-                  value="interested in buying a list"
                   ref={register}
+                  value="interested in buying a list"
                   defaultChecked={
                     addressDataReady === 'interested in buying a list'
                   }
-                />
-                <label htmlFor="addressDataReady3">
+                >
                   Interested in buying a list
-                </label>
-              </Box>
+                </RadioButton>
+              </Flex>
             </>
           )}
-          <Paragraph3 as="label" htmlFor="additionalInformation">
+          <Paragraph3
+            as="label"
+            htmlFor="additionalInformation"
+            css={{ color: '$DA80', display: 'block' }}
+          >
             Additional information(optional)
           </Paragraph3>
           <Box css={{ mt: '$3', pb: '$2' }}>
@@ -144,7 +148,9 @@ export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
               cols={33}
               placeholder="Please include any additional information that is applicable to your job."
               ref={register}
-              defaultValue={additionalInformation}
+              defaultValue={
+                additionalInformation !== '[none]' ? additionalInformation : ''
+              }
             ></textarea>
           </Box>
         </Box>
