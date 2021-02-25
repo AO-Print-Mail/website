@@ -2,24 +2,24 @@ import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
 import { Flex, Box, RadioButton, Input, Paragraph3, UI3, styled } from '@theme'
 import { Button } from '@components/button'
-import { updateJobInformation } from '@lib/little-state-machine'
+import { updateDirectMailForm } from '@lib/little-state-machine'
 
 export interface Step1Props extends JobInformation {
   changeStep: (step: string) => unknown
 }
 
 export interface JobInformation {
-  mailFormat:
+  mailFormat?:
     | 'flyers/postcards'
     | 'brochures'
     | 'letters'
     | 'plastic wrap'
     | 'other'
     | '[not provided]'
-  services: 'Print and mail' | 'Mail only' | '[not provided]'
-  itemQuantity: number | '[not provided]'
-  frequency: 'One-off' | 'daily' | 'weekly' | 'monthly' | '[not provided]'
-  urgency: '[not provided]' //to be built
+  services?: 'Print and mail' | 'Mail only' | '[not provided]'
+  itemQuantity?: number | '[not provided]'
+  frequency?: 'One-off' | 'daily' | 'weekly' | 'monthly' | '[not provided]'
+  urgency?: '[not provided]' //to be built
 }
 
 const Form = styled('form', {
@@ -27,10 +27,10 @@ const Form = styled('form', {
 })
 
 export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
-  const { state, actions } = useStateMachine({ updateJobInformation })
-  const { register, handleSubmit, watch, errors } = useForm<JobInformation>()
+  const { state, actions } = useStateMachine({ updateDirectMailForm })
+  const { register, handleSubmit, errors } = useForm<JobInformation>()
   const onSubmit = (data) => {
-    actions.updateJobInformation(data)
+    actions.updateDirectMailForm(data)
     changeStep('2')
   }
   const {
@@ -39,7 +39,7 @@ export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
     itemQuantity,
     frequency,
     //@ts-ignore
-  } = state.formData?.directMailForm?.jobInformation
+  } = state.formData?.directMailForm
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

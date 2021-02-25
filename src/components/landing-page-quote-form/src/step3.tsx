@@ -3,26 +3,21 @@ import { useStateMachine } from 'little-state-machine'
 import { Flex, Box, Paragraph3, UI3, styled, Input, Checkbox } from '@theme'
 import { Button } from '@components/button'
 import { QuoteFormInputData } from './landing-page-quote-form'
-import {
-  updateContactInformation,
-  updateMarketingInformation,
-} from '@lib/little-state-machine'
+import { updateDirectMailForm } from '@lib/little-state-machine'
 
 export interface Step3Props extends QuoteFormInputData {
   changeStep: (step: string) => unknown
 }
 
-export interface ContactAndMarketingInformation {
-  contactInformation: ContactInformation
-  marketingInformation: MarketingInformation
-}
+export type ContactAndMarketingInformation = ContactInformation &
+  MarketingInformation
 
 export interface ContactInformation {
-  firstName: ''
-  lastName: ''
-  email: ''
-  phone: ''
-  country: ''
+  firstName?: ''
+  lastName?: ''
+  email?: ''
+  phone?: ''
+  country?: ''
 }
 export interface MarketingInformation {
   joinMailingList: boolean
@@ -39,8 +34,7 @@ const Form = styled('form', {
 
 export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
   const { state, actions } = useStateMachine({
-    updateContactInformation,
-    updateMarketingInformation,
+    updateDirectMailForm,
   })
   const {
     register,
@@ -48,11 +42,8 @@ export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
     watch,
     errors,
   } = useForm<ContactAndMarketingInformation>()
-  const onSubmit = ({ joinMailingList, ...rest }) => {
-    //@ts-expect-error
-    actions.updateMarketingInformation({ joinMailingList })
-    //@ts-expect-error
-    actions.updateContactInformation({ ...rest })
+  const onSubmit = (data: ContactAndMarketingInformation) => {
+    actions.updateDirectMailForm(data)
     changeStep('complete')
   }
   const {
@@ -60,12 +51,9 @@ export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
     lastName,
     email,
     phone,
-    //@ts-expect-error
-  } = state.formData?.directMailForm?.contactInformation
-  const {
     joinMailingList,
     //@ts-expect-error
-  } = state.formData?.directMailForm?.marketingInformation
+  } = state.formData?.directMailForm
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Flex fillHeight column css={{ px: '$6', py: '$4' }}>

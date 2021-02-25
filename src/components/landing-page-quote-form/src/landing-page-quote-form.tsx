@@ -8,12 +8,10 @@ import { ConfirmationPage } from './confirmation'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import { useEffect } from 'react'
 
-export type QuoteFormInputData = {
-  jobInformation: JobInformation
-  additionalInformation: AdditionalInformation
-  contactInformation: ContactInformation
-  marketingInformation: MarketingInformation
-}
+export type QuoteFormInputData = JobInformation &
+  AdditionalInformation &
+  ContactInformation &
+  MarketingInformation
 
 interface LandingPageQuoteFormProps {
   keyword: string

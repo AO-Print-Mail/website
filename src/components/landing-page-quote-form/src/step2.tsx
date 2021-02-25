@@ -12,7 +12,7 @@ import {
 } from '@theme'
 import { Button } from '@components/button'
 import { QuoteFormInputData } from './landing-page-quote-form'
-import { updateAdditionalInformation } from '@lib/little-state-machine'
+import { updateDirectMailForm } from '@lib/little-state-machine'
 
 export interface Step2Props extends QuoteFormInputData {
   changeStep: (step: string) => unknown
@@ -41,7 +41,7 @@ const Form = styled('form', {
 })
 
 export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
-  const { state, actions } = useStateMachine({ updateAdditionalInformation })
+  const { state, actions } = useStateMachine({ updateDirectMailForm })
   const {
     register,
     handleSubmit,
@@ -50,17 +50,15 @@ export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
   } = useForm<AdditionalInformation>()
 
   const onSubmit = (data) => {
-    actions.updateAdditionalInformation(data)
+    actions.updateDirectMailForm(data)
     changeStep('3')
   }
 
   const {
-    additionalInformation: {
-      artworkReady,
-      addressDataReady,
-      additionalInformation,
-    },
-    jobInformation: { services, frequency },
+    artworkReady,
+    addressDataReady,
+    additionalInformation,
+    services,
     //@ts-expect-error
   } = state.formData?.directMailForm
 
@@ -68,7 +66,7 @@ export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
 
   useEffect(() => {
     if (!requiresArtwork) {
-      actions.updateAdditionalInformation({ artworkReady: '[n/a]' })
+      actions.updateDirectMailForm({ artworkReady: '[n/a]' })
     }
   }, [services])
 
