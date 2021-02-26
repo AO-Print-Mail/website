@@ -165,7 +165,7 @@ export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
               cols={30}
               placeholder="Please include any additional information that is applicable to your job."
               ref={register}
-              autocomplete="off"
+              autoComplete="off"
               defaultValue={additionalInformation}
               css={{ width: '100%' }}
             />

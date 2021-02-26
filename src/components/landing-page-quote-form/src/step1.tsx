@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
 import { Flex, Box, RadioButton, Input, Paragraph3, UI3, styled } from '@theme'
@@ -30,7 +31,7 @@ export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
   const { register, handleSubmit, errors } = useForm<JobInformation>()
   const onSubmit = (data) => {
-    actions.updateDirectMailForm(data)
+    actions.updateDirectMailForm({ ...data })
     changeStep('2')
   }
   const {
@@ -38,6 +39,7 @@ export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
     services,
     itemQuantity,
     frequency,
+    isComplete,
     //@ts-ignore
   } = state.formData?.directMailForm
 
@@ -50,15 +52,6 @@ export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
             What are you sending?
           </Paragraph3>
           <Flex wrap css={{ mt: '$3', pb: '$3' }}>
-            {/*<input
-              type="radio"
-              id="format1"
-              name="mailFormat"
-              value="flyers"
-              ref={register}
-              defaultChecked={mailFormat === 'flyers'}
-            />
-            <label htmlFor="format1">Flyers</label>*/}
             <RadioButton
               id="format1"
               name="mailFormat"

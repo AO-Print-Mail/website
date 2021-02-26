@@ -1,6 +1,15 @@
 import { useForm } from 'react-hook-form'
-import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, Paragraph3, UI3, styled, Input, Checkbox } from '@theme'
+import { useStateMachine, GlobalState } from 'little-state-machine'
+import {
+  Flex,
+  Box,
+  Paragraph3,
+  UI3,
+  styled,
+  Input,
+  Checkbox,
+  classes,
+} from '@theme'
 import { Button } from '@components/button'
 import { QuoteFormInputData } from './landing-page-quote-form'
 import { updateDirectMailForm } from '@lib/little-state-machine'
@@ -13,19 +22,21 @@ export type ContactAndMarketingInformation = ContactInformation &
   MarketingInformation
 
 export interface ContactInformation {
-  firstName?: ''
-  lastName?: ''
-  email?: ''
-  phone?: ''
-  country?: ''
+  firstName?: string
+  lastName?: string
+  email?: string
+  phone?: string
+  country?: string
 }
 export interface MarketingInformation {
   joinMailingList?: boolean
-  experienceRating?: ''
+  experienceRating?: string
   experienceComment?: '[not provided]'
-  ipAddress?: ''
-  hutk?: ''
-  gclid?: ''
+  ipAddress?: string
+  hutk?: string
+  gclid?: string
+  'bot-field-step3'?: any
+  isComplete?: boolean
 }
 
 const Form = styled('form', {
@@ -43,8 +54,7 @@ export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
     errors,
   } = useForm<ContactAndMarketingInformation>()
   const onSubmit = (data: ContactAndMarketingInformation) => {
-    actions.updateDirectMailForm(data)
-    changeStep('complete')
+    actions.updateDirectMailForm({ ...data, isComplete: true })
   }
   const {
     firstName,
@@ -55,7 +65,7 @@ export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
     //@ts-ignore
   } = state.formData?.directMailForm
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)} netlify-honeypot="bot-field-step3">
       <Flex fillHeight column css={{ px: '$6', py: '$4' }}>
         {/* register your input into the hook by invoking the "register" function */}
         <Box css={{ flex: '1 1' }}>
@@ -114,6 +124,12 @@ export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
             I’d like to keep updated with news and special offers at A&O
           </Checkbox>
         </Box>
+        <p aria-hidden="true" className={classes.visuallyHidden()}>
+          <label>
+            Skip this field if you’re human:
+            <input tabIndex={-1} ref={register} name="bot-field-step3" />
+          </label>
+        </p>
         <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
           <Button
             fullWidth

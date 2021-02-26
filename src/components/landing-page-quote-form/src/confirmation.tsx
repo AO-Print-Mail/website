@@ -1,8 +1,12 @@
+import { useEffect } from 'react'
 import { useStateMachine } from 'little-state-machine'
 import { QuoteFormInputData } from './landing-page-quote-form'
-import { Heading5, Paragraph4, Flex, Box, UI3 } from '@theme'
+import { Heading4, Paragraph4, Flex, Box, UI3 } from '@theme'
 import { Button } from '@components/button'
-import { resetFormData } from '@lib/little-state-machine'
+import {
+  resetFormData,
+  updateFeedbackFormForm,
+} from '@lib/little-state-machine'
 
 export interface ConfirmationPageProps extends QuoteFormInputData {
   changeStep: (step: string) => unknown
@@ -12,9 +16,22 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
   changeStep,
   ...props
 }) => {
-  const { state, actions } = useStateMachine({ resetFormData })
+  const { state, actions } = useStateMachine({
+    resetFormData,
+    updateFeedbackFormForm,
+  })
   //@ts-ignore
-  const name = state.formData?.directMailForm?.contactInformation?.firstName
+  const { firstName, email, hutk, ipAddress } = state.formData?.directMailForm
+
+  useEffect(() => {
+    //@ts-ignore
+    if (!state.formData.directMailForm.isComplete) {
+      changeStep('step1')
+    } else {
+      actions.updateFeedbackFormForm({ firstName, email, hutk, ipAddress })
+      actions.resetFormData('directMailForm')
+    }
+  }, [])
 
   return (
     <Flex
@@ -23,10 +40,10 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
       css={{ px: '$6', py: '$4', backgroundColor: '$green' }}
     >
       <Box css={{ flex: '1 1' }}>
-        <Heading5 alignCenter css={{ color: '$white' }}>
-          Your quote is in progress{name && `, ${name}`}!
-        </Heading5>
-        <Paragraph4 css={{ color: '$LA90' }} alignCenter>
+        <Heading4 alignCenter css={{ color: '$white' }}>
+          Your quote is in progress{firstName && `, ${firstName}`}!
+        </Heading4>
+        <Paragraph4 css={{ color: '$LA90', mt: '$6' }} alignCenter>
           Thanks so much for giving us the opportunity to quote on your next
           job!
         </Paragraph4>
