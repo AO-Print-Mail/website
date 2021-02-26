@@ -52,7 +52,7 @@ export const Step3: React.FC<Step3Props> = ({ changeStep }) => {
     email,
     phone,
     joinMailingList,
-    //@ts-expect-error
+    //@ts-ignore
   } = state.formData?.directMailForm
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
