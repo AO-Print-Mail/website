@@ -17,6 +17,21 @@ export function updateDirectMailForm(
     },
   }
 }
+export function updateFeedbackFormForm(
+  state: GlobalState,
+  payload: QuoteFormInputData
+): GlobalState {
+  return {
+    ...state,
+    formData: {
+      ...state?.formData,
+      feedbackForm: {
+        ...state?.formData?.feedbackForm,
+        ...payload,
+      },
+    },
+  }
+}
 export function resetFormData(
   state: GlobalState,
   formName: string
