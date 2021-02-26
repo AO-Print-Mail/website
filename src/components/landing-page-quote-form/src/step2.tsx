@@ -59,7 +59,7 @@ export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
     addressDataReady,
     additionalInformation,
     services,
-    //@ts-expect-error
+    //@ts-ignore-error
   } = state.formData?.directMailForm
 
   const requiresArtwork = services === 'Print and mail'
