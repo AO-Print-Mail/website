@@ -85,6 +85,7 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
       <form
         method="POST"
         data-netlify="true"
+        name="directMailForm"
         className={classes.visuallyHidden()}
       >
         <input type="hidden" name="form-name" value="directMailForm" />
