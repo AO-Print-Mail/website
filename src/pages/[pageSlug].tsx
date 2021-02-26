@@ -119,9 +119,11 @@ export async function getStaticPaths() {
     query: 'GetLandingPageSlugs',
   })
   return {
-    paths: allLandingPages.allLandingPageV1s.map(
-      (page) => `/${page.pageSlug}` || []
-    ),
+    paths: allLandingPages.allLandingPageV1s.map(({ pageSlug }) => ({
+      params: {
+        pageSlug,
+      },
+    })),
     fallback: false,
   }
 }
