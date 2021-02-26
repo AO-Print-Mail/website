@@ -1837,6 +1837,8 @@ export type TextFilter = {
 export enum LandingPageV1ModelOrderBy {
   CreatedAtAsc = '_createdAt_ASC',
   CreatedAtDesc = '_createdAt_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
   FirstPublishedAtAsc = '_firstPublishedAt_ASC',
@@ -1851,6 +1853,8 @@ export enum LandingPageV1ModelOrderBy {
   StatusDesc = '_status_DESC',
   UpdatedAtAsc = '_updatedAt_ASC',
   UpdatedAtDesc = '_updatedAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
   IsValidAsc = '_isValid_ASC',
   IsValidDesc = '_isValid_DESC',
   TitleAsc = 'title_ASC',

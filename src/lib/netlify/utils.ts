@@ -15,6 +15,7 @@ export const encode = (obj: { [key: string]: any }): string =>
     )
     .join('&')
 
-export const serverUrl = __DEV__
-  ? 'http://localhost:3000'
-  : 'https://offers.aomail.com.au'
+export const serverUrl =
+  __DEV__ && !process.env.NETLIFY
+    ? 'http://localhost:3000'
+    : 'https://offers.aomail.com.au'
