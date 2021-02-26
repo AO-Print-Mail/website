@@ -34,8 +34,10 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
 
   const { state, actions } = useStateMachine({ resetFormData })
   function changeStep(step: string) {
+    //@ts-ignore
+    const newPath = router.pathname.replace('[pageSlug]', router.query.pageSlug)
     router.push({
-      pathname: `/promos/${router.query.pageSlug}`,
+      pathname: `${newPath}`,
       query: { step },
     })
   }
@@ -45,14 +47,14 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
     if (router.query.resetForm) {
       actions.resetFormData('directMailForm')
     }
-    if (router.query.step !== 'success' && isComplete) {
+    if (router.query.step === '3' && isComplete) {
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: encode({ 'form-name': 'contact', ...formData }),
       })
         .catch((error) => console.error(error))
-        .finally(() => {
+        .then(() => {
           changeStep('success')
         })
     }
@@ -70,7 +72,7 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
       Component = Step3
       break
     //@ts-ignore
-    case 'success' && state.formData.directMailForm.isComplete:
+    case 'success':
       Component = ConfirmationPage
       break
     default:

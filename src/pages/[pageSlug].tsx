@@ -120,7 +120,7 @@ export async function getStaticPaths() {
   })
   return {
     paths: allLandingPages.allLandingPageV1s.map(
-      (page) => `${serverUrl}/${page.pageSlug}` || []
+      (page) => `/${page.pageSlug}` || []
     ),
     fallback: false,
   }

@@ -4,10 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 1234",
-    "predev": "yarn gen:gql",
     "build": "next build",
     "start": "next start",
-    "prestart": "yarn gen:gql",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest",
@@ -78,6 +76,7 @@
     "jest": "^26.6.3",
     "jest-axe": "^4.1.0",
     "jest-watch-typeahead": "^0.6.1",
+    "little-state-machine-devtools": "^2.0.0",
     "plop": "^2.7.4",
     "prettier": "2.2.1",
     "raw-loader": "^4.0.2",

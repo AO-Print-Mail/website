@@ -24,13 +24,7 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
   const { firstName, email, hutk, ipAddress } = state.formData?.directMailForm
 
   useEffect(() => {
-    //@ts-ignore
-    if (!state.formData.directMailForm.isComplete) {
-      changeStep('step1')
-    } else {
-      actions.updateFeedbackFormForm({ firstName, email, hutk, ipAddress })
-      actions.resetFormData('directMailForm')
-    }
+    actions.updateFeedbackFormForm({ firstName, email, hutk, ipAddress })
   }, [])
 
   return (

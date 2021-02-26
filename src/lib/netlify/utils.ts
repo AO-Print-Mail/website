@@ -17,4 +17,4 @@ export const encode = (obj: { [key: string]: any }): string =>
 
 export const serverUrl = __DEV__
   ? 'http://localhost:3000'
-  : 'https://your_deployment.server.com'
+  : 'https://offers.aomail.com.au'
