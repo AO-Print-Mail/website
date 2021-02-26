@@ -20,7 +20,7 @@ export default class Document extends NextDocument {
           <link rel="manifest" href="/manifest.json" />
           <link
             rel="alternate"
-            href="http://www.aomail.com.au"
+            href="https://www.aomail.com.au"
             hrefLang="en-AU"
           />
           <meta name="theme-color" content="#10102B" />

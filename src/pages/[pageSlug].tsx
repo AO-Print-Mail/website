@@ -11,6 +11,7 @@ import { markdownToDast, ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
 import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
+import { serverUrl } from '@lib/netlify/utils'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof dataFunction>>
@@ -119,7 +120,7 @@ export async function getStaticPaths() {
   })
   return {
     paths: allLandingPages.allLandingPageV1s.map(
-      (page) => `/promos/${page.pageSlug}` || []
+      (page) => `${serverUrl}/${page.pageSlug}` || []
     ),
     fallback: false,
   }
