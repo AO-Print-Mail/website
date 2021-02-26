@@ -20,12 +20,12 @@ export interface ContactInformation {
   country?: ''
 }
 export interface MarketingInformation {
-  joinMailingList: boolean
-  experienceRating: ''
-  experienceComment: '[not provided]'
-  ipAddress: ''
-  hutk: ''
-  gclid: ''
+  joinMailingList?: boolean
+  experienceRating?: ''
+  experienceComment?: '[not provided]'
+  ipAddress?: ''
+  hutk?: ''
+  gclid?: ''
 }
 
 const Form = styled('form', {

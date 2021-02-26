@@ -49,7 +49,6 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
           fullWidth
           type="submit"
           css={{ alignSelf: 'center' }}
-          //@ts-expect-error
           onClick={() => {
             changeStep('')
           }}
