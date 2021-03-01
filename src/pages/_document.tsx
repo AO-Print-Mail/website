@@ -4,13 +4,15 @@ import { getCssString } from '@theme'
 import { __DEV__ } from '@utils/src/assertion'
 export default class Document extends NextDocument {
   render() {
-    const styles = getCssString()
+    //const styles = !__DEV__ && getCssString()
     return (
       <Html lang="en">
         <Head>
           {/* eslint-disable-next-line react/no-danger */}
 
-          <style id="stitches" dangerouslySetInnerHTML={{ __html: styles }} />
+          {/*!__DEV__ && (
+            <style id="stitches" dangerouslySetInnerHTML={{ __html: styles }} />
+          )*/}
 
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

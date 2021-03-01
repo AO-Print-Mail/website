@@ -1,4 +1,4 @@
-import { styled, ResetButton, theme, CSS, UI1, ThemeVariants } from '@theme'
+import { styled, ResetButton, theme, CSS, UI1, keyframes } from '@theme'
 import { forwardRef } from 'react'
 import * as React from 'react'
 import { __DEV__ } from '@utils/src'
@@ -6,7 +6,8 @@ import { __DEV__ } from '@utils/src'
 interface ButtonProps extends React.ComponentProps<typeof ButtonBg> {
   style?: 'naked' | 'solid' | 'border' | 'icon'
   color?: 'primary' | 'light' | 'dark' | 'success' | 'error'
-  state?: 'disabled' | 'loading'
+  isLoading?: boolean
+  disabled?: boolean
   size?: 'cta' | 'small'
   offset?: 'left' | 'right'
   leftIcon?: React.ReactElement
@@ -37,6 +38,37 @@ export const NakedButton = styled(ResetButton, {
   },
 })
 
+const SpinnerKeyframes = keyframes({
+  '0%': {
+    transform: 'translate3d(-50%, -50%, 0) rotate(0deg)',
+  },
+  '100%': {
+    transform: 'translate3d(-50%, -50%, 0) rotate(360deg)',
+  },
+})
+
+const Spinner = styled('div', {
+  height: '100%',
+  width: '100%',
+  position: 'relative',
+  '&::before': {
+    willChange: 'transform',
+    border: 'solid 4px $LA20',
+    borderBottomColor: '$white',
+    borderRadius: '50%',
+    content: '""',
+    height: '1.5em',
+    left: '50%',
+    position: 'absolute',
+    top: '50%',
+    transform: 'translate3d(-50%, -50%, 0)',
+    width: '1.5em',
+    animation: `${SpinnerKeyframes} 0.5s`,
+    animationIterationCount: 'infinite',
+    animationTimingFunction: 'linear',
+  },
+})
+
 const ButtonBg = styled(ResetButton, {
   color: '$white',
   border: 'none',
@@ -50,6 +82,8 @@ const ButtonBg = styled(ResetButton, {
     l: { fontSize: '$p3d', px: '$4', py: '$3', br: '$4' },
   },
   variants: {
+    disabled: { true: { cursor: 'not-allowed' } },
+
     color: {
       primary: {
         backgroundColor: '$blue',
@@ -63,7 +97,7 @@ const ButtonBg = styled(ResetButton, {
         backgroundColor: '$green',
         color: '$white',
         '&:hover': {
-          backgroundColor: '$G40',
+          backgroundColor: '$G30',
           color: '$white',
         },
       },
@@ -206,6 +240,7 @@ const ButtonBg = styled(ResetButton, {
         },
       },
     },
+    { color: 'success', state: 'disabled', css: { opacity: '50%' } },
   ],
   defaultVariants: {
     color: 'primary',
@@ -236,6 +271,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       style = 'solid',
       color = 'primary',
       size = 'regular',
+      isLoading,
       state,
       leftIcon,
       rightIcon,
@@ -260,10 +296,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       )
 
     return (
-      <ButtonBg style={style} color={color} size={size} ref={ref} {...props}>
-        {LeftIcn && LeftIcn}
-        {_children}
-        {RightIcn && RightIcn}
+      <ButtonBg
+        state={state}
+        style={style}
+        color={color}
+        size={size}
+        ref={ref}
+        {...props}
+      >
+        {!isLoading && LeftIcn && LeftIcn}
+        {!isLoading ? _children : <Spinner />}
+        {!isLoading && RightIcn && RightIcn}
       </ButtonBg>
     )
   }

@@ -7,7 +7,7 @@ import { ContactInformation, MarketingInformation, Step3 } from './step3'
 import { ConfirmationPage } from './confirmation'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import { encode } from '@lib/netlify/utils'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { classes } from '@theme'
 
 export type QuoteFormInputData = JobInformation &
@@ -31,10 +31,14 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   keyword,
   ...props
 }) => {
+  const [isSubmitting, setSubmitting] = useState(false)
   const router = useRouter()
-
   const { state, actions } = useStateMachine({ resetFormData })
+  //@ts-ignore
+  const { isComplete, ...directMailForm } = state.formData.directMailForm
+
   function changeStep(step: string) {
+    setSubmitting(true)
     //@ts-ignore
     const newPath = router.pathname.replace('[pageSlug]', router.query.pageSlug)
     router.push({
@@ -42,24 +46,29 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
       query: { step },
     })
   }
-  //@ts-ignore
-  const { isComplete, ...directMailForm } = state.formData.directMailForm
+
+  const resetForm = () => actions.resetFormData('directMailForm')
+
+  const sendForm = () => {
+    setSubmitting(true)
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({ 'form-name': 'directMailForm', ...directMailForm }),
+    })
+      .then(() => {
+        changeStep('success')
+        //resetForm()
+      })
+      .catch((error) => console.error(error))
+  }
+
   useEffect(() => {
     if (router.query.resetForm) {
-      actions.resetFormData('directMailForm')
+      resetForm()
     }
-    if (router.query.step === '3' && isComplete) {
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encode({ 'form-name': 'directMailForm', ...directMailForm }),
-      })
-        .catch((error) => console.error(error))
-        .then(() => {
-          changeStep('success')
-        })
-    }
-  }, [router, state])
+    setSubmitting(false)
+  }, [router])
 
   let Component: React.FC<any>
   switch (router.query.step) {
@@ -89,14 +98,14 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
         className={classes.visuallyHidden()}
       >
         <input type="hidden" name="form-name" value="directMailForm" />
-        {Object.entries({ ...directMailForm }).map(([name, value]) => (
+        {Object.entries(directMailForm).map(([name, value]) => (
           <input
             type="hidden"
             aria-hidden="true"
             tabIndex={-1}
             name={name}
             //@ts-ignore
-            value={value}
+            value={value || ''}
             key={name}
           />
         ))}
@@ -106,7 +115,15 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
 
   return (
     <>
-      <Component keyword={keyword} {...props} changeStep={changeStep} />
+      <Component
+        keyword={keyword}
+        sendForm={router.query.step === '3' && sendForm}
+        resetForm={resetForm}
+        isSubmitting={isSubmitting}
+        setSubmitting={setSubmitting}
+        {...props}
+        changeStep={changeStep}
+      />
       <NetlifyWorkaroundForm />
     </>
   )

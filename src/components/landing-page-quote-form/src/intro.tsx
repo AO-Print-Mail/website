@@ -3,11 +3,13 @@ import { Button } from '@components/button'
 interface QuoteIntroProps {
   changeStep: (step: string) => unknown
   keyword?: string
+  isSubmitting: boolean
 }
 
 export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   keyword = 'direct mail',
   changeStep,
+  isSubmitting,
   ...props
 }) => {
   return (
@@ -41,6 +43,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
             css={{
               mt: '$6',
             }}
+            isLoading={isSubmitting}
             onClick={() => changeStep('1')}
           >
             Start your quote

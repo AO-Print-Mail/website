@@ -1,6 +1,5 @@
 import { forwardRef, ReactNode } from 'react'
-import { styled, UI3, Box, CSS, ThemeVariants } from '..'
-import { Paragraph5 } from './typography'
+import { styled, Paragraph5, UI2, UI3, Box, CSS, ThemeVariants } from '..'
 
 interface InputProps
   extends React.ComponentProps<typeof TextAreaStyles & typeof InputStyles> {
@@ -16,6 +15,8 @@ interface InputProps
 }
 
 export const InputStyles = styled(UI3, {
+  transtion: 'border-color 0.1s',
+  willChange: 'border-color',
   backgroundColor: '$DA10',
   px: 'calc($3 - 2px)',
   py: 'calc($2 - 2px)',
@@ -42,6 +43,25 @@ export const InputStyles = styled(UI3, {
     borderColor: '$blue',
     color: '$DBA80',
   },
+  variants: {
+    state: {
+      error: {
+        backgroundColor: '$R10',
+        borderColor: '$R30',
+        color: '$red',
+        '&:hover': {
+          borderColor: '$red',
+        },
+        '&:focus': {
+          borderColor: '$R40',
+          color: '$R40',
+        },
+        '&::placeholder': {
+          color: '$R30',
+        },
+      },
+    },
+  },
 })
 
 export const TextAreaStyles = styled(InputStyles, {
@@ -60,10 +80,21 @@ export const TextArea = forwardRef<HTMLInputElement, InputProps>(
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
   (
-    { id, children, value, defaultValue, name, type, placeholder, ...props },
+    {
+      id,
+      children,
+      value,
+      defaultValue,
+      name,
+      type,
+      placeholder,
+      errors,
+      ...props
+    },
     ref
   ) => {
     const inputProps = !children && props
+    const error = errors && !!errors[name]
     const _input = (
       <InputStyles
         id={id}
@@ -74,6 +105,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         type={type}
         placeholder={placeholder}
         ref={ref}
+        state={error && 'error'}
+        aria-invalid={error ? 'true' : 'false'}
         {...inputProps}
       />
     )
@@ -81,11 +114,29 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       return _input
     }
     return (
-      <Box {...props}>
+      <Box css={{ mt: '$3' }} {...props}>
         <LabelStyles as="label" htmlFor={id}>
           {children}
         </LabelStyles>
         {_input}
+        {error && (
+          <Box
+            css={{
+              backgroundColor: '$R30',
+              display: 'inline-block',
+              mt: '$2',
+              px: '$2',
+              br: '$2',
+            }}
+          >
+            <Paragraph5
+              css={{ my: '0', display: 'inline-block', color: '$white' }}
+              role="alert"
+            >
+              {errors[name].message}
+            </Paragraph5>
+          </Box>
+        )}
       </Box>
     )
   }
