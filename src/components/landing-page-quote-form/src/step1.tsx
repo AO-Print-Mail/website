@@ -7,6 +7,8 @@ import { updateDirectMailForm } from '@lib/little-state-machine'
 
 export interface Step1Props extends JobInformation {
   changeStep: (step: string) => unknown
+  isSubmitting: boolean
+  setSubmitting: () => void
 }
 
 export interface JobInformation {
@@ -27,7 +29,7 @@ const Form = styled('form', {
   height: '100%',
 })
 
-export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
+export const Step1: React.FC<Step1Props> = ({ changeStep, isSubmitting }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
   const { register, handleSubmit, errors } = useForm<JobInformation>()
   const onSubmit = (data) => {
@@ -184,6 +186,7 @@ export const Step1: React.FC<Step1Props> = ({ changeStep }) => {
             size="cta"
             type="submit"
             css={{ alignSelf: 'center' }}
+            isLoading={isSubmitting}
           >
             <UI3 css={{ color: '$white' }}>Next</UI3>
           </Button>

@@ -13,6 +13,7 @@ export const store: GlobalState = {
       additionalInformation: '',
       firstName: '',
       lastName: '',
+      companyName: '',
       email: '',
       phone: '',
       joinMailingList: true,

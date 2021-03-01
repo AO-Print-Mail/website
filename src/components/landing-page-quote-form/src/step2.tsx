@@ -16,6 +16,8 @@ import { updateDirectMailForm } from '@lib/little-state-machine'
 
 export interface Step2Props extends QuoteFormInputData {
   changeStep: (step: string) => unknown
+  isSubmitting: boolean
+  setSubmitting: () => void
 }
 
 export interface AdditionalInformation {
@@ -40,7 +42,7 @@ const Form = styled('form', {
   height: '100%',
 })
 
-export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
+export const Step2: React.FC<Step2Props> = ({ changeStep, isSubmitting }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
   const {
     register,
@@ -173,6 +175,7 @@ export const Step2: React.FC<Step2Props> = ({ changeStep }) => {
             size="cta"
             type="submit"
             css={{ alignSelf: 'center' }}
+            isLoading={isSubmitting}
           >
             <UI3 css={{ color: '$white' }}>Next</UI3>
           </Button>
