@@ -1,7 +1,16 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, RadioButton, Input, Paragraph3, UI3, styled } from '@theme'
+import {
+  Flex,
+  Box,
+  RadioButton,
+  Input,
+  Paragraph3,
+  UI3,
+  styled,
+  classes,
+} from '@theme'
 import { Button } from '@components/button'
 import { updateDirectMailForm } from '@lib/little-state-machine'
 
@@ -9,6 +18,7 @@ export interface Step1Props extends JobInformation {
   changeStep: (step: string) => unknown
   isSubmitting: boolean
   setSubmitting: () => void
+  setProgress: (any) => void
 }
 
 export interface JobInformation {
@@ -18,18 +28,22 @@ export interface JobInformation {
     | 'letters'
     | 'plastic wrap'
     | 'other'
-    | '[not provided]'
-  services?: 'Print and mail' | 'Mail only' | '[not provided]'
-  itemQuantity?: number | '[not provided]'
-  frequency?: 'One-off' | 'daily' | 'weekly' | 'monthly' | '[not provided]'
-  urgency?: '[not provided]' //to be built
+    | 'not provided'
+  services?: 'Print and mail' | 'Mail only' | 'not provided'
+  itemQuantity?: number | 'not provided'
+  frequency?: 'One-off' | 'daily' | 'weekly' | 'monthly' | 'not provided'
+  urgency?: 'not provided' //to be built
 }
 
 const Form = styled('form', {
   height: '100%',
 })
 
-export const Step1: React.FC<Step1Props> = ({ changeStep, isSubmitting }) => {
+export const Step1: React.FC<Step1Props> = ({
+  changeStep,
+  setProgress,
+  isSubmitting,
+}) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
   const { register, handleSubmit, errors } = useForm<JobInformation>()
   const onSubmit = (data) => {
@@ -44,12 +58,13 @@ export const Step1: React.FC<Step1Props> = ({ changeStep, isSubmitting }) => {
     isComplete,
     //@ts-ignore
   } = state.formData?.directMailForm
-
+  useEffect(() => {
+    setProgress({ show: true, progress: 0.3 })
+  }, [])
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Flex fillHeight column css={{ px: '$6', py: '$4' }}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <Box css={{ flex: '1 1' }}>
+    <Form className={classes.fullHeight()} onSubmit={handleSubmit(onSubmit)}>
+      <Flex fillHeight column css={{ pb: '$4' }}>
+        <Box css={{ px: '$6', pb: '$4', flex: '1 1' }}>
           <Paragraph3 css={{ color: '$DA80' }}>
             What are you sending?
           </Paragraph3>

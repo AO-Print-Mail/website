@@ -1,17 +1,23 @@
 import { Flex, Box, Heading4, Paragraph3, MailIllustration } from '@theme'
+import { useEffect } from 'react'
 import { Button } from '@components/button'
 interface QuoteIntroProps {
   changeStep: (step: string) => unknown
   keyword?: string
   isSubmitting: boolean
+  setProgress: (any) => void
 }
 
 export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   keyword = 'direct mail',
   changeStep,
   isSubmitting,
+  setProgress,
   ...props
 }) => {
+  useEffect(() => {
+    setProgress({ show: false, progress: 0 })
+  }, [])
   return (
     <Flex column rel fillHeight css={{ pb: '$6' }}>
       <MailIllustration

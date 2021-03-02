@@ -8,7 +8,8 @@ import { ConfirmationPage } from './confirmation'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import { encode } from '@lib/netlify/utils'
 import { useEffect, useState } from 'react'
-import { classes } from '@theme'
+import { Flex, classes, ProgressBar, styled, ArrowBack } from '@theme'
+import { Button } from '@components/button'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
@@ -27,11 +28,14 @@ interface LandingPageQuoteFormProps {
   keyword: string
 }
 
+const FormBackground = styled(Flex, { minHeight: '100%' })
+
 export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   keyword,
   ...props
 }) => {
   const [isSubmitting, setSubmitting] = useState(false)
+  const [progress, setProgress] = useState({ show: false, progress: 0 })
   const router = useRouter()
   const { state, actions } = useStateMachine({ resetFormData })
   //@ts-ignore
@@ -74,16 +78,20 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   switch (router.query.step) {
     case '1':
       Component = Step1
+
       break
     case '2':
       Component = Step2
+
       break
     case '3':
       Component = Step3
+
       break
     //@ts-ignore
     case 'success':
       Component = ConfirmationPage
+
       break
     default:
       Component = QuoteIntro
@@ -114,7 +122,26 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   }
 
   return (
-    <>
+    <FormBackground column fillHeight>
+      {progress.show && (
+        <Flex css={{ alignItems: 'center', px: '$6', pt: '$4' }}>
+          <Button
+            size="small"
+            offset="left"
+            leftIcon={<ArrowBack css={{ color: '$N70' }} />}
+            style="naked"
+            color="dark"
+            onClick={() => router.back()}
+          >
+            Back
+          </Button>
+          <ProgressBar
+            progress={progress.progress}
+            css={{ mr: 0, flex: '1 1 100%' }}
+          />
+        </Flex>
+      )}
+
       <Component
         keyword={keyword}
         sendForm={router.query.step === '3' && sendForm}
@@ -123,8 +150,9 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
         setSubmitting={setSubmitting}
         {...props}
         changeStep={changeStep}
+        setProgress={setProgress}
       />
       <NetlifyWorkaroundForm />
-    </>
+    </FormBackground>
   )
 }

@@ -13,6 +13,7 @@ interface LayoutProps {
   beforeFooter?: React.ReactNode
   metaData?: GetFaviconsQuery['site']['favicon']
   data?: GetFaviconsQuery
+  canonicalPath: string
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -27,6 +28,7 @@ export const Layout: React.FC<LayoutProps> = ({
   description,
   beforeFooter,
   metaData = [],
+  canonicalPath,
   data,
   ...props
 }) => {
@@ -34,8 +36,14 @@ export const Layout: React.FC<LayoutProps> = ({
   return (
     <>
       <Head>
-        <title>{title}</title>
-        <meta name="description" content={description} />
+        <link
+          rel="canonical"
+          href={
+            canonicalPath === 'HOME_PAGE'
+              ? `${process.env.NEXT_PUBLIC_URL}`
+              : `${process.env.NEXT_PUBLIC_URL}/${canonicalPath}`
+          }
+        />
         {
           //@ts-ignore
           renderMetaTags(favicon.concat(metaData))

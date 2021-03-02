@@ -82,6 +82,7 @@ type LandingPageV1Record {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  canonicalPath: String
   createdAt: DateTime!
   id: ItemId!
   modularContent: [LandingPageV1ModelModularContentField]
@@ -1761,6 +1762,7 @@ input LandingPageV1ModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
+  canonicalPath: SlugFilter
   pageMeta: SeoFilter
   pageSlug: SlugFilter
   title: StringFilter
@@ -1900,14 +1902,6 @@ input BooleanFilter {
   eq: BooleanType
 }
 
-"""Specifies how to filter SEO meta tags fields"""
-input SeoFilter {
-  """
-  Filter records with the specified field defined (i.e. with any value) or not
-  """
-  exists: BooleanType
-}
-
 """Specifies how to filter Slug fields"""
 input SlugFilter {
   """Search for records with an exact match"""
@@ -1921,6 +1915,14 @@ input SlugFilter {
 
   """Filter records that do have one of the specified slugs"""
   notIn: [String]
+}
+
+"""Specifies how to filter SEO meta tags fields"""
+input SeoFilter {
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
 }
 
 """Specifies how to filter Single-line string fields"""

@@ -14,6 +14,7 @@ import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof dataFunction>>
+  pageSlug: string
 }
 
 const HeroText = styled('div', {
@@ -57,7 +58,7 @@ const FormBackground = styled('div', {
   },
 })
 
-const LandingPageContent: React.FC<PageProps> = ({ data }) => {
+const LandingPageContent: React.FC<PageProps> = ({ data, pageSlug }) => {
   const beforeFooter = (
     <>
       <Container>
@@ -78,6 +79,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         description="work in progress"
         beforeFooter={beforeFooter}
         metaData={data._seoMetaTags}
+        canonicalPath={data.canonicalPath}
       >
         <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
           <HeroText>
@@ -149,6 +151,7 @@ export async function getStaticProps({ params, preview = false }) {
   return {
     props: {
       data: _data,
+      pageSlug: params.pageSlug,
     },
   }
 }

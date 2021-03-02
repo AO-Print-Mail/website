@@ -9,7 +9,12 @@ interface PageProps {
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   return (
     <>
-      <Layout title="landing page" description="work in progress" metaData={[]}>
+      <Layout
+        canonicalPath="HOME_PAGE"
+        title="landing page"
+        description="work in progress"
+        metaData={[]}
+      >
         <Container
           as="section"
           css={{ justifySelf: 'stretch', height: '824px', pb: '$4' }}

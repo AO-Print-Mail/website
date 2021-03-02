@@ -70,6 +70,7 @@ const Spinner = styled('div', {
 })
 
 const ButtonBg = styled(ResetButton, {
+  display: 'flex',
   color: '$white',
   border: 'none',
   borderRadius: '$2',
@@ -82,8 +83,7 @@ const ButtonBg = styled(ResetButton, {
     l: { fontSize: '$p3d', px: '$4', py: '$3', br: '$4' },
   },
   variants: {
-    disabled: { true: { cursor: 'not-allowed' } },
-
+    disabled: { true: { cursor: 'not-allowed', opacity: '50%' } },
     color: {
       primary: {
         backgroundColor: '$blue',
@@ -264,6 +264,20 @@ const defaultSpacing = (direction: 'left' | 'right') => {
     },
   }
 }
+const smallSpacing = (direction: 'left' | 'right') => {
+  const key = {
+    left: 'marginLeft',
+    right: 'marginRight',
+  }[direction]
+  return {
+    [key]: '$1',
+    when: {
+      m: {
+        [key]: '$2',
+      },
+    },
+  }
+}
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -281,11 +295,27 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const LeftIcn = leftIcon && (
-      <ButtonIcon css={{ ...defaultSpacing('right') }}>{leftIcon}</ButtonIcon>
+      <ButtonIcon
+        css={
+          size === 'small'
+            ? { ...smallSpacing('right') }
+            : { ...defaultSpacing('right') }
+        }
+      >
+        {leftIcon}
+      </ButtonIcon>
     )
 
     const RightIcn = rightIcon && (
-      <ButtonIcon css={{ ...defaultSpacing('left') }}>{rightIcon}</ButtonIcon>
+      <ButtonIcon
+        css={
+          size === 'small'
+            ? { ...smallSpacing('left') }
+            : { ...defaultSpacing('left') }
+        }
+      >
+        {rightIcon}
+      </ButtonIcon>
     )
 
     const _children =
@@ -296,14 +326,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       )
 
     return (
-      <ButtonBg
-        state={state}
-        style={style}
-        color={color}
-        size={size}
-        ref={ref}
-        {...props}
-      >
+      <ButtonBg style={style} color={color} size={size} ref={ref} {...props}>
         {!isLoading && LeftIcn && LeftIcn}
         {!isLoading ? _children : <Spinner />}
         {!isLoading && RightIcn && RightIcn}

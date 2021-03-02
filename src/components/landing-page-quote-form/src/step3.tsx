@@ -30,6 +30,17 @@ export interface ContactInformation {
   country?: string
 }
 
+export interface MarketingInformation {
+  joinMailingList?: boolean
+  experienceRating?: string
+  experienceComment?: string
+  ipAddress?: string
+  hutk?: string
+  gclid?: string
+  'bot-field-step3'?: any
+  isComplete?: boolean
+}
+
 const schema = yup.object().shape({
   firstName: yup.string().required('Please enter a first name'),
   lastName: yup.string(),
@@ -51,17 +62,7 @@ export interface Step3Props extends QuoteFormInputData {
   sendForm: () => void
   isSubmitting: boolean
   setSubmitting: () => void
-}
-
-export interface MarketingInformation {
-  joinMailingList?: boolean
-  experienceRating?: string
-  experienceComment?: '[not provided]'
-  ipAddress?: string
-  hutk?: string
-  gclid?: string
-  'bot-field-step3'?: any
-  isComplete?: boolean
+  setProgress: (any) => void
 }
 
 const mobileMask = [
@@ -98,7 +99,11 @@ const Form = styled('form', {
   height: '100%',
 })
 
-export const Step3: React.FC<Step3Props> = ({ sendForm, isSubmitting }) => {
+export const Step3: React.FC<Step3Props> = ({
+  sendForm,
+  setProgress,
+  isSubmitting,
+}) => {
   const { state, actions } = useStateMachine({
     updateDirectMailForm,
   })
@@ -130,11 +135,17 @@ export const Step3: React.FC<Step3Props> = ({ sendForm, isSubmitting }) => {
       setSubmittable(true)
     }
   }, [formState])
+  useEffect(() => {
+    setProgress({ show: true, progress: 0.9 })
+  }, [])
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} netlify-honeypot="bot-field-step3">
-      <Flex fillHeight column css={{ px: '$6', py: '$4' }}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <Box css={{ flex: '1 1' }}>
+    <Form
+      className={classes.fullHeight()}
+      onSubmit={handleSubmit(onSubmit)}
+      netlify-honeypot="bot-field-step3"
+    >
+      <Flex fillHeight column css={{ pb: '$4' }}>
+        <Box css={{ px: '$6', pb: '$4', flex: '1 1' }}>
           <Paragraph3 css={{ color: '$DA80' }}>
             Your contact information
           </Paragraph3>
@@ -215,13 +226,13 @@ export const Step3: React.FC<Step3Props> = ({ sendForm, isSubmitting }) => {
           >
             I’d like to keep updated with news and special offers at A&O
           </Checkbox>
+          <p aria-hidden="true" className={classes.visuallyHidden()}>
+            <label>
+              Skip this field if you’re human:
+              <input tabIndex={-1} ref={register} name="bot-field-step3" />
+            </label>
+          </p>
         </Box>
-        <p aria-hidden="true" className={classes.visuallyHidden()}>
-          <label>
-            Skip this field if you’re human:
-            <input tabIndex={-1} ref={register} name="bot-field-step3" />
-          </label>
-        </p>
         <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
           <Button
             fullWidth

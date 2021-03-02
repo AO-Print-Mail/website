@@ -9,6 +9,7 @@ import {
   styled,
   RadioButton,
   TextArea,
+  classes,
 } from '@theme'
 import { Button } from '@components/button'
 import { QuoteFormInputData } from './landing-page-quote-form'
@@ -18,6 +19,7 @@ export interface Step2Props extends QuoteFormInputData {
   changeStep: (step: string) => unknown
   isSubmitting: boolean
   setSubmitting: () => void
+  setProgress: (any) => void
 }
 
 export interface AdditionalInformation {
@@ -42,7 +44,11 @@ const Form = styled('form', {
   height: '100%',
 })
 
-export const Step2: React.FC<Step2Props> = ({ changeStep, isSubmitting }) => {
+export const Step2: React.FC<Step2Props> = ({
+  changeStep,
+  setProgress,
+  isSubmitting,
+}) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
   const {
     register,
@@ -70,13 +76,13 @@ export const Step2: React.FC<Step2Props> = ({ changeStep, isSubmitting }) => {
     if (!requiresArtwork) {
       actions.updateDirectMailForm({ artworkReady: '[n/a]' })
     }
-  }, [services])
+    setProgress({ show: true, progress: 0.7 })
+  }, [])
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Flex fillHeight column css={{ px: '$6', py: '$4' }}>
-        {/* register your input into the hook by invoking the "register" function */}
-        <Box css={{ flex: '1 1' }}>
+    <Form className={classes.fullHeight()} onSubmit={handleSubmit(onSubmit)}>
+      <Flex fillHeight column css={{ pb: '$4' }}>
+        <Box css={{ px: '$6', pb: '$4', flex: '1 1' }}>
           {requiresArtwork && (
             <>
               <Paragraph3 css={{ color: '$DA80' }}>

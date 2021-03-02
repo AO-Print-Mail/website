@@ -43,7 +43,7 @@ export function createIcon({
   d,
   path,
   displayName,
-  defaultProps = { displayName: 'Icon' },
+  defaultProps,
 }: CreateIconOptions) {
   const Comp: React.FC<IconProps> = ({ children, ...props }) => {
     const _props = Object.assign({}, { ...defaultProps, displayName }, props)
