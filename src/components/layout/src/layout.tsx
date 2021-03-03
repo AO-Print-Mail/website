@@ -1,4 +1,5 @@
 import { GetStaticProps } from 'next'
+import { createContext, useState } from 'react'
 import Head from 'next/head'
 import { PageWrapper, ContentWrapper } from '@theme'
 import { Header } from '@components/header'
@@ -23,6 +24,13 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return { props: data }
 }
 
+export const LayoutSpaceContext = createContext({
+  setFooterSpace: (space) => space,
+  setHeaderSpace: (space) => space,
+})
+
+export const OverlayContext = createContext(false)
+
 export const Layout: React.FC<LayoutProps> = ({
   title,
   description,
@@ -33,8 +41,13 @@ export const Layout: React.FC<LayoutProps> = ({
   ...props
 }) => {
   const favicon = data?.site?.favicon || []
+  const [layoutSpace, setLayoutSpace] = useState({ header: '0', footer: '0' })
+  const setFooterSpace = (space) =>
+    setLayoutSpace({ ...layoutSpace, footer: space })
+  const setHeaderSpace = (space) =>
+    setLayoutSpace({ ...layoutSpace, header: space })
   return (
-    <>
+    <LayoutSpaceContext.Provider value={{ setFooterSpace, setHeaderSpace }}>
       <Head>
         <link
           rel="canonical"
@@ -52,9 +65,11 @@ export const Layout: React.FC<LayoutProps> = ({
 
       <PageWrapper>
         <Header />
-        <ContentWrapper>{props.children}</ContentWrapper>
-        <Footer beforeFooter={beforeFooter} />
+        <ContentWrapper css={{ marginTop: layoutSpace.header }}>
+          {props.children}
+        </ContentWrapper>
+        <Footer beforeFooter={beforeFooter} bottomSpacer={layoutSpace.footer} />
       </PageWrapper>
-    </>
+    </LayoutSpaceContext.Provider>
   )
 }

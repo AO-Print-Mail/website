@@ -1,4 +1,12 @@
-import { styled, ResetButton, theme, CSS, UI1, keyframes } from '@theme'
+import {
+  styled,
+  ResetButton,
+  theme,
+  CSS,
+  UI1,
+  keyframes,
+  classes,
+} from '@theme'
 import { forwardRef } from 'react'
 import * as React from 'react'
 import { __DEV__ } from '@utils/src'
@@ -8,7 +16,7 @@ interface ButtonProps extends React.ComponentProps<typeof ButtonBg> {
   color?: 'primary' | 'light' | 'dark' | 'success' | 'error'
   isLoading?: boolean
   disabled?: boolean
-  size?: 'cta' | 'small'
+  size?: 'cta' | 'small' | 'icon'
   offset?: 'left' | 'right'
   leftIcon?: React.ReactElement
   rightIcon?: React.ReactElement
@@ -93,6 +101,14 @@ const ButtonBg = styled(ResetButton, {
           color: '$white',
         },
       },
+      subtle: {
+        backgroundColor: '$DA15',
+        color: '$DA70',
+        '&:hover': {
+          backgroundColor: '$DA20',
+          color: '$DA90',
+        },
+      },
       success: {
         backgroundColor: '$green',
         color: '$white',
@@ -113,6 +129,15 @@ const ButtonBg = styled(ResetButton, {
     size: {
       small: {
         fontSize: '$p4m',
+        when: {
+          m: { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
+          l: { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
+        },
+      },
+      icon: {
+        fontSize: '$p4m',
+        px: '$2',
+        py: '$2',
         when: {
           m: { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
           l: { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
@@ -352,3 +377,25 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({ children, ...props }) => {
     : children
   return <Span {...props}>{_children}</Span>
 }
+
+export interface IconButtonProps extends ButtonProps {
+  icon?: React.ReactNode
+  label: string
+}
+
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ size, color, style, icon, children, label, ...props }, ref) => {
+    return (
+      <ButtonBg
+        style={style}
+        color={color}
+        size={size || 'icon'}
+        ref={ref}
+        {...props}
+      >
+        <ButtonIcon>{icon || children}</ButtonIcon>
+        <span className={classes.visuallyHidden()}>{label}</span>
+      </ButtonBg>
+    )
+  }
+)
