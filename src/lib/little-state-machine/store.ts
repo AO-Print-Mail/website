@@ -21,6 +21,7 @@ export const store: GlobalState = {
       hutk: '',
       gclid: '',
       isComplete: false,
+      landingPageKeyword: '',
     },
     feedbackForm: {
       email: '',

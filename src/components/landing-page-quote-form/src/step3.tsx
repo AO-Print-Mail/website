@@ -62,6 +62,7 @@ export interface MarketingInformation {
   gclid?: string
   'bot-field-step3'?: any
   isComplete?: boolean
+  landingPageKeyword?: string
 }
 
 const mobileMask = [
@@ -128,6 +129,8 @@ export const Step3: React.FC<Step3Props> = ({ sendForm, isSubmitting }) => {
   useEffect(() => {
     if (formState.isValid) {
       setSubmittable(true)
+    } else {
+      setSubmittable(false)
     }
   }, [formState])
   return (
