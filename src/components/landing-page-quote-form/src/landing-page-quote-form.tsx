@@ -62,7 +62,8 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
     })
       .then(() => {
         changeStep('success')
-        //resetForm()
+        console.log(JSON.stringify(state, null, 4))
+        resetForm()
       })
       .catch((error) => console.error(error))
   }

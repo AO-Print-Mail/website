@@ -22,9 +22,6 @@ export const store: GlobalState = {
       email: '',
       phone: '',
       joinMailingList: true,
-      ipAddress: '',
-      hutk: '',
-      gclid: '',
       isComplete: false,
     },
     feedbackForm: {

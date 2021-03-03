@@ -52,10 +52,6 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
           If we have any questions we will contact you via email or your
           preferred contact number.
         </Paragraph4>
-        {
-          //@ts-ignore
-          <pre>{JSON.stringify(state.formData.directMailForm, null, 2)}</pre>
-        }
       </Box>
       <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
         <Button
