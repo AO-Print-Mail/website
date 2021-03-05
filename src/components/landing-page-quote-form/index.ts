@@ -1,4 +1,5 @@
 export * from './src/landing-page-quote-form'
+export { LandingPageQuoteForm as LandingPageQuoteFormCopy } from './src/landing-page-quote-form-copy'
 export * from './src/intro'
 export * from './src/step1'
 export * from './src/step2'

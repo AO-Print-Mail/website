@@ -17,7 +17,7 @@ import Link from 'next/link'
 interface FooterProps {
   css?: CSS
   beforeFooter?: React.ReactNode
-  bottomSpacer?: string
+  footerCss?: CSS
 }
 
 const FooterWrapper = styled(ContentWrapper, {
@@ -86,7 +86,7 @@ const row3: CSS = css({
 
 export const Footer: React.FC<FooterProps> = ({
   beforeFooter,
-  bottomSpacer = '0',
+  footerCss,
   ...props
 }: FooterProps) => {
   const footerContent = (
@@ -152,7 +152,7 @@ export const Footer: React.FC<FooterProps> = ({
       <ContentWrapper css={{ backgroundColor: '$black' }}>
         <Container>
           <Paragraph5
-            css={{ color: '$LA40', my: '$2', pb: `calc($1 + ${bottomSpacer})` }}
+            css={{ color: '$LA40', my: '$2', pb: `$1`, ...footerCss }}
           >
             &copy; ANO PTY Ltd. All rights reserved.
           </Paragraph5>

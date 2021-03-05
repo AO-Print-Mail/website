@@ -19,6 +19,7 @@
     "autoprefixer": "^10.2.4",
     "datocms-html-to-structured-text": "^1.0.10",
     "datocms-structured-text-utils": "^1.0.10",
+    "framer-motion": "^3.10.0",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
     "little-state-machine": "^4.0.2",

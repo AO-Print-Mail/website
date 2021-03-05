@@ -36,7 +36,7 @@ export const ChevronDown = createIcon({
 
 export const Rotateable = styled(ChevronUp, {
   transformOrigin: '50% 50%',
-  transition: 'transform 0.3s ease-in-out',
+  transition: 'transform 0.5s',
   willChange: 'transform',
   variants: {
     direction: {

@@ -6,10 +6,19 @@ import { AdditionalInformation, Step2 } from './step2'
 import { ContactInformation, MarketingInformation, Step3 } from './step3'
 import { ConfirmationPage } from './confirmation'
 import { resetFormData } from '@lib/little-state-machine/actions'
+import { useBreakpoints } from '@lib/react/window-size'
 import { encode } from '@lib/netlify/utils'
 import { useEffect, useState } from 'react'
-import { Flex, classes, ProgressBar, styled, ArrowBack } from '@theme'
+import {
+  Flex,
+  classes,
+  ProgressBar,
+  styled,
+  ArrowBack,
+  breakpoints,
+} from '@theme'
 import { Button } from '@components/button'
+import { FormWrapper } from './wrapper'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
@@ -44,6 +53,10 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   const { state, actions } = useStateMachine({ resetFormData })
   //@ts-ignore
   const { isComplete, ...directMailForm } = state.formData.directMailForm
+  //@ts-ignore
+  const { userData } = state
+
+  const breakpoints = useBreakpoints()
 
   function changeStep(step: string) {
     setSubmitting(true)
@@ -108,58 +121,56 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
         method="POST"
         data-netlify="true"
         name="directMailForm"
+        aria-hidden="true"
+        hidden
         className={classes.visuallyHidden()}
       >
-        <input type="hidden" name="form-name" value="directMailForm" />
-        {Object.entries(directMailForm).map(([name, value]) => (
-          <input
-            type="hidden"
-            aria-hidden="true"
-            tabIndex={-1}
-            name={name}
-            //@ts-ignore
-            value={value || ''}
-            key={name}
-          />
-        ))}
+        <input
+          type="hidden"
+          hidden
+          aria-hidden="true"
+          name="form-name"
+          value="directMailForm"
+        />
+        {Object.entries(directMailForm)
+          .concat(Object.entries(userData))
+          .map(([name, value]) => (
+            <input
+              type="hidden"
+              hidden
+              aria-hidden="true"
+              tabIndex={-1}
+              name={name}
+              //@ts-ignore
+              value={value || ''}
+              key={name}
+            />
+          ))}
       </form>
     )
   }
 
-  return (
-    <FormBackground column fillHeight>
-      {progress.show && (
-        <Flex css={{ alignItems: 'center', px: '$6', pt: '$4' }}>
-          <Button
-            size="small"
-            offset="left"
-            leftIcon={<ArrowBack css={{ color: '$N70' }} />}
-            style="naked"
-            color="dark"
-            onClick={() => router.back()}
-          >
-            Back
-          </Button>
-          <ProgressBar
-            progress={progress.progress}
-            css={{ mr: 0, flex: '1 1 100%' }}
-          />
-        </Flex>
-      )}
+  const form = (
+    <Component
+      keyword={keyword}
+      sendForm={router.query.step === '3' && sendForm}
+      resetForm={resetForm}
+      isSubmitting={isSubmitting}
+      setSubmitting={setSubmitting}
+      {...props}
+      changeStep={changeStep}
+      setProgress={setProgress}
+      isOpen={isOpen}
+      toggleIsOpen={toggleIsOpen}
+    />
+  )
 
-      <Component
-        keyword={keyword}
-        sendForm={router.query.step === '3' && sendForm}
-        resetForm={resetForm}
-        isSubmitting={isSubmitting}
-        setSubmitting={setSubmitting}
-        {...props}
-        changeStep={changeStep}
-        setProgress={setProgress}
-        isOpen={isOpen}
-        toggleIsOpen={toggleIsOpen}
-      />
+  return (
+    <>
+      <FormWrapper breakpoints={breakpoints} isOpen={isOpen}>
+        {form}
+      </FormWrapper>
       <NetlifyWorkaroundForm />
-    </FormBackground>
+    </>
   )
 }

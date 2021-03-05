@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import { createContext, useState } from 'react'
 import Head from 'next/head'
-import { PageWrapper, ContentWrapper } from '@theme'
+import { PageWrapper, ContentWrapper, CSS } from '@theme'
 import { Header } from '@components/header'
 import { Footer } from '@components/footer'
 import { request } from '@lib/datocms/datocms'
@@ -15,6 +15,7 @@ interface LayoutProps {
   metaData?: GetFaviconsQuery['site']['favicon']
   data?: GetFaviconsQuery
   canonicalPath: string
+  footerCss: CSS
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -38,6 +39,7 @@ export const Layout: React.FC<LayoutProps> = ({
   metaData = [],
   canonicalPath,
   data,
+  footerCss,
   ...props
 }) => {
   const favicon = data?.site?.favicon || []
@@ -68,7 +70,7 @@ export const Layout: React.FC<LayoutProps> = ({
         <ContentWrapper css={{ marginTop: layoutSpace.header }}>
           {props.children}
         </ContentWrapper>
-        <Footer beforeFooter={beforeFooter} bottomSpacer={layoutSpace.footer} />
+        <Footer beforeFooter={beforeFooter} footerCss={footerCss} />
       </PageWrapper>
     </LayoutSpaceContext.Provider>
   )
