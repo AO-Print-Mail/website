@@ -23,6 +23,7 @@ export const store: GlobalState = {
       phone: '',
       joinMailingList: true,
       isComplete: false,
+      landingPageKeyword: '',
     },
     feedbackForm: {
       email: '',

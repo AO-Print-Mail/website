@@ -76,6 +76,9 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
     if (router.query.resetForm) {
       resetForm()
     }
+    const _hsq = ((window as any)._hsq = (window as any)._hsq || [])
+    _hsq.push(['setPath', router.asPath])
+    _hsq.push(['trackPageView'])
     setSubmitting(false)
   }, [router])
 

@@ -133,6 +133,8 @@ export const Step3: React.FC<Step3Props> = ({
   useEffect(() => {
     if (formState.isValid) {
       setSubmittable(true)
+    } else {
+      setSubmittable(false)
     }
   }, [formState])
   useEffect(() => {
