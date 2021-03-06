@@ -2,7 +2,7 @@ import { styled, keyframes } from '@theme'
 import { useContext, useEffect } from 'react'
 import { LayoutSpaceContext } from '@components/layout'
 import { m as motion } from 'framer-motion'
-import { AnimationFeaturesContext } from '@lib/react/animation-features'
+import { useAnimationFeatures } from '@lib/react/animation-features'
 
 const footerReveal = keyframes({
   '0%': { transform: 'translateY(100%)' },
@@ -74,11 +74,10 @@ export const QuoteFormWrapper: React.FC<QuoteFormWrapperProps> = ({
   ...props
 }) => {
   const { setFooterSpace } = useContext(LayoutSpaceContext)
-  const setAnimationFeatures = useContext(AnimationFeaturesContext)
   useEffect(() => {
     setFooterSpace('80px')
-    setAnimationFeatures(['animation', 'animateLayout'])
   }, [])
+  useAnimationFeatures(['animation', 'animateLayout'])
 
   return (
     <FormBackground

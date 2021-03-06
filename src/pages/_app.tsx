@@ -5,11 +5,10 @@ import '../styles/font-face.css'
 import { StateMachineProvider, createStore } from 'little-state-machine'
 import { store } from '@lib/little-state-machine'
 import {
-  useAnimationFeatures,
+  useAnimationContext,
   AnimationFeaturesContext,
-  featureLookup,
 } from '@lib/react/animation-features'
-import { MotionConfig, MotionFeature } from 'framer-motion'
+import { MotionConfig } from 'framer-motion'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
@@ -18,17 +17,8 @@ export function reportWebVitals(metric: NextWebVitalsMetric) {
 
 createStore(store)
 
-type animationStr = (keyof typeof featureLookup)[]
-
 function MyApp({ Component, pageProps }: AppProps) {
-  const [animationFeatures, setAnimationFeatures]: [
-    animationStr,
-    (reqs: animationStr) => void
-  ] = useState([])
-
-  const motionFeatures: MotionFeature[] = useAnimationFeatures(
-    animationFeatures
-  )
+  const { features, importFeatures } = useAnimationContext()
 
   globalStyles()
   return (
@@ -40,8 +30,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         ></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MotionConfig features={motionFeatures}>
-        <AnimationFeaturesContext.Provider value={setAnimationFeatures}>
+      <MotionConfig features={features}>
+        <AnimationFeaturesContext.Provider value={importFeatures}>
           <Component {...pageProps} />
         </AnimationFeaturesContext.Provider>
       </MotionConfig>

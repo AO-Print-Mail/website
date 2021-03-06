@@ -2,7 +2,7 @@ import { Flex, Box, UI3, styled, keyframes } from '@theme'
 import type { BreakpointsAry } from '@lib/react/window-size'
 import { useContext, useEffect } from 'react'
 import { LayoutSpaceContext } from '@components/layout'
-import { AnimationFeaturesContext } from '@lib/react/animation-features'
+import { useAnimationFeatures } from '@lib/react/animation-features'
 
 export interface FormWrapperProps {
   isOpen: boolean
@@ -87,7 +87,7 @@ export const FormWrapper: React.FC<FormWrapperProps> = ({
   children,
   ...props
 }) => {
-  const setAnimationFeatures = useContext(AnimationFeaturesContext)
+  useAnimationFeatures(['animation'])
 
   const isNotDesktop = !breakpoints.includes('l')
   return <FormBackground {...props}>{children}</FormBackground>

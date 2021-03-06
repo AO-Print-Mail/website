@@ -39,7 +39,7 @@ interface LandingPageQuoteFormProps {
   toggleIsOpen: () => void
 }
 
-const FormBackground = styled(Flex, { minHeight: '100%' })
+
 
 export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   keyword,
