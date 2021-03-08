@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { breakpoints } from '@theme'
 import { useWindowSize } from './useWindowSize'
 
-export type BreakpointsAry = ('initial' | keyof typeof breakpoints)[]
+export type BreakpointsAry = (keyof typeof breakpoints)[]
 
 export function useBreakpoints() {
   const { width } = useWindowSize()

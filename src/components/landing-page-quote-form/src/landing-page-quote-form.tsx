@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { QuoteIntro } from './intro'
 import { JobInformation, Step1 } from './step1'
 import { AdditionalInformation, Step2 } from './step2'
-import { ContactInformation, MarketingInformation, Step3 } from './step3'
+import { ContactInformation, MetaInformation, Step3 } from './step3'
 import { ConfirmationPage } from './confirmation'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import { encode } from '@lib/netlify/utils'
@@ -14,7 +14,7 @@ import { Button } from '@components/button'
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
   ContactInformation &
-  MarketingInformation
+  MetaInformation
 
 export type FeedbackFormData = {
   email: string

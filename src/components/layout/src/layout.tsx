@@ -9,13 +9,13 @@ import { renderMetaTags, SeoMetaTagType } from 'react-datocms'
 import { GetFaviconsQuery } from '@lib/datocms/__generated__/types'
 
 interface LayoutProps {
-  title: string
-  description: string
+  title?: string
+  description?: string
   beforeFooter?: React.ReactNode
   metaData?: GetFaviconsQuery['site']['favicon']
   data?: GetFaviconsQuery
-  canonicalPath: string
-  footerCss: CSS
+  canonicalPath?: string
+  footerCss?: CSS
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
