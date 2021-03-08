@@ -10,12 +10,10 @@ import {
 
 export interface ConfirmationPageProps extends QuoteFormInputData {
   changeStep: (step: string) => unknown
-  setProgress: (any) => void
 }
 
 export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
   changeStep,
-  setProgress,
   ...props
 }) => {
   const { state, actions } = useStateMachine({
@@ -27,7 +25,6 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
 
   useEffect(() => {
     actions.updateFeedbackFormForm({ firstName, email, hutk, ipAddress })
-    setProgress({ show: false, progress: 1 })
   }, [])
 
   return (

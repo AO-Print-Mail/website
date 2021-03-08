@@ -1,4 +1,4 @@
-import { Container, Logo, UI1, ContentWrapper, styled } from '@theme'
+import { Container, Logo, HeaderBar, ContentWrapper, styled } from '@theme'
 import Link from 'next/link'
 import { Button } from '../../button'
 import { Phone } from '@theme/icons/phone'
@@ -6,18 +6,6 @@ import { Phone } from '@theme/icons/phone'
 interface HeaderProps {
   sticky?: boolean
 }
-
-export const HeaderBar = styled(ContentWrapper, {
-  flex: '0',
-  backgroundColor: '$white',
-  py: '$3',
-  borderBottomWidth: '$thin',
-  borderBottomColor: '$N30',
-  borderBottomStyle: 'solid',
-  l: {
-    py: '$4',
-  },
-})
 
 export function Header({ sticky = false, ...props }: HeaderProps) {
   return (

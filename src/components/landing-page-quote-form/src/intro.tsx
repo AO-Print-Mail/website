@@ -7,15 +7,12 @@ import {
   styled,
   Rotateable,
 } from '@theme'
-import { useEffect, useState } from 'react'
 import { Button, IconButton } from '@components/button'
 interface QuoteIntroProps {
   changeStep: (step: string) => unknown
   keyword?: string
   isSubmitting: boolean
-  setProgress: (any) => void
   isOpen: boolean
-
   toggleIsOpen: () => void
 }
 
@@ -42,14 +39,10 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   keyword = 'direct mail',
   changeStep,
   isSubmitting,
-  setProgress,
   toggleIsOpen,
   isOpen,
   ...props
 }) => {
-  useEffect(() => {
-    setProgress({ show: false, progress: 0 })
-  }, [])
   return (
     <Flex
       column

@@ -19,7 +19,7 @@ export interface Step2Props extends QuoteFormInputData {
   changeStep: (step: string) => unknown
   isSubmitting: boolean
   setSubmitting: () => void
-  setProgress: (any) => void
+  header: React.ReactNode
 }
 
 export interface AdditionalInformation {
@@ -46,8 +46,8 @@ const Form = styled('form', {
 
 export const Step2: React.FC<Step2Props> = ({
   changeStep,
-  setProgress,
   isSubmitting,
+  header,
 }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
   const {
@@ -76,12 +76,12 @@ export const Step2: React.FC<Step2Props> = ({
     if (!requiresArtwork) {
       actions.updateDirectMailForm({ artworkReady: '[n/a]' })
     }
-    setProgress({ show: true, progress: 0.7 })
   }, [])
 
   return (
     <Form className={classes.fullHeight()} onSubmit={handleSubmit(onSubmit)}>
       <Flex fillHeight column css={{ pb: '$4' }}>
+        {header}
         <Box css={{ px: '$6', pb: '$4', flex: '1 1' }}>
           {requiresArtwork && (
             <>

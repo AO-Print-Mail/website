@@ -1,5 +1,5 @@
 import { Flex, Box, UI3, styled, keyframes } from '@theme'
-import type { BreakpointsAry } from '@lib/react/window-size'
+import type { BreakpointsAry } from '@lib/react/breakpoints'
 import { useContext, useEffect } from 'react'
 import { LayoutSpaceContext } from '@components/layout'
 import { useAnimationFeatures } from '@lib/react/animation-features'

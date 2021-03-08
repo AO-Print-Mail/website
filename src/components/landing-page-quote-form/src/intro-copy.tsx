@@ -47,9 +47,6 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   isOpen,
   ...props
 }) => {
-  useEffect(() => {
-    setProgress({ show: false, progress: 0 })
-  }, [])
   return (
     <Flex
       column

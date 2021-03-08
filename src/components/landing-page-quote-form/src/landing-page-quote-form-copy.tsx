@@ -6,19 +6,14 @@ import { AdditionalInformation, Step2 } from './step2'
 import { ContactInformation, MarketingInformation, Step3 } from './step3'
 import { ConfirmationPage } from './confirmation'
 import { resetFormData } from '@lib/little-state-machine/actions'
-import { useBreakpoints } from '@lib/react/window-size'
+import { useBreakpoints } from '@lib/react/breakpoints'
 import { encode } from '@lib/netlify/utils'
 import { useEffect, useState } from 'react'
-import {
-  Flex,
-  classes,
-  ProgressBar,
-  styled,
-  ArrowBack,
-  breakpoints,
-} from '@theme'
-import { Button } from '@components/button'
+import { classes } from '@theme'
 import { FormWrapper } from './wrapper'
+import { AnimateSharedLayout, useMotionValue } from 'framer-motion'
+import { useAnimationFeatures } from '@lib/react/animation-features'
+import { TopBarControls } from './topBarControls'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
@@ -39,8 +34,6 @@ interface LandingPageQuoteFormProps {
   toggleIsOpen: () => void
 }
 
-
-
 export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   keyword,
   toggleIsOpen,
@@ -48,7 +41,7 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   ...props
 }) => {
   const [isSubmitting, setSubmitting] = useState(false)
-  const [progress, setProgress] = useState({ show: false, progress: 0 })
+  const [progress, setProgress] = useState(0)
   const router = useRouter()
   const { state, actions } = useStateMachine({ resetFormData })
   //@ts-ignore
@@ -96,23 +89,24 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   switch (router.query.step) {
     case '1':
       Component = Step1
-
+      progress !== 30 && setProgress(30)
       break
     case '2':
       Component = Step2
-
+      progress !== 70 && setProgress(70)
       break
     case '3':
       Component = Step3
-
+      progress !== 90 && setProgress(90)
       break
     //@ts-ignore
     case 'success':
       Component = ConfirmationPage
-
+      progress !== 100 && setProgress(100)
       break
     default:
       Component = QuoteIntro
+      progress !== 0 && setProgress(0)
   }
 
   const NetlifyWorkaroundForm = () => {
@@ -149,28 +143,25 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
       </form>
     )
   }
-
-  const form = (
-    <Component
-      keyword={keyword}
-      sendForm={router.query.step === '3' && sendForm}
-      resetForm={resetForm}
-      isSubmitting={isSubmitting}
-      setSubmitting={setSubmitting}
-      {...props}
-      changeStep={changeStep}
-      setProgress={setProgress}
-      isOpen={isOpen}
-      toggleIsOpen={toggleIsOpen}
-    />
-  )
+  useAnimationFeatures(['animateLayout'])
 
   return (
-    <>
+    <AnimateSharedLayout>
       <FormWrapper breakpoints={breakpoints} isOpen={isOpen}>
-        {form}
+        <Component
+          keyword={keyword}
+          sendForm={router.query.step === '3' && sendForm}
+          resetForm={resetForm}
+          isSubmitting={isSubmitting}
+          setSubmitting={setSubmitting}
+          {...props}
+          changeStep={changeStep}
+          isOpen={isOpen}
+          toggleIsOpen={toggleIsOpen}
+          header={<TopBarControls progress={progress} />}
+        />
       </FormWrapper>
       <NetlifyWorkaroundForm />
-    </>
+    </AnimateSharedLayout>
   )
 }

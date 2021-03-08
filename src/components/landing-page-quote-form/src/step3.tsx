@@ -62,7 +62,7 @@ export interface Step3Props extends QuoteFormInputData {
   sendForm: () => void
   isSubmitting: boolean
   setSubmitting: () => void
-  setProgress: (any) => void
+  header: React.ReactNode
 }
 
 const mobileMask = [
@@ -101,8 +101,8 @@ const Form = styled('form', {
 
 export const Step3: React.FC<Step3Props> = ({
   sendForm,
-  setProgress,
   isSubmitting,
+  header,
 }) => {
   const { state, actions } = useStateMachine({
     updateDirectMailForm,
@@ -137,9 +137,6 @@ export const Step3: React.FC<Step3Props> = ({
       setSubmittable(false)
     }
   }, [formState])
-  useEffect(() => {
-    setProgress({ show: true, progress: 0.9 })
-  }, [])
   return (
     <Form
       className={classes.fullHeight()}
@@ -147,6 +144,7 @@ export const Step3: React.FC<Step3Props> = ({
       netlify-honeypot="bot-field-step3"
     >
       <Flex fillHeight column css={{ pb: '$4' }}>
+        {header}
         <Box css={{ px: '$6', pb: '$4', flex: '1 1' }}>
           <Paragraph3 css={{ color: '$DA80' }}>
             Your contact information

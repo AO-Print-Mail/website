@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
 import {
@@ -13,12 +12,13 @@ import {
 } from '@theme'
 import { Button } from '@components/button'
 import { updateDirectMailForm } from '@lib/little-state-machine'
+import { motion } from 'framer-motion'
 
 export interface Step1Props extends JobInformation {
   changeStep: (step: string) => unknown
   isSubmitting: boolean
   setSubmitting: () => void
-  setProgress: (any) => void
+  header: React.ReactNode
 }
 
 export interface JobInformation {
@@ -41,8 +41,9 @@ const Form = styled('form', {
 
 export const Step1: React.FC<Step1Props> = ({
   changeStep,
-  setProgress,
   isSubmitting,
+  header,
+  ...props
 }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
   const { register, handleSubmit, errors } = useForm<JobInformation>()
@@ -58,12 +59,11 @@ export const Step1: React.FC<Step1Props> = ({
     isComplete,
     //@ts-ignore
   } = state.formData?.directMailForm
-  useEffect(() => {
-    setProgress({ show: true, progress: 0.3 })
-  }, [])
+
   return (
     <Form className={classes.fullHeight()} onSubmit={handleSubmit(onSubmit)}>
       <Flex fillHeight column css={{ pb: '$4' }}>
+        {header}
         <Box css={{ px: '$6', pb: '$4', flex: '1 1' }}>
           <Paragraph3 css={{ color: '$DA80' }}>
             What are you sending?
@@ -195,7 +195,7 @@ export const Step1: React.FC<Step1Props> = ({
             </RadioButton>
           </Flex>
         </Box>
-        <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
+        <Flex column css={{ mt: '$4', pb: '$4', mx: '$6', flex: '0 0' }}>
           <Button
             fullWidth
             size="cta"
