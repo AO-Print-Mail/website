@@ -5,7 +5,7 @@ import { m as motion, MotionValue } from 'framer-motion'
 import { useAnimationFeatures } from '@lib/react/animation-features'
 
 export interface TopBarControlsProps {
-  progress: MotionValue<number>
+  progress: number
   css?: CSS
 }
 

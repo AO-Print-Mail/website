@@ -18,8 +18,7 @@ import MaskedInput from 'react-text-mask'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 
-export type ContactAndMarketingInformation = ContactInformation &
-  MarketingInformation
+export type ContactAndMetaInformation = ContactInformation & MetaInformation
 
 export interface ContactInformation {
   firstName?: string
@@ -30,15 +29,10 @@ export interface ContactInformation {
   country?: string
 }
 
-export interface MarketingInformation {
-  joinMailingList?: boolean
-  experienceRating?: string
-  experienceComment?: string
-  ipAddress?: string
-  hutk?: string
-  gclid?: string
+export interface MetaInformation {
   'bot-field-step3'?: any
-  isComplete?: boolean
+  landingPageKeyword?: string
+  joinMailingList?: boolean
 }
 
 const schema = yup.object().shape({
@@ -112,11 +106,11 @@ export const Step3: React.FC<Step3Props> = ({
     handleSubmit,
     formState,
     errors,
-  } = useForm<ContactAndMarketingInformation>({
+  } = useForm<ContactAndMetaInformation>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   })
-  const onSubmit = (data: ContactAndMarketingInformation) => {
+  const onSubmit = (data: ContactAndMetaInformation) => {
     actions.updateDirectMailForm(data)
     sendForm()
   }

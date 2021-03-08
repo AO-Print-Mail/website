@@ -1,10 +1,9 @@
 import { useStateMachine } from 'little-state-machine'
 import { useRouter } from 'next/router'
 import { QuoteIntro } from './intro'
-import { JobInformation, Step1 } from './step1'
-import { AdditionalInformation, Step2 } from './step2'
-import { ContactInformation, MarketingInformation, Step3 } from './step3'
-import { ConfirmationPage } from './confirmation'
+import { JobInformation } from './step1'
+import { AdditionalInformation } from './step2'
+import { ContactInformation, MetaInformation } from './step3'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import { useBreakpoints } from '@lib/react/breakpoints'
 import { encode } from '@lib/netlify/utils'
@@ -14,11 +13,12 @@ import { FormWrapper } from './wrapper'
 import { AnimateSharedLayout, useMotionValue } from 'framer-motion'
 import { useAnimationFeatures } from '@lib/react/animation-features'
 import { TopBarControls } from './topBarControls'
+import dynamic from 'next/dynamic'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
   ContactInformation &
-  MarketingInformation
+  MetaInformation
 
 export type FeedbackFormData = {
   email: string
@@ -78,36 +78,41 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
       .catch((error) => console.error(error))
   }
 
-  useEffect(() => {
-    if (router.query.resetForm) {
-      resetForm()
-    }
-    setSubmitting(false)
-  }, [router])
+  let Component
 
-  let Component: React.FC<any>
+  const Step1 = () => dynamic(() => import('./step1').then((m) => m.Step1))
   switch (router.query.step) {
     case '1':
-      Component = Step1
+      Component = Step1()
       progress !== 30 && setProgress(30)
       break
     case '2':
-      Component = Step2
+      Component = dynamic(() => import('./step2').then((m) => m.Step2))
       progress !== 70 && setProgress(70)
       break
     case '3':
-      Component = Step3
+      Component = dynamic(() => import('./step3').then((m) => m.Step3))
       progress !== 90 && setProgress(90)
       break
     //@ts-ignore
     case 'success':
-      Component = ConfirmationPage
+      Component = dynamic(() =>
+        import('./confirmation').then((m) => m.ConfirmationPage)
+      )
       progress !== 100 && setProgress(100)
       break
     default:
       Component = QuoteIntro
       progress !== 0 && setProgress(0)
   }
+
+  useEffect(() => {
+    if (router.query.resetForm) {
+      resetForm()
+    }
+
+    setSubmitting(false)
+  }, [router])
 
   const NetlifyWorkaroundForm = () => {
     return (

@@ -21,10 +21,10 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
     updateFeedbackFormForm,
   })
   //@ts-ignore
-  const { firstName, email, hutk, ipAddress } = state.formData?.directMailForm
+  const { firstName, email } = state.formData?.directMailForm
 
   useEffect(() => {
-    actions.updateFeedbackFormForm({ firstName, email, hutk, ipAddress })
+    actions.updateFeedbackFormForm({ firstName, email })
   }, [])
 
   return (
