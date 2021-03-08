@@ -8,9 +8,10 @@ export function useBreakpoints() {
   const { width } = useWindowSize()
   const bp: BreakpointsAry = useMemo(() => {
     function setBreakpoints(acc, [k, v]) {
-      return v >= width ? [...acc, k] : acc
+      return width >= v ? [...acc, k] : acc
     }
-    return Object.entries(breakpoints).reduce(setBreakpoints, ['initial'])
+    return Object.entries(breakpoints).reduce(setBreakpoints, [])
   }, [width])
+
   return bp
 }
