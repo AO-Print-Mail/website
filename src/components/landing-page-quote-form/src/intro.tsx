@@ -14,6 +14,7 @@ interface QuoteIntroProps {
   isSubmitting: boolean
   isOpen: boolean
   toggleIsOpen: () => void
+  setSubmitting: (a: boolean) => void
 }
 
 const FormImage = styled(MailIllustration, {
@@ -41,6 +42,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   isSubmitting,
   toggleIsOpen,
   isOpen,
+  setSubmitting,
   ...props
 }) => {
   return (
@@ -93,6 +95,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
             }}
             isLoading={isSubmitting}
             onClick={() => {
+              setSubmitting(true)
               toggleIsOpen()
               changeStep('1')
             }}

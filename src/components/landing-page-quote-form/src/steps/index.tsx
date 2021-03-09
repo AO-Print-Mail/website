@@ -7,10 +7,9 @@ import { resetFormData } from '@lib/little-state-machine/actions'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { encode } from '@lib/netlify/utils'
-import { AnimateSharedLayout, useMotionValue } from 'framer-motion'
-import { useAnimationFeatures } from '@lib/react/animation-features'
+import { MotionValue, useMotionValue } from 'framer-motion'
 import { TopBarControls } from '../topBarControls'
-import { FormSteps } from '../landing-page-quote-form-copy'
+import { FormSteps } from '../landing-page-quote-form'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
@@ -40,6 +39,7 @@ export interface FormStepsProps {
   isOpen: boolean
   toggleIsOpen: () => void
   changeStep: (a?: string) => void
+  progress: MotionValue<number>
 }
 
 export const FormStepper: React.FC<FormStepsProps> = ({
@@ -47,16 +47,13 @@ export const FormStepper: React.FC<FormStepsProps> = ({
   isOpen,
   toggleIsOpen,
   changeStep,
+  progress,
 }) => {
   const [isSubmitting, setSubmitting] = useState(false)
-
-  const [progress, setProgress] = useState(0)
 
   const router = useRouter()
 
   const { state, actions } = useStateMachine({ resetFormData })
-
-  useAnimationFeatures(['animateLayout', 'animation'])
 
   const {
     //@ts-ignore
@@ -100,40 +97,19 @@ export const FormStepper: React.FC<FormStepsProps> = ({
       changeStep()
   }
 
-  useEffect(() => {
-    switch (step) {
-      case '1':
-        setProgress(30)
-        break
-      case '2':
-        setProgress(60)
-        break
-      case '3':
-        setProgress(90)
-        break
-      //@ts-ignore
-      case 'success':
-        setProgress(100)
-        break
-      default:
-        setProgress(0)
-    }
-  }, [step])
-
   return (
     <>
-      <AnimateSharedLayout>
-        <Component
-          sendForm={router.query.step === '3' && sendForm}
-          resetForm={resetForm}
-          isSubmitting={isSubmitting}
-          setSubmitting={setSubmitting}
-          changeStep={changeStep}
-          isOpen={isOpen}
-          toggleIsOpen={toggleIsOpen}
-          header={<TopBarControls progress={progress} />}
-        />
-      </AnimateSharedLayout>
+      <Component
+        sendForm={router.query.step === '3' && sendForm}
+        resetForm={resetForm}
+        isSubmitting={isSubmitting}
+        setSubmitting={setSubmitting}
+        changeStep={changeStep}
+        isOpen={isOpen}
+        toggleIsOpen={toggleIsOpen}
+        progress={progress}
+        header={<TopBarControls progress={progress} />}
+      />
       <WorkaroundForm formData={{ ...directMailForm, ...userData }} />
     </>
   )

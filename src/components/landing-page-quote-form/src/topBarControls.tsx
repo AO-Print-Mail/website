@@ -2,10 +2,9 @@ import { ArrowBack, ProgressBar, HeaderBar, styled, CSS } from '@theme'
 import router from 'next/router'
 import { Button } from '@components/button'
 import { m as motion, MotionValue } from 'framer-motion'
-import { useAnimationFeatures } from '@lib/react/animation-features'
 
 export interface TopBarControlsProps {
-  progress: number
+  progress: MotionValue<number>
   css?: CSS
 }
 

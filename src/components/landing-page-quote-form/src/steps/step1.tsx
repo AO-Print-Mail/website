@@ -12,13 +12,14 @@ import {
 } from '@theme'
 import { Button } from '@components/button'
 import { updateDirectMailForm } from '@lib/little-state-machine'
-import { motion } from 'framer-motion'
+import { MotionValue } from 'framer-motion'
 
 export interface Step1Props extends JobInformation {
   changeStep: (step: string) => unknown
   isSubmitting: boolean
   setSubmitting: () => void
   header: React.ReactNode
+  progress: MotionValue<number>
 }
 
 export interface JobInformation {
@@ -43,6 +44,7 @@ export const Step1: React.FC<Step1Props> = ({
   changeStep,
   isSubmitting,
   header,
+  progress,
   ...props
 }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
@@ -58,6 +60,7 @@ export const Step1: React.FC<Step1Props> = ({
     frequency,
     //@ts-ignore
   } = state.formData?.directMailForm
+  progress.set(30)
 
   return (
     <Form className={classes.fullHeight()} onSubmit={handleSubmit(onSubmit)}>

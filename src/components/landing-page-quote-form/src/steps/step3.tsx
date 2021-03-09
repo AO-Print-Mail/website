@@ -12,11 +12,12 @@ import {
   classes,
 } from '@theme'
 import { Button } from '@components/button'
-import { QuoteFormInputData } from './landing-page-quote-form'
+import { QuoteFormInputData } from './index'
 import { updateDirectMailForm } from '@lib/little-state-machine'
 import MaskedInput from 'react-text-mask'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { MotionValue } from 'framer-motion'
 
 export type ContactAndMetaInformation = ContactInformation & MetaInformation
 
@@ -57,6 +58,7 @@ export interface Step3Props extends QuoteFormInputData {
   isSubmitting: boolean
   setSubmitting: () => void
   header: React.ReactNode
+  progress: MotionValue<number>
 }
 
 const mobileMask = [
@@ -97,6 +99,7 @@ export const Step3: React.FC<Step3Props> = ({
   sendForm,
   isSubmitting,
   header,
+  progress,
 }) => {
   const { state, actions } = useStateMachine({
     updateDirectMailForm,
@@ -114,6 +117,7 @@ export const Step3: React.FC<Step3Props> = ({
     actions.updateDirectMailForm(data)
     sendForm()
   }
+  progress.set(90)
   const {
     firstName,
     lastName,

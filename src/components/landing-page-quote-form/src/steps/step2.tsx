@@ -12,14 +12,16 @@ import {
   classes,
 } from '@theme'
 import { Button } from '@components/button'
-import { QuoteFormInputData } from './landing-page-quote-form'
+import { QuoteFormInputData } from './index'
 import { updateDirectMailForm } from '@lib/little-state-machine'
+import { MotionValue } from 'framer-motion'
 
 export interface Step2Props extends QuoteFormInputData {
   changeStep: (step: string) => unknown
   isSubmitting: boolean
   setSubmitting: () => void
   header: React.ReactNode
+  progress: MotionValue<number>
 }
 
 export interface AdditionalInformation {
@@ -48,6 +50,7 @@ export const Step2: React.FC<Step2Props> = ({
   changeStep,
   isSubmitting,
   header,
+  progress,
 }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
   const {
@@ -61,6 +64,8 @@ export const Step2: React.FC<Step2Props> = ({
     actions.updateDirectMailForm(data)
     changeStep('3')
   }
+
+  progress.set(60)
 
   const {
     artworkReady,

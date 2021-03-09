@@ -1,10 +1,9 @@
 import { styled, CSS } from '..'
 import { useAnimationFeatures } from '@lib/react/animation-features'
-import { AnimateSharedLayout, m as motion, MotionValue } from 'framer-motion'
-import { useLayoutEffect } from 'react'
+import { m as motion, MotionValue } from 'framer-motion'
 
 export interface ProgressBarProps {
-  progress: number
+  progress: MotionValue<number>
   css?: CSS
 }
 
@@ -16,6 +15,7 @@ const Bg = styled('div', {
   position: 'relative',
   mx: '$6',
   my: '$2',
+  width: '100%',
 })
 
 const Fill = styled('div', {
@@ -25,6 +25,7 @@ const Fill = styled('div', {
   top: '0',
   left: '0',
   bottom: '0',
+  width: '100%',
   willChange: 'transform',
 })
 
@@ -32,12 +33,14 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   progress,
   ...props
 }) => {
+  useAnimationFeatures(['animation'])
+
   return (
     <Bg {...props}>
       <Fill
-        layoutId="something"
         as={motion.div}
-        css={{ width: `${progress}%` }}
+        initial={{ x: `-${100 - progress.getPrevious()}%` }}
+        animate={{ x: `-${100 - progress.get()}%` }}
       />
     </Bg>
   )
