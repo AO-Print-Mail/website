@@ -33,7 +33,10 @@ export const TopBarControls: React.FC<TopBarControlsProps> = ({
         leftIcon={<ArrowBack css={{ color: '$N70' }} />}
         style="naked"
         color="dark"
-        onClick={() => router.back()}
+        onClick={(e) => {
+          e.preventDefault()
+          router.back()
+        }}
       >
         Back
       </Button>

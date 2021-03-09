@@ -10,7 +10,7 @@ import {
 import { markdownToDast, ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
-import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
+//import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof dataFunction>>
@@ -103,7 +103,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data, pageSlug }) => {
           </Box>
         </HeroText>
         <FormBackground>
-          <LandingPageQuoteForm keyword={'direct mail'} />
+          {/*<LandingPageQuoteForm keyword={'direct mail'} />*/}
         </FormBackground>
       </Container>
     </Layout>
