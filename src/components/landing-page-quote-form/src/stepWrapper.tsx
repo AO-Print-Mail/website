@@ -17,6 +17,7 @@ import { MotionValue } from 'framer-motion'
 export interface StepWrapperProps {
   header?: React.ReactNode
   footer?: React.ReactNode
+  form?: React.ReactNode
 }
 
 export const StepWrapper: React.FC<StepWrapperProps> = ({
@@ -25,5 +26,40 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
   footer,
   ...props
 }) => {
-  return { header }
+  return (
+    <>
+      {header}
+      <Flex css={{ pt: '$3', when: { l: { mx: '$6' } } }}>
+        <IconButton
+          label="Read more about online quotes"
+          onClick={() => toggleIsOpen()}
+          icon={
+            <Rotateable direction={isOpen ? 'down' : 'up'} size="regular" />
+          }
+          css={{ flex: '0 0', mr: '$3', when: { l: { display: 'none' } } }}
+          color="subtle"
+        ></IconButton>
+        <Button
+          fullWidth
+          size="cta"
+          css={{
+            flex: '1',
+            when: {
+              l: {
+                mt: '$6',
+              },
+            },
+          }}
+          isLoading={isSubmitting}
+          onClick={() => {
+            setSubmitting(true)
+            toggleIsOpen()
+            changeStep('1')
+          }}
+        >
+          Start your quote
+        </Button>
+      </Flex>
+    </>
+  )
 }

@@ -6,6 +6,7 @@ import {
   MailIllustration,
   styled,
   Rotateable,
+  Container,
 } from '@theme'
 import { Button, IconButton } from '@components/button'
 interface QuoteIntroProps {
@@ -57,7 +58,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
         },
       }}
     >
-      <Box as="section" css={{ px: '$3', when: { l: { px: '$6' } } }}>
+      <Container as="section" css={{ px: '$3', when: { l: { px: '$6' } } }}>
         <IntroContent>
           <FormImage />
           <Heading4 as="h2" alignCenter color="primary" css={{ mt: '$3' }}>
@@ -79,7 +80,11 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
             icon={
               <Rotateable direction={isOpen ? 'down' : 'up'} size="regular" />
             }
-            css={{ flex: '0 0', mr: '$3', when: { l: { display: 'none' } } }}
+            css={{
+              flex: '0.075 0',
+              mr: '$3',
+              when: { l: { display: 'none' } },
+            }}
             color="subtle"
           ></IconButton>
           <Button
@@ -94,16 +99,17 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               },
             }}
             isLoading={isSubmitting}
-            onClick={() => {
+            onClick={(e: PointerEvent) => {
+              e.preventDefault()
               setSubmitting(true)
-              toggleIsOpen()
+              isOpen ?? toggleIsOpen()
               changeStep('1')
             }}
           >
             Start your quote
           </Button>
         </Flex>
-      </Box>
+      </Container>
     </Flex>
   )
 }

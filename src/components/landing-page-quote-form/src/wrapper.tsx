@@ -3,18 +3,16 @@ import type { BreakpointsAry } from '@lib/react/breakpoints'
 import { useContext, useEffect } from 'react'
 import { LayoutSpaceContext } from '@components/layout'
 import { useAnimationFeatures } from '@lib/react/animation-features'
+import { m as motion } from 'framer-motion'
 
 export interface FormWrapperProps {
   isOpen: boolean
   breakpoints: BreakpointsAry
-  //showMenuToggle: boolean
-  //progress: number
-  //showBackButton: boolean
-  //isSubmitting: boolean
-  //buttonLabel: string
-  //submittable: boolean
-  //buttonType: 'submit' | 'primary'
-  //toggleIsOpen: () => void
+  isSubmitting: boolean
+  setSubmitting: (a: boolean) => void
+  toggleIsOpen: () => void
+  changeStep: (a: string) => void
+  formRef?: HTMLFormElement
 }
 
 const footerReveal = keyframes({
@@ -22,9 +20,9 @@ const footerReveal = keyframes({
   '100%': { transform: 'translateY(0%)' },
 })
 
-const FormBackground = styled('div', {
-  transform: 'translateY(100%)',
-  animation: `${footerReveal} 0.5s ease-out 2s forwards`,
+const FormBackground = styled(motion.div, {
+  //transform: 'translateY(100%)',
+  //animation: `${footerReveal} 0.5s ease-out 2s forwards`,
   backgroundColor: '$white',
   position: 'fixed',
   display: 'block',
@@ -37,6 +35,8 @@ const FormBackground = styled('div', {
   minHeight: '$7',
   btlr: '$5',
   btrr: '$5',
+  transform: 'translateY(100%)',
+  transition: 'transform 0.5s ease-out',
   when: {
     l: {
       transform: 'translateY(0%)',
@@ -81,6 +81,27 @@ const Background = styled('div', {
   left: '0',
 })
 
+/*
+Open the form so that it's full height
+Then do whatever animation shows the inputs/intro
+Keep the buttons at the bottom
+*/
+
+const variants = {
+  hidden: (custom) =>
+    custom
+      ? {
+          y: '100%',
+        }
+      : {},
+  visible: (custom) =>
+    custom
+      ? {
+          transform: 'translateY(0%)',
+        }
+      : {},
+}
+
 export const FormWrapper: React.FC<FormWrapperProps> = ({
   isOpen,
   breakpoints,
@@ -90,5 +111,16 @@ export const FormWrapper: React.FC<FormWrapperProps> = ({
   useAnimationFeatures(['animation'])
 
   const isNotDesktop = !breakpoints.includes('l')
-  return <FormBackground {...props}>{children}</FormBackground>
+
+  return (
+    <FormBackground
+      variants={variants}
+      animate="visible"
+      custom={isNotDesktop}
+      transition={{ delay: 3 }}
+      {...props}
+    >
+      {children}
+    </FormBackground>
+  )
 }
