@@ -10,7 +10,7 @@ export const store: GlobalState = {
     directMailForm: {
       mailFormat: 'not provided',
       services: 'not provided',
-      itemQuantity: 0,
+      itemQuantity: '',
       frequency: 'not provided',
       urgency: 'not provided',
       artworkReady: '[unknown]',
