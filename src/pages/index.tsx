@@ -4,7 +4,6 @@ import { ClientLogoBanner } from '@components/client-logo-banner'
 import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import { QuoteFormWrapper } from '@components/quote-form-wrapper'
 import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
-import { useCycle } from 'framer-motion'
 
 interface PageProps {
   data?: {}
@@ -25,7 +24,6 @@ const HeroText = styled('div', {
 })
 
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
-  const [formIsOpen, toggleFormIsOpen] = useCycle(false, true)
   /*const beforeFooter = (
     <>
       <Container>
@@ -72,11 +70,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
             </Paragraph2>
           </Box>
         </HeroText>
-        <LandingPageQuoteForm
-          isOpen={formIsOpen}
-          toggleIsOpen={toggleFormIsOpen}
-          keyword="direct mail"
-        />
+        <LandingPageQuoteForm keyword="direct mail" />
       </Container>
     </Layout>
   )

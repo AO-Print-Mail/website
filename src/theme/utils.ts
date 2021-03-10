@@ -197,6 +197,35 @@ export default {
     width: value,
   }),
 
+  tlbr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space']
+  ) => {
+    return {
+      top: value,
+      left: value,
+      bottom: value,
+      right: value,
+    }
+  },
+  lbr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space']
+  ) => {
+    return {
+      left: value,
+      bottom: value,
+      right: value,
+    }
+  },
+  tlr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space']
+  ) => {
+    return {
+      top: value,
+      left: value,
+      right: value,
+    }
+  },
+
   linearGradient: (config: typeof stitchesConfig) => (
     value: keyof typeof gradients | string
   ) => {

@@ -1,9 +1,8 @@
-import { Flex, Box, UI3, styled, keyframes } from '@theme'
+import { styled } from '@theme'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
-import { useContext, useEffect } from 'react'
-import { LayoutSpaceContext } from '@components/layout'
 import { useAnimationFeatures } from '@lib/react/animation-features'
-import { m as motion } from 'framer-motion'
+import { motion, useAnimation } from 'framer-motion'
+import { useEffect } from 'react'
 
 export interface FormWrapperProps {
   isOpen: boolean
@@ -15,40 +14,27 @@ export interface FormWrapperProps {
   formRef?: HTMLFormElement
 }
 
-const footerReveal = keyframes({
-  '0%': { transform: 'translateY(100%)' },
-  '100%': { transform: 'translateY(0%)' },
-})
-
 const FormBackground = styled(motion.div, {
-  //transform: 'translateY(100%)',
-  //animation: `${footerReveal} 0.5s ease-out 2s forwards`,
-  backgroundColor: '$white',
   position: 'fixed',
   display: 'block',
   zIndex: '$1',
   left: '0',
   bottom: '0',
   right: '0',
-  boxShadow: '$footer',
-  overflow: 'hidden',
   minHeight: '$7',
-  btlr: '$5',
-  btrr: '$5',
   transform: 'translateY(100%)',
   transition: 'transform 0.5s ease-out',
+  willChange: 'transform',
   when: {
     l: {
       transform: 'translateY(0%)',
       animation: 'none',
       minHeight: '$10',
-      boxShadow: '$3',
       position: 'relative',
-      br: '$5',
-      ml: '$2',
-      mr: '$2',
+      ml: '$3',
+      mr: '$3',
       mt: '$6',
-      width: '50%',
+      width: 'calc(50% - 48px)',
     },
     xl: {
       width: 'calc(100% / 12 * 5 - 64px)',
@@ -56,50 +42,10 @@ const FormBackground = styled(motion.div, {
   },
 })
 
-const ContentContainer = styled('div', {
-  display: 'none',
-  variants: {
-    isOpen: {
-      true: {
-        display: 'block',
-      },
-    },
-  },
-  when: {
-    l: {
-      display: 'block',
-    },
-  },
-})
-const Background = styled('div', {
-  willChange: 'transform',
-  background: '$white',
-  position: 'absolute',
-  top: '0',
-  right: '0',
-  bottom: '0',
-  left: '0',
-})
-
-/*
-Open the form so that it's full height
-Then do whatever animation shows the inputs/intro
-Keep the buttons at the bottom
-*/
-
 const variants = {
-  hidden: (custom) =>
-    custom
-      ? {
-          y: '100%',
-        }
-      : {},
-  visible: (custom) =>
-    custom
-      ? {
-          transform: 'translateY(0%)',
-        }
-      : {},
+  visible: {
+    transform: 'translateY(0%)',
+  },
 }
 
 export const FormWrapper: React.FC<FormWrapperProps> = ({
@@ -108,18 +54,18 @@ export const FormWrapper: React.FC<FormWrapperProps> = ({
   children,
   ...props
 }) => {
-  useAnimationFeatures(['animation'])
+  const wrapperControls = useAnimation()
 
   const isNotDesktop = !breakpoints.includes('l')
 
+  useEffect(() => {
+    if (isNotDesktop) {
+      wrapperControls.start('visible', { delay: 2 })
+    }
+  }, [])
+
   return (
-    <FormBackground
-      variants={variants}
-      animate="visible"
-      custom={isNotDesktop}
-      transition={{ delay: 3 }}
-      {...props}
-    >
+    <FormBackground variants={variants} animate={wrapperControls} {...props}>
       {children}
     </FormBackground>
   )

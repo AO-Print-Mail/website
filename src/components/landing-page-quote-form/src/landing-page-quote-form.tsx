@@ -9,7 +9,7 @@ import { useBreakpoints } from '@lib/react/breakpoints'
 import { useEffect, useState } from 'react'
 import { FormWrapper } from './wrapper'
 import dynamic from 'next/dynamic'
-import { useMotionValue } from 'framer-motion'
+import { useCycle, useMotionValue } from 'framer-motion'
 
 export type FormSteps = '1' | '2' | '3' | 'success'
 
@@ -28,8 +28,6 @@ export type FeedbackFormData = {
 
 interface LandingPageQuoteFormProps {
   keyword: string
-  isOpen: boolean
-  toggleIsOpen: () => void
 }
 
 const FormStepper = dynamic(() =>
@@ -38,8 +36,6 @@ const FormStepper = dynamic(() =>
 
 export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   keyword,
-  toggleIsOpen,
-  isOpen,
   ...props
 }) => {
   const [isSubmitting, setSubmitting] = useState(false)
@@ -53,6 +49,7 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
 
   const breakpoints = useBreakpoints()
   const progress = useMotionValue(0)
+  const [isOpen, toggleIsOpen] = useCycle(false, true)
 
   function changeStep(newStep?: string) {
     //@ts-ignore
@@ -66,6 +63,8 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
       { shallow: true, scroll: false }
     )
   }
+
+  console.log(isOpen)
 
   const reset = () => actions.resetFormData('directMailForm')
 
@@ -101,10 +100,11 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
     toggleIsOpen,
     setSubmitting,
     progress,
+    breakpoints,
   }
 
   return (
-    <FormWrapper breakpoints={breakpoints} isOpen={isOpen}>
+    <FormWrapper {...formControls}>
       {step ? (
         <FormStepper {...formControls} />
       ) : (
