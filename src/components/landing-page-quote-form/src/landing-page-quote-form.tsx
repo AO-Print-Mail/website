@@ -64,8 +64,6 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
     )
   }
 
-  console.log(isOpen)
-
   const reset = () => actions.resetFormData('directMailForm')
 
   useEffect(() => {

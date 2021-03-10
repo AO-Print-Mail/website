@@ -12,6 +12,8 @@ export interface IconProps {
   title?: string
   description?: string
   displayName?: string
+  as?: unknown
+  [a: string]: any
 }
 export const Svg = styled('svg', {
   fill: 'none',
@@ -46,6 +48,7 @@ export const Icon = forwardRef<SVGElement, IconProps>(
       title,
       displayName,
       description,
+      as,
       ...props
     },
     ref
@@ -62,6 +65,7 @@ export const Icon = forwardRef<SVGElement, IconProps>(
         aria-labelledby={ariaLabelledBy}
         viewBox={viewBox}
         xmlns="http://www.w3.org/2000/svg"
+        as={as}
         {...props}
       >
         {title && <title id={cTitle}>{title}</title>}

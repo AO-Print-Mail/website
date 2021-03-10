@@ -9,6 +9,8 @@ import {
   Container,
 } from '@theme'
 import { Button, IconButton } from '@components/button'
+import type { BreakpointsAry } from '@lib/react/breakpoints'
+
 interface QuoteIntroProps {
   changeStep: (step: string) => unknown
   keyword?: string
@@ -16,67 +18,101 @@ interface QuoteIntroProps {
   isOpen: boolean
   toggleIsOpen: () => void
   setSubmitting: (a: boolean) => void
+  breakpoints: BreakpointsAry
 }
-import { motion, AnimateSharedLayout } from 'framer-motion'
+import { motion, AnimateSharedLayout, useAnimation } from 'framer-motion'
 
-const FormImage = styled(MailIllustration, {
+const FormImage = styled('div', {
   display: 'block',
   position: 'absolute',
   height: '$12',
   alignSelf: 'flex-end',
   right: '-40px',
   top: '-40px',
-})
-
-const IntroContent = styled('div', {
-  display: 'none',
-  pt: '$10',
-  when: {
-    m: {
-      display: 'block',
-    },
-  },
-})
-
-const ContentContainer = styled('div', {
-  display: 'none',
-  pt: '$10',
+  transition: 'opacity 0.4s',
+  willChange: 'opacity',
   variants: {
     isOpen: {
       true: {
-        display: 'block',
-        height: '100vh',
-        when: {
-          l: {
-            height: 'auto',
-          },
-        },
+        opacity: 1,
       },
       false: {
-        height: 'auto',
+        opacity: 0,
       },
-    },
-  },
-  when: {
-    l: {
-      display: 'block',
     },
   },
 })
 
-const Background = styled('div', {
-  position: 'absolute',
+const Background = styled(motion.div, {
+  position: 'relative',
   background: '$white',
   top: '0',
   left: '0',
   bottom: '0',
   right: '0',
-  boxShadow: '$footer',
   overflow: 'hidden',
-  btrr: '$3',
-  btlr: '$3',
-  when: { l: { boxShadow: '$3', br: '$5' } },
+  btlr: '$4',
+  btrr: '$4',
+  boxShadow: '$footer',
+  variants: {
+    isOpen: {
+      true: { height: '100vh', when: { l: { height: 'auto' } } },
+      false: { height: 'auto' },
+    },
+  },
+  when: {
+    l: {
+      br: '$5',
+      boxShadow: '$3',
+    },
+  },
 })
+
+const Content = styled('div', {
+  flex: '1 1 100%',
+  pt: '$10',
+  height: '0px',
+  position: 'absolute',
+  top: '-100%',
+  variants: {
+    isOpen: {
+      true: {
+        position: 'static',
+      },
+    },
+  },
+  when: {
+    l: {
+      position: 'static',
+    },
+  },
+})
+
+const contentContainerVariants = {
+  open: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+  },
+  closed: {
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
+}
+
+const contentChildrenVariants = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 },
+    },
+  },
+  closed: {
+    y: 50,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000 },
+    },
+  },
+}
 
 export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   keyword = 'direct mail',
@@ -85,82 +121,129 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   toggleIsOpen,
   isOpen,
   setSubmitting,
+  breakpoints,
   ...props
 }) => {
+  const isNotDesktop = !breakpoints.includes('l')
   return (
-    <AnimateSharedLayout>
-      <Background as={motion.div} layoutId="sadfa" />
-      <Flex
-        as={motion.div}
-        layout
-        column
-        rel
-        fillHeight
-        css={{
-          pb: '$4',
-          when: {
-            l: { pb: '$6' },
-          },
-        }}
-      >
-        <Container
-          as={motion.section}
-          css={{ px: '$3', when: { l: { px: '$6' } } }}
+    <Box>
+      <AnimateSharedLayout>
+        <Background
+          layoutId="inner-background"
+          isOpen={isNotDesktop ? isOpen : true}
+          css={{
+            display: 'flex',
+            flexFlow: 'column nowrap',
+            justifyContent: 'flex-end',
+          }}
         >
-          <ContentContainer as={motion.div} isOpen={isOpen}>
-            <FormImage />
-            <Heading4 as="h2" alignCenter color="primary" css={{ mt: '$3' }}>
-              Get a {keyword} quote online
-            </Heading4>
-            <Paragraph3 alignCenter css={{ color: '$DA70' }}>
-              You can expect to receive a quote on the same day so that your job
-              can start asap.
-            </Paragraph3>
-            <Paragraph3 alignCenter css={{ color: '$DA70' }}>
-              We’ll contact you to clarify any important details that help us
-              plan the right approach and best price.
-            </Paragraph3>
-          </ContentContainer>
-          <Flex css={{ pt: '$3', when: { l: { mx: '$6' } } }}>
-            <IconButton
-              label="Read more about online quotes"
-              onClick={() => (e: PointerEvent) => {
-                toggleIsOpen()
-              }}
-              icon={
-                <Rotateable direction={isOpen ? 'down' : 'up'} size="regular" />
-              }
-              css={{
-                flex: '0.075 0',
-                mr: '$3',
-                when: { l: { display: 'none' } },
-              }}
-              color="subtle"
-            ></IconButton>
-            <Button
-              fullWidth
-              size="cta"
-              css={{
-                flex: '1',
-                when: {
-                  l: {
-                    mt: '$6',
-                  },
-                },
-              }}
-              isLoading={isSubmitting}
-              onClick={(e: PointerEvent) => {
-                //e.preventDefault()
-                //setSubmitting(true)
-                toggleIsOpen()
-                //changeStep('1')
-              }}
+          <Content as={motion.div} layout isOpen={isNotDesktop ? isOpen : true}>
+            <FormImage
+              layout
+              isOpen={isNotDesktop ? isOpen : true}
+              as={motion.div}
             >
-              Start your quote
-            </Button>
-          </Flex>
-        </Container>
-      </Flex>
-    </AnimateSharedLayout>
+              <MailIllustration
+                layout
+                as={motion.svg}
+                css={{ height: '100%' }}
+              />
+            </FormImage>
+            <motion.div
+              layout
+              animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
+            >
+              <Container
+                as={motion.div}
+                variants={contentContainerVariants}
+                css={{ maxWidth: '40rem' }}
+              >
+                <Heading4
+                  as={motion.h2}
+                  alignCenter
+                  color="primary"
+                  css={{ mt: '$3' }}
+                  variants={contentChildrenVariants}
+                >
+                  Get a {keyword} quote online
+                </Heading4>
+                <Paragraph3
+                  as={motion.p}
+                  alignCenter
+                  css={{ color: '$DA70', mt: '$6' }}
+                  variants={contentChildrenVariants}
+                >
+                  You can expect to receive a quote on the same day so that your
+                  job can start asap.
+                </Paragraph3>
+                <Paragraph3
+                  as={motion.p}
+                  alignCenter
+                  css={{ color: '$DA70' }}
+                  variants={contentChildrenVariants}
+                >
+                  We’ll contact you to clarify any important details that help
+                  us plan the right approach and best price.
+                </Paragraph3>
+              </Container>
+            </motion.div>
+          </Content>
+          <Box as={motion.div} layout>
+            <Container css={{ maxWidth: '40rem' }}>
+              <Flex
+                as={motion.div}
+                css={{
+                  pt: '$3',
+                  flex: '0 0',
+                  pb: '$4',
+                  when: { l: { mx: '$6', pb: '$6' } },
+                }}
+              >
+                <IconButton
+                  label="Read more about online quotes"
+                  onClick={(e: PointerEvent) => {
+                    toggleIsOpen()
+                  }}
+                  icon={
+                    <Rotateable
+                      direction={isOpen ? 'down' : 'up'}
+                      size="regular"
+                    />
+                  }
+                  css={{
+                    flex: '0.075 0',
+                    mr: '$3',
+                    when: { l: { display: 'none' } },
+                    background: '$N15',
+                  }}
+                  color="subtle"
+                ></IconButton>
+                <Button
+                  fullWidth
+                  size="cta"
+                  css={{
+                    flex: '1',
+                    when: {
+                      l: {
+                        mt: '$6',
+                      },
+                    },
+                  }}
+                  isLoading={isSubmitting}
+                  onClick={(e: PointerEvent) => {
+                    e.preventDefault()
+                    setSubmitting(true)
+                    toggleIsOpen()
+                    changeStep('1')
+                  }}
+                >
+                  Start your quote
+                </Button>
+              </Flex>
+            </Container>
+          </Box>
+        </Background>
+      </AnimateSharedLayout>
+    </Box>
   )
 }

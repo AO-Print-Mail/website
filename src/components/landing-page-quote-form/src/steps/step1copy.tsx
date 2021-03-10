@@ -13,8 +13,6 @@ import {
 import { Button } from '@components/button'
 import { updateDirectMailForm } from '@lib/little-state-machine'
 import { MotionValue } from 'framer-motion'
-import { StepWrapper } from './stepWrapper'
-import type { BreakpointsAry } from '@lib/react/breakpoints'
 
 export interface Step1Props extends JobInformation {
   changeStep: (step: string) => unknown
@@ -22,7 +20,6 @@ export interface Step1Props extends JobInformation {
   setSubmitting: () => void
   header: React.ReactNode
   progress: MotionValue<number>
-  breakpoints: BreakpointsAry
 }
 
 export interface JobInformation {
@@ -48,7 +45,6 @@ export const Step1: React.FC<Step1Props> = ({
   isSubmitting,
   header,
   progress,
-  breakpoints,
   ...props
 }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
@@ -67,12 +63,10 @@ export const Step1: React.FC<Step1Props> = ({
   progress.set(30)
 
   return (
-    <StepWrapper
-      breakpoints={breakpoints}
-      onSubmit={handleSubmit(onSubmit)}
-      header={header}
-      form={() => (
-        <>
+    <Form className={classes.fullHeight()} onSubmit={handleSubmit(onSubmit)}>
+      <Flex fillHeight column css={{ pb: '$4' }}>
+        {header}
+        <Box css={{ px: '$6', pb: '$4', flex: '1 1' }}>
           <Paragraph3 css={{ color: '$DA80' }}>
             What are you sending?
           </Paragraph3>
@@ -202,9 +196,19 @@ export const Step1: React.FC<Step1Props> = ({
               Monthly
             </RadioButton>
           </Flex>
-        </>
-      )}
-      footer={}
-    />
+        </Box>
+        <Flex column css={{ mt: '$4', pb: '$4', mx: '$6', flex: '0 0' }}>
+          <Button
+            fullWidth
+            size="cta"
+            type="submit"
+            css={{ alignSelf: 'center' }}
+            isLoading={isSubmitting}
+          >
+            <UI3 css={{ color: '$white' }}>Next</UI3>
+          </Button>
+        </Flex>
+      </Flex>
+    </Form>
   )
 }
