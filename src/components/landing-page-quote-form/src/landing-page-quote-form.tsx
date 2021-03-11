@@ -1,19 +1,22 @@
 import { useStateMachine } from 'little-state-machine'
 import { useRouter } from 'next/router'
 import { QuoteIntro } from './intro'
-import { JobInformation, Step1 } from './step1'
-import { AdditionalInformation, Step2 } from './step2'
-import { ContactInformation, MarketingInformation, Step3 } from './step3'
-import { ConfirmationPage } from './confirmation'
+import { JobInformation } from './steps/step1'
+import { AdditionalInformation } from './steps/step2'
+import { ContactInformation, MetaInformation } from './steps/step3'
 import { resetFormData } from '@lib/little-state-machine/actions'
-import { encode } from '@lib/netlify/utils'
+import { useBreakpoints } from '@lib/react/breakpoints'
 import { useEffect, useState } from 'react'
-import { classes } from '@theme'
+import { FormWrapper } from './quoteFormWrapper'
+import dynamic from 'next/dynamic'
+import { useCycle, useMotionValue } from 'framer-motion'
+
+export type FormSteps = '1' | '2' | '3' | 'success'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
   ContactInformation &
-  MarketingInformation
+  MetaInformation
 
 export type FeedbackFormData = {
   email: string
@@ -27,107 +30,84 @@ interface LandingPageQuoteFormProps {
   keyword: string
 }
 
+const FormStepper = dynamic(() =>
+  import('./steps').then((res) => res.FormStepper)
+)
+
 export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   keyword,
-  ...props
 }) => {
   const [isSubmitting, setSubmitting] = useState(false)
   const router = useRouter()
-  const { state, actions } = useStateMachine({ resetFormData })
-  //@ts-ignore
-  const { isComplete, ...directMailForm } = state.formData.directMailForm
+  const {
+    step,
+    resetForm,
+    ...queries
+  }: { [k: string]: any; step?: FormSteps } = router.query
+  const { actions } = useStateMachine({ resetFormData })
 
-  function changeStep(step: string) {
-    setSubmitting(true)
+  const breakpoints = useBreakpoints()
+  const progress = useMotionValue(0)
+  const [isOpen, toggleIsOpen] = useCycle(false, true)
+
+  function changeStep(newStep?: string) {
     //@ts-ignore
     const newPath = router.pathname.replace('[pageSlug]', router.query.pageSlug)
-    router.push({
-      pathname: `${newPath}`,
-      query: { step },
-    })
-  }
-
-  const resetForm = () => actions.resetFormData('directMailForm')
-
-  const sendForm = () => {
-    setSubmitting(true)
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'directMailForm', ...directMailForm }),
-    })
-      .then(() => {
-        changeStep('success')
-        //resetForm()
-      })
-      .catch((error) => console.error(error))
-  }
-
-  useEffect(() => {
-    if (router.query.resetForm) {
-      resetForm()
-    }
-    const _hsq = ((window as any)._hsq = (window as any)._hsq || [])
-    _hsq.push(['setPath', router.asPath])
-    _hsq.push(['trackPageView'])
-    setSubmitting(false)
-  }, [router])
-
-  let Component: React.FC<any>
-  switch (router.query.step) {
-    case '1':
-      Component = Step1
-      break
-    case '2':
-      Component = Step2
-      break
-    case '3':
-      Component = Step3
-      break
-    //@ts-ignore
-    case 'success':
-      Component = ConfirmationPage
-      break
-    default:
-      Component = QuoteIntro
-  }
-
-  const NetlifyWorkaroundForm = () => {
-    return (
-      <form
-        method="POST"
-        data-netlify="true"
-        name="directMailForm"
-        className={classes.visuallyHidden()}
-      >
-        <input type="hidden" name="form-name" value="directMailForm" />
-        {Object.entries(directMailForm).map(([name, value]) => (
-          <input
-            type="hidden"
-            aria-hidden="true"
-            tabIndex={-1}
-            name={name}
-            //@ts-ignore
-            value={value || ''}
-            key={name}
-          />
-        ))}
-      </form>
+    router.push(
+      {
+        pathname: `${newPath}`,
+        query: newStep ? { ...queries, step: newStep } : queries,
+      },
+      null,
+      { shallow: true }
     )
   }
 
+  const reset = () => actions.resetFormData('directMailForm')
+  const isNotDesktop = !breakpoints.includes('l')
+
+  useEffect(() => {
+    if (resetForm) {
+      reset()
+      changeStep()
+    }
+  }, [step])
+
+  useEffect(() => {
+    switch (step) {
+      case '1':
+        break
+      case '2':
+        break
+      case '3':
+        break
+      //@ts-ignore
+      case 'success':
+        break
+      default:
+        progress.set(0)
+    }
+  }, [router])
+
+  const formControls = {
+    step,
+    isOpen: isNotDesktop ? isOpen : true,
+    isSubmitting,
+    changeStep,
+    toggleIsOpen,
+    setSubmitting,
+    progress,
+    breakpoints,
+    keyword,
+  }
+
   return (
-    <>
-      <Component
-        keyword={keyword}
-        sendForm={router.query.step === '3' && sendForm}
-        resetForm={resetForm}
-        isSubmitting={isSubmitting}
-        setSubmitting={setSubmitting}
-        {...props}
-        changeStep={changeStep}
-      />
-      <NetlifyWorkaroundForm />
-    </>
+    <FormWrapper {...formControls}>
+      {step ? (
+        <FormStepper {...formControls} />
+      ) : (
+        <QuoteIntro {...formControls} />
+      )}
+    </FormWrapper>
   )
 }

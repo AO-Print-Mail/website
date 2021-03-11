@@ -1,0 +1,21 @@
+{
+  "main": "src/index.ts",
+  "name": "@aomail/quote form wrapper",
+  "version": "1.0.0",
+  "description": "Controls the layout of the form according to viewport",
+  "keywords": [
+    "theme",
+    "theming",
+    "ui mode",
+    "ui"
+  ],
+  "author": "Oli Askew <oli@oaskew.co.uk>",
+  "homepage": "https://github.com/chakra-ui/chakra-ui#readme",
+  "module": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
+  "sideEffects": false,
+  "peerDependencies": {
+    "react": ">=17.0.1"
+  }
+}

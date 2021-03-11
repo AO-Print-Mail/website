@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useStateMachine } from 'little-state-machine'
-import { QuoteFormInputData } from './landing-page-quote-form'
+import { QuoteFormInputData } from '../landing-page-quote-form'
 import { Heading4, Paragraph4, Flex, Box, UI3 } from '@theme'
 import { Button } from '@components/button'
 import {
@@ -9,7 +9,7 @@ import {
 } from '@lib/little-state-machine'
 
 export interface ConfirmationPageProps extends QuoteFormInputData {
-  changeStep: (step: string) => unknown
+  changeStep: (step?: string) => unknown
 }
 
 export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
@@ -21,18 +21,14 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
     updateFeedbackFormForm,
   })
   //@ts-ignore
-  const { firstName, email, hutk, ipAddress } = state.formData?.directMailForm
+  const { firstName, email } = state.formData?.directMailForm
 
   useEffect(() => {
-    actions.updateFeedbackFormForm({ firstName, email, hutk, ipAddress })
+    actions.updateFeedbackFormForm({ firstName, email })
   }, [])
 
   return (
-    <Flex
-      fillHeight
-      column
-      css={{ px: '$6', py: '$4', backgroundColor: '$green' }}
-    >
+    <Box>
       <Box css={{ flex: '1 1' }}>
         <Heading4 alignCenter css={{ color: '$white' }}>
           Your quote is in progress{firstName && `, ${firstName}`}!
@@ -49,10 +45,6 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
           If we have any questions we will contact you via email or your
           preferred contact number.
         </Paragraph4>
-        {
-          //@ts-ignore
-          <pre>{JSON.stringify(state.formData.directMailForm, null, 2)}</pre>
-        }
       </Box>
       <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
         <Button
@@ -61,12 +53,12 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
           type="submit"
           css={{ alignSelf: 'center' }}
           onClick={() => {
-            changeStep('')
+            changeStep()
           }}
         >
-          <UI3>Start again</UI3>
+          <UI3>Close</UI3>
         </Button>
       </Flex>
-    </Flex>
+    </Box>
   )
 }

@@ -22,6 +22,7 @@ const Block = styled('div', {
   '& > label:hover': {
     color: '$DBA80',
     backgroundColor: '$GA20',
+    cursor: 'pointer',
   },
   '& > input[type="radio"]:focus + label': {
     boxShadow: '$1',

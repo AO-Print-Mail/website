@@ -1,13 +1,18 @@
 import { GlobalState } from 'little-state-machine'
 
 export const store: GlobalState = {
+  userData: {
+    hutk: '',
+    gclid: '',
+    ipAddress: '',
+  },
   formData: {
     directMailForm: {
-      mailFormat: '[not provided]',
-      services: '[not provided]',
-      itemQuantity: '[not provided]',
-      frequency: '[not provided]',
-      urgency: '[not provided]',
+      mailFormat: 'not provided',
+      services: 'not provided',
+      itemQuantity: '',
+      frequency: 'not provided',
+      urgency: 'not provided',
       artworkReady: '[unknown]',
       addressDataReady: '[unknown]',
       additionalInformation: '',
@@ -17,18 +22,15 @@ export const store: GlobalState = {
       email: '',
       phone: '',
       joinMailingList: true,
-      ipAddress: '',
-      hutk: '',
-      gclid: '',
-      isComplete: false,
       landingPageKeyword: '',
+      'bot-field-step3': '',
     },
     feedbackForm: {
-      email: '',
-      hutk: '',
-      ipAddress: '',
       experienceRating: '',
-      experienceComment: '[not provided]',
+      experienceComment: '',
+      email: '',
+      firstName: '',
+      lastName: '',
     },
   },
 }

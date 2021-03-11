@@ -1,4 +1,12 @@
-import { styled, ResetButton, theme, CSS, UI1, keyframes } from '@theme'
+import {
+  styled,
+  ResetButton,
+  theme,
+  CSS,
+  UI1,
+  keyframes,
+  classes,
+} from '@theme'
 import { forwardRef } from 'react'
 import * as React from 'react'
 import { __DEV__ } from '@utils/src'
@@ -8,7 +16,7 @@ interface ButtonProps extends React.ComponentProps<typeof ButtonBg> {
   color?: 'primary' | 'light' | 'dark' | 'success' | 'error'
   isLoading?: boolean
   disabled?: boolean
-  size?: 'cta' | 'small'
+  size?: 'cta' | 'small' | 'icon'
   offset?: 'left' | 'right'
   leftIcon?: React.ReactElement
   rightIcon?: React.ReactElement
@@ -70,6 +78,7 @@ const Spinner = styled('div', {
 })
 
 const ButtonBg = styled(ResetButton, {
+  display: 'flex',
   color: '$white',
   border: 'none',
   borderRadius: '$2',
@@ -82,8 +91,7 @@ const ButtonBg = styled(ResetButton, {
     l: { fontSize: '$p3d', px: '$4', py: '$3', br: '$4' },
   },
   variants: {
-    disabled: { true: { cursor: 'not-allowed' } },
-
+    disabled: { true: { cursor: 'not-allowed', opacity: '50%' } },
     color: {
       primary: {
         backgroundColor: '$blue',
@@ -91,6 +99,14 @@ const ButtonBg = styled(ResetButton, {
         '&:hover': {
           backgroundColor: '$B50',
           color: '$white',
+        },
+      },
+      subtle: {
+        backgroundColor: '$DA15',
+        color: '$DA70',
+        '&:hover': {
+          backgroundColor: '$DA20',
+          color: '$DA90',
         },
       },
       success: {
@@ -113,6 +129,15 @@ const ButtonBg = styled(ResetButton, {
     size: {
       small: {
         fontSize: '$p4m',
+        when: {
+          m: { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
+          l: { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
+        },
+      },
+      icon: {
+        fontSize: '$p4m',
+        px: '$2',
+        py: '$2',
         when: {
           m: { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
           l: { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
@@ -264,6 +289,20 @@ const defaultSpacing = (direction: 'left' | 'right') => {
     },
   }
 }
+const smallSpacing = (direction: 'left' | 'right') => {
+  const key = {
+    left: 'marginLeft',
+    right: 'marginRight',
+  }[direction]
+  return {
+    [key]: '$1',
+    when: {
+      m: {
+        [key]: '$2',
+      },
+    },
+  }
+}
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -281,11 +320,27 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const LeftIcn = leftIcon && (
-      <ButtonIcon css={{ ...defaultSpacing('right') }}>{leftIcon}</ButtonIcon>
+      <ButtonIcon
+        css={
+          size === 'small'
+            ? { ...smallSpacing('right') }
+            : { ...defaultSpacing('right') }
+        }
+      >
+        {leftIcon}
+      </ButtonIcon>
     )
 
     const RightIcn = rightIcon && (
-      <ButtonIcon css={{ ...defaultSpacing('left') }}>{rightIcon}</ButtonIcon>
+      <ButtonIcon
+        css={
+          size === 'small'
+            ? { ...smallSpacing('left') }
+            : { ...defaultSpacing('left') }
+        }
+      >
+        {rightIcon}
+      </ButtonIcon>
     )
 
     const _children =
@@ -296,14 +351,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       )
 
     return (
-      <ButtonBg
-        state={state}
-        style={style}
-        color={color}
-        size={size}
-        ref={ref}
-        {...props}
-      >
+      <ButtonBg style={style} color={color} size={size} ref={ref} {...props}>
         {!isLoading && LeftIcn && LeftIcn}
         {!isLoading ? _children : <Spinner />}
         {!isLoading && RightIcn && RightIcn}
@@ -329,3 +377,25 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({ children, ...props }) => {
     : children
   return <Span {...props}>{_children}</Span>
 }
+
+export interface IconButtonProps extends ButtonProps {
+  icon?: React.ReactNode
+  label: string
+}
+
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ size, color, style, icon, children, label, ...props }, ref) => {
+    return (
+      <ButtonBg
+        style={style}
+        color={color}
+        size={size || 'icon'}
+        ref={ref}
+        {...props}
+      >
+        <ButtonIcon>{icon || children}</ButtonIcon>
+        <span className={classes.visuallyHidden()}>{label}</span>
+      </ButtonBg>
+    )
+  }
+)

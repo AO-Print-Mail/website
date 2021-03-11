@@ -21,3 +21,8 @@ export const visuallyHiddenUnlessActive = css({
     width: '1px',
   },
 })
+
+export const fullHeight = css({
+  height: '100%',
+  flex: '1 1 100%',
+})

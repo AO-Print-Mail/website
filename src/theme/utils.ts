@@ -9,8 +9,6 @@ const gradients = {
   $dark: '90deg, rgba(36, 35, 52, 0.93) 0%, rgba(36, 35, 52, 0.02) 100%',
 }
 
-type gradientColor = '' | '$green' | 'orange' | '$white' | '$dark'
-
 export default {
   p: (config: typeof stitchesConfig) => (
     value: keyof typeof theme['space'] | (string & {})
@@ -198,6 +196,35 @@ export default {
     height: value,
     width: value,
   }),
+
+  tlbr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space']
+  ) => {
+    return {
+      top: value,
+      left: value,
+      bottom: value,
+      right: value,
+    }
+  },
+  lbr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space']
+  ) => {
+    return {
+      left: value,
+      bottom: value,
+      right: value,
+    }
+  },
+  tlr: (config: typeof stitchesConfig) => (
+    value: keyof typeof theme['space']
+  ) => {
+    return {
+      top: value,
+      left: value,
+      right: value,
+    }
+  },
 
   linearGradient: (config: typeof stitchesConfig) => (
     value: keyof typeof gradients | string

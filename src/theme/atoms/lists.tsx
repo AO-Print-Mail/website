@@ -19,7 +19,8 @@ export const List = styled('ul', {
   marginLeft: '0',
   listStyle: 'none',
   pl: '0',
-  my: '$2',
+  mt: '$2',
+  mb: '$5',
 })
 
 export const _ListItem = styled('li', {
@@ -72,9 +73,13 @@ export const ListItem = forwardRef<HTMLUListElement, listItemProps>(
             css={{
               size: '$2',
               marginRight: '$3',
-              alignSelf: 'flex-end',
+              alignSelf: 'flex-start',
+              flex: '0 0 $2',
               position: 'relative',
-              top: '0.2em',
+              mt: '$4',
+              '& + p': {
+                flex: '1 1',
+              },
               ...iconCss,
             }}
           />
