@@ -1,16 +1,8 @@
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import {
-  Flex,
-  Box,
-  RadioButton,
-  Input,
-  Paragraph3,
-  UI3,
-  styled,
-  classes,
-} from '@theme'
-import { Button } from '@components/button'
+import { Flex, Box, RadioButton, Input, Paragraph3, styled } from '@theme'
+import type { FormSteps } from '../landing-page-quote-form'
+import { FormStepControls } from '../formStepControls'
 import { updateDirectMailForm } from '@lib/little-state-machine'
 import { MotionValue } from 'framer-motion'
 import { StepWrapper } from './stepWrapper'
@@ -23,6 +15,9 @@ export interface Step1Props extends JobInformation {
   header: React.ReactNode
   progress: MotionValue<number>
   breakpoints: BreakpointsAry
+  step: FormSteps
+  isOpen: boolean
+  toggleIsOpen: () => void
 }
 
 export interface JobInformation {
@@ -49,6 +44,10 @@ export const Step1: React.FC<Step1Props> = ({
   header,
   progress,
   breakpoints,
+  isOpen,
+  setSubmitting,
+  step,
+  toggleIsOpen,
   ...props
 }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
@@ -65,13 +64,19 @@ export const Step1: React.FC<Step1Props> = ({
     //@ts-ignore
   } = state.formData?.directMailForm
   progress.set(30)
+  const formName = 'step1form'
 
   return (
     <StepWrapper
       breakpoints={breakpoints}
       onSubmit={handleSubmit(onSubmit)}
       header={header}
-      form={() => (
+      isOpen={isOpen}
+      formName={formName}
+      isSubmitting={isSubmitting}
+      setSubmitting={setSubmitting}
+      toggleIsOpen={toggleIsOpen}
+      formFields={({ childrenAnimationVariants }) => (
         <>
           <Paragraph3 css={{ color: '$DA80' }}>
             What are you sending?
@@ -204,7 +209,21 @@ export const Step1: React.FC<Step1Props> = ({
           </Flex>
         </>
       )}
-      footer={}
+      footer={
+        <FormStepControls
+          isOpen={isOpen}
+          isSubmitting={isSubmitting}
+          buttonLabel={isOpen ? 'Next' : 'Continue your quote'}
+          buttonOnClick={(e: React.PointerEvent) => {
+            if (!isOpen) {
+              e.preventDefault()
+              toggleIsOpen()
+            }
+          }}
+          formName={formName}
+          toggleIsOpen={toggleIsOpen}
+        />
+      }
     />
   )
 }

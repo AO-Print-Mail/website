@@ -1,27 +1,23 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import {
-  Flex,
-  Box,
-  Paragraph3,
-  UI3,
-  styled,
-  RadioButton,
-  TextArea,
-  classes,
-} from '@theme'
-import { Button } from '@components/button'
-import { QuoteFormInputData } from './index'
+import { Flex, Box, Paragraph3, RadioButton, TextArea } from '@theme'
+import type { FormSteps } from '../landing-page-quote-form'
+import { FormStepControls } from '../formStepControls'
 import { updateDirectMailForm } from '@lib/little-state-machine'
 import { MotionValue } from 'framer-motion'
+import { StepWrapper } from './stepWrapper'
+import type { BreakpointsAry } from '@lib/react/breakpoints'
 
-export interface Step2Props extends QuoteFormInputData {
+export interface Step2Props extends AdditionalInformation {
   changeStep: (step: string) => unknown
   isSubmitting: boolean
   setSubmitting: () => void
   header: React.ReactNode
   progress: MotionValue<number>
+  breakpoints: BreakpointsAry
+  isOpen: boolean
+  toggleIsOpen: () => void
 }
 
 export interface AdditionalInformation {
@@ -42,30 +38,25 @@ export interface AdditionalInformation {
   //isFileAttached: boolean  -- Useful for letting agent know something is attached in the form data
 }
 
-const Form = styled('form', {
-  height: '100%',
-})
-
 export const Step2: React.FC<Step2Props> = ({
   changeStep,
   isSubmitting,
   header,
   progress,
+  breakpoints,
+  isOpen,
+  setSubmitting,
+  toggleIsOpen,
+  ...props
 }) => {
   const { state, actions } = useStateMachine({ updateDirectMailForm })
-  const {
-    register,
-    handleSubmit,
-    watch,
-    errors,
-  } = useForm<AdditionalInformation>()
-
+  const { register, handleSubmit, errors } = useForm<AdditionalInformation>()
   const onSubmit = (data) => {
-    actions.updateDirectMailForm(data)
+    actions.updateDirectMailForm({ ...data })
     changeStep('3')
   }
 
-  progress.set(60)
+  progress.set(75)
 
   const {
     artworkReady,
@@ -83,11 +74,20 @@ export const Step2: React.FC<Step2Props> = ({
     }
   }, [])
 
+  const formName = 'step2form'
+
   return (
-    <Form className={classes.fullHeight()} onSubmit={handleSubmit(onSubmit)}>
-      <Flex fillHeight column css={{ pb: '$4' }}>
-        {header}
-        <Box css={{ px: '$6', pb: '$4', flex: '1 1' }}>
+    <StepWrapper
+      breakpoints={breakpoints}
+      onSubmit={handleSubmit(onSubmit)}
+      header={header}
+      isOpen={isOpen}
+      formName={formName}
+      isSubmitting={isSubmitting}
+      setSubmitting={setSubmitting}
+      toggleIsOpen={toggleIsOpen}
+      formFields={({ childrenAnimationVariants }) => (
+        <>
           {requiresArtwork && (
             <>
               <Paragraph3 css={{ color: '$DA80' }}>
@@ -163,7 +163,7 @@ export const Step2: React.FC<Step2Props> = ({
             htmlFor="additionalInformation"
             css={{ color: '$DA80', display: 'block' }}
           >
-            Additional information(optional)
+            Your brief (optional)
           </Paragraph3>
           <Box css={{ mt: '$3', pb: '$2' }}>
             <TextArea
@@ -179,19 +179,23 @@ export const Step2: React.FC<Step2Props> = ({
               css={{ width: '100%' }}
             />
           </Box>
-        </Box>
-        <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
-          <Button
-            fullWidth
-            size="cta"
-            type="submit"
-            css={{ alignSelf: 'center' }}
-            isLoading={isSubmitting}
-          >
-            <UI3 css={{ color: '$white' }}>Next</UI3>
-          </Button>
-        </Flex>
-      </Flex>
-    </Form>
+        </>
+      )}
+      footer={
+        <FormStepControls
+          isOpen={isOpen}
+          isSubmitting={isSubmitting}
+          buttonLabel={isOpen ? 'Next' : 'Continue your quote'}
+          buttonOnClick={(e: React.PointerEvent) => {
+            if (!isOpen) {
+              e.preventDefault()
+              toggleIsOpen()
+            }
+          }}
+          formName={formName}
+          toggleIsOpen={toggleIsOpen}
+        />
+      }
+    />
   )
 }

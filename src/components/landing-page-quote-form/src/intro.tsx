@@ -1,15 +1,15 @@
 import {
-  Flex,
   Box,
   Heading4,
   Paragraph3,
   MailIllustration,
   styled,
-  Rotateable,
   Container,
+  Close,
 } from '@theme'
-import { Button, IconButton } from '@components/button'
+import { FormStepControls } from './formStepControls'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
+import { Button } from '@components/button'
 
 interface QuoteIntroProps {
   changeStep: (step: string) => unknown
@@ -130,34 +130,47 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
       <AnimateSharedLayout>
         <Background
           layoutId="inner-background"
-          isOpen={isNotDesktop ? isOpen : true}
+          isOpen={isOpen}
           css={{
             display: 'flex',
             flexFlow: 'column nowrap',
             justifyContent: 'flex-end',
           }}
         >
-          <Content as={motion.div} layout isOpen={isNotDesktop ? isOpen : true}>
-            <FormImage
-              layout
-              isOpen={isNotDesktop ? isOpen : true}
-              as={motion.div}
-            >
+          <Content as={motion.div} layout isOpen={isOpen}>
+            <FormImage layout isOpen={isOpen} as={motion.div}>
               <MailIllustration
                 layout
                 as={motion.svg}
                 css={{ height: '100%' }}
               />
             </FormImage>
-            <motion.div
-              layout
-              animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
-            >
+            <motion.div layout animate={isOpen ? 'open' : 'closed'}>
               <Container
                 as={motion.div}
                 variants={contentContainerVariants}
                 css={{ maxWidth: '40rem' }}
               >
+                {isNotDesktop && (
+                  <Button
+                    size="small"
+                    rightIcon={<Close css={{ color: '$N70' }} />}
+                    style="naked"
+                    color="dark"
+                    css={{
+                      ml: 'auto',
+                      mt: '$3',
+                      mb: '$5',
+                      when: { l: { display: 'none' } },
+                    }}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      toggleIsOpen()
+                    }}
+                  >
+                    Close
+                  </Button>
+                )}
                 <Heading4
                   as={motion.h2}
                   alignCenter
@@ -188,60 +201,26 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               </Container>
             </motion.div>
           </Content>
-          <Box as={motion.div} layout>
-            <Container css={{ maxWidth: '40rem' }}>
-              <Flex
-                as={motion.div}
-                css={{
-                  pt: '$3',
-                  flex: '0 0',
-                  pb: '$4',
-                  when: { l: { mx: '$6', pb: '$6' } },
-                }}
-              >
-                <IconButton
-                  label="Read more about online quotes"
-                  onClick={(e: PointerEvent) => {
+          <Container css={{ maxWidth: '40rem' }}>
+            <Box as={motion.div} layout>
+              <FormStepControls
+                isOpen={isNotDesktop && isOpen}
+                isSubmitting={isSubmitting}
+                buttonLabel={
+                  isNotDesktop && isOpen ? 'Continue' : 'Start your quote'
+                }
+                buttonOnClick={(e: React.PointerEvent) => {
+                  e.preventDefault()
+                  if (!isOpen && isNotDesktop) {
                     toggleIsOpen()
-                  }}
-                  icon={
-                    <Rotateable
-                      direction={isOpen ? 'down' : 'up'}
-                      size="regular"
-                    />
-                  }
-                  css={{
-                    flex: '0.075 0',
-                    mr: '$3',
-                    when: { l: { display: 'none' } },
-                    background: '$N15',
-                  }}
-                  color="subtle"
-                ></IconButton>
-                <Button
-                  fullWidth
-                  size="cta"
-                  css={{
-                    flex: '1',
-                    when: {
-                      l: {
-                        mt: '$6',
-                      },
-                    },
-                  }}
-                  isLoading={isSubmitting}
-                  onClick={(e: PointerEvent) => {
-                    e.preventDefault()
-                    setSubmitting(true)
-                    toggleIsOpen()
+                  } else {
                     changeStep('1')
-                  }}
-                >
-                  Start your quote
-                </Button>
-              </Flex>
-            </Container>
-          </Box>
+                  }
+                }}
+                toggleIsOpen={toggleIsOpen}
+              />
+            </Box>
+          </Container>
         </Background>
       </AnimateSharedLayout>
     </Box>

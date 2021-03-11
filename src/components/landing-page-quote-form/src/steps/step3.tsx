@@ -1,25 +1,29 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import {
-  Flex,
-  Box,
-  Paragraph3,
-  UI3,
-  styled,
-  Input,
-  Checkbox,
-  classes,
-} from '@theme'
-import { Button } from '@components/button'
-import { QuoteFormInputData } from './index'
+import { Flex, Box, Paragraph3, styled, Input, Checkbox, classes } from '@theme'
 import { updateDirectMailForm } from '@lib/little-state-machine'
 import MaskedInput from 'react-text-mask'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MotionValue } from 'framer-motion'
+import { FormStepControls } from '../formStepControls'
+import { StepWrapper } from './stepWrapper'
+import type { BreakpointsAry } from '@lib/react/breakpoints'
 
 export type ContactAndMetaInformation = ContactInformation & MetaInformation
+
+export interface Step3Props extends ContactAndMetaInformation {
+  changeStep: (step: string) => unknown
+  sendForm: () => void
+  isSubmitting: boolean
+  setSubmitting: (a: boolean) => void
+  header: React.ReactNode
+  progress: MotionValue<number>
+  breakpoints: BreakpointsAry
+  isOpen: boolean
+  toggleIsOpen: () => void
+}
 
 export interface ContactInformation {
   firstName?: string
@@ -52,15 +56,6 @@ const schema = yup.object().shape({
   country: yup.string(),
 })
 
-export interface Step3Props extends QuoteFormInputData {
-  changeStep: (step: string) => unknown
-  sendForm: () => void
-  isSubmitting: boolean
-  setSubmitting: () => void
-  header: React.ReactNode
-  progress: MotionValue<number>
-}
-
 const mobileMask = [
   /\d/,
   /\d/,
@@ -76,21 +71,6 @@ const mobileMask = [
   /\d/,
 ]
 
-const phoneMask = [
-  /\d/,
-  /\d/,
-  ' ',
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-  ' ',
-  /\d/,
-  /\d/,
-  /\d/,
-  /\d/,
-]
-
 const Form = styled('form', {
   height: '100%',
 })
@@ -100,6 +80,10 @@ export const Step3: React.FC<Step3Props> = ({
   isSubmitting,
   header,
   progress,
+  breakpoints,
+  toggleIsOpen,
+  setSubmitting,
+  isOpen,
 }) => {
   const { state, actions } = useStateMachine({
     updateDirectMailForm,
@@ -113,11 +97,17 @@ export const Step3: React.FC<Step3Props> = ({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   })
-  const onSubmit = (data: ContactAndMetaInformation) => {
+
+  const submit = (data: ContactAndMetaInformation) => {
     actions.updateDirectMailForm(data)
     sendForm()
   }
-  progress.set(90)
+
+  const onSubmit = (data: ContactAndMetaInformation) => {
+    setSubmitting(true)
+    window && window.setTimeout(submit, 1500, data)
+  }
+  progress.set(100)
   const {
     firstName,
     lastName,
@@ -135,19 +125,23 @@ export const Step3: React.FC<Step3Props> = ({
       setSubmittable(false)
     }
   }, [formState])
+  const formName = 'step3form'
   return (
-    <Form
-      className={classes.fullHeight()}
+    <StepWrapper
+      breakpoints={breakpoints}
       onSubmit={handleSubmit(onSubmit)}
-      netlify-honeypot="bot-field-step3"
-    >
-      <Flex fillHeight column css={{ pb: '$4' }}>
-        {header}
-        <Box css={{ px: '$6', pb: '$4', flex: '1 1' }}>
-          <Paragraph3 css={{ color: '$DA80' }}>
+      header={header}
+      isOpen={isOpen}
+      formName={formName}
+      isSubmitting={isSubmitting}
+      setSubmitting={setSubmitting}
+      toggleIsOpen={toggleIsOpen}
+      formFields={({ childrenAnimationVariants }) => (
+        <>
+          <Paragraph3 css={{ color: '$DA80', mt: '$2' }}>
             Your contact information
           </Paragraph3>
-          <Box css={{ mt: '$3', pb: '$2' }}>
+          <Box css={{ my: '$4', pb: '$2' }}>
             <Flex css={{ mx: '-$2' }}>
               <Input
                 ref={register}
@@ -230,21 +224,24 @@ export const Step3: React.FC<Step3Props> = ({
               <input tabIndex={-1} ref={register} name="bot-field-step3" />
             </label>
           </p>
-        </Box>
-        <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
-          <Button
-            fullWidth
-            size="cta"
-            type="submit"
-            css={{ alignSelf: 'center' }}
-            color="success"
-            disabled={!submittable}
-            isLoading={isSubmitting}
-          >
-            <UI3 css={{ color: '$white' }}>Submit</UI3>
-          </Button>
-        </Flex>
-      </Flex>
-    </Form>
+        </>
+      )}
+      footer={
+        <FormStepControls
+          isOpen={isOpen}
+          isSubmitting={isSubmitting}
+          buttonLabel={isOpen ? 'Submit quote request' : 'Continue your quote'}
+          buttonOnClick={(e: React.PointerEvent) => {
+            if (!isOpen) {
+              e.preventDefault()
+              toggleIsOpen()
+            }
+          }}
+          buttonColor="success"
+          formName={formName}
+          toggleIsOpen={toggleIsOpen}
+        />
+      }
+    />
   )
 }

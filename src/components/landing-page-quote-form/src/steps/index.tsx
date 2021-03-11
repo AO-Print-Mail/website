@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { JobInformation, Step1 } from './step1'
 import { AdditionalInformation, Step2 } from './step2'
 import { ContactInformation, MetaInformation, Step3 } from './step3'
 import { useStateMachine } from 'little-state-machine'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
 import { encode } from '@lib/netlify/utils'
-import { MotionValue, useMotionValue } from 'framer-motion'
+import { MotionValue } from 'framer-motion'
 import { TopBarControls } from '../topBarControls'
 import { FormSteps } from '../landing-page-quote-form'
+import type { BreakpointsAry } from '@lib/react/breakpoints'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
@@ -22,6 +22,7 @@ export type FeedbackFormData = {
   ipAddress: string
   experienceRating: string
   experienceComment: string
+  breakpoints: BreakpointsAry
 }
 
 const WorkaroundForm = dynamic(() =>
@@ -40,18 +41,18 @@ export interface FormStepsProps {
   toggleIsOpen: () => void
   changeStep: (a?: string) => void
   progress: MotionValue<number>
+  breakpoints: BreakpointsAry
 }
 
 export const FormStepper: React.FC<FormStepsProps> = ({
   step,
+  breakpoints,
   isOpen,
   toggleIsOpen,
   changeStep,
   progress,
 }) => {
   const [isSubmitting, setSubmitting] = useState(false)
-
-  const router = useRouter()
 
   const { state, actions } = useStateMachine({ resetFormData })
 
@@ -80,7 +81,7 @@ export const FormStepper: React.FC<FormStepsProps> = ({
 
   let Component
 
-  switch (router.query.step) {
+  switch (step) {
     case '1':
       Component = Step1
       break
@@ -100,7 +101,7 @@ export const FormStepper: React.FC<FormStepsProps> = ({
   return (
     <>
       <Component
-        sendForm={router.query.step === '3' && sendForm}
+        sendForm={step === '3' && sendForm}
         resetForm={resetForm}
         isSubmitting={isSubmitting}
         setSubmitting={setSubmitting}
@@ -108,7 +109,10 @@ export const FormStepper: React.FC<FormStepsProps> = ({
         isOpen={isOpen}
         toggleIsOpen={toggleIsOpen}
         progress={progress}
-        header={<TopBarControls progress={progress} />}
+        header={
+          <TopBarControls toggleIsOpen={toggleIsOpen} progress={progress} />
+        }
+        breakpoints={breakpoints}
       />
       <WorkaroundForm formData={{ ...directMailForm, ...userData }} />
     </>

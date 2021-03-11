@@ -36,7 +36,6 @@ const FormStepper = dynamic(() =>
 
 export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   keyword,
-  ...props
 }) => {
   const [isSubmitting, setSubmitting] = useState(false)
   const router = useRouter()
@@ -65,6 +64,7 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   }
 
   const reset = () => actions.resetFormData('directMailForm')
+  const isNotDesktop = !breakpoints.includes('l')
 
   useEffect(() => {
     if (resetForm) {
@@ -92,13 +92,14 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
 
   const formControls = {
     step,
-    isOpen,
+    isOpen: isNotDesktop ? isOpen : true,
     isSubmitting,
     changeStep,
     toggleIsOpen,
     setSubmitting,
     progress,
     breakpoints,
+    keyword,
   }
 
   return (

@@ -1,21 +1,20 @@
-import { Flex, Box, styled, Rotateable, Container } from '@theme'
-import { Button, IconButton } from '@components/button'
+import { motion, AnimateSharedLayout } from 'framer-motion'
+import { Box, styled, Container } from '@theme'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 
 interface StepWrapperProps {
-  changeStep: (step: string) => unknown
   keyword?: string
   isSubmitting: boolean
   isOpen: boolean
   toggleIsOpen: () => void
   setSubmitting: (a: boolean) => void
   breakpoints: BreakpointsAry
-  form: (any) => React.ReactNode
+  formFields: (any) => React.ReactNode
   header: React.ReactNode
   footer: React.ReactNode
   onSubmit: (data: unknown) => void
+  formName: string
 }
-import { motion, AnimateSharedLayout } from 'framer-motion'
 
 const FormImage = styled('div', {
   display: 'block',
@@ -38,7 +37,7 @@ const FormImage = styled('div', {
   },
 })
 
-const Background = styled(motion.div, {
+const Background = styled('div', {
   position: 'relative',
   background: '$white',
   top: '0',
@@ -65,7 +64,7 @@ const Background = styled(motion.div, {
 
 const Content = styled('div', {
   flex: '1 1 100%',
-  pt: '$10',
+  pt: '$3',
   height: '0px',
   position: 'absolute',
   top: '-100%',
@@ -111,13 +110,13 @@ const contentChildrenVariants = {
 
 export const StepWrapper: React.FC<StepWrapperProps> = ({
   keyword = 'direct mail',
-  changeStep,
   isSubmitting,
   toggleIsOpen,
   isOpen,
   setSubmitting,
   breakpoints,
-  form,
+  formFields,
+  formName,
   header,
   footer,
   onSubmit,
@@ -130,6 +129,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
         <Background
           layoutId="inner-background"
           isOpen={isNotDesktop ? isOpen : true}
+          as={motion.div}
           css={{
             display: 'flex',
             flexFlow: 'column nowrap',
@@ -137,24 +137,21 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
           }}
         >
           <Content as={motion.div} layout isOpen={isNotDesktop ? isOpen : true}>
-            <FormImage
-              layout
-              isOpen={isNotDesktop ? isOpen : true}
-              as={motion.div}
-            >
-              {header}
-            </FormImage>
+            <Box>{header}</Box>
             <motion.div
               layout
               animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
             >
               <Container
-                as={motion.div}
+                as={motion.form}
+                id={formName}
                 variants={contentContainerVariants}
                 css={{ maxWidth: '40rem' }}
                 onSubmit={onSubmit}
               >
-                {() => form(contentChildrenVariants)}
+                {formFields({
+                  childrenAnimationVariants: contentChildrenVariants,
+                })}
               </Container>
             </motion.div>
           </Content>
