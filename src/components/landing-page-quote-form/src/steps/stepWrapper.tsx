@@ -3,39 +3,13 @@ import { Box, styled, Container } from '@theme'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 
 interface StepWrapperProps {
-  keyword?: string
   isSubmitting: boolean
   isOpen: boolean
-  toggleIsOpen: () => void
-  setSubmitting: (a: boolean) => void
   breakpoints: BreakpointsAry
-  formFields: (any) => React.ReactNode
+  main: React.ReactNode
   header: React.ReactNode
   footer: React.ReactNode
-  onSubmit: (data: unknown) => void
-  formName: string
 }
-
-const FormImage = styled('div', {
-  display: 'block',
-  position: 'absolute',
-  height: '$12',
-  alignSelf: 'flex-end',
-  right: '-40px',
-  top: '-40px',
-  transition: 'opacity 0.4s',
-  willChange: 'opacity',
-  variants: {
-    isOpen: {
-      true: {
-        opacity: 1,
-      },
-      false: {
-        opacity: 0,
-      },
-    },
-  },
-})
 
 const Background = styled('div', {
   position: 'relative',
@@ -78,6 +52,7 @@ const Content = styled('div', {
   when: {
     l: {
       position: 'static',
+      top: '$3',
     },
   },
 })
@@ -109,57 +84,48 @@ const contentChildrenVariants = {
 }
 
 export const StepWrapper: React.FC<StepWrapperProps> = ({
-  keyword = 'direct mail',
   isSubmitting,
-  toggleIsOpen,
   isOpen,
-  setSubmitting,
   breakpoints,
-  formFields,
-  formName,
+  main,
   header,
   footer,
-  onSubmit,
   ...props
 }) => {
   const isNotDesktop = !breakpoints.includes('l')
   return (
-    <Box>
-      <AnimateSharedLayout>
-        <Background
-          layoutId="inner-background"
-          isOpen={isNotDesktop ? isOpen : true}
-          as={motion.div}
-          css={{
-            display: 'flex',
-            flexFlow: 'column nowrap',
-            justifyContent: 'flex-end',
-          }}
-        >
-          <Content as={motion.div} layout isOpen={isNotDesktop ? isOpen : true}>
-            <Box>{header}</Box>
-            <motion.div
-              layout
-              animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
+    <AnimateSharedLayout>
+      <Background
+        layoutId="inner-background"
+        isOpen={isOpen}
+        as={motion.div}
+        css={{
+          display: 'flex',
+          flexFlow: 'column nowrap',
+          justifyContent: 'flex-end',
+        }}
+      >
+        <Content as={motion.div} layout isOpen={isOpen}>
+          {header && <Box>{header}</Box>}
+          <motion.div
+            layout
+            animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
+          >
+            <Container
+              as={motion.div}
+              variants={contentContainerVariants}
+              css={{ maxWidth: '40rem' }}
             >
-              <Container
-                as={motion.form}
-                id={formName}
-                variants={contentContainerVariants}
-                css={{ maxWidth: '40rem' }}
-                onSubmit={onSubmit}
-              >
-                {formFields({
-                  childrenAnimationVariants: contentChildrenVariants,
-                })}
-              </Container>
-            </motion.div>
-          </Content>
+              {main}
+            </Container>
+          </motion.div>
+        </Content>
+        {footer && (
           <Box as={motion.div} layout>
             <Container css={{ maxWidth: '40rem' }}>{footer}</Container>
           </Box>
-        </Background>
-      </AnimateSharedLayout>
-    </Box>
+        )}
+      </Background>
+    </AnimateSharedLayout>
   )
 }

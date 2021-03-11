@@ -1,6 +1,5 @@
-import { styled } from '@theme'
+import { styled, Box } from '@theme'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
-import { useAnimationFeatures } from '@lib/react/animation-features'
 import { motion, useAnimation } from 'framer-motion'
 import { useEffect } from 'react'
 
@@ -12,6 +11,7 @@ export interface FormWrapperProps {
   toggleIsOpen: () => void
   changeStep: (a: string) => void
   formRef?: HTMLFormElement
+  step: any
 }
 
 const FormBackground = styled(motion.div, {
@@ -29,8 +29,12 @@ const FormBackground = styled(motion.div, {
     l: {
       transform: 'translateY(0%)',
       animation: 'none',
-      minHeight: '$10',
+      minHeight: '48rem',
+      height: '100%',
+      maxHeight: '100%',
+      //overflow: 'visible',
       position: 'relative',
+      top: '$3',
       ml: '$3',
       mr: '$3',
       mt: '$6',
@@ -52,6 +56,7 @@ export const FormWrapper: React.FC<FormWrapperProps> = ({
   isOpen,
   breakpoints,
   children,
+  step,
   ...props
 }) => {
   const wrapperControls = useAnimation()

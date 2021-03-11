@@ -7,8 +7,7 @@ import MaskedInput from 'react-text-mask'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { MotionValue } from 'framer-motion'
-import { FormStepControls } from '../formStepControls'
-import { StepWrapper } from './stepWrapper'
+import { FormStepControls } from '../bottomBarControls'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 
 export type ContactAndMetaInformation = ContactInformation & MetaInformation
@@ -71,19 +70,12 @@ const mobileMask = [
   /\d/,
 ]
 
-const Form = styled('form', {
-  height: '100%',
-})
+const FORM_NAME = 'step3form'
 
-export const Step3: React.FC<Step3Props> = ({
+export const Step3Form: React.FC<Step3Props> = ({
   sendForm,
-  isSubmitting,
-  header,
   progress,
-  breakpoints,
-  toggleIsOpen,
   setSubmitting,
-  isOpen,
 }) => {
   const { state, actions } = useStateMachine({
     updateDirectMailForm,
@@ -104,10 +96,14 @@ export const Step3: React.FC<Step3Props> = ({
   }
 
   const onSubmit = (data: ContactAndMetaInformation) => {
+    progress.set(100)
     setSubmitting(true)
     window && window.setTimeout(submit, 1500, data)
   }
-  progress.set(100)
+  progress.set(95)
+  useEffect(() => {
+    setSubmitting(false)
+  }, [])
   const {
     firstName,
     lastName,
@@ -125,123 +121,116 @@ export const Step3: React.FC<Step3Props> = ({
       setSubmittable(false)
     }
   }, [formState])
-  const formName = 'step3form'
   return (
-    <StepWrapper
-      breakpoints={breakpoints}
-      onSubmit={handleSubmit(onSubmit)}
-      header={header}
-      isOpen={isOpen}
-      formName={formName}
-      isSubmitting={isSubmitting}
-      setSubmitting={setSubmitting}
-      toggleIsOpen={toggleIsOpen}
-      formFields={({ childrenAnimationVariants }) => (
-        <>
-          <Paragraph3 css={{ color: '$DA80', mt: '$2' }}>
-            Your contact information
-          </Paragraph3>
-          <Box css={{ my: '$4', pb: '$2' }}>
-            <Flex css={{ mx: '-$2' }}>
-              <Input
-                ref={register}
-                id="firstName"
-                name="firstName"
-                placeholder="Jane"
-                defaultValue={firstName}
-                css={{ px: '$2' }}
-                errors={errors}
-              >
-                First name
-              </Input>
-              <Input
-                ref={register}
-                id="lastName"
-                name="lastName"
-                placeholder="Appleseed"
-                defaultValue={lastName}
-                css={{ px: '$2' }}
-                errors={errors}
-              >
-                Last name
-              </Input>
-            </Flex>
-            <Input
-              ref={register}
-              id="companyName"
-              name="companyName"
-              placeholder="Acme inc"
-              defaultValue={companyName}
-              errors={errors}
-            >
-              Company name
-            </Input>
-            <Input
-              ref={register}
-              id="email"
-              name="email"
-              placeholder="jane@example.com.au"
-              type="email"
-              defaultValue={email}
-              errors={errors}
-            >
-              Email address
-            </Input>
-            <MaskedInput
-              id="phone"
-              placeholder="04xx xxx xxx"
-              mask={mobileMask}
-              inputMode="numeric"
-              guide={false}
-              type="text"
-              defaultValue={phone}
-              errors={errors}
-              render={(textMaskRef, props) => (
-                <Input
-                  ref={(node) => {
-                    textMaskRef(node)
-                    register(node)
-                  }}
-                  name="phone"
-                  {...props}
-                >
-                  Contact number
-                </Input>
-              )}
-            ></MaskedInput>
-          </Box>
-          <Checkbox
+    <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>
+      <Paragraph3 css={{ color: '$DA80', mt: '$2' }}>
+        Your contact information
+      </Paragraph3>
+      <Box css={{ my: '$4', pb: '$2' }}>
+        <Flex css={{ mx: '-$2' }}>
+          <Input
             ref={register}
-            id="joinMailingList"
-            name="joinMailingList"
-            defaultChecked={joinMailingList}
+            id="firstName"
+            name="firstName"
+            placeholder="Jane"
+            defaultValue={firstName}
+            css={{ px: '$2' }}
+            errors={errors}
           >
-            I’d like to keep updated with news and special offers at A&O
-          </Checkbox>
-          <p aria-hidden="true" className={classes.visuallyHidden()}>
-            <label>
-              Skip this field if you’re human:
-              <input tabIndex={-1} ref={register} name="bot-field-step3" />
-            </label>
-          </p>
-        </>
-      )}
-      footer={
-        <FormStepControls
-          isOpen={isOpen}
-          isSubmitting={isSubmitting}
-          buttonLabel={isOpen ? 'Submit quote request' : 'Continue your quote'}
-          buttonOnClick={(e: React.PointerEvent) => {
-            if (!isOpen) {
-              e.preventDefault()
-              toggleIsOpen()
-            }
-          }}
-          buttonColor="success"
-          formName={formName}
-          toggleIsOpen={toggleIsOpen}
-        />
-      }
+            First name
+          </Input>
+          <Input
+            ref={register}
+            id="lastName"
+            name="lastName"
+            placeholder="Appleseed"
+            defaultValue={lastName}
+            css={{ px: '$2' }}
+            errors={errors}
+          >
+            Last name
+          </Input>
+        </Flex>
+        <Input
+          ref={register}
+          id="companyName"
+          name="companyName"
+          placeholder="Acme inc"
+          defaultValue={companyName}
+          errors={errors}
+        >
+          Company name
+        </Input>
+        <Input
+          ref={register}
+          id="email"
+          name="email"
+          placeholder="jane@example.com.au"
+          type="email"
+          defaultValue={email}
+          errors={errors}
+        >
+          Email address
+        </Input>
+        <MaskedInput
+          id="phone"
+          placeholder="04xx xxx xxx"
+          mask={mobileMask}
+          inputMode="numeric"
+          guide={false}
+          type="text"
+          defaultValue={phone}
+          errors={errors}
+          render={(textMaskRef, props) => (
+            <Input
+              ref={(node) => {
+                textMaskRef(node)
+                register(node)
+              }}
+              name="phone"
+              {...props}
+            >
+              Contact number
+            </Input>
+          )}
+        ></MaskedInput>
+      </Box>
+      <Checkbox
+        ref={register}
+        id="joinMailingList"
+        name="joinMailingList"
+        defaultChecked={joinMailingList}
+      >
+        I’d like to keep updated with news and special offers
+      </Checkbox>
+      <p aria-hidden="true" className={classes.visuallyHidden()}>
+        <label>
+          Skip this field if you’re human:
+          <input tabIndex={-1} ref={register} name="bot-field-step3" />
+        </label>
+      </p>
+    </form>
+  )
+}
+export const Step3Controls: React.FC<Step3Props> = ({
+  isSubmitting,
+  toggleIsOpen,
+  isOpen,
+}) => {
+  return (
+    <FormStepControls
+      isOpen={isOpen}
+      isSubmitting={isSubmitting}
+      buttonLabel={isOpen ? 'Submit quote request' : 'Continue your quote'}
+      buttonOnClick={(e: React.PointerEvent) => {
+        if (!isOpen) {
+          e.preventDefault()
+          toggleIsOpen()
+        }
+      }}
+      buttonColor="success"
+      formName={FORM_NAME}
+      toggleIsOpen={toggleIsOpen}
     />
   )
 }

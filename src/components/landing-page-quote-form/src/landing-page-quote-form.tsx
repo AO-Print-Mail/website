@@ -1,13 +1,13 @@
 import { useStateMachine } from 'little-state-machine'
 import { useRouter } from 'next/router'
-import { QuoteIntro } from './intro'
-import { JobInformation, Step1 } from './steps/step1'
-import { AdditionalInformation, Step2 } from './steps/step2'
-import { ContactInformation, MetaInformation, Step3 } from './steps/step3'
+import { QuoteIntro } from './steps/intro'
+import { JobInformation } from './steps/step1'
+import { AdditionalInformation } from './steps/step2'
+import { ContactInformation, MetaInformation } from './steps/step3'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import { useBreakpoints } from '@lib/react/breakpoints'
 import { useEffect, useState } from 'react'
-import { FormWrapper } from './wrapper'
+import { FormWrapper } from './quoteFormWrapper'
 import dynamic from 'next/dynamic'
 import { useCycle, useMotionValue } from 'framer-motion'
 
@@ -59,7 +59,7 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
         query: newStep ? { ...queries, step: newStep } : queries,
       },
       null,
-      { shallow: true, scroll: false }
+      { shallow: true }
     )
   }
 
@@ -71,7 +71,6 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
       reset()
       changeStep()
     }
-    setSubmitting(false)
   }, [step])
 
   useEffect(() => {

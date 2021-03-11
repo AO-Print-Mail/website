@@ -32,7 +32,7 @@ export const TopBarControls: React.FC<TopBarControlsProps> = ({
   ...props
 }) => {
   return (
-    <Bg as={motion.div}>
+    <Bg as={motion.div} layout>
       <Container
         css={{
           maxWidth: '40rem',

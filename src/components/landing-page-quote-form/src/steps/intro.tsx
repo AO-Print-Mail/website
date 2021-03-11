@@ -7,7 +7,7 @@ import {
   Container,
   Close,
 } from '@theme'
-import { FormStepControls } from './formStepControls'
+import { FormStepControls } from '../bottomBarControls'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 import { Button } from '@components/button'
 

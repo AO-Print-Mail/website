@@ -1,7 +1,12 @@
 import { useState } from 'react'
-import { JobInformation, Step1 } from './step1'
-import { AdditionalInformation, Step2 } from './step2'
-import { ContactInformation, MetaInformation, Step3 } from './step3'
+import { JobInformation, Step1Form, Step1Controls } from './step1'
+import { AdditionalInformation, Step2Form, Step2Controls } from './step2'
+import {
+  ContactInformation,
+  MetaInformation,
+  Step3Form,
+  Step3Controls,
+} from './step3'
 import { useStateMachine } from 'little-state-machine'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import dynamic from 'next/dynamic'
@@ -10,6 +15,8 @@ import { MotionValue } from 'framer-motion'
 import { TopBarControls } from '../topBarControls'
 import { FormSteps } from '../landing-page-quote-form'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
+import { Box } from '@theme'
+import { StepWrapper } from './stepWrapper'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
@@ -32,7 +39,7 @@ const WorkaroundForm = dynamic(() =>
 )
 
 const SuccessPage = dynamic(() =>
-  import('../confirmation').then((res) => res.ConfirmationPage)
+  import('./confirmation').then((res) => res.ConfirmationPage)
 )
 
 export interface FormStepsProps {
@@ -79,42 +86,69 @@ export const FormStepper: React.FC<FormStepsProps> = ({
       .catch((error) => console.error(error))
   }
 
-  let Component
+  let Main, Footer
 
   switch (step) {
     case '1':
-      Component = Step1
+      Main = Step1Form
+      Footer = Step1Controls
       break
     case '2':
-      Component = Step2
+      Main = Step2Form
+      Footer = Step2Controls
       break
     case '3':
-      Component = Step3
+      Main = Step3Form
+      Footer = Step3Controls
       break
     case 'success':
-      Component = SuccessPage
+      Main = SuccessPage
       break
     default:
       changeStep()
   }
 
   return (
-    <>
-      <Component
-        sendForm={step === '3' && sendForm}
-        resetForm={resetForm}
+    <Box
+      css={{
+        when: {
+          l: {
+            height: 'calc(800px - 20vh)',
+            position: 'sticky',
+            top: '$5',
+          },
+        },
+      }}
+    >
+      <StepWrapper
         isSubmitting={isSubmitting}
-        setSubmitting={setSubmitting}
-        changeStep={changeStep}
         isOpen={isOpen}
-        toggleIsOpen={toggleIsOpen}
-        progress={progress}
+        breakpoints={breakpoints}
+        main={
+          <Main
+            sendForm={step === '3' && sendForm}
+            resetForm={resetForm}
+            isSubmitting={isSubmitting}
+            setSubmitting={setSubmitting}
+            changeStep={changeStep}
+            isOpen={isOpen}
+            toggleIsOpen={toggleIsOpen}
+            progress={progress}
+            breakpoints={breakpoints}
+          />
+        }
         header={
           <TopBarControls toggleIsOpen={toggleIsOpen} progress={progress} />
         }
-        breakpoints={breakpoints}
+        footer={
+          <Footer
+            isSubmitting={isSubmitting}
+            isOpen={isOpen}
+            toggleIsOpen={toggleIsOpen}
+          ></Footer>
+        }
       />
       <WorkaroundForm formData={{ ...directMailForm, ...userData }} />
-    </>
+    </Box>
   )
 }

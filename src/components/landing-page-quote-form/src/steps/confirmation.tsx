@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useStateMachine } from 'little-state-machine'
-import { QuoteFormInputData } from './landing-page-quote-form'
+import { QuoteFormInputData } from '../landing-page-quote-form'
 import { Heading4, Paragraph4, Flex, Box, UI3 } from '@theme'
 import { Button } from '@components/button'
 import {

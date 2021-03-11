@@ -1,6 +1,8 @@
 import { styled, CSS } from '..'
 import { useAnimationFeatures } from '@lib/react/animation-features'
 import { m as motion, MotionValue } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { set } from 'shelljs'
 
 export interface ProgressBarProps {
   progress: MotionValue<number>
@@ -33,14 +35,28 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   progress,
   ...props
 }) => {
+  const [{ newProgress, previousProgress }, setProgress] = useState({
+    newProgress: 0,
+    previousProgress: 0,
+  })
   useAnimationFeatures(['animation'])
+  useEffect(() => {
+    const updateProgress = () =>
+      setProgress({
+        newProgress: progress.get(),
+        previousProgress: progress.getPrevious(),
+      })
+    updateProgress()
+    const listener = progress.onChange(updateProgress)
+    return listener
+  }, [])
 
   return (
     <Bg {...props}>
       <Fill
         as={motion.div}
-        initial={{ x: `-${100 - progress.getPrevious()}%` }}
-        animate={{ x: `-${100 - progress.get()}%` }}
+        initial={{ x: `-${100 - previousProgress}%` }}
+        animate={{ x: `-${100 - newProgress}%` }}
       />
     </Bg>
   )
