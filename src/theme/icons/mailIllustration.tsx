@@ -27,7 +27,7 @@ export const MailIllustration = createIcon({
         d="M62 156H0l62 31 62-31H62z"
         fill="#00237D"
       />
-      <path d="M124 156v62l-62-31 62-31z" fill="url(#paint0_linear)" />
+      <path d="M124 156v62l-62-31 62-31z" fill="url(#paint0linear)" />
       <path d="M218 156h31v31l-31-31zM218 125h31v31l-31-31z" fill="#00237D" />
       <path
         d="M156 218h31c17 0 31-14 31-31h-31c-18 0-31 14-31 31z"
@@ -60,7 +60,7 @@ export const MailIllustration = createIcon({
       <path d="M156 63l-32-31" stroke="#fff" strokeDasharray="5 2" />
       <defs>
         <linearGradient
-          id="paint0_linear"
+          id="paint0linear"
           x1="66.3"
           y1="46.1"
           x2="125.4"

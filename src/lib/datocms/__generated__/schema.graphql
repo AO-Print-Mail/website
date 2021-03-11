@@ -1762,11 +1762,11 @@ input LandingPageV1ModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
-  canonicalPath: SlugFilter
-  pageMeta: SeoFilter
-  pageSlug: SlugFilter
-  title: StringFilter
   pageContent: TextFilter
+  pageMeta: SeoFilter
+  title: StringFilter
+  pageSlug: SlugFilter
+  canonicalPath: SlugFilter
   OR: [LandingPageV1ModelFilter]
 }
 
@@ -1902,19 +1902,24 @@ input BooleanFilter {
   eq: BooleanType
 }
 
-"""Specifies how to filter Slug fields"""
-input SlugFilter {
-  """Search for records with an exact match"""
-  eq: String
+"""Specifies how to filter text fields"""
+input TextFilter {
+  """Filter records based on a regular expression"""
+  matches: StringMatchesFilter
 
-  """Exclude records with an exact match"""
-  neq: String
+  """Exclude records based on a regular expression"""
+  notMatches: StringMatchesFilter
 
-  """Filter records that have one of the specified slugs"""
-  in: [String]
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+}
 
-  """Filter records that do have one of the specified slugs"""
-  notIn: [String]
+input StringMatchesFilter {
+  pattern: String!
+  caseSensitive: BooleanType
+  regexp: BooleanType
 }
 
 """Specifies how to filter SEO meta tags fields"""
@@ -1951,24 +1956,19 @@ input StringFilter {
   notIn: [String]
 }
 
-input StringMatchesFilter {
-  pattern: String!
-  caseSensitive: BooleanType
-  regexp: BooleanType
-}
+"""Specifies how to filter Slug fields"""
+input SlugFilter {
+  """Search for records with an exact match"""
+  eq: String
 
-"""Specifies how to filter text fields"""
-input TextFilter {
-  """Filter records based on a regular expression"""
-  matches: StringMatchesFilter
+  """Exclude records with an exact match"""
+  neq: String
 
-  """Exclude records based on a regular expression"""
-  notMatches: StringMatchesFilter
+  """Filter records that have one of the specified slugs"""
+  in: [String]
 
-  """
-  Filter records with the specified field defined (i.e. with any value) or not
-  """
-  exists: BooleanType
+  """Filter records that do have one of the specified slugs"""
+  notIn: [String]
 }
 
 enum LandingPageV1ModelOrderBy {

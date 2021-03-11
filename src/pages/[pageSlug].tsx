@@ -73,42 +73,38 @@ const LandingPageContent: React.FC<PageProps> = ({ data, pageSlug }) => {
   )
 
   return (
-    <>
-      <Layout
-        title="landing page"
-        description="work in progress"
-        beforeFooter={beforeFooter}
-        metaData={data._seoMetaTags}
-        canonicalPath={data.canonicalPath}
-      >
-        <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
-          <HeroText>
-            <Heading1 color="primary">{data.title}</Heading1>
-            <Box css={{ maxWidth: '60ch' }}>
-              <StructuredText
-                data={data.content.document}
-                customRules={structuredTextRules({
-                  headingProps: { color: 'primary' },
-                  listItemProps: {
-                    icon: 'CheckLeaf',
-                    iconProps: {
-                      css: {
-                        color: '$green',
-                        size: '1.125em',
-                        marginBottom: '0.125em',
-                      },
+    <Layout
+      title="landing page"
+      description="work in progress"
+      beforeFooter={beforeFooter}
+      metaData={data._seoMetaTags}
+      canonicalPath={data.canonicalPath}
+    >
+      <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
+        <HeroText>
+          <Heading1 color="primary">{data.title}</Heading1>
+          <Box css={{ maxWidth: '60ch' }}>
+            <StructuredText
+              data={data.content.document}
+              customRules={structuredTextRules({
+                headingProps: { color: 'primary' },
+                listItemProps: {
+                  icon: 'CheckLeaf',
+                  iconProps: {
+                    css: {
+                      color: '$green',
+                      size: '1.125em',
+                      marginBottom: '0.125em',
                     },
                   },
-                })}
-              />
-            </Box>
-          </HeroText>
-          <FormBackground>
-            <LandingPageQuoteForm keyword={'direct mail'} />
-          </FormBackground>
-        </Container>
-      </Layout>
-    </>
+                },
+              })}
+            />
+          </Box>
+        </HeroText>
+        <LandingPageQuoteForm keyword="direct mail" />
+      </Container>
+    </Layout>
   )
 }
 

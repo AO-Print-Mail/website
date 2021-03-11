@@ -1,4 +1,5 @@
 import { createIcon } from './createIcon'
+import { styled } from '..'
 
 export const ArrowForward = createIcon({
   displayName: 'Forward Arrow',
@@ -14,5 +15,43 @@ export const ArrowBack = createIcon({
   viewBox: '0 0 24 24',
   defaultProps: {
     title: 'Back arrow',
+  },
+})
+export const ChevronUp = createIcon({
+  displayName: 'Chevron Up',
+  d: 'M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6 1.41 1.41z',
+  viewBox: '0 0 24 24',
+  defaultProps: {
+    title: 'Chevron Up',
+  },
+})
+export const ChevronDown = createIcon({
+  displayName: 'Chevron Down',
+  d: 'M7.4 7.8l4.6 4.6 4.6-4.6L18 9.2l-6 6-6-6 1.4-1.4z',
+  viewBox: '0 0 24 24',
+  defaultProps: {
+    title: 'Chevron Down',
+  },
+})
+
+export const Rotateable = styled(ChevronUp, {
+  transformOrigin: '50% 50%',
+  transition: 'transform 0.5s',
+  willChange: 'transform',
+  variants: {
+    direction: {
+      up: {
+        transform: 'rotate(0deg)',
+      },
+      down: {
+        transform: 'rotate(180deg)',
+      },
+      left: {
+        transform: 'rotate(-90deg)',
+      },
+      right: {
+        transform: 'rotate(90deg)',
+      },
+    },
   },
 })

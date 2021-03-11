@@ -4,9 +4,11 @@ import * as clientLogos from './logos'
 interface ClientLogoBannerProps {}
 
 const Logos = styled('div', {
+  position: 'relative',
   mt: '$4',
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'center',
   when: {
     m: {
       px: '$2',
@@ -53,11 +55,12 @@ const LogoWrapper = styled('div', {
 })
 
 const Banner = styled('div', {
-  pt: '$7',
+  pt: '$5',
   pb: '$5',
   display: 'grid',
   when: {
     l: {
+      pt: '$7',
       gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
       gridGap: '$3',
     },
@@ -75,7 +78,7 @@ export const ClientLogoBanner: React.FC<ClientLogoBannerProps> = (props) => {
       <Logos>
         {bannerLogos.map(([name, Component], i) => (
           <LogoWrapper key={name}>
-            <Component css={{ size: '100%' }} />
+            <Component css={{ size: '100%', maxHeight: '$3' }} />
           </LogoWrapper>
         ))}
       </Logos>

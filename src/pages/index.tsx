@@ -1,33 +1,78 @@
-import { Container } from '@theme'
+import { styled, Container, Heading1, Box, Paragraph2 } from '@theme'
 import { Layout } from '@components/layout'
-import { ModalWrapper, ModalBackground } from '@components/modal'
+import { ClientLogoBanner } from '@components/client-logo-banner'
+import { ReviewsIoWidget } from '@components/reviews-io-widget'
+import { QuoteFormWrapper } from '@components/quote-form-wrapper'
+import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 
 interface PageProps {
   data?: {}
 }
 
+const HeroText = styled('div', {
+  when: {
+    l: {
+      pr: '$2',
+      pl: '$3',
+      width: '50%',
+    },
+    xl: {
+      pr: '$3',
+      pl: '$4',
+    },
+  },
+})
+
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
-  return (
+  /*const beforeFooter = (
     <>
-      <Layout
-        canonicalPath="HOME_PAGE"
-        title="landing page"
-        description="work in progress"
-        metaData={[]}
-      >
-        <Container
-          as="section"
-          css={{ justifySelf: 'stretch', height: '824px', pb: '$4' }}
-        >
-          <ModalWrapper>
-            <ModalBackground>
-              {/* START GRAPHIC INNER */}
-              {/* END GRAPHIC INNER */}
-            </ModalBackground>
-          </ModalWrapper>
+      <Container>
+        <ClientLogoBanner />
+      </Container>
+      <Box css={{ backgroundColor: '$white', py: '$4' }}>
+        <Container>
+          <ReviewsIoWidget />
         </Container>
-      </Layout>
+      </Box>
     </>
+  )*/
+  const beforeFooter = (
+    <Container>
+      <ClientLogoBanner />
+    </Container>
+  )
+  return (
+    <Layout
+      canonicalPath="HOME_PAGE"
+      title="landing page"
+      description="work in progress"
+      beforeFooter={beforeFooter}
+      metaData={[]}
+      footerCss={{
+        paddingBottom: '$7',
+        when: { l: { paddingBottom: '$1' } },
+      }}
+    >
+      <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
+        <HeroText>
+          <Heading1 color="primary">
+            Exceptional Direct Mail, Print and Fulfilment services
+          </Heading1>
+          <Box css={{ maxWidth: '60ch' }}>
+            <Paragraph2>
+              A&amp;O is Sydney’s premier Mail House, providing end-to-end
+              Print, Direct Mail and Fulfilment services to over 700 Australian
+              and global clients.
+            </Paragraph2>
+            <Paragraph2>
+              We exist to offer your business the best possible levels of
+              service when delivering your message to your customers.
+            </Paragraph2>
+          </Box>
+        </HeroText>
+        <LandingPageQuoteForm keyword="direct mail" />
+      </Container>
+    </Layout>
   )
 }
 

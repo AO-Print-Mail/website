@@ -1,4 +1,4 @@
-import { cloneElement } from 'react'
+import { forwardRef } from 'react'
 import { Icon, IconProps } from './icon'
 
 interface CreateIconOptions {
@@ -45,14 +45,16 @@ export function createIcon({
   displayName,
   defaultProps,
 }: CreateIconOptions) {
-  const Comp: React.FC<IconProps> = ({ children, ...props }) => {
-    const _props = Object.assign({}, { ...defaultProps, displayName }, props)
-    return (
-      //@ts-ignore
-      <Icon viewBox={viewBox} {..._props}>
-        {path ?? makePaths(d) ?? children}
-      </Icon>
-    )
-  }
+  const Comp = forwardRef<SVGElement, IconProps>(
+    ({ children, ...props }, ref) => {
+      const _props = Object.assign({}, { ...defaultProps, displayName })
+      return (
+        //@ts-ignore
+        <Icon viewBox={viewBox} ref={ref} {..._props} {...props}>
+          {path ?? makePaths(d) ?? children}
+        </Icon>
+      )
+    }
+  )
   return Comp
 }

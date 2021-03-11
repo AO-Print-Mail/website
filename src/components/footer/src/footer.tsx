@@ -9,6 +9,7 @@ import {
   CovidSafeBanner,
   css,
   CSS,
+  theme,
 } from '@theme'
 import { Button } from '@components/button'
 import Link from 'next/link'
@@ -16,6 +17,7 @@ import Link from 'next/link'
 interface FooterProps {
   css?: CSS
   beforeFooter?: React.ReactNode
+  footerCss?: CSS
 }
 
 const FooterWrapper = styled(ContentWrapper, {
@@ -84,6 +86,7 @@ const row3: CSS = css({
 
 export const Footer: React.FC<FooterProps> = ({
   beforeFooter,
+  footerCss,
   ...props
 }: FooterProps) => {
   const footerContent = (
@@ -148,7 +151,9 @@ export const Footer: React.FC<FooterProps> = ({
       </LayoutGrid>
       <ContentWrapper css={{ backgroundColor: '$black' }}>
         <Container>
-          <Paragraph5 css={{ color: '$LA40', my: '$2' }}>
+          <Paragraph5
+            css={{ color: '$LA40', my: '$2', pb: `$1`, ...footerCss }}
+          >
             &copy; ANO PTY Ltd. All rights reserved.
           </Paragraph5>
         </Container>

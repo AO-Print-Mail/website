@@ -1,20 +1,22 @@
 import { useStateMachine } from 'little-state-machine'
 import { useRouter } from 'next/router'
 import { QuoteIntro } from './intro'
-import { JobInformation, Step1 } from './step1'
-import { AdditionalInformation, Step2 } from './step2'
-import { ContactInformation, MarketingInformation, Step3 } from './step3'
-import { ConfirmationPage } from './confirmation'
+import { JobInformation } from './steps/step1'
+import { AdditionalInformation } from './steps/step2'
+import { ContactInformation, MetaInformation } from './steps/step3'
 import { resetFormData } from '@lib/little-state-machine/actions'
-import { encode } from '@lib/netlify/utils'
+import { useBreakpoints } from '@lib/react/breakpoints'
 import { useEffect, useState } from 'react'
-import { Flex, classes, ProgressBar, styled, ArrowBack } from '@theme'
-import { Button } from '@components/button'
+import { FormWrapper } from './quoteFormWrapper'
+import dynamic from 'next/dynamic'
+import { useCycle, useMotionValue } from 'framer-motion'
+
+export type FormSteps = '1' | '2' | '3' | 'success'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
   ContactInformation &
-  MarketingInformation
+  MetaInformation
 
 export type FeedbackFormData = {
   email: string
@@ -28,132 +30,84 @@ interface LandingPageQuoteFormProps {
   keyword: string
 }
 
-const FormBackground = styled(Flex, { minHeight: '100%' })
+const FormStepper = dynamic(() =>
+  import('./steps').then((res) => res.FormStepper)
+)
 
 export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   keyword,
-  ...props
 }) => {
   const [isSubmitting, setSubmitting] = useState(false)
-  const [progress, setProgress] = useState({ show: false, progress: 0 })
   const router = useRouter()
-  const { state, actions } = useStateMachine({ resetFormData })
-  //@ts-ignore
-  const { isComplete, ...directMailForm } = state.formData.directMailForm
+  const {
+    step,
+    resetForm,
+    ...queries
+  }: { [k: string]: any; step?: FormSteps } = router.query
+  const { actions } = useStateMachine({ resetFormData })
 
-  function changeStep(step: string) {
-    setSubmitting(true)
+  const breakpoints = useBreakpoints()
+  const progress = useMotionValue(0)
+  const [isOpen, toggleIsOpen] = useCycle(false, true)
+
+  function changeStep(newStep?: string) {
     //@ts-ignore
     const newPath = router.pathname.replace('[pageSlug]', router.query.pageSlug)
-    router.push({
-      pathname: `${newPath}`,
-      query: { step },
-    })
-  }
-
-  const resetForm = () => actions.resetFormData('directMailForm')
-
-  const sendForm = () => {
-    setSubmitting(true)
-    fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'directMailForm', ...directMailForm }),
-    })
-      .then(() => {
-        changeStep('success')
-        console.log(JSON.stringify(state, null, 4))
-        resetForm()
-      })
-      .catch((error) => console.error(error))
-  }
-
-  useEffect(() => {
-    if (router.query.resetForm) {
-      resetForm()
-    }
-    setSubmitting(false)
-  }, [router])
-
-  let Component: React.FC<any>
-  switch (router.query.step) {
-    case '1':
-      Component = Step1
-
-      break
-    case '2':
-      Component = Step2
-
-      break
-    case '3':
-      Component = Step3
-
-      break
-    //@ts-ignore
-    case 'success':
-      Component = ConfirmationPage
-
-      break
-    default:
-      Component = QuoteIntro
-  }
-
-  const NetlifyWorkaroundForm = () => {
-    return (
-      <form
-        method="POST"
-        data-netlify="true"
-        name="directMailForm"
-        className={classes.visuallyHidden()}
-      >
-        <input type="hidden" name="form-name" value="directMailForm" />
-        {Object.entries(directMailForm).map(([name, value]) => (
-          <input
-            type="hidden"
-            aria-hidden="true"
-            tabIndex={-1}
-            name={name}
-            //@ts-ignore
-            value={value || ''}
-            key={name}
-          />
-        ))}
-      </form>
+    router.push(
+      {
+        pathname: `${newPath}`,
+        query: newStep ? { ...queries, step: newStep } : queries,
+      },
+      null,
+      { shallow: true }
     )
   }
 
-  return (
-    <FormBackground column fillHeight>
-      {progress.show && (
-        <Flex css={{ alignItems: 'center', px: '$6', pt: '$4' }}>
-          <Button
-            size="small"
-            offset="left"
-            leftIcon={<ArrowBack css={{ color: '$N70' }} />}
-            style="naked"
-            color="dark"
-            onClick={() => router.back()}
-          >
-            Back
-          </Button>
-          <ProgressBar
-            progress={progress.progress}
-            css={{ mr: 0, flex: '1 1 100%' }}
-          />
-        </Flex>
-      )}
+  const reset = () => actions.resetFormData('directMailForm')
+  const isNotDesktop = !breakpoints.includes('l')
 
-      <Component
-        keyword={keyword}
-        sendForm={router.query.step === '3' && sendForm}
-        resetForm={resetForm}
-        isSubmitting={isSubmitting}
-        setSubmitting={setSubmitting}
-        {...props}
-        changeStep={changeStep}
-        setProgress={setProgress}
-      />
-      <NetlifyWorkaroundForm />
-    </FormBackground>
+  useEffect(() => {
+    if (resetForm) {
+      reset()
+      changeStep()
+    }
+  }, [step])
+
+  useEffect(() => {
+    switch (step) {
+      case '1':
+        break
+      case '2':
+        break
+      case '3':
+        break
+      //@ts-ignore
+      case 'success':
+        break
+      default:
+        progress.set(0)
+    }
+  }, [router])
+
+  const formControls = {
+    step,
+    isOpen: isNotDesktop ? isOpen : true,
+    isSubmitting,
+    changeStep,
+    toggleIsOpen,
+    setSubmitting,
+    progress,
+    breakpoints,
+    keyword,
+  }
+
+  return (
+    <FormWrapper {...formControls}>
+      {step ? (
+        <FormStepper {...formControls} />
+      ) : (
+        <QuoteIntro {...formControls} />
+      )}
+    </FormWrapper>
   )
 }
