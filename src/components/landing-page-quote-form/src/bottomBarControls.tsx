@@ -42,7 +42,6 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
           size="cta"
           css={{
             display: 'block',
-            zIndex: '$2',
             flex: '1',
             when: {
               l: {

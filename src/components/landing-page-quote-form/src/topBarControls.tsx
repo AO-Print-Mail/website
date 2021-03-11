@@ -21,6 +21,7 @@ export interface TopBarControlsProps {
 const Bg = styled(HeaderBar, {
   backgroundColor: '$transparent',
   pt: '$2',
+  variant: { success: { true: { border: 'none' } } },
   when: {
     l: {
       borderColor: '$DA10',
@@ -46,7 +47,7 @@ export const TopBarControls: React.FC<TopBarControlsProps> = ({
   ...props
 }) => {
   return (
-    <Bg as={motion.div} layout>
+    <Bg as={motion.div} success={success} layout>
       <Container
         css={{
           maxWidth: '32rem',
