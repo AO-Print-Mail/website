@@ -7,9 +7,10 @@ import {
   Container,
   Close,
 } from '@theme'
-import { FormStepControls } from '../bottomBarControls'
+import { FormStepControls } from './bottomBarControls'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 import { Button } from '@components/button'
+import { Background } from './steps/stepWrapper'
 
 interface QuoteIntroProps {
   changeStep: (step: string) => unknown
@@ -37,42 +38,17 @@ const FormImage = styled('div', {
         opacity: 1,
       },
       false: {
-        opacity: 0,
+        opacity: 0.5,
       },
-    },
-  },
-})
-
-const Background = styled(motion.div, {
-  position: 'relative',
-  background: '$white',
-  top: '0',
-  left: '0',
-  bottom: '0',
-  right: '0',
-  overflow: 'hidden',
-  btlr: '$4',
-  btrr: '$4',
-  boxShadow: '$footer',
-  variants: {
-    isOpen: {
-      true: { height: '100vh', when: { l: { height: 'auto' } } },
-      false: { height: 'auto' },
-    },
-  },
-  when: {
-    l: {
-      br: '$5',
-      boxShadow: '$3',
     },
   },
 })
 
 const Content = styled('div', {
   flex: '1 1 100%',
-  pt: '$10',
   height: '0px',
   position: 'absolute',
+  '-webkit-transform': 'translate3d(0,0,0)',
   top: '-100%',
   variants: {
     isOpen: {
@@ -128,54 +104,52 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   return (
     <Box>
       <AnimateSharedLayout>
-        <Background
-          layoutId="inner-background"
-          isOpen={isOpen}
-          css={{
-            display: 'flex',
-            flexFlow: 'column nowrap',
-            justifyContent: 'flex-end',
-          }}
-        >
+        <Background layout isOpen={isOpen} as={motion.div}>
+          <FormImage layout isOpen={isOpen} as={motion.div}>
+            <MailIllustration layout as={motion.svg} css={{ height: '100%' }} />
+          </FormImage>
           <Content as={motion.div} layout isOpen={isOpen}>
-            <FormImage layout isOpen={isOpen} as={motion.div}>
-              <MailIllustration
-                layout
-                as={motion.svg}
-                css={{ height: '100%' }}
-              />
-            </FormImage>
             <motion.div layout animate={isOpen ? 'open' : 'closed'}>
+              <Container
+                css={{
+                  maxWidth: '32rem',
+                  display: 'flex',
+                  width: '100%',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                  pt: '$4',
+                }}
+                layout
+                as={motion.div}
+              >
+                <Button
+                  initial="hide"
+                  animate="show"
+                  size="small"
+                  rightIcon={<Close css={{ color: '$N70' }} />}
+                  style="naked"
+                  color={'dark'}
+                  css={{ when: { l: { display: 'none' } } }}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    toggleIsOpen()
+                  }}
+                  as={motion.button}
+                >
+                  Close
+                </Button>
+              </Container>
+
               <Container
                 as={motion.div}
                 variants={contentContainerVariants}
-                css={{ maxWidth: '40rem' }}
+                css={{ maxWidth: '32rem', pt: '$9' }}
               >
-                {isNotDesktop && (
-                  <Button
-                    size="small"
-                    rightIcon={<Close css={{ color: '$N70' }} />}
-                    style="naked"
-                    color="dark"
-                    css={{
-                      ml: 'auto',
-                      mt: '$3',
-                      mb: '$5',
-                      when: { l: { display: 'none' } },
-                    }}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      toggleIsOpen()
-                    }}
-                  >
-                    Close
-                  </Button>
-                )}
                 <Heading4
                   as={motion.h2}
                   alignCenter
                   color="primary"
-                  css={{ mt: '$3' }}
+                  css={{ mt: '0' }}
                   variants={contentChildrenVariants}
                 >
                   Get a {keyword} quote online
@@ -183,7 +157,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
                 <Paragraph3
                   as={motion.p}
                   alignCenter
-                  css={{ color: '$DA70', mt: '$6' }}
+                  css={{ color: '$DA70', mt: '$3' }}
                   variants={contentChildrenVariants}
                 >
                   You can expect to receive a quote on the same day so that your
@@ -201,7 +175,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               </Container>
             </motion.div>
           </Content>
-          <Container css={{ maxWidth: '40rem' }}>
+          <Container css={{ maxWidth: '32rem', zIndex: '$1' }}>
             <Box as={motion.div} layout>
               <FormStepControls
                 isOpen={isNotDesktop && isOpen}

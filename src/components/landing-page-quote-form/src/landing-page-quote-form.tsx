@@ -1,6 +1,6 @@
 import { useStateMachine } from 'little-state-machine'
 import { useRouter } from 'next/router'
-import { QuoteIntro } from './steps/intro'
+import { QuoteIntro } from './intro'
 import { JobInformation } from './steps/step1'
 import { AdditionalInformation } from './steps/step2'
 import { ContactInformation, MetaInformation } from './steps/step3'

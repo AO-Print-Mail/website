@@ -1,12 +1,13 @@
 import { styled, CSS } from '..'
 import { useAnimationFeatures } from '@lib/react/animation-features'
-import { m as motion, MotionValue } from 'framer-motion'
+import { m as motion, MotionValue, MotionProps } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { set } from 'shelljs'
 
-export interface ProgressBarProps {
+export interface ProgressBarProps extends MotionProps {
   progress: MotionValue<number>
   css?: CSS
+  as: any
 }
 
 const Bg = styled('div', {
@@ -14,8 +15,9 @@ const Bg = styled('div', {
   br: '$pill',
   height: '8px',
   overflow: 'hidden',
+  '-webkit-mask-image': '-webkit-radial-gradient(white, black)',
   position: 'relative',
-  mx: '$6',
+  mx: '$4',
   my: '$2',
   width: '100%',
 })

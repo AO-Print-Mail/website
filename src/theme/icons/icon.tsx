@@ -48,7 +48,6 @@ export const Icon = forwardRef<SVGElement, IconProps>(
       title,
       displayName,
       description,
-      as,
       ...props
     },
     ref
@@ -65,7 +64,7 @@ export const Icon = forwardRef<SVGElement, IconProps>(
         aria-labelledby={ariaLabelledBy}
         viewBox={viewBox}
         xmlns="http://www.w3.org/2000/svg"
-        as={as}
+        xmlnsXlink="http://www.w3.org/1999/xlink"
         {...props}
       >
         {title && <title id={cTitle}>{title}</title>}

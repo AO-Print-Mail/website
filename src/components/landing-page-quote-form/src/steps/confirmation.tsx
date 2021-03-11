@@ -9,7 +9,7 @@ import {
 } from '@lib/little-state-machine'
 
 export interface ConfirmationPageProps extends QuoteFormInputData {
-  changeStep: (step: string) => unknown
+  changeStep: (step?: string) => unknown
 }
 
 export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
@@ -28,11 +28,7 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
   }, [])
 
   return (
-    <Flex
-      fillHeight
-      column
-      css={{ px: '$6', py: '$4', backgroundColor: '$green' }}
-    >
+    <Box>
       <Box css={{ flex: '1 1' }}>
         <Heading4 alignCenter css={{ color: '$white' }}>
           Your quote is in progress{firstName && `, ${firstName}`}!
@@ -57,12 +53,12 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
           type="submit"
           css={{ alignSelf: 'center' }}
           onClick={() => {
-            changeStep('')
+            changeStep()
           }}
         >
-          <UI3>Start again</UI3>
+          <UI3>Close</UI3>
         </Button>
       </Flex>
-    </Flex>
+    </Box>
   )
 }

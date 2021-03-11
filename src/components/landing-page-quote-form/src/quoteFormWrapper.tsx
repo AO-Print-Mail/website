@@ -1,6 +1,6 @@
-import { styled, Box } from '@theme'
+import { styled } from '@theme'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
-import { motion, useAnimation } from 'framer-motion'
+import { AnimateSharedLayout, motion, useAnimation } from 'framer-motion'
 import { useEffect } from 'react'
 
 export interface FormWrapperProps {
@@ -25,6 +25,7 @@ const FormBackground = styled(motion.div, {
   transform: 'translateY(100%)',
   transition: 'transform 0.5s ease-out',
   willChange: 'transform',
+  variants: { isOpen: { true: { top: '0' } } },
   when: {
     l: {
       transform: 'translateY(0%)',
@@ -61,17 +62,18 @@ export const FormWrapper: React.FC<FormWrapperProps> = ({
 }) => {
   const wrapperControls = useAnimation()
 
-  const isNotDesktop = !breakpoints.includes('l')
-
   useEffect(() => {
-    if (isNotDesktop) {
-      wrapperControls.start('visible', { delay: 2 })
-    }
+    wrapperControls.start('visible', { delay: 2 })
   }, [])
 
   return (
-    <FormBackground variants={variants} animate={wrapperControls} {...props}>
-      {children}
+    <FormBackground
+      isOpen={isOpen}
+      variants={variants}
+      animate={wrapperControls}
+      {...props}
+    >
+      <AnimateSharedLayout>{children}</AnimateSharedLayout>
     </FormBackground>
   )
 }

@@ -1,4 +1,4 @@
-import { motion, AnimateSharedLayout } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Box, styled, Container } from '@theme'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 
@@ -9,9 +9,13 @@ interface StepWrapperProps {
   main: React.ReactNode
   header: React.ReactNode
   footer: React.ReactNode
+  success: boolean
 }
 
-const Background = styled('div', {
+export const Background = styled('div', {
+  display: 'flex',
+  flexFlow: 'column nowrap',
+  justifyContent: 'flex-end',
   position: 'relative',
   background: '$white',
   top: '0',
@@ -24,7 +28,16 @@ const Background = styled('div', {
   boxShadow: '$footer',
   variants: {
     isOpen: {
-      true: { height: '100vh', when: { l: { height: 'auto' } } },
+      true: {
+        position: 'absolute',
+        top: '0',
+        right: '0',
+        bottom: '0',
+        left: '0',
+        btlr: '0',
+        btrr: '0',
+        when: { l: { br: '$5', height: 'auto', bottom: 'unset' } },
+      },
       false: { height: 'auto' },
     },
   },
@@ -57,11 +70,24 @@ const Content = styled('div', {
   },
 })
 
+const SuccessBackground = styled('div', {
+  position: 'absolute',
+  top: '0',
+  right: '0',
+  bottom: '0',
+  left: '0',
+  background: '$green',
+})
+
 const contentContainerVariants = {
   open: {
+    opacity: 1,
+    pointerEvents: 'auto',
     transition: { staggerChildren: 0.07, delayChildren: 0.2 },
   },
   closed: {
+    opacity: 0,
+    pointerEvents: 'none',
     transition: { staggerChildren: 0.05, staggerDirection: -1 },
   },
 }
@@ -90,42 +116,53 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
   main,
   header,
   footer,
+  success,
   ...props
 }) => {
   const isNotDesktop = !breakpoints.includes('l')
   return (
-    <AnimateSharedLayout>
-      <Background
-        layoutId="inner-background"
-        isOpen={isOpen}
-        as={motion.div}
-        css={{
-          display: 'flex',
-          flexFlow: 'column nowrap',
-          justifyContent: 'flex-end',
-        }}
-      >
-        <Content as={motion.div} layout isOpen={isOpen}>
-          {header && <Box>{header}</Box>}
-          <motion.div
-            layout
-            animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
-          >
-            <Container
-              as={motion.div}
-              variants={contentContainerVariants}
-              css={{ maxWidth: '40rem' }}
-            >
-              {main}
-            </Container>
-          </motion.div>
-        </Content>
-        {footer && (
-          <Box as={motion.div} layout>
-            <Container css={{ maxWidth: '40rem' }}>{footer}</Container>
+    <Background layout isOpen={isOpen} as={motion.div}>
+      {success && (
+        <SuccessBackground
+          as={motion.div}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        />
+      )}
+      <Content as={motion.div} layout isOpen={isOpen}>
+        {header && (
+          <Box css={{ mb: '$4' }}>
+            <AnimatePresence>{header}</AnimatePresence>
           </Box>
         )}
-      </Background>
-    </AnimateSharedLayout>
+        <motion.div layout>
+          <Container
+            animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
+            as={motion.div}
+            layout
+            variants={contentContainerVariants}
+            css={{
+              maxWidth: '32rem',
+              flex: '1',
+              overflow: 'auto',
+              minHeight: '0',
+            }}
+          >
+            {main}
+          </Container>
+        </motion.div>
+      </Content>
+      {footer && (
+        <Box as={motion.div} layout>
+          <Container
+            as={motion.div}
+            layout
+            css={{ maxWidth: '32rem', flex: '0 0' }}
+          >
+            {footer}
+          </Container>
+        </Box>
+      )}
+    </Background>
   )
 }

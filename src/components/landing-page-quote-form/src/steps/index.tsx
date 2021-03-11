@@ -11,12 +11,14 @@ import { useStateMachine } from 'little-state-machine'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import dynamic from 'next/dynamic'
 import { encode } from '@lib/netlify/utils'
-import { MotionValue } from 'framer-motion'
+import { MotionValue, AnimatePresence, motion } from 'framer-motion'
 import { TopBarControls } from '../topBarControls'
 import { FormSteps } from '../landing-page-quote-form'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 import { Box } from '@theme'
 import { StepWrapper } from './stepWrapper'
+import { ConfirmationPage } from './confirmation'
+import { useAnimationFeatures } from '@lib/react/animation-features'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
@@ -36,10 +38,6 @@ const WorkaroundForm = dynamic(() =>
   import('@components/netlify-workaraound-form').then(
     (res) => res.NetlifyWorkaroundForm
   )
-)
-
-const SuccessPage = dynamic(() =>
-  import('./confirmation').then((res) => res.ConfirmationPage)
 )
 
 export interface FormStepsProps {
@@ -85,6 +83,7 @@ export const FormStepper: React.FC<FormStepsProps> = ({
       })
       .catch((error) => console.error(error))
   }
+  useAnimationFeatures(['exit', 'animation'])
 
   let Main, Footer
 
@@ -102,7 +101,8 @@ export const FormStepper: React.FC<FormStepsProps> = ({
       Footer = Step3Controls
       break
     case 'success':
-      Main = SuccessPage
+      Main = ConfirmationPage
+      Footer = null
       break
     default:
       changeStep()
@@ -119,11 +119,14 @@ export const FormStepper: React.FC<FormStepsProps> = ({
           },
         },
       }}
+      as={motion.div}
+      layout
     >
       <StepWrapper
         isSubmitting={isSubmitting}
         isOpen={isOpen}
         breakpoints={breakpoints}
+        success={step === 'success'}
         main={
           <Main
             sendForm={step === '3' && sendForm}
@@ -138,14 +141,20 @@ export const FormStepper: React.FC<FormStepsProps> = ({
           />
         }
         header={
-          <TopBarControls toggleIsOpen={toggleIsOpen} progress={progress} />
+          <TopBarControls
+            success={step === 'success'}
+            toggleIsOpen={toggleIsOpen}
+            progress={progress}
+          />
         }
         footer={
-          <Footer
-            isSubmitting={isSubmitting}
-            isOpen={isOpen}
-            toggleIsOpen={toggleIsOpen}
-          ></Footer>
+          Footer && (
+            <Footer
+              isSubmitting={isSubmitting}
+              isOpen={isOpen}
+              toggleIsOpen={toggleIsOpen}
+            ></Footer>
+          )
         }
       />
       <WorkaroundForm formData={{ ...directMailForm, ...userData }} />

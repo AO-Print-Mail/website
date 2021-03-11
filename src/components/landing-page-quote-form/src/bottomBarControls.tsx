@@ -27,7 +27,7 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
 }) => {
   useAnimationFeatures(['exit'])
   return (
-    <Container css={{ maxWidth: '40rem' }} as={AnimatePresence}>
+    <Container css={{ maxWidth: '32rem' }} as={AnimatePresence}>
       <Flex
         as={motion.div}
         css={{
@@ -41,6 +41,8 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
           fullWidth
           size="cta"
           css={{
+            display: 'block',
+            zIndex: '$2',
             flex: '1',
             when: {
               l: {

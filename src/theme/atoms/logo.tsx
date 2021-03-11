@@ -1,4 +1,4 @@
-import { styled, theme, ThemeVariants, CSS } from '..'
+import { styled, ThemeVariants, CSS } from '..'
 
 type LogoProps = {
   color?: ThemeVariants<typeof Leaf>
@@ -52,10 +52,10 @@ const Orange = styled('path', {
   variants: {
     color: {
       primary: {
-        fill: 'url(#paint0_linear)',
+        fill: 'url(#paint0linear)',
       },
       white: {
-        fill: 'url(#paint0_linear)',
+        fill: 'url(#paint0linear)',
       },
       allWhite: {
         fill: '$white',
@@ -85,14 +85,14 @@ export const Logo: React.FC<LogoProps> = ({
       />
       <defs>
         <linearGradient
-          id="paint0_linear"
+          id="paint0linear"
           x1="60.07"
           y1="25.33"
           x2="77.92"
           y2="25.33"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#EE3131" />
+          <stop offset="0" stopColor="#EE3131" />
           <stop offset="1" stopColor="#F89E33" />
         </linearGradient>
       </defs>

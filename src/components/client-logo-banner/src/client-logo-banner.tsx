@@ -4,9 +4,11 @@ import * as clientLogos from './logos'
 interface ClientLogoBannerProps {}
 
 const Logos = styled('div', {
+  position: 'relative',
   mt: '$4',
   display: 'flex',
   justifyContent: 'space-between',
+  alignItems: 'center',
   when: {
     m: {
       px: '$2',
@@ -76,7 +78,7 @@ export const ClientLogoBanner: React.FC<ClientLogoBannerProps> = (props) => {
       <Logos>
         {bannerLogos.map(([name, Component], i) => (
           <LogoWrapper key={name}>
-            <Component css={{ size: '100%' }} />
+            <Component css={{ size: '100%', maxHeight: '$3' }} />
           </LogoWrapper>
         ))}
       </Logos>
