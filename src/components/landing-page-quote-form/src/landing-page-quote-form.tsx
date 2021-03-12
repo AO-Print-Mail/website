@@ -13,18 +13,7 @@ import { useCycle, useMotionValue } from 'framer-motion'
 
 export type FormSteps = '1' | '2' | '3' | 'success'
 
-export type QuoteFormInputData = JobInformation &
-  AdditionalInformation &
-  ContactInformation &
-  MetaInformation
-
-export type FeedbackFormData = {
-  email: string
-  hutk: string
-  ipAddress: string
-  experienceRating: string
-  experienceComment: string
-}
+export type { QuoteFormInputData, FeedbackFormData } from './steps'
 
 interface LandingPageQuoteFormProps {
   keyword: string

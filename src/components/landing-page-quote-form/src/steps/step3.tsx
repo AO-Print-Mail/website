@@ -10,7 +10,9 @@ import { MotionValue } from 'framer-motion'
 import { FormStepControls } from '../bottomBarControls'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 
-export type ContactAndMetaInformation = ContactInformation & MetaInformation
+export type ContactAndMetaInformation = ContactInformation &
+  MetaInformation &
+  FormStateInformation
 
 export interface Step3Props extends ContactAndMetaInformation {
   changeStep: (step: string) => unknown
@@ -22,6 +24,7 @@ export interface Step3Props extends ContactAndMetaInformation {
   breakpoints: BreakpointsAry
   isOpen: boolean
   toggleIsOpen: () => void
+  fireFormSubmission: () => void
 }
 
 export interface ContactInformation {
@@ -37,6 +40,11 @@ export interface MetaInformation {
   'bot-field-step3'?: any
   landingPageKeyword?: string
   joinMailingList?: boolean
+}
+
+export interface FormStateInformation {
+  readyToSubmit?: boolean
+  submitted?: boolean
 }
 
 const schema = yup.object().shape({
@@ -73,37 +81,32 @@ const mobileMask = [
 const FORM_NAME = 'step3form'
 
 export const Step3Form: React.FC<Step3Props> = ({
-  sendForm,
+  fireFormSubmission,
   progress,
   setSubmitting,
 }) => {
   const { state, actions } = useStateMachine({
     updateDirectMailForm,
   })
-  const {
-    register,
-    handleSubmit,
-    formState,
-    errors,
-  } = useForm<ContactAndMetaInformation>({
+  const { register, handleSubmit, formState, errors } = useForm<
+    ContactInformation & MetaInformation
+  >({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   })
 
-  const submit = (data: ContactAndMetaInformation) => {
-    actions.updateDirectMailForm(data)
-    sendForm()
-  }
-
-  const onSubmit = (data: ContactAndMetaInformation) => {
+  const onSubmit = (data: ContactInformation & MetaInformation) => {
     progress.set(100)
     setSubmitting(true)
-    window && window.setTimeout(submit, 1500, data)
+    actions.updateDirectMailForm({ ...data, readyToSubmit: true })
+    window && window.setTimeout(fireFormSubmission, 1000)
   }
-  progress.set(95)
+
   useEffect(() => {
+    progress.set(95)
     setSubmitting(false)
   }, [])
+
   const {
     firstName,
     lastName,

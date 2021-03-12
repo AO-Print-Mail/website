@@ -50,12 +50,6 @@ export const Step2Form: React.FC<Step2Props> = ({
     changeStep('3')
   }
 
-  progress.set(75)
-
-  useEffect(() => {
-    setSubmitting(false)
-  }, [])
-
   const {
     artworkReady,
     addressDataReady,
@@ -67,6 +61,8 @@ export const Step2Form: React.FC<Step2Props> = ({
   const requiresArtwork = services === 'Print and mail'
 
   useEffect(() => {
+    setSubmitting(false)
+    progress.set(75)
     if (!requiresArtwork) {
       actions.updateDirectMailForm({ artworkReady: '[n/a]' })
     }

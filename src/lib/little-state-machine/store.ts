@@ -24,6 +24,8 @@ export const store: GlobalState = {
       joinMailingList: true,
       landingPageKeyword: '',
       'bot-field-step3': '',
+      readyToSubmit: false,
+      submitted: false,
     },
     feedbackForm: {
       experienceRating: '',

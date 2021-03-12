@@ -130,11 +130,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
         />
       )}
       <Content as={motion.div} layout isOpen={isOpen}>
-        {header && (
-          <Box css={{ mb: '$4' }}>
-            <AnimatePresence>{header}</AnimatePresence>
-          </Box>
-        )}
+        {header && <Box css={{ mb: '$4' }}>{header}</Box>}
         <motion.div layout>
           <Container
             animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
