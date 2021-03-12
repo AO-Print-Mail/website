@@ -56,9 +56,9 @@ export const Step1Form: React.FC<Step1Props> = ({
     frequency,
     //@ts-ignore
   } = state.formData?.directMailForm
-  progress.set(30)
 
   useEffect(() => {
+    progress.set(30)
     setSubmitting(false)
   }, [])
 

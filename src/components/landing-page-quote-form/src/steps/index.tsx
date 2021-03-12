@@ -1,17 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { JobInformation, Step1Form, Step1Controls } from './step1'
 import { AdditionalInformation, Step2Form, Step2Controls } from './step2'
-import {
-  ContactInformation,
-  MetaInformation,
-  Step3Form,
-  Step3Controls,
-} from './step3'
+import { ContactAndMetaInformation, Step3Form, Step3Controls } from './step3'
 import { useStateMachine } from 'little-state-machine'
-import { resetFormData } from '@lib/little-state-machine/actions'
+import {
+  resetFormData,
+  updateDirectMailForm,
+} from '@lib/little-state-machine/actions'
 import dynamic from 'next/dynamic'
 import { encode } from '@lib/netlify/utils'
-import { MotionValue, AnimatePresence, motion } from 'framer-motion'
+import { MotionValue, motion, useMotionValue } from 'framer-motion'
 import { TopBarControls } from '../topBarControls'
 import { FormSteps } from '../landing-page-quote-form'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
@@ -19,11 +17,11 @@ import { Box } from '@theme'
 import { StepWrapper } from './stepWrapper'
 import { ConfirmationPage } from './confirmation'
 import { useAnimationFeatures } from '@lib/react/animation-features'
+import { __DEV__ } from '@utils'
 
 export type QuoteFormInputData = JobInformation &
   AdditionalInformation &
-  ContactInformation &
-  MetaInformation
+  ContactAndMetaInformation
 
 export type FeedbackFormData = {
   email: string
@@ -59,11 +57,16 @@ export const FormStepper: React.FC<FormStepsProps> = ({
 }) => {
   const [isSubmitting, setSubmitting] = useState(false)
 
-  const { state, actions } = useStateMachine({ resetFormData })
+  const { state, actions } = useStateMachine({
+    resetFormData,
+    updateDirectMailForm,
+  })
+
+  const [readyToSubmit, fireSubmit] = useState(false)
 
   const {
     //@ts-ignore
-    formData: { directMailForm },
+    formData: { submitted, ...formData },
     //@ts-ignore
     userData,
   } = state
@@ -75,14 +78,25 @@ export const FormStepper: React.FC<FormStepsProps> = ({
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'directMailForm', ...directMailForm }),
+      body: encode({ 'form-name': 'directMailForm', ...formData }),
     })
       .then(() => {
         changeStep('success')
+        actions.updateDirectMailForm({ submitted: true })
         resetForm()
       })
       .catch((error) => console.error(error))
+      .finally(() => {})
   }
+
+  useEffect(() => {
+    if (readyToSubmit) {
+      console.log(JSON.stringify(formData, null, 4))
+      sendForm()
+      fireSubmit(false)
+    }
+  }, [readyToSubmit])
+
   useAnimationFeatures(['exit', 'animation'])
 
   let Main, Footer
@@ -138,6 +152,7 @@ export const FormStepper: React.FC<FormStepsProps> = ({
             toggleIsOpen={toggleIsOpen}
             progress={progress}
             breakpoints={breakpoints}
+            fireFormSubmission={step === '3' && (() => fireSubmit(true))}
           />
         }
         header={
@@ -157,7 +172,7 @@ export const FormStepper: React.FC<FormStepsProps> = ({
           )
         }
       />
-      <WorkaroundForm formData={{ ...directMailForm, ...userData }} />
+      <WorkaroundForm formData={{ ...formData, ...userData }} />
     </Box>
   )
 }
