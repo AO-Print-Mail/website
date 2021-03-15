@@ -78,7 +78,7 @@ export const FormStepper: React.FC<FormStepsProps> = ({
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'directMailForm', ...formData }),
+      body: encode({ 'form-name': 'directMailForm', ...formData, ...userData }),
     })
       .then(() => {
         changeStep('success')

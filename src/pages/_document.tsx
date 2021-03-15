@@ -50,6 +50,13 @@ export default class Document extends NextDocument {
             crossOrigin=""
           />
         </Head>
+        <script
+          type="text/javascript"
+          id="hs-script-loader"
+          async
+          defer
+          src="//js.hs-scripts.com/8035366.js"
+        ></script>
         <body>
           <noscript>
             <iframe

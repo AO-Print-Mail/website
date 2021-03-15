@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react'
 import Head from 'next/head'
-import publicIp from 'public-ip'
+import { isBrowser } from '@utils'
 
 import '../styles/font-face.css'
 import { StateMachineProvider, createStore } from 'little-state-machine'
@@ -16,8 +15,13 @@ import { UserData } from '@lib/react'
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   console.log(JSON.stringify(metric, null, 2))
 }
-
-createStore(store)
+if (isBrowser()) {
+  createStore(store, {
+    storageType: window.localStorage,
+    name: '__AOM__',
+    middleWares: [],
+  })
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { features, importFeatures } = useAnimationContext()
