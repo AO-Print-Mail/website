@@ -9,7 +9,7 @@ import {
 } from '@lib/little-state-machine/actions'
 import dynamic from 'next/dynamic'
 import { encode } from '@lib/netlify/utils'
-import { MotionValue, motion, useMotionValue } from 'framer-motion'
+import { MotionValue, motion } from 'framer-motion'
 import { TopBarControls } from '../topBarControls'
 import { FormSteps } from '../landing-page-quote-form'
 import type { BreakpointsAry } from '@lib/react/breakpoints'

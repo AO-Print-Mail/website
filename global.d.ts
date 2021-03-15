@@ -3,7 +3,8 @@ import {
   QuoteFormInputData,
   FeedbackFormData,
 } from '@components/landing-page-quote-form-copy'
-declare module 'little-state-machine' {
+
+module 'little-state-machine' {
   interface GlobalState {
     userData: {
       hutk: string
@@ -14,5 +15,11 @@ declare module 'little-state-machine' {
       directMailForm: QuoteFormInputData
       feedbackForm: QuoteFormInputData
     }
+  }
+}
+
+declare global {
+  interface Window {
+    dataLayer?: object[]
   }
 }

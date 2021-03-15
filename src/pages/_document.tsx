@@ -2,31 +2,25 @@ import React from 'react'
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { getCssString } from '@theme'
 import { __DEV__ } from '@utils/src/assertion'
-const styles = !__DEV__ ? getCssString() : ''
+import { globalStyles } from '@theme'
+
 export default class Document extends NextDocument {
   render() {
+    const styles = getCssString()
+    const globals = globalStyles()
     return (
       <Html lang="en">
         <Head>
           {/* eslint-disable-next-line react/no-danger */}
           <script
             dangerouslySetInnerHTML={{
-              __html: `(function (w, d, s, l, i) {
-                w[l] = w[l] || []
-                w[l].push({
-                  'gtm.start': new Date().getTime(),
-                  event: 'gtm.js',
-                })
-                var f = d.getElementsByTagName(s)[0],
-                  j = d.createElement(s),
-                  dl = l != 'dataLayer' ? '&l=' + l : ''
-                j.async = true
-                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl
-                f.parentNode.insertBefore(j, f)
-              })(window, document, 'script', 'dataLayer', 'GTM-WSFD68H');`,
+              __html: `!function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-WSFD68H",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer");`,
             }}
           />
-          <style id="stitches" dangerouslySetInnerHTML={{ __html: styles }} />
+          <style
+            id="stitches"
+            dangerouslySetInnerHTML={{ __html: { ...globals, ...styles } }}
+          />
 
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

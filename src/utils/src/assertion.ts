@@ -69,6 +69,10 @@ export const isEmpty = (value: any) => {
   return false
 }
 
+export function isBrowser(): boolean {
+  return typeof window !== 'undefined'
+}
+
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export const __DEV__ =
   process.env.NODE_ENV !== 'production' && !process.env.NETLIFY
