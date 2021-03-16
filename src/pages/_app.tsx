@@ -11,6 +11,7 @@ import {
 import { MotionConfig } from 'framer-motion'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { UserData } from '@lib/react'
+import { globalStyles } from '@theme'
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   console.log(JSON.stringify(metric, null, 2))
@@ -25,7 +26,7 @@ if (isBrowser()) {
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { features, importFeatures } = useAnimationContext()
-
+  globalStyles()
   return (
     <StateMachineProvider>
       <Head>

@@ -2,12 +2,10 @@ import React from 'react'
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { getCssString } from '@theme'
 import { __DEV__ } from '@utils/src/assertion'
-import { globalStyles } from '@theme'
 
 export default class Document extends NextDocument {
+  styles = getCssString()
   render() {
-    const styles = getCssString()
-    const globals = globalStyles()
     return (
       <Html lang="en">
         <Head>
@@ -19,7 +17,9 @@ export default class Document extends NextDocument {
           />
           <style
             id="stitches"
-            dangerouslySetInnerHTML={{ __html: { ...globals, ...styles } }}
+            dangerouslySetInnerHTML={{
+              __html: getCssString(),
+            }}
           />
 
           <meta charSet="utf-8" />
