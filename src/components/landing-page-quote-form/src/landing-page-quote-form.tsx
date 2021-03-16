@@ -1,9 +1,6 @@
 import { useStateMachine } from 'little-state-machine'
 import { useRouter } from 'next/router'
-import { QuoteIntro } from './intro'
-import { JobInformation } from './steps/step1'
-import { AdditionalInformation } from './steps/step2'
-import { ContactInformation, MetaInformation } from './steps/step3'
+import { QuoteIntro, BlankSkeletonScreen } from './intro'
 import { resetFormData } from '@lib/little-state-machine/actions'
 import { useBreakpoints } from '@lib/react/breakpoints'
 import { useEffect, useState } from 'react'
@@ -19,8 +16,11 @@ interface LandingPageQuoteFormProps {
   keyword: string
 }
 
-const FormStepper = dynamic(() =>
-  import('./steps').then((res) => res.FormStepper)
+const FormStepper = dynamic(
+  () => import('./steps').then((res) => res.FormStepper),
+  {
+    loading: () => <BlankSkeletonScreen />,
+  }
 )
 
 export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({

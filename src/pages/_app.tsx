@@ -1,6 +1,6 @@
-import { useState } from 'react'
 import Head from 'next/head'
-import { globalStyles } from '@theme'
+import { isBrowser } from '@utils'
+
 import '../styles/font-face.css'
 import { StateMachineProvider, createStore } from 'little-state-machine'
 import { store } from '@lib/little-state-machine'
@@ -10,17 +10,22 @@ import {
 } from '@lib/react/animation-features'
 import { MotionConfig } from 'framer-motion'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
+import { UserData } from '@lib/react'
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   console.log(JSON.stringify(metric, null, 2))
 }
-
-createStore(store)
+if (isBrowser()) {
+  createStore(store, {
+    storageType: window.localStorage,
+    name: '__AOM__',
+    middleWares: [],
+  })
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { features, importFeatures } = useAnimationContext()
 
-  globalStyles()
   return (
     <StateMachineProvider>
       <Head>
@@ -30,6 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         ></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <UserData />
       <MotionConfig features={features}>
         <AnimationFeaturesContext.Provider value={importFeatures}>
           <Component {...pageProps} />

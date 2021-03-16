@@ -1,3 +1,6 @@
+import type { APIGatewayEvent, Context } from 'aws-lambda'
+import fetch from 'node-fetch'
+
 const fieldNameLookup = {
   mailFormat: 'format',
   services: 'what_services_do_you_require_',
@@ -24,4 +27,16 @@ const contextNameLookup = {
   pageName: 'pageName',
   pageUri: 'pageUri',
   submittedAt: 'submittedAt',
+}
+
+export async function handler(event: APIGatewayEvent, context: Context) {
+  const { msg } = event.queryStringParameters
+
+  return {
+    statusCode: 200,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ msg }),
+  }
 }
