@@ -6,13 +6,19 @@ import { isBrowser } from '@utils'
 export function getCookie(name) {
   const entries = document.cookie.split(';')
   for (let c of entries) {
-    if (c.split('=')[0].trim() === name) {
-      return decodeURIComponent(c[1])
+    const [key, val] = c.split('=')
+    if (key.trim() === name) {
+      console.log(decodeURIComponent(val))
+      return decodeURIComponent(val)
     }
   }
 }
 
-export function useSetCookieToState(cookieName: string, event: string) {
+export function useSetCookieToState(
+  cookieName: string,
+  event: string,
+  property: string = cookieName
+) {
   const {
     state: { userData },
     actions,
@@ -22,7 +28,7 @@ export function useSetCookieToState(cookieName: string, event: string) {
       const cookie = getCookie(cookieName)
       if (cookie) {
         window.dataLayer.push({ event, cookieName: cookie })
-        actions.updateUserData({ cookieName: cookie })
+        actions.updateUserData({ [property]: cookie })
         return null
       }
       setTimeout(checkCookie, 1500)

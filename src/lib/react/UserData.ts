@@ -33,6 +33,6 @@ export const UserData = ({}) => {
     const trackingData = Object.entries(router.query).reduce(filterParams, {})
     actions.updateUserData(trackingData)
   }, [router])
-  useSetCookieToState('hutk', 'hubspotUserToken')
+  useSetCookieToState('hubspotutk', 'hubspotUserToken', 'hutk')
   return null
 }

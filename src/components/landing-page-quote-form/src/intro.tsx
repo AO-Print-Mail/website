@@ -200,3 +200,40 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
     </Box>
   )
 }
+
+//TODO - skeleton screen
+export const BlankSkeletonScreen = () => (
+  <Box>
+    <Background isOpen={true}>
+      <FormImage isOpen={true}>
+        <MailIllustration css={{ height: '100%' }} />
+      </FormImage>
+      <Content isOpen={true}>
+        <Container
+          css={{
+            maxWidth: '32rem',
+            display: 'flex',
+            width: '100%',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            pt: '$4',
+            height: '30rem',
+          }}
+        ></Container>
+      </Content>
+      <Container css={{ maxWidth: '32rem', zIndex: '$1' }}>
+        <Box>
+          <FormStepControls
+            isOpen={true}
+            isSubmitting={true}
+            buttonLabel=""
+            buttonOnClick={(e: React.PointerEvent) => {
+              e.preventDefault()
+            }}
+            toggleIsOpen={() => undefined}
+          />
+        </Box>
+      </Container>
+    </Background>
+  </Box>
+)
