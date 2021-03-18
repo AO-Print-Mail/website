@@ -36,7 +36,7 @@ export const Background = styled('div', {
         left: '0',
         btlr: '0',
         btrr: '0',
-        when: { l: { br: '$5', height: 'auto', bottom: 'unset' } },
+        when: { l: { br: '$5', height: 'auto' } },
       },
       false: { height: 'auto' },
     },
