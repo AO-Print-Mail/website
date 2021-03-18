@@ -4,7 +4,7 @@ import markdown from 'remark-parse'
 import raw from 'rehype-raw'
 import remark2rehype from 'remark-rehype'
 import html from 'rehype-stringify'
-import parse5 from 'parse5'
+var parse5 = require('parse5')
 import { parse5ToStructuredText } from 'datocms-html-to-structured-text'
 export type { ThenArg } from '@utils/src/types.ts'
 var gfm = require('remark-gfm')

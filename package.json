@@ -19,7 +19,6 @@
     "@hookform/resolvers": "1.3.0",
     "@hubspot/api-client": "^3.4.1",
     "@stitches/react": "0.1.0-canary.17",
-    "add": "^2.0.6",
     "autoprefixer": "^10.2.4",
     "datocms-html-to-structured-text": "^1.0.10",
     "datocms-structured-text-utils": "^1.0.10",
@@ -30,9 +29,7 @@
     "next": "^10.0.5",
     "next-compose-plugins": "^2.2.1",
     "next-offline": "^5.0.3",
-    "node-fetch": "^2.6.1",
     "parse5": "^6.0.1",
-    "polished": "^4.1.0",
     "postcss": "^8.2.4",
     "public-ip": "^4.0.3",
     "react": "^17.0.1",
@@ -99,5 +96,19 @@
     "typescript": "^4.1.3",
     "unist-util-inspect": "^6.0.1",
     "vfile-reporter": "^6.0.2"
+  },
+  "browser": {
+    "parse5": false,
+    "rehype-raw": false,
+    "rehype-stringify": false,
+    "remark-breaks": false,
+    "remark-gfm": false,
+    "remark-parse": false,
+    "remark-rehype": false,
+    "@hubspot/api-client": false,
+    "graphql": false,
+    "graphql-request": false,
+    "datocms-html-to-structured-text": false,
+    "lodash": false
   }
 }
