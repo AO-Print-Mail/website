@@ -52,10 +52,10 @@ const Orange = styled('path', {
   variants: {
     color: {
       primary: {
-        fill: 'url(#paint0linear)',
+        fill: 'url(#logoOrangeGradient)',
       },
       white: {
-        fill: 'url(#paint0linear)',
+        fill: 'url(#logoOrangeGradient)',
       },
       allWhite: {
         fill: '$white',
@@ -85,7 +85,7 @@ export const Logo: React.FC<LogoProps> = ({
       />
       <defs>
         <linearGradient
-          id="paint0linear"
+          id="logoOrangeGradient"
           x1="60.07"
           y1="25.33"
           x2="77.92"

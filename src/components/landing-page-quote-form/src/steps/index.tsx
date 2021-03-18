@@ -127,8 +127,8 @@ export const FormStepper: React.FC<FormStepsProps> = ({
       css={{
         when: {
           l: {
-            height: 'calc(800px - 20vh)',
-            position: 'sticky',
+            //height: 'calc(800px - 20vh)',
+            position: 'realtive',
             top: '$5',
           },
         },
