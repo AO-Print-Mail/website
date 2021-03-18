@@ -31,7 +31,7 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
       <Flex
         as={motion.div}
         css={{
-          pt: '$3',
+          pt: '$2',
           flex: '0 0',
           pb: '$4',
           when: { l: { mx: '$6', pb: '$6' } },
@@ -44,9 +44,7 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
             display: 'block',
             flex: '1',
             when: {
-              l: {
-                mt: '$6',
-              },
+              l: {},
             },
           }}
           isLoading={isSubmitting}

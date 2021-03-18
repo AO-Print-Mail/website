@@ -143,7 +143,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               <Container
                 as={motion.div}
                 variants={contentContainerVariants}
-                css={{ maxWidth: '32rem', pt: '$9' }}
+                css={{ maxWidth: '32rem', pt: '$10' }}
               >
                 <Heading4
                   as={motion.h2}

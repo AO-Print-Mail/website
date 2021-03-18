@@ -5,6 +5,7 @@ import { Phone } from '@theme/icons/phone'
 
 interface HeaderProps {
   sticky?: boolean
+  blur?: boolean
 }
 
 export function Header({ sticky = false, ...props }: HeaderProps) {

@@ -10,4 +10,5 @@ export const breakpoints = {
   m: `@media (min-width: 640px)`,
   l: `@media (min-width: 1200px)`,
   xl: `@media (min-width: 1500px)`,
+  moz: `@-moz-document url-prefix()`,
 }

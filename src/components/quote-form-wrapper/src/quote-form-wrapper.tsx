@@ -1,6 +1,4 @@
 import { styled, keyframes } from '@theme'
-import { useContext, useEffect } from 'react'
-import { LayoutSpaceContext } from '@components/layout'
 import { m as motion } from 'framer-motion'
 import { useAnimationFeatures } from '@lib/react/animation-features'
 
@@ -73,10 +71,6 @@ export const QuoteFormWrapper: React.FC<QuoteFormWrapperProps> = ({
   isOpen,
   ...props
 }) => {
-  const { setFooterSpace } = useContext(LayoutSpaceContext)
-  useEffect(() => {
-    setFooterSpace('80px')
-  }, [])
   useAnimationFeatures(['animation', 'animateLayout'])
 
   return (

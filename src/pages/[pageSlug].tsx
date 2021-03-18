@@ -6,6 +6,7 @@ import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import {
   GetLandingPageSlugsQuery,
   GetLandingPageQuery,
+  GetFaviconsQuery,
 } from '@lib/datocms/__generated__/types'
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
@@ -31,33 +32,6 @@ const HeroText = styled('div', {
   },
 })
 
-const FormBackground = styled('div', {
-  background: '$white',
-  minHeight: '$10',
-  position: 'fixed',
-  display: 'block',
-  zIndex: '$1',
-  left: '0',
-  bottom: '0',
-  right: '0',
-  boxShadow: '$footer',
-  overflow: 'hidden',
-  when: {
-    l: {
-      boxShadow: '$3',
-      position: 'relative',
-      br: '$5',
-      ml: '$2',
-      mr: '$2',
-      mt: '$6',
-      width: '50%',
-    },
-    xl: {
-      width: 'calc(100% / 12 * 5 - 64px)',
-    },
-  },
-})
-
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   const beforeFooter = (
     <>
@@ -77,8 +51,12 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       title="landing page"
       description="work in progress"
       beforeFooter={beforeFooter}
-      metaData={data._seoMetaTags}
+      metaData={data._seoMetaTags.concat(data.favicon)}
       canonicalPath={data.canonicalPath}
+      footerCss={{
+        paddingBottom: '$7',
+        when: { l: { paddingBottom: '$1' } },
+      }}
     >
       <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
         <HeroText>
@@ -133,6 +111,13 @@ export async function getStaticProps({ params, preview = false }) {
     preview,
     variables: { pageSlug: params.pageSlug },
   })
+  //@ts-expect-error
+  const {
+    site: { favicon },
+  }: GetFaviconsQuery = await request({
+    query: 'GetFavicons',
+    preview,
+  })
 
   const markdownToDast = (await import('@utils/src')).markdownToDast
 
@@ -140,7 +125,7 @@ export async function getStaticProps({ params, preview = false }) {
 
   return {
     props: {
-      data: { content, ...rest },
+      data: { content, favicon, ...rest },
       pageSlug: params.pageSlug,
     },
   }
