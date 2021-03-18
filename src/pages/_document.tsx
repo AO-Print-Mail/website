@@ -26,18 +26,17 @@ export default class Document extends NextDocument {
       <Html lang="en">
         <Head>
           {/* eslint-disable-next-line react/no-danger */}
+          <style
+            id="stitches"
+            dangerouslySetInnerHTML={{
+              __html: getCssString(),
+            }}
+          />
           <script
             dangerouslySetInnerHTML={{
               __html: `!function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-WSFD68H",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer");`,
             }}
           />
-          <style
-            id="stitches"
-            dangerouslySetInnerHTML={{
-              __html: getCssString().concat('#loadOverlay{display: none;}'),
-            }}
-          />
-
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
           <link rel="manifest" href="/manifest.json" />
@@ -67,18 +66,6 @@ export default class Document extends NextDocument {
           />
         </Head>
         <body>
-          <div
-            id="loadOverlay"
-            style={{
-              backgroundColor: '#fff',
-              position: 'absolute',
-              top: '0px',
-              left: '0px',
-              width: '100%',
-              height: '100%',
-              zIndex: 2000,
-            }}
-          ></div>
           <noscript>
             <iframe
               src="https://www.googletagmanager.com/ns.html?id=GTM-WSFD68H"
