@@ -31,7 +31,7 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
   const {
     step,
     resetForm,
-    ...queries
+    pageSlug,
   }: { [k: string]: any; step?: FormSteps } = router.query
   const { actions } = useStateMachine({ resetFormData })
 
@@ -41,11 +41,11 @@ export const LandingPageQuoteForm: React.FC<LandingPageQuoteFormProps> = ({
 
   function changeStep(newStep?: string) {
     //@ts-ignore
-    const newPath = router.pathname.replace('[pageSlug]', router.query.pageSlug)
+    const newPath = router.pathname.replace('[pageSlug]', pageSlug)
     router.push(
       {
         pathname: `${newPath}`,
-        query: newStep ? { ...queries, step: newStep } : queries,
+        query: newStep ? { step: newStep } : {},
       },
       null,
       { shallow: true }
