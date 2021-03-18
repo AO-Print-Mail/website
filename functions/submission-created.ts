@@ -1,5 +1,4 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
-import fetch from 'node-fetch'
 
 const fieldNameLookup = {
   mailFormat: 'format',

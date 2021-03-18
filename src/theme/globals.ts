@@ -82,4 +82,5 @@ export const globalStyles = global({
   summary: { display: 'list-item' },
   template: { display: 'none' },
   '[hidden]': { display: 'none' },
+  '#loadOverlay': { display: 'none' },
 })

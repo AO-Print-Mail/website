@@ -7,13 +7,13 @@ import {
   GetLandingPageSlugsQuery,
   GetLandingPageQuery,
 } from '@lib/datocms/__generated__/types'
-import { markdownToDast, ThenArg } from '@utils/src'
+import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
 import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof dataFunction>>
+  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
   pageSlug: string
 }
 
@@ -58,7 +58,7 @@ const FormBackground = styled('div', {
   },
 })
 
-const LandingPageContent: React.FC<PageProps> = ({ data, pageSlug }) => {
+const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   const beforeFooter = (
     <>
       <Container>
@@ -125,28 +125,22 @@ export async function getStaticPaths() {
   }
 }
 
-async function dataFunction({
-  landingPageV1: { pageContent, ...rest },
-}: GetLandingPageQuery) {
-  const content = await markdownToDast(pageContent)
-  return {
-    content,
-    ...rest,
-  }
-}
-
 export async function getStaticProps({ params, preview = false }) {
-  const data: GetLandingPageQuery = await request({
+  const {
+    landingPageV1: { pageContent, ...rest },
+  }: GetLandingPageQuery = await request({
     query: 'GetLandingPage',
     preview,
     variables: { pageSlug: params.pageSlug },
   })
 
-  const _data = await dataFunction(data)
+  const markdownToDast = (await import('@utils/src')).markdownToDast
+
+  const content = await markdownToDast(pageContent)
 
   return {
     props: {
-      data: _data,
+      data: { content, ...rest },
       pageSlug: params.pageSlug,
     },
   }

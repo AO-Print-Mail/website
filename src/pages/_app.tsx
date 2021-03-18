@@ -12,6 +12,7 @@ import { MotionConfig } from 'framer-motion'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { UserData } from '@lib/react'
 import { globalStyles } from '@theme'
+import dynamic from 'next/dynamic'
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   console.log(JSON.stringify(metric, null, 2))
@@ -23,6 +24,8 @@ if (isBrowser()) {
     middleWares: [],
   })
 }
+
+const Hubspot = dynamic(() => import('@lib/react/hubspot'))
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { features, importFeatures } = useAnimationContext()
@@ -37,6 +40,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <UserData />
+      <Hubspot />
       <MotionConfig features={features}>
         <AnimationFeaturesContext.Provider value={importFeatures}>
           <Component {...pageProps} />
