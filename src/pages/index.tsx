@@ -1,16 +1,31 @@
-import { styled, Container, Heading1, Box, Paragraph2 } from '@theme'
+import {
+  styled,
+  Container,
+  Heading1,
+  Box,
+  Paragraph3,
+  HomePattern,
+} from '@theme'
 import { Layout } from '@components/layout'
-import { ClientLogoBanner } from '@components/client-logo-banner'
-import { ReviewsIoWidget } from '@components/reviews-io-widget'
-import { QuoteFormWrapper } from '@components/quote-form-wrapper'
-import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 
 interface PageProps {
   data?: {}
 }
 
 const HeroText = styled('div', {
+  willChange: 'opacity',
   when: {
+    s: {
+      pr: '$2',
+      pl: '$3',
+      pt: '$3',
+    },
+    m: {
+      pr: '$2',
+      pl: '$3',
+      pt: '$6',
+      width: '75%',
+    },
     l: {
       pr: '$2',
       pl: '$3',
@@ -24,54 +39,76 @@ const HeroText = styled('div', {
 })
 
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
-  /*const beforeFooter = (
-    <>
-      <Container>
-        <ClientLogoBanner />
-      </Container>
-      <Box css={{ backgroundColor: '$white', py: '$4' }}>
-        <Container>
-          <ReviewsIoWidget />
-        </Container>
-      </Box>
-    </>
-  )*/
-  const beforeFooter = (
-    <Container>
-      <ClientLogoBanner />
-    </Container>
-  )
   return (
     <Layout
       canonicalPath="HOME_PAGE"
       title="landing page"
       description="work in progress"
-      beforeFooter={beforeFooter}
       metaData={[]}
       footerCss={{
         paddingBottom: '$7',
         when: { l: { paddingBottom: '$1' } },
       }}
     >
-      <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
-        <HeroText>
-          <Heading1 color="primary">
-            Exceptional Direct Mail, Print and Fulfilment services
-          </Heading1>
-          <Box css={{ maxWidth: '60ch' }}>
-            <Paragraph2>
-              A&amp;O is Sydney’s premier Mail House, providing end-to-end
-              Print, Direct Mail and Fulfilment services to over 700 Australian
-              and global clients.
-            </Paragraph2>
-            <Paragraph2>
-              We exist to offer your business the best possible levels of
-              service when delivering your message to your customers.
-            </Paragraph2>
-          </Box>
-        </HeroText>
-        <LandingPageQuoteForm keyword="direct mail" />
-      </Container>
+      <Box
+        as="section"
+        css={{
+          backgroundColor: '$N10',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <Container
+          css={{
+            height: '680px',
+            pt: '$6',
+            when: { l: { display: 'flex', height: '800px', pt: '$7' } },
+          }}
+        >
+          <HomePattern
+            css={{
+              height: '240px',
+              width: 'auto',
+              position: 'absolute',
+              right: '-$7',
+              top: '$7',
+              display: 'none',
+              when: {
+                s: { right: '-$6', height: '300px' },
+                m: {
+                  top: '0',
+                  display: 'block',
+                  height: '100%',
+                  right: '-$10',
+                },
+                l: { right: '-$4', top: '0' },
+              },
+            }}
+          />
+          <HeroText>
+            <Heading1 color="primary">
+              Exceptional Direct Mail, Print and Fulfilment services
+            </Heading1>
+            <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
+              <Paragraph3 color="primary">
+                A&amp;O is Sydney’s premier Mail House, providing end-to-end
+                Print, Direct Mail and Fulfilment services to over 700
+                Australian and global clients.
+              </Paragraph3>
+              <Paragraph3 color="primary">
+                We exist to offer your business the best possible levels of
+                service when delivering your message to your customers.
+              </Paragraph3>
+            </Box>
+          </HeroText>
+        </Container>
+      </Box>
+      <Box as="section">
+        <Container
+          as="section"
+          css={{ height: '100vh', when: { l: { display: 'flex' } } }}
+        ></Container>
+      </Box>
     </Layout>
   )
 }

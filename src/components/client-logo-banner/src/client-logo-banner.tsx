@@ -68,7 +68,7 @@ const Banner = styled('div', {
 })
 
 export const ClientLogoBanner: React.FC<ClientLogoBannerProps> = (props) => {
-  const logoList = ['Chanel', 'RayWhite', 'Quantas', 'Nrl', 'Lush', 'Bmw']
+  const logoList = ['Chanel', 'RayWhite', 'Quantas', 'Nrl', 'Lush', 'Wires']
   const bannerLogos = logoList.map((name) => [name, clientLogos[name]])
   return (
     <Banner>

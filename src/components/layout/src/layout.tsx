@@ -43,7 +43,7 @@ export const Layout: React.FC<LayoutProps> = ({
       <Head>{renderMetaTags(metaData)}</Head>
       <PageWrapper>
         <Header blur />
-        <ContentWrapper css={{ pt: '$7' }}>{props.children}</ContentWrapper>
+        <ContentWrapper>{props.children}</ContentWrapper>
         <Footer beforeFooter={beforeFooter} footerCss={footerCss} />
       </PageWrapper>
     </>

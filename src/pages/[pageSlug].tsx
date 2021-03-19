@@ -51,6 +51,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       title="landing page"
       description="work in progress"
       beforeFooter={beforeFooter}
+      //@ts-expect-error
       metaData={data._seoMetaTags.concat(data.favicon)}
       canonicalPath={data.canonicalPath}
       footerCss={{
@@ -58,7 +59,10 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         when: { l: { paddingBottom: '$1' } },
       }}
     >
-      <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
+      <Container
+        as="section"
+        css={{ pt: '$7', when: { l: { display: 'flex' } } }}
+      >
         <HeroText>
           <Heading1 color="primary">{data.title}</Heading1>
           <Box css={{ maxWidth: '60ch' }}>

@@ -16,7 +16,7 @@ export const HeaderBar = styled(ContentWrapper, {
         left: '0',
         right: '0',
         position: 'absolute',
-        backgroundColor: '$LA60',
+        backgroundColor: '$LA80',
         backdropFilter: 'blur(12px)',
         boxShadow: '0px 6px 12px $colors$DBA15',
         when: {
