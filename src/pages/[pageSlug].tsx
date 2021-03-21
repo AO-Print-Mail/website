@@ -6,12 +6,12 @@ import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import {
   GetLandingPageSlugsQuery,
   GetLandingPageQuery,
-  GetFaviconsQuery,
 } from '@lib/datocms/__generated__/types'
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
 import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
+import { Header } from '@components/header-landing'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -51,12 +51,14 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       title="landing page"
       description="work in progress"
       beforeFooter={beforeFooter}
-      metaData={data._seoMetaTags.concat(data.favicon)}
+      //@ts-ignore
+      metaData={data._seoMetaTags}
       canonicalPath={data.canonicalPath}
       footerCss={{
         paddingBottom: '$7',
         when: { l: { paddingBottom: '$1' } },
       }}
+      altHeader={<Header />}
     >
       <Container
         as="section"
@@ -114,13 +116,6 @@ export async function getStaticProps({ params, preview = false }) {
     preview,
     variables: { pageSlug: params.pageSlug },
   })
-  //@ts-expect-error
-  const {
-    site: { favicon },
-  }: GetFaviconsQuery = await request({
-    query: 'GetFavicons',
-    preview,
-  })
 
   const markdownToDast = (await import('@utils/src')).markdownToDast
 
@@ -128,7 +123,7 @@ export async function getStaticProps({ params, preview = false }) {
 
   return {
     props: {
-      data: { content, favicon, ...rest },
+      data: { content, ...rest },
       pageSlug: params.pageSlug,
     },
   }

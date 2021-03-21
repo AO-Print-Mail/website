@@ -369,7 +369,7 @@ interface ButtonIconProps {
 }
 
 const ButtonIcon: React.FC<ButtonIconProps> = ({ children, ...props }) => {
-  const Span = styled('span', {})
+  const Span = styled('span', { height: '24px' })
   const _children = React.isValidElement(children)
     ? React.cloneElement(children, {
         'aria-hidden': true,

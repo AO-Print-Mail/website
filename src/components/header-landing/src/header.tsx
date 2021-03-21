@@ -1,4 +1,4 @@
-import { Container, Logo, HeaderBar, ContentWrapper, styled } from '@theme'
+import { Container, Logo, HeaderBar, styled } from '@theme'
 import Link from 'next/link'
 import { Button } from '../../button'
 import { Phone } from '@theme/icons/phone'
@@ -8,9 +8,11 @@ interface HeaderProps {
   blur?: boolean
 }
 
+const NavContainer = styled('div', {})
+
 export function Header({ sticky = false, ...props }: HeaderProps) {
   return (
-    <HeaderBar {...props} as="header">
+    <HeaderBar as="header" {...props}>
       <Container
         css={{
           display: 'flex',
@@ -30,6 +32,7 @@ export function Header({ sticky = false, ...props }: HeaderProps) {
             />
           </a>
         </Link>
+
         <Button
           as="a"
           href="tel:+61296456777"
