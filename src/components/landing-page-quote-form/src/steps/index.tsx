@@ -9,14 +9,13 @@ import {
 } from '@lib/little-state-machine/actions'
 import dynamic from 'next/dynamic'
 import { encode } from '@lib/netlify/utils'
-import { MotionValue, motion } from 'framer-motion'
+import { MotionValue, m as motion } from 'framer-motion'
 import { TopBarControls } from '../topBarControls'
 import { FormSteps } from '../landing-page-quote-form'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 import { Box } from '@theme'
 import { StepWrapper } from './stepWrapper'
 import { ConfirmationPage } from './confirmation'
-import { useAnimationFeatures } from '@lib/react/animation-features'
 import { __DEV__ } from '@utils'
 
 export type QuoteFormInputData = JobInformation &
@@ -91,13 +90,10 @@ export const FormStepper: React.FC<FormStepsProps> = ({
 
   useEffect(() => {
     if (readyToSubmit) {
-      console.log(JSON.stringify(formData, null, 4))
       sendForm()
       fireSubmit(false)
     }
   }, [readyToSubmit])
-
-  useAnimationFeatures(['exit', 'animation'])
 
   let Main, Footer
 

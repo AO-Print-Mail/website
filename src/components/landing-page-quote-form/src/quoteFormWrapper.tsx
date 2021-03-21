@@ -1,6 +1,6 @@
 import { styled } from '@theme'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
-import { AnimateSharedLayout, motion, useAnimation } from 'framer-motion'
+import { m as motion, useAnimation } from 'framer-motion'
 import { useEffect } from 'react'
 
 export interface FormWrapperProps {
@@ -14,10 +14,10 @@ export interface FormWrapperProps {
   step: any
 }
 
-const FormBackground = styled(motion.div, {
+const FormBackground = styled('div', {
   position: 'fixed',
   display: 'block',
-  zIndex: '$1',
+  zIndex: '$3',
   left: '0',
   bottom: '0',
   right: '0',
@@ -68,12 +68,13 @@ export const FormWrapper: React.FC<FormWrapperProps> = ({
 
   return (
     <FormBackground
+      as={motion.div}
       isOpen={isOpen}
       variants={variants}
       animate={wrapperControls}
       {...props}
     >
-      <AnimateSharedLayout>{children}</AnimateSharedLayout>
+      {children}
     </FormBackground>
   )
 }

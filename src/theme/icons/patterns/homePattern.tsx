@@ -39,15 +39,15 @@ export const HomePattern = createIcon({
         <path fill="#FE9339" d="M306.4 431.5h61.3v61.3l-61.3-61.3z" />
         <path
           stroke="#EE3131"
-          stroke-dasharray="5 2"
+          strokeDasharray="5 2"
           d="M367.7 492.8l-61.3-61.3"
         />
         <path fill="#B6DDF6" d="M245.2 676.6H0V554l245.2 122.6z" />
         <path
           fill="#00217D"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           d="M122.6 554H.6l122 61v.3l.2-.1.3.1v-.2l122-61H122.7z"
-          clip-rule="evenodd"
+          clipRule="evenodd"
         />
         <path
           fill="url(#paint0_linear)"
@@ -73,15 +73,15 @@ export const HomePattern = createIcon({
         />
         <path
           fill="#558C46"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           d="M106.6 54l77.3 77.2h-39.3c-21 0-38-17-38-38V53.9z"
-          clip-rule="evenodd"
+          clipRule="evenodd"
         />
         <path
           fill="#006D38"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           d="M183.9 131.2l-77.3-77.3H146c21 0 38 17 38 38v39.3z"
-          clip-rule="evenodd"
+          clipRule="evenodd"
         />
         <path
           fill="#397A39"
@@ -93,35 +93,27 @@ export const HomePattern = createIcon({
         />
         <path
           stroke="#558C46"
-          stroke-dasharray="5 2"
+          strokeDasharray="5 2"
           d="M306.4 492.8L245.2 554"
         />
-        <path
-          stroke="#00217D"
-          stroke-dasharray="5 2"
-          d="M429 492.8l61.3-61.3"
-        />
+        <path stroke="#00217D" strokeDasharray="5 2" d="M429 492.8l61.3-61.3" />
         <path
           fill="#FF212D"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           d="M183.9 253.7V131.2h0a61.3 61.3 0 100 122.5z"
-          clip-rule="evenodd"
+          clipRule="evenodd"
         />
         <path
           fill="#FE9339"
-          fill-rule="evenodd"
+          fillRule="evenodd"
           d="M183.9 131.2v122.5h-.1a61.3 61.3 0 000-122.5z"
-          clip-rule="evenodd"
+          clipRule="evenodd"
         />
         <circle cx="275.8" cy="339.5" r="30.6" fill="#FE9339" />
         <circle cx="215.1" cy="462.3" r="30.6" fill="#002A7D" />
-        <path
-          stroke="#fff"
-          stroke-dasharray="5 2"
-          d="M306.4 370.2l-61.2-61.3"
-        />
+        <path stroke="#fff" strokeDasharray="5 2" d="M306.4 370.2l-61.2-61.3" />
         <path fill="#B6DDF6" d="M429 247.6H306.4V125L429 247.6z" />
-        <path stroke="#fff" stroke-dasharray="5 2" d="M183.9 492.8l61.3-61.3" />
+        <path stroke="#fff" strokeDasharray="5 2" d="M183.9 492.8l61.3-61.3" />
       </g>
       <defs>
         <linearGradient
@@ -132,8 +124,8 @@ export const HomePattern = createIcon({
           y2="360.6"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#00217D" />
-          <stop offset="1" stop-color="#0072CE" />
+          <stop stopColor="#00217D" />
+          <stop offset="1" stopColor="#0072CE" />
         </linearGradient>
       </defs>
     </>

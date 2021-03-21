@@ -1,5 +1,4 @@
-import { createContext, useState } from 'react'
-import type { MotionFeature } from 'framer-motion'
+import { createContext, useEffect, useState } from 'react'
 
 export const featureLookup = {
   drag: './dragFeature',
@@ -11,20 +10,15 @@ export const featureLookup = {
 
 //FAILED ATTEMPT - TBC
 
-/*
-We are looking for a component to simply use
-useAnimationFeature(['exit','drag'])
-*/
-
 export type animationStr = keyof typeof featureLookup
 export type AnimationState = {
-  [key in animationStr]?: MotionFeature
+  [key in animationStr]?: any
 }
 type contextType = (arg: animationStr[]) => void
 
 export const AnimationFeaturesContext = createContext<contextType>(([]) => {})
 
-export function useAnimationContext() {
+export function useAnimationContext(defaultFeatures?: animationStr[]) {
   const [animationFeatures, setAnimationFeatures]: [
     AnimationState,
     (AnimationState) => void
@@ -33,7 +27,7 @@ export function useAnimationContext() {
   const importFeatures = (reqs: animationStr[]) => {
     reqs.forEach(async (req) => {
       if (!animationFeatures[req]) {
-        let feature: MotionFeature
+        let feature: any
         switch (req) {
           case 'drag':
             feature = (await import('./dragFeature')).default
@@ -56,7 +50,13 @@ export function useAnimationContext() {
     })
   }
 
-  const features: MotionFeature[] = Object.values(animationFeatures)
+  useEffect(() => {
+    if (defaultFeatures) {
+      importFeatures(defaultFeatures)
+    }
+  }, [])
+
+  const features: any[] = Object.values(animationFeatures)
 
   return { features, importFeatures }
 }

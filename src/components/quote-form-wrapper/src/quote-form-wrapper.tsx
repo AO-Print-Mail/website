@@ -1,6 +1,5 @@
 import { styled, keyframes } from '@theme'
 import { m as motion } from 'framer-motion'
-import { useAnimationFeatures } from '@lib/react/animation-features'
 
 const footerReveal = keyframes({
   '0%': { transform: 'translateY(100%)' },
@@ -71,8 +70,6 @@ export const QuoteFormWrapper: React.FC<QuoteFormWrapperProps> = ({
   isOpen,
   ...props
 }) => {
-  useAnimationFeatures(['animation', 'animateLayout'])
-
   return (
     <FormBackground
       as={motion.div}

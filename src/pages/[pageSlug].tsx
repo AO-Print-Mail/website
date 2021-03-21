@@ -51,7 +51,6 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       title="landing page"
       description="work in progress"
       beforeFooter={beforeFooter}
-      //@ts-expect-error
       metaData={data._seoMetaTags.concat(data.favicon)}
       canonicalPath={data.canonicalPath}
       footerCss={{

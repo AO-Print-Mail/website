@@ -1,5 +1,4 @@
 import { useEffect, useState, createContext } from 'react'
-import { MotionFeature } from 'framer-motion'
 import dynamic from 'next/dynamic'
 
 export const featureLookup = {
@@ -12,7 +11,7 @@ export const featureLookup = {
 
 export const useAnimationFeatures = (
   featureReqs: (keyof typeof featureLookup)[]
-): MotionFeature[] => {
+): any[] => {
   const [features, setFeatures] = useState({})
 
   const importFeatures = (reqs: (keyof typeof featureLookup)[]) => {
@@ -45,5 +44,3 @@ export const useAnimationFeatures = (
 
   return Object.values(features)
 }
-
-//useAnimationFeatures(['exit'])

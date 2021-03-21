@@ -4,11 +4,7 @@ import { isBrowser } from '@utils'
 import '../styles/font-face.css'
 import { StateMachineProvider, createStore } from 'little-state-machine'
 import { store } from '@lib/little-state-machine'
-import {
-  useAnimationContext,
-  AnimationFeaturesContext,
-} from '@lib/react/animation-features'
-import { MotionConfig } from 'framer-motion'
+import { LazyMotion, domMax } from 'framer-motion'
 import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { UserData } from '@lib/react'
 import { globalStyles } from '@theme'
@@ -28,7 +24,6 @@ if (isBrowser()) {
 const Hubspot = dynamic(() => import('@lib/react/hubspot'))
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { features, importFeatures } = useAnimationContext()
   globalStyles()
   return (
     <StateMachineProvider>
@@ -41,11 +36,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <UserData />
       <Hubspot />
-      <MotionConfig features={features}>
-        <AnimationFeaturesContext.Provider value={importFeatures}>
-          <Component {...pageProps} />
-        </AnimationFeaturesContext.Provider>
-      </MotionConfig>
+      <LazyMotion strict features={domMax}>
+        <Component {...pageProps} />
+      </LazyMotion>
     </StateMachineProvider>
   )
 }
