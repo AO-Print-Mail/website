@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { styled, Container, Logo, Flex } from '@theme'
-import { m as motion, AnimationControls } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { MenuButton } from '@components/button'
 import Link from 'next/link'
+import { MobileNavigation } from '@components/mobile-navigation'
 
 interface HeaderMainProps {
   menuIsOpen: boolean
@@ -113,6 +114,13 @@ export const HeaderMain: React.FC<HeaderMainProps> = ({
               />
             </Flex>
           </NavContainer>
+        </Container>
+        <Container
+          as={motion.div}
+          layout
+          css={{ when: { l: { display: 'none' } } }}
+        >
+          <MobileNavigation navIsOpen={menuIsOpen} />
         </Container>
       </Header>
     </HeaderOuter>
