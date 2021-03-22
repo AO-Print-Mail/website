@@ -66,12 +66,20 @@ export const Layout: React.FC<LayoutProps> = ({
     setShowNav(true)
     let listener
     function update() {
-      const velocity = scrollY.getVelocity()
-      if (velocity > 100) {
-        setShowNav(false)
-      }
-      if (velocity < -100) {
-        setShowNav(true)
+      if (!menuIsOpen) {
+        if (scrollY.get() < 100) {
+          setShowNav(true)
+          return
+        }
+        const velocity = scrollY.getVelocity()
+        if (velocity > 100) {
+          setShowNav(false)
+          return
+        }
+        if (velocity < -100) {
+          setShowNav(true)
+          return
+        }
       }
     }
     const addScrollListener = window.setTimeout(() => {

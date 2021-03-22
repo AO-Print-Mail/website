@@ -55,13 +55,19 @@ const MenuButtonLabel: React.FC<MenuButtonProps> = ({ open }) => {
   return <UI3>{open ? 'Close' : 'Menu'}</UI3>
 }
 
-export const MenuButton: React.FC<MenuButtonProps> = ({ open, onClick }) => {
+export const MenuButton: React.FC<MenuButtonProps> = ({
+  open,
+  onClick,
+  ...props
+}) => {
   return (
     <Button
       style="naked"
+      //@ts-expect-error
       css={{ color: '$DBA85' }}
       rightIcon={<MenuButtonIcon open={open} />}
       onClick={onClick}
+      {...props}
     >
       <UI3 color="unset">{open ? 'Close' : 'Menu'}</UI3>
     </Button>

@@ -1,3 +1,4 @@
+import { StickyMobileFooter } from '@components/sticky-mobile-footer'
 import { theme, stitchesConfig } from '.'
 
 const gradients = {
@@ -225,7 +226,32 @@ export default {
       right: value,
     }
   },
-
+  /*
+  visuallyHide: (config: typeof stitchesConfig) => (
+    value: 'true' | 'false'
+  ) => {
+    if (value === 'true') {
+      return {
+        clip: 'rect(0 0 0 0)',
+        clipPath: 'inset(50%)',
+        overflow: 'hidden',
+        position: 'absolute',
+        whiteSpace: 'nowrap',
+        width: '1px',
+      }
+    }
+    if (value === 'false') {
+      return {
+        clip: 'none',
+        clipPath: 'none',
+        overflow: 'auto',
+        position: 'relative',
+        whiteSpace: 'auto',
+        width: 'auto',
+      }
+    }
+  },
+*/
   linearGradient: (config: typeof stitchesConfig) => (
     value: keyof typeof gradients | string
   ) => {
