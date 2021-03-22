@@ -1,5 +1,6 @@
 import { StickyMobileFooter } from '@components/sticky-mobile-footer'
 import { theme, stitchesConfig } from '.'
+import { colors } from './tokens/colors'
 
 const gradients = {
   $orange: '90deg, #EE3131 0%, #F89E33 100.02%',
@@ -226,32 +227,13 @@ export default {
       right: value,
     }
   },
-  /*
-  visuallyHide: (config: typeof stitchesConfig) => (
-    value: 'true' | 'false'
+  focusRing: (config: typeof stitchesConfig) => (
+    value: keyof typeof colors | string
   ) => {
-    if (value === 'true') {
-      return {
-        clip: 'rect(0 0 0 0)',
-        clipPath: 'inset(50%)',
-        overflow: 'hidden',
-        position: 'absolute',
-        whiteSpace: 'nowrap',
-        width: '1px',
-      }
-    }
-    if (value === 'false') {
-      return {
-        clip: 'none',
-        clipPath: 'none',
-        overflow: 'auto',
-        position: 'relative',
-        whiteSpace: 'auto',
-        width: 'auto',
-      }
+    return {
+      color: 'pink',
     }
   },
-*/
   linearGradient: (config: typeof stitchesConfig) => (
     value: keyof typeof gradients | string
   ) => {
