@@ -65,6 +65,11 @@ const SectionLabel = styled(UI2, {
   color: '$DA40',
   fontWeight: 'semi-bold',
   ml: '$2',
+  when: {
+    m: {
+      ml: '$3',
+    },
+  },
 })
 
 const SectionLink: React.FC<typeof staticData[0]['menu_items'][0]> = ({
@@ -72,15 +77,17 @@ const SectionLink: React.FC<typeof staticData[0]['menu_items'][0]> = ({
   link,
 }) => {
   return (
-    <Box as="li" css={{ flex: '0 0 50%' }}>
+    <Box as="li" css={{ flex: '0 0 50%', '& > a': { textDecoration: 'none' } }}>
       <Link href={link}>
-        <Button
-          style="naked"
-          as="a"
-          css={{ display: 'inline-block', mt: '$3' }}
-        >
-          <UI2 color="unset">{name}</UI2>
-        </Button>
+        <a>
+          <Button
+            style="naked"
+            as="span"
+            css={{ display: 'inline-block', mt: '$3', py: '$2' }}
+          >
+            <UI2 color="unset">{name}</UI2>
+          </Button>
+        </a>
       </Link>
     </Box>
   )
@@ -106,7 +113,7 @@ const NavSection: React.FC<NavSectionProps> = ({
           wrap
         >
           {menu_items.map((item) => (
-            <SectionLink {...item} />
+            <SectionLink key={item.name} {...item} />
           ))}
         </Flex>
       </Container>
