@@ -26,22 +26,20 @@ const FormBackground = styled('div', {
   animation: `${footerReveal} 0.4s ease-out forwards`,
   btlr: '$5',
   btrr: '$5',
-  when: {
-    l: {
-      transform: 'translateY(0%)',
-      animation: 'none',
-      minHeight: '$10',
-      boxShadow: '$3',
-      position: 'relative',
-      br: '$5',
-      ml: '$2',
-      mr: '$2',
-      mt: '$6',
-      width: '50%',
-    },
-    xl: {
-      width: 'calc(100% / 12 * 5 - 64px)',
-    },
+  '@l': {
+    transform: 'translateY(0%)',
+    animation: 'none',
+    minHeight: '$10',
+    boxShadow: '$3',
+    position: 'relative',
+    br: '$5',
+    ml: '$2',
+    mr: '$2',
+    mt: '$6',
+    width: '50%',
+  },
+  '@xl': {
+    width: 'calc(100% / 12 * 5 - 64px)',
   },
 })
 

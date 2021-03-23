@@ -22,16 +22,13 @@ export const Titile = styled('h1', {
     alignRight: { true: { textAlign: 'right' } },
     alignCenter: { true: { textAlign: 'center' } },
   },
-
-  when: {
-    m: {
-      fontSize: '$h1t',
-      letterSpacing: '$xcosy',
-    },
-    l: {
-      fontSize: '$h1d',
-      letterSpacing: '$xcosy',
-    },
+  '@m': {
+    fontSize: '$h1t',
+    letterSpacing: '$xcosy',
+  },
+  '@l': {
+    fontSize: '$h1d',
+    letterSpacing: '$xcosy',
   },
 })
 export const Heading1 = styled('h1', {
@@ -57,15 +54,13 @@ export const Heading1 = styled('h1', {
     alignCenter: { true: { textAlign: 'center' } },
   },
 
-  when: {
-    m: {
-      fontSize: '$h1t',
-      letterSpacing: '$xcosy',
-    },
-    l: {
-      fontSize: '$h1d',
-      letterSpacing: '$xcosy',
-    },
+  '@m': {
+    fontSize: '$h1t',
+    letterSpacing: '$xcosy',
+  },
+  '@l': {
+    fontSize: '$h1d',
+    letterSpacing: '$xcosy',
   },
 })
 export const Heading2 = styled('h2', {
@@ -91,15 +86,13 @@ export const Heading2 = styled('h2', {
     alignCenter: { true: { textAlign: 'center' } },
   },
 
-  when: {
-    m: {
-      fontSize: '$h2t',
-      letterSpacing: '$xcosy',
-    },
-    l: {
-      fontSize: '$h2d',
-      letterSpacing: '$xcosy',
-    },
+  '@m': {
+    fontSize: '$h2t',
+    letterSpacing: '$xcosy',
+  },
+  '@l': {
+    fontSize: '$h2d',
+    letterSpacing: '$xcosy',
   },
 })
 export const Heading3 = styled('h3', {
@@ -125,15 +118,13 @@ export const Heading3 = styled('h3', {
     alignCenter: { true: { textAlign: 'center' } },
   },
 
-  when: {
-    m: {
-      fontSize: '$h3t',
-      letterSpacing: '$cosy',
-    },
-    l: {
-      fontSize: '$h3d',
-      letterSpacing: '$xcosy',
-    },
+  '@m': {
+    fontSize: '$h3t',
+    letterSpacing: '$cosy',
+  },
+  '@l': {
+    fontSize: '$h3d',
+    letterSpacing: '$xcosy',
   },
 })
 export const Heading4 = styled('h4', {
@@ -159,15 +150,13 @@ export const Heading4 = styled('h4', {
     alignCenter: { true: { textAlign: 'center' } },
   },
 
-  when: {
-    m: {
-      fontSize: '$h4t',
-      letterSpacing: '$cosy',
-    },
-    l: {
-      fontSize: '$h4d',
-      letterSpacing: '$cosy',
-    },
+  '@m': {
+    fontSize: '$h4t',
+    letterSpacing: '$cosy',
+  },
+  '@l': {
+    fontSize: '$h4d',
+    letterSpacing: '$cosy',
   },
 })
 export const Heading5 = styled('h5', {
@@ -192,16 +181,13 @@ export const Heading5 = styled('h5', {
     alignRight: { true: { textAlign: 'right' } },
     alignCenter: { true: { textAlign: 'center' } },
   },
-
-  when: {
-    m: {
-      fontSize: '$h5t',
-      letterSpacing: '$cosy',
-    },
-    l: {
-      fontSize: '$h5d',
-      letterSpacing: '$cosy',
-    },
+  '@m': {
+    fontSize: '$h5t',
+    letterSpacing: '$cosy',
+  },
+  '@l': {
+    fontSize: '$h5d',
+    letterSpacing: '$cosy',
   },
 })
 export const Heading6 = styled('h6', {
@@ -226,16 +212,13 @@ export const Heading6 = styled('h6', {
     alignRight: { true: { textAlign: 'right' } },
     alignCenter: { true: { textAlign: 'center' } },
   },
-
-  when: {
-    m: {
-      fontSize: '$h6t',
-      letterSpacing: '$cosy',
-    },
-    l: {
-      fontSize: '$h6d',
-      letterSpacing: '$cosy',
-    },
+  '@m': {
+    fontSize: '$h6t',
+    letterSpacing: '$cosy',
+  },
+  '@l': {
+    fontSize: '$h6d',
+    letterSpacing: '$cosy',
   },
 })
 export const Paragraph1 = styled('p', {
@@ -263,16 +246,13 @@ export const Paragraph1 = styled('p', {
     semiBold: { true: { fontWeight: '600' } },
     italic: { true: { textStyle: 'italic' } },
   },
-
-  when: {
-    m: {
-      fontSize: '$p1t',
-      letterSpacing: '$cosy',
-    },
-    l: {
-      fontSize: '$p1d',
-      letterSpacing: '$cosy',
-    },
+  '@m': {
+    fontSize: '$p1t',
+    letterSpacing: '$cosy',
+  },
+  '@l': {
+    fontSize: '$p1d',
+    letterSpacing: '$cosy',
   },
 })
 export const Paragraph2 = styled('p', {
@@ -300,16 +280,13 @@ export const Paragraph2 = styled('p', {
     semiBold: { true: { fontWeight: '600' } },
     italic: { true: { textStyle: 'italic' } },
   },
-
-  when: {
-    m: {
-      fontSize: '$p2t',
-      letterSpacing: '$reg',
-    },
-    l: {
-      fontSize: '$p2d',
-      letterSpacing: '$reg',
-    },
+  '@m': {
+    fontSize: '$p2t',
+    letterSpacing: '$reg',
+  },
+  '@l': {
+    fontSize: '$p2d',
+    letterSpacing: '$reg',
   },
 })
 export const Paragraph3 = styled('p', {
@@ -337,16 +314,13 @@ export const Paragraph3 = styled('p', {
     semiBold: { true: { fontWeight: '600' } },
     italic: { true: { textStyle: 'italic' } },
   },
-
-  when: {
-    m: {
-      fontSize: '$p3t',
-      letterSpacing: '$reg',
-    },
-    l: {
-      fontSize: '$p3d',
-      letterSpacing: '$reg',
-    },
+  '@m': {
+    fontSize: '$p3t',
+    letterSpacing: '$reg',
+  },
+  '@l': {
+    fontSize: '$p3d',
+    letterSpacing: '$reg',
   },
 })
 export const Paragraph4 = styled('p', {
@@ -374,16 +348,13 @@ export const Paragraph4 = styled('p', {
     semiBold: { true: { fontWeight: '600' } },
     italic: { true: { textStyle: 'italic' } },
   },
-
-  when: {
-    m: {
-      fontSize: '$p4t',
-      letterSpacing: '$reg',
-    },
-    l: {
-      fontSize: '$p4d',
-      letterSpacing: '$reg',
-    },
+  '@m': {
+    fontSize: '$p4t',
+    letterSpacing: '$reg',
+  },
+  '@l': {
+    fontSize: '$p4d',
+    letterSpacing: '$reg',
   },
 })
 export const Paragraph5 = styled('p', {
@@ -411,16 +382,13 @@ export const Paragraph5 = styled('p', {
     semiBold: { true: { fontWeight: '600' } },
     italic: { true: { textStyle: 'italic' } },
   },
-
-  when: {
-    m: {
-      fontSize: '$p5t',
-      letterSpacing: '$space',
-    },
-    l: {
-      fontSize: '$p5d',
-      letterSpacing: '$space',
-    },
+  '@m': {
+    fontSize: '$p5t',
+    letterSpacing: '$space',
+  },
+  '@l': {
+    fontSize: '$p5d',
+    letterSpacing: '$space',
   },
 })
 
@@ -468,12 +436,14 @@ export const UI1 = styled('span', {
 export const UI2 = styled('span', {
   ...uiProperties,
   fontSize: '$p3m',
-  when: { m: { fontSize: '$p3t' }, l: { fontSize: '$p3d' } },
+  '@m': { fontSize: '$p3t' },
+  '@l': { fontSize: '$p3d' },
 })
 export const UI3 = styled('span', {
   ...uiProperties,
   fontSize: '$p4m',
-  when: { m: { fontSize: '$p4t' }, l: { fontSize: '$p4d' } },
+  '@m': { fontSize: '$p4t' },
+  '@l': { fontSize: '$p4d' },
 })
 
 export const strikethroughClass = css({

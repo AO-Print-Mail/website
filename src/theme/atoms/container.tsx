@@ -7,14 +7,12 @@ export const Container = styled('div', {
   width: '100%',
   mx: 'auto',
   px: '$3',
-  when: {
-    m: {
-      px: '$4',
-      maxWidth: '60rem',
-    },
-    l: {
-      maxWidth: '96rem',
-      px: '$5',
-    },
+  '@m': {
+    px: '$4',
+    maxWidth: '60rem',
+  },
+  '@l': {
+    maxWidth: '96rem',
+    px: '$5',
   },
 })

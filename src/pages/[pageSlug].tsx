@@ -19,16 +19,14 @@ interface PageProps {
 }
 
 const HeroText = styled('div', {
-  when: {
-    l: {
-      pr: '$2',
-      pl: '$3',
-      width: '50%',
-    },
-    xl: {
-      pr: '$3',
-      pl: '$4',
-    },
+  '@l': {
+    pr: '$2',
+    pl: '$3',
+    width: '50%',
+  },
+  '@xl': {
+    pr: '$3',
+    pl: '$4',
   },
 })
 
@@ -56,14 +54,11 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       canonicalPath={data.canonicalPath}
       footerCss={{
         paddingBottom: '$7',
-        when: { l: { paddingBottom: '$1' } },
+        '@l': { paddingBottom: '$1' },
       }}
       altHeader={<Header />}
     >
-      <Container
-        as="section"
-        css={{ pt: '$7', when: { l: { display: 'flex' } } }}
-      >
+      <Container as="section" css={{ pt: '$7', '@l': { display: 'flex' } }}>
         <HeroText>
           <Heading1 color="primary">{data.title}</Heading1>
           <Box css={{ maxWidth: '60ch' }}>

@@ -14,27 +14,25 @@ interface PageProps {
 
 const HeroText = styled('div', {
   willChange: 'opacity',
-  when: {
-    s: {
-      pr: '$2',
-      pl: '$3',
-      pt: '$3',
-    },
-    m: {
-      pr: '$2',
-      pl: '$3',
-      pt: '$6',
-      width: '75%',
-    },
-    l: {
-      pr: '$2',
-      pl: '$3',
-      width: '50%',
-    },
-    xl: {
-      pr: '$3',
-      pl: '$4',
-    },
+  '@s': {
+    pr: '$2',
+    pl: '$3',
+    pt: '$3',
+  },
+  '@m': {
+    pr: '$2',
+    pl: '$3',
+    pt: '$6',
+    width: '75%',
+  },
+  '@l': {
+    pr: '$2',
+    pl: '$3',
+    width: '50%',
+  },
+  '@xl': {
+    pr: '$3',
+    pl: '$4',
   },
 })
 
@@ -47,7 +45,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       metaData={[]}
       footerCss={{
         paddingBottom: '$7',
-        when: { l: { paddingBottom: '$1' } },
+        '@l': { paddingBottom: '$1' },
       }}
     >
       <Box
@@ -62,7 +60,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           css={{
             height: '680px',
             pt: '$6',
-            when: { l: { display: 'flex', height: '800px', pt: '$7' } },
+            '@l': { display: 'flex', height: '800px', pt: '$7' },
           }}
         >
           <HomePattern
@@ -73,16 +71,14 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
               right: '-$7',
               top: '$7',
               display: 'none',
-              when: {
-                s: { right: '-$6', height: '300px' },
-                m: {
-                  top: '0',
-                  display: 'block',
-                  height: '100%',
-                  right: '-$10',
-                },
-                l: { right: '-$4', top: '0' },
+              '@s': { right: '-$6', height: '300px' },
+              '@m': {
+                top: '0',
+                display: 'block',
+                height: '100%',
+                right: '-$10',
               },
+              '@l': { right: '-$4', top: '0' },
             }}
           />
           <HeroText>
@@ -106,7 +102,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       <Box as="section">
         <Container
           as="section"
-          css={{ height: '100vh', when: { l: { display: 'flex' } } }}
+          css={{ height: '100vh', '@l': { display: 'flex' } }}
         ></Container>
       </Box>
     </Layout>

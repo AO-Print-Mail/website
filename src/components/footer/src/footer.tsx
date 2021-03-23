@@ -10,6 +10,7 @@ import {
   css,
   CSS,
   Flex,
+  Box,
 } from '@theme'
 import { Button } from '@components/button'
 import Link from 'next/link'
@@ -38,16 +39,14 @@ const FooterWrapper = styled(ContentWrapper, {
 })
 
 const LayoutGrid = styled(Container, {
-  when: {
-    m: {
-      display: 'grid',
-      gridGap: '$4',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
-    },
-    l: {
-      gridGap: '$5',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
-    },
+  '@m': {
+    display: 'grid',
+    gridGap: '$4',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
+  },
+  '@l': {
+    gridGap: '$5',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
   },
 })
 
@@ -56,32 +55,28 @@ const ContentColumn = styled('div', {
   flexFlow: 'column nowrap',
   alignItems: 'flex-start',
   justifyContent: 'flex-start',
-  when: {
-    m: {
-      gridColumnStart: '1',
-      gridColumnEnd: 'span 3',
-    },
-    l: {
-      gridColumnEnd: 'span 2',
-    },
+  '@m': {
+    gridColumnStart: '1',
+    gridColumnEnd: 'span 3',
+  },
+  '@l': {
+    gridColumnEnd: 'span 2',
   },
 })
 const row3 = css({
   gridColumnStart: '1',
   gridColumnEnd: 'span 4',
   alignSelf: 'start',
-  when: {
-    s: {
-      gridColumnEnd: 'span 3',
-    },
-    m: {
-      gridColumnStart: '4',
-      gridColumnEnd: 'span 3',
-    },
-    l: {
-      gridColumnStart: '6',
-      gridColumnEnd: 'span 3',
-    },
+  '@s': {
+    gridColumnEnd: 'span 3',
+  },
+  '@m': {
+    gridColumnStart: '4',
+    gridColumnEnd: 'span 3',
+  },
+  '@l': {
+    gridColumnStart: '6',
+    gridColumnEnd: 'span 3',
   },
 })
 
@@ -113,9 +108,11 @@ const MainFooter: React.FC<MainFooterProps> = ({
   ...props
 }) => {
   return (
-    <Container>
-      <Flex as="nav"></Flex>
-    </Container>
+    <Box>
+      <Container>
+        <Flex as="nav"></Flex>
+      </Container>
+    </Box>
   )
 }
 
@@ -133,9 +130,9 @@ export const Footer: React.FC<FooterProps> = ({
               <Logo
                 color="white"
                 size={{
-                  initial: 'regular',
-                  m: 'large',
-                  l: 'xlarge',
+                  '@initial': 'regular',
+                  '@m': 'large',
+                  '@l': 'xlarge',
                 }}
               />
             </a>

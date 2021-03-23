@@ -1,26 +1,20 @@
 import React from 'react'
-import NextDocument, {
-  Html,
-  Head,
-  Main,
-  NextScript,
-  DocumentContext,
-} from 'next/document'
+import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { getCssString } from '@theme'
 import { __DEV__ } from '@utils/src/assertion'
 import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 
 export default class Document extends NextDocument {
-  prefixedStyles = async () => {
-    const styles = getCssString().concat('#loadOverlay{display: none;}')
+  /*prefixedStyles = async () => {
+    const styles = getCssString()
     const ps = await postcss([autoprefixer()])
       .process(styles)
       .then((style) => {
         return style.css
       })
     return ps
-  }
+  }*/
   render() {
     return (
       <Html lang="en">
@@ -28,9 +22,7 @@ export default class Document extends NextDocument {
           {/* eslint-disable-next-line react/no-danger */}
           <style
             id="stitches"
-            dangerouslySetInnerHTML={{
-              __html: getCssString(),
-            }}
+            dangerouslySetInnerHTML={{ __html: getCssString() }}
           />
           <script
             dangerouslySetInnerHTML={{

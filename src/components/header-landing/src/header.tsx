@@ -25,9 +25,9 @@ export function Header({ sticky = false, ...props }: HeaderProps) {
             <Logo
               color="primary"
               size={{
-                initial: 'regular',
-                m: 'large',
-                l: 'xlarge',
+                '@initial': 'regular',
+                '@m': 'large',
+                '@l': 'xlarge',
               }}
             />
           </a>

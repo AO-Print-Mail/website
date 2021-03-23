@@ -36,16 +36,14 @@ export const Background = styled('div', {
         left: '0',
         btlr: '0',
         btrr: '0',
-        when: { l: { br: '$5', height: 'auto' } },
+        '@l': { br: '$5', height: 'auto' },
       },
       false: { height: 'auto' },
     },
   },
-  when: {
-    l: {
-      br: '$5',
-      boxShadow: '$3',
-    },
+  '@l': {
+    br: '$5',
+    boxShadow: '$3',
   },
 })
 
@@ -62,11 +60,9 @@ const Content = styled('div', {
       },
     },
   },
-  when: {
-    l: {
-      position: 'static',
-      top: '$3',
-    },
+  '@l': {
+    position: 'static',
+    top: '$3',
   },
 })
 

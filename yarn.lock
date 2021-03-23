@@ -2928,17 +2928,17 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stitches/core@^0.1.0-canary.17":
-  version "0.1.0-canary.17"
-  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.1.0-canary.17.tgz#9c6514668196a7b92d1dfdfbef756464b4a7dd66"
-  integrity sha512-KWNdHgk8hflXCLLZTnIVqwY7jGHQtGF0yQMrOBGrleOF/rU3t1bSPIjKpW1YH9iRzVFP0p6X9KVlEhh5qCbxJg==
+"@stitches/core@^0.1.0-canary.21":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.1.0.tgz#9ee10f0eda36a6a7c0a6746aea32d41d41b6c9d2"
+  integrity sha512-3XX86Jc3iDtMEKEg9aCrRIaPOh2Qptp/5J1UH1rB5NtepCc6jXPqK0sxNNEQO6HZlv0AszycKEp8hW2KGL7Xng==
 
-"@stitches/react@0.1.0-canary.17":
-  version "0.1.0-canary.17"
-  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.1.0-canary.17.tgz#051a191709ba7acf9381b1ad50bb53c15535037d"
-  integrity sha512-KkfbUvLQ5iVG54fZdBd89r4Hr5gCcZ6xcgrlDs0KRsMQ06OU6OCFcOItrpx0v5o+EutIlvSy501Z/oBsaC/Qyg==
+"@stitches/react@0.1.0-canary.21":
+  version "0.1.0-canary.21"
+  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.1.0-canary.21.tgz#e958ebe8b70720e89163062405d4aaee7a0fd5e2"
+  integrity sha512-LHdEk9cWos2huWgVRX82XpnA6c4r8su/olsSqnk+O03yJejUtKhEUXjDcvBiljDB3S6whKteN7BgloHTHsWmKA==
   dependencies:
-    "@stitches/core" "^0.1.0-canary.17"
+    "@stitches/core" "^0.1.0-canary.21"
 
 "@storybook/addon-actions@6.1.18", "@storybook/addon-actions@^6.1.18":
   version "6.1.18"

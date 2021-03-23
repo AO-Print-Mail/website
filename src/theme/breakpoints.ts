@@ -6,9 +6,8 @@ export const breakpointPixelValues = {
 }
 
 export const breakpoints = {
-  s: `@media (min-width: 360px)`,
-  m: `@media (min-width: 640px)`,
-  l: `@media (min-width: 960px)`,
-  xl: `@media (min-width: 1300px)`,
-  moz: `@-moz-document url-prefix()`,
+  s: `(min-width: 360px)`,
+  m: `(min-width: 640px)`,
+  l: `(min-width: 960px)`,
+  xl: `(min-width: 1300px)`,
 }

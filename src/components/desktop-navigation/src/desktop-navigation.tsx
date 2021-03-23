@@ -39,7 +39,7 @@ const NavLinkText = styled(UI2, {
   '&:focus': {
     color: 'red',
   },
-  when: { xl: { fontSize: '$p3d' } },
+  '@xl': { fontSize: '$p3d' },
 })
 
 const Anchor = styled('a', {
@@ -57,7 +57,7 @@ const NavLink: React.FC<{ name: string; link: string }> = ({
       css={{
         mr: '$4',
         '& > a': { textDecoration: 'none' },
-        when: { xl: { mr: '$5' } },
+        '@xl': { mr: '$5' },
       }}
     >
       <Link href={link}>

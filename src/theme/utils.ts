@@ -1,5 +1,4 @@
-import { StickyMobileFooter } from '@components/sticky-mobile-footer'
-import { theme, stitchesConfig } from '.'
+import { theme, stitchesConfig, CSS } from '.'
 import { colors } from './tokens/colors'
 
 const gradients = {
@@ -251,6 +250,11 @@ export default {
       '& > *': {
         margin: 'var(--gap) 0 0 var(--gap)',
       },
+    }
+  },
+  moz: (config: typeof stitchesConfig) => (value: CSS) => {
+    return {
+      '@-moz-document url-prefix()': value,
     }
   },
 }
