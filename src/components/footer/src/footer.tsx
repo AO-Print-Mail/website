@@ -9,10 +9,11 @@ import {
   CovidSafeBanner,
   css,
   CSS,
-  theme,
+  Flex,
 } from '@theme'
 import { Button } from '@components/button'
 import Link from 'next/link'
+import React from 'react'
 
 interface FooterProps {
   css?: CSS
@@ -65,7 +66,7 @@ const ContentColumn = styled('div', {
     },
   },
 })
-const row3: CSS = css({
+const row3 = css({
   gridColumnStart: '1',
   gridColumnEnd: 'span 4',
   alignSelf: 'start',
@@ -83,6 +84,40 @@ const row3: CSS = css({
     },
   },
 })
+
+const staticData = [
+  {
+    section_label: 'Services',
+    menu_items: [
+      { name: 'Direct Mail', link: '/direct-mail' },
+      { name: 'Fulfilment', link: '/package-fulfilment' },
+      { name: 'Printing', link: '/printing' },
+    ],
+  },
+  {
+    section_label: 'Company',
+    menu_items: [
+      { name: 'About Us', link: '/about-us' },
+      { name: 'Contact', link: '/contact' },
+      { name: 'Blog', link: '/blog' },
+    ],
+  },
+]
+
+interface MainFooterProps {
+  data?: typeof staticData
+}
+
+const MainFooter: React.FC<MainFooterProps> = ({
+  data = staticData,
+  ...props
+}) => {
+  return (
+    <Container>
+      <Flex as="nav"></Flex>
+    </Container>
+  )
+}
 
 export const Footer: React.FC<FooterProps> = ({
   beforeFooter,
@@ -123,8 +158,8 @@ export const Footer: React.FC<FooterProps> = ({
             (02) 9645 6777
           </Button>
         </ContentColumn>
-        <ContentColumn className={row3}>
-          <CovidSafeBanner className={row3} css={{ mt: '$2' }} />
+        <ContentColumn className={row3()}>
+          <CovidSafeBanner css={{ mt: '$2' }} />
           <Button
             as="a"
             href="#"
