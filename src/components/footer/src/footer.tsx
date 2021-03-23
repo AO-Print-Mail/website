@@ -12,6 +12,7 @@ import {
   Flex,
   Box,
   UI2,
+  UI3,
 } from '@theme'
 import { Button } from '@components/button'
 import Link from 'next/link'
@@ -31,7 +32,7 @@ const FooterWrapper = styled(ContentWrapper, {
       none: {},
       normal: {
         pt: '$5',
-        backgroundColor: '$N80',
+        backgroundColor: '$N90',
       },
     },
   },
@@ -114,27 +115,53 @@ interface MainFooterProps {
 }
 
 const Column = styled('section', {
-  mx: '$2',
+  px: '$2',
   width: '16.6%',
-  '@m': { mx: '$3' },
-  '@l': { mx: '$4' },
+  '@m': { px: '$3' },
+  '@l': { px: '$4' },
 })
 
-const SectionLabel = styled(UI2, {
+const SectionLabel = styled(UI3, {
+  ml: '$2',
   color: '$LA35',
   fontWeight: '600',
 })
 
+const LinkText = styled(Paragraph5, {
+  color: '$N30',
+  p: '$2',
+  mt: '$1',
+  '&:hover': {
+    color: '$grey',
+  },
+})
+
+const Section: React.FC<{ data: typeof staticData[0]['menu_items'] }> = ({
+  data,
+}) => {
+  return (
+    <Box css={{ mt: '$3' }}>
+      {data.map((d) => (
+        <Link href={d.link} key={d.name}>
+          <a style={{ textDecoration: 'none' }}>
+            <LinkText>{d.name}</LinkText>
+          </a>
+        </Link>
+      ))}
+    </Box>
+  )
+}
 export const MainFooter: React.FC<MainFooterProps> = ({
   data = staticData,
   ...props
 }) => {
   return (
-    <Box css={{ backgroundColor: '$N80', mb: '$4' }}>
+    <Box css={{ backgroundColor: '$N90', mb: '$4' }}>
       <Container>
         <Flex
           as="nav"
           css={{
+            position: 'relative',
             '@initial': { mx: '-$2' },
             '@m': { mx: '-$3' },
             '@l': { mx: '-$4' },
@@ -149,7 +176,13 @@ export const MainFooter: React.FC<MainFooterProps> = ({
           </Column>
           {data.map((section) => (
             <Column as="section" css={{ mt: '$4' }}>
-              <SectionLabel as="h3">{section.section_label}</SectionLabel>
+              <SectionLabel as="h3" key={section.section_label}>
+                {section.section_label}
+              </SectionLabel>
+              <Section
+                key={`${section.section_label}`}
+                data={section.menu_items}
+              />
             </Column>
           ))}
         </Flex>
@@ -180,11 +213,21 @@ export const Footer: React.FC<FooterProps> = ({
               />
             </a>
           </Link>
-          <Paragraph4 color="light">
-            9 Clearview Pl
-            <br />
-            Brookvale NSW 2100
-          </Paragraph4>
+          <Button
+            as="a"
+            href="https://g.page/ao-mail"
+            color="light"
+            style="naked"
+            size="small"
+            offset="left"
+            css={{ mt: '$3', color: '$LA60' }}
+          >
+            <Paragraph4 color="light" css={{ my: 0 }}>
+              9 Clearview Pl
+              <br />
+              Brookvale NSW 2100
+            </Paragraph4>
+          </Button>
           <Button
             as="a"
             href="tel:+61296456777"

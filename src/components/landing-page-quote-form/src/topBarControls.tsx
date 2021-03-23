@@ -64,7 +64,7 @@ export const TopBarControls: React.FC<TopBarControlsProps> = ({
               animate="show"
               exit="hide"
               size="small"
-              leftIcon={<ArrowBack css={{ color: '$N70' }} as={motion.svg} />}
+              leftIcon={<ArrowBack css={{ color: '$N80' }} as={motion.svg} />}
               style="naked"
               color="dark"
               offset="left"
@@ -97,7 +97,7 @@ export const TopBarControls: React.FC<TopBarControlsProps> = ({
           size="small"
           rightIcon={
             <Close
-              css={{ color: success ? '$LA70' : '$N70' }}
+              css={{ color: success ? '$LA70' : '$N80' }}
               as={motion.svg}
             />
           }

@@ -59,7 +59,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       landing
       altHeader={<Header />}
     >
-      <Container as="section" css={{ pt: '$7', '@l': { display: 'flex' } }}>
+      <Container as="section" css={{ pt: '$2', '@l': { display: 'flex' } }}>
         <HeroText>
           <Heading1 color="primary">{data.title}</Heading1>
           <Box css={{ maxWidth: '60ch' }}>

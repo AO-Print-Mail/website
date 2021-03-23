@@ -123,7 +123,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
                 initial="hide"
                 animate="show"
                 size="small"
-                rightIcon={<Close css={{ color: '$N70' }} />}
+                rightIcon={<Close css={{ color: '$N80' }} />}
                 style="naked"
                 color={'dark'}
                 css={{ '@l': { display: 'none' } }}

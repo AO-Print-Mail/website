@@ -6,7 +6,7 @@ export const globalStyles = global({
     margin: '0',
     fontFamily: '$paragraph',
     fontFeatureSettings: '"salt"',
-    backgroundColor: '$N15',
+    backgroundColor: '$N20',
   },
   '*': {
     boxSizing: 'border-box',

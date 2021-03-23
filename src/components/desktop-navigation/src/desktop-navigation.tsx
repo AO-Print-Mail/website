@@ -39,7 +39,6 @@ const NavLinkText = styled(UI2, {
   '&:focus': {
     color: 'red',
   },
-  '@xl': { fontSize: '$p3d' },
 })
 
 const Anchor = styled('a', {

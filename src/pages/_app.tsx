@@ -21,7 +21,7 @@ if (isBrowser()) {
   })
 }
 
-const Hubspot = dynamic(() => import('@lib/react/hubspot'))
+const Hubspot = dynamic(() => import('@lib/react/hubspot'), { ssr: false })
 
 function MyApp({ Component, pageProps }: AppProps) {
   globalStyles()
