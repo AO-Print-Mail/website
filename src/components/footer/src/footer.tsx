@@ -11,6 +11,7 @@ import {
   CSS,
   Flex,
   Box,
+  UI2,
 } from '@theme'
 import { Button } from '@components/button'
 import Link from 'next/link'
@@ -20,6 +21,7 @@ interface FooterProps {
   css?: CSS
   beforeFooter?: React.ReactNode
   footerCss?: CSS
+  landing?: boolean
 }
 
 const FooterWrapper = styled(ContentWrapper, {
@@ -97,20 +99,60 @@ const staticData = [
       { name: 'Blog', link: '/blog' },
     ],
   },
+  {
+    section_label: 'Legal',
+    menu_items: [
+      { name: 'Privacy policy', link: '/privacy' },
+      { name: 'Cookie policy', link: '/cookies' },
+      { name: 'Terms of service', link: '/terms' },
+    ],
+  },
 ]
 
 interface MainFooterProps {
   data?: typeof staticData
 }
 
-const MainFooter: React.FC<MainFooterProps> = ({
+const Column = styled('section', {
+  mx: '$2',
+  width: '16.6%',
+  '@m': { mx: '$3' },
+  '@l': { mx: '$4' },
+})
+
+const SectionLabel = styled(UI2, {
+  color: '$LA35',
+  fontWeight: '600',
+})
+
+export const MainFooter: React.FC<MainFooterProps> = ({
   data = staticData,
   ...props
 }) => {
   return (
-    <Box>
+    <Box css={{ backgroundColor: '$N80', mb: '$4' }}>
       <Container>
-        <Flex as="nav"></Flex>
+        <Flex
+          as="nav"
+          css={{
+            '@initial': { mx: '-$2' },
+            '@m': { mx: '-$3' },
+            '@l': { mx: '-$4' },
+          }}
+        >
+          <Column>
+            <Link href="/">
+              <a>
+                <Logo color="white" size={'regular'} />
+              </a>
+            </Link>
+          </Column>
+          {data.map((section) => (
+            <Column as="section" css={{ mt: '$4' }}>
+              <SectionLabel as="h3">{section.section_label}</SectionLabel>
+            </Column>
+          ))}
+        </Flex>
       </Container>
     </Box>
   )
@@ -119,9 +161,10 @@ const MainFooter: React.FC<MainFooterProps> = ({
 export const Footer: React.FC<FooterProps> = ({
   beforeFooter,
   footerCss,
+  landing,
   ...props
 }: FooterProps) => {
-  const footerContent = (
+  const landingFooter = (
     <>
       <LayoutGrid css={{ pb: '$5' }}>
         <ContentColumn>
@@ -196,13 +239,15 @@ export const Footer: React.FC<FooterProps> = ({
     return (
       <FooterWrapper style="none" {...props}>
         {beforeFooter}
-        <FooterWrapper as="footer">{footerContent}</FooterWrapper>
+        <FooterWrapper as="footer">
+          {landing ? landingFooter : <MainFooter />}
+        </FooterWrapper>
       </FooterWrapper>
     )
   }
   return (
     <FooterWrapper as="footer" {...props}>
-      {footerContent}
+      {landing ? landingFooter : <MainFooter />}
     </FooterWrapper>
   )
 }

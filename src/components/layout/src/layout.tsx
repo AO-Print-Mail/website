@@ -6,7 +6,6 @@ import { Footer } from '@components/footer'
 import { request } from '@lib/datocms/datocms'
 import { renderMetaTags, SeoMetaTagType } from 'react-datocms'
 import { GetFaviconsQuery } from '@lib/datocms/__generated__/types'
-import dynamic from 'next/dynamic'
 import { HeaderMain } from '@components/header-main'
 import {
   useCycle,
@@ -24,6 +23,7 @@ interface LayoutProps {
   data?: GetFaviconsQuery
   canonicalPath?: string
   footerCss?: CSS
+  landing?: boolean
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -44,6 +44,7 @@ export const Layout: React.FC<LayoutProps> = ({
   data,
   footerCss,
   altHeader,
+  landing,
   ...props
 }) => {
   const [menuIsOpen, toggleMenu] = useCycle(false, true)
@@ -129,7 +130,11 @@ export const Layout: React.FC<LayoutProps> = ({
           />
         )}
         <ContentWrapper>{props.children}</ContentWrapper>
-        <Footer beforeFooter={beforeFooter} footerCss={footerCss} />
+        <Footer
+          landing={landing}
+          beforeFooter={beforeFooter}
+          footerCss={footerCss}
+        />
       </PageWrapper>
     </>
   )

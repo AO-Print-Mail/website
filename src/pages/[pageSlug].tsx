@@ -56,6 +56,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         paddingBottom: '$7',
         '@l': { paddingBottom: '$1' },
       }}
+      landing
       altHeader={<Header />}
     >
       <Container as="section" css={{ pt: '$7', '@l': { display: 'flex' } }}>
