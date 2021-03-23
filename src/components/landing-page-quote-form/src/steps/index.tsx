@@ -121,12 +121,10 @@ export const FormStepper: React.FC<FormStepsProps> = ({
   return (
     <Box
       css={{
-        when: {
-          l: {
-            //height: 'calc(800px - 20vh)',
-            position: 'realtive',
-            top: '$5',
-          },
+        '@l': {
+          //height: 'calc(800px - 20vh)',
+          position: 'realtive',
+          top: '$5',
         },
       }}
       as={motion.div}

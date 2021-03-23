@@ -32,7 +32,7 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
           pt: '$3',
           flex: '0 0',
           pb: '$3',
-          when: { l: { mx: '$6', pb: '$6' } },
+          '@l': { mx: '$6', pb: '$6' },
         }}
       >
         <Button
@@ -41,9 +41,8 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
           css={{
             display: 'block',
             flex: '1',
-            when: {
-              l: {},
-            },
+
+            '@l': {},
           }}
           isLoading={isSubmitting}
           type={formName ? 'submit' : undefined}

@@ -26,24 +26,23 @@ const FormBackground = styled('div', {
   transition: 'transform 0.5s ease-out',
   willChange: 'transform',
   variants: { isOpen: { true: { top: '0' } } },
-  when: {
-    l: {
-      transform: 'translateY(0%)',
-      animation: 'none',
-      minHeight: '48rem',
-      height: '100%',
-      maxHeight: '100%',
-      //overflow: 'visible',
-      position: 'relative',
-      top: '$3',
-      ml: '$3',
-      mr: '$3',
-      mt: '$6',
-      width: 'calc(50% - 48px)',
-    },
-    xl: {
-      width: 'calc(100% / 12 * 5 - 64px)',
-    },
+
+  '@l': {
+    transform: 'translateY(0%)',
+    animation: 'none',
+    minHeight: '48rem',
+    height: '100%',
+    maxHeight: '100%',
+    //overflow: 'visible',
+    position: 'relative',
+    top: '$3',
+    ml: '$3',
+    mr: '$3',
+    mt: '$6',
+    width: 'calc(50% - 48px)',
+  },
+  '@xl': {
+    width: 'calc(100% / 12 * 5 - 64px)',
   },
 })
 

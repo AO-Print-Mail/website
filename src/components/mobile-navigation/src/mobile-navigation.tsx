@@ -65,10 +65,8 @@ const SectionLabel = styled(UI2, {
   color: '$DA40',
   fontWeight: 'semi-bold',
   ml: '$2',
-  when: {
-    m: {
-      ml: '$3',
-    },
+  '@m': {
+    ml: '$3',
   },
 })
 
@@ -108,7 +106,7 @@ const NavSection: React.FC<NavSectionProps> = ({
             padding: '0',
             margin: '0',
             mt: '$2',
-            when: { m: { width: '75%' } },
+            '@m': { width: '75%' },
           }}
           wrap
         >

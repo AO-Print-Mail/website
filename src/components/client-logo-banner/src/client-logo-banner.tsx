@@ -9,48 +9,42 @@ const Logos = styled('div', {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
-  when: {
-    m: {
-      px: '$2',
-    },
-    l: {
-      px: '$3',
-      gridColumnStart: '3',
-      gridColumnEnd: 'span 6',
-    },
+  '@m': {
+    px: '$2',
+  },
+  '@l': {
+    px: '$3',
+    gridColumnStart: '3',
+    gridColumnEnd: 'span 6',
   },
 })
 
 const LeadText = styled(Paragraph4, {
   color: '$DA70',
   mt: '$4',
-  when: {
-    l: {
-      pr: '$4',
-      pl: '$3',
-      textAlign: 'right',
-      gridColumnStart: '1',
-      gridColumnEnd: 'span 2',
-    },
+  '@l': {
+    pr: '$4',
+    pl: '$3',
+    textAlign: 'right',
+    gridColumnStart: '1',
+    gridColumnEnd: 'span 2',
   },
 })
 
 const LogoWrapper = styled('div', {
   maxHeight: '$3',
   maxWidth: '$6',
-  when: {
-    s: {
-      maxHeight: '$3',
-      maxWidth: '$6',
-    },
-    m: {
-      maxHeight: '$5',
-      maxWidth: '$9',
-    },
-    l: {
-      maxHeight: '$7',
-      maxWidth: '$10',
-    },
+  '@s': {
+    maxHeight: '$3',
+    maxWidth: '$6',
+  },
+  '@m': {
+    maxHeight: '$5',
+    maxWidth: '$9',
+  },
+  '@l': {
+    maxHeight: '$7',
+    maxWidth: '$10',
   },
 })
 
@@ -58,12 +52,10 @@ const Banner = styled('div', {
   pt: '$5',
   pb: '$5',
   display: 'grid',
-  when: {
-    l: {
-      pt: '$7',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
-      gridGap: '$3',
-    },
+  '@l': {
+    pt: '$7',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+    gridGap: '$3',
   },
 })
 

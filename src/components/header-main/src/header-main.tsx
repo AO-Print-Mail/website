@@ -34,11 +34,9 @@ const Header = styled('header', {
   boxShadow: '0px 6px 12px $colors$DBA15',
   py: '$3',
   height: '100%',
-  when: {
-    m: { pb: '$4' },
-    moz: {
-      backgroundColor: '$white',
-    },
+  '@m': { pb: '$4' },
+  moz: {
+    backgroundColor: '$white',
   },
 })
 
@@ -46,10 +44,8 @@ const NavContainer = styled('div', {
   flex: '1 1',
   alignSelf: 'flex-end',
   ml: '$6',
-  when: {
-    xl: {
-      ml: '$7',
-    },
+  '@xl': {
+    ml: '$7',
   },
 })
 
@@ -92,8 +88,8 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
                 <Logo
                   color="primary"
                   size={{
-                    initial: 'regular',
-                    l: 'large',
+                    '@initial': 'regular',
+                    '@l': 'large',
                   }}
                 />
               </a>
@@ -102,11 +98,11 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
               <Flex
                 css={{
                   justifyContent: 'flex-end',
-                  when: { l: { justifyContent: 'space-between' } },
+                  '@l': { justifyContent: 'space-between' },
                 }}
               >
                 <DesktopNavigation
-                  css={{ display: 'none', when: { l: { display: 'flex' } } }}
+                  css={{ display: 'none', '@l': { display: 'flex' } }}
                 />
                 <MenuButton
                   open={menuIsOpen}
@@ -116,16 +112,12 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
                     e.preventDefault()
                     toggleMenu()
                   }}
-                  css={{ py: '$2', when: { l: { display: 'none' } } }}
+                  css={{ py: '$2', '@l': { display: 'none' } }}
                 />
               </Flex>
             </NavContainer>
           </Container>
-          <Box
-            as={motion.nav}
-            css={{ when: { l: { display: 'none' } } }}
-            layout
-          >
+          <Box as={motion.nav} css={{ '@l': { display: 'none' } }} layout>
             <MobileNavigation id="drawer-menu" navIsOpen={menuIsOpen} />
           </Box>
         </Header>

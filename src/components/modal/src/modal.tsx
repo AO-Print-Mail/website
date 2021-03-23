@@ -14,42 +14,38 @@ const BackDrop = styled('div', {
 
 export const ModalWrapper = styled(Container, {
   height: '100%',
-  when: {
-    m: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
-      gridGap: '$3',
-    },
-    l: {
-      gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
-      gridGap: '$4',
-    },
+  '@m': {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+    gridGap: '$3',
+  },
+  '@l': {
+    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+    gridGap: '$4',
   },
 })
 
 export const ModalBackground = styled('div', {
   boxShadow: '$footer',
   position: 'absolute',
-  m: '0',
+  margin: '0',
   background: '$white',
   top: '0',
   right: '0',
   left: '0',
   bottom: '0',
   overflow: 'hidden',
-  when: {
-    m: {
-      boxShadow: '$3',
-      top: '$4',
-      br: '$5',
-      gridColumnStart: '2',
-      gridColumnEnd: 'span 6',
-    },
-    l: {
-      top: '$6',
-      gridColumnStart: '7',
-      gridColumnEnd: 'span 5',
-    },
+  '@m': {
+    boxShadow: '$3',
+    top: '$4',
+    br: '$5',
+    gridColumnStart: '2',
+    gridColumnEnd: 'span 6',
+  },
+  '@l': {
+    top: '$6',
+    gridColumnStart: '7',
+    gridColumnEnd: 'span 5',
   },
 })
 

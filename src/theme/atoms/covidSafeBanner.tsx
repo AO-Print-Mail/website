@@ -14,10 +14,8 @@ const Background = styled('div', {
   alignItems: 'center',
   px: '$3',
   py: '$1',
-  when: {
-    m: { px: '$4', py: '$2' },
-    l: { px: '$5', py: '$2' },
-  },
+  '@m': { px: '$4', py: '$2' },
+  '@l': { px: '$5', py: '$2' },
 })
 export const CovidSafeBanner: React.FC<CovidSafeBannerProps> = (props) => {
   return (

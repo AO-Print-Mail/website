@@ -22,10 +22,9 @@ const Bg = styled(HeaderBar, {
   backgroundColor: '$transparent',
   pt: '$2',
   variants: { success: { true: { border: 'none' } } },
-  when: {
-    l: {
-      borderColor: '$DA10',
-    },
+
+  '@l': {
+    borderColor: '$DA10',
   },
 })
 
@@ -104,7 +103,7 @@ export const TopBarControls: React.FC<TopBarControlsProps> = ({
           }
           style="naked"
           color={success ? 'light' : 'dark'}
-          css={{ when: { l: { display: 'none' } } }}
+          css={{ '@l': { display: 'none' } }}
           onClick={(e) => {
             e.preventDefault()
             toggleIsOpen()

@@ -40,10 +40,8 @@ export const NakedButton = styled(ResetButton, {
   py: '$2',
   br: '$3',
   fontSize: '$p3m',
-  when: {
-    m: { fontSize: '$p3t', px: '$2', py: '$3', br: '$3' },
-    l: { fontSize: '$p3d', px: '$3', py: '$3', br: '$4' },
-  },
+  '@m': { fontSize: '$p3t', px: '$2', py: '$3', br: '$3' },
+  '@l': { fontSize: '$p3d', px: '$3', py: '$3', br: '$4' },
 })
 
 const SpinnerKeyframes = keyframes({
@@ -86,10 +84,8 @@ const ButtonBg = styled(ResetButton, {
   py: '$2',
   br: '$3',
   fontSize: '$p3m',
-  when: {
-    m: { fontSize: '$p3t', px: '$3', py: '$3', br: '$3' },
-    l: { fontSize: '$p3d', px: '$4', py: '$3', br: '$4' },
-  },
+  '@m': { fontSize: '$p3t', px: '$3', py: '$3', br: '$3' },
+  '@l': { fontSize: '$p3d', px: '$4', py: '$3', br: '$4' },
   variants: {
     disabled: { true: { cursor: 'not-allowed', opacity: '50%' } },
     color: {
@@ -129,19 +125,15 @@ const ButtonBg = styled(ResetButton, {
     size: {
       small: {
         fontSize: '$p4m',
-        when: {
-          m: { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
-          l: { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
-        },
+        '@m': { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
+        '@l': { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
       },
       icon: {
         fontSize: '$p4m',
         px: '$2',
         py: '$2',
-        when: {
-          m: { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
-          l: { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
-        },
+        '@m': { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
+        '@l': { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
       },
       cta: {
         height: '$5',
@@ -149,10 +141,8 @@ const ButtonBg = styled(ResetButton, {
         '&:hover': {
           boxShadow: '$2',
         },
-        when: {
-          m: {
-            height: '$6',
-          },
+        '@m': {
+          height: '$6',
         },
       },
     },
@@ -182,17 +172,13 @@ const ButtonBg = styled(ResetButton, {
       left: {
         //NEGATIVE MARGIN BEING FIXED IN BETA https://github.com/modulz/stitches/issues/370
         ml: 'calc(var(--space-2) * -1)',
-        when: {
-          m: { ml: 'calc(var(--space-3) * -1)' },
-          l: { ml: 'calc(var(--space-4) * -1)' },
-        },
+        '@m': { ml: 'calc(var(--space-3) * -1)' },
+        '@l': { ml: 'calc(var(--space-4) * -1)' },
       },
       right: {
         mr: 'calc(var(--space-2) * -1)',
-        when: {
-          m: { mr: 'calc(var(--space-3) * -1)' },
-          l: { mr: 'calc(var(--space-4) * -1)' },
-        },
+        '@m': { mr: 'calc(var(--space-3) * -1)' },
+        '@l': { mr: 'calc(var(--space-4) * -1)' },
       },
     },
   },
@@ -248,10 +234,8 @@ const ButtonBg = styled(ResetButton, {
       size: 'small',
       css: {
         ml: 'calc(var(--space-2) * -1)',
-        when: {
-          m: { ml: 'calc(var(--space-2) * -1)' },
-          l: { ml: 'calc(var(--space-2) * -1)' },
-        },
+        '@m': { ml: 'calc(var(--space-2) * -1)' },
+        '@l': { ml: 'calc(var(--space-2) * -1)' },
       },
     },
     {
@@ -259,10 +243,8 @@ const ButtonBg = styled(ResetButton, {
       size: 'small',
       css: {
         mr: 'calc(var(--space-2) * -1)',
-        when: {
-          m: { mr: 'calc(var(--space-2) * -1)' },
-          l: { mr: 'calc(var(--space-2) * -1)' },
-        },
+        '@m': { mr: 'calc(var(--space-2) * -1)' },
+        '@l': { mr: 'calc(var(--space-2) * -1)' },
       },
     },
     { color: 'success', state: 'disabled', css: { opacity: '50%' } },
@@ -282,10 +264,8 @@ const defaultSpacing = (direction: 'left' | 'right') => {
   }[direction]
   return {
     [key]: '$2',
-    when: {
-      m: {
-        [key]: '$3',
-      },
+    '@m': {
+      [key]: '$3',
     },
   }
 }
@@ -296,10 +276,8 @@ const smallSpacing = (direction: 'left' | 'right') => {
   }[direction]
   return {
     [key]: '$1',
-    when: {
-      m: {
-        [key]: '$2',
-      },
+    '@m': {
+      [key]: '$2',
     },
   }
 }

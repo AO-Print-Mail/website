@@ -10,21 +10,4 @@ export const HeaderBar = styled(ContentWrapper, {
   borderBottomColor: '$N30',
   borderBottomStyle: 'solid',
   zIndex: '$3',
-  variants: {
-    blur: {
-      true: {
-        left: '0',
-        right: '0',
-        position: 'absolute',
-        backgroundColor: '$LA80',
-        backdropFilter: 'blur(12px)',
-        boxShadow: '0px 6px 12px $colors$DBA15',
-        when: {
-          moz: {
-            backgroundColor: '$white',
-          },
-        },
-      },
-    },
-  },
 })

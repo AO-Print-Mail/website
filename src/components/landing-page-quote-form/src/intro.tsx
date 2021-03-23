@@ -57,10 +57,8 @@ const Content = styled('div', {
       },
     },
   },
-  when: {
-    l: {
-      position: 'static',
-    },
+  '@l': {
+    position: 'static',
   },
 })
 
@@ -128,7 +126,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
                 rightIcon={<Close css={{ color: '$N70' }} />}
                 style="naked"
                 color={'dark'}
-                css={{ when: { l: { display: 'none' } } }}
+                css={{ '@l': { display: 'none' } }}
                 onClick={(e) => {
                   e.preventDefault()
                   toggleIsOpen()
