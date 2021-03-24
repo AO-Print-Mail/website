@@ -9,6 +9,7 @@ type LogoProps = {
 const Svg = styled('svg', {
   variants: {
     size: {
+      small: { height: '$4' },
       regular: { height: '$5' },
       large: { height: '$6' },
     },

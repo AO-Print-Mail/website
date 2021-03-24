@@ -7,6 +7,7 @@ import {
   HomePattern,
 } from '@theme'
 import { Layout } from '@components/layout'
+import { HomePageBody } from '@components/home-page-body'
 
 interface PageProps {
   data?: {}
@@ -99,11 +100,8 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           </HeroText>
         </Container>
       </Box>
-      <Box as="section">
-        <Container
-          as="section"
-          css={{ height: '100vh', '@l': { display: 'flex' } }}
-        ></Container>
+      <Box>
+        <HomePageBody />
       </Box>
     </Layout>
   )

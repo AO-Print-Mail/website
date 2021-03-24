@@ -1,1 +1,0 @@
-export * from "./src/sticky-mobile-footer"

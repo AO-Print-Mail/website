@@ -13,10 +13,11 @@ import {
   Box,
   UI2,
   UI3,
+  Facebook,
+  LinkedIn,
 } from '@theme'
-import { Button } from '@components/button'
+import { Button, IconButton } from '@components/button'
 import Link from 'next/link'
-import React from 'react'
 
 interface FooterProps {
   css?: CSS
@@ -116,9 +117,10 @@ interface MainFooterProps {
 
 const Column = styled('section', {
   px: '$2',
-  width: '16.6%',
-  '@m': { px: '$3' },
-  '@l': { px: '$4' },
+  width: '50%',
+  mb: '$3',
+  '@m': { px: '$3', width: '33.3%' },
+  '@l': { px: '$4', width: '16.6%' },
 })
 
 const SectionLabel = styled(UI3, {
@@ -156,37 +158,150 @@ export const MainFooter: React.FC<MainFooterProps> = ({
   ...props
 }) => {
   return (
-    <Box css={{ backgroundColor: '$N90', mb: '$4' }}>
+    <Box css={{ backgroundColor: '$N90' }}>
       <Container>
         <Flex
           as="nav"
+          wrap
           css={{
-            position: 'relative',
-            '@initial': { mx: '-$2' },
+            '@initial': { mx: '-$2', mb: '$4', position: 'relative' },
             '@m': { mx: '-$3' },
             '@l': { mx: '-$4' },
           }}
         >
-          <Column>
+          <Column
+            css={{
+              '@initial': { width: '100%', mb: '$2', ml: '$2' },
+              '@l': { width: '16.6%', ml: '0', mt: '$2' },
+            }}
+          >
             <Link href="/">
               <a>
-                <Logo color="white" size={'regular'} />
+                <Logo
+                  color="white"
+                  size={{ '@initial': 'small', '@xl': 'regular' }}
+                />
               </a>
             </Link>
           </Column>
           {data.map((section) => (
-            <Column as="section" css={{ mt: '$4' }}>
-              <SectionLabel as="h3" key={section.section_label}>
-                {section.section_label}
-              </SectionLabel>
-              <Section
-                key={`${section.section_label}`}
-                data={section.menu_items}
-              />
+            <Column
+              key={`${section.section_label}`}
+              as="section"
+              css={{ mt: '$4' }}
+            >
+              <SectionLabel as="h3">{section.section_label}</SectionLabel>
+              <Section data={section.menu_items} />
             </Column>
           ))}
         </Flex>
       </Container>
+      <Box css={{ backgroundColor: '$LA10', py: '$4' }}>
+        <Container>
+          <Flex
+            css={{
+              '@initial': {
+                mx: '-$2',
+                position: 'relative',
+                flexDirection: 'column',
+              },
+              '@m': {
+                flexFlow: 'row nowrap',
+                justifyContent: 'space-between',
+                mx: '-$3',
+              },
+              '@l': {
+                mx: '-$4',
+              },
+            }}
+          >
+            <Column
+              column
+              css={{
+                '@initial': {
+                  display: 'flex',
+                  width: '100%',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                },
+                '@m': {
+                  width: '40%',
+                },
+                '@l': {
+                  width: '33.33%',
+                  ml: '8.33%',
+                },
+              }}
+            >
+              <Button
+                as="a"
+                href="https://g.page/ao-mail"
+                color="light"
+                style="naked"
+                size="small"
+                css={{ mt: '$3', color: '$LA60' }}
+              >
+                <Paragraph5 color="light" css={{ my: 0 }}>
+                  9 Clearview Pl
+                  <br />
+                  Brookvale NSW 2100
+                </Paragraph5>
+              </Button>
+              <Button
+                as="a"
+                href="tel:+61296456777"
+                leftIcon={<Phone size="matchFontSize" />}
+                color="light"
+                style="naked"
+                size="small"
+                css={{ mt: '$2', color: '$LA60' }}
+              >
+                <Paragraph5 color="light" css={{ my: 0 }}>
+                  (02) 9645 6777
+                </Paragraph5>
+              </Button>
+              <Flex css={{ justifyContent: 'flex-start' }}>
+                <IconButton
+                  as="a"
+                  href=""
+                  color="light"
+                  style="naked"
+                  size="small"
+                  css={{ mt: '$2', color: '$LA60' }}
+                  label="Visit our Facebook page"
+                >
+                  <Facebook size="regular" />
+                </IconButton>
+                <IconButton
+                  as="a"
+                  href=""
+                  color="light"
+                  style="naked"
+                  size="small"
+                  css={{ mt: '$2', color: '$LA60' }}
+                  label="Visit our LinkedIn page"
+                >
+                  <LinkedIn size="regular" />
+                </IconButton>
+              </Flex>
+            </Column>
+            <Column
+              css={{
+                '@initial': { width: '100% !important', mt: '$3' },
+                '@m': { width: '50% !important' },
+                '@l': { width: '33.3% !important', mr: '8.33%' },
+              }}
+            >
+              <CovidSafeBanner css={{ m: '0', width: '100%' }} />
+              <Paragraph5
+                css={{ color: '$LA40', mt: '$3', '@m': { textAlign: 'right' } }}
+              >
+                &copy; ANO PTY Ltd. All rights reserved.
+              </Paragraph5>
+            </Column>
+          </Flex>
+        </Container>
+      </Box>
     </Box>
   )
 }

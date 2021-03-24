@@ -65,7 +65,7 @@ export const Layout: React.FC<LayoutProps> = ({
   useEffect(() => {
     setShowNav(true)
     let listener
-    function update() {
+    const update = function () {
       if (!menuIsOpen) {
         if (scrollY.get() < 100) {
           setShowNav(true)
@@ -82,6 +82,7 @@ export const Layout: React.FC<LayoutProps> = ({
         }
       }
     }
+
     function focusHeader() {
       window.scroll({ top: 0 })
       setShowNav(true)
@@ -91,7 +92,7 @@ export const Layout: React.FC<LayoutProps> = ({
       hr.addEventListener('focusin', focusHeader)
     }
     const addScrollListener = window.setTimeout(() => {
-      listener = scrollY.onChange(() => update())
+      listener = scrollY.onChange(update)
     }, 1000)
     return () => {
       window.clearTimeout(addScrollListener)

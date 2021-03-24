@@ -1,5 +1,5 @@
 import { createIcon } from './createIcon'
-export const Check = createIcon({
+export const LinkedIn = createIcon({
   displayName: 'LinkedIn',
   viewBox: '0 0 24 24',
   d:
