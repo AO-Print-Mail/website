@@ -216,7 +216,6 @@ export const MainFooter: React.FC<MainFooterProps> = ({
             }}
           >
             <Column
-              column
               css={{
                 '@initial': {
                   display: 'flex',
