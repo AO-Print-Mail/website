@@ -1,12 +1,11 @@
 import { global } from '@theme'
-import { fontFace } from './font-face'
 export const globalStyles = global({
   html: { lineHeight: '1.15', textSizeAdjust: '100%' },
   body: {
     margin: '0',
     fontFamily: '$paragraph',
     fontFeatureSettings: '"salt"',
-    backgroundColor: '$N10',
+    backgroundColor: '$N20',
   },
   '*': {
     boxSizing: 'border-box',

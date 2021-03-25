@@ -21,7 +21,7 @@ interface QuoteIntroProps {
   setSubmitting: (a: boolean) => void
   breakpoints: BreakpointsAry
 }
-import { motion, AnimateSharedLayout, useAnimation } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 
 const FormImage = styled('div', {
   display: 'block',
@@ -57,10 +57,8 @@ const Content = styled('div', {
       },
     },
   },
-  when: {
-    l: {
-      position: 'static',
-    },
+  '@l': {
+    position: 'static',
   },
 })
 
@@ -103,100 +101,98 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
   const isNotDesktop = !breakpoints.includes('l')
   return (
     <Box>
-      <AnimateSharedLayout>
-        <Background layout isOpen={isOpen} as={motion.div}>
-          <FormImage layout isOpen={isOpen} as={motion.div}>
-            <MailIllustration layout as={motion.svg} css={{ height: '100%' }} />
-          </FormImage>
-          <Content as={motion.div} layout isOpen={isOpen}>
-            <motion.div layout animate={isOpen ? 'open' : 'closed'}>
-              <Container
-                css={{
-                  maxWidth: '32rem',
-                  display: 'flex',
-                  width: '100%',
-                  alignItems: 'center',
-                  justifyContent: 'flex-start',
-                  pt: '$4',
-                }}
-                layout
-                as={motion.div}
-              >
-                <Button
-                  initial="hide"
-                  animate="show"
-                  size="small"
-                  rightIcon={<Close css={{ color: '$N70' }} />}
-                  style="naked"
-                  color={'dark'}
-                  css={{ when: { l: { display: 'none' } } }}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    toggleIsOpen()
-                  }}
-                  as={motion.button}
-                >
-                  Close
-                </Button>
-              </Container>
-
-              <Container
-                as={motion.div}
-                variants={contentContainerVariants}
-                css={{ maxWidth: '32rem', pt: '$9' }}
-              >
-                <Heading4
-                  as={motion.h2}
-                  alignCenter
-                  color="primary"
-                  css={{ mt: '0' }}
-                  variants={contentChildrenVariants}
-                >
-                  Get a {keyword} quote online
-                </Heading4>
-                <Paragraph3
-                  as={motion.p}
-                  alignCenter
-                  css={{ color: '$DA70', mt: '$3' }}
-                  variants={contentChildrenVariants}
-                >
-                  You can expect to receive a quote on the same day so that your
-                  job can start asap.
-                </Paragraph3>
-                <Paragraph3
-                  as={motion.p}
-                  alignCenter
-                  css={{ color: '$DA70' }}
-                  variants={contentChildrenVariants}
-                >
-                  We’ll contact you to clarify any important details that help
-                  us plan the right approach and best price.
-                </Paragraph3>
-              </Container>
-            </motion.div>
-          </Content>
-          <Container css={{ maxWidth: '32rem', zIndex: '$1' }}>
-            <Box as={motion.div} layout>
-              <FormStepControls
-                isOpen={isNotDesktop && isOpen}
-                isSubmitting={isSubmitting}
-                buttonLabel={
-                  isNotDesktop && isOpen ? 'Continue' : 'Start your quote'
-                }
-                buttonOnClick={(e: React.PointerEvent) => {
+      <Background layout isOpen={isOpen} as={motion.div}>
+        <FormImage layout isOpen={isOpen} as={motion.div}>
+          <MailIllustration layout as={motion.svg} css={{ height: '100%' }} />
+        </FormImage>
+        <Content as={motion.div} layout isOpen={isOpen}>
+          <motion.div layout animate={isOpen ? 'open' : 'closed'}>
+            <Container
+              css={{
+                maxWidth: '32rem',
+                display: 'flex',
+                width: '100%',
+                alignItems: 'center',
+                justifyContent: 'flex-start',
+                pt: '$4',
+              }}
+              layout
+              as={motion.div}
+            >
+              <Button
+                initial="hide"
+                animate="show"
+                size="small"
+                rightIcon={<Close css={{ color: '$N80' }} />}
+                style="naked"
+                color={'dark'}
+                css={{ '@l': { display: 'none' } }}
+                onClick={(e) => {
                   e.preventDefault()
-                  if (!isOpen && isNotDesktop) {
-                    toggleIsOpen()
-                  } else {
-                    changeStep('1')
-                  }
+                  toggleIsOpen()
                 }}
-                toggleIsOpen={toggleIsOpen}
-              />
-            </Box>
-          </Container>
-        </Background>
-      </AnimateSharedLayout>
+                as={motion.button}
+              >
+                Close
+              </Button>
+            </Container>
+
+            <Container
+              as={motion.div}
+              variants={contentContainerVariants}
+              css={{ maxWidth: '32rem', pt: '$10' }}
+            >
+              <Heading4
+                as={motion.h2}
+                alignCenter
+                color="primary"
+                css={{ mt: '0' }}
+                variants={contentChildrenVariants}
+              >
+                Get a {keyword} quote online
+              </Heading4>
+              <Paragraph3
+                as={motion.p}
+                alignCenter
+                css={{ color: '$DA70', mt: '$3' }}
+                variants={contentChildrenVariants}
+              >
+                You can expect to receive a quote on the same day so that your
+                job can start asap.
+              </Paragraph3>
+              <Paragraph3
+                as={motion.p}
+                alignCenter
+                css={{ color: '$DA70' }}
+                variants={contentChildrenVariants}
+              >
+                We’ll contact you to clarify any important details that help us
+                plan the right approach and best price.
+              </Paragraph3>
+            </Container>
+          </motion.div>
+        </Content>
+        <Container css={{ maxWidth: '32rem', zIndex: '$1' }}>
+          <Box as={motion.div} layout>
+            <FormStepControls
+              isOpen={isNotDesktop && isOpen}
+              isSubmitting={isSubmitting}
+              buttonLabel={
+                isNotDesktop && isOpen ? 'Continue' : 'Start your quote'
+              }
+              buttonOnClick={(e: React.PointerEvent) => {
+                e.preventDefault()
+                if (!isOpen && isNotDesktop) {
+                  toggleIsOpen()
+                } else {
+                  changeStep('1')
+                }
+              }}
+              toggleIsOpen={toggleIsOpen}
+            />
+          </Box>
+        </Container>
+      </Background>
     </Box>
   )
 }

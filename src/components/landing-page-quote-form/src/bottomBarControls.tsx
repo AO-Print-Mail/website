@@ -1,7 +1,6 @@
 import { IconButton, Button } from '@components/button'
-import { Container, Flex, Rotateable } from '@theme'
-import { motion, AnimatePresence } from 'framer-motion'
-import { useAnimationFeatures } from '@lib/react/animation-features'
+import { Container, Flex } from '@theme'
+import { m as motion } from 'framer-motion'
 import React from 'react'
 
 export interface FormStepControlsProps {
@@ -25,16 +24,15 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
   children,
   ...props
 }) => {
-  useAnimationFeatures(['exit'])
   return (
-    <Container css={{ maxWidth: '32rem' }} as={AnimatePresence}>
+    <Container css={{ maxWidth: '32rem' }}>
       <Flex
         as={motion.div}
         css={{
           pt: '$3',
           flex: '0 0',
-          pb: '$4',
-          when: { l: { mx: '$6', pb: '$6' } },
+          pb: '$3',
+          '@l': { mx: '$6', pb: '$6' },
         }}
       >
         <Button
@@ -43,11 +41,8 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
           css={{
             display: 'block',
             flex: '1',
-            when: {
-              l: {
-                mt: '$6',
-              },
-            },
+
+            '@l': {},
           }}
           isLoading={isSubmitting}
           type={formName ? 'submit' : undefined}

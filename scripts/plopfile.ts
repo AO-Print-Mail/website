@@ -46,9 +46,9 @@ async function createPackage() {
 
       actions.push({
         type: 'addMany',
-        templateFiles: 'component-pkg/**',
+        templateFiles: 'component/**',
         destination: '../src/components/{{dashCase componentName}}',
-        base: 'component-pkg/',
+        base: 'component/',
         data: { description, componentName },
       })
 

@@ -1,6 +1,6 @@
 import { styled } from '@theme'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
-import { AnimateSharedLayout, motion, useAnimation } from 'framer-motion'
+import { m as motion, useAnimation } from 'framer-motion'
 import { useEffect } from 'react'
 
 export interface FormWrapperProps {
@@ -14,10 +14,10 @@ export interface FormWrapperProps {
   step: any
 }
 
-const FormBackground = styled(motion.div, {
+const FormBackground = styled('div', {
   position: 'fixed',
   display: 'block',
-  zIndex: '$1',
+  zIndex: '$3',
   left: '0',
   bottom: '0',
   right: '0',
@@ -26,24 +26,23 @@ const FormBackground = styled(motion.div, {
   transition: 'transform 0.5s ease-out',
   willChange: 'transform',
   variants: { isOpen: { true: { top: '0' } } },
-  when: {
-    l: {
-      transform: 'translateY(0%)',
-      animation: 'none',
-      minHeight: '48rem',
-      height: '100%',
-      maxHeight: '100%',
-      //overflow: 'visible',
-      position: 'relative',
-      top: '$3',
-      ml: '$3',
-      mr: '$3',
-      mt: '$6',
-      width: 'calc(50% - 48px)',
-    },
-    xl: {
-      width: 'calc(100% / 12 * 5 - 64px)',
-    },
+
+  '@l': {
+    transform: 'translateY(0%)',
+    animation: 'none',
+    minHeight: '48rem',
+    height: '100%',
+    maxHeight: '100%',
+    //overflow: 'visible',
+    position: 'relative',
+    top: '$3',
+    ml: '$3',
+    mr: '$3',
+    mt: '$6',
+    width: 'calc(50% - 48px)',
+  },
+  '@xl': {
+    width: 'calc(100% / 12 * 5 - 64px)',
   },
 })
 
@@ -68,12 +67,13 @@ export const FormWrapper: React.FC<FormWrapperProps> = ({
 
   return (
     <FormBackground
+      as={motion.div}
       isOpen={isOpen}
       variants={variants}
       animate={wrapperControls}
       {...props}
     >
-      <AnimateSharedLayout>{children}</AnimateSharedLayout>
+      {children}
     </FormBackground>
   )
 }

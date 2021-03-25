@@ -23,7 +23,7 @@ const Input = styled(UI3, {
 
   '&[type=number]::-webkit-inner-spin-button, &[type=number]::-webkit-outer-spin-button,': {
     '-webkit-appearance': 'none',
-    m: '0',
+    '@m': '0',
   },
   '&:hover': {
     borderColor: '$DBA40',

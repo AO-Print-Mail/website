@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { Box, styled, Container } from '@theme'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 
@@ -36,16 +36,14 @@ export const Background = styled('div', {
         left: '0',
         btlr: '0',
         btrr: '0',
-        when: { l: { br: '$5', height: 'auto' } },
+        '@l': { br: '$5', height: 'auto' },
       },
       false: { height: 'auto' },
     },
   },
-  when: {
-    l: {
-      br: '$5',
-      boxShadow: '$3',
-    },
+  '@l': {
+    br: '$5',
+    boxShadow: '$3',
   },
 })
 
@@ -62,11 +60,9 @@ const Content = styled('div', {
       },
     },
   },
-  when: {
-    l: {
-      position: 'static',
-      top: '$3',
-    },
+  '@l': {
+    position: 'static',
+    top: '$3',
   },
 })
 
@@ -92,23 +88,6 @@ const contentContainerVariants = {
   },
 }
 
-const contentChildrenVariants = {
-  open: {
-    y: 0,
-    opacity: 1,
-    transition: {
-      y: { stiffness: 1000, velocity: -100 },
-    },
-  },
-  closed: {
-    y: 50,
-    opacity: 0,
-    transition: {
-      y: { stiffness: 1000 },
-    },
-  },
-}
-
 export const StepWrapper: React.FC<StepWrapperProps> = ({
   isSubmitting,
   isOpen,
@@ -130,23 +109,20 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
         />
       )}
       <Content as={motion.div} layout isOpen={isOpen}>
-        {header && <Box css={{ mb: '$4' }}>{header}</Box>}
-        <motion.div layout>
-          <Container
-            animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
-            as={motion.div}
-            layout
-            variants={contentContainerVariants}
-            css={{
-              maxWidth: '32rem',
-              flex: '1',
-              overflow: 'auto',
-              minHeight: '0',
-            }}
-          >
-            {main}
-          </Container>
-        </motion.div>
+        {header && <Box css={{ mb: '$3' }}>{header}</Box>}
+        <Container
+          animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
+          as={motion.div}
+          variants={contentContainerVariants}
+          css={{
+            maxWidth: '32rem',
+            flex: '1',
+            overflow: 'auto',
+            minHeight: '0',
+          }}
+        >
+          {main}
+        </Container>
       </Content>
       {footer && (
         <Box as={motion.div} layout>

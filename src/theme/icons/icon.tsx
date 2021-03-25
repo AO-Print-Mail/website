@@ -16,6 +16,8 @@ export interface IconProps {
   [a: string]: any
 }
 export const Svg = styled('svg', {
+  pointerEvents: 'none',
+  userSelect: 'none',
   fill: 'none',
   verticalAlign: 'middle',
   lineHeight: '1em',

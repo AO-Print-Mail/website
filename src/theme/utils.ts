@@ -1,4 +1,5 @@
-import { theme, stitchesConfig } from '.'
+import { theme, stitchesConfig, CSS } from '.'
+import { colors } from './tokens/colors'
 
 const gradients = {
   $orange: '90deg, #EE3131 0%, #F89E33 100.02%',
@@ -225,7 +226,13 @@ export default {
       right: value,
     }
   },
-
+  focusRing: (config: typeof stitchesConfig) => (
+    value: keyof typeof colors | string
+  ) => {
+    return {
+      color: 'pink',
+    }
+  },
   linearGradient: (config: typeof stitchesConfig) => (
     value: keyof typeof gradients | string
   ) => {
@@ -243,6 +250,11 @@ export default {
       '& > *': {
         margin: 'var(--gap) 0 0 var(--gap)',
       },
+    }
+  },
+  moz: (config: typeof stitchesConfig) => (value: CSS) => {
+    return {
+      '@-moz-document url-prefix()': value,
     }
   },
 }

@@ -11,6 +11,7 @@ import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
 import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
+import { Header } from '@components/header-landing'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -18,43 +19,14 @@ interface PageProps {
 }
 
 const HeroText = styled('div', {
-  when: {
-    l: {
-      pr: '$2',
-      pl: '$3',
-      width: '50%',
-    },
-    xl: {
-      pr: '$3',
-      pl: '$4',
-    },
+  '@l': {
+    pr: '$2',
+    pl: '$3',
+    width: '50%',
   },
-})
-
-const FormBackground = styled('div', {
-  background: '$white',
-  minHeight: '$10',
-  position: 'fixed',
-  display: 'block',
-  zIndex: '$1',
-  left: '0',
-  bottom: '0',
-  right: '0',
-  boxShadow: '$footer',
-  overflow: 'hidden',
-  when: {
-    l: {
-      boxShadow: '$3',
-      position: 'relative',
-      br: '$5',
-      ml: '$2',
-      mr: '$2',
-      mt: '$6',
-      width: '50%',
-    },
-    xl: {
-      width: 'calc(100% / 12 * 5 - 64px)',
-    },
+  '@xl': {
+    pr: '$3',
+    pl: '$4',
   },
 })
 
@@ -77,10 +49,17 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       title="landing page"
       description="work in progress"
       beforeFooter={beforeFooter}
+      //@ts-ignore
       metaData={data._seoMetaTags}
       canonicalPath={data.canonicalPath}
+      footerCss={{
+        paddingBottom: '$7',
+        '@l': { paddingBottom: '$1' },
+      }}
+      landing
+      altHeader={<Header />}
     >
-      <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
+      <Container as="section" css={{ pt: '$2', '@l': { display: 'flex' } }}>
         <HeroText>
           <Heading1 color="primary">{data.title}</Heading1>
           <Box css={{ maxWidth: '60ch' }}>

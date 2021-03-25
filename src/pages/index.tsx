@@ -1,79 +1,173 @@
-import { styled, Container, Heading1, Box, Paragraph2 } from '@theme'
+import { styled, Container, Heading1, Box, HomePattern, Heading2 } from '@theme'
 import { Layout } from '@components/layout'
-import { ClientLogoBanner } from '@components/client-logo-banner'
-import { ReviewsIoWidget } from '@components/reviews-io-widget'
-import { QuoteFormWrapper } from '@components/quote-form-wrapper'
-import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
+import { HomePageBody } from '@components/home-page-body'
+import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
+import { request } from '@lib/datocms/datocms'
+import { ThenArg } from '@utils/src'
+import { StructuredText } from 'react-datocms'
+import { structuredTextRules } from '@lib/datocms/structuredTextRules'
 
 interface PageProps {
-  data?: {}
+  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
 const HeroText = styled('div', {
-  when: {
-    l: {
-      pr: '$2',
-      pl: '$3',
-      width: '50%',
-    },
-    xl: {
-      pr: '$3',
-      pl: '$4',
-    },
+  willChange: 'opacity',
+  '@s': {
+    pr: '$2',
+    pl: '$2',
+    pt: '$3',
+    pb: '$6',
+  },
+  '@m': {
+    pr: '$2',
+    pl: '$3',
+    pt: '$6',
+    width: '75%',
+  },
+  '@l': {
+    pr: '$2',
+    pl: '$4',
+    width: '50%',
+  },
+  '@xl': {
+    pr: '$3',
+    pl: '$4',
   },
 })
 
-const LandingPageContent: React.FC<PageProps> = ({ data }) => {
-  /*const beforeFooter = (
-    <>
-      <Container>
-        <ClientLogoBanner />
-      </Container>
-      <Box css={{ backgroundColor: '$white', py: '$4' }}>
-        <Container>
-          <ReviewsIoWidget />
-        </Container>
-      </Box>
-    </>
-  )*/
-  const beforeFooter = (
-    <Container>
-      <ClientLogoBanner />
-    </Container>
+const ParagraphText = ({ data, size }) => {
+  return (
+    <StructuredText
+      data={data}
+      customRules={structuredTextRules({
+        headingProps: { color: 'primary' },
+        paragraphProps: { size, color: 'primary' },
+        listItemProps: {
+          icon: 'CheckLeaf',
+          iconProps: {
+            css: {
+              color: '$green',
+              size: '1.125em',
+              marginBottom: '0.125em',
+            },
+          },
+        },
+      })}
+    />
   )
+}
+
+const LandingPageContent: React.FC<PageProps> = ({ data }) => {
+  const featureSections = data.contentSections.map((f) => (
+    <Box
+      key={f.heading}
+      css={{ '@initial': { px: '$2' }, '@m': { px: '$3' }, '@l': { px: '$4' } }}
+    >
+      <Heading2 color="primary">{f.heading}</Heading2>
+      <ParagraphText data={f.paragraph} size="Paragraph3" />
+    </Box>
+  ))
   return (
     <Layout
-      canonicalPath="HOME_PAGE"
-      title="landing page"
-      description="work in progress"
-      beforeFooter={beforeFooter}
-      metaData={[]}
+      canonicalPath="https://www.aomail.com.au"
+      metaData={data._seoMetaTags}
       footerCss={{
         paddingBottom: '$7',
-        when: { l: { paddingBottom: '$1' } },
+        '@l': { paddingBottom: '$1' },
       }}
     >
-      <Container as="section" css={{ when: { l: { display: 'flex' } } }}>
-        <HeroText>
-          <Heading1 color="primary">
-            Exceptional Direct Mail, Print and Fulfilment services
-          </Heading1>
-          <Box css={{ maxWidth: '60ch' }}>
-            <Paragraph2>
-              A&amp;O is Sydney’s premier Mail House, providing end-to-end
-              Print, Direct Mail and Fulfilment services to over 700 Australian
-              and global clients.
-            </Paragraph2>
-            <Paragraph2>
-              We exist to offer your business the best possible levels of
-              service when delivering your message to your customers.
-            </Paragraph2>
-          </Box>
-        </HeroText>
-        <LandingPageQuoteForm keyword="direct mail" />
-      </Container>
+      <Box
+        as="section"
+        css={{
+          backgroundColor: '$N10',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <Container
+          css={{
+            pt: '$6',
+            '@m': { height: '680px' },
+            '@l': { display: 'flex', height: '768px', pt: '$5' },
+          }}
+        >
+          <HomePattern
+            css={{
+              height: '240px',
+              width: 'auto',
+              position: 'absolute',
+              right: '-$7',
+              top: '$7',
+              display: 'none',
+              '@s': { right: '-$6', height: '300px' },
+              '@m': {
+                top: '0',
+                display: 'block',
+                height: '100%',
+                right: '-$10',
+              },
+              '@l': { right: '-$4', top: '0' },
+            }}
+          />
+          <HeroText>
+            <Heading1 color="primary">{data.mainHeading}</Heading1>
+            <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
+              <ParagraphText data={data.heroParagraph} size="Paragraph2" />
+            </Box>
+          </HeroText>
+        </Container>
+      </Box>
+      <Box>
+        <HomePageBody
+          cardData={data.cardData}
+          featureSections={featureSections}
+        />
+      </Box>
     </Layout>
   )
+}
+
+export async function getStaticProps({ params, preview = false }) {
+  const { homepage }: GetHomePageQuery = await request({
+    query: 'GetHomePage',
+    preview,
+    variables: {},
+  })
+  /*
+  const markdownToDast = (await import('@utils/src')).markdownToDast
+
+  const { heroParagraph: hp, contentSections: cs } = homepage
+
+  const heroParagraph = await markdownToDast(hp.value)
+  const getContentSections = (data: typeof homepage.contentSections) => {
+    const promises = data.map(async (d) => {
+      return {
+        ...d,
+        paragraph: await markdownToDast(d.paragraph.value),
+      }
+    })
+    return Promise.all(promises)
+  }
+  console.log(JSON.stringify(homepage.heroParagraph, null, 4))
+  const contentSections = await getContentSections(homepage.contentSections)
+*/
+  const data = {
+    ...homepage,
+    cardData: homepage.serviceCards.map((card) => ({
+      title: card.title,
+      image: card.image.responsiveImage,
+      description: card.description,
+      link: '/#',
+      linkText: card.linkText,
+    })),
+  }
+
+  return {
+    props: {
+      data,
+    },
+  }
 }
 
 export default LandingPageContent

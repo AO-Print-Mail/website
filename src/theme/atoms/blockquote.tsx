@@ -9,12 +9,10 @@ interface BlockQuoteProps {
 
 const Wrapper = styled('div', {
   my: '$6',
-  when: {
-    l: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 1fr 1fr 1fr',
-      gridGap: '$4',
-    },
+  '@l': {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr',
+    gridGap: '$4',
   },
 })
 
@@ -25,20 +23,18 @@ const Background = styled('figure', {
   borderWidth: '$thin',
   borderColor: '$DA20',
   borderStyle: 'solid',
-  m: '0',
+  margin: '0',
   pb: '$5',
   pt: '$1',
   pl: '$5',
   pr: '$4',
   br: '$3',
-  when: {
-    m: {
-      display: 'inline-block',
-    },
-    l: {
-      gridColumnStart: '1',
-      gridColumnEnd: 'span 3',
-    },
+  '@m': {
+    display: 'inline-block',
+  },
+  '@l': {
+    gridColumnStart: '1',
+    gridColumnEnd: 'span 3',
   },
 })
 

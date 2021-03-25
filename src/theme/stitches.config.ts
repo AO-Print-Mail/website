@@ -1,12 +1,12 @@
-import createCss, { StitchesCss, StitchesVariants } from '@stitches/react'
-import { breakpoints as conditions } from './breakpoints'
+import { StitchesCss, StitchesVariants, createCss } from '@stitches/react'
+import { breakpoints as media } from './breakpoints'
 import { theme } from './tokens'
 import utils from './utils'
 
 export const stitchesConfig = createCss({
   prefix: '',
   theme,
-  conditions,
+  media,
   utils,
 })
 

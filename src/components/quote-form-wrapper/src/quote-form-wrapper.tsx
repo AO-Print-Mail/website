@@ -1,8 +1,5 @@
 import { styled, keyframes } from '@theme'
-import { useContext, useEffect } from 'react'
-import { LayoutSpaceContext } from '@components/layout'
 import { m as motion } from 'framer-motion'
-import { useAnimationFeatures } from '@lib/react/animation-features'
 
 const footerReveal = keyframes({
   '0%': { transform: 'translateY(100%)' },
@@ -29,22 +26,20 @@ const FormBackground = styled('div', {
   animation: `${footerReveal} 0.4s ease-out forwards`,
   btlr: '$5',
   btrr: '$5',
-  when: {
-    l: {
-      transform: 'translateY(0%)',
-      animation: 'none',
-      minHeight: '$10',
-      boxShadow: '$3',
-      position: 'relative',
-      br: '$5',
-      ml: '$2',
-      mr: '$2',
-      mt: '$6',
-      width: '50%',
-    },
-    xl: {
-      width: 'calc(100% / 12 * 5 - 64px)',
-    },
+  '@l': {
+    transform: 'translateY(0%)',
+    animation: 'none',
+    minHeight: '$10',
+    boxShadow: '$3',
+    position: 'relative',
+    br: '$5',
+    ml: '$2',
+    mr: '$2',
+    mt: '$6',
+    width: '50%',
+  },
+  '@xl': {
+    width: 'calc(100% / 12 * 5 - 64px)',
   },
 })
 
@@ -73,12 +68,6 @@ export const QuoteFormWrapper: React.FC<QuoteFormWrapperProps> = ({
   isOpen,
   ...props
 }) => {
-  const { setFooterSpace } = useContext(LayoutSpaceContext)
-  useEffect(() => {
-    setFooterSpace('80px')
-  }, [])
-  useAnimationFeatures(['animation', 'animateLayout'])
-
   return (
     <FormBackground
       as={motion.div}

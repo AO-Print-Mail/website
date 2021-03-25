@@ -1,5 +1,4 @@
 import { styled, CSS } from '..'
-import { useAnimationFeatures } from '@lib/react/animation-features'
 import { m as motion, MotionValue, MotionProps } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { set } from 'shelljs'
@@ -41,7 +40,6 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
     newProgress: 0,
     previousProgress: 0,
   })
-  useAnimationFeatures(['animation'])
   useEffect(() => {
     const updateProgress = () =>
       setProgress({

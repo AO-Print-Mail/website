@@ -1,10 +1,12 @@
 import { styled, CSS } from '..'
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import * as icons from '../icons'
 
 export interface ListProps {
   as?: string
   icon?: React.ReactElement | string
+  key?: string
+  children?: React.ReactChildren
 }
 
 export interface listItemProps {
@@ -12,6 +14,8 @@ export interface listItemProps {
   iconProps?: {
     css?: CSS
   }
+  key?: string
+  children?: React.ReactChildren
 }
 
 export const List = styled('ul', {

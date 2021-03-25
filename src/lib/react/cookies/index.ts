@@ -8,7 +8,6 @@ export function getCookie(name) {
   for (let c of entries) {
     const [key, val] = c.split('=')
     if (key.trim() === name) {
-      console.log(decodeURIComponent(val))
       return decodeURIComponent(val)
     }
   }
