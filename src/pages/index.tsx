@@ -1,12 +1,4 @@
-import {
-  styled,
-  Container,
-  Heading1,
-  Box,
-  Paragraph3,
-  HomePattern,
-  Heading2,
-} from '@theme'
+import { styled, Container, Heading1, Box, HomePattern, Heading2 } from '@theme'
 import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
@@ -23,8 +15,9 @@ const HeroText = styled('div', {
   willChange: 'opacity',
   '@s': {
     pr: '$2',
-    pl: '$3',
+    pl: '$2',
     pt: '$3',
+    pb: '$6',
   },
   '@m': {
     pr: '$2',
@@ -34,7 +27,7 @@ const HeroText = styled('div', {
   },
   '@l': {
     pr: '$2',
-    pl: '$3',
+    pl: '$4',
     width: '50%',
   },
   '@xl': {
@@ -43,12 +36,13 @@ const HeroText = styled('div', {
   },
 })
 
-const ParagraphText = ({ data }) => {
+const ParagraphText = ({ data, size }) => {
   return (
     <StructuredText
       data={data}
       customRules={structuredTextRules({
         headingProps: { color: 'primary' },
+        paragraphProps: { size, color: 'primary' },
         listItemProps: {
           icon: 'CheckLeaf',
           iconProps: {
@@ -66,15 +60,17 @@ const ParagraphText = ({ data }) => {
 
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   const featureSections = data.contentSections.map((f) => (
-    <Box key={f.heading}>
-      <Heading2>{f.heading}</Heading2>
-      <ParagraphText data={f.paragraph} />
+    <Box
+      key={f.heading}
+      css={{ '@initial': { px: '$2' }, '@m': { px: '$3' }, '@l': { px: '$4' } }}
+    >
+      <Heading2 color="primary">{f.heading}</Heading2>
+      <ParagraphText data={f.paragraph} size="Paragraph3" />
     </Box>
   ))
   return (
     <Layout
       canonicalPath="https://www.aomail.com.au"
-      //@ts-expect-error
       metaData={data._seoMetaTags}
       footerCss={{
         paddingBottom: '$7',
@@ -91,9 +87,9 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       >
         <Container
           css={{
-            height: '680px',
             pt: '$6',
-            '@l': { display: 'flex', height: '800px', pt: '$5' },
+            '@m': { height: '680px' },
+            '@l': { display: 'flex', height: '768px', pt: '$5' },
           }}
         >
           <HomePattern
@@ -117,7 +113,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           <HeroText>
             <Heading1 color="primary">{data.mainHeading}</Heading1>
             <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
-              <ParagraphText data={data.heroParagraph} />
+              <ParagraphText data={data.heroParagraph} size="Paragraph2" />
             </Box>
           </HeroText>
         </Container>
