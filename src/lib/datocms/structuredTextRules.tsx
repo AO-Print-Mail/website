@@ -9,30 +9,67 @@ import {
   Span,
   Node,
 } from 'datocms-structured-text-utils'
-import {
-  Heading1,
-  Heading2,
-  Heading3,
-  Heading4,
-  Heading5,
-  Heading6,
-  Paragraph1,
-  Paragraph2,
-  Paragraph3,
-  Paragraph4,
-  Paragraph5,
-  BlockQuote,
-  UnorderedList,
-  OrderedList,
-  ListItem,
-  listItemProps,
-  strikethroughClass,
-  underlineClass,
-} from '@theme'
+import dynamic from 'next/dynamic'
+
+const Heading1 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Heading1)
+)
+const Heading2 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Heading2)
+)
+const Heading3 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Heading3)
+)
+const Heading4 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Heading4)
+)
+const Heading5 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Heading5)
+)
+const Heading6 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Heading6)
+)
+const Paragraph1 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Paragraph1)
+)
+const Paragraph2 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Paragraph2)
+)
+const Paragraph3 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Paragraph3)
+)
+const Paragraph4 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Paragraph4)
+)
+const Paragraph5 = dynamic(
+  import('@theme/atoms/typography').then((res) => res.Paragraph5)
+)
+const BlockQuote = dynamic(
+  import('@theme/atoms/blockquote').then((res) => res.BlockQuote)
+)
+const UnorderedList = dynamic(
+  import('@theme/atoms/lists').then((res) => res.UnorderedList)
+)
+const OrderedList = dynamic(
+  import('@theme/atoms/lists').then((res) => res.OrderedList)
+)
+const ListItem = dynamic(
+  import('@theme/atoms/lists').then((res) => res.ListItem)
+)
+
+const strikethroughClass = dynamic(
+  import('@theme/atoms/typography').then((res) => res.strikethroughClass)
+)
+const underlineClass = dynamic(
+  import('@theme/atoms/typography').then((res) => res.underlineClass)
+)
+
+import { listItemProps } from '@theme'
 
 type structuredTextConfig = {
   headingProps?: {}
   paragraphProps?: {
+    color?: string
     size?:
       | 'Paragraph1'
       | 'Paragraph2'
@@ -114,7 +151,7 @@ export const structuredTextRules = ({
   }),
   renderRule(isListItem, function ({ children, key }) {
     //@ts-ignore - expects component but we are still rendering dast tree
-    return <ListItem {...listItemProps} key={key} children={children} />
+    return <ListItem key={key} children={children} {...listItemProps} />
   }),
   renderRule(isBlockquote, function ({ children, key }) {
     return <BlockQuote key={key}>{children}</BlockQuote>
