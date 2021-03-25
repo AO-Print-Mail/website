@@ -1,36 +1,5 @@
 import { styled, css } from '@theme'
 
-export const Titile = styled('h1', {
-  color: '$DA100',
-  fontWeight: '$semibold',
-  fontFamily: '$heading',
-  fontSize: '$h1m',
-  marginTop: '1em',
-  lineHeight: '$1',
-  marginBottom: '0.82em',
-  letterSpacing: '$xcosy',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA100',
-      },
-      light: {
-        color: '$LA100',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-  },
-  '@m': {
-    fontSize: '$h1t',
-    letterSpacing: '$xcosy',
-  },
-  '@l': {
-    fontSize: '$h1d',
-    letterSpacing: '$xcosy',
-  },
-})
 export const Heading1 = styled('h1', {
   color: '$DA100',
   fontWeight: '$semibold',

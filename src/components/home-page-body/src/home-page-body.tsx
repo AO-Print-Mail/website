@@ -9,6 +9,7 @@ import {
   Flex,
   UI3,
   ArrowForward,
+  Card as CardBg,
 } from '@theme'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import Link from 'next/link'
@@ -53,12 +54,10 @@ const LinkText: React.FC<LinkTextProps> = ({ text, css }) => {
   )
 }
 
-const CardBackground = styled('div', {
+const CardBackground = styled(CardBg, {
   display: 'flex',
   flexFlow: 'row wrap',
   position: 'relative',
-  backgroundColor: '$white',
-  boxShadow: '$3',
   br: '$5',
   p: '$4',
   color: '$DBA70',

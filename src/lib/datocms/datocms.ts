@@ -1,4 +1,3 @@
-import { GraphQLClient } from 'graphql-request'
 import { getSdk } from './__generated__/types'
 
 interface requestQuery {
