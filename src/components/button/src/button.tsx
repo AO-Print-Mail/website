@@ -77,6 +77,7 @@ const Spinner = styled('div', {
 
 const ButtonBg = styled(ResetButton, {
   display: 'flex',
+  position: 'relative',
   color: '$white',
   border: 'none',
   borderRadius: '$2',
@@ -84,6 +85,15 @@ const ButtonBg = styled(ResetButton, {
   py: '$2',
   br: '$3',
   fontSize: '$p3m',
+  '&:focus': {
+    '&:before': {
+      content: '',
+      position: 'absolute',
+      tlbr: '-$1',
+      br: '$5',
+      border: '2px solid $colors$blue',
+    },
+  },
   '@m': { fontSize: '$p3t', px: '$3', py: '$3', br: '$3' },
   '@l': { fontSize: '$p3d', px: '$4', py: '$3', br: '$4' },
   variants: {

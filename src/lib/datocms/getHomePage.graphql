@@ -1,0 +1,40 @@
+query GetHomePage {
+  homepage {
+    _seoMetaTags {
+      attributes
+      content
+      tag
+    }
+    mainHeading
+    heroParagraph {
+      value
+    }
+    serviceCards {
+      title
+      description
+      image {
+        responsiveImage(
+          imgixParams: { fit: fill, w: 360, h: 360, auto: format }
+        ) {
+          srcSet
+          webpSrcSet
+          sizes
+          src
+          width
+          height
+          aspectRatio
+          alt
+          title
+          base64
+        }
+      }
+      linkText
+    }
+    contentSections {
+      heading
+      paragraph {
+        value
+      }
+    }
+  }
+}

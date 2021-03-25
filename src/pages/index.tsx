@@ -5,12 +5,18 @@ import {
   Box,
   Paragraph3,
   HomePattern,
+  Heading2,
 } from '@theme'
 import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
+import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
+import { request } from '@lib/datocms/datocms'
+import { ThenArg } from '@utils/src'
+import { StructuredText } from 'react-datocms'
+import { structuredTextRules } from '@lib/datocms/structuredTextRules'
 
 interface PageProps {
-  data?: {}
+  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
 const HeroText = styled('div', {
@@ -37,13 +43,39 @@ const HeroText = styled('div', {
   },
 })
 
+const ParagraphText = ({ data }) => {
+  return (
+    <StructuredText
+      data={data}
+      customRules={structuredTextRules({
+        headingProps: { color: 'primary' },
+        listItemProps: {
+          icon: 'CheckLeaf',
+          iconProps: {
+            css: {
+              color: '$green',
+              size: '1.125em',
+              marginBottom: '0.125em',
+            },
+          },
+        },
+      })}
+    />
+  )
+}
+
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
+  const featureSections = data.contentSections.map((f) => (
+    <Box key={f.heading}>
+      <Heading2>{f.heading}</Heading2>
+      <ParagraphText data={f.paragraph} />
+    </Box>
+  ))
   return (
     <Layout
-      canonicalPath="HOME_PAGE"
-      title="landing page"
-      description="work in progress"
-      metaData={[]}
+      canonicalPath="https://www.aomail.com.au"
+      //@ts-expect-error
+      metaData={data._seoMetaTags}
       footerCss={{
         paddingBottom: '$7',
         '@l': { paddingBottom: '$1' },
@@ -61,7 +93,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           css={{
             height: '680px',
             pt: '$6',
-            '@l': { display: 'flex', height: '800px', pt: '$7' },
+            '@l': { display: 'flex', height: '800px', pt: '$5' },
           }}
         >
           <HomePattern
@@ -83,28 +115,63 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
             }}
           />
           <HeroText>
-            <Heading1 color="primary">
-              Exceptional Direct Mail, Print and Fulfilment services
-            </Heading1>
+            <Heading1 color="primary">{data.mainHeading}</Heading1>
             <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
-              <Paragraph3 color="primary">
-                A&amp;O is Sydney’s premier Mail House, providing end-to-end
-                Print, Direct Mail and Fulfilment services to over 700
-                Australian and global clients.
-              </Paragraph3>
-              <Paragraph3 color="primary">
-                We exist to offer your business the best possible levels of
-                service when delivering your message to your customers.
-              </Paragraph3>
+              <ParagraphText data={data.heroParagraph} />
             </Box>
           </HeroText>
         </Container>
       </Box>
       <Box>
-        <HomePageBody />
+        <HomePageBody
+          cardData={data.cardData}
+          featureSections={featureSections}
+        />
       </Box>
     </Layout>
   )
+}
+
+export async function getStaticProps({ params, preview = false }) {
+  const { homepage }: GetHomePageQuery = await request({
+    query: 'GetHomePage',
+    preview,
+    variables: {},
+  })
+  /*
+  const markdownToDast = (await import('@utils/src')).markdownToDast
+
+  const { heroParagraph: hp, contentSections: cs } = homepage
+
+  const heroParagraph = await markdownToDast(hp.value)
+  const getContentSections = (data: typeof homepage.contentSections) => {
+    const promises = data.map(async (d) => {
+      return {
+        ...d,
+        paragraph: await markdownToDast(d.paragraph.value),
+      }
+    })
+    return Promise.all(promises)
+  }
+  console.log(JSON.stringify(homepage.heroParagraph, null, 4))
+  const contentSections = await getContentSections(homepage.contentSections)
+*/
+  const data = {
+    ...homepage,
+    cardData: homepage.serviceCards.map((card) => ({
+      title: card.title,
+      image: card.image.responsiveImage,
+      description: card.description,
+      link: '/#',
+      linkText: card.linkText,
+    })),
+  }
+
+  return {
+    props: {
+      data,
+    },
+  }
 }
 
 export default LandingPageContent

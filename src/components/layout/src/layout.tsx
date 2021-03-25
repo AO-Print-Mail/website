@@ -110,7 +110,10 @@ export const Layout: React.FC<LayoutProps> = ({
 
   return (
     <>
-      <Head>{meta}</Head>
+      <Head>
+        {meta}
+        <link rel="canonical" href={canonicalPath} />
+      </Head>
       <PageWrapper
         as={motion.main}
         style={
