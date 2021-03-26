@@ -6,6 +6,8 @@ import { request } from '@lib/datocms/datocms'
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { QuoteCta } from '@components/quote-cta'
+import { ClientLogoBanner } from '@components/client-logo-banner'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -124,6 +126,12 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           featureSections={featureSections}
         />
       </Box>
+      <Box css={{ my: '$7' }}>
+        <Container>
+          <QuoteCta />
+          <ClientLogoBanner />
+        </Container>
+      </Box>
     </Layout>
   )
 }
@@ -134,24 +142,6 @@ export async function getStaticProps({ params, preview = false }) {
     preview,
     variables: {},
   })
-  /*
-  const markdownToDast = (await import('@utils/src')).markdownToDast
-
-  const { heroParagraph: hp, contentSections: cs } = homepage
-
-  const heroParagraph = await markdownToDast(hp.value)
-  const getContentSections = (data: typeof homepage.contentSections) => {
-    const promises = data.map(async (d) => {
-      return {
-        ...d,
-        paragraph: await markdownToDast(d.paragraph.value),
-      }
-    })
-    return Promise.all(promises)
-  }
-  console.log(JSON.stringify(homepage.heroParagraph, null, 4))
-  const contentSections = await getContentSections(homepage.contentSections)
-*/
   const data = {
     ...homepage,
     cardData: homepage.serviceCards.map((card) => ({

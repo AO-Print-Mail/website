@@ -58,8 +58,6 @@ const CardBackground = styled(CardBg, {
   display: 'flex',
   flexFlow: 'row wrap',
   position: 'relative',
-  br: '$5',
-  p: '$4',
   color: '$DBA70',
   height: '100%',
   transition: 'transform 0.2s ease-out',
