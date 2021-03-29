@@ -6,24 +6,36 @@ import postcss from 'postcss'
 import autoprefixer from 'autoprefixer'
 
 export default class Document extends NextDocument {
-  /*prefixedStyles = async () => {
-    const styles = getCssString()
-    const ps = await postcss([autoprefixer()])
-      .process(styles)
-      .then((style) => {
-        return style.css
-      })
-    return ps
-  }*/
+  static async getInitialProps(ctx) {
+    try {
+      const initialProps = await NextDocument.getInitialProps(ctx)
+
+      const ssrStyles = getCssString()
+      const prefixedStyles = await postcss([autoprefixer()])
+        .process(ssrStyles)
+        .then((style) => {
+          return style.css
+        })
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            <style
+              id="stitches"
+              dangerouslySetInnerHTML={{ __html: prefixedStyles }}
+            />
+          </>
+        ),
+      }
+    } finally {
+    }
+  }
   render() {
     return (
       <Html lang="en">
         <Head>
           {/* eslint-disable-next-line react/no-danger */}
-          <style
-            id="stitches"
-            dangerouslySetInnerHTML={{ __html: getCssString() }}
-          />
           <script
             dangerouslySetInnerHTML={{
               __html: `!function(e,t,a,n,g){e[n]=e[n]||[],e[n].push({"gtm.start":(new Date).getTime(),event:"gtm.js"});var m=t.getElementsByTagName(a)[0],r=t.createElement(a);r.async=!0,r.src="https://www.googletagmanager.com/gtm.js?id=GTM-WSFD68H",m.parentNode.insertBefore(r,m)}(window,document,"script","dataLayer");`,
