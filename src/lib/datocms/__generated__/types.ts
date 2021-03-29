@@ -82,40 +82,6 @@ export type CreatedAtFilter = {
   neq?: Maybe<Scalars['DateTime']>;
 };
 
-/** Record of type CTA (cta) */
-export type CtaRecord = {
-  __typename?: 'CtaRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  colour?: Maybe<ColorField>;
-  createdAt: Scalars['DateTime'];
-  heading?: Maybe<Scalars['String']>;
-  id: Scalars['ItemId'];
-  subtext?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Record of type CTA (cta) */
-export type CtaRecord_SeoMetaTagsArgs = {
-  locale?: Maybe<SiteLocale>;
-};
-
-
-/** Record of type CTA (cta) */
-export type CtaRecordSubtextArgs = {
-  markdown?: Maybe<Scalars['Boolean']>;
-};
-
 
 
 export enum FaviconType {
@@ -228,32 +194,6 @@ export type FileFieldUrlArgs = {
 };
 
 
-/** Record of type Gallery (gallery) */
-export type GalleryRecord = {
-  __typename?: 'GalleryRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  createdAt: Scalars['DateTime'];
-  id: Scalars['ItemId'];
-  images: Array<FileField>;
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Record of type Gallery (gallery) */
-export type GalleryRecord_SeoMetaTagsArgs = {
-  locale?: Maybe<SiteLocale>;
-};
-
 export type GlobalSeoField = {
   __typename?: 'GlobalSeoField';
   facebookPageUrl?: Maybe<Scalars['String']>;
@@ -290,6 +230,7 @@ export type HomepageRecord = {
   id: Scalars['ItemId'];
   mainHeading?: Maybe<Scalars['String']>;
   pageMeta?: Maybe<SeoField>;
+  preview?: Maybe<Scalars['JsonField']>;
   serviceCards?: Maybe<Array<Maybe<PreviewCardRecord>>>;
   updatedAt: Scalars['DateTime'];
 };
@@ -1608,6 +1549,12 @@ export enum ItemStatus {
 }
 
 
+/** Specifies how to filter JSON fields */
+export type JsonFilter = {
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: Maybe<Scalars['BooleanType']>;
+};
+
 export type LandingPageV1ModelFilter = {
   _createdAt?: Maybe<CreatedAtFilter>;
   createdAt?: Maybe<CreatedAtFilter>;
@@ -1620,6 +1567,7 @@ export type LandingPageV1ModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
+  preview?: Maybe<JsonFilter>;
   pageContent?: Maybe<TextFilter>;
   pageMeta?: Maybe<SeoFilter>;
   title?: Maybe<StringFilter>;
@@ -1627,8 +1575,6 @@ export type LandingPageV1ModelFilter = {
   canonicalPath?: Maybe<SlugFilter>;
   OR?: Maybe<Array<Maybe<LandingPageV1ModelFilter>>>;
 };
-
-export type LandingPageV1ModelModularContentField = CtaRecord | GalleryRecord | RichTextRecord;
 
 export enum LandingPageV1ModelOrderBy {
   _createdAt_ASC = '_createdAt_ASC',
@@ -1674,10 +1620,10 @@ export type LandingPageV1Record = {
   canonicalPath?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
-  modularContent?: Maybe<Array<Maybe<LandingPageV1ModelModularContentField>>>;
   pageContent?: Maybe<Scalars['String']>;
   pageMeta?: Maybe<SeoField>;
   pageSlug?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['JsonField']>;
   title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
@@ -1707,6 +1653,22 @@ export type OrientationFilter = {
   eq?: Maybe<UploadOrientation>;
   /** Exclude uploads with the specified orientation */
   neq?: Maybe<UploadOrientation>;
+};
+
+/** Specifies how to filter by position (sorted and tree-like collections) */
+export type PositionFilter = {
+  /** Filter records with a value that's strictly greater than the one specified */
+  gt?: Maybe<Scalars['IntType']>;
+  /** Filter records with a value that's less than the one specified */
+  lt?: Maybe<Scalars['IntType']>;
+  /** Filter records with a value that's greater than or equal to the one specified */
+  gte?: Maybe<Scalars['IntType']>;
+  /** Filter records with a value that's less or equal than the one specified */
+  lte?: Maybe<Scalars['IntType']>;
+  /** Search for records with an exact match */
+  eq?: Maybe<Scalars['IntType']>;
+  /** Exclude records with an exact match */
+  neq?: Maybe<Scalars['IntType']>;
 };
 
 /** Record of type Preview Card (preview_card) */
@@ -1762,18 +1724,26 @@ export type Query = {
   __typename?: 'Query';
   /** Returns meta information regarding a record collection */
   _allLandingPageV1sMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allServicesMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta?: Maybe<CollectionMetadata>;
   /** Returns the single instance record */
   _site: Site;
   /** Returns a collection of records */
   allLandingPageV1s: Array<LandingPageV1Record>;
+  /** Returns a collection of records */
+  allServices: Array<ServiceRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns the single instance record */
   homepage?: Maybe<HomepageRecord>;
   /** Returns a specific record */
   landingPageV1?: Maybe<LandingPageV1Record>;
+  /** Returns a specific record */
+  service?: Maybe<ServiceRecord>;
+  /** Returns the single instance record */
+  templatePage?: Maybe<TemplatePageRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
 };
@@ -1783,6 +1753,13 @@ export type Query = {
 export type Query_AllLandingPageV1sMetaArgs = {
   locale?: Maybe<SiteLocale>;
   filter?: Maybe<LandingPageV1ModelFilter>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllServicesMetaArgs = {
+  locale?: Maybe<SiteLocale>;
+  filter?: Maybe<ServiceModelFilter>;
 };
 
 
@@ -1810,6 +1787,16 @@ export type QueryAllLandingPageV1sArgs = {
 
 
 /** The query root for this schema */
+export type QueryAllServicesArgs = {
+  locale?: Maybe<SiteLocale>;
+  skip?: Maybe<Scalars['IntType']>;
+  first?: Maybe<Scalars['IntType']>;
+  filter?: Maybe<ServiceModelFilter>;
+  orderBy?: Maybe<Array<Maybe<ServiceModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
 export type QueryAllUploadsArgs = {
   locale?: Maybe<SiteLocale>;
   skip?: Maybe<Scalars['IntType']>;
@@ -1830,6 +1817,20 @@ export type QueryLandingPageV1Args = {
   locale?: Maybe<SiteLocale>;
   filter?: Maybe<LandingPageV1ModelFilter>;
   orderBy?: Maybe<Array<Maybe<LandingPageV1ModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryServiceArgs = {
+  locale?: Maybe<SiteLocale>;
+  filter?: Maybe<ServiceModelFilter>;
+  orderBy?: Maybe<Array<Maybe<ServiceModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryTemplatePageArgs = {
+  locale?: Maybe<SiteLocale>;
 };
 
 
@@ -1874,38 +1875,6 @@ export type ResponsiveImage = {
   width: Scalars['IntType'];
 };
 
-/** Record of type Rich text (rich_text) */
-export type RichTextRecord = {
-  __typename?: 'RichTextRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  createdAt: Scalars['DateTime'];
-  id: Scalars['ItemId'];
-  text?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Record of type Rich text (rich_text) */
-export type RichTextRecord_SeoMetaTagsArgs = {
-  locale?: Maybe<SiteLocale>;
-};
-
-
-/** Record of type Rich text (rich_text) */
-export type RichTextRecordTextArgs = {
-  markdown?: Maybe<Scalars['Boolean']>;
-};
-
 export type SeoField = {
   __typename?: 'SeoField';
   description?: Maybe<Scalars['String']>;
@@ -1918,6 +1887,87 @@ export type SeoField = {
 export type SeoFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists?: Maybe<Scalars['BooleanType']>;
+};
+
+export type ServiceModelFilter = {
+  _createdAt?: Maybe<CreatedAtFilter>;
+  createdAt?: Maybe<CreatedAtFilter>;
+  id?: Maybe<ItemIdFilter>;
+  _firstPublishedAt?: Maybe<PublishedAtFilter>;
+  position?: Maybe<PositionFilter>;
+  _publicationScheduledAt?: Maybe<PublishedAtFilter>;
+  _unpublishingScheduledAt?: Maybe<PublishedAtFilter>;
+  _publishedAt?: Maybe<PublishedAtFilter>;
+  _status?: Maybe<StatusFilter>;
+  _updatedAt?: Maybe<UpdatedAtFilter>;
+  updatedAt?: Maybe<UpdatedAtFilter>;
+  _isValid?: Maybe<BooleanFilter>;
+  preview?: Maybe<JsonFilter>;
+  title?: Maybe<StringFilter>;
+  pageMeta?: Maybe<SeoFilter>;
+  pageSlug?: Maybe<SlugFilter>;
+  canonicalPath?: Maybe<SlugFilter>;
+  OR?: Maybe<Array<Maybe<ServiceModelFilter>>>;
+};
+
+export enum ServiceModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  position_ASC = 'position_ASC',
+  position_DESC = 'position_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC'
+}
+
+/** Record of type Service page (service) */
+export type ServiceRecord = {
+  __typename?: 'ServiceRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canonicalPath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  pageMeta?: Maybe<SeoField>;
+  pageSlug?: Maybe<Scalars['String']>;
+  position?: Maybe<Scalars['IntType']>;
+  preview?: Maybe<Scalars['JsonField']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Service page (service) */
+export type ServiceRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
 };
 
 export type Site = {
@@ -1994,6 +2044,36 @@ export type Tag = {
   attributes?: Maybe<Scalars['MetaTagAttributes']>;
   content?: Maybe<Scalars['String']>;
   tag: Scalars['String'];
+};
+
+/** Record of type ***TEMPLATE*** (template_page) */
+export type TemplatePageRecord = {
+  __typename?: 'TemplatePageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canonicalPath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  pageMeta?: Maybe<SeoField>;
+  pageSlug?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['JsonField']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type ***TEMPLATE*** (template_page) */
+export type TemplatePageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
 };
 
 /** Specifies how to filter text fields */

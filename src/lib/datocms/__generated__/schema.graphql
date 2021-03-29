@@ -66,34 +66,6 @@ input CreatedAtFilter {
   neq: DateTime
 }
 
-"""Record of type CTA (cta)"""
-type CtaRecord {
-  _createdAt: DateTime!
-  _firstPublishedAt: DateTime
-  _isValid: BooleanType!
-  _modelApiKey: String!
-  _publicationScheduledAt: DateTime
-  _publishedAt: DateTime
-
-  """SEO meta tags"""
-  _seoMetaTags(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): [Tag!]!
-  _status: ItemStatus!
-  _unpublishingScheduledAt: DateTime
-  _updatedAt: DateTime!
-  colour: ColorField
-  createdAt: DateTime!
-  heading: String
-  id: ItemId!
-  subtext(
-    """Process content as markdown"""
-    markdown: Boolean
-  ): String
-  updatedAt: DateTime!
-}
-
 scalar CustomData
 
 """A ISO 8601 compliant datetime value"""
@@ -204,29 +176,6 @@ Represents signed double-precision fractional values as specified by [IEEE 754](
 """
 scalar FloatType
 
-"""Record of type Gallery (gallery)"""
-type GalleryRecord {
-  _createdAt: DateTime!
-  _firstPublishedAt: DateTime
-  _isValid: BooleanType!
-  _modelApiKey: String!
-  _publicationScheduledAt: DateTime
-  _publishedAt: DateTime
-
-  """SEO meta tags"""
-  _seoMetaTags(
-    """The locale to use to fetch the field's content"""
-    locale: SiteLocale
-  ): [Tag!]!
-  _status: ItemStatus!
-  _unpublishingScheduledAt: DateTime
-  _updatedAt: DateTime!
-  createdAt: DateTime!
-  id: ItemId!
-  images: [FileField!]!
-  updatedAt: DateTime!
-}
-
 type GlobalSeoField {
   facebookPageUrl: String
   fallbackSeo: SeoField
@@ -264,6 +213,7 @@ type HomepageRecord {
   id: ItemId!
   mainHeading: String
   pageMeta: SeoField
+  preview: JsonField
   serviceCards: [PreviewCardRecord]
   updatedAt: DateTime!
 }
@@ -1708,6 +1658,14 @@ enum ItemStatus {
 
 scalar JsonField
 
+"""Specifies how to filter JSON fields"""
+input JsonFilter {
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+}
+
 input LandingPageV1ModelFilter {
   _createdAt: CreatedAtFilter
   createdAt: CreatedAtFilter
@@ -1720,6 +1678,7 @@ input LandingPageV1ModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
+  preview: JsonFilter
   pageContent: TextFilter
   pageMeta: SeoFilter
   title: StringFilter
@@ -1727,8 +1686,6 @@ input LandingPageV1ModelFilter {
   canonicalPath: SlugFilter
   OR: [LandingPageV1ModelFilter]
 }
-
-union LandingPageV1ModelModularContentField = CtaRecord | GalleryRecord | RichTextRecord
 
 enum LandingPageV1ModelOrderBy {
   _createdAt_ASC
@@ -1777,13 +1734,13 @@ type LandingPageV1Record {
   canonicalPath: String
   createdAt: DateTime!
   id: ItemId!
-  modularContent: [LandingPageV1ModelModularContentField]
   pageContent(
     """Process content as markdown"""
     markdown: Boolean
   ): String
   pageMeta: SeoField
   pageSlug: String
+  preview: JsonField
   title: String
   updatedAt: DateTime!
 }
@@ -1803,6 +1760,33 @@ input OrientationFilter {
 
   """Exclude uploads with the specified orientation"""
   neq: UploadOrientation
+}
+
+"""Specifies how to filter by position (sorted and tree-like collections)"""
+input PositionFilter {
+  """
+  Filter records with a value that's strictly greater than the one specified
+  """
+  gt: IntType
+
+  """Filter records with a value that's less than the one specified"""
+  lt: IntType
+
+  """
+  Filter records with a value that's greater than or equal to the one specified
+  """
+  gte: IntType
+
+  """
+  Filter records with a value that's less or equal than the one specified
+  """
+  lte: IntType
+
+  """Search for records with an exact match"""
+  eq: IntType
+
+  """Exclude records with an exact match"""
+  neq: IntType
 }
 
 """Record of type Preview Card (preview_card)"""
@@ -1873,6 +1857,13 @@ type Query {
     filter: LandingPageV1ModelFilter
   ): CollectionMetadata!
 
+  """Returns meta information regarding a record collection"""
+  _allServicesMeta(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: ServiceModelFilter
+  ): CollectionMetadata!
+
   """Returns meta information regarding an assets collection"""
   _allUploadsMeta(
     """The locale to use to fetch the field's content"""
@@ -1899,6 +1890,20 @@ type Query {
     filter: LandingPageV1ModelFilter
     orderBy: [LandingPageV1ModelOrderBy] = [_updatedAt_DESC]
   ): [LandingPageV1Record!]!
+
+  """Returns a collection of records"""
+  allServices(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Limit the number of results"""
+    first: IntType = 20
+    filter: ServiceModelFilter
+    orderBy: [ServiceModelOrderBy] = [position_ASC]
+  ): [ServiceRecord!]!
 
   """Returns a collection of assets"""
   allUploads(
@@ -1927,6 +1932,20 @@ type Query {
     filter: LandingPageV1ModelFilter
     orderBy: [LandingPageV1ModelOrderBy] = [_updatedAt_DESC]
   ): LandingPageV1Record
+
+  """Returns a specific record"""
+  service(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: ServiceModelFilter
+    orderBy: [ServiceModelOrderBy] = [position_ASC]
+  ): ServiceRecord
+
+  """Returns the single instance record"""
+  templatePage(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): TemplatePageRecord
 
   """Returns a specific asset"""
   upload(
@@ -1973,8 +1992,73 @@ type ResponsiveImage {
   width: IntType!
 }
 
-"""Record of type Rich text (rich_text)"""
-type RichTextRecord {
+type SeoField {
+  description: String
+  image: FileField
+  title: String
+  twitterCard: String
+}
+
+"""Specifies how to filter SEO meta tags fields"""
+input SeoFilter {
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+}
+
+input ServiceModelFilter {
+  _createdAt: CreatedAtFilter
+  createdAt: CreatedAtFilter
+  id: ItemIdFilter
+  _firstPublishedAt: PublishedAtFilter
+  position: PositionFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _updatedAt: UpdatedAtFilter
+  updatedAt: UpdatedAtFilter
+  _isValid: BooleanFilter
+  preview: JsonFilter
+  title: StringFilter
+  pageMeta: SeoFilter
+  pageSlug: SlugFilter
+  canonicalPath: SlugFilter
+  OR: [ServiceModelFilter]
+}
+
+enum ServiceModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  position_ASC
+  position_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  title_ASC
+  title_DESC
+}
+
+"""Record of type Service page (service)"""
+type ServiceRecord {
   _createdAt: DateTime!
   _firstPublishedAt: DateTime
   _isValid: BooleanType!
@@ -1990,28 +2074,15 @@ type RichTextRecord {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
+  canonicalPath: String
   createdAt: DateTime!
   id: ItemId!
-  text(
-    """Process content as markdown"""
-    markdown: Boolean
-  ): String
-  updatedAt: DateTime!
-}
-
-type SeoField {
-  description: String
-  image: FileField
+  pageMeta: SeoField
+  pageSlug: String
+  position: IntType
+  preview: JsonField
   title: String
-  twitterCard: String
-}
-
-"""Specifies how to filter SEO meta tags fields"""
-input SeoFilter {
-  """
-  Filter records with the specified field defined (i.e. with any value) or not
-  """
-  exists: BooleanType
+  updatedAt: DateTime!
 }
 
 type Site {
@@ -2096,6 +2167,33 @@ type Tag {
   attributes: MetaTagAttributes
   content: String
   tag: String!
+}
+
+"""Record of type ***TEMPLATE*** (template_page)"""
+type TemplatePageRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  canonicalPath: String
+  createdAt: DateTime!
+  id: ItemId!
+  pageMeta: SeoField
+  pageSlug: String
+  preview: JsonField
+  title: String
+  updatedAt: DateTime!
 }
 
 """Specifies how to filter text fields"""
