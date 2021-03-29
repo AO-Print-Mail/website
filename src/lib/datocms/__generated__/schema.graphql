@@ -2096,6 +2096,8 @@ type ServiceModelHeroParagraphField {
   value: JsonField!
 }
 
+union ServiceModelModularContentField = SideBySidePRecord | TestimonialRecord
+
 enum ServiceModelOrderBy {
   _createdAt_ASC
   _createdAt_DESC
@@ -2157,6 +2159,7 @@ type ServiceRecord {
   heroParagraph: ServiceModelHeroParagraphField
   id: ItemId!
   mainHeading: String
+  modularContent: [ServiceModelModularContentField]
   pageContent: ServiceModelPageContentField
   pageMeta: SeoField
   pageSlug: String

@@ -16,7 +16,10 @@ query GetServicePage($pageSlug: String!) {
       blocks {
         ... on FeatureParagraphImageRecord {
           id
+          __typename
           heading
+          cropImage
+          patternBackground
           paragraph {
             value
           }
@@ -37,40 +40,44 @@ query GetServicePage($pageSlug: String!) {
             }
           }
         }
-        ... on SideBySidePRecord {
-          id
-          leftHeading
-          leftParagraph {
-            value
-          }
-          rightHeading
-          rightParagraph {
-            value
-          }
-        }
-        ... on TestimonialRecord {
-          id
-          name
-          photo {
-            responsiveImage(
-              imgixParams: { fit: fill, w: 360, h: 360, auto: format }
-            ) {
-              srcSet
-              webpSrcSet
-              sizes
-              src
-              width
-              height
-              aspectRatio
-              alt
-              title
-              base64
-            }
-          }
-        }
         ... on TwoColumnListRecord {
           id
+          __typename
           serviceList
+        }
+      }
+    }
+    modularContent {
+      ... on SideBySidePRecord {
+        id
+        __typename
+        leftHeading
+        leftParagraph {
+          value
+        }
+        rightHeading
+        rightParagraph {
+          value
+        }
+      }
+      ... on TestimonialRecord {
+        id
+        name
+        photo {
+          responsiveImage(
+            imgixParams: { fit: fill, w: 360, h: 360, auto: format }
+          ) {
+            srcSet
+            webpSrcSet
+            sizes
+            src
+            width
+            height
+            aspectRatio
+            alt
+            title
+            base64
+          }
         }
       }
     }

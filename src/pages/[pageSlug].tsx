@@ -10,6 +10,7 @@ import {
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextBlockRules } from '@lib/datocms/blockRules'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -41,10 +42,12 @@ const HeroText = styled('div', {
   },
 })
 
-const ParagraphText = ({ data, size }) => {
+const ConfiguredText = ({ data, size }) => {
   return (
     <StructuredText
       data={data}
+      //@ts-expect-error
+      renderBlock={structuredTextBlockRules}
       customRules={structuredTextRules({
         headingProps: { color: 'primary' },
         paragraphProps: { size, color: 'primary' },
@@ -102,9 +105,14 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
           <HeroText>
             <Heading1 color="primary">{data.mainHeading}</Heading1>
             <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
-              <ParagraphText data={data.heroParagraph} size="Paragraph2" />
+              <ConfiguredText data={data.heroParagraph} size="Paragraph2" />
             </Box>
           </HeroText>
+        </Container>
+      </Box>
+      <Box>
+        <Container>
+          <ConfiguredText data={data.pageContent} size="Paragraph2" />
         </Container>
       </Box>
     </Layout>

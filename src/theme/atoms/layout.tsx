@@ -21,3 +21,18 @@ export const Flex = styled(Box, {
   },
 })
 export const Grid = styled(Box, { display: 'grid' })
+
+export const Column = styled(Box, {
+  px: 'calc($space$3 / 2)',
+  '@m': { px: 'calc($space$4 / 2)' },
+  '@l': { px: 'calc($space$4 / 2)' },
+  '@xl': { px: 'calc($space$5 / 2)' },
+})
+
+export const ColumnWrapper = styled(Flex, {
+  position: 'relative',
+  mx: 'calc(-$space$3 / 2)',
+  '@m': { mx: 'calc(-$space$4 / 2)' },
+  '@l': { mx: 'calc(-$space$4 / 2)' },
+  '@xl': { mx: 'calc(-$space$5 / 2)' },
+})

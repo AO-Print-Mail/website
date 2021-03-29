@@ -1989,6 +1989,8 @@ export type ServiceModelHeroParagraphField = {
   value: Scalars['JsonField'];
 };
 
+export type ServiceModelModularContentField = SideBySidePRecord | TestimonialRecord;
+
 export enum ServiceModelOrderBy {
   _createdAt_ASC = '_createdAt_ASC',
   _createdAt_DESC = '_createdAt_DESC',
@@ -2048,6 +2050,7 @@ export type ServiceRecord = {
   heroParagraph?: Maybe<ServiceModelHeroParagraphField>;
   id: Scalars['ItemId'];
   mainHeading?: Maybe<Scalars['String']>;
+  modularContent?: Maybe<Array<Maybe<ServiceModelModularContentField>>>;
   pageContent?: Maybe<ServiceModelPageContentField>;
   pageMeta?: Maybe<SeoField>;
   pageSlug?: Maybe<Scalars['String']>;
@@ -2749,8 +2752,8 @@ export type GetServicePageQuery = (
       { __typename?: 'ServiceModelPageContentField' }
       & Pick<ServiceModelPageContentField, 'value'>
       & { blocks: Array<(
-        { __typename?: 'FeatureParagraphImageRecord' }
-        & Pick<FeatureParagraphImageRecord, 'id' | 'heading'>
+        { __typename: 'FeatureParagraphImageRecord' }
+        & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'patternBackground'>
         & { paragraph?: Maybe<(
           { __typename?: 'FeatureParagraphImageModelParagraphField' }
           & Pick<FeatureParagraphImageModelParagraphField, 'value'>
@@ -2761,31 +2764,31 @@ export type GetServicePageQuery = (
             & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
           )> }
         )> }
-      ) | (
-        { __typename?: 'SideBySidePRecord' }
-        & Pick<SideBySidePRecord, 'id' | 'leftHeading' | 'rightHeading'>
-        & { leftParagraph?: Maybe<(
-          { __typename?: 'SideBySidePModelLeftParagraphField' }
-          & Pick<SideBySidePModelLeftParagraphField, 'value'>
-        )>, rightParagraph?: Maybe<(
-          { __typename?: 'SideBySidePModelRightParagraphField' }
-          & Pick<SideBySidePModelRightParagraphField, 'value'>
-        )> }
-      ) | (
-        { __typename?: 'TestimonialRecord' }
-        & Pick<TestimonialRecord, 'id' | 'name'>
-        & { photo?: Maybe<(
-          { __typename?: 'FileField' }
-          & { responsiveImage?: Maybe<(
-            { __typename?: 'ResponsiveImage' }
-            & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
-          )> }
-        )> }
-      ) | (
-        { __typename?: 'TwoColumnListRecord' }
+      ) | { __typename?: 'SideBySidePRecord' } | { __typename?: 'TestimonialRecord' } | (
+        { __typename: 'TwoColumnListRecord' }
         & Pick<TwoColumnListRecord, 'id' | 'serviceList'>
       )> }
-    )> }
+    )>, modularContent?: Maybe<Array<Maybe<(
+      { __typename: 'SideBySidePRecord' }
+      & Pick<SideBySidePRecord, 'id' | 'leftHeading' | 'rightHeading'>
+      & { leftParagraph?: Maybe<(
+        { __typename?: 'SideBySidePModelLeftParagraphField' }
+        & Pick<SideBySidePModelLeftParagraphField, 'value'>
+      )>, rightParagraph?: Maybe<(
+        { __typename?: 'SideBySidePModelRightParagraphField' }
+        & Pick<SideBySidePModelRightParagraphField, 'value'>
+      )> }
+    ) | (
+      { __typename?: 'TestimonialRecord' }
+      & Pick<TestimonialRecord, 'id' | 'name'>
+      & { photo?: Maybe<(
+        { __typename?: 'FileField' }
+        & { responsiveImage?: Maybe<(
+          { __typename?: 'ResponsiveImage' }
+          & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
+        )> }
+      )> }
+    )>>> }
   )> }
 );
 
@@ -2893,7 +2896,10 @@ export const GetServicePageDocument = gql`
       blocks {
         ... on FeatureParagraphImageRecord {
           id
+          __typename
           heading
+          cropImage
+          patternBackground
           paragraph {
             value
           }
@@ -2912,38 +2918,42 @@ export const GetServicePageDocument = gql`
             }
           }
         }
-        ... on SideBySidePRecord {
-          id
-          leftHeading
-          leftParagraph {
-            value
-          }
-          rightHeading
-          rightParagraph {
-            value
-          }
-        }
-        ... on TestimonialRecord {
-          id
-          name
-          photo {
-            responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
-              srcSet
-              webpSrcSet
-              sizes
-              src
-              width
-              height
-              aspectRatio
-              alt
-              title
-              base64
-            }
-          }
-        }
         ... on TwoColumnListRecord {
           id
+          __typename
           serviceList
+        }
+      }
+    }
+    modularContent {
+      ... on SideBySidePRecord {
+        id
+        __typename
+        leftHeading
+        leftParagraph {
+          value
+        }
+        rightHeading
+        rightParagraph {
+          value
+        }
+      }
+      ... on TestimonialRecord {
+        id
+        name
+        photo {
+          responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
+            srcSet
+            webpSrcSet
+            sizes
+            src
+            width
+            height
+            aspectRatio
+            alt
+            title
+            base64
+          }
         }
       }
     }
