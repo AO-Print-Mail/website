@@ -77,6 +77,39 @@ enum FaviconType {
   msApplication
 }
 
+type FeatureParagraphImageModelParagraphField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+"""Record of type Feature paragraph with image (feature_paragraph_image)"""
+type FeatureParagraphImageRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  cropImage: BooleanType
+  heading: String
+  id: ItemId!
+  image: FileField
+  paragraph: FeatureParagraphImageModelParagraphField
+  patternBackground: String
+  updatedAt: DateTime!
+}
+
 type FeatureParagraphModelParagraphField {
   blocks: [LandingPageV1Record!]!
   links: [LandingPageV1Record!]!
@@ -1992,6 +2025,32 @@ type ResponsiveImage {
   width: IntType!
 }
 
+"""Record of type Rich text (rich_text)"""
+type RichTextRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  text(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  updatedAt: DateTime!
+}
+
 type SeoField {
   description: String
   image: FileField
@@ -2025,7 +2084,16 @@ input ServiceModelFilter {
   pageMeta: SeoFilter
   pageSlug: SlugFilter
   canonicalPath: SlugFilter
+  heroParagraph: StructuredTextFilter
+  pageContent: StructuredTextFilter
+  mainHeading: StringFilter
   OR: [ServiceModelFilter]
+}
+
+type ServiceModelHeroParagraphField {
+  blocks: [RichTextRecord!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
 }
 
 enum ServiceModelOrderBy {
@@ -2055,6 +2123,16 @@ enum ServiceModelOrderBy {
   _isValid_DESC
   title_ASC
   title_DESC
+  mainHeading_ASC
+  mainHeading_DESC
+}
+
+union ServiceModelPageContentBlocksField = FeatureParagraphImageRecord | SideBySidePRecord | TestimonialRecord | TwoColumnListRecord
+
+type ServiceModelPageContentField {
+  blocks: [ServiceModelPageContentBlocksField!]!
+  links: [ServiceRecord!]!
+  value: JsonField!
 }
 
 """Record of type Service page (service)"""
@@ -2076,12 +2154,53 @@ type ServiceRecord {
   _updatedAt: DateTime!
   canonicalPath: String
   createdAt: DateTime!
+  heroParagraph: ServiceModelHeroParagraphField
   id: ItemId!
+  mainHeading: String
+  pageContent: ServiceModelPageContentField
   pageMeta: SeoField
   pageSlug: String
   position: IntType
   preview: JsonField
   title: String
+  updatedAt: DateTime!
+}
+
+type SideBySidePModelLeftParagraphField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+type SideBySidePModelRightParagraphField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+"""Record of type Side by side paragraphs (side_by_side_p)"""
+type SideBySidePRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  leftHeading: String
+  leftParagraph: SideBySidePModelLeftParagraphField
+  rightHeading: String
+  rightParagraph: SideBySidePModelRightParagraphField
   updatedAt: DateTime!
 }
 
@@ -2163,6 +2282,20 @@ input StringMatchesFilter {
   regexp: BooleanType
 }
 
+"""Specifies how to filter Structured Text fields"""
+input StructuredTextFilter {
+  """Filter records based on a regular expression"""
+  matches: StringMatchesFilter
+
+  """Exclude records based on a regular expression"""
+  notMatches: StringMatchesFilter
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+}
+
 type Tag {
   attributes: MetaTagAttributes
   content: String
@@ -2196,6 +2329,35 @@ type TemplatePageRecord {
   updatedAt: DateTime!
 }
 
+"""Record of type Testimonial (testimonial)"""
+type TestimonialRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  name: String
+  photo: FileField
+  positionCompany: String
+  testimonial(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  updatedAt: DateTime!
+}
+
 """Specifies how to filter text fields"""
 input TextFilter {
   """Filter records based on a regular expression"""
@@ -2208,6 +2370,29 @@ input TextFilter {
   Filter records with the specified field defined (i.e. with any value) or not
   """
   exists: BooleanType
+}
+
+"""Record of type 2 Column List (two_column_list)"""
+type TwoColumnListRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  serviceList: JsonField
+  updatedAt: DateTime!
 }
 
 """Specifies how to filter by upload type"""

@@ -75,10 +75,6 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       canonicalPath="https://www.aomail.com.au"
       //@ts-ignore
       metaData={data._seoMetaTags}
-      footerCss={{
-        paddingBottom: '$7',
-        '@l': { paddingBottom: '$1' },
-      }}
     >
       <Box
         as="section"
