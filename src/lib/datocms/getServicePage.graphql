@@ -20,6 +20,7 @@ query GetServicePage($pageSlug: String!) {
           heading
           cropImage
           patternBackground
+          imagePosition
           paragraph {
             value
           }

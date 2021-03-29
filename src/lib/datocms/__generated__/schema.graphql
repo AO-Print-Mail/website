@@ -105,6 +105,7 @@ type FeatureParagraphImageRecord {
   heading: String
   id: ItemId!
   image: FileField
+  imagePosition: String
   paragraph: FeatureParagraphImageModelParagraphField
   patternBackground: String
   updatedAt: DateTime!

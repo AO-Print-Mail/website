@@ -36,3 +36,9 @@ export const ColumnWrapper = styled(Flex, {
   '@l': { mx: 'calc(-$space$4 / 2)' },
   '@xl': { mx: 'calc(-$space$5 / 2)' },
 })
+
+export const TextHolder = styled('div', {
+  px: '$2',
+  '@m': { px: '$3' },
+  '@l': { px: '$4' },
+})

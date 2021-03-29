@@ -32,6 +32,7 @@ export function structuredTextBlockRules({
           image={record.image}
           crop={record.cropImage}
           background={record.patternBackground}
+          imagePosition={record.imagePosition}
         />
       )
 

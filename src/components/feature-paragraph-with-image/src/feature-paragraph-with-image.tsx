@@ -1,11 +1,10 @@
 import { FeatureParagraphImageRecord } from '@lib/datocms/__generated__/types'
 import {
-  Box,
-  Flex,
+  TextHolder,
   styled,
   css,
   CSS,
-  Heading2,
+  Heading3,
   Column,
   ColumnWrapper,
 } from '@theme'
@@ -20,6 +19,7 @@ interface FeatureParagraphWithImageProps {
   paragraph?: FeatureParagraphImageRecord['paragraph']
   background?: FeatureParagraphImageRecord['patternBackground']
   crop?: boolean
+  imagePosition?: 'left' | 'right'
 }
 
 const FeatureImage = styled(Image, {
@@ -37,10 +37,6 @@ const FeatureImage = styled(Image, {
   },
 })
 
-const Background = styled('div', {
-  position: 'relative',
-})
-
 const innerImageStyle = css({
   m: '$4',
 })
@@ -51,34 +47,44 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
   heading,
   crop,
   background,
+  imagePosition,
   ...props
 }) => {
+  const ImageColumn = (
+    <Column css={{ '@m': { flex: '0 0 50%' }, '@l': { flex: '0 0 50%' } }}>
+      <FeatureImage
+        imageClassName={innerImageStyle()}
+        oval={crop}
+        data={image.responsiveImage}
+      />
+    </Column>
+  )
   return (
     <ColumnWrapper
       css={{
-        '@initial': { flexDirection: 'column' },
-        '@m': { flexDirection: 'row', alignItems: 'center' },
+        '@initial': { flexDirection: 'column', mt: '$4' },
+        '@m': { flexDirection: 'row', alignItems: 'center', mt: '$5' },
+        '@l': { mt: '$6' },
       }}
     >
+      {imagePosition === 'left' && ImageColumn}
       <Column css={{ '@m': { pr: '$2' } }}>
-        <Heading2 color="primary">{heading}</Heading2>
-        <StructuredText
-          customRules={structuredTextRules({
-            paragraphProps: {
-              color: 'primary',
-              size: 'Paragraph3',
-            },
-          })}
-          data={paragraph.value}
-        />
+        <TextHolder>
+          <Heading3 as="h2" css={{ mt: '$2' }} color="primary">
+            {heading}
+          </Heading3>
+          <StructuredText
+            customRules={structuredTextRules({
+              paragraphProps: {
+                color: 'primary',
+                size: 'Paragraph3',
+              },
+            })}
+            data={paragraph.value}
+          />
+        </TextHolder>
       </Column>
-      <Column css={{ '@m': { flex: '0 0 50%' }, '@l': { flex: '0 0 50%' } }}>
-        <FeatureImage
-          imageClassName={innerImageStyle()}
-          oval={crop}
-          data={image.responsiveImage}
-        />
-      </Column>
+      {imagePosition === 'right' && ImageColumn}
     </ColumnWrapper>
   )
 }

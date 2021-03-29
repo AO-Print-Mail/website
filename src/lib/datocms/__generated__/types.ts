@@ -116,6 +116,7 @@ export type FeatureParagraphImageRecord = {
   heading?: Maybe<Scalars['String']>;
   id: Scalars['ItemId'];
   image?: Maybe<FileField>;
+  imagePosition?: Maybe<Scalars['String']>;
   paragraph?: Maybe<FeatureParagraphImageModelParagraphField>;
   patternBackground?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
@@ -2753,7 +2754,7 @@ export type GetServicePageQuery = (
       & Pick<ServiceModelPageContentField, 'value'>
       & { blocks: Array<(
         { __typename: 'FeatureParagraphImageRecord' }
-        & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'patternBackground'>
+        & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'patternBackground' | 'imagePosition'>
         & { paragraph?: Maybe<(
           { __typename?: 'FeatureParagraphImageModelParagraphField' }
           & Pick<FeatureParagraphImageModelParagraphField, 'value'>
@@ -2900,6 +2901,7 @@ export const GetServicePageDocument = gql`
           heading
           cropImage
           patternBackground
+          imagePosition
           paragraph {
             value
           }
