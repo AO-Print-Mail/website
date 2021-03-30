@@ -42,3 +42,9 @@ export const TextHolder = styled('div', {
   '@m': { px: '$3' },
   '@l': { px: '$4' },
 })
+
+export const BreakoutTextHolder = styled('div', {
+  mx: '-$2',
+  '@m': { mx: '-$3' },
+  '@l': { mx: '-$4' },
+})

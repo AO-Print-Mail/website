@@ -11,60 +11,17 @@ query GetServicePage($pageSlug: String!) {
     heroParagraph {
       value
     }
-    pageContent {
-      value
-      blocks {
-        ... on FeatureParagraphImageRecord {
-          id
-          __typename
-          heading
-          cropImage
-          patternBackground
-          imagePosition
-          paragraph {
-            value
-          }
-          image {
-            responsiveImage(
-              imgixParams: { fit: fill, w: 360, h: 360, auto: format }
-            ) {
-              srcSet
-              webpSrcSet
-              sizes
-              src
-              width
-              height
-              aspectRatio
-              alt
-              title
-              base64
-            }
-          }
-        }
-        ... on TwoColumnListRecord {
-          id
-          __typename
-          serviceList
-        }
-      }
-    }
-    modularContent {
-      ... on SideBySidePRecord {
-        id
+    leftRightParagraphs {
+      ... on FeatureParagraphImageRecord {
         __typename
-        leftHeading
-        leftParagraph {
-          value
-        }
-        rightHeading
-        rightParagraph {
-          value
-        }
-      }
-      ... on TestimonialRecord {
         id
-        name
-        photo {
+        heading
+        cropImage
+        imagePosition
+        paragraph {
+          value
+        }
+        image {
           responsiveImage(
             imgixParams: { fit: fill, w: 360, h: 360, auto: format }
           ) {
@@ -82,6 +39,50 @@ query GetServicePage($pageSlug: String!) {
         }
       }
     }
-    title
+    pageContent {
+      value
+      blocks {
+        ... on TwoColumnListRecord {
+          __typename
+          id
+          serviceList
+        }
+      }
+    }
+    modularContent {
+      ... on SideBySidePRecord {
+        __typename
+        id
+        leftHeading
+        leftParagraph {
+          value
+        }
+        rightHeading
+        rightParagraph {
+          value
+        }
+      }
+      ... on TestimonialRecord {
+        __typename
+        id
+        name
+        photo {
+          responsiveImage(
+            imgixParams: { fit: fill, w: 240, h: 240, auto: format }
+          ) {
+            srcSet
+            webpSrcSet
+            sizes
+            src
+            width
+            height
+            aspectRatio
+            alt
+            title
+            base64
+          }
+        }
+      }
+    }
   }
 }

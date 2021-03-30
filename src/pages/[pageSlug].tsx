@@ -1,5 +1,12 @@
 import { request } from '@lib/datocms/datocms'
-import { Heading1, Box, Container, styled } from '@theme'
+import {
+  Heading1,
+  Box,
+  Container,
+  styled,
+  TextHolder,
+  BreakoutTextHolder,
+} from '@theme'
 import { Layout } from '@components/layout'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 import { ReviewsIoWidget } from '@components/reviews-io-widget'
@@ -10,7 +17,10 @@ import {
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
-import { structuredTextBlockRules } from '@lib/datocms/blockRules'
+import {
+  structuredTextBlockRules,
+  ModularContent,
+} from '@lib/datocms/blockRules'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -112,7 +122,31 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
       </Box>
       <Box>
         <Container>
-          <ConfiguredText data={data.pageContent} size="Paragraph2" />
+          <ModularContent
+            //@ts-ignore
+            data={data.leftRightParagraphs}
+          />
+          <TextHolder
+            css={{
+              '@initial': { mt: '$7' },
+              '@l': {
+                mx: '16.67%',
+              },
+            }}
+          >
+            <StructuredText
+              //@ts-expect-error
+              data={data.pageContent}
+              customRules={structuredTextRules({
+                paragraphProps: {
+                  size: 'Paragraph3',
+                  color: 'primary',
+                },
+              })}
+              //@ts-expect-error
+              renderBlock={structuredTextBlockRules}
+            />
+          </TextHolder>
         </Container>
       </Box>
     </Layout>
