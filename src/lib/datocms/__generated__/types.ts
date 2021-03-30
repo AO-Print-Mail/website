@@ -2050,6 +2050,7 @@ export type ServiceRecord = {
   createdAt: Scalars['DateTime'];
   heroParagraph?: Maybe<ServiceModelHeroParagraphField>;
   id: Scalars['ItemId'];
+  leftRightParagraphs?: Maybe<Array<Maybe<FeatureParagraphImageRecord>>>;
   mainHeading?: Maybe<Scalars['String']>;
   modularContent?: Maybe<Array<Maybe<ServiceModelModularContentField>>>;
   pageContent?: Maybe<ServiceModelPageContentField>;
@@ -2742,30 +2743,30 @@ export type GetServicePageQuery = (
   { __typename?: 'Query' }
   & { service?: Maybe<(
     { __typename?: 'ServiceRecord' }
-    & Pick<ServiceRecord, 'canonicalPath' | 'id' | 'mainHeading' | 'title'>
+    & Pick<ServiceRecord, 'canonicalPath' | 'id' | 'mainHeading'>
     & { _seoMetaTags: Array<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'attributes' | 'content' | 'tag'>
     )>, heroParagraph?: Maybe<(
       { __typename?: 'ServiceModelHeroParagraphField' }
       & Pick<ServiceModelHeroParagraphField, 'value'>
-    )>, pageContent?: Maybe<(
+    )>, leftRightParagraphs?: Maybe<Array<Maybe<(
+      { __typename: 'FeatureParagraphImageRecord' }
+      & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'imagePosition'>
+      & { paragraph?: Maybe<(
+        { __typename?: 'FeatureParagraphImageModelParagraphField' }
+        & Pick<FeatureParagraphImageModelParagraphField, 'value'>
+      )>, image?: Maybe<(
+        { __typename?: 'FileField' }
+        & { responsiveImage?: Maybe<(
+          { __typename?: 'ResponsiveImage' }
+          & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
+        )> }
+      )> }
+    )>>>, pageContent?: Maybe<(
       { __typename?: 'ServiceModelPageContentField' }
       & Pick<ServiceModelPageContentField, 'value'>
-      & { blocks: Array<(
-        { __typename: 'FeatureParagraphImageRecord' }
-        & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'patternBackground' | 'imagePosition'>
-        & { paragraph?: Maybe<(
-          { __typename?: 'FeatureParagraphImageModelParagraphField' }
-          & Pick<FeatureParagraphImageModelParagraphField, 'value'>
-        )>, image?: Maybe<(
-          { __typename?: 'FileField' }
-          & { responsiveImage?: Maybe<(
-            { __typename?: 'ResponsiveImage' }
-            & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
-          )> }
-        )> }
-      ) | { __typename?: 'SideBySidePRecord' } | { __typename?: 'TestimonialRecord' } | (
+      & { blocks: Array<{ __typename?: 'FeatureParagraphImageRecord' } | { __typename?: 'SideBySidePRecord' } | { __typename?: 'TestimonialRecord' } | (
         { __typename: 'TwoColumnListRecord' }
         & Pick<TwoColumnListRecord, 'id' | 'serviceList'>
       )> }
@@ -2780,7 +2781,7 @@ export type GetServicePageQuery = (
         & Pick<SideBySidePModelRightParagraphField, 'value'>
       )> }
     ) | (
-      { __typename?: 'TestimonialRecord' }
+      { __typename: 'TestimonialRecord' }
       & Pick<TestimonialRecord, 'id' | 'name'>
       & { photo?: Maybe<(
         { __typename?: 'FileField' }
@@ -2892,58 +2893,17 @@ export const GetServicePageDocument = gql`
     heroParagraph {
       value
     }
-    pageContent {
-      value
-      blocks {
-        ... on FeatureParagraphImageRecord {
-          id
-          __typename
-          heading
-          cropImage
-          patternBackground
-          imagePosition
-          paragraph {
-            value
-          }
-          image {
-            responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
-              srcSet
-              webpSrcSet
-              sizes
-              src
-              width
-              height
-              aspectRatio
-              alt
-              title
-              base64
-            }
-          }
-        }
-        ... on TwoColumnListRecord {
-          id
-          __typename
-          serviceList
-        }
-      }
-    }
-    modularContent {
-      ... on SideBySidePRecord {
-        id
+    leftRightParagraphs {
+      ... on FeatureParagraphImageRecord {
         __typename
-        leftHeading
-        leftParagraph {
-          value
-        }
-        rightHeading
-        rightParagraph {
-          value
-        }
-      }
-      ... on TestimonialRecord {
         id
-        name
-        photo {
+        heading
+        cropImage
+        imagePosition
+        paragraph {
+          value
+        }
+        image {
           responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
             srcSet
             webpSrcSet
@@ -2959,7 +2919,49 @@ export const GetServicePageDocument = gql`
         }
       }
     }
-    title
+    pageContent {
+      value
+      blocks {
+        ... on TwoColumnListRecord {
+          __typename
+          id
+          serviceList
+        }
+      }
+    }
+    modularContent {
+      ... on SideBySidePRecord {
+        __typename
+        id
+        leftHeading
+        leftParagraph {
+          value
+        }
+        rightHeading
+        rightParagraph {
+          value
+        }
+      }
+      ... on TestimonialRecord {
+        __typename
+        id
+        name
+        photo {
+          responsiveImage(imgixParams: {fit: fill, w: 240, h: 240, auto: format}) {
+            srcSet
+            webpSrcSet
+            sizes
+            src
+            width
+            height
+            aspectRatio
+            alt
+            title
+            base64
+          }
+        }
+      }
+    }
   }
 }
     `;

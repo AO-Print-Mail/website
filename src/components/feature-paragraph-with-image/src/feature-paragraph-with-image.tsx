@@ -19,7 +19,7 @@ interface FeatureParagraphWithImageProps {
   paragraph?: FeatureParagraphImageRecord['paragraph']
   background?: FeatureParagraphImageRecord['patternBackground']
   crop?: boolean
-  imagePosition?: 'left' | 'right'
+  imagePosition?: FeatureParagraphImageRecord['imagePosition']
 }
 
 const FeatureImage = styled(Image, {
@@ -52,11 +52,13 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
 }) => {
   const ImageColumn = (
     <Column css={{ '@m': { flex: '0 0 50%' }, '@l': { flex: '0 0 50%' } }}>
-      <FeatureImage
-        imageClassName={innerImageStyle()}
-        oval={crop}
-        data={image.responsiveImage}
-      />
+      <TextHolder>
+        <FeatureImage
+          imageClassName={innerImageStyle()}
+          oval={crop}
+          data={image.responsiveImage}
+        />
+      </TextHolder>
     </Column>
   )
   return (
@@ -66,6 +68,7 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
         '@m': { flexDirection: 'row', alignItems: 'center', mt: '$5' },
         '@l': { mt: '$6' },
       }}
+      {...props}
     >
       {imagePosition === 'left' && ImageColumn}
       <Column css={{ '@m': { pr: '$2' } }}>

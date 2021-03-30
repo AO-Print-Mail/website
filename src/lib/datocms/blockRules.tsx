@@ -18,6 +18,10 @@ const FeatureParagraphImage = dynamic(
   )
 )
 
+const TwoColumnList = dynamic(
+  import('@components/two-column-list').then((res) => res.TwoColumnList)
+)
+
 export function structuredTextBlockRules({
   record,
 }: {
@@ -27,6 +31,7 @@ export function structuredTextBlockRules({
     case 'FeatureParagraphImageRecord':
       return (
         <FeatureParagraphImage
+          key={record.id}
           heading={record.heading}
           paragraph={record.paragraph}
           image={record.image}
@@ -35,8 +40,13 @@ export function structuredTextBlockRules({
           imagePosition={record.imagePosition}
         />
       )
-
+    case 'TwoColumnListRecord':
+      return <TwoColumnList items={record.serviceList} />
     default:
       return null
   }
+}
+
+export function ModularContent({ data }: { data: BlockRecord[] }) {
+  return <>{data.map((record) => structuredTextBlockRules({ record }))}</>
 }

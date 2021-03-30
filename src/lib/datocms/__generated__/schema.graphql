@@ -2159,6 +2159,7 @@ type ServiceRecord {
   createdAt: DateTime!
   heroParagraph: ServiceModelHeroParagraphField
   id: ItemId!
+  leftRightParagraphs: [FeatureParagraphImageRecord]
   mainHeading: String
   modularContent: [ServiceModelModularContentField]
   pageContent: ServiceModelPageContentField

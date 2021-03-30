@@ -5,12 +5,15 @@ interface BlockQuoteProps {
   children?: React.ReactNode
 }
 
-export const Card = styled('div', {
+export const FlatCard = styled('div', {
   backgroundColor: '$white',
-  boxShadow: '$3',
   br: '$5',
   p: '$3',
   '@l': {
     p: '$4',
   },
+})
+
+export const Card = styled(FlatCard, {
+  boxShadow: '$3',
 })

@@ -7,6 +7,7 @@ export interface ListProps {
   icon?: React.ReactElement | string
   key?: string
   children?: React.ReactChildren
+  css?: CSS
 }
 
 export interface listItemProps {
@@ -15,7 +16,7 @@ export interface listItemProps {
     css?: CSS
   }
   key?: string
-  children?: React.ReactChildren
+  children?: React.ReactElement | string
 }
 
 export const List = styled('ul', {
@@ -53,17 +54,17 @@ export const _ListItem = styled('li', {
 })
 
 export const UnorderedList = forwardRef<HTMLUListElement, ListProps>(
-  ({ as, ...props }, ref) => <List role={'list'} ref={ref} as={as} {...props} />
+  ({ as, ...props }, ref) => <List role="list" ref={ref} as={as} {...props} />
 )
 export const OrderedList = forwardRef<HTMLUListElement, ListProps>(
   ({ as, ...props }, ref) => (
-    <List role={'list'} ref={ref} as={as ?? 'ol'} {...props} />
+    <List role="list" ref={ref} as={as ?? 'ol'} {...props} />
   )
 )
 export const ListItem = forwardRef<HTMLUListElement, listItemProps>(
-  ({ children, icon, iconProps, ...props }, ref) => {
+  ({ children, icon, iconProps = {}, ...props }, ref) => {
     const Mark = typeof icon === 'string' ? icons[icon] : icon
-    const { css: iconCss, ...iconRest } = iconProps
+    const { css = {}, ...iconRest } = iconProps
     return (
       <_ListItem
         mark={Mark ? 'disabled' : 'enabled'}
@@ -84,7 +85,7 @@ export const ListItem = forwardRef<HTMLUListElement, listItemProps>(
               '& + p': {
                 flex: '1 1',
               },
-              ...iconCss,
+              ...css,
             }}
           />
         )}
