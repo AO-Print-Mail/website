@@ -1,9 +1,10 @@
-import { styled, CSS, Card, Heading4, Paragraph3, Paragraph4 } from '@theme'
+import { styled, CSS, Card, Heading4, Paragraph3 } from '@theme'
 import { Button } from '@components/button'
 
 interface QuoteCtaProps {
   heading?: string
   paragraph?: string
+  css?: CSS
 }
 
 const Bg = styled(Card, {

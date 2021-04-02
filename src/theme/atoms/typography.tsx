@@ -140,10 +140,10 @@ export const Heading5 = styled('h5', {
   variants: {
     color: {
       primary: {
-        color: '$DBA75',
+        color: '$DBA80',
       },
       light: {
-        color: '$LA75',
+        color: '$LA80',
       },
     },
     alignLeft: { true: { textAlign: 'left' } },
@@ -171,10 +171,10 @@ export const Heading6 = styled('h6', {
   variants: {
     color: {
       primary: {
-        color: '$DBA70',
+        color: '$DBA80',
       },
       light: {
-        color: '$LA70',
+        color: '$LA80',
       },
     },
     alignLeft: { true: { textAlign: 'left' } },

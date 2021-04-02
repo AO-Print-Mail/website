@@ -86,6 +86,12 @@ query GetServicePage($pageSlug: String!) {
           }
         }
       }
+      ... on CtaRecord {
+        __typename
+        id
+        heading
+        subtext
+      }
     }
   }
 }

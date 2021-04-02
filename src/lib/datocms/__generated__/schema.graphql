@@ -66,6 +66,34 @@ input CreatedAtFilter {
   neq: DateTime
 }
 
+"""Record of type CTA (cta)"""
+type CtaRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  accentImage: FileField
+  createdAt: DateTime!
+  heading: String
+  id: ItemId!
+  subtext(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  updatedAt: DateTime!
+}
+
 scalar CustomData
 
 """A ISO 8601 compliant datetime value"""
@@ -2098,7 +2126,7 @@ type ServiceModelHeroParagraphField {
   value: JsonField!
 }
 
-union ServiceModelModularContentField = SideBySidePRecord | TestimonialRecord
+union ServiceModelModularContentField = CtaRecord | SideBySidePRecord | TestimonialRecord
 
 enum ServiceModelOrderBy {
   _createdAt_ASC

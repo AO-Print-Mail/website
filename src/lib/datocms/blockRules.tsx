@@ -1,8 +1,10 @@
-import {
+import { Container } from '@theme'
+import type {
   TestimonialRecord,
   FeatureParagraphImageRecord,
   SideBySidePRecord,
   TwoColumnListRecord,
+  CtaRecord,
 } from './__generated__/types'
 import dynamic from 'next/dynamic'
 
@@ -11,6 +13,7 @@ export type BlockRecord =
   | FeatureParagraphImageRecord
   | SideBySidePRecord
   | TwoColumnListRecord
+  | CtaRecord
 
 const FeatureParagraphImage = dynamic(
   import('@components/feature-paragraph-with-image').then(
@@ -23,6 +26,14 @@ const TwoColumnList = dynamic(
 )
 const Testimonial = dynamic(
   import('@components/testimonial').then((res) => res.Testimonial)
+)
+const SideBySideParagraphs = dynamic(
+  import('@components/side-by-side-paragraphs').then(
+    (res) => res.SideBySideParagraphs
+  )
+)
+const QuoteCta = dynamic(
+  import('@components/quote-cta').then((res) => res.QuoteCta)
 )
 
 export function structuredTextBlockRules({
@@ -54,6 +65,26 @@ export function structuredTextBlockRules({
           key={record.id}
           image={record.photo.responsiveImage}
         />
+      )
+    case 'SideBySidePRecord':
+      return (
+        <SideBySideParagraphs
+          leftHeading={record.leftHeading}
+          rightHeading={record.rightHeading}
+          leftParagraph={record.leftParagraph}
+          rightParagraph={record.rightParagraph}
+          key={record.id}
+        />
+      )
+    case 'CtaRecord':
+      return (
+        <Container>
+          <QuoteCta
+            heading={record.heading}
+            paragraph={record.subtext}
+            key={record.id}
+          />
+        </Container>
       )
     default:
       return null

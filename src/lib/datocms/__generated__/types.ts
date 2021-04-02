@@ -82,6 +82,40 @@ export type CreatedAtFilter = {
   neq?: Maybe<Scalars['DateTime']>;
 };
 
+/** Record of type CTA (cta) */
+export type CtaRecord = {
+  __typename?: 'CtaRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  accentImage?: Maybe<FileField>;
+  createdAt: Scalars['DateTime'];
+  heading?: Maybe<Scalars['String']>;
+  id: Scalars['ItemId'];
+  subtext?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type CTA (cta) */
+export type CtaRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** Record of type CTA (cta) */
+export type CtaRecordSubtextArgs = {
+  markdown?: Maybe<Scalars['Boolean']>;
+};
+
 
 
 export enum FaviconType {
@@ -1991,7 +2025,7 @@ export type ServiceModelHeroParagraphField = {
   value: Scalars['JsonField'];
 };
 
-export type ServiceModelModularContentField = SideBySidePRecord | TestimonialRecord;
+export type ServiceModelModularContentField = CtaRecord | SideBySidePRecord | TestimonialRecord;
 
 export enum ServiceModelOrderBy {
   _createdAt_ASC = '_createdAt_ASC',
@@ -2775,6 +2809,9 @@ export type GetServicePageQuery = (
         & Pick<TwoColumnListRecord, 'id' | 'serviceList'>
       )> }
     )>, modularContent?: Maybe<Array<Maybe<(
+      { __typename: 'CtaRecord' }
+      & Pick<CtaRecord, 'id' | 'heading' | 'subtext'>
+    ) | (
       { __typename: 'SideBySidePRecord' }
       & Pick<SideBySidePRecord, 'id' | 'leftHeading' | 'rightHeading'>
       & { leftParagraph?: Maybe<(
@@ -2967,6 +3004,12 @@ export const GetServicePageDocument = gql`
             base64
           }
         }
+      }
+      ... on CtaRecord {
+        __typename
+        id
+        heading
+        subtext
       }
     }
   }
