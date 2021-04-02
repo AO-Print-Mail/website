@@ -1980,6 +1980,7 @@ export type ServiceModelFilter = {
   heroParagraph?: Maybe<StructuredTextFilter>;
   pageContent?: Maybe<StructuredTextFilter>;
   mainHeading?: Maybe<StringFilter>;
+  illustration?: Maybe<StringFilter>;
   OR?: Maybe<Array<Maybe<ServiceModelFilter>>>;
 };
 
@@ -2020,7 +2021,9 @@ export enum ServiceModelOrderBy {
   title_ASC = 'title_ASC',
   title_DESC = 'title_DESC',
   mainHeading_ASC = 'mainHeading_ASC',
-  mainHeading_DESC = 'mainHeading_DESC'
+  mainHeading_DESC = 'mainHeading_DESC',
+  illustration_ASC = 'illustration_ASC',
+  illustration_DESC = 'illustration_DESC'
 }
 
 export type ServiceModelPageContentBlocksField = FeatureParagraphImageRecord | SideBySidePRecord | TestimonialRecord | TwoColumnListRecord;
@@ -2050,6 +2053,7 @@ export type ServiceRecord = {
   createdAt: Scalars['DateTime'];
   heroParagraph?: Maybe<ServiceModelHeroParagraphField>;
   id: Scalars['ItemId'];
+  illustration?: Maybe<Scalars['String']>;
   leftRightParagraphs?: Maybe<Array<Maybe<FeatureParagraphImageRecord>>>;
   mainHeading?: Maybe<Scalars['String']>;
   modularContent?: Maybe<Array<Maybe<ServiceModelModularContentField>>>;
@@ -2743,7 +2747,7 @@ export type GetServicePageQuery = (
   { __typename?: 'Query' }
   & { service?: Maybe<(
     { __typename?: 'ServiceRecord' }
-    & Pick<ServiceRecord, 'canonicalPath' | 'id' | 'mainHeading'>
+    & Pick<ServiceRecord, 'canonicalPath' | 'id' | 'mainHeading' | 'illustration'>
     & { _seoMetaTags: Array<(
       { __typename?: 'Tag' }
       & Pick<Tag, 'attributes' | 'content' | 'tag'>
@@ -2782,7 +2786,7 @@ export type GetServicePageQuery = (
       )> }
     ) | (
       { __typename: 'TestimonialRecord' }
-      & Pick<TestimonialRecord, 'id' | 'name'>
+      & Pick<TestimonialRecord, 'id' | 'name' | 'testimonial' | 'positionCompany'>
       & { photo?: Maybe<(
         { __typename?: 'FileField' }
         & { responsiveImage?: Maybe<(
@@ -2890,6 +2894,7 @@ export const GetServicePageDocument = gql`
     canonicalPath
     id
     mainHeading
+    illustration
     heroParagraph {
       value
     }
@@ -2946,6 +2951,8 @@ export const GetServicePageDocument = gql`
         __typename
         id
         name
+        testimonial
+        positionCompany
         photo {
           responsiveImage(imgixParams: {fit: fill, w: 240, h: 240, auto: format}) {
             srcSet

@@ -21,6 +21,9 @@ const FeatureParagraphImage = dynamic(
 const TwoColumnList = dynamic(
   import('@components/two-column-list').then((res) => res.TwoColumnList)
 )
+const Testimonial = dynamic(
+  import('@components/testimonial').then((res) => res.Testimonial)
+)
 
 export function structuredTextBlockRules({
   record,
@@ -41,7 +44,17 @@ export function structuredTextBlockRules({
         />
       )
     case 'TwoColumnListRecord':
-      return <TwoColumnList items={record.serviceList} />
+      return <TwoColumnList key={record.id} items={record.serviceList} />
+    case 'TestimonialRecord':
+      return (
+        <Testimonial
+          testimonial={record.testimonial}
+          name={record.name}
+          company={record.positionCompany}
+          key={record.id}
+          image={record.photo.responsiveImage}
+        />
+      )
     default:
       return null
   }

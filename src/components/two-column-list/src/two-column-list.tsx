@@ -26,6 +26,7 @@ const TwoColUl = styled(UnorderedList, {
 const Li = styled(ListItem, {
   display: 'inline-flex',
   width: '100%',
+  my: '$2',
   px: 'calc($space$3 / 2)',
   '@m': { px: 'calc($space$4 / 2)' },
   '@l': { px: 'calc($space$4 / 2)' },

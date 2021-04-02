@@ -2088,6 +2088,7 @@ input ServiceModelFilter {
   heroParagraph: StructuredTextFilter
   pageContent: StructuredTextFilter
   mainHeading: StringFilter
+  illustration: StringFilter
   OR: [ServiceModelFilter]
 }
 
@@ -2128,6 +2129,8 @@ enum ServiceModelOrderBy {
   title_DESC
   mainHeading_ASC
   mainHeading_DESC
+  illustration_ASC
+  illustration_DESC
 }
 
 union ServiceModelPageContentBlocksField = FeatureParagraphImageRecord | SideBySidePRecord | TestimonialRecord | TwoColumnListRecord
@@ -2159,6 +2162,7 @@ type ServiceRecord {
   createdAt: DateTime!
   heroParagraph: ServiceModelHeroParagraphField
   id: ItemId!
+  illustration: String
   leftRightParagraphs: [FeatureParagraphImageRecord]
   mainHeading: String
   modularContent: [ServiceModelModularContentField]

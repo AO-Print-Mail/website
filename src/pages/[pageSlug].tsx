@@ -21,6 +21,10 @@ import {
   structuredTextBlockRules,
   ModularContent,
 } from '@lib/datocms/blockRules'
+import dynamic from 'next/dynamic'
+
+const Printer = dynamic(import('../svg/printer.svg'))
+const Inserter = dynamic(import('../svg/inserter.svg'))
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -77,6 +81,15 @@ const ConfiguredText = ({ data, size }) => {
 }
 
 const ServicePage: React.FC<PageProps> = ({ data }) => {
+  const Illustration = (props) => {
+    if (data.illustration === 'inserter') {
+      return <Inserter {...props} />
+    }
+    if (data.illustration === 'printer') {
+      return <Printer {...props} />
+    }
+    return null
+  }
   const beforeFooter = (
     <>
       <Container>
@@ -135,7 +148,6 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
             }}
           >
             <StructuredText
-              //@ts-expect-error
               data={data.pageContent}
               customRules={structuredTextRules({
                 paragraphProps: {
@@ -147,7 +159,14 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
               renderBlock={structuredTextBlockRules}
             />
           </TextHolder>
+          <BreakoutTextHolder css={{ mr: '16.67%', mt: '$6' }}>
+            <Illustration />
+          </BreakoutTextHolder>
         </Container>
+        <ModularContent
+          //@ts-ignore
+          data={data.modularContent}
+        />
       </Box>
     </Layout>
   )

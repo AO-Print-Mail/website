@@ -8,6 +8,7 @@ query GetServicePage($pageSlug: String!) {
     canonicalPath
     id
     mainHeading
+    illustration
     heroParagraph {
       value
     }
@@ -66,6 +67,8 @@ query GetServicePage($pageSlug: String!) {
         __typename
         id
         name
+        testimonial
+        positionCompany
         photo {
           responsiveImage(
             imgixParams: { fit: fill, w: 240, h: 240, auto: format }

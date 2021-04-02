@@ -77,8 +77,8 @@ export const ListItem = forwardRef<HTMLUListElement, listItemProps>(
           <Mark
             {...iconRest}
             css={{
-              size: '$2',
               marginRight: '$3',
+              mt: '$1',
               alignSelf: 'flex-start',
               flex: '0 0 $2',
               position: 'relative',
