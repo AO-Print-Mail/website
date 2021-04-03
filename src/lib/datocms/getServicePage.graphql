@@ -52,8 +52,8 @@ query GetServicePage($pageSlug: String!) {
     }
     modularContent {
       ... on SideBySidePRecord {
-        __typename
         id
+        __typename
         leftHeading
         leftParagraph {
           value

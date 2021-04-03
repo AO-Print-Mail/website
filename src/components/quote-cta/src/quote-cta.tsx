@@ -22,9 +22,13 @@ const Bg = styled(Card, {
   },
 })
 
-export const QuoteCta: React.FC<QuoteCtaProps> = ({ heading, paragraph }) => {
+export const QuoteCta: React.FC<QuoteCtaProps> = ({
+  heading,
+  paragraph,
+  ...props
+}) => {
   return (
-    <Bg>
+    <Bg {...props}>
       <Heading4 alignCenter color="primary" css={{ mt: '$3' }}>
         {heading || 'Get a quote for your next job'}
       </Heading4>

@@ -51,7 +51,10 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
   ...props
 }) => {
   const ImageColumn = (
-    <Column css={{ '@m': { flex: '0 0 50%' }, '@l': { flex: '0 0 50%' } }}>
+    <Column
+      css={{ '@m': { flex: '0 0 50%' }, '@l': { flex: '0 0 50%' } }}
+      {...props}
+    >
       <TextHolder>
         <FeatureImage
           imageClassName={innerImageStyle()}

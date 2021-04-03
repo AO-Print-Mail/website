@@ -78,12 +78,8 @@ export function structuredTextBlockRules({
       )
     case 'CtaRecord':
       return (
-        <Container>
-          <QuoteCta
-            heading={record.heading}
-            paragraph={record.subtext}
-            key={record.id}
-          />
+        <Container key={record.id}>
+          <QuoteCta heading={record.heading} paragraph={record.subtext} />
         </Container>
       )
     default:
