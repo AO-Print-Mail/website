@@ -1,8 +1,10 @@
-import {
+import { Container } from '@theme'
+import type {
   TestimonialRecord,
   FeatureParagraphImageRecord,
   SideBySidePRecord,
   TwoColumnListRecord,
+  CtaRecord,
 } from './__generated__/types'
 import dynamic from 'next/dynamic'
 
@@ -11,6 +13,7 @@ export type BlockRecord =
   | FeatureParagraphImageRecord
   | SideBySidePRecord
   | TwoColumnListRecord
+  | CtaRecord
 
 const FeatureParagraphImage = dynamic(
   import('@components/feature-paragraph-with-image').then(
@@ -20,6 +23,17 @@ const FeatureParagraphImage = dynamic(
 
 const TwoColumnList = dynamic(
   import('@components/two-column-list').then((res) => res.TwoColumnList)
+)
+const Testimonial = dynamic(
+  import('@components/testimonial').then((res) => res.Testimonial)
+)
+const SideBySideParagraphs = dynamic(
+  import('@components/side-by-side-paragraphs').then(
+    (res) => res.SideBySideParagraphs
+  )
+)
+const QuoteCta = dynamic(
+  import('@components/quote-cta').then((res) => res.QuoteCta)
 )
 
 export function structuredTextBlockRules({
@@ -41,7 +55,33 @@ export function structuredTextBlockRules({
         />
       )
     case 'TwoColumnListRecord':
-      return <TwoColumnList items={record.serviceList} />
+      return <TwoColumnList key={record.id} items={record.serviceList} />
+    case 'TestimonialRecord':
+      return (
+        <Testimonial
+          testimonial={record.testimonial}
+          name={record.name}
+          company={record.positionCompany}
+          key={record.id}
+          image={record.photo.responsiveImage}
+        />
+      )
+    case 'SideBySidePRecord':
+      return (
+        <SideBySideParagraphs
+          leftHeading={record.leftHeading}
+          rightHeading={record.rightHeading}
+          leftParagraph={record.leftParagraph}
+          rightParagraph={record.rightParagraph}
+          key={record.id}
+        />
+      )
+    case 'CtaRecord':
+      return (
+        <Container key={record.id}>
+          <QuoteCta heading={record.heading} paragraph={record.subtext} />
+        </Container>
+      )
     default:
       return null
   }

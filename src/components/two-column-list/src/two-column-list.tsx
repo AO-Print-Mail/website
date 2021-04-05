@@ -1,8 +1,7 @@
 import {
   styled,
   FlatCard,
-  ColumnWrapper,
-  Column,
+  Paragraph4,
   UnorderedList,
   ListItem,
   BreakoutTextHolder,
@@ -25,6 +24,9 @@ const TwoColUl = styled(UnorderedList, {
 })
 
 const Li = styled(ListItem, {
+  display: 'inline-flex',
+  width: '100%',
+  my: '$2',
   px: 'calc($space$3 / 2)',
   '@m': { px: 'calc($space$4 / 2)' },
   '@l': { px: 'calc($space$4 / 2)' },
@@ -36,12 +38,12 @@ export const TwoColumnList: React.FC<TwoColumnListProps> = ({
   ...props
 }) => {
   return (
-    <BreakoutTextHolder css={{ my: '$6' }}>
+    <BreakoutTextHolder css={{ my: '$6' }} {...props}>
       <FlatCard {...props}>
         <TwoColUl>
           {items.map((item) => (
             <Li icon="CheckLeaf" key={item}>
-              {item}
+              <Paragraph4 css={{ mt: '0' }}>{item}</Paragraph4>
             </Li>
           ))}
         </TwoColUl>

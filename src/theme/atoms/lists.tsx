@@ -30,6 +30,7 @@ export const List = styled('ul', {
 
 export const _ListItem = styled('li', {
   display: 'flex',
+  mt: '$3',
   variants: {
     mark: {
       enabled: {
@@ -76,12 +77,11 @@ export const ListItem = forwardRef<HTMLUListElement, listItemProps>(
           <Mark
             {...iconRest}
             css={{
-              size: '$2',
               marginRight: '$3',
+              mt: '$1',
               alignSelf: 'flex-start',
               flex: '0 0 $2',
               position: 'relative',
-              mt: '$4',
               '& + p': {
                 flex: '1 1',
               },

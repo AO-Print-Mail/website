@@ -6,4 +6,19 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withPlugins([withBundleAnalyzer], {
   target: 'serverless',
+  webpack: (config, options) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            svgo: true,
+            svgoConfig: { removeViewBox: false, removeDesc: false },
+          },
+        },
+      ],
+    })
+    return config
+  },
 })

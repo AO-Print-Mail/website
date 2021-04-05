@@ -1,12 +1,14 @@
+import { ThenArg } from '@utils/src'
 import { styled, Container, Heading1, Box, HomePattern, Heading2 } from '@theme'
 import { Layout } from '@components/layout'
-import { HomePageBody } from '@components/home-page-body'
-import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
+import { GetAboutUsQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
-import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredTextRules'
-import { QuoteCta } from '@components/quote-cta'
+import {
+  structuredTextBlockRules,
+  ModularContent,
+} from '@lib/datocms/blockRules'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 
 interface PageProps {
@@ -38,12 +40,14 @@ const HeroText = styled('div', {
   },
 })
 
-const ParagraphText = ({ data, size }) => {
+const ConfiguredText = ({ data, size }) => {
   return (
     <StructuredText
       data={data}
+      //@ts-expect-error
+      renderBlock={structuredTextBlockRules}
       customRules={structuredTextRules({
-        headingProps: { color: 'primary' },
+        headingProps: { color: 'primary', css: { ml: '8.335%' } },
         paragraphProps: { size, color: 'primary' },
         listItemProps: {
           icon: 'CheckLeaf',
@@ -60,19 +64,10 @@ const ParagraphText = ({ data, size }) => {
   )
 }
 
-const LandingPageContent: React.FC<PageProps> = ({ data }) => {
-  const featureSections = data.contentSections.map((f) => (
-    <Box
-      key={f.heading}
-      css={{ '@initial': { px: '$2' }, '@m': { px: '$3' }, '@l': { px: '$4' } }}
-    >
-      <Heading2 color="primary">{f.heading}</Heading2>
-      <ParagraphText data={f.paragraph} size="Paragraph3" />
-    </Box>
-  ))
+const AboutUsPage: React.FC<PageProps> = ({ data }) => {
   return (
     <Layout
-      canonicalPath=""
+      canonicalPath="about"
       //@ts-ignore
       metaData={data._seoMetaTags}
     >
@@ -91,63 +86,29 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
             '@l': { display: 'flex', height: '768px', pt: '$5' },
           }}
         >
-          <HomePattern
-            css={{
-              height: '240px',
-              width: 'auto',
-              position: 'absolute',
-              right: '-$7',
-              top: '$7',
-              display: 'none',
-              '@s': { right: '-$6', height: '300px' },
-              '@m': {
-                top: '0',
-                display: 'block',
-                height: '100%',
-                right: '-$10',
-              },
-              '@l': { right: '-$4', top: '0' },
-            }}
-          />
           <HeroText>
             <Heading1 color="primary">{data.mainHeading}</Heading1>
             <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
-              <ParagraphText data={data.heroParagraph} size="Paragraph2" />
+              <ConfiguredText data={data.heroParagraph} size="Paragraph2" />
             </Box>
           </HeroText>
         </Container>
       </Box>
-      <Box>
-        <HomePageBody
-          cardData={data.cardData}
-          featureSections={featureSections}
-        />
-      </Box>
-      <Box css={{ my: '$7' }}>
-        <Container>
-          <QuoteCta />
-          <ClientLogoBanner />
-        </Container>
-      </Box>
+      <Container>
+        <ConfiguredText data={data.pageContent} size="Paragraph2" />
+      </Container>
     </Layout>
   )
 }
 
 export async function getStaticProps({ params, preview = false }) {
-  const { homepage }: GetHomePageQuery = await request({
-    query: 'GetHomePage',
+  const { aboutUsPage }: GetAboutUsQuery = await request({
+    query: 'GetAboutUs',
     preview,
     variables: {},
   })
   const data = {
-    ...homepage,
-    cardData: homepage.serviceCards.map((card) => ({
-      title: card.title,
-      image: card.image.responsiveImage,
-      description: card.description,
-      link: '/#',
-      linkText: card.linkText,
-    })),
+    ...aboutUsPage,
   }
 
   return {
@@ -157,4 +118,4 @@ export async function getStaticProps({ params, preview = false }) {
   }
 }
 
-export default LandingPageContent
+export default AboutUsPage
