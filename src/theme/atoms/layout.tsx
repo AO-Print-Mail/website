@@ -1,4 +1,4 @@
-import { styled } from '@theme'
+import { css, styled } from '@theme'
 
 export const Box = styled('div', {
   variants: {
@@ -38,6 +38,12 @@ export const ColumnWrapper = styled(Flex, {
 })
 
 export const TextHolder = styled('div', {
+  px: '$2',
+  '@m': { px: '$3' },
+  '@l': { px: '$4' },
+})
+
+export const TextHolderClass = css({
   px: '$2',
   '@m': { px: '$3' },
   '@l': { px: '$4' },

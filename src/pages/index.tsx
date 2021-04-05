@@ -72,7 +72,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   ))
   return (
     <Layout
-      canonicalPath="https://www.aomail.com.au"
+      canonicalPath=""
       //@ts-ignore
       metaData={data._seoMetaTags}
     >
