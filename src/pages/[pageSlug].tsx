@@ -160,8 +160,12 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
               renderBlock={structuredTextBlockRules}
             />
           </TextHolder>
-          <BreakoutTextHolder css={{ mr: '16.67%', mt: '$6' }}>
-            <Illustration />
+          <BreakoutTextHolder
+            css={{ mr: '16.67%', mt: '$6', overflow: 'hidden' }}
+          >
+            <Box css={{ position: 'relative', bottom: '-$3' }}>
+              <Illustration />
+            </Box>
           </BreakoutTextHolder>
         </Container>
         <ModularContent
