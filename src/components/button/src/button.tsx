@@ -85,7 +85,12 @@ const ButtonBg = styled(ResetButton, {
   py: '$2',
   br: '$3',
   fontSize: '$p3m',
-  '&:focus-visible': {
+  '&:focus:not(:focus-visible)': {
+    '&:before': {
+      display: 'none',
+    },
+  },
+  '&:focus': {
     '&:before': {
       content: '',
       position: 'absolute',

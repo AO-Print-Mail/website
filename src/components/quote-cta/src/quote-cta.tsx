@@ -1,9 +1,10 @@
-import { styled, CSS, Card, Heading4, Paragraph3, Paragraph4 } from '@theme'
+import { styled, CSS, Card, Heading4, Paragraph3 } from '@theme'
 import { Button } from '@components/button'
 
 interface QuoteCtaProps {
   heading?: string
   paragraph?: string
+  css?: CSS
 }
 
 const Bg = styled(Card, {
@@ -21,9 +22,13 @@ const Bg = styled(Card, {
   },
 })
 
-export const QuoteCta: React.FC<QuoteCtaProps> = ({ heading, paragraph }) => {
+export const QuoteCta: React.FC<QuoteCtaProps> = ({
+  heading,
+  paragraph,
+  ...props
+}) => {
   return (
-    <Bg>
+    <Bg {...props}>
       <Heading4 alignCenter color="primary" css={{ mt: '$3' }}>
         {heading || 'Get a quote for your next job'}
       </Heading4>

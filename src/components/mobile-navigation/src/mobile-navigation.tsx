@@ -24,7 +24,7 @@ const staticData = [
   {
     section_label: 'Company',
     menu_items: [
-      { name: 'About Us', link: '/about-us' },
+      { name: 'About Us', link: '/about' },
       { name: 'Contact', link: '/contact' },
       { name: 'Blog', link: '/blog' },
     ],

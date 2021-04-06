@@ -238,6 +238,17 @@ export default {
   ) => {
     return { backgroundImage: `linear-gradient(${gradients[value]})` }
   },
+  textGradient: (config: typeof stitchesConfig) => (
+    value: keyof typeof gradients | string
+  ) => {
+    return {
+      backgroundImage: value,
+      '-moz-background-clip': 'text',
+      '-webkit-background-clip': 'text',
+      '-moz-text-fill-color': 'transparent',
+      '-webkit-text-fill-color': 'transparent',
+    }
+  },
   flexGap: (config: typeof stitchesConfig) => (
     value: keyof typeof theme['space']
   ) => {

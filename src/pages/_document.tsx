@@ -11,8 +11,8 @@ export default class Document extends NextDocument {
       const initialProps = await NextDocument.getInitialProps(ctx)
 
       const ssrStyles = getCssString()
-      const prefixedStyles = await postcss([autoprefixer()])
-        .process(ssrStyles)
+      const prefixedStyles = await postcss([autoprefixer({})])
+        .process(ssrStyles, { from: undefined })
         .then((style) => {
           return style.css
         })

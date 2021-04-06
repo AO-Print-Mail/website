@@ -1,3 +1,44 @@
+type AboutUsPageModelHeroParagraphField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+union AboutUsPageModelPageContentBlocksField = CtaRecord | FeatureParagraphImageRecord | FullWidthCalloutRecord | SideBySidePRecord | StaffProfileCollectionRecord | TwoColumnListRecord
+
+type AboutUsPageModelPageContentField {
+  blocks: [AboutUsPageModelPageContentBlocksField!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+"""Record of type About Us page (about_us_page)"""
+type AboutUsPageRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  heroParagraph: AboutUsPageModelHeroParagraphField
+  id: ItemId!
+  mainHeading: String
+  pageContent: AboutUsPageModelPageContentField
+  pageMeta: SeoField
+  preview: JsonField
+  updatedAt: DateTime!
+}
+
 """Specifies how to filter Boolean fields"""
 input BooleanFilter {
   """Search for records with an exact match"""
@@ -66,6 +107,34 @@ input CreatedAtFilter {
   neq: DateTime
 }
 
+"""Record of type CTA (cta)"""
+type CtaRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  accentImage: FileField
+  createdAt: DateTime!
+  heading: String
+  id: ItemId!
+  subtext(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  updatedAt: DateTime!
+}
+
 scalar CustomData
 
 """A ISO 8601 compliant datetime value"""
@@ -75,6 +144,40 @@ enum FaviconType {
   icon
   appleTouchIcon
   msApplication
+}
+
+type FeatureParagraphImageModelParagraphField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+"""Record of type Feature paragraph with image (feature_paragraph_image)"""
+type FeatureParagraphImageRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  cropImage: BooleanType
+  heading: String
+  id: ItemId!
+  image: FileField
+  imagePosition: String
+  paragraph: FeatureParagraphImageModelParagraphField
+  patternBackground: String
+  updatedAt: DateTime!
 }
 
 type FeatureParagraphModelParagraphField {
@@ -171,10 +274,64 @@ type FileField {
   width: IntType
 }
 
+"""Specifies how to filter Single-file/image fields"""
+input FileFilter {
+  """
+  Search for records with an exact match. The specified value must be an Upload ID
+  """
+  eq: UploadId
+
+  """
+  Exclude records with an exact match. The specified value must be an Upload ID
+  """
+  neq: UploadId
+
+  """Filter records that have one of the specified uploads"""
+  in: [UploadId]
+
+  """Filter records that do not have one of the specified uploads"""
+  notIn: [UploadId]
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
+}
+
 """
 Represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point).
 """
 scalar FloatType
+
+type FullWidthCalloutModelCalloutField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+"""Record of type Full width callout (full_width_callout)"""
+type FullWidthCalloutRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  callout: FullWidthCalloutModelCalloutField
+  createdAt: DateTime!
+  id: ItemId!
+  subheading: String
+  updatedAt: DateTime!
+}
 
 type GlobalSeoField {
   facebookPageUrl: String
@@ -1864,6 +2021,13 @@ type Query {
     filter: ServiceModelFilter
   ): CollectionMetadata!
 
+  """Returns meta information regarding a record collection"""
+  _allStaffProfilesMeta(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: StaffProfileModelFilter
+  ): CollectionMetadata!
+
   """Returns meta information regarding an assets collection"""
   _allUploadsMeta(
     """The locale to use to fetch the field's content"""
@@ -1876,6 +2040,12 @@ type Query {
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
   ): Site!
+
+  """Returns the single instance record"""
+  aboutUsPage(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): AboutUsPageRecord
 
   """Returns a collection of records"""
   allLandingPageV1s(
@@ -1904,6 +2074,20 @@ type Query {
     filter: ServiceModelFilter
     orderBy: [ServiceModelOrderBy] = [position_ASC]
   ): [ServiceRecord!]!
+
+  """Returns a collection of records"""
+  allStaffProfiles(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Limit the number of results"""
+    first: IntType = 20
+    filter: StaffProfileModelFilter
+    orderBy: [StaffProfileModelOrderBy] = [position_ASC]
+  ): [StaffProfileRecord!]!
 
   """Returns a collection of assets"""
   allUploads(
@@ -1940,6 +2124,14 @@ type Query {
     filter: ServiceModelFilter
     orderBy: [ServiceModelOrderBy] = [position_ASC]
   ): ServiceRecord
+
+  """Returns a specific record"""
+  staffProfile(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: StaffProfileModelFilter
+    orderBy: [StaffProfileModelOrderBy] = [position_ASC]
+  ): StaffProfileRecord
 
   """Returns the single instance record"""
   templatePage(
@@ -1992,6 +2184,32 @@ type ResponsiveImage {
   width: IntType!
 }
 
+"""Record of type Rich text (rich_text)"""
+type RichTextRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  text(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  updatedAt: DateTime!
+}
+
 type SeoField {
   description: String
   image: FileField
@@ -2025,8 +2243,20 @@ input ServiceModelFilter {
   pageMeta: SeoFilter
   pageSlug: SlugFilter
   canonicalPath: SlugFilter
+  heroParagraph: StructuredTextFilter
+  pageContent: StructuredTextFilter
+  mainHeading: StringFilter
+  illustration: StringFilter
   OR: [ServiceModelFilter]
 }
+
+type ServiceModelHeroParagraphField {
+  blocks: [RichTextRecord!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+union ServiceModelModularContentField = CtaRecord | SideBySidePRecord | TestimonialRecord
 
 enum ServiceModelOrderBy {
   _createdAt_ASC
@@ -2055,6 +2285,18 @@ enum ServiceModelOrderBy {
   _isValid_DESC
   title_ASC
   title_DESC
+  mainHeading_ASC
+  mainHeading_DESC
+  illustration_ASC
+  illustration_DESC
+}
+
+union ServiceModelPageContentBlocksField = FeatureParagraphImageRecord | SideBySidePRecord | TestimonialRecord | TwoColumnListRecord
+
+type ServiceModelPageContentField {
+  blocks: [ServiceModelPageContentBlocksField!]!
+  links: [ServiceRecord!]!
+  value: JsonField!
 }
 
 """Record of type Service page (service)"""
@@ -2076,12 +2318,56 @@ type ServiceRecord {
   _updatedAt: DateTime!
   canonicalPath: String
   createdAt: DateTime!
+  heroParagraph: ServiceModelHeroParagraphField
   id: ItemId!
+  illustration: String
+  leftRightParagraphs: [FeatureParagraphImageRecord]
+  mainHeading: String
+  modularContent: [ServiceModelModularContentField]
+  pageContent: ServiceModelPageContentField
   pageMeta: SeoField
   pageSlug: String
   position: IntType
   preview: JsonField
   title: String
+  updatedAt: DateTime!
+}
+
+type SideBySidePModelLeftParagraphField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+type SideBySidePModelRightParagraphField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+"""Record of type Side by side paragraphs (side_by_side_p)"""
+type SideBySidePRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  leftHeading: String
+  leftParagraph: SideBySidePModelLeftParagraphField
+  rightHeading: String
+  rightParagraph: SideBySidePModelRightParagraphField
   updatedAt: DateTime!
 }
 
@@ -2116,6 +2402,113 @@ input SlugFilter {
   notIn: [String]
 }
 
+"""Record of type Staff profile collection (staff_profile_collection)"""
+type StaffProfileCollectionRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  profiles: [StaffProfileRecord!]!
+  updatedAt: DateTime!
+}
+
+type StaffProfileModelBiographyField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+input StaffProfileModelFilter {
+  _createdAt: CreatedAtFilter
+  createdAt: CreatedAtFilter
+  id: ItemIdFilter
+  _firstPublishedAt: PublishedAtFilter
+  position: PositionFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _updatedAt: UpdatedAtFilter
+  updatedAt: UpdatedAtFilter
+  _isValid: BooleanFilter
+  jobTitle: StringFilter
+  biography: StructuredTextFilter
+  name: StringFilter
+  avatar: FileFilter
+  OR: [StaffProfileModelFilter]
+}
+
+enum StaffProfileModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  position_ASC
+  position_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  jobTitle_ASC
+  jobTitle_DESC
+  name_ASC
+  name_DESC
+}
+
+"""Record of type Staff Profile (staff_profile)"""
+type StaffProfileRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  avatar: FileField
+  biography: StaffProfileModelBiographyField
+  createdAt: DateTime!
+  id: ItemId!
+  jobTitle: String
+  name: String
+  position: IntType
+  updatedAt: DateTime!
+}
+
 """Specifies how to filter by status"""
 input StatusFilter {
   """Search the record with the specified status"""
@@ -2140,9 +2533,9 @@ input StringFilter {
   notMatches: StringMatchesFilter
 
   """
-  Filter records with the specified field defined (i.e. with any value) or not
+  Filter records with the specified field set as blank (null or empty string)
   """
-  exists: BooleanType
+  isBlank: BooleanType
 
   """Search for records with an exact match"""
   eq: String
@@ -2155,12 +2548,36 @@ input StringFilter {
 
   """Filter records that do not equal one of the specified values"""
   notIn: [String]
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
 }
 
 input StringMatchesFilter {
   pattern: String!
   caseSensitive: BooleanType
   regexp: BooleanType
+}
+
+"""Specifies how to filter Structured Text fields"""
+input StructuredTextFilter {
+  """Filter records based on a regular expression"""
+  matches: StringMatchesFilter
+
+  """Exclude records based on a regular expression"""
+  notMatches: StringMatchesFilter
+
+  """
+  Filter records with the specified field set as blank (null or single empty paragraph)
+  """
+  isBlank: BooleanType
+
+  """
+  Filter records with the specified field defined (i.e. with any value) or not
+  """
+  exists: BooleanType
 }
 
 type Tag {
@@ -2196,6 +2613,35 @@ type TemplatePageRecord {
   updatedAt: DateTime!
 }
 
+"""Record of type Testimonial (testimonial)"""
+type TestimonialRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  name: String
+  photo: FileField
+  positionCompany: String
+  testimonial(
+    """Process content as markdown"""
+    markdown: Boolean
+  ): String
+  updatedAt: DateTime!
+}
+
 """Specifies how to filter text fields"""
 input TextFilter {
   """Filter records based on a regular expression"""
@@ -2205,9 +2651,37 @@ input TextFilter {
   notMatches: StringMatchesFilter
 
   """
+  Filter records with the specified field set as blank (null or empty string)
+  """
+  isBlank: BooleanType
+
+  """
   Filter records with the specified field defined (i.e. with any value) or not
   """
   exists: BooleanType
+}
+
+"""Record of type 2 Column List (two_column_list)"""
+type TwoColumnListRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  createdAt: DateTime!
+  id: ItemId!
+  serviceList: JsonField
+  updatedAt: DateTime!
 }
 
 """Specifies how to filter by upload type"""

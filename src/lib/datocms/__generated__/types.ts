@@ -28,6 +28,52 @@ export type Scalars = {
   UploadId: any;
 };
 
+export type AboutUsPageModelHeroParagraphField = {
+  __typename?: 'AboutUsPageModelHeroParagraphField';
+  blocks: Array<LandingPageV1Record>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+export type AboutUsPageModelPageContentBlocksField = CtaRecord | FeatureParagraphImageRecord | FullWidthCalloutRecord | SideBySidePRecord | StaffProfileCollectionRecord | TwoColumnListRecord;
+
+export type AboutUsPageModelPageContentField = {
+  __typename?: 'AboutUsPageModelPageContentField';
+  blocks: Array<AboutUsPageModelPageContentBlocksField>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+/** Record of type About Us page (about_us_page) */
+export type AboutUsPageRecord = {
+  __typename?: 'AboutUsPageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  heroParagraph?: Maybe<AboutUsPageModelHeroParagraphField>;
+  id: Scalars['ItemId'];
+  mainHeading?: Maybe<Scalars['String']>;
+  pageContent?: Maybe<AboutUsPageModelPageContentField>;
+  pageMeta?: Maybe<SeoField>;
+  preview?: Maybe<Scalars['JsonField']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type About Us page (about_us_page) */
+export type AboutUsPageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
 /** Specifies how to filter Boolean fields */
 export type BooleanFilter = {
   /** Search for records with an exact match */
@@ -82,6 +128,40 @@ export type CreatedAtFilter = {
   neq?: Maybe<Scalars['DateTime']>;
 };
 
+/** Record of type CTA (cta) */
+export type CtaRecord = {
+  __typename?: 'CtaRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  accentImage?: Maybe<FileField>;
+  createdAt: Scalars['DateTime'];
+  heading?: Maybe<Scalars['String']>;
+  id: Scalars['ItemId'];
+  subtext?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type CTA (cta) */
+export type CtaRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** Record of type CTA (cta) */
+export type CtaRecordSubtextArgs = {
+  markdown?: Maybe<Scalars['Boolean']>;
+};
+
 
 
 export enum FaviconType {
@@ -89,6 +169,44 @@ export enum FaviconType {
   appleTouchIcon = 'appleTouchIcon',
   msApplication = 'msApplication'
 }
+
+export type FeatureParagraphImageModelParagraphField = {
+  __typename?: 'FeatureParagraphImageModelParagraphField';
+  blocks: Array<LandingPageV1Record>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+/** Record of type Feature paragraph with image (feature_paragraph_image) */
+export type FeatureParagraphImageRecord = {
+  __typename?: 'FeatureParagraphImageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  cropImage?: Maybe<Scalars['BooleanType']>;
+  heading?: Maybe<Scalars['String']>;
+  id: Scalars['ItemId'];
+  image?: Maybe<FileField>;
+  imagePosition?: Maybe<Scalars['String']>;
+  paragraph?: Maybe<FeatureParagraphImageModelParagraphField>;
+  patternBackground?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Feature paragraph with image (feature_paragraph_image) */
+export type FeatureParagraphImageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
 
 export type FeatureParagraphModelParagraphField = {
   __typename?: 'FeatureParagraphModelParagraphField';
@@ -193,6 +311,54 @@ export type FileFieldUrlArgs = {
   imgixParams?: Maybe<ImgixParams>;
 };
 
+/** Specifies how to filter Single-file/image fields */
+export type FileFilter = {
+  /** Search for records with an exact match. The specified value must be an Upload ID */
+  eq?: Maybe<Scalars['UploadId']>;
+  /** Exclude records with an exact match. The specified value must be an Upload ID */
+  neq?: Maybe<Scalars['UploadId']>;
+  /** Filter records that have one of the specified uploads */
+  in?: Maybe<Array<Maybe<Scalars['UploadId']>>>;
+  /** Filter records that do not have one of the specified uploads */
+  notIn?: Maybe<Array<Maybe<Scalars['UploadId']>>>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: Maybe<Scalars['BooleanType']>;
+};
+
+
+export type FullWidthCalloutModelCalloutField = {
+  __typename?: 'FullWidthCalloutModelCalloutField';
+  blocks: Array<LandingPageV1Record>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+/** Record of type Full width callout (full_width_callout) */
+export type FullWidthCalloutRecord = {
+  __typename?: 'FullWidthCalloutRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  callout?: Maybe<FullWidthCalloutModelCalloutField>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  subheading?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Full width callout (full_width_callout) */
+export type FullWidthCalloutRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
 
 export type GlobalSeoField = {
   __typename?: 'GlobalSeoField';
@@ -1726,14 +1892,20 @@ export type Query = {
   _allLandingPageV1sMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allServicesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allStaffProfilesMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta?: Maybe<CollectionMetadata>;
   /** Returns the single instance record */
   _site: Site;
+  /** Returns the single instance record */
+  aboutUsPage?: Maybe<AboutUsPageRecord>;
   /** Returns a collection of records */
   allLandingPageV1s: Array<LandingPageV1Record>;
   /** Returns a collection of records */
   allServices: Array<ServiceRecord>;
+  /** Returns a collection of records */
+  allStaffProfiles: Array<StaffProfileRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
   /** Returns the single instance record */
@@ -1742,6 +1914,8 @@ export type Query = {
   landingPageV1?: Maybe<LandingPageV1Record>;
   /** Returns a specific record */
   service?: Maybe<ServiceRecord>;
+  /** Returns a specific record */
+  staffProfile?: Maybe<StaffProfileRecord>;
   /** Returns the single instance record */
   templatePage?: Maybe<TemplatePageRecord>;
   /** Returns a specific asset */
@@ -1764,6 +1938,13 @@ export type Query_AllServicesMetaArgs = {
 
 
 /** The query root for this schema */
+export type Query_AllStaffProfilesMetaArgs = {
+  locale?: Maybe<SiteLocale>;
+  filter?: Maybe<StaffProfileModelFilter>;
+};
+
+
+/** The query root for this schema */
 export type Query_AllUploadsMetaArgs = {
   locale?: Maybe<SiteLocale>;
   filter?: Maybe<UploadFilter>;
@@ -1772,6 +1953,12 @@ export type Query_AllUploadsMetaArgs = {
 
 /** The query root for this schema */
 export type Query_SiteArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type QueryAboutUsPageArgs = {
   locale?: Maybe<SiteLocale>;
 };
 
@@ -1793,6 +1980,16 @@ export type QueryAllServicesArgs = {
   first?: Maybe<Scalars['IntType']>;
   filter?: Maybe<ServiceModelFilter>;
   orderBy?: Maybe<Array<Maybe<ServiceModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllStaffProfilesArgs = {
+  locale?: Maybe<SiteLocale>;
+  skip?: Maybe<Scalars['IntType']>;
+  first?: Maybe<Scalars['IntType']>;
+  filter?: Maybe<StaffProfileModelFilter>;
+  orderBy?: Maybe<Array<Maybe<StaffProfileModelOrderBy>>>;
 };
 
 
@@ -1825,6 +2022,14 @@ export type QueryServiceArgs = {
   locale?: Maybe<SiteLocale>;
   filter?: Maybe<ServiceModelFilter>;
   orderBy?: Maybe<Array<Maybe<ServiceModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryStaffProfileArgs = {
+  locale?: Maybe<SiteLocale>;
+  filter?: Maybe<StaffProfileModelFilter>;
+  orderBy?: Maybe<Array<Maybe<StaffProfileModelOrderBy>>>;
 };
 
 
@@ -1875,6 +2080,38 @@ export type ResponsiveImage = {
   width: Scalars['IntType'];
 };
 
+/** Record of type Rich text (rich_text) */
+export type RichTextRecord = {
+  __typename?: 'RichTextRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  text?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Rich text (rich_text) */
+export type RichTextRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** Record of type Rich text (rich_text) */
+export type RichTextRecordTextArgs = {
+  markdown?: Maybe<Scalars['Boolean']>;
+};
+
 export type SeoField = {
   __typename?: 'SeoField';
   description?: Maybe<Scalars['String']>;
@@ -1907,8 +2144,21 @@ export type ServiceModelFilter = {
   pageMeta?: Maybe<SeoFilter>;
   pageSlug?: Maybe<SlugFilter>;
   canonicalPath?: Maybe<SlugFilter>;
+  heroParagraph?: Maybe<StructuredTextFilter>;
+  pageContent?: Maybe<StructuredTextFilter>;
+  mainHeading?: Maybe<StringFilter>;
+  illustration?: Maybe<StringFilter>;
   OR?: Maybe<Array<Maybe<ServiceModelFilter>>>;
 };
+
+export type ServiceModelHeroParagraphField = {
+  __typename?: 'ServiceModelHeroParagraphField';
+  blocks: Array<RichTextRecord>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+export type ServiceModelModularContentField = CtaRecord | SideBySidePRecord | TestimonialRecord;
 
 export enum ServiceModelOrderBy {
   _createdAt_ASC = '_createdAt_ASC',
@@ -1936,8 +2186,21 @@ export enum ServiceModelOrderBy {
   _isValid_ASC = '_isValid_ASC',
   _isValid_DESC = '_isValid_DESC',
   title_ASC = 'title_ASC',
-  title_DESC = 'title_DESC'
+  title_DESC = 'title_DESC',
+  mainHeading_ASC = 'mainHeading_ASC',
+  mainHeading_DESC = 'mainHeading_DESC',
+  illustration_ASC = 'illustration_ASC',
+  illustration_DESC = 'illustration_DESC'
 }
+
+export type ServiceModelPageContentBlocksField = FeatureParagraphImageRecord | SideBySidePRecord | TestimonialRecord | TwoColumnListRecord;
+
+export type ServiceModelPageContentField = {
+  __typename?: 'ServiceModelPageContentField';
+  blocks: Array<ServiceModelPageContentBlocksField>;
+  links: Array<ServiceRecord>;
+  value: Scalars['JsonField'];
+};
 
 /** Record of type Service page (service) */
 export type ServiceRecord = {
@@ -1955,7 +2218,13 @@ export type ServiceRecord = {
   _updatedAt: Scalars['DateTime'];
   canonicalPath?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
+  heroParagraph?: Maybe<ServiceModelHeroParagraphField>;
   id: Scalars['ItemId'];
+  illustration?: Maybe<Scalars['String']>;
+  leftRightParagraphs?: Maybe<Array<Maybe<FeatureParagraphImageRecord>>>;
+  mainHeading?: Maybe<Scalars['String']>;
+  modularContent?: Maybe<Array<Maybe<ServiceModelModularContentField>>>;
+  pageContent?: Maybe<ServiceModelPageContentField>;
   pageMeta?: Maybe<SeoField>;
   pageSlug?: Maybe<Scalars['String']>;
   position?: Maybe<Scalars['IntType']>;
@@ -1967,6 +2236,49 @@ export type ServiceRecord = {
 
 /** Record of type Service page (service) */
 export type ServiceRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+export type SideBySidePModelLeftParagraphField = {
+  __typename?: 'SideBySidePModelLeftParagraphField';
+  blocks: Array<LandingPageV1Record>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+export type SideBySidePModelRightParagraphField = {
+  __typename?: 'SideBySidePModelRightParagraphField';
+  blocks: Array<LandingPageV1Record>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+/** Record of type Side by side paragraphs (side_by_side_p) */
+export type SideBySidePRecord = {
+  __typename?: 'SideBySidePRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  leftHeading?: Maybe<Scalars['String']>;
+  leftParagraph?: Maybe<SideBySidePModelLeftParagraphField>;
+  rightHeading?: Maybe<Scalars['String']>;
+  rightParagraph?: Maybe<SideBySidePModelRightParagraphField>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Side by side paragraphs (side_by_side_p) */
+export type SideBySidePRecord_SeoMetaTagsArgs = {
   locale?: Maybe<SiteLocale>;
 };
 
@@ -2003,6 +2315,120 @@ export type SlugFilter = {
   notIn?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+/** Record of type Staff profile collection (staff_profile_collection) */
+export type StaffProfileCollectionRecord = {
+  __typename?: 'StaffProfileCollectionRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  profiles: Array<StaffProfileRecord>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Staff profile collection (staff_profile_collection) */
+export type StaffProfileCollectionRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+export type StaffProfileModelBiographyField = {
+  __typename?: 'StaffProfileModelBiographyField';
+  blocks: Array<LandingPageV1Record>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+export type StaffProfileModelFilter = {
+  _createdAt?: Maybe<CreatedAtFilter>;
+  createdAt?: Maybe<CreatedAtFilter>;
+  id?: Maybe<ItemIdFilter>;
+  _firstPublishedAt?: Maybe<PublishedAtFilter>;
+  position?: Maybe<PositionFilter>;
+  _publicationScheduledAt?: Maybe<PublishedAtFilter>;
+  _unpublishingScheduledAt?: Maybe<PublishedAtFilter>;
+  _publishedAt?: Maybe<PublishedAtFilter>;
+  _status?: Maybe<StatusFilter>;
+  _updatedAt?: Maybe<UpdatedAtFilter>;
+  updatedAt?: Maybe<UpdatedAtFilter>;
+  _isValid?: Maybe<BooleanFilter>;
+  jobTitle?: Maybe<StringFilter>;
+  biography?: Maybe<StructuredTextFilter>;
+  name?: Maybe<StringFilter>;
+  avatar?: Maybe<FileFilter>;
+  OR?: Maybe<Array<Maybe<StaffProfileModelFilter>>>;
+};
+
+export enum StaffProfileModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  position_ASC = 'position_ASC',
+  position_DESC = 'position_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  jobTitle_ASC = 'jobTitle_ASC',
+  jobTitle_DESC = 'jobTitle_DESC',
+  name_ASC = 'name_ASC',
+  name_DESC = 'name_DESC'
+}
+
+/** Record of type Staff Profile (staff_profile) */
+export type StaffProfileRecord = {
+  __typename?: 'StaffProfileRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  avatar?: Maybe<FileField>;
+  biography?: Maybe<StaffProfileModelBiographyField>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  jobTitle?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  position?: Maybe<Scalars['IntType']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Staff Profile (staff_profile) */
+export type StaffProfileRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
 /** Specifies how to filter by status */
 export type StatusFilter = {
   /** Search the record with the specified status */
@@ -2021,8 +2447,8 @@ export type StringFilter = {
   matches?: Maybe<StringMatchesFilter>;
   /** Exclude records based on a regular expression */
   notMatches?: Maybe<StringMatchesFilter>;
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: Maybe<Scalars['BooleanType']>;
+  /** Filter records with the specified field set as blank (null or empty string) */
+  isBlank?: Maybe<Scalars['BooleanType']>;
   /** Search for records with an exact match */
   eq?: Maybe<Scalars['String']>;
   /** Exclude records with an exact match */
@@ -2031,12 +2457,26 @@ export type StringFilter = {
   in?: Maybe<Array<Maybe<Scalars['String']>>>;
   /** Filter records that do not equal one of the specified values */
   notIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: Maybe<Scalars['BooleanType']>;
 };
 
 export type StringMatchesFilter = {
   pattern: Scalars['String'];
   caseSensitive?: Maybe<Scalars['BooleanType']>;
   regexp?: Maybe<Scalars['BooleanType']>;
+};
+
+/** Specifies how to filter Structured Text fields */
+export type StructuredTextFilter = {
+  /** Filter records based on a regular expression */
+  matches?: Maybe<StringMatchesFilter>;
+  /** Exclude records based on a regular expression */
+  notMatches?: Maybe<StringMatchesFilter>;
+  /** Filter records with the specified field set as blank (null or single empty paragraph) */
+  isBlank?: Maybe<Scalars['BooleanType']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: Maybe<Scalars['BooleanType']>;
 };
 
 export type Tag = {
@@ -2076,14 +2516,77 @@ export type TemplatePageRecord_SeoMetaTagsArgs = {
   locale?: Maybe<SiteLocale>;
 };
 
+/** Record of type Testimonial (testimonial) */
+export type TestimonialRecord = {
+  __typename?: 'TestimonialRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  name?: Maybe<Scalars['String']>;
+  photo?: Maybe<FileField>;
+  positionCompany?: Maybe<Scalars['String']>;
+  testimonial?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Testimonial (testimonial) */
+export type TestimonialRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** Record of type Testimonial (testimonial) */
+export type TestimonialRecordTestimonialArgs = {
+  markdown?: Maybe<Scalars['Boolean']>;
+};
+
 /** Specifies how to filter text fields */
 export type TextFilter = {
   /** Filter records based on a regular expression */
   matches?: Maybe<StringMatchesFilter>;
   /** Exclude records based on a regular expression */
   notMatches?: Maybe<StringMatchesFilter>;
+  /** Filter records with the specified field set as blank (null or empty string) */
+  isBlank?: Maybe<Scalars['BooleanType']>;
   /** Filter records with the specified field defined (i.e. with any value) or not */
   exists?: Maybe<Scalars['BooleanType']>;
+};
+
+/** Record of type 2 Column List (two_column_list) */
+export type TwoColumnListRecord = {
+  __typename?: 'TwoColumnListRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  serviceList?: Maybe<Scalars['JsonField']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type 2 Column List (two_column_list) */
+export type TwoColumnListRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
 };
 
 /** Specifies how to filter by upload type */
@@ -2445,6 +2948,81 @@ export type FocalPoint = {
   y?: Maybe<Scalars['FloatType']>;
 };
 
+export type GetAboutUsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAboutUsQuery = (
+  { __typename?: 'Query' }
+  & { aboutUsPage?: Maybe<(
+    { __typename?: 'AboutUsPageRecord' }
+    & Pick<AboutUsPageRecord, 'mainHeading'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'attributes' | 'content' | 'tag'>
+    )>, heroParagraph?: Maybe<(
+      { __typename?: 'AboutUsPageModelHeroParagraphField' }
+      & Pick<AboutUsPageModelHeroParagraphField, 'value'>
+    )>, pageContent?: Maybe<(
+      { __typename?: 'AboutUsPageModelPageContentField' }
+      & Pick<AboutUsPageModelPageContentField, 'value'>
+      & { blocks: Array<(
+        { __typename: 'CtaRecord' }
+        & Pick<CtaRecord, 'id' | 'heading' | 'subtext'>
+      ) | (
+        { __typename: 'FeatureParagraphImageRecord' }
+        & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'imagePosition'>
+        & { paragraph?: Maybe<(
+          { __typename?: 'FeatureParagraphImageModelParagraphField' }
+          & Pick<FeatureParagraphImageModelParagraphField, 'value'>
+        )>, image?: Maybe<(
+          { __typename?: 'FileField' }
+          & { responsiveImage?: Maybe<(
+            { __typename?: 'ResponsiveImage' }
+            & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
+          )> }
+        )> }
+      ) | (
+        { __typename: 'FullWidthCalloutRecord' }
+        & Pick<FullWidthCalloutRecord, 'id' | 'subheading'>
+        & { callout?: Maybe<(
+          { __typename?: 'FullWidthCalloutModelCalloutField' }
+          & Pick<FullWidthCalloutModelCalloutField, 'value'>
+        )> }
+      ) | (
+        { __typename: 'SideBySidePRecord' }
+        & Pick<SideBySidePRecord, 'id' | 'leftHeading' | 'rightHeading'>
+        & { leftParagraph?: Maybe<(
+          { __typename?: 'SideBySidePModelLeftParagraphField' }
+          & Pick<SideBySidePModelLeftParagraphField, 'value'>
+        )>, rightParagraph?: Maybe<(
+          { __typename?: 'SideBySidePModelRightParagraphField' }
+          & Pick<SideBySidePModelRightParagraphField, 'value'>
+        )> }
+      ) | (
+        { __typename: 'StaffProfileCollectionRecord' }
+        & Pick<StaffProfileCollectionRecord, 'id'>
+        & { profiles: Array<(
+          { __typename?: 'StaffProfileRecord' }
+          & Pick<StaffProfileRecord, 'id' | 'name' | 'jobTitle' | 'position'>
+          & { biography?: Maybe<(
+            { __typename?: 'StaffProfileModelBiographyField' }
+            & Pick<StaffProfileModelBiographyField, 'value'>
+          )>, avatar?: Maybe<(
+            { __typename?: 'FileField' }
+            & { responsiveImage?: Maybe<(
+              { __typename?: 'ResponsiveImage' }
+              & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
+            )> }
+          )> }
+        )> }
+      ) | (
+        { __typename: 'TwoColumnListRecord' }
+        & Pick<TwoColumnListRecord, 'id' | 'serviceList'>
+      )> }
+    )> }
+  )> }
+);
+
 export type GetFaviconsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2522,7 +3100,183 @@ export type GetLandingPageSlugsQuery = (
   )> }
 );
 
+export type GetServicePageQueryVariables = Exact<{
+  pageSlug: Scalars['String'];
+}>;
 
+
+export type GetServicePageQuery = (
+  { __typename?: 'Query' }
+  & { service?: Maybe<(
+    { __typename?: 'ServiceRecord' }
+    & Pick<ServiceRecord, 'canonicalPath' | 'id' | 'mainHeading' | 'illustration'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & Pick<Tag, 'attributes' | 'content' | 'tag'>
+    )>, heroParagraph?: Maybe<(
+      { __typename?: 'ServiceModelHeroParagraphField' }
+      & Pick<ServiceModelHeroParagraphField, 'value'>
+    )>, leftRightParagraphs?: Maybe<Array<Maybe<(
+      { __typename: 'FeatureParagraphImageRecord' }
+      & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'imagePosition'>
+      & { paragraph?: Maybe<(
+        { __typename?: 'FeatureParagraphImageModelParagraphField' }
+        & Pick<FeatureParagraphImageModelParagraphField, 'value'>
+      )>, image?: Maybe<(
+        { __typename?: 'FileField' }
+        & { responsiveImage?: Maybe<(
+          { __typename?: 'ResponsiveImage' }
+          & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
+        )> }
+      )> }
+    )>>>, pageContent?: Maybe<(
+      { __typename?: 'ServiceModelPageContentField' }
+      & Pick<ServiceModelPageContentField, 'value'>
+      & { blocks: Array<{ __typename?: 'FeatureParagraphImageRecord' } | { __typename?: 'SideBySidePRecord' } | { __typename?: 'TestimonialRecord' } | (
+        { __typename: 'TwoColumnListRecord' }
+        & Pick<TwoColumnListRecord, 'id' | 'serviceList'>
+      )> }
+    )>, modularContent?: Maybe<Array<Maybe<(
+      { __typename: 'CtaRecord' }
+      & Pick<CtaRecord, 'id' | 'heading' | 'subtext'>
+    ) | (
+      { __typename: 'SideBySidePRecord' }
+      & Pick<SideBySidePRecord, 'id' | 'leftHeading' | 'rightHeading'>
+      & { leftParagraph?: Maybe<(
+        { __typename?: 'SideBySidePModelLeftParagraphField' }
+        & Pick<SideBySidePModelLeftParagraphField, 'value'>
+      )>, rightParagraph?: Maybe<(
+        { __typename?: 'SideBySidePModelRightParagraphField' }
+        & Pick<SideBySidePModelRightParagraphField, 'value'>
+      )> }
+    ) | (
+      { __typename: 'TestimonialRecord' }
+      & Pick<TestimonialRecord, 'id' | 'name' | 'testimonial' | 'positionCompany'>
+      & { photo?: Maybe<(
+        { __typename?: 'FileField' }
+        & { responsiveImage?: Maybe<(
+          { __typename?: 'ResponsiveImage' }
+          & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
+        )> }
+      )> }
+    )>>> }
+  )> }
+);
+
+export type GetServicePagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetServicePagesQuery = (
+  { __typename?: 'Query' }
+  & { allServices: Array<(
+    { __typename?: 'ServiceRecord' }
+    & Pick<ServiceRecord, 'pageSlug'>
+  )> }
+);
+
+
+export const GetAboutUsDocument = gql`
+    query GetAboutUs {
+  aboutUsPage {
+    _seoMetaTags {
+      attributes
+      content
+      tag
+    }
+    mainHeading
+    heroParagraph {
+      value
+    }
+    pageContent {
+      value
+      blocks {
+        ... on CtaRecord {
+          __typename
+          id
+          heading
+          subtext
+        }
+        ... on FeatureParagraphImageRecord {
+          __typename
+          id
+          heading
+          cropImage
+          imagePosition
+          paragraph {
+            value
+          }
+          image {
+            responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
+              srcSet
+              webpSrcSet
+              sizes
+              src
+              width
+              height
+              aspectRatio
+              alt
+              title
+              base64
+            }
+          }
+        }
+        ... on FullWidthCalloutRecord {
+          id
+          __typename
+          subheading
+          callout {
+            value
+          }
+        }
+        ... on SideBySidePRecord {
+          id
+          __typename
+          leftHeading
+          leftParagraph {
+            value
+          }
+          rightHeading
+          rightParagraph {
+            value
+          }
+        }
+        ... on StaffProfileCollectionRecord {
+          id
+          __typename
+          profiles {
+            id
+            name
+            jobTitle
+            position
+            biography {
+              value
+            }
+            avatar {
+              responsiveImage(imgixParams: {fit: fill, w: 288, h: 288, auto: format}) {
+                srcSet
+                webpSrcSet
+                sizes
+                src
+                width
+                height
+                aspectRatio
+                alt
+                title
+                base64
+              }
+            }
+          }
+        }
+        ... on TwoColumnListRecord {
+          __typename
+          id
+          serviceList
+        }
+      }
+    }
+  }
+}
+    `;
 export const GetFaviconsDocument = gql`
     query GetFavicons {
   site: _site {
@@ -2596,6 +3350,108 @@ export const GetLandingPageSlugsDocument = gql`
   }
 }
     `;
+export const GetServicePageDocument = gql`
+    query GetServicePage($pageSlug: String!) {
+  service(filter: {pageSlug: {eq: $pageSlug}}) {
+    _seoMetaTags {
+      attributes
+      content
+      tag
+    }
+    canonicalPath
+    id
+    mainHeading
+    illustration
+    heroParagraph {
+      value
+    }
+    leftRightParagraphs {
+      ... on FeatureParagraphImageRecord {
+        __typename
+        id
+        heading
+        cropImage
+        imagePosition
+        paragraph {
+          value
+        }
+        image {
+          responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
+            srcSet
+            webpSrcSet
+            sizes
+            src
+            width
+            height
+            aspectRatio
+            alt
+            title
+            base64
+          }
+        }
+      }
+    }
+    pageContent {
+      value
+      blocks {
+        ... on TwoColumnListRecord {
+          __typename
+          id
+          serviceList
+        }
+      }
+    }
+    modularContent {
+      ... on SideBySidePRecord {
+        __typename
+        id
+        leftHeading
+        leftParagraph {
+          value
+        }
+        rightHeading
+        rightParagraph {
+          value
+        }
+      }
+      ... on TestimonialRecord {
+        __typename
+        id
+        name
+        testimonial
+        positionCompany
+        photo {
+          responsiveImage(imgixParams: {fit: fill, w: 240, h: 240, auto: format}) {
+            srcSet
+            webpSrcSet
+            sizes
+            src
+            width
+            height
+            aspectRatio
+            alt
+            title
+            base64
+          }
+        }
+      }
+      ... on CtaRecord {
+        __typename
+        id
+        heading
+        subtext
+      }
+    }
+  }
+}
+    `;
+export const GetServicePagesDocument = gql`
+    query GetServicePages {
+  allServices {
+    pageSlug
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 
@@ -2603,6 +3459,9 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    GetAboutUs(variables?: GetAboutUsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAboutUsQuery> {
+      return withWrapper(() => client.request<GetAboutUsQuery>(print(GetAboutUsDocument), variables, requestHeaders));
+    },
     GetFavicons(variables?: GetFaviconsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetFaviconsQuery> {
       return withWrapper(() => client.request<GetFaviconsQuery>(print(GetFaviconsDocument), variables, requestHeaders));
     },
@@ -2614,6 +3473,12 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetLandingPageSlugs(variables?: GetLandingPageSlugsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPageSlugsQuery> {
       return withWrapper(() => client.request<GetLandingPageSlugsQuery>(print(GetLandingPageSlugsDocument), variables, requestHeaders));
+    },
+    GetServicePage(variables: GetServicePageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetServicePageQuery> {
+      return withWrapper(() => client.request<GetServicePageQuery>(print(GetServicePageDocument), variables, requestHeaders));
+    },
+    GetServicePages(variables?: GetServicePagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetServicePagesQuery> {
+      return withWrapper(() => client.request<GetServicePagesQuery>(print(GetServicePagesDocument), variables, requestHeaders));
     }
   };
 }

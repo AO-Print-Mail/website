@@ -97,7 +97,9 @@ export const Layout: React.FC<LayoutProps> = ({
     return () => {
       window.clearTimeout(addScrollListener)
       listener && listener()
-      hr.removeEventListener('focusin', focusHeader)
+      if (hr) {
+        hr.removeEventListener('focusin', focusHeader)
+      }
     }
   }, [])
 

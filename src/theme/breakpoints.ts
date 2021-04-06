@@ -2,7 +2,7 @@ export const breakpointPixelValues = {
   s: 360,
   m: 640,
   l: 960,
-  xl: 1300,
+  xl: 1280,
 }
 
 export const breakpoints = {

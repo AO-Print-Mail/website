@@ -1,6 +1,5 @@
 import * as React from 'react'
 import {
-  renderRule,
   isHeading,
   isParagraph,
   isBlockquote,
@@ -10,6 +9,7 @@ import {
   Node,
 } from 'datocms-structured-text-utils'
 import dynamic from 'next/dynamic'
+import { renderRule } from 'react-datocms'
 
 const Heading1 = dynamic(
   import('@theme/atoms/typography').then((res) => res.Heading1)

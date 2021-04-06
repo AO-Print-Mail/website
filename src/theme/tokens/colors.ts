@@ -16,9 +16,9 @@ export const colors = {
   N40: '#C8CACC',
   N50: '#B8BBC0',
   N60: '#7F818A',
-  N70: '#595D78',
-  N80: '#41435B',
-  N90: '#32334A',
+  N70: '#4F4E5D',
+  N80: '#353444',
+  N90: '#242334',
   //secondary greens
   G10: '#E4F2CE',
   G30: '#84B972',
@@ -109,4 +109,5 @@ export const colors = {
   BA20: 'rgba(0, 114, 206, 0.12)',
   BA40: 'rgba(0, 114, 206, 0.25)',
   BA75: 'rgba(0, 114, 206, 0.6)',
+  //gradients
 }

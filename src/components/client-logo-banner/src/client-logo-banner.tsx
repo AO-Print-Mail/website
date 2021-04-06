@@ -49,11 +49,10 @@ const LogoWrapper = styled('div', {
 })
 
 const Banner = styled('div', {
-  pt: '$5',
-  pb: '$5',
+  pb: '$3',
   display: 'grid',
   '@l': {
-    pt: '$7',
+    pt: '$3',
     gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
     gridGap: '$3',
   },

@@ -24,4 +24,7 @@ export const ResetButton = styled('button', {
   '::after': {
     boxSizing: 'border-box',
   },
+  '&:focus:not(:focus-visible)': {
+    outline: 'none',
+  },
 })
