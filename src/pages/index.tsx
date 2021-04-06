@@ -117,7 +117,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           </HeroText>
         </Container>
       </Box>
-      <Box>
+      <Box css={{ my: '$7' }}>
         <HomePageBody
           cardData={data.cardData}
           featureSections={featureSections}
@@ -125,7 +125,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       </Box>
       <Box css={{ my: '$7' }}>
         <Container>
-          <QuoteCta />
+          <QuoteCta css={{ mb: '$7' }} />
           <ClientLogoBanner />
         </Container>
       </Box>

@@ -92,7 +92,7 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
   }
   const beforeFooter = (
     <>
-      <Container>
+      <Container css={{ mb: '$7' }}>
         <ClientLogoBanner />
       </Container>
       <Box css={{ backgroundColor: '$white', py: '$4' }}>
@@ -148,6 +148,7 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
             }}
           >
             <StructuredText
+              //@ts-ignore
               data={data.pageContent}
               customRules={structuredTextRules({
                 paragraphProps: {

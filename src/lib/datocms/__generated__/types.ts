@@ -3007,6 +3007,12 @@ export type GetAboutUsQuery = (
           & { biography?: Maybe<(
             { __typename?: 'StaffProfileModelBiographyField' }
             & Pick<StaffProfileModelBiographyField, 'value'>
+          )>, avatar?: Maybe<(
+            { __typename?: 'FileField' }
+            & { responsiveImage?: Maybe<(
+              { __typename?: 'ResponsiveImage' }
+              & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
+            )> }
           )> }
         )> }
       ) | (
@@ -3244,6 +3250,20 @@ export const GetAboutUsDocument = gql`
             position
             biography {
               value
+            }
+            avatar {
+              responsiveImage(imgixParams: {fit: fill, w: 288, h: 288, auto: format}) {
+                srcSet
+                webpSrcSet
+                sizes
+                src
+                width
+                height
+                aspectRatio
+                alt
+                title
+                base64
+              }
             }
           }
         }

@@ -5,6 +5,7 @@ import type {
   SideBySidePRecord,
   TwoColumnListRecord,
   CtaRecord,
+  StaffProfileCollectionRecord,
 } from './__generated__/types'
 import dynamic from 'next/dynamic'
 
@@ -14,6 +15,7 @@ export type BlockRecord =
   | SideBySidePRecord
   | TwoColumnListRecord
   | CtaRecord
+  | StaffProfileCollectionRecord
 
 const FeatureParagraphImage = dynamic(
   import('@components/feature-paragraph-with-image').then(
@@ -34,6 +36,11 @@ const SideBySideParagraphs = dynamic(
 )
 const QuoteCta = dynamic(
   import('@components/quote-cta').then((res) => res.QuoteCta)
+)
+const StaffProfileCollection = dynamic(
+  import('@components/staff-profile-collection').then(
+    (res) => res.StaffProfileCollection
+  )
 )
 
 export function structuredTextBlockRules({
@@ -79,7 +86,17 @@ export function structuredTextBlockRules({
     case 'CtaRecord':
       return (
         <Container key={record.id}>
-          <QuoteCta heading={record.heading} paragraph={record.subtext} />
+          <QuoteCta
+            heading={record.heading}
+            css={{ my: '$6' }}
+            paragraph={record.subtext}
+          />
+        </Container>
+      )
+    case 'StaffProfileCollectionRecord':
+      return (
+        <Container>
+          <StaffProfileCollection data={record.profiles} />
         </Container>
       )
     default:
