@@ -39,7 +39,7 @@ export const TwoColumnList: React.FC<TwoColumnListProps> = ({
 }) => {
   return (
     <BreakoutTextHolder css={{ my: '$6' }} {...props}>
-      <FlatCard {...props}>
+      <FlatCard css={{ boxShadow: '$1' }}>
         <TwoColUl>
           {items.map((item) => (
             <Li icon="CheckLeaf" key={item}>
