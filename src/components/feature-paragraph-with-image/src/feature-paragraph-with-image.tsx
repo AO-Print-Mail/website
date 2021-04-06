@@ -25,8 +25,10 @@ interface FeatureParagraphWithImageProps {
 const FeatureImage = styled(Image, {
   mt: '$5',
   height: 'auto',
+  size: '$12',
   '@l': {
     mx: '16.67%',
+    size: 'unset',
   },
   variants: {
     oval: {
@@ -52,7 +54,11 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
 }) => {
   const ImageColumn = (
     <Column
-      css={{ '@m': { flex: '0 0 50%' }, '@l': { flex: '0 0 50%' } }}
+      css={{
+        '@initial': { alignSelf: 'center', flex: '0 0 auto' },
+        '@m': { flex: '0 0 50%' },
+        '@l': { flex: '0 0 50%' },
+      }}
       {...props}
     >
       <TextHolder>
