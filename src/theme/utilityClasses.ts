@@ -26,3 +26,11 @@ export const fullHeight = css({
   height: '100%',
   flex: '1 1 100%',
 })
+
+export const fullWidth = css({
+  position: 'relative',
+  width: '100vw',
+  mx: '-50vw',
+  left: '50%',
+  right: '50%',
+})

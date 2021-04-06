@@ -43,6 +43,7 @@ const Avatar = styled(Image, {
 const Name = styled(Paragraph1, {
   fontWeight: '700',
   color: '$darkBlue',
+  textGradient: 'linear-gradient(272.88deg, #0072CE 14.59%, #00237D 101%)',
   my: '$0',
 })
 
@@ -128,7 +129,7 @@ export const StaffProfileCollection: React.FC<StaffProfileCollectionProps> = ({
               biography={staff.biography}
               jobTitle={staff.jobTitle}
               name={staff.name}
-              css={{ minHeight: '100%', pb: '$5' }}
+              css={{ minHeight: '100%', pb: '$5', boxShadow: '$1' }}
             />
           </Col>
         )

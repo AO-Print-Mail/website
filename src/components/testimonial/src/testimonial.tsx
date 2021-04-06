@@ -9,6 +9,7 @@ import {
   Box,
   Column,
   ColumnWrapper,
+  FullWidthFeatureContainer,
 } from '@theme'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import Pattern from '@svg/cornerPatternDark.svg'
@@ -39,6 +40,10 @@ const BackgroundImage = styled(Pattern, {
   left: '0',
   '@m': {
     width: '50%',
+  },
+  '@l': {
+    width: 'auto',
+    height: '$10',
   },
 })
 
@@ -107,28 +112,25 @@ export const Testimonial: React.FC<TestimonialProps> = ({
   ...props
 }) => {
   return (
-    <Background {...props}>
-      <BackgroundImage />
-      <Container>
-        <TestimonialTextHolder>
-          <Column>
-            <TextHolder>
-              <Quote as="blockquote">{testimonial}</Quote>
-            </TextHolder>
-          </Column>
-          <Column css={{ '@l': { flex: '0 0 25%' } }}>
-            <TextHolder>
-              <ProfileWrapper css={{ mt: '$6' }}>
-                <Photo data={image} />
-                <Box>
-                  <ProfileText name>{name}</ProfileText>
-                  <ProfileText color="light">{company}</ProfileText>
-                </Box>
-              </ProfileWrapper>
-            </TextHolder>
-          </Column>
-        </TestimonialTextHolder>
-      </Container>
-    </Background>
+    <FullWidthFeatureContainer>
+      <TestimonialTextHolder>
+        <Column>
+          <TextHolder>
+            <Quote as="blockquote">{testimonial}</Quote>
+          </TextHolder>
+        </Column>
+        <Column css={{ '@l': { flex: '0 0 25%' } }}>
+          <TextHolder>
+            <ProfileWrapper css={{ mt: '$6' }}>
+              <Photo data={image} />
+              <Box>
+                <ProfileText name>{name}</ProfileText>
+                <ProfileText color="light">{company}</ProfileText>
+              </Box>
+            </ProfileWrapper>
+          </TextHolder>
+        </Column>
+      </TestimonialTextHolder>
+    </FullWidthFeatureContainer>
   )
 }
