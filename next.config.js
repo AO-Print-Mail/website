@@ -6,6 +6,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withPlugins([withBundleAnalyzer], {
   target: 'serverless',
+  future: {
+    webpack5: true,
+  },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/,
