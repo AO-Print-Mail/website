@@ -3282,7 +3282,7 @@ export type GetBlogPostQuery = (
   { __typename?: 'Query' }
   & { blogArticle?: Maybe<(
     { __typename?: 'BlogArticleRecord' }
-    & Pick<BlogArticleRecord, 'id' | 'updatedAt' | '_updatedAt'>
+    & Pick<BlogArticleRecord, 'id' | 'slug' | 'title' | 'updatedAt' | '_updatedAt'>
     & { mainImage?: Maybe<(
       { __typename?: 'FileField' }
       & { responsiveImage?: Maybe<(
@@ -3299,6 +3299,17 @@ export type GetBlogPostQuery = (
       { __typename?: 'BlogArticleModelSummaryField' }
       & Pick<BlogArticleModelSummaryField, 'value'>
     )> }
+  )> }
+);
+
+export type GetBlogPostPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBlogPostPathsQuery = (
+  { __typename?: 'Query' }
+  & { allBlogArticles: Array<(
+    { __typename?: 'BlogArticleRecord' }
+    & Pick<BlogArticleRecord, 'id' | 'slug'>
   )> }
 );
 
@@ -3615,6 +3626,8 @@ export const GetBlogPostDocument = gql`
     query getBlogPost($pageSlug: String!) {
   blogArticle(filter: {slug: {eq: $pageSlug}}) {
     id
+    slug
+    title
     mainImage {
       responsiveImage(imgixParams: {fit: crop, w: 800, h: 400, auto: format}) {
         ...responsiveImageFragment
@@ -3635,6 +3648,14 @@ export const GetBlogPostDocument = gql`
 }
     ${ResponsiveImageFragmentFragmentDoc}
 ${MetaTagsFragmentFragmentDoc}`;
+export const GetBlogPostPathsDocument = gql`
+    query getBlogPostPaths {
+  allBlogArticles {
+    id
+    slug
+  }
+}
+    `;
 export const GetFaviconsDocument = gql`
     query GetFavicons {
   site: _site {
@@ -3767,6 +3788,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getBlogPost(variables: GetBlogPostQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostQuery> {
       return withWrapper(() => client.request<GetBlogPostQuery>(print(GetBlogPostDocument), variables, requestHeaders));
+    },
+    getBlogPostPaths(variables?: GetBlogPostPathsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostPathsQuery> {
+      return withWrapper(() => client.request<GetBlogPostPathsQuery>(print(GetBlogPostPathsDocument), variables, requestHeaders));
     },
     GetFavicons(variables?: GetFaviconsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetFaviconsQuery> {
       return withWrapper(() => client.request<GetFaviconsQuery>(print(GetFaviconsDocument), variables, requestHeaders));

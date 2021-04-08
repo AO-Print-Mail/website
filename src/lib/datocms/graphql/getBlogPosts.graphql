@@ -19,6 +19,8 @@ query getBlogPostSummaries {
 query getBlogPost($pageSlug: String!) {
   blogArticle(filter: { slug: { eq: $pageSlug } }) {
     id
+    slug
+    title
     mainImage {
       responsiveImage(
         imgixParams: { fit: crop, w: 800, h: 400, auto: format }
@@ -37,5 +39,12 @@ query getBlogPost($pageSlug: String!) {
     summary {
       value
     }
+  }
+}
+
+query getBlogPostPaths {
+  allBlogArticles {
+    id
+    slug
   }
 }

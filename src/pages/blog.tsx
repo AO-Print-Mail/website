@@ -22,7 +22,7 @@ interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
-const PREFETCH_ARTICLES = 4
+const PREFETCH_ARTICLES = 3
 
 const ListWrapper = styled(ColumnWrapper, {
   position: 'relative',
@@ -51,11 +51,16 @@ const CardWrapper = styled(Column, {
 
 const Blog: React.FC<PageProps> = ({ data }) => {
   const router = useRouter()
-  useEffect(() => {
-    data.articleSummaries
-      .slice(0, PREFETCH_ARTICLES)
-      .forEach((article) => router.prefetch(`/blog/${article.slug}`))
-  }, [])
+  useEffect(
+    () => {
+      data.articleSummaries
+        .slice(0, PREFETCH_ARTICLES)
+        .forEach((article) => router.prefetch(`/blog/${article.slug}`))
+    },
+    //need to add param here if filtering is being used
+    //if queries being made on the client, need to check package.json[browser]
+    []
+  )
 
   const handleClick = (link: string) => (e: React.MouseEvent) => {
     e.preventDefault()

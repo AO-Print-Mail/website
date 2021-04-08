@@ -123,7 +123,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   return (
     <CardBackground {...props}>
       <Spacer />
-      <Title>
+      <Title as="h1">
         <a href={link} style={{ textDecoration: 'none', color: 'unset' }}>
           {title}
         </a>
