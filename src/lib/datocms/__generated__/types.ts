@@ -167,6 +167,36 @@ export type BlogArticleRecord_SeoMetaTagsArgs = {
   locale?: Maybe<SiteLocale>;
 };
 
+/** Record of type Blog page (blog_page) */
+export type BlogPageRecord = {
+  __typename?: 'BlogPageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canonicalPath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  pageMeta?: Maybe<SeoField>;
+  pageSlug?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['JsonField']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Blog page (blog_page) */
+export type BlogPageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
 /** Specifies how to filter Boolean fields */
 export type BooleanFilter = {
   /** Search for records with an exact match */
@@ -2008,6 +2038,8 @@ export type Query = {
   /** Returns a specific record */
   blogArticle?: Maybe<BlogArticleRecord>;
   /** Returns the single instance record */
+  blogPage?: Maybe<BlogPageRecord>;
+  /** Returns the single instance record */
   homepage?: Maybe<HomepageRecord>;
   /** Returns a specific record */
   landingPageV1?: Maybe<LandingPageV1Record>;
@@ -2124,6 +2156,12 @@ export type QueryBlogArticleArgs = {
   locale?: Maybe<SiteLocale>;
   filter?: Maybe<BlogArticleModelFilter>;
   orderBy?: Maybe<Array<Maybe<BlogArticleModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryBlogPageArgs = {
+  locale?: Maybe<SiteLocale>;
 };
 
 
@@ -3199,6 +3237,71 @@ export type GetAboutUsQuery = (
   )> }
 );
 
+export type GetBlogPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBlogPageQuery = (
+  { __typename?: 'Query' }
+  & { blogPage?: Maybe<(
+    { __typename?: 'BlogPageRecord' }
+    & Pick<BlogPageRecord, 'id' | 'pageSlug' | 'title'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & MetaTagsFragmentFragment
+    )> }
+  )> }
+);
+
+export type GetBlogPostSummariesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBlogPostSummariesQuery = (
+  { __typename?: 'Query' }
+  & { allBlogArticles: Array<(
+    { __typename?: 'BlogArticleRecord' }
+    & Pick<BlogArticleRecord, 'id' | 'slug' | 'title'>
+    & { mainImage?: Maybe<(
+      { __typename?: 'FileField' }
+      & { responsiveImage?: Maybe<(
+        { __typename?: 'ResponsiveImage' }
+        & ResponsiveImageFragmentFragment
+      )> }
+    )>, summary?: Maybe<(
+      { __typename?: 'BlogArticleModelSummaryField' }
+      & Pick<BlogArticleModelSummaryField, 'value'>
+    )> }
+  )> }
+);
+
+export type GetBlogPostQueryVariables = Exact<{
+  pageSlug: Scalars['String'];
+}>;
+
+
+export type GetBlogPostQuery = (
+  { __typename?: 'Query' }
+  & { blogArticle?: Maybe<(
+    { __typename?: 'BlogArticleRecord' }
+    & Pick<BlogArticleRecord, 'id' | 'updatedAt' | '_updatedAt'>
+    & { mainImage?: Maybe<(
+      { __typename?: 'FileField' }
+      & { responsiveImage?: Maybe<(
+        { __typename?: 'ResponsiveImage' }
+        & ResponsiveImageFragmentFragment
+      )> }
+    )>, _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & MetaTagsFragmentFragment
+    )>, article?: Maybe<(
+      { __typename?: 'BlogArticleModelArticleField' }
+      & Pick<BlogArticleModelArticleField, 'value'>
+    )>, summary?: Maybe<(
+      { __typename?: 'BlogArticleModelSummaryField' }
+      & Pick<BlogArticleModelSummaryField, 'value'>
+    )> }
+  )> }
+);
+
 export type GetFaviconsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3479,6 +3582,59 @@ ${FullWidthCalloutRecordFragmentFragmentDoc}
 ${SideBySidePRecordFragmentFragmentDoc}
 ${StaffProfileCollectionRecordFragmentFragmentDoc}
 ${TwoColumnListRecordFragmentFragmentDoc}`;
+export const GetBlogPageDocument = gql`
+    query GetBlogPage {
+  blogPage {
+    id
+    _seoMetaTags {
+      ...metaTagsFragment
+    }
+    pageSlug
+    title
+  }
+}
+    ${MetaTagsFragmentFragmentDoc}`;
+export const GetBlogPostSummariesDocument = gql`
+    query getBlogPostSummaries {
+  allBlogArticles {
+    id
+    slug
+    title
+    mainImage {
+      responsiveImage(imgixParams: {fit: crop, w: 336, h: 192, auto: format}) {
+        ...responsiveImageFragment
+      }
+    }
+    summary {
+      value
+    }
+  }
+}
+    ${ResponsiveImageFragmentFragmentDoc}`;
+export const GetBlogPostDocument = gql`
+    query getBlogPost($pageSlug: String!) {
+  blogArticle(filter: {slug: {eq: $pageSlug}}) {
+    id
+    mainImage {
+      responsiveImage(imgixParams: {fit: crop, w: 800, h: 400, auto: format}) {
+        ...responsiveImageFragment
+      }
+    }
+    updatedAt
+    _seoMetaTags {
+      ...metaTagsFragment
+    }
+    _updatedAt
+    article {
+      value
+    }
+    summary {
+      value
+    }
+  }
+}
+    ${ResponsiveImageFragmentFragmentDoc}
+${MetaTagsFragmentFragmentDoc}`;
 export const GetFaviconsDocument = gql`
     query GetFavicons {
   site: _site {
@@ -3602,6 +3758,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     GetAboutUs(variables?: GetAboutUsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAboutUsQuery> {
       return withWrapper(() => client.request<GetAboutUsQuery>(print(GetAboutUsDocument), variables, requestHeaders));
+    },
+    GetBlogPage(variables?: GetBlogPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPageQuery> {
+      return withWrapper(() => client.request<GetBlogPageQuery>(print(GetBlogPageDocument), variables, requestHeaders));
+    },
+    getBlogPostSummaries(variables?: GetBlogPostSummariesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostSummariesQuery> {
+      return withWrapper(() => client.request<GetBlogPostSummariesQuery>(print(GetBlogPostSummariesDocument), variables, requestHeaders));
+    },
+    getBlogPost(variables: GetBlogPostQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostQuery> {
+      return withWrapper(() => client.request<GetBlogPostQuery>(print(GetBlogPostDocument), variables, requestHeaders));
     },
     GetFavicons(variables?: GetFaviconsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetFaviconsQuery> {
       return withWrapper(() => client.request<GetFaviconsQuery>(print(GetFaviconsDocument), variables, requestHeaders));

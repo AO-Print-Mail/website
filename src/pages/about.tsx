@@ -67,7 +67,7 @@ const ConfiguredText = ({ data, size }) => {
 const AboutUsPage: React.FC<PageProps> = ({ data }) => {
   return (
     <Layout
-      canonicalPath="about"
+      canonicalPath="https://www.aomail.com.au/about"
       //@ts-ignore
       metaData={data._seoMetaTags}
     >
@@ -101,14 +101,14 @@ const AboutUsPage: React.FC<PageProps> = ({ data }) => {
   )
 }
 
-export async function getStaticProps({ params, preview = false }) {
-  const { aboutUsPage }: GetAboutUsQuery = await request({
+export async function getStaticProps({ preview = false }) {
+  const about: GetAboutUsQuery = await request({
     query: 'GetAboutUs',
     preview,
     variables: {},
   })
   const data = {
-    ...aboutUsPage,
+    ...about.aboutUsPage,
   }
 
   return {

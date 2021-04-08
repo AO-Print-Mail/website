@@ -110,11 +110,10 @@ const Card: React.FC<CardProps> = ({
   link,
   linkText,
   title,
-  css,
   ...props
 }) => {
   return (
-    <Box css={{ ...css }}>
+    <Box {...props}>
       <Link href={link || '#'}>
         <a style={{ textDecoration: 'none', color: 'unset' }}>
           <CardBackground>

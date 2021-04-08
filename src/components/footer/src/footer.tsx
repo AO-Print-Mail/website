@@ -144,7 +144,7 @@ const Section: React.FC<{ data: typeof staticData[0]['menu_items'] }> = ({
   return (
     <Box css={{ mt: '$3' }}>
       {data.map((d) => (
-        <Link href={d.link} key={d.name}>
+        <Link href={d.link} key={d.name} prefetch={false}>
           <a style={{ textDecoration: 'none' }}>
             <LinkText>{d.name}</LinkText>
           </a>

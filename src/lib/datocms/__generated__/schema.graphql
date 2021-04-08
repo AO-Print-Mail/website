@@ -127,6 +127,33 @@ type BlogArticleRecord {
   updatedAt: DateTime!
 }
 
+"""Record of type Blog page (blog_page)"""
+type BlogPageRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  canonicalPath: String
+  createdAt: DateTime!
+  id: ItemId!
+  pageMeta: SeoField
+  pageSlug: String
+  preview: JsonField
+  title: String
+  updatedAt: DateTime!
+}
+
 """Specifies how to filter Boolean fields"""
 input BooleanFilter {
   """Search for records with an exact match"""
@@ -2219,6 +2246,12 @@ type Query {
     filter: BlogArticleModelFilter
     orderBy: [BlogArticleModelOrderBy] = [_updatedAt_DESC]
   ): BlogArticleRecord
+
+  """Returns the single instance record"""
+  blogPage(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): BlogPageRecord
 
   """Returns the single instance record"""
   homepage(
