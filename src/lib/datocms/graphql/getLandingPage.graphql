@@ -11,3 +11,9 @@ query GetLandingPage($pageSlug: String!) {
     canonicalPath
   }
 }
+
+query GetLandingPages {
+  allLandingPageV1s {
+    pageSlug
+  }
+}

@@ -1,5 +1,0 @@
-query GetLandingPageSlugs {
-  allLandingPageV1s {
-    pageSlug
-  }
-}

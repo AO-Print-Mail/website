@@ -16,16 +16,7 @@ query GetHomePage {
         responsiveImage(
           imgixParams: { fit: fill, w: 360, h: 360, auto: format }
         ) {
-          srcSet
-          webpSrcSet
-          sizes
-          src
-          width
-          height
-          aspectRatio
-          alt
-          title
-          base64
+          ...responsiveImageFragment
         }
       }
       linkText

@@ -112,7 +112,6 @@ export const StaffProfileCollection: React.FC<StaffProfileCollectionProps> = ({
 }) => {
   return (
     <ColumnWrapper
-      wrap
       css={{
         '@initial': { my: '$6' },
 
