@@ -4,7 +4,7 @@ import { Layout } from '@components/layout'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import {
-  GetLandingPageSlugsQuery,
+  GetLandingPagesQuery,
   GetLandingPageQuery,
 } from '@lib/datocms/__generated__/types'
 import { ThenArg } from '@utils/src'
@@ -91,8 +91,8 @@ export default LandingPageContent
 
 export async function getStaticPaths() {
   //@ts-ignore
-  const allLandingPages: GetLandingPageSlugsQuery = await request({
-    query: 'GetLandingPageSlugs',
+  const allLandingPages: GetLandingPagesQuery = await request({
+    query: 'GetLandingPages',
   })
   return {
     paths: allLandingPages.allLandingPageV1s.map(({ pageSlug }) => ({

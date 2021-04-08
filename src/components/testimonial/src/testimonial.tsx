@@ -112,7 +112,8 @@ export const Testimonial: React.FC<TestimonialProps> = ({
   ...props
 }) => {
   return (
-    <FullWidthFeatureContainer>
+    //@ts-ignore
+    <FullWidthFeatureContainer {...props}>
       <TestimonialTextHolder>
         <Column>
           <TextHolder>

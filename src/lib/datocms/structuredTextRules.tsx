@@ -105,7 +105,7 @@ export const structuredTextRules = ({
         return <Heading6 children={children} key={key} {...headingProps} />
     }
   }),
-  renderRule(isParagraph, ({ node, children, key }) => {
+  renderRule(isParagraph, ({ children, key }) => {
     switch (paragraphSize) {
       case 'Paragraph1':
         return <Paragraph1 {...paragraphProps} children={children} key={key} />
