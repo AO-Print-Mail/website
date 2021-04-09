@@ -41,7 +41,6 @@ const ListWrapper = styled(ColumnWrapper, {
 })
 const CardWrapper = styled(Column, {
   flex: '0 0 100%',
-
   mb: '$5',
   '@m': {
     flex: '0 0 50%',
