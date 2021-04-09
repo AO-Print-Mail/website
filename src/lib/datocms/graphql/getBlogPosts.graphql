@@ -28,11 +28,10 @@ query getBlogPost($pageSlug: String!) {
         ...responsiveImageFragment
       }
     }
-    updatedAt
     _seoMetaTags {
       ...metaTagsFragment
     }
-    _updatedAt
+    updatedAt
     article {
       value
     }

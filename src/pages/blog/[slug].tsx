@@ -41,13 +41,24 @@ const Blog: React.FC<PageProps> = ({ data }) => {
       >
         <Container
           css={{
-            pt: '$6',
-            height: '$280px',
-            '@m': { height: '400px' },
+            py: '$7',
+            minHeight: '$280px',
+            '@m': { minHeight: '400px' },
           }}
         >
-          <TextHolder css={{ mt: '$7', '@l': { ml: '8.33%' } }}>
-            <ArticleSummary title={data.title} />
+          <TextHolder
+            css={{
+              mt: '$6',
+              '@m': { mr: '16.67%' },
+              '@l': { ml: '8.33%', mr: '33.3%' },
+              '@xl': { ml: '8.33%', mr: '50%' },
+            }}
+          >
+            <ArticleSummary
+              title={data.title}
+              lastUpdated={data.lastUpdated}
+              summary={data.summary.value}
+            />
           </TextHolder>
         </Container>
       </Box>
@@ -72,9 +83,24 @@ export async function getStaticProps({ preview = false, params }) {
     preview,
     variables: { pageSlug: params.slug },
   })
+  const englishOrdinalRules = new Intl.PluralRules('en', { type: 'ordinal' })
+  const suffixes = {
+    one: 'st',
+    two: 'nd',
+    few: 'rd',
+    other: 'th',
+  }
+  function appendOrdinal(number: number) {
+    return number + suffixes[englishOrdinalRules.select(number)]
+  }
+  const date = new Date(blogArticle.updatedAt)
+  const lastUpdated = `${appendOrdinal(
+    date.getDate()
+  )} ${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`
+
   return {
     props: {
-      data: blogArticle,
+      data: { ...blogArticle, lastUpdated },
     },
   }
 }

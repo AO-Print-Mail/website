@@ -3282,7 +3282,7 @@ export type GetBlogPostQuery = (
   { __typename?: 'Query' }
   & { blogArticle?: Maybe<(
     { __typename?: 'BlogArticleRecord' }
-    & Pick<BlogArticleRecord, 'id' | 'slug' | 'title' | 'updatedAt' | '_updatedAt'>
+    & Pick<BlogArticleRecord, 'id' | 'slug' | 'title' | 'updatedAt'>
     & { mainImage?: Maybe<(
       { __typename?: 'FileField' }
       & { responsiveImage?: Maybe<(
@@ -3633,11 +3633,10 @@ export const GetBlogPostDocument = gql`
         ...responsiveImageFragment
       }
     }
-    updatedAt
     _seoMetaTags {
       ...metaTagsFragment
     }
-    _updatedAt
+    updatedAt
     article {
       value
     }
