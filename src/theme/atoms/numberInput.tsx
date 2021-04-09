@@ -1,5 +1,6 @@
 import { forwardRef, ReactNode } from 'react'
-import { styled, UI3 } from '..'
+import { styled } from '..'
+import { Paragraph3 } from './typography'
 
 interface NumberInputProps {
   id: string
@@ -11,7 +12,7 @@ interface NumberInputProps {
   type: string
 }
 
-const Input = styled(UI3, {
+const Input = styled(Paragraph3, {
   backgroundColor: '$DA10',
   px: 'calc($3 - 2px)',
   py: 'calc($2 - 2px)',

@@ -59,7 +59,6 @@ const ParagraphText = ({ data, size }) => {
     />
   )
 }
-
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   const featureSections = data.contentSections.map((f) => (
     <Box
@@ -67,7 +66,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       css={{ '@initial': { px: '$2' }, '@m': { px: '$3' }, '@l': { px: '$4' } }}
     >
       <Heading2 color="primary">{f.heading}</Heading2>
-      <ParagraphText data={f.paragraph} size="Paragraph3" />
+      <ParagraphText data={f.paragraph} size="3" />
     </Box>
   ))
   return (
@@ -112,7 +111,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           <HeroText>
             <Heading1 color="primary">{data.mainHeading}</Heading1>
             <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
-              <ParagraphText data={data.heroParagraph} size="Paragraph2" />
+              <ParagraphText data={data.heroParagraph} size={'2'} />
             </Box>
           </HeroText>
         </Container>

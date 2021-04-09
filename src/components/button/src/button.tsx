@@ -3,7 +3,7 @@ import {
   ResetButton,
   theme,
   CSS,
-  UI1,
+  Paragraph,
   keyframes,
   classes,
 } from '@theme'
@@ -109,7 +109,6 @@ const ButtonBg = styled(ResetButton, {
         color: '$white',
         '&:hover': {
           backgroundColor: '$B50',
-          color: '$white',
         },
       },
       subtle: {
@@ -338,7 +337,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const _children =
       typeof children === 'string' ? (
-        <UI1 color="unset">{children}</UI1>
+        <Paragraph>{children}</Paragraph>
       ) : (
         children
       )

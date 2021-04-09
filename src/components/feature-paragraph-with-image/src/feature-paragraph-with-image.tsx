@@ -89,7 +89,7 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
             customRules={structuredTextRules({
               paragraphProps: {
                 color: 'primary',
-                size: 'Paragraph3',
+                size: '3',
               },
             })}
             data={paragraph.value}

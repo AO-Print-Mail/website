@@ -1,7 +1,7 @@
 import { m as motion } from 'framer-motion'
 import React from 'react'
 import { Button } from './button'
-import { UI3, styled, CSS } from '@theme'
+import { styled, CSS, Paragraph } from '@theme'
 
 interface MenuButtonProps {
   open: boolean
@@ -51,10 +51,6 @@ const MenuButtonIcon: React.FC<MenuButtonProps> = ({ open }) => {
   )
 }
 
-const MenuButtonLabel: React.FC<MenuButtonProps> = ({ open }) => {
-  return <UI3>{open ? 'Close' : 'Menu'}</UI3>
-}
-
 export const MenuButton: React.FC<MenuButtonProps> = ({
   open,
   onClick,
@@ -69,7 +65,7 @@ export const MenuButton: React.FC<MenuButtonProps> = ({
       onClick={onClick}
       {...props}
     >
-      <UI3 color="unset">{open ? 'Close' : 'Menu'}</UI3>
+      <Paragraph>{open ? 'Close' : 'Menu'}</Paragraph>
     </Button>
   )
 }

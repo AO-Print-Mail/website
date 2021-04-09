@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 import { useStateMachine } from 'little-state-machine'
 import { QuoteFormInputData } from '../landing-page-quote-form'
-import { Heading4, Paragraph4, Flex, Box, UI3 } from '@theme'
-import { Button } from '@components/button'
+import { Heading4, Paragraph4, Box } from '@theme'
 import {
   resetFormData,
   updateFeedbackFormForm,
@@ -46,19 +45,6 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
           preferred contact number.
         </Paragraph4>
       </Box>
-      <Flex column css={{ mt: '$4', pb: '$4', mx: '$6' }}>
-        <Button
-          color="light"
-          fullWidth
-          type="submit"
-          css={{ alignSelf: 'center' }}
-          onClick={() => {
-            changeStep()
-          }}
-        >
-          <UI3>Close</UI3>
-        </Button>
-      </Flex>
     </Box>
   )
 }

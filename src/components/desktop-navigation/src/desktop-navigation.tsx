@@ -1,4 +1,4 @@
-import { Box, Flex, styled, UI2, CSS } from '@theme'
+import { Box, styled, CSS, Paragraph } from '@theme'
 import Link from 'next/link'
 import React from 'react'
 
@@ -26,13 +26,12 @@ const staticData = [
   },
 ]
 
-const NavLinkText = styled(UI2, {
+const NavLinkText = styled(Paragraph, {
   cursor: 'pointer',
   color: '$B80',
   lineHeight: '24px',
   textDecoration: 'none',
   fontSize: '$p4d',
-
   '&:hover': {
     color: '$DBA60',
   },
@@ -58,6 +57,7 @@ const NavLink: React.FC<{ name: string; link: string }> = ({
         '& > a': { textDecoration: 'none' },
         '@xl': { mr: '$5' },
       }}
+      as="li"
     >
       <Link href={link}>
         <a>
@@ -68,18 +68,25 @@ const NavLink: React.FC<{ name: string; link: string }> = ({
   )
 }
 
+const MenuWrapper = styled('nav', {
+  display: 'flex',
+  mx: '0',
+  my: '$2',
+  listStyle: 'none',
+})
+
 export const DesktopNavigation: React.FC<DesktopNavigationProps> = ({
   ...props
 }) => {
   //const [services, ...rest] = staticData
   const menuItems = staticData.reduce((acc, i) => [...acc, ...i.menu_items], [])
   return (
-    <Flex css={{ mb: '$2', ...props.css }}>
+    <MenuWrapper as="ul" {...props}>
       {[
         menuItems.map((service) => (
           <NavLink key={`service-${service.name}`} {...service} />
         )),
       ]}
-    </Flex>
+    </MenuWrapper>
   )
 }

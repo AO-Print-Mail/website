@@ -29,21 +29,6 @@ const Heading5 = dynamic(
 const Heading6 = dynamic(
   import('@theme/atoms/typography').then((res) => res.Heading6)
 )
-const Paragraph1 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Paragraph1)
-)
-const Paragraph2 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Paragraph2)
-)
-const Paragraph3 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Paragraph3)
-)
-const Paragraph4 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Paragraph4)
-)
-const Paragraph5 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Paragraph5)
-)
 const BlockQuote = dynamic(
   import('@theme/atoms/blockquote').then((res) => res.BlockQuote)
 )
@@ -64,26 +49,18 @@ const underlineClass = dynamic(
   import('@theme/atoms/typography').then((res) => res.underlineClass)
 )
 
-import { listItemProps } from '@theme'
+import { listItemProps, Paragraph } from '@theme'
 
 type structuredTextConfig = {
-  headingProps?: {}
-  paragraphProps?: {
-    color?: string
-    size?:
-      | 'Paragraph1'
-      | 'Paragraph2'
-      | 'Paragraph3'
-      | 'Paragraph4'
-      | 'Paragraph5'
-  }
-  listItemProps?: listItemProps
+  headingProps?: React.ComponentProps<typeof Heading1>
+  paragraphProps?: React.ComponentProps<typeof Paragraph>
+  listItemProps?: React.ComponentProps<typeof ListItem>
 }
 
 export const structuredTextRules = ({
   headingProps = { color: 'primary' },
-  paragraphProps: { size: paragraphSize, ...paragraphProps } = {
-    size: 'Paragraph2',
+  paragraphProps: { ...paragraphProps } = {
+    size: '2',
   },
   listItemProps = {},
 }: structuredTextConfig) => [
@@ -106,20 +83,7 @@ export const structuredTextRules = ({
     }
   }),
   renderRule(isParagraph, ({ children, key }) => {
-    switch (paragraphSize) {
-      case 'Paragraph1':
-        return <Paragraph1 {...paragraphProps} children={children} key={key} />
-      case 'Paragraph2':
-        return <Paragraph2 {...paragraphProps} children={children} key={key} />
-      case 'Paragraph3':
-        return <Paragraph3 {...paragraphProps} children={children} key={key} />
-      case 'Paragraph4':
-        return <Paragraph4 {...paragraphProps} children={children} key={key} />
-      case 'Paragraph5':
-        return <Paragraph5 {...paragraphProps} children={children} key={key} />
-      default:
-        return <Paragraph2 {...paragraphProps} children={children} key={key} />
-    }
+    return <Paragraph children={children} key={key} {...paragraphProps} />
   }),
   renderRule(
     function (node: Node): node is Span {

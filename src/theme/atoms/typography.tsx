@@ -1,6 +1,8 @@
 import { styled, css } from '@theme'
+import { forwardRef } from '@theme/forwardRef'
+import { ResetButton } from './resetButton'
 
-export const Heading1 = styled('h1', {
+export const Heading = styled('h1', {
   color: '$DA100',
   fontWeight: '$semibold',
   fontFamily: '$heading',
@@ -18,11 +20,103 @@ export const Heading1 = styled('h1', {
         color: '$LA100',
       },
     },
+    level: {
+      1: {
+        color: '$DA100',
+        fontSize: '$h1m',
+        marginBottom: '0.82em',
+        letterSpacing: '$xcosy',
+        '@m': {
+          fontSize: '$h1t',
+          letterSpacing: '$xcosy',
+        },
+        '@l': {
+          fontSize: '$h1d',
+          letterSpacing: '$xcosy',
+        },
+      },
+      2: {
+        color: '$DA90',
+        fontSize: '$h2m',
+        marginBottom: '0.31em',
+        letterSpacing: '$cosy',
+        '@m': {
+          fontSize: '$h2t',
+          letterSpacing: '$xcosy',
+        },
+        '@l': {
+          fontSize: '$h2d',
+        },
+      },
+      3: {
+        color: '$DA85',
+        fontSize: '$h3m',
+        marginBottom: '0.26em',
+        letterSpacing: '$cosy',
+        '@m': {
+          fontSize: '$h3t',
+        },
+        '@l': {
+          fontSize: '$h3d',
+          letterSpacing: '$xcosy',
+        },
+      },
+      4: {
+        color: '$DA80',
+        fontSize: '$h4m',
+        marginBottom: '0.26em',
+        letterSpacing: '$cosy',
+        '@m': {
+          fontSize: '$h4t',
+        },
+        '@l': {
+          fontSize: '$h4d',
+          letterSpacing: '$cosy',
+        },
+      },
+      5: {
+        color: '$DA80',
+        fontSize: '$h5m',
+        marginBottom: '0.24em',
+        letterSpacing: '$cosy',
+        '@m': {
+          fontSize: '$h5t',
+        },
+        '@l': {
+          fontSize: '$h5d',
+        },
+      },
+      6: {
+        color: '$DA80',
+        fontSize: '$h6m',
+        marginBottom: '-0.26em',
+        letterSpacing: '$cosy',
+        '@m': {
+          fontSize: '$h6t',
+        },
+        '@l': {
+          fontSize: '$h6d',
+        },
+      },
+    },
     alignLeft: { true: { textAlign: 'left' } },
     alignRight: { true: { textAlign: 'right' } },
     alignCenter: { true: { textAlign: 'center' } },
   },
-
+  compoundVariants: [
+    { level: '1', color: 'primary', css: { color: '$DBA100' } },
+    { level: '1', color: 'light', css: { color: '$LA100' } },
+    { level: '2', color: 'primary', css: { color: '$DBA90' } },
+    { level: '2', color: 'light', css: { color: '$LA90' } },
+    { level: '3', color: 'primary', css: { color: '$DBA85' } },
+    { level: '3', color: 'light', css: { color: '$LA85' } },
+    { level: '4', color: 'primary', css: { color: '$DBA80' } },
+    { level: '4', color: 'light', css: { color: '$LA80' } },
+    { level: '5', color: 'primary', css: { color: '$DBA75' } },
+    { level: '5', color: 'light', css: { color: '$LA75' } },
+    { size: '6', color: 'primary', css: { color: '$DBA75' } },
+    { size: '6', color: 'light', css: { color: '$LA75' } },
+  ],
   '@m': {
     fontSize: '$h1t',
     letterSpacing: '$xcosy',
@@ -32,340 +126,46 @@ export const Heading1 = styled('h1', {
     letterSpacing: '$xcosy',
   },
 })
-export const Heading2 = styled('h2', {
-  color: '$DA90',
-  fontWeight: '$semibold',
-  fontFamily: '$heading',
-  fontSize: '$h2m',
-  marginTop: '1em',
-  lineHeight: '$1',
-  marginBottom: '0.31em',
-  letterSpacing: '$cosy',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA90',
-      },
-      light: {
-        color: '$LA90',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-  },
 
-  '@m': {
-    fontSize: '$h2t',
-    letterSpacing: '$xcosy',
-  },
-  '@l': {
-    fontSize: '$h2d',
-    letterSpacing: '$xcosy',
-  },
-})
-export const Heading3 = styled('h3', {
-  color: '$DA85',
-  fontWeight: '$semibold',
-  fontFamily: '$heading',
-  fontSize: '$h3m',
-  marginTop: '1em',
-  lineHeight: '$2',
-  marginBottom: '0.26em',
-  letterSpacing: '$cosy',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA85',
-      },
-      light: {
-        color: '$LA85',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-  },
+export const Heading1 = forwardRef<
+  HTMLHeadingElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Heading level="1" as="h1" ref={ref} {...props} />)
+export const Heading2 = forwardRef<
+  HTMLHeadingElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Heading level="2" as="h2" ref={ref} {...props} />)
+export const Heading3 = forwardRef<
+  HTMLHeadingElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Heading level="3" as="h3" ref={ref} {...props} />)
+export const Heading4 = forwardRef<
+  HTMLHeadingElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Heading level="4" as="h4" ref={ref} {...props} />)
+export const Heading5 = forwardRef<
+  HTMLHeadingElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Heading level="5" as="h5" ref={ref} {...props} />)
+export const Heading6 = forwardRef<
+  HTMLHeadingElement,
+  React.ComponentProps<typeof Heading>
+>(({ children, ...props }, ref) => (
+  <Heading level="6" as="h6" ref={ref} {...props}>
+    {children}
+  </Heading>
+))
+/*export const Heading6: React.FC<React.ComponentProps<typeof Paragraph>> = (props) => (
+  <Heading level="6" as="h6" {...props} />
+)*/
 
-  '@m': {
-    fontSize: '$h3t',
-    letterSpacing: '$cosy',
-  },
-  '@l': {
-    fontSize: '$h3d',
-    letterSpacing: '$xcosy',
-  },
-})
-export const Heading4 = styled('h4', {
-  color: '$DA80',
-  fontWeight: '$semibold',
-  fontFamily: '$heading',
-  fontSize: '$h4m',
-  marginTop: '1em',
-  lineHeight: '$2',
-  marginBottom: '0.26em',
-  letterSpacing: '$cosy',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA80',
-      },
-      light: {
-        color: '$LA80',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-  },
-
-  '@m': {
-    fontSize: '$h4t',
-    letterSpacing: '$cosy',
-  },
-  '@l': {
-    fontSize: '$h4d',
-    letterSpacing: '$cosy',
-  },
-})
-export const Heading5 = styled('h5', {
-  color: '$DA75',
-  fontWeight: '$semibold',
-  fontFamily: '$heading',
-  fontSize: '$h5m',
-  marginTop: '1em',
-  lineHeight: '$3',
-  marginBottom: '0.24em',
-  letterSpacing: '$cosy',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA80',
-      },
-      light: {
-        color: '$LA80',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-  },
-  '@m': {
-    fontSize: '$h5t',
-    letterSpacing: '$cosy',
-  },
-  '@l': {
-    fontSize: '$h5d',
-    letterSpacing: '$cosy',
-  },
-})
-export const Heading6 = styled('h6', {
-  color: '$DA70',
-  fontWeight: '$semibold',
-  fontFamily: '$heading',
-  fontSize: '$h6m',
-  marginTop: '1em',
-  lineHeight: '$3',
-  marginBottom: '-0.26em',
-  letterSpacing: '$cosy',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA80',
-      },
-      light: {
-        color: '$LA80',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-  },
-  '@m': {
-    fontSize: '$h6t',
-    letterSpacing: '$cosy',
-  },
-  '@l': {
-    fontSize: '$h6d',
-    letterSpacing: '$cosy',
-  },
-})
-export const Paragraph1 = styled('p', {
-  color: '$DA90',
+export const Paragraph = styled('p', {
+  color: 'inherit',
   fontWeight: '$regular',
   fontFamily: '$paragraph',
-  fontSize: '$p1m',
-  marginTop: '1em',
-  lineHeight: '$4',
-  marginBottom: '-0.32em',
-  letterSpacing: '$reg',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA80',
-      },
-      light: {
-        color: '$LA80',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-    bold: { true: { fontWeight: 'bold' } },
-    semiBold: { true: { fontWeight: '600' } },
-    italic: { true: { textStyle: 'italic' } },
-  },
-  '@m': {
-    fontSize: '$p1t',
-    letterSpacing: '$cosy',
-  },
-  '@l': {
-    fontSize: '$p1d',
-    letterSpacing: '$cosy',
-  },
-})
-export const Paragraph2 = styled('p', {
-  color: '$DA80',
-  fontWeight: '$regular',
-  fontFamily: '$paragraph',
-  fontSize: '$p2m',
-  marginTop: '1em',
-  lineHeight: '$4',
-  marginBottom: '-0.32em',
-  letterSpacing: '$reg',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA75',
-      },
-      light: {
-        color: '$LA75',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-    bold: { true: { fontWeight: 'bold' } },
-    semiBold: { true: { fontWeight: '600' } },
-    italic: { true: { textStyle: 'italic' } },
-  },
-  '@m': {
-    fontSize: '$p2t',
-    letterSpacing: '$reg',
-  },
-  '@l': {
-    fontSize: '$p2d',
-    letterSpacing: '$reg',
-  },
-})
-export const Paragraph3 = styled('p', {
-  color: '$DA70',
-  fontWeight: '$regular',
-  fontFamily: '$paragraph',
-  fontSize: '$p3m',
-  marginTop: '1em',
-  lineHeight: '$4',
-  marginBottom: '-0.33em',
-  letterSpacing: '$reg',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA70',
-      },
-      light: {
-        color: '$LA70',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-    bold: { true: { fontWeight: 'bold' } },
-    semiBold: { true: { fontWeight: '600' } },
-    italic: { true: { textStyle: 'italic' } },
-  },
-  '@m': {
-    fontSize: '$p3t',
-    letterSpacing: '$reg',
-  },
-  '@l': {
-    fontSize: '$p3d',
-    letterSpacing: '$reg',
-  },
-})
-export const Paragraph4 = styled('p', {
-  color: '$DA70',
-  fontWeight: '$regular',
-  fontFamily: '$paragraph',
-  fontSize: '$p4m',
-  marginTop: '1em',
-  lineHeight: '$5',
-  marginBottom: '-0.33em',
-  letterSpacing: '$reg',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA70',
-      },
-      light: {
-        color: '$LA70',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-    bold: { true: { fontWeight: 'bold' } },
-    semiBold: { true: { fontWeight: '600' } },
-    italic: { true: { textStyle: 'italic' } },
-  },
-  '@m': {
-    fontSize: '$p4t',
-    letterSpacing: '$reg',
-  },
-  '@l': {
-    fontSize: '$p4d',
-    letterSpacing: '$reg',
-  },
-})
-export const Paragraph5 = styled('p', {
-  color: '$DA60',
-  fontWeight: '$regular',
-  fontFamily: '$paragraph',
-  fontSize: '$p5m',
-  marginTop: '1em',
-  lineHeight: '$5',
-  marginBottom: '-0.375em',
-  letterSpacing: '$space',
-  variants: {
-    color: {
-      primary: {
-        color: '$DBA60',
-      },
-      light: {
-        color: '$LA60',
-      },
-    },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
-    bold: { true: { fontWeight: 'bold' } },
-    semiBold: { true: { fontWeight: '600' } },
-    italic: { true: { textStyle: 'italic' } },
-  },
-  '@m': {
-    fontSize: '$p5t',
-    letterSpacing: '$space',
-  },
-  '@l': {
-    fontSize: '$p5d',
-    letterSpacing: '$space',
-  },
-})
-
-const uiProperties = {
-  lineHeight: '$1',
-  margin: '0',
-  color: '$DA80',
-  letterSpacing: '$space',
+  fontSize: 'inherit',
+  letterSpacing: 'inherit',
+  lineHeight: 'inherit',
   variants: {
     color: {
       primary: {
@@ -383,37 +183,142 @@ const uiProperties = {
       warning: {
         color: '$orange',
       },
-      unset: {
-        color: 'unset',
-      },
-    },
-    weight: {
-      smb: {
-        fontWeight: '$semibold',
-      },
     },
     alignLeft: { true: { textAlign: 'left' } },
     alignRight: { true: { textAlign: 'right' } },
     alignCenter: { true: { textAlign: 'center' } },
-  },
-}
+    bold: { true: { fontWeight: 'bold' } },
+    semiBold: { true: { fontWeight: '600' } },
+    italic: { true: { textStyle: 'italic' } },
+    size: {
+      1: {
+        color: '$DA90',
+        fontSize: '$p1m',
+        lineHeight: '$4',
+        marginBottom: '-0.32em',
+        letterSpacing: '$reg',
+        '@m': {
+          fontSize: '$p1t',
+          letterSpacing: '$cosy',
+        },
+        '@l': {
+          fontSize: '$p1d',
+          letterSpacing: '$cosy',
+        },
+      },
+      2: {
+        color: '$DA80',
+        fontSize: '$p2m',
+        lineHeight: '$4',
+        marginBottom: '-0.32em',
+        letterSpacing: '$reg',
+        '@m': {
+          fontSize: '$p2t',
+          letterSpacing: '$reg',
+        },
+        '@l': {
+          fontSize: '$p2d',
+          letterSpacing: '$reg',
+        },
+      },
+      3: {
+        color: '$DA70',
+        fontSize: '$p3m',
+        lineHeight: '$4',
+        marginBottom: '-0.33em',
+        letterSpacing: '$reg',
+        '@m': {
+          fontSize: '$p3t',
+          letterSpacing: '$reg',
+        },
+        '@l': {
+          fontSize: '$p3d',
+          letterSpacing: '$reg',
+        },
+      },
+      4: {
+        color: '$DA70',
+        fontSize: '$p4',
+        lineHeight: '$5',
+        marginBottom: '-0.33em',
+        letterSpacing: '$reg',
 
-export const UI1 = styled('span', {
-  ...uiProperties,
-  fontSize: '$unset',
+        '@m': {
+          fontSize: '$p4t',
+          letterSpacing: '$reg',
+        },
+        '@l': {
+          fontSize: '$p4d',
+          letterSpacing: '$reg',
+        },
+      },
+      5: {
+        color: '$DA60',
+        fontSize: '$p5m',
+        lineHeight: '$5',
+        marginBottom: '-0.375em',
+        letterSpacing: '$space',
+        '@m': {
+          fontSize: '$p5t',
+          letterSpacing: '$space',
+        },
+        '@l': {
+          fontSize: '$p5d',
+          letterSpacing: '$space',
+        },
+      },
+    },
+  },
+  compoundVariants: [
+    { size: '1', color: 'primary', css: { color: '$DBA85' } },
+    { size: '1', color: 'light', css: { color: '$LA85' } },
+    { size: '2', color: 'primary', css: { color: '$DBA80' } },
+    { size: '2', color: 'light', css: { color: '$LA80' } },
+    { size: '3', color: 'primary', css: { color: '$DBA80' } },
+    { size: '3', color: 'light', css: { color: '$LA80' } },
+    { size: '4', color: 'primary', css: { color: '$DBA75' } },
+    { size: '4', color: 'light', css: { color: '$LA75' } },
+    { size: '5', color: 'primary', css: { color: '$DBA70' } },
+    { size: '5', color: 'light', css: { color: '$LA70' } },
+  ],
+  'li &': {
+    m: '0',
+  },
+  [`${ResetButton} &`]: {
+    m: '0 !important',
+    p: '0 !important',
+    letterSpacing: '$reg !important',
+  },
+  'label&, input&, span&': {
+    m: '0',
+  },
 })
-export const UI2 = styled('span', {
-  ...uiProperties,
-  fontSize: '$p3m',
-  '@m': { fontSize: '$p3t' },
-  '@l': { fontSize: '$p3d' },
-})
-export const UI3 = styled('span', {
-  ...uiProperties,
-  fontSize: '$p4m',
-  '@m': { fontSize: '$p4t' },
-  '@l': { fontSize: '$p4d' },
-})
+
+export const Paragraph1 = forwardRef<
+  HTMLParagraphElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Paragraph size="1" ref={ref} {...props} />)
+export const Paragraph2 = forwardRef<
+  HTMLParagraphElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Paragraph size="2" ref={ref} {...props} />)
+export const Paragraph3 = forwardRef<
+  HTMLParagraphElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Paragraph size="3" ref={ref} {...props} />)
+export const Paragraph4 = forwardRef<
+  HTMLParagraphElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Paragraph size="4" ref={ref} {...props} />)
+export const Paragraph5 = forwardRef<
+  HTMLParagraphElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Paragraph size="5" ref={ref} {...props} />)
+
+export const UI = forwardRef<
+  HTMLSpanElement,
+  React.ComponentProps<typeof Paragraph>
+>((props, ref) => <Paragraph as="span" ref={ref} {...props} />)
 
 export const strikethroughClass = css({
   textDecoration: 'line-through',

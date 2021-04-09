@@ -11,10 +11,9 @@ import {
   CSS,
   Flex,
   Box,
-  UI2,
-  UI3,
   Facebook,
   LinkedIn,
+  Paragraph,
 } from '@theme'
 import { Button, IconButton } from '@components/button'
 import Link from 'next/link'
@@ -123,9 +122,9 @@ const Column = styled('section', {
   '@l': { px: '$4', width: '16.6%' },
 })
 
-const SectionLabel = styled(UI3, {
+const SectionLabel = styled(Paragraph, {
   ml: '$2',
-  color: '$LA35',
+  color: '$LA60',
   fontWeight: '600',
 })
 
@@ -190,7 +189,9 @@ export const MainFooter: React.FC<MainFooterProps> = ({
               as="section"
               css={{ mt: '$4' }}
             >
-              <SectionLabel as="h3">{section.section_label}</SectionLabel>
+              <SectionLabel size="4" as="h3">
+                {section.section_label}
+              </SectionLabel>
               <Section data={section.menu_items} />
             </Column>
           ))}
@@ -384,7 +385,7 @@ export const Footer: React.FC<FooterProps> = ({
       <ContentWrapper css={{ backgroundColor: '$black' }}>
         <Container>
           <Paragraph5
-            css={{ color: '$LA40', my: '$2', pb: `$1`, ...footerCss }}
+            css={{ color: '$LA60', my: '$2', pb: `$1`, ...footerCss }}
           >
             &copy; ANO PTY Ltd. All rights reserved.
           </Paragraph5>

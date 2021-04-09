@@ -39,7 +39,7 @@ const Text = ({ data }) => {
     <StructuredText
       data={data}
       customRules={structuredTextRules({
-        paragraphProps: { size: 'Paragraph4', color: 'primary' },
+        paragraphProps: { size: '4', color: 'primary' },
       })}
     />
   )

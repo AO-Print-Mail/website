@@ -84,7 +84,7 @@ const Col = styled(Column, {
 })
 
 const BiographyStRules = structuredTextRules({
-  paragraphProps: { size: 'Paragraph4' },
+  paragraphProps: { size: '4' },
 })
 
 export const StaffProfile: React.FC<StaffProfileProps> = ({
