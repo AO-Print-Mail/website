@@ -1,34 +1,75 @@
 import * as React from 'react'
 import {
-  isHeading,
-  isParagraph,
-  isBlockquote,
-  isList,
-  isListItem,
+  isHeading as isHeadingGuard,
+  isParagraph as isParagraphGuard,
+  isBlockquote as isBlockquoteGuard,
+  isList as isListGuard,
+  isListItem as isListItemGuard,
   Span,
   Node,
+  isBlock as isBlockGuard,
+  isCode as isCodeGuard,
+  isInlineItem as isInlineItemGuard,
+  isThematicBreak as isThematicBreakGuard,
+  isInlineNode as isInlineNodeGuard,
+  isItemLink as isItemLinkGuard,
+  isLink as isLinkGuard,
+  isRoot as isRootGuard,
+  isSpan as isSpanGuard,
 } from 'datocms-structured-text-utils'
 import dynamic from 'next/dynamic'
-import { renderRule } from 'react-datocms'
+import { renderRule, StructuredText } from 'react-datocms'
 
-const Heading1 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Heading1)
-)
-const Heading2 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Heading2)
-)
-const Heading3 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Heading3)
-)
-const Heading4 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Heading4)
-)
-const Heading5 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Heading5)
-)
-const Heading6 = dynamic(
-  import('@theme/atoms/typography').then((res) => res.Heading6)
-)
+const isHeading = (props) => renderRule(isHeadingGuard, (node) => <></>)
+const isParagraph = (props) => renderRule(isParagraphGuard, (node) => <></>)
+const isBlockquote = (props) => renderRule(isBlockquoteGuard, (node) => <></>)
+const isList = (props) => renderRule(isListGuard, (node) => <></>)
+const isListItem = (props) => renderRule(isListItemGuard, (node) => <></>)
+const isBlock = (props) => renderRule(isBlockGuard, (node) => <></>)
+const isCode = (props) => renderRule(isCodeGuard, (node) => <></>)
+const isInlineItem = (props) => renderRule(isInlineItemGuard, (node) => <></>)
+const isThematicBreak = (props) =>
+  renderRule(isThematicBreakGuard, (node) => <></>)
+const isInlineNode = (props) => renderRule(isInlineNodeGuard, (node) => <></>)
+const isItemLink = (props) => renderRule(isItemLinkGuard, (node) => <></>)
+const isLink = (props) => renderRule(isLinkGuard, (node) => <></>)
+const isRoot = (props) => renderRule(isRootGuard, (node) => <></>)
+const isSpan = (props) => renderRule(isSpanGuard, (node) => <></>)
+
+const configKeys = ({ headingProps }) => {
+  const config = {
+    isHeading: renderRule(isHeading, ({ node, children, key }) => {
+      const { level } = node
+      return (
+        <Heading
+          children={children}
+          level={level}
+          as={`h${level}`}
+          key={key}
+          {...headingProps}
+        />
+      )
+    }),
+    isParagraph: {},
+    isBlockquote: {},
+    isList: {},
+    isListItem: {},
+    Span: {},
+    Node: {},
+    isBlock: {},
+    isCode: {},
+    isDocument: {},
+    isInlineItem: {},
+    isThematicBreak: {},
+    isStructuredText: {},
+    isInlineNode: {},
+    isItemLink: {},
+    isLink: {},
+    isRoot: {},
+    isSpan: {},
+  }
+}
+
 const BlockQuote = dynamic(
   import('@theme/atoms/blockquote').then((res) => res.BlockQuote)
 )
@@ -49,10 +90,10 @@ const underlineClass = dynamic(
   import('@theme/atoms/typography').then((res) => res.underlineClass)
 )
 
-import { listItemProps, Paragraph } from '@theme'
+import { Heading, listItemProps, Paragraph } from '@theme'
 
 type structuredTextConfig = {
-  headingProps?: React.ComponentProps<typeof Heading1>
+  headingProps?: React.ComponentProps<typeof Heading>
   paragraphProps?: React.ComponentProps<typeof Paragraph>
   listItemProps?: React.ComponentProps<typeof ListItem>
 }
@@ -65,22 +106,16 @@ export const structuredTextRules = ({
   listItemProps = {},
 }: structuredTextConfig) => [
   renderRule(isHeading, ({ node, children, key }) => {
-    switch (node.level) {
-      case 1:
-        return <Heading1 children={children} key={key} {...headingProps} />
-      case 2:
-        return <Heading2 children={children} key={key} {...headingProps} />
-      case 3:
-        return <Heading3 children={children} key={key} {...headingProps} />
-      case 4:
-        return <Heading4 children={children} key={key} {...headingProps} />
-      case 5:
-        return <Heading5 children={children} key={key} {...headingProps} />
-      case 6:
-        return <Heading6 children={children} key={key} {...headingProps} />
-      default:
-        return <Heading6 children={children} key={key} {...headingProps} />
-    }
+    const { level } = node
+    return (
+      <Heading
+        children={children}
+        level={level}
+        as={`h${level}`}
+        key={key}
+        {...headingProps}
+      />
+    )
   }),
   renderRule(isParagraph, ({ children, key }) => {
     return <Paragraph children={children} key={key} {...paragraphProps} />
