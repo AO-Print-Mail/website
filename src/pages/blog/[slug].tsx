@@ -17,6 +17,8 @@ import { ArticleSummary } from '@components/article-summary'
 import { Image, renderRule } from 'react-datocms'
 import dynamic from 'next/dynamic'
 import { isHeading } from 'datocms-structured-text-utils'
+import { StructuredText } from '@lib/datocms/structuredText'
+import { QuoteCta } from '@components/quote-cta'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -83,6 +85,7 @@ const Img = styled(Image, {
   left: '50%',
   right: '50%',
   top: '-$4',
+  order: '-1',
   '@l': {
     br: '$2',
     width: 'auto',
@@ -98,9 +101,9 @@ const Blog: React.FC<PageProps> = ({ data }) => {
       canonicalPath={`https://www.aomail.com.au/blog/${data.slug}`}
       //@ts-expect-error
       metaData={data._seoMetaTags}
+      layoutElement="article"
     >
       <Box
-        as="section"
         css={{
           backgroundColor: '$N10',
           position: 'relative',
@@ -132,16 +135,28 @@ const Blog: React.FC<PageProps> = ({ data }) => {
           </TextHolder>
         </Container>
       </Box>
-      <Box as="article">
-        <Container css={{ position: 'static' }}>
+      <Box>
+        <Container css={{ mb: '$7' }}>
           <ColumnWrapper
             css={{
               flexFlow: 'column nowrap',
               justifyContent: 'stretch',
+              pb: '$7',
               '@l': { flexFlow: 'row nowrap' },
             }}
           >
-            <Column css={{ flex: '1 1' }}>
+            <Column
+              css={{ flex: '1 1', display: 'flex', flexFlow: 'column nowrap' }}
+            >
+              <TextHolder css={{ maxWidth: '80ch', alignSelf: 'center' }}>
+                <StructuredText
+                  data={data.article.value}
+                  config={{
+                    paragraphProps: { size: '4', color: 'primary' },
+                    headingProps: { css: { mt: '$6' }, fromSize: '3' },
+                  }}
+                />
+              </TextHolder>
               <Img data={data.mainImage.responsiveImage} />
             </Column>
             <Column
@@ -156,6 +171,7 @@ const Blog: React.FC<PageProps> = ({ data }) => {
               as="aside"
             ></Column>
           </ColumnWrapper>
+          <QuoteCta />
         </Container>
       </Box>
     </Layout>

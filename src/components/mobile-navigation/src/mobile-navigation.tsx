@@ -1,8 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import { CSS, styled, Box, Container, UI2, Flex } from '@theme'
+import { CSS, styled, Box, Container, Flex, Paragraph } from '@theme'
 import { Button } from '@components/button'
-import { motion } from 'framer-motion'
 interface MobileNavigationProps {
   navIsOpen: boolean
   data?: typeof staticData
@@ -61,9 +60,8 @@ interface NavSectionProps {
   menu_items: typeof staticData[0]['menu_items']
 }
 
-const SectionLabel = styled(UI2, {
+const SectionLabel = styled(Paragraph, {
   color: '$DA40',
-  fontWeight: 'semi-bold',
   ml: '$2',
   '@m': {
     ml: '$3',
@@ -83,7 +81,7 @@ const SectionLink: React.FC<typeof staticData[0]['menu_items'][0]> = ({
             as="span"
             css={{ display: 'inline-block', mt: '$3', py: '$2' }}
           >
-            <UI2 color="unset">{name}</UI2>
+            {name}
           </Button>
         </a>
       </Link>
@@ -98,7 +96,9 @@ const NavSection: React.FC<NavSectionProps> = ({
   return (
     <Box css={{ borderTop: '1px dashed $colors$DBA30', pt: '$5', pb: '$4' }}>
       <Container as="section">
-        <SectionLabel as="h3">{section_label}</SectionLabel>
+        <SectionLabel size="3" as="h3" semiBold>
+          {section_label}
+        </SectionLabel>
         <Flex
           as="ul"
           css={{

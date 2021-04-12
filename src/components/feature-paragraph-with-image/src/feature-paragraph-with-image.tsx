@@ -8,7 +8,7 @@ import {
   Column,
   ColumnWrapper,
 } from '@theme'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import { StructuredText } from 'react-datocms'
 import { Image } from 'react-datocms'
 
@@ -89,7 +89,7 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
             customRules={structuredTextRules({
               paragraphProps: {
                 color: 'primary',
-                size: 'Paragraph3',
+                size: '3',
               },
             })}
             data={paragraph.value}

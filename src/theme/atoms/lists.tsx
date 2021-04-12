@@ -24,8 +24,7 @@ export const List = styled('ul', {
   marginLeft: '0',
   listStyle: 'none',
   pl: '0',
-  mt: '$2',
-  mb: '$5',
+  my: '$5',
 })
 
 export const _ListItem = styled('li', {

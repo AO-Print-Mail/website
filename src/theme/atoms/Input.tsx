@@ -1,5 +1,6 @@
 import { forwardRef, ReactNode } from 'react'
-import { styled, Paragraph5, UI2, UI3, Box, CSS, ThemeVariants } from '..'
+import { styled, Paragraph5, Box, CSS } from '..'
+import { Paragraph3 } from './typography'
 
 interface InputProps
   extends React.ComponentProps<typeof TextAreaStyles & typeof InputStyles> {
@@ -14,7 +15,7 @@ interface InputProps
   css?: CSS
 }
 
-export const InputStyles = styled(UI3, {
+export const InputStyles = styled(Paragraph3, {
   transtion: 'border-color 0.1s',
   willChange: 'border-color',
   backgroundColor: '$DA10',

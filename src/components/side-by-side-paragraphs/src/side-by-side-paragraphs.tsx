@@ -8,7 +8,7 @@ import {
   Heading6,
 } from '@theme'
 import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 
 interface SideBySideParagraphsProps {
   leftHeading: string
@@ -39,7 +39,7 @@ const Text = ({ data }) => {
     <StructuredText
       data={data}
       customRules={structuredTextRules({
-        paragraphProps: { size: 'Paragraph4', color: 'primary' },
+        paragraphProps: { size: '4', color: 'primary' },
       })}
     />
   )

@@ -1,5 +1,6 @@
 import { forwardRef } from 'react'
-import { styled, UI3 } from '..'
+import { styled } from '..'
+import { Paragraph4 } from './typography'
 
 interface RadioButtonProps {
   id?: string
@@ -41,13 +42,14 @@ const Block = styled('div', {
   },
 })
 
-const Label = styled(UI3, {
+const Label = styled(Paragraph4, {
   py: '$2',
   px: '$2',
   display: 'block',
   br: '$3',
   backgroundColor: '$DA10',
   color: '$DBA70',
+  lineHeight: '1',
 })
 
 export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(

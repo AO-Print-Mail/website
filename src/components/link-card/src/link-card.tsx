@@ -1,13 +1,14 @@
 import {
   Card as CardBg,
   Flex,
-  UI3,
   ArrowForward,
   styled,
   CSS,
   Box,
   Heading6,
   Paragraph4,
+  Paragraph,
+  Heading,
 } from '@theme'
 import {
   Image,
@@ -15,7 +16,6 @@ import {
   ResponsiveImageType,
   StructuredText,
 } from 'react-datocms'
-import Link from 'next/link'
 import { isParagraph } from 'datocms-structured-text-utils'
 
 interface LinkCardProps {
@@ -46,7 +46,8 @@ const CardBackground = styled(CardBg, {
   },
 })
 
-const LinkText = styled(UI3, {
+const LinkText = styled(Paragraph, {
+  m: '0',
   color: '$blue',
   [`&:hover, ${CardBackground}:hover &`]: {
     color: '$B40',
@@ -59,7 +60,7 @@ const Arrow = styled(ArrowForward, {
   transition: 'transform 0.2s ease-out',
   color: '$blue',
   ml: '$2',
-  mt: '2px',
+  alignSelf: 'center',
   [`&:hover, ${CardBackground}:hover &`]: {
     transform: 'translateX($space$1)',
     color: '$B40',
@@ -68,8 +69,8 @@ const Arrow = styled(ArrowForward, {
 
 const CtaLink: React.FC<LinkTextProps> = ({ text, css }) => {
   return (
-    <Flex css={{ mt: '$4', ...css }}>
-      <LinkText>{text}</LinkText>
+    <Flex as="span" css={{ mt: '$4', ...css }}>
+      <LinkText size="4">{text}</LinkText>
       <Arrow />
     </Flex>
   )
@@ -83,9 +84,10 @@ const textRules = [
   )),
 ]
 
-const Title = styled(Heading6, {
+const Title = styled(Heading, {
   color: '$DBA90',
   mt: '$2',
+  lineHeight: '$3',
   flex: '0 0',
 })
 
@@ -123,8 +125,15 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   return (
     <CardBackground {...props}>
       <Spacer />
-      <Title as="h1">
-        <a href={link} style={{ textDecoration: 'none', color: 'unset' }}>
+      <Title as="h1" level="6">
+        <a
+          href={link}
+          style={{
+            textDecoration: 'none',
+            color: 'unset',
+            fontFamily: 'unset',
+          }}
+        >
           {title}
         </a>
       </Title>
