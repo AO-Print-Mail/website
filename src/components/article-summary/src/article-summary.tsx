@@ -5,6 +5,7 @@ import {
   styled,
   Paragraph5,
   Paragraph4,
+  Heading,
 } from '@theme'
 import { isParagraph } from 'datocms-structured-text-utils'
 import {
@@ -18,10 +19,9 @@ interface ArticleSummaryProps {
   summary: StructuredTextDocument
 }
 
-const Title = styled(Heading3, {
-  color: '$darkBlue',
+const Title = styled(Heading, {
   textGradient: 'linear-gradient(272.88deg, #0072CE 14.59%, #00237D 101%)',
-  mt: '0',
+  my: '0',
 })
 
 const Spacer = styled('span', {

@@ -24,6 +24,7 @@ interface LayoutProps {
   canonicalPath?: string
   footerCss?: CSS
   landing?: boolean
+  layoutElement?: string
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
@@ -135,7 +136,9 @@ export const Layout: React.FC<LayoutProps> = ({
             ref={headerRef}
           />
         )}
-        <ContentWrapper>{props.children}</ContentWrapper>
+        <ContentWrapper as={props.layoutElement}>
+          {props.children}
+        </ContentWrapper>
         <Footer
           landing={landing}
           beforeFooter={beforeFooter}

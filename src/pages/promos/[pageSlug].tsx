@@ -9,7 +9,7 @@ import {
 } from '@lib/datocms/__generated__/types'
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 import { Header } from '@components/header-landing'
 
@@ -59,27 +59,26 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       landing
       altHeader={<Header />}
     >
-      <Container as="section" css={{ pt: '$2', '@l': { display: 'flex' } }}>
+      <Container as="section" css={{ py: '$3', '@l': { display: 'flex' } }}>
         <HeroText>
           <Heading1 color="primary">{data.title}</Heading1>
-          <Box css={{ maxWidth: '60ch' }}>
-            <StructuredText
-              data={data.content.document}
-              customRules={structuredTextRules({
-                headingProps: { color: 'primary' },
-                listItemProps: {
-                  icon: 'CheckLeaf',
-                  iconProps: {
-                    css: {
-                      color: '$green',
-                      size: '1.125em',
-                      marginBottom: '0.125em',
-                    },
+          <StructuredText
+            data={data.content.document}
+            customRules={structuredTextRules({
+              paragraphProps: { size: '2', css: { maxWidth: '60ch' } },
+              headingProps: { color: 'primary' },
+              listItemProps: {
+                icon: 'CheckLeaf',
+                iconProps: {
+                  css: {
+                    color: '$green',
+                    size: '1.125em',
+                    marginBottom: '0.125em',
                   },
                 },
-              })}
-            />
-          </Box>
+              },
+            })}
+          />
         </HeroText>
         <LandingPageQuoteForm keyword="direct mail" />
       </Container>

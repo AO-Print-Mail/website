@@ -41,9 +41,11 @@ type AboutUsPageRecord {
 
 type BlogArticleModelArticleField {
   blocks: [TwoColumnListRecord!]!
-  links: [LandingPageV1Record!]!
+  links: [BlogArticleModelArticleLinksField!]!
   value: JsonField!
 }
+
+union BlogArticleModelArticleLinksField = AboutUsPageRecord | BlogArticleRecord | ServiceRecord
 
 input BlogArticleModelFilter {
   _createdAt: CreatedAtFilter
@@ -58,11 +60,11 @@ input BlogArticleModelFilter {
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
   summary: StructuredTextFilter
+  article: StructuredTextFilter
   seoMeta: SeoFilter
   title: StringFilter
   slug: SlugFilter
   mainImage: FileFilter
-  article: StructuredTextFilter
   OR: [BlogArticleModelFilter]
 }
 

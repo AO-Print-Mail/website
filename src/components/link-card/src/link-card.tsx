@@ -8,6 +8,7 @@ import {
   Heading6,
   Paragraph4,
   Paragraph,
+  Heading,
 } from '@theme'
 import {
   Image,
@@ -83,9 +84,10 @@ const textRules = [
   )),
 ]
 
-const Title = styled(Heading6, {
+const Title = styled(Heading, {
   color: '$DBA90',
   mt: '$2',
+  lineHeight: '$3',
   flex: '0 0',
 })
 
@@ -123,8 +125,15 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   return (
     <CardBackground {...props}>
       <Spacer />
-      <Title as="h1">
-        <a href={link} style={{ textDecoration: 'none', color: 'unset' }}>
+      <Title as="h1" level="6">
+        <a
+          href={link}
+          style={{
+            textDecoration: 'none',
+            color: 'unset',
+            fontFamily: 'unset',
+          }}
+        >
           {title}
         </a>
       </Title>

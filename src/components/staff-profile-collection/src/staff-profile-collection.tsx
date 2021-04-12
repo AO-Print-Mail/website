@@ -1,7 +1,7 @@
 import type { ResponsiveImageType, StructuredTextDocument } from 'react-datocms'
 import { StaffProfileModelBiographyField } from '@lib/datocms/__generated__/types'
 import { Image, StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import {
   styled,
   Flex,

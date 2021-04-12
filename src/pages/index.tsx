@@ -5,7 +5,7 @@ import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 
@@ -110,7 +110,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           />
           <HeroText>
             <Heading1 color="primary">{data.mainHeading}</Heading1>
-            <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
+            <Box css={{ maxWidth: '60ch' }}>
               <ParagraphText data={data.heroParagraph} size={'2'} />
             </Box>
           </HeroText>
@@ -132,7 +132,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   )
 }
 
-export async function getStaticProps({ params, preview = false }) {
+export async function getStaticProps({ preview = false }) {
   const { homepage }: GetHomePageQuery = await request({
     query: 'GetHomePage',
     preview,

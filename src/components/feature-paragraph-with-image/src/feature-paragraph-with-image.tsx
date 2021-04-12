@@ -8,7 +8,7 @@ import {
   Column,
   ColumnWrapper,
 } from '@theme'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import { StructuredText } from 'react-datocms'
 import { Image } from 'react-datocms'
 

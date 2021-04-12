@@ -8,9 +8,15 @@ export const Heading = styled('h1', {
   fontFamily: '$heading',
   fontSize: '$h1m',
   marginTop: '1em',
-  lineHeight: '$1',
-  marginBottom: '0.82em',
+  lineHeight: '$2',
+  marginBottom: '$3',
   letterSpacing: '$xcosy',
+  '@m': {
+    fontSize: '$h1t',
+  },
+  '@l': {
+    fontSize: '$h1d',
+  },
   variants: {
     color: {
       primary: {
@@ -21,24 +27,11 @@ export const Heading = styled('h1', {
       },
     },
     level: {
-      1: {
-        color: '$DA100',
-        fontSize: '$h1m',
-        marginBottom: '0.82em',
-        letterSpacing: '$xcosy',
-        '@m': {
-          fontSize: '$h1t',
-          letterSpacing: '$xcosy',
-        },
-        '@l': {
-          fontSize: '$h1d',
-          letterSpacing: '$xcosy',
-        },
-      },
+      1: {},
       2: {
         color: '$DA90',
         fontSize: '$h2m',
-        marginBottom: '0.31em',
+        //marginBottom: '0.31em',
         letterSpacing: '$cosy',
         '@m': {
           fontSize: '$h2t',
@@ -51,7 +44,7 @@ export const Heading = styled('h1', {
       3: {
         color: '$DA85',
         fontSize: '$h3m',
-        marginBottom: '0.26em',
+        //marginBottom: '0.26em',
         letterSpacing: '$cosy',
         '@m': {
           fontSize: '$h3t',
@@ -64,7 +57,7 @@ export const Heading = styled('h1', {
       4: {
         color: '$DA80',
         fontSize: '$h4m',
-        marginBottom: '0.26em',
+        //marginBottom: '0.26em',
         letterSpacing: '$cosy',
         '@m': {
           fontSize: '$h4t',
@@ -77,7 +70,7 @@ export const Heading = styled('h1', {
       5: {
         color: '$DA80',
         fontSize: '$h5m',
-        marginBottom: '0.24em',
+        //marginBottom: '0.24em',
         letterSpacing: '$cosy',
         '@m': {
           fontSize: '$h5t',
@@ -89,7 +82,7 @@ export const Heading = styled('h1', {
       6: {
         color: '$DA80',
         fontSize: '$h6m',
-        marginBottom: '-0.26em',
+        //marginBottom: '-0.26em',
         letterSpacing: '$cosy',
         '@m': {
           fontSize: '$h6t',
@@ -117,47 +110,34 @@ export const Heading = styled('h1', {
     { size: '6', color: 'primary', css: { color: '$DBA75' } },
     { size: '6', color: 'light', css: { color: '$LA75' } },
   ],
-  '@m': {
-    fontSize: '$h1t',
-    letterSpacing: '$xcosy',
-  },
-  '@l': {
-    fontSize: '$h1d',
-    letterSpacing: '$xcosy',
-  },
 })
 
 export const Heading1 = forwardRef<
   HTMLHeadingElement,
-  React.ComponentProps<typeof Paragraph>
+  React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="1" as="h1" ref={ref} {...props} />)
 export const Heading2 = forwardRef<
   HTMLHeadingElement,
-  React.ComponentProps<typeof Paragraph>
+  React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="2" as="h2" ref={ref} {...props} />)
 export const Heading3 = forwardRef<
   HTMLHeadingElement,
-  React.ComponentProps<typeof Paragraph>
+  React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="3" as="h3" ref={ref} {...props} />)
 export const Heading4 = forwardRef<
   HTMLHeadingElement,
-  React.ComponentProps<typeof Paragraph>
+  React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="4" as="h4" ref={ref} {...props} />)
 export const Heading5 = forwardRef<
   HTMLHeadingElement,
-  React.ComponentProps<typeof Paragraph>
+  React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="5" as="h5" ref={ref} {...props} />)
 export const Heading6 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
->(({ children, ...props }, ref) => (
-  <Heading level="6" as="h6" ref={ref} {...props}>
-    {children}
-  </Heading>
+>(({ as = 'h6', ...props }, ref) => (
+  <Heading level="6" as={as} ref={ref} {...props} />
 ))
-/*export const Heading6: React.FC<React.ComponentProps<typeof Paragraph>> = (props) => (
-  <Heading level="6" as="h6" {...props} />
-)*/
 
 export const Paragraph = styled('p', {
   color: 'inherit',

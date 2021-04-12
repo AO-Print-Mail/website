@@ -77,9 +77,11 @@ export type AboutUsPageRecord_SeoMetaTagsArgs = {
 export type BlogArticleModelArticleField = {
   __typename?: 'BlogArticleModelArticleField';
   blocks: Array<TwoColumnListRecord>;
-  links: Array<LandingPageV1Record>;
+  links: Array<BlogArticleModelArticleLinksField>;
   value: Scalars['JsonField'];
 };
+
+export type BlogArticleModelArticleLinksField = AboutUsPageRecord | BlogArticleRecord | ServiceRecord;
 
 export type BlogArticleModelFilter = {
   _createdAt?: Maybe<CreatedAtFilter>;
@@ -94,11 +96,11 @@ export type BlogArticleModelFilter = {
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
   summary?: Maybe<StructuredTextFilter>;
+  article?: Maybe<StructuredTextFilter>;
   seoMeta?: Maybe<SeoFilter>;
   title?: Maybe<StringFilter>;
   slug?: Maybe<SlugFilter>;
   mainImage?: Maybe<FileFilter>;
-  article?: Maybe<StructuredTextFilter>;
   OR?: Maybe<Array<Maybe<BlogArticleModelFilter>>>;
 };
 

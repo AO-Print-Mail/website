@@ -16,7 +16,7 @@ import {
 } from '@lib/datocms/__generated__/types'
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import {
   structuredTextBlockRules,
   ModularContent,

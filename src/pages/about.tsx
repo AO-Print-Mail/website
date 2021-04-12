@@ -4,7 +4,7 @@ import { Layout } from '@components/layout'
 import { GetAboutUsQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
 import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import {
   structuredTextBlockRules,
   ModularContent,
