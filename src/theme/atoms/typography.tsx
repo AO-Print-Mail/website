@@ -1,5 +1,5 @@
 import { styled, css } from '@theme'
-import { forwardRef } from '@theme/forwardRef'
+import { forwardRef } from 'react'
 import { ResetButton } from './resetButton'
 
 export const Heading = styled('h1', {
