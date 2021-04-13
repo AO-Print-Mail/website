@@ -6,7 +6,7 @@ import { updateDirectMailForm } from '@lib/little-state-machine'
 import MaskedInput from 'react-text-mask'
 import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { MotionValue } from 'framer-motion'
+import type { MotionValue } from 'framer-motion'
 import { FormStepControls } from '../bottomBarControls'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 
@@ -137,7 +137,7 @@ export const Step3Form: React.FC<Step3Props> = ({
             name="firstName"
             placeholder="Jane"
             defaultValue={firstName}
-            css={{ px: '$2' }}
+            css={{ px: '$2', flexBasis: '50% ' }}
             errors={errors}
           >
             First name
@@ -148,7 +148,7 @@ export const Step3Form: React.FC<Step3Props> = ({
             name="lastName"
             placeholder="Appleseed"
             defaultValue={lastName}
-            css={{ px: '$2' }}
+            css={{ px: '$2', flexBasis: '50%' }}
             errors={errors}
           >
             Last name
@@ -196,7 +196,7 @@ export const Step3Form: React.FC<Step3Props> = ({
               Contact number
             </Input>
           )}
-        ></MaskedInput>
+        />
       </Box>
       <Checkbox
         ref={register}

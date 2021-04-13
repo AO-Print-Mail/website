@@ -16,7 +16,6 @@ interface InputProps
 }
 
 export const InputStyles = styled(Paragraph3, {
-  transtion: 'border-color 0.1s',
   willChange: 'border-color',
   backgroundColor: '$DA10',
   px: 'calc($3 - 2px)',
