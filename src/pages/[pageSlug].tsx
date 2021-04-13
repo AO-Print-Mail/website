@@ -127,7 +127,7 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
         >
           <HeroText>
             <Heading1 color="primary">{data.mainHeading}</Heading1>
-            <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
+            <Box css={{ maxWidth: '60ch', mt: '$4' }}>
               <ConfiguredText data={data.heroParagraph} size="2" />
             </Box>
           </HeroText>

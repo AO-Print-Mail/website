@@ -1,15 +1,14 @@
 import {
   styled,
   CSS,
-  Heading6,
   Paragraph4,
   TextHolder,
-  Container,
   Flex,
   Box,
   Column,
   ColumnWrapper,
   FullWidthFeatureContainer,
+  Heading,
 } from '@theme'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import Pattern from '@svg/cornerPatternDark.svg'
@@ -95,7 +94,7 @@ const TestimonialTextHolder = styled(ColumnWrapper, {
   },
 })
 
-const Quote = styled(Heading6, {
+const Quote = styled(Heading, {
   color: '$white',
   mx: '0',
   p: '0',
@@ -117,7 +116,9 @@ export const Testimonial: React.FC<TestimonialProps> = ({
       <TestimonialTextHolder>
         <Column>
           <TextHolder>
-            <Quote as="blockquote">{testimonial}</Quote>
+            <Quote level="6" as="blockquote">
+              {testimonial}
+            </Quote>
           </TextHolder>
         </Column>
         <Column css={{ '@l': { flex: '0 0 25%' } }}>
