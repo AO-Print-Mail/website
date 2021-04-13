@@ -27,6 +27,18 @@ export const Column = styled(Box, {
   '@m': { px: 'calc($space$4 / 2)' },
   '@l': { px: 'calc($space$4 / 2)' },
   '@xl': { px: 'calc($space$5 / 2)' },
+  variants: {
+    layout: {
+      fullWidth: {
+        mx: '50%',
+        position: 'relative',
+        width: '100vw',
+        left: '-50vw',
+        right: '-50vw',
+        padding: '0',
+      },
+    },
+  },
 })
 
 export const ColumnWrapper = styled(Flex, {

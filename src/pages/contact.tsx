@@ -18,6 +18,7 @@ import { request } from '@lib/datocms/datocms'
 import { GetContactPageQuery } from '@lib/datocms/__generated__/types'
 import { Button } from '@components/button'
 import Image from 'next/image'
+import { ContactForm } from '@components/contact-form'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -110,51 +111,106 @@ const Contact: React.FC<PageProps> = ({ data }) => {
         </Container>
       </Box>
       <Container>
-        <ColumnWrapper>
-          <Column css={{ '@l': { ml: '8.33%' } }}>
-            <TextHolder css={{ pb: '$6' }}>
-              <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
-                Call us:
-              </Heading>
-              <Button
-                as="a"
-                href="tel:+61296456777"
-                leftIcon={<Phone size="matchFontSize" />}
-                color="primary"
-                style="naked"
-                offset="left"
+        <ColumnWrapper
+          css={{
+            flexFlow: 'column nowrap',
+            mb: '-$5',
+            //'@m': { mx: '8.33%' },
+            '@l': { flexFlow: 'row nowrap', mx: '8.33%', mb: '-$6' },
+          }}
+        >
+          <Column css={{ '@l': { flex: '0 0 40%' } }}>
+            <TextHolder css={{ pb: '$7' }}>
+              <Box
+                css={{
+                  '@m': { width: '50%', float: 'left' },
+                  '@l': { width: 'auto', float: 'none' },
+                }}
               >
-                (02) 9645 6777
-              </Button>
-              <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
-                Opening hours:
-              </Heading>
-              <OpeningHoursTable data={openingHours} />
-              <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
-                Visit Us:
-              </Heading>
-              <Paragraph size="4" color="primary">
-                9 Clearview Pl
-                <br />
-                Brookvale
-                <br />
-                Sydney NSW 2100
-              </Paragraph>
-              <Spacer size="large" />
-              <Button
-                as="a"
-                href="https://g.page/ao-mail"
-                rightIcon={<ArrowForward />}
-                style="naked"
-                offset="left"
-                size="small"
-                css={{ color: '$blue' }}
+                <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
+                  Call us:
+                </Heading>
+                <Button
+                  as="a"
+                  href="tel:+61296456777"
+                  leftIcon={<Phone size="matchFontSize" />}
+                  color="primary"
+                  style="naked"
+                  offset="left"
+                >
+                  (02) 9645 6777
+                </Button>
+              </Box>
+              <Box
+                css={{
+                  '@m': { width: '50%', float: 'right' },
+                  '@l': { width: 'auto', float: 'none' },
+                }}
               >
-                Directions on Google Maps
-              </Button>
+                <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
+                  Opening hours:
+                </Heading>
+                <OpeningHoursTable data={openingHours} />
+              </Box>
+              <Box
+                css={{
+                  '@m': { width: '50%', float: 'left' },
+                  '@l': { width: 'auto', float: 'none' },
+                }}
+              >
+                <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
+                  Visit Us:
+                </Heading>
+                <Paragraph size="4" color="primary">
+                  9 Clearview Pl
+                  <br />
+                  Brookvale
+                  <br />
+                  Sydney NSW 2100
+                </Paragraph>
+                <Spacer size="large" />
+                <Button
+                  as="a"
+                  href="https://g.page/ao-mail"
+                  rightIcon={<ArrowForward />}
+                  style="naked"
+                  offset="left"
+                  size="small"
+                  css={{ color: '$blue' }}
+                >
+                  Directions on Google Maps
+                </Button>
+              </Box>
             </TextHolder>
           </Column>
-          <Column></Column>
+          <Column
+            css={{
+              zIndex: '$1',
+              '@l': {
+                position: 'relative',
+                top: '-$4',
+                flex: '0 0 60%',
+              },
+            }}
+          >
+            <ContactForm
+              css={{
+                width: '100vw',
+                mx: '50%',
+                left: '-50vw',
+                right: '-50vw',
+                position: 'relative',
+                br: '0',
+                '@m': {
+                  width: 'unset',
+                  mx: 'unset',
+                  left: 'unset',
+                  right: 'unset',
+                  br: '$4',
+                },
+              }}
+            />
+          </Column>
         </ColumnWrapper>
       </Container>
       <Img
