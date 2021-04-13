@@ -83,11 +83,11 @@ const Blog: React.FC<PageProps> = ({ data }) => {
         <Container
           css={{
             pt: '$6',
-            height: '$280px',
-            '@m': { height: '400px' },
+            minHeight: '280px',
+            '@m': { minHeight: '400px' },
           }}
         >
-          <TextHolder css={{ mt: '$8', '@l': { ml: '8.33%' } }}>
+          <TextHolder css={{ mt: '$7', '@l': { ml: '8.33%' } }}>
             <Heading1 color="primary">{data.blogPage.title}</Heading1>
           </TextHolder>
         </Container>
