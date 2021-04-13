@@ -107,8 +107,8 @@ export const Heading = styled('h1', {
     { level: '4', color: 'light', css: { color: '$LA80' } },
     { level: '5', color: 'primary', css: { color: '$DBA75' } },
     { level: '5', color: 'light', css: { color: '$LA75' } },
-    { size: '6', color: 'primary', css: { color: '$DBA75' } },
-    { size: '6', color: 'light', css: { color: '$LA75' } },
+    { level: '6', color: 'primary', css: { color: '$DBA75' } },
+    { level: '6', color: 'light', css: { color: '$LA75' } },
   ],
 })
 
