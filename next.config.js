@@ -9,6 +9,9 @@ module.exports = withPlugins([withBundleAnalyzer], {
   future: {
     webpack5: true,
   },
+  images: {
+    domains: ['maps.googleapis.com'],
+  },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.svg$/,

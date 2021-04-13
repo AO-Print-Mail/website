@@ -235,6 +235,37 @@ export type ColorField = {
   red?: Maybe<Scalars['IntType']>;
 };
 
+/** Record of type Contact Us page (contact_page) */
+export type ContactPageRecord = {
+  __typename?: 'ContactPageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canonicalPath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  location?: Maybe<LatLonField>;
+  pageMeta?: Maybe<SeoField>;
+  pageSlug?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['JsonField']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Contact Us page (contact_page) */
+export type ContactPageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
 /** Specifies how to filter by creation datetime */
 export type CreatedAtFilter = {
   /** Filter records with a value that's strictly greater than the one specified */
@@ -1931,6 +1962,12 @@ export type LandingPageV1RecordPageContentArgs = {
   markdown?: Maybe<Scalars['Boolean']>;
 };
 
+export type LatLonField = {
+  __typename?: 'LatLonField';
+  latitude?: Maybe<Scalars['FloatType']>;
+  longitude?: Maybe<Scalars['FloatType']>;
+};
+
 
 export enum MuxThumbnailFormatType {
   jpg = 'jpg',
@@ -2041,6 +2078,8 @@ export type Query = {
   blogArticle?: Maybe<BlogArticleRecord>;
   /** Returns the single instance record */
   blogPage?: Maybe<BlogPageRecord>;
+  /** Returns the single instance record */
+  contactPage?: Maybe<ContactPageRecord>;
   /** Returns the single instance record */
   homepage?: Maybe<HomepageRecord>;
   /** Returns a specific record */
@@ -2163,6 +2202,12 @@ export type QueryBlogArticleArgs = {
 
 /** The query root for this schema */
 export type QueryBlogPageArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type QueryContactPageArgs = {
   locale?: Maybe<SiteLocale>;
 };
 
@@ -3315,6 +3360,24 @@ export type GetBlogPostPathsQuery = (
   )> }
 );
 
+export type GetContactPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetContactPageQuery = (
+  { __typename?: 'Query' }
+  & { contactPage?: Maybe<(
+    { __typename?: 'ContactPageRecord' }
+    & Pick<ContactPageRecord, 'id' | 'pageSlug' | 'title'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & MetaTagsFragmentFragment
+    )>, location?: Maybe<(
+      { __typename?: 'LatLonField' }
+      & Pick<LatLonField, 'latitude' | 'longitude'>
+    )> }
+  )> }
+);
+
 export type GetFaviconsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3657,6 +3720,22 @@ export const GetBlogPostPathsDocument = gql`
   }
 }
     `;
+export const GetContactPageDocument = gql`
+    query GetContactPage {
+  contactPage {
+    id
+    _seoMetaTags {
+      ...metaTagsFragment
+    }
+    pageSlug
+    title
+    location {
+      latitude
+      longitude
+    }
+  }
+}
+    ${MetaTagsFragmentFragmentDoc}`;
 export const GetFaviconsDocument = gql`
     query GetFavicons {
   site: _site {
@@ -3792,6 +3871,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     getBlogPostPaths(variables?: GetBlogPostPathsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostPathsQuery> {
       return withWrapper(() => client.request<GetBlogPostPathsQuery>(print(GetBlogPostPathsDocument), variables, requestHeaders));
+    },
+    GetContactPage(variables?: GetContactPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetContactPageQuery> {
+      return withWrapper(() => client.request<GetContactPageQuery>(print(GetContactPageDocument), variables, requestHeaders));
     },
     GetFavicons(variables?: GetFaviconsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetFaviconsQuery> {
       return withWrapper(() => client.request<GetFaviconsQuery>(print(GetFaviconsDocument), variables, requestHeaders));

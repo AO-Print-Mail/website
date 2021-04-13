@@ -1,7 +1,7 @@
 import {
   Breadcrumbs,
   Box,
-  Heading3,
+  Spacer,
   styled,
   Paragraph5,
   Paragraph4,
@@ -22,12 +22,6 @@ interface ArticleSummaryProps {
 const Title = styled(Heading, {
   textGradient: 'linear-gradient(272.88deg, #0072CE 14.59%, #00237D 101%)',
   my: '0',
-})
-
-const Spacer = styled('span', {
-  display: 'block',
-  height: '$space$2',
-  minHeight: '$space$2',
 })
 
 const Updated = styled(Paragraph5, {
@@ -51,7 +45,7 @@ export const ArticleSummary: React.FC<ArticleSummaryProps> = ({
   return (
     <Box {...props}>
       <Breadcrumbs links={[{ name: 'Blog', url: '/blog' }]} />
-      <Spacer />
+      <Spacer size="small" />
       <Title as="h1">{title}</Title>
       <Updated>Last updated {lastUpdated}</Updated>
       <StructuredText data={summary} customRules={structuredTextRulez} />

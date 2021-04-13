@@ -4,8 +4,7 @@ import {
   ArrowForward,
   styled,
   CSS,
-  Box,
-  Heading6,
+  Spacer,
   Paragraph4,
   Paragraph,
   Heading,
@@ -89,11 +88,6 @@ const Title = styled(Heading, {
   mt: '$2',
   lineHeight: '$3',
   flex: '0 0',
-})
-
-const Spacer = styled('span', {
-  display: 'block',
-  flex: '0 0 $space$3',
 })
 
 const ImgWrapper = styled('div', {
