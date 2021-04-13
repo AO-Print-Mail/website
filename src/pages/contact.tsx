@@ -105,7 +105,9 @@ const Contact: React.FC<PageProps> = ({ data }) => {
             '@m': { minHeight: '400px' },
           }}
         >
-          <TextHolder css={{ mt: '$7', '@l': { ml: '8.33%' } }}>
+          <TextHolder
+            css={{ mt: '$7', '@m': { mt: '$8' }, '@l': { ml: '8.33%' } }}
+          >
             <Heading1 color="primary">Contact Us</Heading1>
           </TextHolder>
         </Container>
@@ -214,7 +216,7 @@ const Contact: React.FC<PageProps> = ({ data }) => {
         </ColumnWrapper>
       </Container>
       <Img
-        src={`https://maps.googleapis.com/maps/api/staticmap?center=Frenchs%20Forest,AU&zoom=11&size=2048x2048&scale=4&markers=color:red%7Clabel:%7C${
+        src={`https://maps.googleapis.com/maps/api/staticmap?center=Frenchs%20Forest,AU&zoom=11&size=2048x2048&scale=4&markers=color:red%7Csize:small%7Clabel:%7C${
           data.contactPage.location.latitude +
           ',' +
           data.contactPage.location.longitude
