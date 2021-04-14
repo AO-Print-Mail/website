@@ -47,34 +47,35 @@ const BackgroundImage = styled(Pattern, {
 })
 
 const Photo = styled(Image, {
+  objectFit: 'cover',
   br: '50%',
-  size: '$8',
+  size: '$9',
   mr: '$3',
   '@m': {
-    mr: '$4',
+    mr: '$5',
   },
   '@l': {
-    size: '$9',
+    size: '$10',
     m: '0',
   },
 })
 
 const ProfileWrapper = styled(Flex, {
   mt: '$6',
+  alignItems: 'center',
   '@l': {
     flexFlow: 'column nowrap',
-    alignItems: 'center',
+    mb: '-$2',
   },
 })
 
 const ProfileText = styled(Paragraph4, {
-  mt: '$2',
+  my: '$1',
   variants: {
     name: {
       true: {
         color: '$white',
         fontWeight: '600',
-        mt: '$2',
       },
     },
   },
@@ -123,9 +124,9 @@ export const Testimonial: React.FC<TestimonialProps> = ({
         </Column>
         <Column css={{ '@l': { flex: '0 0 25%' } }}>
           <TextHolder>
-            <ProfileWrapper css={{ mt: '$6' }}>
+            <ProfileWrapper>
               <Photo data={image} />
-              <Box>
+              <Box css={{ my: '$4' }}>
                 <ProfileText name>{name}</ProfileText>
                 <ProfileText color="light">{company}</ProfileText>
               </Box>

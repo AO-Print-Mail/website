@@ -113,8 +113,9 @@ export const StaffProfileCollection: React.FC<StaffProfileCollectionProps> = ({
   return (
     <ColumnWrapper
       css={{
-        '@initial': { my: '$6' },
-
+        my: '$6',
+        flexFlow: 'column nowrap',
+        '@l': { flexFlow: 'row nowrap' },
         '@xl': {
           mx: '8.33%',
         },

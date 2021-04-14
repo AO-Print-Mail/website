@@ -3613,7 +3613,7 @@ export const TestimonialRecordFragmentFragmentDoc = gql`
   testimonial
   positionCompany
   photo {
-    responsiveImage(imgixParams: {fit: fill, w: 240, h: 240, auto: format}) {
+    responsiveImage(imgixParams: {fit: crop, w: 240, h: 240, auto: format}) {
       ...responsiveImageFragment
     }
   }
