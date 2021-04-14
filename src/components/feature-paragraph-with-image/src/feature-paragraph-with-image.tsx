@@ -52,24 +52,6 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
   imagePosition,
   ...props
 }) => {
-  const ImageColumn = (
-    <Column
-      css={{
-        '@initial': { alignSelf: 'center', flex: '0 0 auto' },
-        '@m': { flex: '0 0 50%' },
-        '@l': { flex: '0 0 50%' },
-      }}
-      {...props}
-    >
-      <TextHolder>
-        <FeatureImage
-          imageClassName={innerImageStyle()}
-          oval={crop}
-          data={image.responsiveImage}
-        />
-      </TextHolder>
-    </Column>
-  )
   return (
     <ColumnWrapper
       css={{
@@ -79,7 +61,6 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
       }}
       {...props}
     >
-      {imagePosition === 'left' && ImageColumn}
       <Column css={{ '@m': { pr: '$2' } }}>
         <TextHolder>
           <Heading3 as="h2" css={{ mt: '$2' }} color="primary">
@@ -96,7 +77,25 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
           />
         </TextHolder>
       </Column>
-      {imagePosition === 'right' && ImageColumn}
+      <Column
+        css={{
+          '@initial': {
+            alignSelf: 'center',
+            flex: '0 0 auto',
+          },
+          '@m': { flex: '0 0 50%' },
+          '@l': { flex: '0 0 50%', order: imagePosition === 'left' ? '-1' : 1 },
+        }}
+        {...props}
+      >
+        <TextHolder>
+          <FeatureImage
+            imageClassName={innerImageStyle()}
+            oval={crop}
+            data={image.responsiveImage}
+          />
+        </TextHolder>
+      </Column>
     </ColumnWrapper>
   )
 }

@@ -101,8 +101,6 @@ const AboutUsPage: React.FC<PageProps> = ({ data }) => {
   )
 }
 
-HTMLHeadingElement
-
 export async function getStaticProps({ preview = false }) {
   const about: GetAboutUsQuery = await request({
     query: 'GetAboutUs',

@@ -2017,7 +2017,7 @@ export type PreviewCardRecord = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['ItemId'];
   image?: Maybe<FileField>;
-  linkTarget?: Maybe<LandingPageV1Record>;
+  linkTarget?: Maybe<ServiceRecord>;
   linkText?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
@@ -3402,7 +3402,7 @@ export type GetHomePageQuery = (
     & Pick<HomepageRecord, 'mainHeading'>
     & { _seoMetaTags: Array<(
       { __typename?: 'Tag' }
-      & Pick<Tag, 'attributes' | 'content' | 'tag'>
+      & MetaTagsFragmentFragment
     )>, heroParagraph?: Maybe<(
       { __typename?: 'HomepageModelHeroParagraphField' }
       & Pick<HomepageModelHeroParagraphField, 'value'>
@@ -3415,6 +3415,9 @@ export type GetHomePageQuery = (
           { __typename?: 'ResponsiveImage' }
           & ResponsiveImageFragmentFragment
         )> }
+      )>, linkTarget?: Maybe<(
+        { __typename?: 'ServiceRecord' }
+        & Pick<ServiceRecord, 'pageSlug'>
       )> }
     )>>>, contentSections?: Maybe<Array<Maybe<(
       { __typename?: 'FeatureParagraphRecord' }
@@ -3749,9 +3752,7 @@ export const GetHomePageDocument = gql`
     query GetHomePage {
   homepage {
     _seoMetaTags {
-      attributes
-      content
-      tag
+      ...metaTagsFragment
     }
     mainHeading
     heroParagraph {
@@ -3766,6 +3767,9 @@ export const GetHomePageDocument = gql`
         }
       }
       linkText
+      linkTarget {
+        pageSlug
+      }
     }
     contentSections {
       heading
@@ -3775,7 +3779,8 @@ export const GetHomePageDocument = gql`
     }
   }
 }
-    ${ResponsiveImageFragmentFragmentDoc}`;
+    ${MetaTagsFragmentFragmentDoc}
+${ResponsiveImageFragmentFragmentDoc}`;
 export const GetLandingPageDocument = gql`
     query GetLandingPage($pageSlug: String!) {
   landingPageV1(filter: {pageSlug: {eq: $pageSlug}}) {

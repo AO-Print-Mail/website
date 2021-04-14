@@ -99,17 +99,14 @@ const Blog: React.FC<PageProps> = ({ data }) => {
           {data.articleSummaries.map((article) => {
             const targetUrl = `/blog/${article.slug}`
             return (
-              <CardWrapper
-                as="article"
-                key={article.id}
-                onClick={handleClick(targetUrl)}
-              >
+              <CardWrapper as="article" key={article.id}>
                 <LinkCard
                   title={article.title}
                   description={article.summary.value}
                   image={article.mainImage.responsiveImage}
                   link={targetUrl}
                   css={{ height: '100%' }}
+                  onClick={handleClick(targetUrl)}
                 />
               </CardWrapper>
             )
