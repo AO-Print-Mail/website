@@ -66,13 +66,12 @@ export const InputStyles = styled(Paragraph3, {
 
 export const TextAreaStyles = styled(InputStyles, {
   lineHeight: 1.5,
-
   variants: {
     resizeVertical: { true: { resize: 'vertical' } },
   },
 })
 
-const LabelStyles = styled(Paragraph5, { color: '$DA70', display: 'block' })
+export const Label = styled(Paragraph5, { color: '$DA70', display: 'block' })
 
 export const TextArea = forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => <TextAreaStyles ref={ref} {...props} as="textarea" />
@@ -115,9 +114,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }
     return (
       <Box css={{ mt: '$3' }} {...props}>
-        <LabelStyles as="label" htmlFor={id}>
+        <Label as="label" htmlFor={id}>
           {children}
-        </LabelStyles>
+        </Label>
         {_input}
         {error && (
           <Box

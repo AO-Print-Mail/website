@@ -62,6 +62,7 @@ interface NavSectionProps {
 
 const SectionLabel = styled(Paragraph, {
   color: '$DA40',
+  fontWeight: '$semibold',
   ml: '$2',
   '@m': {
     ml: '$3',
@@ -96,7 +97,7 @@ const NavSection: React.FC<NavSectionProps> = ({
   return (
     <Box css={{ borderTop: '1px dashed $colors$DBA30', pt: '$5', pb: '$4' }}>
       <Container as="section">
-        <SectionLabel size="3" as="h3" semiBold>
+        <SectionLabel size="3" as="h3">
           {section_label}
         </SectionLabel>
         <Flex

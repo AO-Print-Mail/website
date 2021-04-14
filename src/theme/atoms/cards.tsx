@@ -7,6 +7,7 @@ interface BlockQuoteProps {
 
 export const FlatCard = styled('div', {
   backgroundColor: '$white',
+  overflow: 'hidden',
   br: '$5',
   p: '$3',
   '@l': {

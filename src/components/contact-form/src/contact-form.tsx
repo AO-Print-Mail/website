@@ -1,10 +1,32 @@
-import { styled, Card, Flex, Box, Input, Checkbox, classes } from '@theme'
+import {
+  styled,
+  Card,
+  Flex,
+  Box,
+  Input,
+  Checkbox,
+  classes,
+  TextArea,
+  Label,
+  Heading,
+  Paragraph,
+} from '@theme'
 import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import MaskedInput from 'react-text-mask'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { encode } from '@lib/netlify/utils'
+import { Button } from '@components/button'
+import { m as motion } from 'framer-motion'
+import dynamic from 'next/dynamic'
+import { useRouter } from 'next/router'
+
+const WorkaroundForm = dynamic(() =>
+  import('@components/netlify-workaraound-form').then(
+    (res) => res.NetlifyWorkaroundForm
+  )
+)
 
 const FORM_NAME = 'contactForm'
 
@@ -18,6 +40,7 @@ const inputs = {
   phone: '',
   message: '',
   joinMailingList: false,
+  'bot-field': '',
 }
 
 const schema = yup.object().shape({
@@ -34,6 +57,7 @@ const schema = yup.object().shape({
     .min(9, 'Please enter a full telephone number')
     .max(14, 'The telephone number you entered seems too long.'),
   message: yup.string(),
+  'bot-field': yup.string(),
   joinMailingList: yup.boolean(),
 })
 
@@ -53,31 +77,84 @@ const mobileMask = [
 ]
 
 const Background = styled(Card, {
-  height: '768px',
   boxShadow: '$1',
+  px: '$4',
+  pb: '$6',
+  '@m': { px: '$6' },
+  '@xl': { px: '$7' },
 })
 
 export const ContactForm: React.FC<ContactFormProps> = (props) => {
-  const { register, handleSubmit, formState, errors } = useForm<typeof inputs>({
+  const { register, handleSubmit, errors, reset } = useForm<typeof inputs>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   })
+  const router = useRouter()
+  const SuccessBackground = styled(Background, {
+    position: 'absolute',
+    top: '0',
+    right: '0',
+    bottom: '0',
+    left: '0',
+    background: '$green',
+    zIndex: '$3',
+  })
   const [submitting, setSubmitting] = useState(false)
-  const onSubmit = (data) => {
+  const [firstName, setFirstname] = useState('')
+
+  const onSubmit = (data: typeof inputs) => {
     setSubmitting(true)
+    setFirstname(data.firstName)
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': 'contactUsForm', ...data }),
     })
       .then(() => {
-        //success stuff
+        const newPath = router.pathname.replace('[pageSlug]', '/contact')
+        router.push(
+          {
+            pathname: `${newPath}`,
+            query: { success: 'true' },
+          },
+          null,
+          { shallow: true }
+        )
       })
       .catch((error) => console.error(error))
-      .finally(() => {})
+      .finally(() => {
+        setSubmitting(false)
+        reset()
+      })
   }
   return (
     <Background {...props}>
+      {router.query['success'] && (
+        <SuccessBackground
+          as={motion.div}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          <Flex css={{ alignItems: 'center', height: '100%' }}>
+            <Box css={{ flex: '1 1', pb: '$9' }}>
+              <Heading as="h2" level="5" alignCenter css={{ color: '$white' }}>
+                Thanks for your message{firstName && `, ${firstName}`}!
+              </Heading>
+              <Paragraph
+                size="4"
+                css={{ color: '$LA90', mt: '$6' }}
+                alignCenter
+              >
+                We'll get back to you very soon.
+              </Paragraph>
+            </Box>
+          </Flex>
+        </SuccessBackground>
+      )}
+      <Heading color="primary" as="h2" level="5">
+        Send a message
+      </Heading>
       <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>
         <Box css={{ my: '$4', pb: '$2' }}>
           <Flex css={{ mx: '-$2' }}>
@@ -147,22 +224,50 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
               </Input>
             )}
           />
+          <Box css={{ mt: '$3' }}>
+            <Label as="label" size="4" htmlFor="additionalInformation">
+              Message (optional)
+            </Label>
+            <TextArea
+              resizeVertical
+              id="additionalInformation"
+              name="additionalInformation"
+              rows={8}
+              cols={30}
+              placeholder="Please include any additional information that is applicable to your job."
+              ref={register}
+              autoComplete="off"
+              defaultValue={inputs.message}
+              css={{ width: '100%' }}
+            />
+          </Box>
+          <Checkbox
+            ref={register}
+            id="joinMailingList"
+            name="joinMailingList"
+            defaultChecked={inputs.joinMailingList}
+            css={{ mt: '$3' }}
+          >
+            Keep me up to date with news and special offers
+          </Checkbox>
         </Box>
-        <Checkbox
-          ref={register}
-          id="joinMailingList"
-          name="joinMailingList"
-          defaultChecked={inputs.joinMailingList}
-        >
-          I’d like to keep updated with news and special offers
-        </Checkbox>
         <p aria-hidden="true" className={classes.visuallyHidden()}>
           <label>
             Skip this field if you’re human:
-            <input tabIndex={-1} ref={register} name="bot-field-step3" />
+            <input tabIndex={-1} ref={register} name="bot-field" />
           </label>
         </p>
+        <Button
+          fullWidth
+          size="cta"
+          isLoading={submitting}
+          type="submit"
+          color="primary"
+        >
+          Send Message
+        </Button>
       </form>
+      <WorkaroundForm formFields={inputs} name={FORM_NAME} />
     </Background>
   )
 }

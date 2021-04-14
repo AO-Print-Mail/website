@@ -17,7 +17,7 @@ const CheckboxStyles = styled('input', {
   size: '$2',
   borderColor: '$DBA20',
   borderStyle: 'solid',
-  mriu: '$3',
+  mr: '$3',
 })
 
 const LabelStyles = styled(Paragraph, { color: '$DA70' })
