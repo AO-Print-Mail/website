@@ -144,7 +144,7 @@ export async function getStaticProps({ preview = false }) {
       title: card.title,
       image: card.image.responsiveImage,
       description: card.description,
-      link: '/#',
+      link: card.linkTarget.pageSlug,
       linkText: card.linkText,
     })),
   }

@@ -24,6 +24,7 @@ interface LinkCardProps {
   link?: string
   linkText?: string
   css?: CSS
+  onClick?: (e: React.MouseEvent) => void
 }
 
 interface LinkTextProps {

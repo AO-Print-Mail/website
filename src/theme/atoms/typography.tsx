@@ -164,6 +164,7 @@ export const Paragraph = styled('p', {
         color: '$orange',
       },
     },
+    ui: { true: { m: '0 !important' } },
     alignLeft: { true: { textAlign: 'left' } },
     alignRight: { true: { textAlign: 'right' } },
     alignCenter: { true: { textAlign: 'center' } },

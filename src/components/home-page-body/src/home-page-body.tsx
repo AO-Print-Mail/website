@@ -9,10 +9,11 @@ import {
   Flex,
   ArrowForward,
   Card as CardBg,
-  UI,
+  Paragraph,
 } from '@theme'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 interface HomePageBodyProps {
   cardData: CardProps[]
@@ -30,8 +31,9 @@ interface CardProps {
 }
 
 interface LinkTextProps {
-  text: any
+  text: string
   css?: CSS
+  link: string
 }
 
 const Arrow = styled(ArrowForward, {
@@ -43,15 +45,21 @@ const Arrow = styled(ArrowForward, {
   alignSelf: 'center',
 })
 
-const LinkText: React.FC<LinkTextProps> = ({ text, css, ...props }) => {
+const LinkText: React.FC<LinkTextProps> = ({ text, css, link, ...props }) => {
   return (
-    <Flex as="span" css={{ mt: '$4', flex: '0 0 100%', ...css }} {...props}>
-      {/*@ts-ignore */}
-      <UI size="4" className="linkText" css={{ color: '$blue' }}>
-        {text}
-      </UI>
-      <Arrow className="arrowForward" />
-    </Flex>
+    <Link href={link} passHref>
+      <Flex
+        as="a"
+        css={{ mt: '$4', flex: '0 0 100%', textDecoration: 'none', ...css }}
+        {...props}
+      >
+        {/*@ts-ignore */}
+        <Paragraph ui size="4" className="linkText" css={{ color: '$blue' }}>
+          {text}
+        </Paragraph>
+        <Arrow className="arrowForward" />
+      </Flex>
+    </Link>
   )
 }
 
@@ -65,6 +73,7 @@ const CardBackground = styled(CardBg, {
   willChange: 'transform',
   '&:hover': {
     transform: 'translateY(-2px)',
+    cursor: 'pointer',
     '& .arrowForward': {
       transform: 'translateX($space$1)',
       color: '$B40',
@@ -115,33 +124,26 @@ const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <Box {...props}>
-      <Link href={link || '#'}>
-        <a style={{ textDecoration: 'none', color: 'unset' }}>
-          <CardBackground>
-            <Title className={leftColumn} color="primary" css={{ mt: '0' }}>
-              {title || 'Direct Mail'}
-            </Title>
-            {image ? (
-              <CardImage
-                pictureStyle={{
-                  objectFit: 'cover',
-                }}
-                data={image}
-              />
-            ) : (
-              <CardImage as="div" css={{ backgroundColor: '$B10' }} />
-            )}
-            <Paragraph4
-              className={leftColumn}
-              css={{ color: 'inherit', mt: '$1' }}
-            >
-              {description ||
-                'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.'}
-            </Paragraph4>
-            <LinkText text={linkText || 'Read more'} />
-          </CardBackground>
-        </a>
-      </Link>
+      <CardBackground>
+        <Title className={leftColumn} color="primary" css={{ mt: '0' }}>
+          {title || 'Direct Mail'}
+        </Title>
+        {image ? (
+          <CardImage
+            pictureStyle={{
+              objectFit: 'cover',
+            }}
+            data={image}
+          />
+        ) : (
+          <CardImage as="div" css={{ backgroundColor: '$B10' }} />
+        )}
+        <Paragraph4 className={leftColumn} css={{ color: 'inherit', mt: '$1' }}>
+          {description ||
+            'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.'}
+        </Paragraph4>
+        <LinkText text={linkText || 'Read more'} link={link} />
+      </CardBackground>
     </Box>
   )
 }
@@ -157,6 +159,11 @@ export const HomePageBody: React.FC<HomePageBodyProps> = ({
   featureSections,
   ...props
 }) => {
+  const router = useRouter()
+  const handleClick = (link: string) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    router.push(link)
+  }
   return (
     <Box {...props}>
       <Container css={{ mt: '-$4' }}>
@@ -189,6 +196,7 @@ export const HomePageBody: React.FC<HomePageBodyProps> = ({
                 //@ts-expect-error
                 css={{ '@initial': { gridArea, mt: '$3' }, '@m': { mt: '0' } }}
                 key={c.title}
+                onClick={handleClick(c.link)}
                 {...c}
               />
             )

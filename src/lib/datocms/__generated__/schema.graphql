@@ -2117,7 +2117,7 @@ type PreviewCardRecord {
   description: String
   id: ItemId!
   image: FileField
-  linkTarget: LandingPageV1Record
+  linkTarget: ServiceRecord
   linkText: String
   title: String
   updatedAt: DateTime!
