@@ -1,9 +1,7 @@
 query GetFavicons {
   site: _site {
     favicon: faviconMetaTags {
-      attributes
-      content
-      tag
+      ...metaTagsFragment
     }
   }
 }

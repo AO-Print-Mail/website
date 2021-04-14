@@ -3,7 +3,7 @@ import {
   ResetButton,
   theme,
   CSS,
-  UI1,
+  Paragraph,
   keyframes,
   classes,
 } from '@theme'
@@ -76,7 +76,7 @@ const Spinner = styled('div', {
 })
 
 const ButtonBg = styled(ResetButton, {
-  display: 'flex',
+  display: 'inline-flex',
   position: 'relative',
   color: '$white',
   border: 'none',
@@ -109,7 +109,6 @@ const ButtonBg = styled(ResetButton, {
         color: '$white',
         '&:hover': {
           backgroundColor: '$B50',
-          color: '$white',
         },
       },
       subtle: {
@@ -185,15 +184,14 @@ const ButtonBg = styled(ResetButton, {
     offset: {
       center: {},
       left: {
-        //NEGATIVE MARGIN BEING FIXED IN BETA https://github.com/modulz/stitches/issues/370
-        ml: 'calc(var(--space-2) * -1)',
-        '@m': { ml: 'calc(var(--space-3) * -1)' },
-        '@l': { ml: 'calc(var(--space-4) * -1)' },
+        ml: '-$2',
+        '@m': { ml: '-$3' },
+        '@l': { ml: '-$4' },
       },
       right: {
-        mr: 'calc(var(--space-2) * -1)',
-        '@m': { mr: 'calc(var(--space-3) * -1)' },
-        '@l': { mr: 'calc(var(--space-4) * -1)' },
+        mr: '-$2',
+        '@m': { mr: '-$3' },
+        '@l': { mr: '-$4' },
       },
     },
   },
@@ -248,18 +246,18 @@ const ButtonBg = styled(ResetButton, {
       offset: 'left',
       size: 'small',
       css: {
-        ml: 'calc(var(--space-2) * -1)',
-        '@m': { ml: 'calc(var(--space-2) * -1)' },
-        '@l': { ml: 'calc(var(--space-2) * -1)' },
+        ml: '-$2',
+        '@m': { ml: '-$2' },
+        '@l': { ml: '-$2' },
       },
     },
     {
       offset: 'right',
       size: 'small',
       css: {
-        mr: 'calc(var(--space-2) * -1)',
-        '@m': { mr: 'calc(var(--space-2) * -1)' },
-        '@l': { mr: 'calc(var(--space-2) * -1)' },
+        mr: '-$2',
+        '@m': { mr: '-$2' },
+        '@l': { mr: '-$2' },
       },
     },
     { color: 'success', state: 'disabled', css: { opacity: '50%' } },
@@ -290,10 +288,7 @@ const smallSpacing = (direction: 'left' | 'right') => {
     right: 'marginRight',
   }[direction]
   return {
-    [key]: '$1',
-    '@m': {
-      [key]: '$2',
-    },
+    [key]: '$2',
   }
 }
 
@@ -338,7 +333,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     const _children =
       typeof children === 'string' ? (
-        <UI1 color="unset">{children}</UI1>
+        <Paragraph>{children}</Paragraph>
       ) : (
         children
       )
@@ -362,7 +357,7 @@ interface ButtonIconProps {
 }
 
 const ButtonIcon: React.FC<ButtonIconProps> = ({ children, ...props }) => {
-  const Span = styled('span', { height: '24px' })
+  const Span = styled('span', {})
   const _children = React.isValidElement(children)
     ? React.cloneElement(children, {
         'aria-hidden': true,

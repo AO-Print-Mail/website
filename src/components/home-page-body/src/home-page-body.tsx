@@ -7,9 +7,9 @@ import {
   Box,
   Container,
   Flex,
-  UI3,
   ArrowForward,
   Card as CardBg,
+  UI,
 } from '@theme'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import Link from 'next/link'
@@ -30,7 +30,7 @@ interface CardProps {
 }
 
 interface LinkTextProps {
-  text: string
+  text: any
   css?: CSS
 }
 
@@ -40,15 +40,16 @@ const Arrow = styled(ArrowForward, {
   transition: 'transform 0.2s ease-out',
   color: '$blue',
   ml: '$2',
-  mt: '2px',
+  alignSelf: 'center',
 })
 
-const LinkText: React.FC<LinkTextProps> = ({ text, css }) => {
+const LinkText: React.FC<LinkTextProps> = ({ text, css, ...props }) => {
   return (
-    <Flex css={{ mt: '$4', flex: '0 0 100%', ...css }}>
-      <UI3 className="linkText" css={{ color: '$blue' }}>
+    <Flex as="span" css={{ mt: '$4', flex: '0 0 100%', ...css }} {...props}>
+      {/*@ts-ignore */}
+      <UI size="4" className="linkText" css={{ color: '$blue' }}>
         {text}
-      </UI3>
+      </UI>
       <Arrow className="arrowForward" />
     </Flex>
   )
@@ -110,11 +111,10 @@ const Card: React.FC<CardProps> = ({
   link,
   linkText,
   title,
-  css,
   ...props
 }) => {
   return (
-    <Box css={{ ...css }}>
+    <Box {...props}>
       <Link href={link || '#'}>
         <a style={{ textDecoration: 'none', color: 'unset' }}>
           <CardBackground>
@@ -138,7 +138,7 @@ const Card: React.FC<CardProps> = ({
               {description ||
                 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.'}
             </Paragraph4>
-            <LinkText text={linkText || 'Packaging Fulfilment'} />
+            <LinkText text={linkText || 'Read more'} />
           </CardBackground>
         </a>
       </Link>

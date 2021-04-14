@@ -5,7 +5,7 @@ import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 
@@ -59,7 +59,6 @@ const ParagraphText = ({ data, size }) => {
     />
   )
 }
-
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   const featureSections = data.contentSections.map((f) => (
     <Box
@@ -67,12 +66,12 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       css={{ '@initial': { px: '$2' }, '@m': { px: '$3' }, '@l': { px: '$4' } }}
     >
       <Heading2 color="primary">{f.heading}</Heading2>
-      <ParagraphText data={f.paragraph} size="Paragraph3" />
+      <ParagraphText data={f.paragraph} size="3" />
     </Box>
   ))
   return (
     <Layout
-      canonicalPath=""
+      canonicalPath="https://www.aomail.com.au"
       //@ts-ignore
       metaData={data._seoMetaTags}
     >
@@ -111,8 +110,8 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           />
           <HeroText>
             <Heading1 color="primary">{data.mainHeading}</Heading1>
-            <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
-              <ParagraphText data={data.heroParagraph} size="Paragraph2" />
+            <Box css={{ maxWidth: '60ch' }}>
+              <ParagraphText data={data.heroParagraph} size={'2'} />
             </Box>
           </HeroText>
         </Container>
@@ -133,7 +132,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   )
 }
 
-export async function getStaticProps({ params, preview = false }) {
+export async function getStaticProps({ preview = false }) {
   const { homepage }: GetHomePageQuery = await request({
     query: 'GetHomePage',
     preview,

@@ -4,7 +4,7 @@ import { Layout } from '@components/layout'
 import { GetAboutUsQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
 import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import {
   structuredTextBlockRules,
   ModularContent,
@@ -67,7 +67,7 @@ const ConfiguredText = ({ data, size }) => {
 const AboutUsPage: React.FC<PageProps> = ({ data }) => {
   return (
     <Layout
-      canonicalPath="about"
+      canonicalPath="https://www.aomail.com.au/about"
       //@ts-ignore
       metaData={data._seoMetaTags}
     >
@@ -89,26 +89,28 @@ const AboutUsPage: React.FC<PageProps> = ({ data }) => {
           <HeroText>
             <Heading1 color="primary">{data.mainHeading}</Heading1>
             <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
-              <ConfiguredText data={data.heroParagraph} size="Paragraph2" />
+              <ConfiguredText data={data.heroParagraph} size="2" />
             </Box>
           </HeroText>
         </Container>
       </Box>
       <Container>
-        <ConfiguredText data={data.pageContent} size="Paragraph2" />
+        <ConfiguredText data={data.pageContent} size="2" />
       </Container>
     </Layout>
   )
 }
 
-export async function getStaticProps({ params, preview = false }) {
-  const { aboutUsPage }: GetAboutUsQuery = await request({
+HTMLHeadingElement
+
+export async function getStaticProps({ preview = false }) {
+  const about: GetAboutUsQuery = await request({
     query: 'GetAboutUs',
     preview,
     variables: {},
   })
   const data = {
-    ...aboutUsPage,
+    ...about.aboutUsPage,
   }
 
   return {

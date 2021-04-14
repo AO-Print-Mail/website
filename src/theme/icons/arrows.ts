@@ -33,25 +33,11 @@ export const ChevronDown = createIcon({
     title: 'Chevron Down',
   },
 })
-
-export const Rotateable = styled(ChevronUp, {
-  transformOrigin: '50% 50%',
-  transition: 'transform 0.5s',
-  willChange: 'transform',
-  variants: {
-    direction: {
-      up: {
-        transform: 'rotate(0deg)',
-      },
-      down: {
-        transform: 'rotate(180deg)',
-      },
-      left: {
-        transform: 'rotate(-90deg)',
-      },
-      right: {
-        transform: 'rotate(90deg)',
-      },
-    },
+export const ChevronRight = createIcon({
+  displayName: 'Chevron Right',
+  d: 'M10 6L8.6 7.4l4.6 4.6-4.6 4.6L10 18l6-6-6-6z',
+  viewBox: '0 0 24 24',
+  defaultProps: {
+    title: 'Chevron Right',
   },
 })

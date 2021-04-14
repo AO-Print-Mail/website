@@ -166,7 +166,7 @@ export const FormStepper: React.FC<FormStepsProps> = ({
           )
         }
       />
-      <WorkaroundForm formData={{ ...formData, ...userData }} />
+      <WorkaroundForm name="directMailForm" formFields={formData} />
     </Box>
   )
 }

@@ -1,7 +1,7 @@
 import type { ResponsiveImageType, StructuredTextDocument } from 'react-datocms'
 import { StaffProfileModelBiographyField } from '@lib/datocms/__generated__/types'
 import { Image, StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import {
   styled,
   Flex,
@@ -84,7 +84,7 @@ const Col = styled(Column, {
 })
 
 const BiographyStRules = structuredTextRules({
-  paragraphProps: { size: 'Paragraph4' },
+  paragraphProps: { size: '4' },
 })
 
 export const StaffProfile: React.FC<StaffProfileProps> = ({
@@ -112,7 +112,6 @@ export const StaffProfileCollection: React.FC<StaffProfileCollectionProps> = ({
 }) => {
   return (
     <ColumnWrapper
-      wrap
       css={{
         '@initial': { my: '$6' },
 

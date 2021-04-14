@@ -74,6 +74,131 @@ export type AboutUsPageRecord_SeoMetaTagsArgs = {
   locale?: Maybe<SiteLocale>;
 };
 
+export type BlogArticleModelArticleField = {
+  __typename?: 'BlogArticleModelArticleField';
+  blocks: Array<TwoColumnListRecord>;
+  links: Array<BlogArticleModelArticleLinksField>;
+  value: Scalars['JsonField'];
+};
+
+export type BlogArticleModelArticleLinksField = AboutUsPageRecord | BlogArticleRecord | ServiceRecord;
+
+export type BlogArticleModelFilter = {
+  _createdAt?: Maybe<CreatedAtFilter>;
+  createdAt?: Maybe<CreatedAtFilter>;
+  id?: Maybe<ItemIdFilter>;
+  _firstPublishedAt?: Maybe<PublishedAtFilter>;
+  _publicationScheduledAt?: Maybe<PublishedAtFilter>;
+  _unpublishingScheduledAt?: Maybe<PublishedAtFilter>;
+  _publishedAt?: Maybe<PublishedAtFilter>;
+  _status?: Maybe<StatusFilter>;
+  _updatedAt?: Maybe<UpdatedAtFilter>;
+  updatedAt?: Maybe<UpdatedAtFilter>;
+  _isValid?: Maybe<BooleanFilter>;
+  summary?: Maybe<StructuredTextFilter>;
+  article?: Maybe<StructuredTextFilter>;
+  seoMeta?: Maybe<SeoFilter>;
+  title?: Maybe<StringFilter>;
+  slug?: Maybe<SlugFilter>;
+  mainImage?: Maybe<FileFilter>;
+  OR?: Maybe<Array<Maybe<BlogArticleModelFilter>>>;
+};
+
+export enum BlogArticleModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC'
+}
+
+export type BlogArticleModelSummaryField = {
+  __typename?: 'BlogArticleModelSummaryField';
+  blocks: Array<LandingPageV1Record>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+/** Record of type Blog article (blog_article) */
+export type BlogArticleRecord = {
+  __typename?: 'BlogArticleRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  article?: Maybe<BlogArticleModelArticleField>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  mainImage?: Maybe<FileField>;
+  seoMeta?: Maybe<SeoField>;
+  slug?: Maybe<Scalars['String']>;
+  summary?: Maybe<BlogArticleModelSummaryField>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Blog article (blog_article) */
+export type BlogArticleRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+/** Record of type Blog page (blog_page) */
+export type BlogPageRecord = {
+  __typename?: 'BlogPageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canonicalPath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  pageMeta?: Maybe<SeoField>;
+  pageSlug?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['JsonField']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Blog page (blog_page) */
+export type BlogPageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
 /** Specifies how to filter Boolean fields */
 export type BooleanFilter = {
   /** Search for records with an exact match */
@@ -108,6 +233,37 @@ export type ColorField = {
   green?: Maybe<Scalars['IntType']>;
   hex?: Maybe<Scalars['String']>;
   red?: Maybe<Scalars['IntType']>;
+};
+
+/** Record of type Contact Us page (contact_page) */
+export type ContactPageRecord = {
+  __typename?: 'ContactPageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canonicalPath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  location?: Maybe<LatLonField>;
+  pageMeta?: Maybe<SeoField>;
+  pageSlug?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['JsonField']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Contact Us page (contact_page) */
+export type ContactPageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
 };
 
 /** Specifies how to filter by creation datetime */
@@ -1806,6 +1962,12 @@ export type LandingPageV1RecordPageContentArgs = {
   markdown?: Maybe<Scalars['Boolean']>;
 };
 
+export type LatLonField = {
+  __typename?: 'LatLonField';
+  latitude?: Maybe<Scalars['FloatType']>;
+  longitude?: Maybe<Scalars['FloatType']>;
+};
+
 
 export enum MuxThumbnailFormatType {
   jpg = 'jpg',
@@ -1889,6 +2051,8 @@ export type PublishedAtFilter = {
 export type Query = {
   __typename?: 'Query';
   /** Returns meta information regarding a record collection */
+  _allBlogArticlesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allLandingPageV1sMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allServicesMeta: CollectionMetadata;
@@ -1901,6 +2065,8 @@ export type Query = {
   /** Returns the single instance record */
   aboutUsPage?: Maybe<AboutUsPageRecord>;
   /** Returns a collection of records */
+  allBlogArticles: Array<BlogArticleRecord>;
+  /** Returns a collection of records */
   allLandingPageV1s: Array<LandingPageV1Record>;
   /** Returns a collection of records */
   allServices: Array<ServiceRecord>;
@@ -1908,6 +2074,12 @@ export type Query = {
   allStaffProfiles: Array<StaffProfileRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
+  /** Returns a specific record */
+  blogArticle?: Maybe<BlogArticleRecord>;
+  /** Returns the single instance record */
+  blogPage?: Maybe<BlogPageRecord>;
+  /** Returns the single instance record */
+  contactPage?: Maybe<ContactPageRecord>;
   /** Returns the single instance record */
   homepage?: Maybe<HomepageRecord>;
   /** Returns a specific record */
@@ -1920,6 +2092,13 @@ export type Query = {
   templatePage?: Maybe<TemplatePageRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllBlogArticlesMetaArgs = {
+  locale?: Maybe<SiteLocale>;
+  filter?: Maybe<BlogArticleModelFilter>;
 };
 
 
@@ -1964,6 +2143,16 @@ export type QueryAboutUsPageArgs = {
 
 
 /** The query root for this schema */
+export type QueryAllBlogArticlesArgs = {
+  locale?: Maybe<SiteLocale>;
+  skip?: Maybe<Scalars['IntType']>;
+  first?: Maybe<Scalars['IntType']>;
+  filter?: Maybe<BlogArticleModelFilter>;
+  orderBy?: Maybe<Array<Maybe<BlogArticleModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
 export type QueryAllLandingPageV1sArgs = {
   locale?: Maybe<SiteLocale>;
   skip?: Maybe<Scalars['IntType']>;
@@ -2000,6 +2189,26 @@ export type QueryAllUploadsArgs = {
   first?: Maybe<Scalars['IntType']>;
   filter?: Maybe<UploadFilter>;
   orderBy?: Maybe<Array<Maybe<UploadOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryBlogArticleArgs = {
+  locale?: Maybe<SiteLocale>;
+  filter?: Maybe<BlogArticleModelFilter>;
+  orderBy?: Maybe<Array<Maybe<BlogArticleModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryBlogPageArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type QueryContactPageArgs = {
+  locale?: Maybe<SiteLocale>;
 };
 
 
@@ -2948,6 +3157,93 @@ export type FocalPoint = {
   y?: Maybe<Scalars['FloatType']>;
 };
 
+export type ResponsiveImageFragmentFragment = (
+  { __typename?: 'ResponsiveImage' }
+  & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
+);
+
+export type MetaTagsFragmentFragment = (
+  { __typename?: 'Tag' }
+  & Pick<Tag, 'attributes' | 'content' | 'tag'>
+);
+
+export type FeatureParagraphImageRecordFragmentFragment = (
+  { __typename: 'FeatureParagraphImageRecord' }
+  & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'imagePosition'>
+  & { paragraph?: Maybe<(
+    { __typename?: 'FeatureParagraphImageModelParagraphField' }
+    & Pick<FeatureParagraphImageModelParagraphField, 'value'>
+  )>, image?: Maybe<(
+    { __typename?: 'FileField' }
+    & { responsiveImage?: Maybe<(
+      { __typename?: 'ResponsiveImage' }
+      & ResponsiveImageFragmentFragment
+    )> }
+  )> }
+);
+
+export type CtaRecordFragmentFragment = (
+  { __typename: 'CtaRecord' }
+  & Pick<CtaRecord, 'id' | 'heading' | 'subtext'>
+);
+
+export type FullWidthCalloutRecordFragmentFragment = (
+  { __typename: 'FullWidthCalloutRecord' }
+  & Pick<FullWidthCalloutRecord, 'id' | 'subheading'>
+  & { callout?: Maybe<(
+    { __typename?: 'FullWidthCalloutModelCalloutField' }
+    & Pick<FullWidthCalloutModelCalloutField, 'value'>
+  )> }
+);
+
+export type SideBySidePRecordFragmentFragment = (
+  { __typename: 'SideBySidePRecord' }
+  & Pick<SideBySidePRecord, 'id' | 'leftHeading' | 'rightHeading'>
+  & { leftParagraph?: Maybe<(
+    { __typename?: 'SideBySidePModelLeftParagraphField' }
+    & Pick<SideBySidePModelLeftParagraphField, 'value'>
+  )>, rightParagraph?: Maybe<(
+    { __typename?: 'SideBySidePModelRightParagraphField' }
+    & Pick<SideBySidePModelRightParagraphField, 'value'>
+  )> }
+);
+
+export type StaffProfileCollectionRecordFragmentFragment = (
+  { __typename: 'StaffProfileCollectionRecord' }
+  & Pick<StaffProfileCollectionRecord, 'id'>
+  & { profiles: Array<(
+    { __typename?: 'StaffProfileRecord' }
+    & Pick<StaffProfileRecord, 'id' | 'name' | 'jobTitle' | 'position'>
+    & { biography?: Maybe<(
+      { __typename?: 'StaffProfileModelBiographyField' }
+      & Pick<StaffProfileModelBiographyField, 'value'>
+    )>, avatar?: Maybe<(
+      { __typename?: 'FileField' }
+      & { responsiveImage?: Maybe<(
+        { __typename?: 'ResponsiveImage' }
+        & ResponsiveImageFragmentFragment
+      )> }
+    )> }
+  )> }
+);
+
+export type TwoColumnListRecordFragmentFragment = (
+  { __typename: 'TwoColumnListRecord' }
+  & Pick<TwoColumnListRecord, 'id' | 'serviceList'>
+);
+
+export type TestimonialRecordFragmentFragment = (
+  { __typename: 'TestimonialRecord' }
+  & Pick<TestimonialRecord, 'id' | 'name' | 'testimonial' | 'positionCompany'>
+  & { photo?: Maybe<(
+    { __typename?: 'FileField' }
+    & { responsiveImage?: Maybe<(
+      { __typename?: 'ResponsiveImage' }
+      & ResponsiveImageFragmentFragment
+    )> }
+  )> }
+);
+
 export type GetAboutUsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2958,7 +3254,7 @@ export type GetAboutUsQuery = (
     & Pick<AboutUsPageRecord, 'mainHeading'>
     & { _seoMetaTags: Array<(
       { __typename?: 'Tag' }
-      & Pick<Tag, 'attributes' | 'content' | 'tag'>
+      & MetaTagsFragmentFragment
     )>, heroParagraph?: Maybe<(
       { __typename?: 'AboutUsPageModelHeroParagraphField' }
       & Pick<AboutUsPageModelHeroParagraphField, 'value'>
@@ -2966,59 +3262,118 @@ export type GetAboutUsQuery = (
       { __typename?: 'AboutUsPageModelPageContentField' }
       & Pick<AboutUsPageModelPageContentField, 'value'>
       & { blocks: Array<(
-        { __typename: 'CtaRecord' }
-        & Pick<CtaRecord, 'id' | 'heading' | 'subtext'>
+        { __typename?: 'CtaRecord' }
+        & CtaRecordFragmentFragment
       ) | (
-        { __typename: 'FeatureParagraphImageRecord' }
-        & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'imagePosition'>
-        & { paragraph?: Maybe<(
-          { __typename?: 'FeatureParagraphImageModelParagraphField' }
-          & Pick<FeatureParagraphImageModelParagraphField, 'value'>
-        )>, image?: Maybe<(
-          { __typename?: 'FileField' }
-          & { responsiveImage?: Maybe<(
-            { __typename?: 'ResponsiveImage' }
-            & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
-          )> }
-        )> }
+        { __typename?: 'FeatureParagraphImageRecord' }
+        & FeatureParagraphImageRecordFragmentFragment
       ) | (
-        { __typename: 'FullWidthCalloutRecord' }
-        & Pick<FullWidthCalloutRecord, 'id' | 'subheading'>
-        & { callout?: Maybe<(
-          { __typename?: 'FullWidthCalloutModelCalloutField' }
-          & Pick<FullWidthCalloutModelCalloutField, 'value'>
-        )> }
+        { __typename?: 'FullWidthCalloutRecord' }
+        & FullWidthCalloutRecordFragmentFragment
       ) | (
-        { __typename: 'SideBySidePRecord' }
-        & Pick<SideBySidePRecord, 'id' | 'leftHeading' | 'rightHeading'>
-        & { leftParagraph?: Maybe<(
-          { __typename?: 'SideBySidePModelLeftParagraphField' }
-          & Pick<SideBySidePModelLeftParagraphField, 'value'>
-        )>, rightParagraph?: Maybe<(
-          { __typename?: 'SideBySidePModelRightParagraphField' }
-          & Pick<SideBySidePModelRightParagraphField, 'value'>
-        )> }
+        { __typename?: 'SideBySidePRecord' }
+        & SideBySidePRecordFragmentFragment
       ) | (
-        { __typename: 'StaffProfileCollectionRecord' }
-        & Pick<StaffProfileCollectionRecord, 'id'>
-        & { profiles: Array<(
-          { __typename?: 'StaffProfileRecord' }
-          & Pick<StaffProfileRecord, 'id' | 'name' | 'jobTitle' | 'position'>
-          & { biography?: Maybe<(
-            { __typename?: 'StaffProfileModelBiographyField' }
-            & Pick<StaffProfileModelBiographyField, 'value'>
-          )>, avatar?: Maybe<(
-            { __typename?: 'FileField' }
-            & { responsiveImage?: Maybe<(
-              { __typename?: 'ResponsiveImage' }
-              & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
-            )> }
-          )> }
-        )> }
+        { __typename?: 'StaffProfileCollectionRecord' }
+        & StaffProfileCollectionRecordFragmentFragment
       ) | (
-        { __typename: 'TwoColumnListRecord' }
-        & Pick<TwoColumnListRecord, 'id' | 'serviceList'>
+        { __typename?: 'TwoColumnListRecord' }
+        & TwoColumnListRecordFragmentFragment
       )> }
+    )> }
+  )> }
+);
+
+export type GetBlogPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBlogPageQuery = (
+  { __typename?: 'Query' }
+  & { blogPage?: Maybe<(
+    { __typename?: 'BlogPageRecord' }
+    & Pick<BlogPageRecord, 'id' | 'pageSlug' | 'title'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & MetaTagsFragmentFragment
+    )> }
+  )> }
+);
+
+export type GetBlogPostSummariesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBlogPostSummariesQuery = (
+  { __typename?: 'Query' }
+  & { allBlogArticles: Array<(
+    { __typename?: 'BlogArticleRecord' }
+    & Pick<BlogArticleRecord, 'id' | 'slug' | 'title'>
+    & { mainImage?: Maybe<(
+      { __typename?: 'FileField' }
+      & { responsiveImage?: Maybe<(
+        { __typename?: 'ResponsiveImage' }
+        & ResponsiveImageFragmentFragment
+      )> }
+    )>, summary?: Maybe<(
+      { __typename?: 'BlogArticleModelSummaryField' }
+      & Pick<BlogArticleModelSummaryField, 'value'>
+    )> }
+  )> }
+);
+
+export type GetBlogPostQueryVariables = Exact<{
+  pageSlug: Scalars['String'];
+}>;
+
+
+export type GetBlogPostQuery = (
+  { __typename?: 'Query' }
+  & { blogArticle?: Maybe<(
+    { __typename?: 'BlogArticleRecord' }
+    & Pick<BlogArticleRecord, 'id' | 'slug' | 'title' | 'updatedAt'>
+    & { mainImage?: Maybe<(
+      { __typename?: 'FileField' }
+      & { responsiveImage?: Maybe<(
+        { __typename?: 'ResponsiveImage' }
+        & ResponsiveImageFragmentFragment
+      )> }
+    )>, _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & MetaTagsFragmentFragment
+    )>, article?: Maybe<(
+      { __typename?: 'BlogArticleModelArticleField' }
+      & Pick<BlogArticleModelArticleField, 'value'>
+    )>, summary?: Maybe<(
+      { __typename?: 'BlogArticleModelSummaryField' }
+      & Pick<BlogArticleModelSummaryField, 'value'>
+    )> }
+  )> }
+);
+
+export type GetBlogPostPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBlogPostPathsQuery = (
+  { __typename?: 'Query' }
+  & { allBlogArticles: Array<(
+    { __typename?: 'BlogArticleRecord' }
+    & Pick<BlogArticleRecord, 'id' | 'slug'>
+  )> }
+);
+
+export type GetContactPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetContactPageQuery = (
+  { __typename?: 'Query' }
+  & { contactPage?: Maybe<(
+    { __typename?: 'ContactPageRecord' }
+    & Pick<ContactPageRecord, 'id' | 'pageSlug' | 'title'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & MetaTagsFragmentFragment
+    )>, location?: Maybe<(
+      { __typename?: 'LatLonField' }
+      & Pick<LatLonField, 'latitude' | 'longitude'>
     )> }
   )> }
 );
@@ -3032,7 +3387,7 @@ export type GetFaviconsQuery = (
     { __typename?: 'Site' }
     & { favicon: Array<(
       { __typename?: 'Tag' }
-      & Pick<Tag, 'attributes' | 'content' | 'tag'>
+      & MetaTagsFragmentFragment
     )> }
   ) }
 );
@@ -3058,7 +3413,7 @@ export type GetHomePageQuery = (
         { __typename?: 'FileField' }
         & { responsiveImage?: Maybe<(
           { __typename?: 'ResponsiveImage' }
-          & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
+          & ResponsiveImageFragmentFragment
         )> }
       )> }
     )>>>, contentSections?: Maybe<Array<Maybe<(
@@ -3089,10 +3444,10 @@ export type GetLandingPageQuery = (
   )> }
 );
 
-export type GetLandingPageSlugsQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetLandingPagesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetLandingPageSlugsQuery = (
+export type GetLandingPagesQuery = (
   { __typename?: 'Query' }
   & { allLandingPageV1s: Array<(
     { __typename?: 'LandingPageV1Record' }
@@ -3112,53 +3467,29 @@ export type GetServicePageQuery = (
     & Pick<ServiceRecord, 'canonicalPath' | 'id' | 'mainHeading' | 'illustration'>
     & { _seoMetaTags: Array<(
       { __typename?: 'Tag' }
-      & Pick<Tag, 'attributes' | 'content' | 'tag'>
+      & MetaTagsFragmentFragment
     )>, heroParagraph?: Maybe<(
       { __typename?: 'ServiceModelHeroParagraphField' }
       & Pick<ServiceModelHeroParagraphField, 'value'>
     )>, leftRightParagraphs?: Maybe<Array<Maybe<(
-      { __typename: 'FeatureParagraphImageRecord' }
-      & Pick<FeatureParagraphImageRecord, 'id' | 'heading' | 'cropImage' | 'imagePosition'>
-      & { paragraph?: Maybe<(
-        { __typename?: 'FeatureParagraphImageModelParagraphField' }
-        & Pick<FeatureParagraphImageModelParagraphField, 'value'>
-      )>, image?: Maybe<(
-        { __typename?: 'FileField' }
-        & { responsiveImage?: Maybe<(
-          { __typename?: 'ResponsiveImage' }
-          & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
-        )> }
-      )> }
+      { __typename?: 'FeatureParagraphImageRecord' }
+      & FeatureParagraphImageRecordFragmentFragment
     )>>>, pageContent?: Maybe<(
       { __typename?: 'ServiceModelPageContentField' }
       & Pick<ServiceModelPageContentField, 'value'>
       & { blocks: Array<{ __typename?: 'FeatureParagraphImageRecord' } | { __typename?: 'SideBySidePRecord' } | { __typename?: 'TestimonialRecord' } | (
-        { __typename: 'TwoColumnListRecord' }
-        & Pick<TwoColumnListRecord, 'id' | 'serviceList'>
+        { __typename?: 'TwoColumnListRecord' }
+        & TwoColumnListRecordFragmentFragment
       )> }
     )>, modularContent?: Maybe<Array<Maybe<(
-      { __typename: 'CtaRecord' }
-      & Pick<CtaRecord, 'id' | 'heading' | 'subtext'>
+      { __typename?: 'CtaRecord' }
+      & CtaRecordFragmentFragment
     ) | (
-      { __typename: 'SideBySidePRecord' }
-      & Pick<SideBySidePRecord, 'id' | 'leftHeading' | 'rightHeading'>
-      & { leftParagraph?: Maybe<(
-        { __typename?: 'SideBySidePModelLeftParagraphField' }
-        & Pick<SideBySidePModelLeftParagraphField, 'value'>
-      )>, rightParagraph?: Maybe<(
-        { __typename?: 'SideBySidePModelRightParagraphField' }
-        & Pick<SideBySidePModelRightParagraphField, 'value'>
-      )> }
+      { __typename?: 'SideBySidePRecord' }
+      & SideBySidePRecordFragmentFragment
     ) | (
-      { __typename: 'TestimonialRecord' }
-      & Pick<TestimonialRecord, 'id' | 'name' | 'testimonial' | 'positionCompany'>
-      & { photo?: Maybe<(
-        { __typename?: 'FileField' }
-        & { responsiveImage?: Maybe<(
-          { __typename?: 'ResponsiveImage' }
-          & Pick<ResponsiveImage, 'srcSet' | 'webpSrcSet' | 'sizes' | 'src' | 'width' | 'height' | 'aspectRatio' | 'alt' | 'title' | 'base64'>
-        )> }
-      )> }
+      { __typename?: 'TestimonialRecord' }
+      & TestimonialRecordFragmentFragment
     )>>> }
   )> }
 );
@@ -3174,14 +3505,122 @@ export type GetServicePagesQuery = (
   )> }
 );
 
-
+export const MetaTagsFragmentFragmentDoc = gql`
+    fragment metaTagsFragment on Tag {
+  attributes
+  content
+  tag
+}
+    `;
+export const ResponsiveImageFragmentFragmentDoc = gql`
+    fragment responsiveImageFragment on ResponsiveImage {
+  srcSet
+  webpSrcSet
+  sizes
+  src
+  width
+  height
+  aspectRatio
+  alt
+  title
+  base64
+}
+    `;
+export const FeatureParagraphImageRecordFragmentFragmentDoc = gql`
+    fragment featureParagraphImageRecordFragment on FeatureParagraphImageRecord {
+  __typename
+  id
+  heading
+  cropImage
+  imagePosition
+  paragraph {
+    value
+  }
+  image {
+    responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
+      ...responsiveImageFragment
+    }
+  }
+}
+    ${ResponsiveImageFragmentFragmentDoc}`;
+export const CtaRecordFragmentFragmentDoc = gql`
+    fragment ctaRecordFragment on CtaRecord {
+  __typename
+  id
+  heading
+  subtext
+}
+    `;
+export const FullWidthCalloutRecordFragmentFragmentDoc = gql`
+    fragment fullWidthCalloutRecordFragment on FullWidthCalloutRecord {
+  id
+  __typename
+  subheading
+  callout {
+    value
+  }
+}
+    `;
+export const SideBySidePRecordFragmentFragmentDoc = gql`
+    fragment sideBySidePRecordFragment on SideBySidePRecord {
+  id
+  __typename
+  leftHeading
+  leftParagraph {
+    value
+  }
+  rightHeading
+  rightParagraph {
+    value
+  }
+}
+    `;
+export const StaffProfileCollectionRecordFragmentFragmentDoc = gql`
+    fragment staffProfileCollectionRecordFragment on StaffProfileCollectionRecord {
+  id
+  __typename
+  profiles {
+    id
+    name
+    jobTitle
+    position
+    biography {
+      value
+    }
+    avatar {
+      responsiveImage(imgixParams: {fit: fill, w: 288, h: 288, auto: format}) {
+        ...responsiveImageFragment
+      }
+    }
+  }
+}
+    ${ResponsiveImageFragmentFragmentDoc}`;
+export const TwoColumnListRecordFragmentFragmentDoc = gql`
+    fragment twoColumnListRecordFragment on TwoColumnListRecord {
+  __typename
+  id
+  serviceList
+}
+    `;
+export const TestimonialRecordFragmentFragmentDoc = gql`
+    fragment testimonialRecordFragment on TestimonialRecord {
+  __typename
+  id
+  name
+  testimonial
+  positionCompany
+  photo {
+    responsiveImage(imgixParams: {fit: fill, w: 240, h: 240, auto: format}) {
+      ...responsiveImageFragment
+    }
+  }
+}
+    ${ResponsiveImageFragmentFragmentDoc}`;
 export const GetAboutUsDocument = gql`
     query GetAboutUs {
   aboutUsPage {
     _seoMetaTags {
-      attributes
-      content
-      tag
+      ...metaTagsFragment
     }
     mainHeading
     heroParagraph {
@@ -3191,103 +3630,121 @@ export const GetAboutUsDocument = gql`
       value
       blocks {
         ... on CtaRecord {
-          __typename
-          id
-          heading
-          subtext
+          ...ctaRecordFragment
         }
         ... on FeatureParagraphImageRecord {
-          __typename
-          id
-          heading
-          cropImage
-          imagePosition
-          paragraph {
-            value
-          }
-          image {
-            responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
-              srcSet
-              webpSrcSet
-              sizes
-              src
-              width
-              height
-              aspectRatio
-              alt
-              title
-              base64
-            }
-          }
+          ...featureParagraphImageRecordFragment
         }
         ... on FullWidthCalloutRecord {
-          id
-          __typename
-          subheading
-          callout {
-            value
-          }
+          ...fullWidthCalloutRecordFragment
         }
         ... on SideBySidePRecord {
-          id
-          __typename
-          leftHeading
-          leftParagraph {
-            value
-          }
-          rightHeading
-          rightParagraph {
-            value
-          }
+          ...sideBySidePRecordFragment
         }
         ... on StaffProfileCollectionRecord {
-          id
-          __typename
-          profiles {
-            id
-            name
-            jobTitle
-            position
-            biography {
-              value
-            }
-            avatar {
-              responsiveImage(imgixParams: {fit: fill, w: 288, h: 288, auto: format}) {
-                srcSet
-                webpSrcSet
-                sizes
-                src
-                width
-                height
-                aspectRatio
-                alt
-                title
-                base64
-              }
-            }
-          }
+          ...staffProfileCollectionRecordFragment
         }
         ... on TwoColumnListRecord {
-          __typename
-          id
-          serviceList
+          ...twoColumnListRecordFragment
         }
       }
     }
   }
 }
+    ${MetaTagsFragmentFragmentDoc}
+${CtaRecordFragmentFragmentDoc}
+${FeatureParagraphImageRecordFragmentFragmentDoc}
+${FullWidthCalloutRecordFragmentFragmentDoc}
+${SideBySidePRecordFragmentFragmentDoc}
+${StaffProfileCollectionRecordFragmentFragmentDoc}
+${TwoColumnListRecordFragmentFragmentDoc}`;
+export const GetBlogPageDocument = gql`
+    query GetBlogPage {
+  blogPage {
+    id
+    _seoMetaTags {
+      ...metaTagsFragment
+    }
+    pageSlug
+    title
+  }
+}
+    ${MetaTagsFragmentFragmentDoc}`;
+export const GetBlogPostSummariesDocument = gql`
+    query getBlogPostSummaries {
+  allBlogArticles {
+    id
+    slug
+    title
+    mainImage {
+      responsiveImage(imgixParams: {fit: crop, w: 336, h: 192, auto: format}) {
+        ...responsiveImageFragment
+      }
+    }
+    summary {
+      value
+    }
+  }
+}
+    ${ResponsiveImageFragmentFragmentDoc}`;
+export const GetBlogPostDocument = gql`
+    query getBlogPost($pageSlug: String!) {
+  blogArticle(filter: {slug: {eq: $pageSlug}}) {
+    id
+    slug
+    title
+    mainImage {
+      responsiveImage(imgixParams: {fit: crop, w: 800, h: 400, auto: format}) {
+        ...responsiveImageFragment
+      }
+    }
+    _seoMetaTags {
+      ...metaTagsFragment
+    }
+    updatedAt
+    article {
+      value
+    }
+    summary {
+      value
+    }
+  }
+}
+    ${ResponsiveImageFragmentFragmentDoc}
+${MetaTagsFragmentFragmentDoc}`;
+export const GetBlogPostPathsDocument = gql`
+    query getBlogPostPaths {
+  allBlogArticles {
+    id
+    slug
+  }
+}
     `;
+export const GetContactPageDocument = gql`
+    query GetContactPage {
+  contactPage {
+    id
+    _seoMetaTags {
+      ...metaTagsFragment
+    }
+    pageSlug
+    title
+    location {
+      latitude
+      longitude
+    }
+  }
+}
+    ${MetaTagsFragmentFragmentDoc}`;
 export const GetFaviconsDocument = gql`
     query GetFavicons {
   site: _site {
     favicon: faviconMetaTags {
-      attributes
-      content
-      tag
+      ...metaTagsFragment
     }
   }
 }
-    `;
+    ${MetaTagsFragmentFragmentDoc}`;
 export const GetHomePageDocument = gql`
     query GetHomePage {
   homepage {
@@ -3305,16 +3762,7 @@ export const GetHomePageDocument = gql`
       description
       image {
         responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
-          srcSet
-          webpSrcSet
-          sizes
-          src
-          width
-          height
-          aspectRatio
-          alt
-          title
-          base64
+          ...responsiveImageFragment
         }
       }
       linkText
@@ -3327,7 +3775,7 @@ export const GetHomePageDocument = gql`
     }
   }
 }
-    `;
+    ${ResponsiveImageFragmentFragmentDoc}`;
 export const GetLandingPageDocument = gql`
     query GetLandingPage($pageSlug: String!) {
   landingPageV1(filter: {pageSlug: {eq: $pageSlug}}) {
@@ -3343,8 +3791,8 @@ export const GetLandingPageDocument = gql`
   }
 }
     `;
-export const GetLandingPageSlugsDocument = gql`
-    query GetLandingPageSlugs {
+export const GetLandingPagesDocument = gql`
+    query GetLandingPages {
   allLandingPageV1s {
     pageSlug
   }
@@ -3354,9 +3802,7 @@ export const GetServicePageDocument = gql`
     query GetServicePage($pageSlug: String!) {
   service(filter: {pageSlug: {eq: $pageSlug}}) {
     _seoMetaTags {
-      attributes
-      content
-      tag
+      ...metaTagsFragment
     }
     canonicalPath
     id
@@ -3367,84 +3813,36 @@ export const GetServicePageDocument = gql`
     }
     leftRightParagraphs {
       ... on FeatureParagraphImageRecord {
-        __typename
-        id
-        heading
-        cropImage
-        imagePosition
-        paragraph {
-          value
-        }
-        image {
-          responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
-            srcSet
-            webpSrcSet
-            sizes
-            src
-            width
-            height
-            aspectRatio
-            alt
-            title
-            base64
-          }
-        }
+        ...featureParagraphImageRecordFragment
       }
     }
     pageContent {
       value
       blocks {
         ... on TwoColumnListRecord {
-          __typename
-          id
-          serviceList
+          ...twoColumnListRecordFragment
         }
       }
     }
     modularContent {
       ... on SideBySidePRecord {
-        __typename
-        id
-        leftHeading
-        leftParagraph {
-          value
-        }
-        rightHeading
-        rightParagraph {
-          value
-        }
+        ...sideBySidePRecordFragment
       }
       ... on TestimonialRecord {
-        __typename
-        id
-        name
-        testimonial
-        positionCompany
-        photo {
-          responsiveImage(imgixParams: {fit: fill, w: 240, h: 240, auto: format}) {
-            srcSet
-            webpSrcSet
-            sizes
-            src
-            width
-            height
-            aspectRatio
-            alt
-            title
-            base64
-          }
-        }
+        ...testimonialRecordFragment
       }
       ... on CtaRecord {
-        __typename
-        id
-        heading
-        subtext
+        ...ctaRecordFragment
       }
     }
   }
 }
-    `;
+    ${MetaTagsFragmentFragmentDoc}
+${FeatureParagraphImageRecordFragmentFragmentDoc}
+${TwoColumnListRecordFragmentFragmentDoc}
+${SideBySidePRecordFragmentFragmentDoc}
+${TestimonialRecordFragmentFragmentDoc}
+${CtaRecordFragmentFragmentDoc}`;
 export const GetServicePagesDocument = gql`
     query GetServicePages {
   allServices {
@@ -3462,6 +3860,21 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetAboutUs(variables?: GetAboutUsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAboutUsQuery> {
       return withWrapper(() => client.request<GetAboutUsQuery>(print(GetAboutUsDocument), variables, requestHeaders));
     },
+    GetBlogPage(variables?: GetBlogPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPageQuery> {
+      return withWrapper(() => client.request<GetBlogPageQuery>(print(GetBlogPageDocument), variables, requestHeaders));
+    },
+    getBlogPostSummaries(variables?: GetBlogPostSummariesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostSummariesQuery> {
+      return withWrapper(() => client.request<GetBlogPostSummariesQuery>(print(GetBlogPostSummariesDocument), variables, requestHeaders));
+    },
+    getBlogPost(variables: GetBlogPostQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostQuery> {
+      return withWrapper(() => client.request<GetBlogPostQuery>(print(GetBlogPostDocument), variables, requestHeaders));
+    },
+    getBlogPostPaths(variables?: GetBlogPostPathsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostPathsQuery> {
+      return withWrapper(() => client.request<GetBlogPostPathsQuery>(print(GetBlogPostPathsDocument), variables, requestHeaders));
+    },
+    GetContactPage(variables?: GetContactPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetContactPageQuery> {
+      return withWrapper(() => client.request<GetContactPageQuery>(print(GetContactPageDocument), variables, requestHeaders));
+    },
     GetFavicons(variables?: GetFaviconsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetFaviconsQuery> {
       return withWrapper(() => client.request<GetFaviconsQuery>(print(GetFaviconsDocument), variables, requestHeaders));
     },
@@ -3471,8 +3884,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     GetLandingPage(variables: GetLandingPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPageQuery> {
       return withWrapper(() => client.request<GetLandingPageQuery>(print(GetLandingPageDocument), variables, requestHeaders));
     },
-    GetLandingPageSlugs(variables?: GetLandingPageSlugsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPageSlugsQuery> {
-      return withWrapper(() => client.request<GetLandingPageSlugsQuery>(print(GetLandingPageSlugsDocument), variables, requestHeaders));
+    GetLandingPages(variables?: GetLandingPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPagesQuery> {
+      return withWrapper(() => client.request<GetLandingPagesQuery>(print(GetLandingPagesDocument), variables, requestHeaders));
     },
     GetServicePage(variables: GetServicePageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetServicePageQuery> {
       return withWrapper(() => client.request<GetServicePageQuery>(print(GetServicePageDocument), variables, requestHeaders));

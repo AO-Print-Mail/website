@@ -39,6 +39,123 @@ type AboutUsPageRecord {
   updatedAt: DateTime!
 }
 
+type BlogArticleModelArticleField {
+  blocks: [TwoColumnListRecord!]!
+  links: [BlogArticleModelArticleLinksField!]!
+  value: JsonField!
+}
+
+union BlogArticleModelArticleLinksField = AboutUsPageRecord | BlogArticleRecord | ServiceRecord
+
+input BlogArticleModelFilter {
+  _createdAt: CreatedAtFilter
+  createdAt: CreatedAtFilter
+  id: ItemIdFilter
+  _firstPublishedAt: PublishedAtFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _updatedAt: UpdatedAtFilter
+  updatedAt: UpdatedAtFilter
+  _isValid: BooleanFilter
+  summary: StructuredTextFilter
+  article: StructuredTextFilter
+  seoMeta: SeoFilter
+  title: StringFilter
+  slug: SlugFilter
+  mainImage: FileFilter
+  OR: [BlogArticleModelFilter]
+}
+
+enum BlogArticleModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  title_ASC
+  title_DESC
+}
+
+type BlogArticleModelSummaryField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+"""Record of type Blog article (blog_article)"""
+type BlogArticleRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  article: BlogArticleModelArticleField
+  createdAt: DateTime!
+  id: ItemId!
+  mainImage: FileField
+  seoMeta: SeoField
+  slug: String
+  summary: BlogArticleModelSummaryField
+  title: String
+  updatedAt: DateTime!
+}
+
+"""Record of type Blog page (blog_page)"""
+type BlogPageRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  canonicalPath: String
+  createdAt: DateTime!
+  id: ItemId!
+  pageMeta: SeoField
+  pageSlug: String
+  preview: JsonField
+  title: String
+  updatedAt: DateTime!
+}
+
 """Specifies how to filter Boolean fields"""
 input BooleanFilter {
   """Search for records with an exact match"""
@@ -73,6 +190,34 @@ type ColorField {
   green: IntType
   hex: String
   red: IntType
+}
+
+"""Record of type Contact Us page (contact_page)"""
+type ContactPageRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  canonicalPath: String
+  createdAt: DateTime!
+  id: ItemId!
+  location: LatLonField
+  pageMeta: SeoField
+  pageSlug: String
+  preview: JsonField
+  title: String
+  updatedAt: DateTime!
 }
 
 """Specifies how to filter by creation datetime"""
@@ -1902,6 +2047,11 @@ type LandingPageV1Record {
   updatedAt: DateTime!
 }
 
+type LatLonField {
+  latitude: FloatType
+  longitude: FloatType
+}
+
 scalar MetaTagAttributes
 
 enum MuxThumbnailFormatType {
@@ -2008,6 +2158,13 @@ input PublishedAtFilter {
 """The query root for this schema"""
 type Query {
   """Returns meta information regarding a record collection"""
+  _allBlogArticlesMeta(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: BlogArticleModelFilter
+  ): CollectionMetadata!
+
+  """Returns meta information regarding a record collection"""
   _allLandingPageV1sMeta(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -2046,6 +2203,20 @@ type Query {
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
   ): AboutUsPageRecord
+
+  """Returns a collection of records"""
+  allBlogArticles(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Limit the number of results"""
+    first: IntType = 20
+    filter: BlogArticleModelFilter
+    orderBy: [BlogArticleModelOrderBy] = [_updatedAt_DESC]
+  ): [BlogArticleRecord!]!
 
   """Returns a collection of records"""
   allLandingPageV1s(
@@ -2102,6 +2273,26 @@ type Query {
     filter: UploadFilter
     orderBy: [UploadOrderBy] = [_createdAt_DESC]
   ): [FileField!]!
+
+  """Returns a specific record"""
+  blogArticle(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: BlogArticleModelFilter
+    orderBy: [BlogArticleModelOrderBy] = [_updatedAt_DESC]
+  ): BlogArticleRecord
+
+  """Returns the single instance record"""
+  blogPage(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): BlogPageRecord
+
+  """Returns the single instance record"""
+  contactPage(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): ContactPageRecord
 
   """Returns the single instance record"""
   homepage(

@@ -23,18 +23,20 @@ const HighlightedText = styled('span', {
 })
 
 const rulez = [
-  renderRule(isParagraph, (node) => <CalloutText>{node.children}</CalloutText>),
+  renderRule(isParagraph, ({ key, children }) => (
+    <CalloutText key={key}>{children}</CalloutText>
+  )),
   renderRule(
     function (node: Node): node is Span {
       return node.type === 'span' && !!node.marks?.includes('strong')
     },
-    ({ node }) => <BoldText>{node.value}</BoldText>
+    ({ node, key }) => <BoldText key={key}>{node.value}</BoldText>
   ),
   renderRule(
     function (node: Node): node is Span {
       return node.type === 'span' && !!node.marks?.includes('highlight')
     },
-    ({ node }) => <HighlightedText>{node.value}</HighlightedText>
+    ({ node, key }) => <HighlightedText key={key}>{node.value}</HighlightedText>
   ),
 ]
 

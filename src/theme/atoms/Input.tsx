@@ -1,5 +1,6 @@
 import { forwardRef, ReactNode } from 'react'
-import { styled, Paragraph5, UI2, UI3, Box, CSS, ThemeVariants } from '..'
+import { styled, Paragraph5, Box, CSS } from '..'
+import { Paragraph3 } from './typography'
 
 interface InputProps
   extends React.ComponentProps<typeof TextAreaStyles & typeof InputStyles> {
@@ -14,8 +15,7 @@ interface InputProps
   css?: CSS
 }
 
-export const InputStyles = styled(UI3, {
-  transtion: 'border-color 0.1s',
+export const InputStyles = styled(Paragraph3, {
   willChange: 'border-color',
   backgroundColor: '$DA10',
   px: 'calc($3 - 2px)',
@@ -66,13 +66,12 @@ export const InputStyles = styled(UI3, {
 
 export const TextAreaStyles = styled(InputStyles, {
   lineHeight: 1.5,
-
   variants: {
     resizeVertical: { true: { resize: 'vertical' } },
   },
 })
 
-const LabelStyles = styled(Paragraph5, { color: '$DA70', display: 'block' })
+export const Label = styled(Paragraph5, { color: '$DA70', display: 'block' })
 
 export const TextArea = forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => <TextAreaStyles ref={ref} {...props} as="textarea" />
@@ -115,9 +114,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }
     return (
       <Box css={{ mt: '$3' }} {...props}>
-        <LabelStyles as="label" htmlFor={id}>
+        <Label as="label" htmlFor={id}>
           {children}
-        </LabelStyles>
+        </Label>
         {_input}
         {error && (
           <Box

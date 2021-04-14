@@ -3,16 +3,13 @@ import {
   ContentWrapper,
   Container,
   Logo,
-  Paragraph4,
-  Paragraph5,
+  Paragraph,
   Phone,
   CovidSafeBanner,
   css,
   CSS,
   Flex,
   Box,
-  UI2,
-  UI3,
   Facebook,
   LinkedIn,
 } from '@theme'
@@ -123,13 +120,13 @@ const Column = styled('section', {
   '@l': { px: '$4', width: '16.6%' },
 })
 
-const SectionLabel = styled(UI3, {
+const SectionLabel = styled(Paragraph, {
   ml: '$2',
-  color: '$LA35',
+  color: '$LA60',
   fontWeight: '600',
 })
 
-const LinkText = styled(Paragraph5, {
+const LinkText = styled(Paragraph, {
   color: '$N30',
   p: '$2',
   mt: '$1',
@@ -144,9 +141,9 @@ const Section: React.FC<{ data: typeof staticData[0]['menu_items'] }> = ({
   return (
     <Box css={{ mt: '$3' }}>
       {data.map((d) => (
-        <Link href={d.link} key={d.name}>
+        <Link href={d.link} key={d.name} prefetch={false}>
           <a style={{ textDecoration: 'none' }}>
-            <LinkText>{d.name}</LinkText>
+            <LinkText size="5">{d.name}</LinkText>
           </a>
         </Link>
       ))}
@@ -190,7 +187,9 @@ export const MainFooter: React.FC<MainFooterProps> = ({
               as="section"
               css={{ mt: '$4' }}
             >
-              <SectionLabel as="h3">{section.section_label}</SectionLabel>
+              <SectionLabel size="4" as="h3">
+                {section.section_label}
+              </SectionLabel>
               <Section data={section.menu_items} />
             </Column>
           ))}
@@ -240,11 +239,11 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                 size="small"
                 css={{ mt: '$3', color: '$LA60' }}
               >
-                <Paragraph5 color="light" css={{ my: 0 }}>
+                <Paragraph size="5" color="light" css={{ my: 0 }}>
                   9 Clearview Pl
                   <br />
                   Brookvale NSW 2100
-                </Paragraph5>
+                </Paragraph>
               </Button>
               <Button
                 as="a"
@@ -255,9 +254,9 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                 size="small"
                 css={{ mt: '$2', color: '$LA60' }}
               >
-                <Paragraph5 color="light" css={{ my: 0 }}>
+                <Paragraph size="5" color="light" css={{ my: 0 }}>
                   (02) 9645 6777
-                </Paragraph5>
+                </Paragraph>
               </Button>
               <Flex css={{ justifyContent: 'flex-start' }}>
                 <IconButton
@@ -292,11 +291,12 @@ export const MainFooter: React.FC<MainFooterProps> = ({
               }}
             >
               <CovidSafeBanner css={{ m: '0', width: '100%' }} />
-              <Paragraph5
+              <Paragraph
+                size="5"
                 css={{ color: '$LA40', mt: '$3', '@m': { textAlign: 'right' } }}
               >
                 &copy; ANO PTY Ltd. All rights reserved.
-              </Paragraph5>
+              </Paragraph>
             </Column>
           </Flex>
         </Container>
@@ -336,11 +336,11 @@ export const Footer: React.FC<FooterProps> = ({
             offset="left"
             css={{ mt: '$3', color: '$LA60' }}
           >
-            <Paragraph4 color="light" css={{ my: 0 }}>
+            <Paragraph size="4" color="light" css={{ my: 0 }}>
               9 Clearview Pl
               <br />
               Brookvale NSW 2100
-            </Paragraph4>
+            </Paragraph>
           </Button>
           <Button
             as="a"
@@ -383,11 +383,12 @@ export const Footer: React.FC<FooterProps> = ({
       </LayoutGrid>
       <ContentWrapper css={{ backgroundColor: '$black' }}>
         <Container>
-          <Paragraph5
-            css={{ color: '$LA40', my: '$2', pb: `$1`, ...footerCss }}
+          <Paragraph
+            size="5"
+            css={{ color: '$LA60', my: '$2', pb: `$1`, ...footerCss }}
           >
             &copy; ANO PTY Ltd. All rights reserved.
-          </Paragraph5>
+          </Paragraph>
         </Container>
       </ContentWrapper>
     </>

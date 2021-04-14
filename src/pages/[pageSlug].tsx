@@ -16,7 +16,7 @@ import {
 } from '@lib/datocms/__generated__/types'
 import { ThenArg } from '@utils/src'
 import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredTextRules'
+import { structuredTextRules } from '@lib/datocms/structuredText'
 import {
   structuredTextBlockRules,
   ModularContent,
@@ -127,8 +127,8 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
         >
           <HeroText>
             <Heading1 color="primary">{data.mainHeading}</Heading1>
-            <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
-              <ConfiguredText data={data.heroParagraph} size="Paragraph2" />
+            <Box css={{ maxWidth: '60ch', mt: '$4' }}>
+              <ConfiguredText data={data.heroParagraph} size="2" />
             </Box>
           </HeroText>
         </Container>
@@ -152,7 +152,7 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
               data={data.pageContent}
               customRules={structuredTextRules({
                 paragraphProps: {
-                  size: 'Paragraph3',
+                  size: '3',
                   color: 'primary',
                 },
               })}
