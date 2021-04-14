@@ -180,7 +180,7 @@ export const HomePageBody: React.FC<HomePageBodyProps> = ({
               gridTemplateAreas: `
               'contentleft contentleft contentleft contentleft contentleft card1 card1 card1 card2 card2 card2 .' 
               'contentleft contentleft contentleft contentleft contentleft . . . card3 card3 card3 .'
-              'contentleft contentleft contentleft contentleft contentleft . contentright contentright contentright contentright contentright .'
+              'contentleft contentleft contentleft contentleft contentleft contentright contentright contentright contentright contentright contentright .'
               `,
               gridTemplateColumns:
                 '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',

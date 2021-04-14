@@ -7,7 +7,7 @@ import {
   Checkbox,
   classes,
   TextArea,
-  Label,
+  InputLabel,
   Heading,
   Paragraph,
 } from '@theme'
@@ -225,9 +225,13 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             )}
           />
           <Box css={{ mt: '$3' }}>
-            <Label as="label" size="4" htmlFor="additionalInformation">
+            <InputLabel
+              as="InputLabel"
+              size="4"
+              htmlFor="additionalInformation"
+            >
               Message (optional)
-            </Label>
+            </InputLabel>
             <TextArea
               resizeVertical
               id="additionalInformation"
