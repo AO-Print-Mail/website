@@ -8,7 +8,7 @@ export const Heading = styled('h1', {
   fontFamily: '$heading',
   fontSize: '$h1m',
   marginTop: '1em',
-  lineHeight: '$2',
+  lineHeight: '$1',
   marginBottom: '$3',
   letterSpacing: '$xcosy',
   '@m': {
@@ -59,6 +59,7 @@ export const Heading = styled('h1', {
         fontSize: '$h4m',
         //marginBottom: '0.26em',
         letterSpacing: '$cosy',
+        lineHeight: '$2',
         '@m': {
           fontSize: '$h4t',
         },
@@ -72,6 +73,7 @@ export const Heading = styled('h1', {
         fontSize: '$h5m',
         //marginBottom: '0.24em',
         letterSpacing: '$cosy',
+        lineHeight: '$2',
         '@m': {
           fontSize: '$h5t',
         },
@@ -84,6 +86,7 @@ export const Heading = styled('h1', {
         fontSize: '$h6m',
         //marginBottom: '-0.26em',
         letterSpacing: '$cosy',
+        lineHeight: '$2',
         '@m': {
           fontSize: '$h6t',
         },

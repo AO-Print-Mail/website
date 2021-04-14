@@ -124,7 +124,10 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       </Box>
       <Box css={{ my: '$7' }}>
         <Container>
-          <QuoteCta css={{ mb: '$7' }} />
+          <QuoteCta
+            css={{ mb: '$7' }}
+            paragraph="Get a competitive quote for your next job now. Our friendly team of experts are standing by to complete yourproject with ease and to make the process as seamless as possible."
+          />
           <ClientLogoBanner />
         </Container>
       </Box>

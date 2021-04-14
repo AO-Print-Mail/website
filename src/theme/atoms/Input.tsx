@@ -71,7 +71,10 @@ export const TextAreaStyles = styled(InputStyles, {
   },
 })
 
-export const Label = styled(Paragraph5, { color: '$DA70', display: 'block' })
+export const InputLabel = styled(Paragraph5, {
+  color: '$DA70',
+  display: 'block',
+})
 
 export const TextArea = forwardRef<HTMLInputElement, InputProps>(
   (props, ref) => <TextAreaStyles ref={ref} {...props} as="textarea" />
@@ -114,9 +117,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }
     return (
       <Box css={{ mt: '$3' }} {...props}>
-        <Label as="label" htmlFor={id}>
+        <InputLabel as="label" htmlFor={id}>
           {children}
-        </Label>
+        </InputLabel>
         {_input}
         {error && (
           <Box
