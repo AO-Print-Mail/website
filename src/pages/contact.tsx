@@ -19,7 +19,6 @@ import { GetContactPageQuery } from '@lib/datocms/__generated__/types'
 import { Button } from '@components/button'
 import Image from 'next/image'
 import { ContactForm } from '@components/contact-form'
-import { yupResolver } from '@hookform/resolvers/yup'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -122,7 +121,9 @@ const Contact: React.FC<PageProps> = ({ data }) => {
           }}
         >
           <Column css={{ pb: '$5', '@l': { flex: '0 0 40%' } }}>
-            <TextHolder>
+            <TextHolder
+              css={{ '@l': { display: 'flex', flexFlow: 'column ' } }}
+            >
               <Box
                 css={{
                   '@m': { width: '50%', float: 'left' },
@@ -156,6 +157,11 @@ const Contact: React.FC<PageProps> = ({ data }) => {
               </Box>
               <Box
                 css={{
+                  display: 'flex',
+                  flexFlow: 'column nowrap',
+                  alignItems: 'flex-start',
+                  flex: '1 1',
+                  justifyContents: 'flex-end',
                   '@m': { width: '50%', float: 'left' },
                   '@l': { width: 'auto', float: 'none' },
                 }}

@@ -1,16 +1,22 @@
 export interface NetlifyWorkaroundFormProps {
-  formData: { [k: string]: any }
+  formFields: { [k: string]: any }
+  name: string
 }
 import { classes } from '@theme'
+import { useStateMachine } from 'little-state-machine'
 
 export const NetlifyWorkaroundForm: React.FC<NetlifyWorkaroundFormProps> = ({
-  formData,
+  formFields,
+  name,
 }) => {
+  const {
+    state: { userData },
+  } = useStateMachine({})
   return (
     <form
       method="POST"
       data-netlify="true"
-      name="directMailForm"
+      name={name}
       aria-hidden="true"
       hidden
       className={classes.visuallyHidden()}
@@ -20,9 +26,9 @@ export const NetlifyWorkaroundForm: React.FC<NetlifyWorkaroundFormProps> = ({
         hidden
         aria-hidden="true"
         name="form-name"
-        value="directMailForm"
+        value={name}
       />
-      {Object.entries(formData).map(([name, value]) => (
+      {Object.entries({ ...userData, ...formFields }).map(([name, value]) => (
         <input
           type="hidden"
           hidden
