@@ -13,10 +13,12 @@ import {
   StructuredText,
   StructuredTextDocument,
 } from 'react-datocms'
+
 interface ArticleSummaryProps {
   title: string
-  lastUpdated: string
+  lastUpdated?: string
   summary: StructuredTextDocument
+  breadcrumbLinks?: { name: string; url: string }[]
 }
 
 const Title = styled(Heading, {
@@ -40,14 +42,15 @@ export const ArticleSummary: React.FC<ArticleSummaryProps> = ({
   title,
   lastUpdated,
   summary,
+  breadcrumbLinks,
   ...props
 }) => {
   return (
     <Box {...props}>
-      <Breadcrumbs links={[{ name: 'Blog', url: '/blog' }]} />
-      <Spacer size="small" />
+      {breadcrumbLinks && <Breadcrumbs links={breadcrumbLinks} />}
+      <Spacer size={breadcrumbLinks ? 'small' : 'large'} />
       <Title as="h1">{title}</Title>
-      <Updated>Last updated {lastUpdated}</Updated>
+      {lastUpdated && <Updated>Last updated {lastUpdated}</Updated>}
       <StructuredText data={summary} customRules={structuredTextRulez} />
     </Box>
   )

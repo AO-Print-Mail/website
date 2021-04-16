@@ -143,9 +143,11 @@ export const LinkCard: React.FC<LinkCardProps> = ({
         <Summary data={description} />
         <CtaLink text="Read more" />
       </Flex>
-      <ImgWrapper>
-        <Img data={image} />
-      </ImgWrapper>
+      {image && (
+        <ImgWrapper>
+          <Img data={image} />
+        </ImgWrapper>
+      )}
     </CardBackground>
   )
 }

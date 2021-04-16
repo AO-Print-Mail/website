@@ -169,7 +169,7 @@ export type BlogArticleRecord_SeoMetaTagsArgs = {
   locale?: Maybe<SiteLocale>;
 };
 
-/** Record of type Blog page (blog_page) */
+/** Record of type Blog list page (blog_page) */
 export type BlogPageRecord = {
   __typename?: 'BlogPageRecord';
   _createdAt: Scalars['DateTime'];
@@ -194,7 +194,7 @@ export type BlogPageRecord = {
 };
 
 
-/** Record of type Blog page (blog_page) */
+/** Record of type Blog list page (blog_page) */
 export type BlogPageRecord_SeoMetaTagsArgs = {
   locale?: Maybe<SiteLocale>;
 };
@@ -1968,6 +1968,133 @@ export type LatLonField = {
   longitude?: Maybe<Scalars['FloatType']>;
 };
 
+/** Record of type Legal list page (legal_list_page) */
+export type LegalListPageRecord = {
+  __typename?: 'LegalListPageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canonicalPath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  pageMeta?: Maybe<SeoField>;
+  pageSlug?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['JsonField']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Legal list page (legal_list_page) */
+export type LegalListPageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+export type LegalPageModelFilter = {
+  _createdAt?: Maybe<CreatedAtFilter>;
+  createdAt?: Maybe<CreatedAtFilter>;
+  id?: Maybe<ItemIdFilter>;
+  _firstPublishedAt?: Maybe<PublishedAtFilter>;
+  _publicationScheduledAt?: Maybe<PublishedAtFilter>;
+  _unpublishingScheduledAt?: Maybe<PublishedAtFilter>;
+  _publishedAt?: Maybe<PublishedAtFilter>;
+  _status?: Maybe<StatusFilter>;
+  _updatedAt?: Maybe<UpdatedAtFilter>;
+  updatedAt?: Maybe<UpdatedAtFilter>;
+  _isValid?: Maybe<BooleanFilter>;
+  legalText?: Maybe<StructuredTextFilter>;
+  summary?: Maybe<StructuredTextFilter>;
+  pageMeta?: Maybe<SeoFilter>;
+  title?: Maybe<StringFilter>;
+  preview?: Maybe<JsonFilter>;
+  canonicalPath?: Maybe<SlugFilter>;
+  legalPageSlug?: Maybe<SlugFilter>;
+  OR?: Maybe<Array<Maybe<LegalPageModelFilter>>>;
+};
+
+export type LegalPageModelLegalTextField = {
+  __typename?: 'LegalPageModelLegalTextField';
+  blocks: Array<LandingPageV1Record>;
+  links: Array<LegalPageModelLegalTextLinksField>;
+  value: Scalars['JsonField'];
+};
+
+export type LegalPageModelLegalTextLinksField = ContactPageRecord | LegalPageRecord;
+
+export enum LegalPageModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC'
+}
+
+export type LegalPageModelSummaryField = {
+  __typename?: 'LegalPageModelSummaryField';
+  blocks: Array<LandingPageV1Record>;
+  links: Array<LandingPageV1Record>;
+  value: Scalars['JsonField'];
+};
+
+/** Record of type Legal page (legal_page) */
+export type LegalPageRecord = {
+  __typename?: 'LegalPageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canonicalPath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  legalPageSlug?: Maybe<Scalars['String']>;
+  legalText?: Maybe<LegalPageModelLegalTextField>;
+  pageMeta?: Maybe<SeoField>;
+  preview?: Maybe<Scalars['JsonField']>;
+  summary?: Maybe<LegalPageModelSummaryField>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Legal page (legal_page) */
+export type LegalPageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
 
 export enum MuxThumbnailFormatType {
   jpg = 'jpg',
@@ -2055,6 +2182,8 @@ export type Query = {
   /** Returns meta information regarding a record collection */
   _allLandingPageV1sMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allLegalPagesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allServicesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allStaffProfilesMeta: CollectionMetadata;
@@ -2068,6 +2197,8 @@ export type Query = {
   allBlogArticles: Array<BlogArticleRecord>;
   /** Returns a collection of records */
   allLandingPageV1s: Array<LandingPageV1Record>;
+  /** Returns a collection of records */
+  allLegalPages: Array<LegalPageRecord>;
   /** Returns a collection of records */
   allServices: Array<ServiceRecord>;
   /** Returns a collection of records */
@@ -2084,6 +2215,10 @@ export type Query = {
   homepage?: Maybe<HomepageRecord>;
   /** Returns a specific record */
   landingPageV1?: Maybe<LandingPageV1Record>;
+  /** Returns the single instance record */
+  legalListPage?: Maybe<LegalListPageRecord>;
+  /** Returns a specific record */
+  legalPage?: Maybe<LegalPageRecord>;
   /** Returns a specific record */
   service?: Maybe<ServiceRecord>;
   /** Returns a specific record */
@@ -2106,6 +2241,13 @@ export type Query_AllBlogArticlesMetaArgs = {
 export type Query_AllLandingPageV1sMetaArgs = {
   locale?: Maybe<SiteLocale>;
   filter?: Maybe<LandingPageV1ModelFilter>;
+};
+
+
+/** The query root for this schema */
+export type Query_AllLegalPagesMetaArgs = {
+  locale?: Maybe<SiteLocale>;
+  filter?: Maybe<LegalPageModelFilter>;
 };
 
 
@@ -2159,6 +2301,16 @@ export type QueryAllLandingPageV1sArgs = {
   first?: Maybe<Scalars['IntType']>;
   filter?: Maybe<LandingPageV1ModelFilter>;
   orderBy?: Maybe<Array<Maybe<LandingPageV1ModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryAllLegalPagesArgs = {
+  locale?: Maybe<SiteLocale>;
+  skip?: Maybe<Scalars['IntType']>;
+  first?: Maybe<Scalars['IntType']>;
+  filter?: Maybe<LegalPageModelFilter>;
+  orderBy?: Maybe<Array<Maybe<LegalPageModelOrderBy>>>;
 };
 
 
@@ -2223,6 +2375,20 @@ export type QueryLandingPageV1Args = {
   locale?: Maybe<SiteLocale>;
   filter?: Maybe<LandingPageV1ModelFilter>;
   orderBy?: Maybe<Array<Maybe<LandingPageV1ModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+export type QueryLegalListPageArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type QueryLegalPageArgs = {
+  locale?: Maybe<SiteLocale>;
+  filter?: Maybe<LegalPageModelFilter>;
+  orderBy?: Maybe<Array<Maybe<LegalPageModelOrderBy>>>;
 };
 
 
@@ -3458,6 +3624,66 @@ export type GetLandingPagesQuery = (
   )> }
 );
 
+export type GetLegalListPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLegalListPageQuery = (
+  { __typename?: 'Query' }
+  & { legalPage?: Maybe<(
+    { __typename?: 'LegalPageRecord' }
+    & Pick<LegalPageRecord, 'id' | 'legalPageSlug' | 'title'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & MetaTagsFragmentFragment
+    )> }
+  )> }
+);
+
+export type GetLegalPageQueryVariables = Exact<{
+  legalPageSlug: Scalars['String'];
+}>;
+
+
+export type GetLegalPageQuery = (
+  { __typename?: 'Query' }
+  & { legalPage?: Maybe<(
+    { __typename?: 'LegalPageRecord' }
+    & Pick<LegalPageRecord, 'id' | 'legalPageSlug' | 'title'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & MetaTagsFragmentFragment
+    )>, summary?: Maybe<(
+      { __typename?: 'LegalPageModelSummaryField' }
+      & Pick<LegalPageModelSummaryField, 'value'>
+    )>, legalText?: Maybe<(
+      { __typename?: 'LegalPageModelLegalTextField' }
+      & Pick<LegalPageModelLegalTextField, 'value'>
+      & { links: Array<(
+        { __typename: 'ContactPageRecord' }
+        & Pick<ContactPageRecord, 'id' | 'pageSlug'>
+      ) | (
+        { __typename: 'LegalPageRecord' }
+        & Pick<LegalPageRecord, 'id' | 'legalPageSlug'>
+      )> }
+    )> }
+  )> }
+);
+
+export type GetLegalPagesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetLegalPagesQuery = (
+  { __typename?: 'Query' }
+  & { allLegalPages: Array<(
+    { __typename?: 'LegalPageRecord' }
+    & Pick<LegalPageRecord, 'id' | 'legalPageSlug' | 'title'>
+    & { summary?: Maybe<(
+      { __typename?: 'LegalPageModelSummaryField' }
+      & Pick<LegalPageModelSummaryField, 'value'>
+    )> }
+  )> }
+);
+
 export type GetServicePageQueryVariables = Exact<{
   pageSlug: Scalars['String'];
 }>;
@@ -3803,6 +4029,61 @@ export const GetLandingPagesDocument = gql`
   }
 }
     `;
+export const GetLegalListPageDocument = gql`
+    query GetLegalListPage {
+  legalPage {
+    id
+    _seoMetaTags {
+      ...metaTagsFragment
+    }
+    legalPageSlug
+    title
+  }
+}
+    ${MetaTagsFragmentFragmentDoc}`;
+export const GetLegalPageDocument = gql`
+    query GetLegalPage($legalPageSlug: String!) {
+  legalPage(filter: {legalPageSlug: {eq: $legalPageSlug}}) {
+    id
+    legalPageSlug
+    title
+    _seoMetaTags {
+      ...metaTagsFragment
+    }
+    summary {
+      value
+    }
+    legalText {
+      value
+      links {
+        __typename
+        ... on ContactPageRecord {
+          id
+          __typename
+          pageSlug
+        }
+        ... on LegalPageRecord {
+          id
+          __typename
+          legalPageSlug
+        }
+      }
+    }
+  }
+}
+    ${MetaTagsFragmentFragmentDoc}`;
+export const GetLegalPagesDocument = gql`
+    query GetLegalPages {
+  allLegalPages {
+    id
+    legalPageSlug
+    title
+    summary {
+      value
+    }
+  }
+}
+    `;
 export const GetServicePageDocument = gql`
     query GetServicePage($pageSlug: String!) {
   service(filter: {pageSlug: {eq: $pageSlug}}) {
@@ -3891,6 +4172,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetLandingPages(variables?: GetLandingPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPagesQuery> {
       return withWrapper(() => client.request<GetLandingPagesQuery>(print(GetLandingPagesDocument), variables, requestHeaders));
+    },
+    GetLegalListPage(variables?: GetLegalListPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalListPageQuery> {
+      return withWrapper(() => client.request<GetLegalListPageQuery>(print(GetLegalListPageDocument), variables, requestHeaders));
+    },
+    GetLegalPage(variables: GetLegalPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalPageQuery> {
+      return withWrapper(() => client.request<GetLegalPageQuery>(print(GetLegalPageDocument), variables, requestHeaders));
+    },
+    GetLegalPages(variables?: GetLegalPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalPagesQuery> {
+      return withWrapper(() => client.request<GetLegalPagesQuery>(print(GetLegalPagesDocument), variables, requestHeaders));
     },
     GetServicePage(variables: GetServicePageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetServicePageQuery> {
       return withWrapper(() => client.request<GetServicePageQuery>(print(GetServicePageDocument), variables, requestHeaders));

@@ -21,6 +21,7 @@ import { Button } from '@components/button'
 import { m as motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import { useStateMachine } from 'little-state-machine'
 
 const WorkaroundForm = dynamic(() =>
   import('@components/netlify-workaraound-form').then(
@@ -102,13 +103,17 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
   const [submitting, setSubmitting] = useState(false)
   const [firstName, setFirstname] = useState('')
 
+  const {
+    state: { userData },
+  } = useStateMachine({})
+
   const onSubmit = (data: typeof inputs) => {
     setSubmitting(true)
     setFirstname(data.firstName)
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contactUsForm', ...data }),
+      body: encode({ 'form-name': 'contactUsForm', ...data, ...userData }),
     })
       .then(() => {
         const newPath = router.pathname.replace('[pageSlug]', '/contact')

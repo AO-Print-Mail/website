@@ -129,7 +129,7 @@ type BlogArticleRecord {
   updatedAt: DateTime!
 }
 
-"""Record of type Blog page (blog_page)"""
+"""Record of type Blog list page (blog_page)"""
 type BlogPageRecord {
   _createdAt: DateTime!
   _firstPublishedAt: DateTime
@@ -2052,6 +2052,125 @@ type LatLonField {
   longitude: FloatType
 }
 
+"""Record of type Legal list page (legal_list_page)"""
+type LegalListPageRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  canonicalPath: String
+  createdAt: DateTime!
+  id: ItemId!
+  pageMeta: SeoField
+  pageSlug: String
+  preview: JsonField
+  title: String
+  updatedAt: DateTime!
+}
+
+input LegalPageModelFilter {
+  _createdAt: CreatedAtFilter
+  createdAt: CreatedAtFilter
+  id: ItemIdFilter
+  _firstPublishedAt: PublishedAtFilter
+  _publicationScheduledAt: PublishedAtFilter
+  _unpublishingScheduledAt: PublishedAtFilter
+  _publishedAt: PublishedAtFilter
+  _status: StatusFilter
+  _updatedAt: UpdatedAtFilter
+  updatedAt: UpdatedAtFilter
+  _isValid: BooleanFilter
+  legalText: StructuredTextFilter
+  summary: StructuredTextFilter
+  pageMeta: SeoFilter
+  title: StringFilter
+  preview: JsonFilter
+  canonicalPath: SlugFilter
+  legalPageSlug: SlugFilter
+  OR: [LegalPageModelFilter]
+}
+
+type LegalPageModelLegalTextField {
+  blocks: [LandingPageV1Record!]!
+  links: [LegalPageModelLegalTextLinksField!]!
+  value: JsonField!
+}
+
+union LegalPageModelLegalTextLinksField = ContactPageRecord | LegalPageRecord
+
+enum LegalPageModelOrderBy {
+  _createdAt_ASC
+  _createdAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  _firstPublishedAt_ASC
+  _firstPublishedAt_DESC
+  _publicationScheduledAt_ASC
+  _publicationScheduledAt_DESC
+  _unpublishingScheduledAt_ASC
+  _unpublishingScheduledAt_DESC
+  _publishedAt_ASC
+  _publishedAt_DESC
+  _status_ASC
+  _status_DESC
+  _updatedAt_ASC
+  _updatedAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  _isValid_ASC
+  _isValid_DESC
+  title_ASC
+  title_DESC
+}
+
+type LegalPageModelSummaryField {
+  blocks: [LandingPageV1Record!]!
+  links: [LandingPageV1Record!]!
+  value: JsonField!
+}
+
+"""Record of type Legal page (legal_page)"""
+type LegalPageRecord {
+  _createdAt: DateTime!
+  _firstPublishedAt: DateTime
+  _isValid: BooleanType!
+  _modelApiKey: String!
+  _publicationScheduledAt: DateTime
+  _publishedAt: DateTime
+
+  """SEO meta tags"""
+  _seoMetaTags(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): [Tag!]!
+  _status: ItemStatus!
+  _unpublishingScheduledAt: DateTime
+  _updatedAt: DateTime!
+  canonicalPath: String
+  createdAt: DateTime!
+  id: ItemId!
+  legalPageSlug: String
+  legalText: LegalPageModelLegalTextField
+  pageMeta: SeoField
+  preview: JsonField
+  summary: LegalPageModelSummaryField
+  title: String
+  updatedAt: DateTime!
+}
+
 scalar MetaTagAttributes
 
 enum MuxThumbnailFormatType {
@@ -2172,6 +2291,13 @@ type Query {
   ): CollectionMetadata!
 
   """Returns meta information regarding a record collection"""
+  _allLegalPagesMeta(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: LegalPageModelFilter
+  ): CollectionMetadata!
+
+  """Returns meta information regarding a record collection"""
   _allServicesMeta(
     """The locale to use to fetch the field's content"""
     locale: SiteLocale
@@ -2231,6 +2357,20 @@ type Query {
     filter: LandingPageV1ModelFilter
     orderBy: [LandingPageV1ModelOrderBy] = [_updatedAt_DESC]
   ): [LandingPageV1Record!]!
+
+  """Returns a collection of records"""
+  allLegalPages(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+
+    """Skip the first results"""
+    skip: IntType
+
+    """Limit the number of results"""
+    first: IntType = 20
+    filter: LegalPageModelFilter
+    orderBy: [LegalPageModelOrderBy] = [_updatedAt_DESC]
+  ): [LegalPageRecord!]!
 
   """Returns a collection of records"""
   allServices(
@@ -2307,6 +2447,20 @@ type Query {
     filter: LandingPageV1ModelFilter
     orderBy: [LandingPageV1ModelOrderBy] = [_updatedAt_DESC]
   ): LandingPageV1Record
+
+  """Returns the single instance record"""
+  legalListPage(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+  ): LegalListPageRecord
+
+  """Returns a specific record"""
+  legalPage(
+    """The locale to use to fetch the field's content"""
+    locale: SiteLocale
+    filter: LegalPageModelFilter
+    orderBy: [LegalPageModelOrderBy] = [_updatedAt_DESC]
+  ): LegalPageRecord
 
   """Returns a specific record"""
   service(

@@ -6,7 +6,7 @@ export const encode = (obj: { [key: string]: any }): string =>
       ([key, val]) =>
         `${
           typeof val === 'string'
-            ? `${encodeURI(key)}=${encodeURI(val)}`
+            ? `${encodeURIComponent(key)}=${encodeURIComponent(val)}`
             : val !== null && typeof val === 'object'
             ? `${encode(val)}`
             : ''

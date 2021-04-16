@@ -1,21 +1,21 @@
 import { ThenArg } from '@utils/src'
 import { request } from '@lib/datocms/datocms'
 import {
-  GetBlogPostQuery,
-  GetBlogPostPathsQuery,
+  GetLegalPagesQuery,
+  GetLegalPageQuery,
 } from '@lib/datocms/__generated__/types'
 import { Layout } from '@components/layout'
 import {
   Box,
   Container,
   TextHolder,
-  styled,
   ColumnWrapper,
   Column,
+  Paragraph,
 } from '@theme'
 import { ArticleSummary } from '@components/article-summary'
-import { Image } from 'react-datocms'
-import dynamic from 'next/dynamic'
+import { renderRule } from 'react-datocms'
+import { isHeading as isHeadingGuard } from 'datocms-structured-text-utils'
 import { StructuredText } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 
@@ -23,27 +23,52 @@ interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
-const Img = styled(Image, {
-  position: 'relative',
-  width: '100vw',
-  mx: '-50vw',
-  left: '50%',
-  right: '50%',
-  top: '-$4',
-  order: '-1',
-  '@l': {
-    br: '$2',
-    width: 'auto',
-    mx: '0',
-    left: 'auto',
-    right: 'auto',
-  },
-})
+const isHeading = () =>
+  renderRule(isHeadingGuard, ({ node, key, children }) => {
+    switch (node.level) {
+      case 1:
+        return (
+          <Paragraph size="1" color="primary" semiBold as="h1" key={key}>
+            {children}
+          </Paragraph>
+        )
+      case 2:
+        return (
+          <Paragraph size="1" color="primary" semiBold as="h2" key={key}>
+            {children}
+          </Paragraph>
+        )
+      case 3:
+        return (
+          <Paragraph size="2" color="primary" semiBold as="h3" key={key}>
+            {children}
+          </Paragraph>
+        )
+      case 4:
+        return (
+          <Paragraph size="2" color="primary" semiBold as="h4" key={key}>
+            {children}
+          </Paragraph>
+        )
+      case 5:
+        return (
+          <Paragraph size="2" color="primary" semiBold as="h5" key={key}>
+            {children}
+          </Paragraph>
+        )
+      case 6:
+        return (
+          <Paragraph size="2" color="primary" semiBold as="h6" key={key}>
+            {children}
+          </Paragraph>
+        )
+    }
+  })
 
-const Blog: React.FC<PageProps> = ({ data }) => {
+const LegalPage: React.FC<PageProps> = ({ data }) => {
   return (
     <Layout
-      canonicalPath={`https://www.aomail.com.au/blog/${data.slug}`}
+      canonicalPath={`https://www.aomail.com.au/legal/${data.legalPageSlug}`}
       //@ts-expect-error
       metaData={data._seoMetaTags}
       layoutElement="article"
@@ -71,12 +96,11 @@ const Blog: React.FC<PageProps> = ({ data }) => {
             }}
           >
             <ArticleSummary
-              title={data.title}
-              lastUpdated={data.lastUpdated}
-              summary={data.summary.value}
-              breadcrumbLinks={[{ name: 'Blog', url: '/blog' }]}
-              //@ts-expect-error
               as="section"
+              breadcrumbLinks={[{ name: 'Legal', url: '/legal' }]}
+              title={data.title}
+              //@ts-expect-error
+              summary={data.summary}
             />
           </TextHolder>
         </Container>
@@ -96,14 +120,14 @@ const Blog: React.FC<PageProps> = ({ data }) => {
             >
               <TextHolder css={{ maxWidth: '80ch', alignSelf: 'center' }}>
                 <StructuredText
-                  data={data.article.value}
+                  data={data.legalText}
                   config={{
                     paragraphProps: { size: '4', color: 'primary' },
                     headingProps: { css: { mt: '$6' }, fromSize: '3' },
+                    ruleOverrides: { isHeading },
                   }}
                 />
               </TextHolder>
-              <Img data={data.mainImage.responsiveImage} />
             </Column>
             <Column
               as="aside"
@@ -126,41 +150,29 @@ const Blog: React.FC<PageProps> = ({ data }) => {
 
 export async function getStaticPaths() {
   //@ts-expect-error
-  const { allBlogArticles }: GetBlogPostPathsQuery = await request({
-    query: 'getBlogPostPaths',
+  const { allLegalPages }: GetLegalPagesQuery = await request({
+    query: 'GetLegalPages',
   })
   return {
-    paths: allBlogArticles.map(({ slug }) => ({ params: { slug } })),
+    paths: allLegalPages.map(({ legalPageSlug }) => ({
+      params: { legalPageSlug },
+    })),
     fallback: false,
   }
 }
 
 export async function getStaticProps({ preview = false, params }) {
-  const { blogArticle }: GetBlogPostQuery = await request({
-    query: 'getBlogPost',
+  const { legalPage }: GetLegalPageQuery = await request({
+    query: 'GetLegalPage',
     preview,
-    variables: { pageSlug: params.slug },
+    variables: { legalPageSlug: params.legalPageSlug },
   })
-  const englishOrdinalRules = new Intl.PluralRules('en', { type: 'ordinal' })
-  const suffixes = {
-    one: 'st',
-    two: 'nd',
-    few: 'rd',
-    other: 'th',
-  }
-  function appendOrdinal(number: number) {
-    return number + suffixes[englishOrdinalRules.select(number)]
-  }
-  const date = new Date(blogArticle.updatedAt)
-  const lastUpdated = `${appendOrdinal(
-    date.getDate()
-  )} ${date.toLocaleString('default', { month: 'long' })} ${date.getFullYear()}`
 
   return {
     props: {
-      data: { ...blogArticle, lastUpdated },
+      data: { ...legalPage },
     },
   }
 }
 
-export default Blog
+export default LegalPage
