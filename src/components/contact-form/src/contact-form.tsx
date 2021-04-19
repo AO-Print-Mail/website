@@ -113,7 +113,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contactUsForm', ...data, ...userData }),
+      body: encode({ 'form-name': FORM_NAME, ...data, ...userData }),
     })
       .then(() => {
         const newPath = router.pathname.replace('[pageSlug]', '/contact')
@@ -230,17 +230,13 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             )}
           />
           <Box css={{ mt: '$3' }}>
-            <InputLabel
-              as="InputLabel"
-              size="4"
-              htmlFor="additionalInformation"
-            >
+            <InputLabel as="InputLabel" size="4" htmlFor="message">
               Message (optional)
             </InputLabel>
             <TextArea
               resizeVertical
-              id="additionalInformation"
-              name="additionalInformation"
+              id="message"
+              name="message"
               rows={8}
               cols={30}
               placeholder="Please include any additional information that is applicable to your job."

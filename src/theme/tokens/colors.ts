@@ -11,7 +11,7 @@ export const colors = {
   red: '#F92539',
   //neutrals
   N10: '#F7F7F7',
-  N20: '#EAEDED',
+  N20: '#EFF0F0',
   N30: '#DBDCDD',
   N40: '#C8CACC',
   N50: '#B8BBC0',

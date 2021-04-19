@@ -3988,7 +3988,7 @@ export const GetHomePageDocument = gql`
       title
       description
       image {
-        responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
+        responsiveImage(imgixParams: {fit: crop, w: 320, h: 240, auto: format}) {
           ...responsiveImageFragment
         }
       }

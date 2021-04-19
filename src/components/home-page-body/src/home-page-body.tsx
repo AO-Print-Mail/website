@@ -14,6 +14,8 @@ import {
 import { Image, ResponsiveImageType } from 'react-datocms'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { ComponentProps } from 'react'
+import { StyledInstance } from '@stitches/react'
 
 interface HomePageBodyProps {
   cardData: CardProps[]
@@ -84,10 +86,11 @@ const CardBackground = styled(CardBg, {
   },
   '@l': {
     flexFlow: 'column nowrap',
+    alignItems: 'stretch',
   },
 })
 
-const CardImage = styled(Image, {
+const CardImage: React.FC<ComponentProps<typeof Image>> = styled(Image, {
   position: 'absolute !important',
   width: '33%',
   right: '$4',
@@ -95,8 +98,9 @@ const CardImage = styled(Image, {
   '@l': {
     position: 'relative !important',
     right: 'unset',
-    width: 'unset',
-    flex: '1 1 $sizes$10',
+    width: 'auto',
+    flex: '1 0 $sizes$10',
+    alignSelf: 'stretch',
   },
   '@xl': {
     flexBasis: '$11',
@@ -128,16 +132,11 @@ const Card: React.FC<CardProps> = ({
         <Title className={leftColumn} color="primary" css={{ mt: '0' }}>
           {title || 'Direct Mail'}
         </Title>
-        {image ? (
-          <CardImage
-            pictureStyle={{
-              objectFit: 'cover',
-            }}
-            data={image}
-          />
-        ) : (
-          <CardImage as="div" css={{ backgroundColor: '$B10' }} />
-        )}
+        <CardImage
+          pictureStyle={{ objectFit: 'cover', width: '100%', height: 'auto' }}
+          data={image}
+        />
+
         <Paragraph4 className={leftColumn} css={{ color: 'inherit', mt: '$1' }}>
           {description ||
             'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.'}
