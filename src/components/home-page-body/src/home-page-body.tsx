@@ -133,7 +133,11 @@ const Card: React.FC<CardProps> = ({
           {title || 'Direct Mail'}
         </Title>
         <CardImage
-          pictureStyle={{ objectFit: 'cover', width: '100%', height: 'auto' }}
+          pictureStyle={{
+            objectFit: 'contain',
+            minWidth: '100%',
+            height: '100%',
+          }}
           data={image}
         />
 
