@@ -7,12 +7,7 @@ import { request } from '@lib/datocms/datocms'
 import { renderMetaTags, SeoMetaTagType } from 'react-datocms'
 import { GetFaviconsQuery } from '@lib/datocms/__generated__/types'
 import { HeaderMain } from '@components/header-main'
-import {
-  useCycle,
-  useViewportScroll,
-  useMotionValue,
-  m as motion,
-} from 'framer-motion'
+import { useViewportScroll, useMotionValue, m as motion } from 'framer-motion'
 
 interface LayoutProps {
   title?: string
@@ -34,7 +29,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
   return { props: data }
 }
 
-export const OverlayContext = createContext(false)
+export const LayoutScrollContext = createContext({
+  scrollLock: false,
+  toggleScrollLock: undefined,
+})
 
 export const Layout: React.FC<LayoutProps> = ({
   title,
@@ -48,9 +46,9 @@ export const Layout: React.FC<LayoutProps> = ({
   landing,
   ...props
 }) => {
-  const [menuIsOpen, toggleMenu] = useCycle(false, true)
+  const [scrollLock, setScrollLock] = useState(false)
   const [showNav, setShowNav] = useState(true)
-  const menuScrollPosition = useMotionValue(0)
+  const scrollPosition = useMotionValue(0)
   const headerRef = useRef<HTMLDivElement>()
 
   //@ts-ignore
@@ -59,15 +57,16 @@ export const Layout: React.FC<LayoutProps> = ({
   const { scrollY } = useViewportScroll()
 
   useEffect(() => {
-    if (!menuIsOpen) {
-      window.scroll({ top: menuScrollPosition.get() })
+    if (!scrollLock) {
+      const top = scrollPosition.get()
+      window.scroll({ top })
     }
-  }, [menuIsOpen])
+  }, [scrollLock])
   useEffect(() => {
     setShowNav(true)
     let listener
     const update = function () {
-      if (!menuIsOpen) {
+      if (!scrollLock) {
         if (scrollY.get() < 100) {
           setShowNav(true)
           return
@@ -85,7 +84,6 @@ export const Layout: React.FC<LayoutProps> = ({
     }
 
     function focusHeader() {
-      window.scroll({ top: 0 })
       setShowNav(true)
     }
     const hr = headerRef.current
@@ -104,15 +102,15 @@ export const Layout: React.FC<LayoutProps> = ({
     }
   }, [])
 
-  const handleToggle = () => {
-    if (!menuIsOpen) {
-      menuScrollPosition.set(scrollY.get())
+  const toggleScrollLock = () => {
+    if (!scrollLock) {
+      scrollPosition.set(scrollY.get())
     }
-    toggleMenu()
+    setScrollLock(!scrollLock)
   }
 
   return (
-    <>
+    <LayoutScrollContext.Provider value={{ scrollLock, toggleScrollLock }}>
       <Head>
         {meta}
         <link rel="canonical" href={canonicalPath} />
@@ -120,7 +118,7 @@ export const Layout: React.FC<LayoutProps> = ({
       <PageWrapper
         as={motion.main}
         style={
-          menuIsOpen
+          scrollLock
             ? {
                 position: 'fixed',
                 top: `-${scrollY.getPrevious()}px`,
@@ -128,14 +126,7 @@ export const Layout: React.FC<LayoutProps> = ({
             : {}
         }
       >
-        {altHeader ?? (
-          <HeaderMain
-            menuIsOpen={menuIsOpen}
-            toggleMenu={handleToggle}
-            show={showNav}
-            ref={headerRef}
-          />
-        )}
+        {altHeader ?? <HeaderMain show={showNav} ref={headerRef} />}
         <ContentWrapper as={props.layoutElement}>
           {props.children}
         </ContentWrapper>
@@ -145,6 +136,6 @@ export const Layout: React.FC<LayoutProps> = ({
           footerCss={footerCss}
         />
       </PageWrapper>
-    </>
+    </LayoutScrollContext.Provider>
   )
 }

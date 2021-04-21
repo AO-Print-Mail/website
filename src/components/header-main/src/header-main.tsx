@@ -1,14 +1,12 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState, useContext } from 'react'
 import { styled, Container, Logo, Flex, Box } from '@theme'
 import { m as motion } from 'framer-motion'
 import { MenuButton } from '@components/button'
 import Link from 'next/link'
 import { MobileNavigation } from '@components/mobile-navigation'
 import { DesktopNavigation } from '@components/desktop-navigation'
-
+import { LayoutScrollContext } from '@components/layout'
 interface HeaderMainProps {
-  menuIsOpen: boolean
-  toggleMenu: () => void
   show?: boolean
 }
 
@@ -65,7 +63,15 @@ const spring = {
 }
 
 export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
-  ({ menuIsOpen, toggleMenu, show, ...props }, ref) => {
+  ({ show, ...props }, ref) => {
+    const [menuIsOpen, setMenuIsOpen] = useState(false)
+    const { toggleScrollLock } = useContext(LayoutScrollContext)
+
+    function toggleMenu() {
+      toggleScrollLock()
+      setMenuIsOpen(!menuIsOpen)
+    }
+
     return (
       <HeaderOuter
         as={motion.header}
