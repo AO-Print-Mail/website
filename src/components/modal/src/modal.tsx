@@ -1,7 +1,13 @@
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { ClientOnlyPortal } from '@lib/react'
 import { styled, Container } from '@theme'
-interface ModalProps {}
+import { LayoutScrollContext } from '@components/layout'
+import { m as motion } from 'framer-motion'
+
+interface ModalProps {
+  layoutId?: string
+  children?: React.ReactElement
+}
 
 const BackDrop = styled('div', {
   position: 'fixed',
@@ -50,6 +56,13 @@ export const ModalBackground = styled('div', {
 })
 
 export const Modal: React.FC<ModalProps> = ({ children, ...props }) => {
+  const { toggleScrollLock } = useContext(LayoutScrollContext)
+  useEffect(() => {
+    //lock the layout when the modal opens
+    toggleScrollLock()
+    //unlock the layout when the modal unmounts
+    return toggleScrollLock()
+  })
   return ClientOnlyPortal({
     children: (
       <BackDrop>

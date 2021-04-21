@@ -1,7 +1,7 @@
 import { useRef, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-export function ClientOnlyPortal({ children, selector }) {
+export function ClientOnlyPortal({ children, selector = 'portal-modal' }) {
   const ref = useRef()
   const [mounted, setMounted] = useState(false)
 
