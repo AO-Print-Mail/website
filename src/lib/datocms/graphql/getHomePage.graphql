@@ -12,7 +12,7 @@ query GetHomePage {
       description
       image {
         responsiveImage(
-          imgixParams: { fit: fill, w: 360, h: 360, auto: format }
+          imgixParams: { fit: crop, w: 320, h: 240, auto: format }
         ) {
           ...responsiveImageFragment
         }

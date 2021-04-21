@@ -21,6 +21,7 @@ import { Button } from '@components/button'
 import { m as motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
+import { useStateMachine } from 'little-state-machine'
 
 const WorkaroundForm = dynamic(() =>
   import('@components/netlify-workaraound-form').then(
@@ -102,13 +103,17 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
   const [submitting, setSubmitting] = useState(false)
   const [firstName, setFirstname] = useState('')
 
+  const {
+    state: { userData },
+  } = useStateMachine({})
+
   const onSubmit = (data: typeof inputs) => {
     setSubmitting(true)
     setFirstname(data.firstName)
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contactUsForm', ...data }),
+      body: encode({ 'form-name': FORM_NAME, ...data, ...userData }),
     })
       .then(() => {
         const newPath = router.pathname.replace('[pageSlug]', '/contact')
@@ -225,17 +230,13 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             )}
           />
           <Box css={{ mt: '$3' }}>
-            <InputLabel
-              as="InputLabel"
-              size="4"
-              htmlFor="additionalInformation"
-            >
+            <InputLabel as="InputLabel" size="4" htmlFor="message">
               Message (optional)
             </InputLabel>
             <TextArea
               resizeVertical
-              id="additionalInformation"
-              name="additionalInformation"
+              id="message"
+              name="message"
               rows={8}
               cols={30}
               placeholder="Please include any additional information that is applicable to your job."

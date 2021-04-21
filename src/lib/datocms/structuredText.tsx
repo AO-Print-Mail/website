@@ -73,7 +73,7 @@ function isStrikethroughGuard(node: Node): node is Span {
 const defaults = {
   isHeading: ({
     headingProps: { fromSize = 1, fromLevel = 1, ...props } = {},
-  }: structuredTextConfig) =>
+  }: structuredTextConfig = {}) =>
     renderRule(isHeadingGuard, ({ node, children, key }) => {
       return (
         <Heading
@@ -158,19 +158,44 @@ const isSpan = (props) => renderRule(isSpanGuard, (node) => <></>)
 export const structuredTextRules = ({
   ruleOverrides,
   ...propConfig
-}: structuredTextConfig & { ruleOverrides?: typeof defaults } = {}) => {
-  const ary = Object.values(Object.assign({}, defaults, ruleOverrides))
+}: structuredTextConfig & {
+  ruleOverrides?: Partial<typeof defaults>
+} = {}) => {
   return Object.values(Object.assign({}, defaults, ruleOverrides)).map((k) =>
     k(propConfig)
   )
 }
+interface StructuredTextProps
+  extends React.ComponentProps<typeof ConfigurableText> {
+  config?: structuredTextConfig & { ruleOverrides?: Partial<typeof defaults> }
+}
 
-export const StructuredText: React.FC<{
-  config?: structuredTextConfig & { ruleOverrides?: typeof defaults }
-  data: StructuredTextDocument
-}> = ({ config, data, ...props }) => {
+export const renderInlineRecordRules: React.ComponentProps<
+  typeof ConfigurableText
+>['renderInlineRecord'] = (node) => {
+  console.log(JSON.stringify({ INLINE: node }))
+  return <div></div>
+}
+export const renderLinkToRules: React.ComponentProps<
+  typeof ConfigurableText
+>['renderLinkToRecord'] = (node) => {
+  console.log(JSON.stringify({ LINKTO: node }))
+  return <div></div>
+}
+
+export const StructuredText: React.FC<StructuredTextProps> = ({
+  config,
+  data,
+  ...props
+}) => {
   return (
-    <ConfigurableText customRules={structuredTextRules(config)} data={data} />
+    <ConfigurableText
+      renderInlineRecord={renderInlineRecordRules}
+      customRules={structuredTextRules(config)}
+      renderLinkToRecord={renderLinkToRules}
+      data={data}
+      {...props}
+    />
   )
 }
 

@@ -101,9 +101,8 @@ const staticData = [
   {
     section_label: 'Legal',
     menu_items: [
-      { name: 'Privacy policy', link: '/privacy' },
-      { name: 'Cookie policy', link: '/cookies' },
-      { name: 'Terms of service', link: '/terms' },
+      { name: 'Privacy policy', link: '/legal/privacy' },
+      { name: 'Terms of service', link: '/legal/terms' },
     ],
   },
 ]
