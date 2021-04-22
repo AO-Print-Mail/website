@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { ClientOnlyPortal } from '@lib/react'
 import { styled, Container } from '@theme'
 import { LayoutScrollContext } from '@components/layout'
@@ -12,10 +12,11 @@ interface ModalProps {
 const BackDrop = styled('div', {
   position: 'fixed',
   top: '0',
-  right: '0',
+  width: '100%',
   bottom: '0',
   left: '0',
   background: '$DA60',
+  zIndex: '$4',
 })
 
 export const ModalWrapper = styled(Container, {
@@ -57,18 +58,19 @@ export const ModalBackground = styled('div', {
 
 export const Modal: React.FC<ModalProps> = ({ children, ...props }) => {
   const { toggleScrollLock } = useContext(LayoutScrollContext)
+  const ref = useRef(toggleScrollLock)
   useEffect(() => {
     //lock the layout when the modal opens
     toggleScrollLock()
     //unlock the layout when the modal unmounts
-    return toggleScrollLock()
-  })
+    return () => ref.current()
+  }, [])
   return ClientOnlyPortal({
     children: (
       <BackDrop>
-        <ModalWrapper>
+        <Container css={{ height: '50%' }}>
           <ModalBackground>{children}</ModalBackground>
-        </ModalWrapper>
+        </Container>
       </BackDrop>
     ),
     selector: '#portal-modal',

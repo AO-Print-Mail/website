@@ -1,5 +1,7 @@
 import { styled, CSS, Card, Heading4, Paragraph3 } from '@theme'
 import { Button } from '@components/button'
+import { useState } from 'react'
+import { Modal } from '@components/modal'
 
 interface QuoteCtaProps {
   heading?: string
@@ -27,6 +29,11 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
   paragraph,
   ...props
 }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  function toggleModal(e: React.MouseEvent) {
+    e.preventDefault()
+    setModalIsOpen(!modalIsOpen)
+  }
   return (
     <Bg {...props}>
       <Heading4 alignCenter color="primary" css={{ mt: '$3' }}>
@@ -43,9 +50,15 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
           '@m': { mt: '$6', minWidth: '$12' },
         }}
         type="primary"
+        onClick={toggleModal}
       >
         Start your quote
       </Button>
+      {modalIsOpen && (
+        <Modal>
+          <Button onClick={toggleModal}>Close</Button>
+        </Modal>
+      )}
     </Bg>
   )
 }
