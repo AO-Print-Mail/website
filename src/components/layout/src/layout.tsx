@@ -7,7 +7,12 @@ import { request } from '@lib/datocms/datocms'
 import { renderMetaTags, SeoMetaTagType } from 'react-datocms'
 import { GetFaviconsQuery } from '@lib/datocms/__generated__/types'
 import { HeaderMain } from '@components/header-main'
-import { useViewportScroll, useMotionValue, m as motion } from 'framer-motion'
+import {
+  useViewportScroll,
+  useMotionValue,
+  useCycle,
+  m as motion,
+} from 'framer-motion'
 
 interface LayoutProps {
   title?: string
@@ -46,7 +51,7 @@ export const Layout: React.FC<LayoutProps> = ({
   landing,
   ...props
 }) => {
-  const [scrollLock, setScrollLock] = useState(false)
+  const [scrollLock, toggleScroll] = useCycle(false, true)
   const [showNav, setShowNav] = useState(true)
   const scrollPosition = useMotionValue(0)
   const headerRef = useRef<HTMLDivElement>()
@@ -102,11 +107,11 @@ export const Layout: React.FC<LayoutProps> = ({
     }
   }, [])
 
-  const toggleScrollLock = () => {
-    if (!scrollLock) {
+  const toggleScrollLock = (skipPositionSet: boolean = false) => {
+    if (!scrollLock && !skipPositionSet) {
       scrollPosition.set(scrollY.get())
     }
-    setScrollLock(!scrollLock)
+    toggleScroll()
   }
 
   return (
@@ -121,6 +126,8 @@ export const Layout: React.FC<LayoutProps> = ({
           scrollLock
             ? {
                 position: 'fixed',
+                width: '100%',
+                left: '0',
                 top: `-${scrollY.getPrevious()}px`,
               }
             : {}

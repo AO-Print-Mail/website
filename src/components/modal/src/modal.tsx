@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import { ClientOnlyPortal } from '@lib/react'
-import { styled, Container } from '@theme'
+import { styled, Container, Card } from '@theme'
 import { LayoutScrollContext } from '@components/layout'
 import { m as motion } from 'framer-motion'
 
@@ -15,8 +15,9 @@ const BackDrop = styled('div', {
   width: '100%',
   bottom: '0',
   left: '0',
-  background: '$DA60',
+  background: '$DA80',
   zIndex: '$4',
+  backdropFilter: 'blur(12px)',
 })
 
 export const ModalWrapper = styled(Container, {
@@ -32,47 +33,39 @@ export const ModalWrapper = styled(Container, {
   },
 })
 
-export const ModalBackground = styled('div', {
-  boxShadow: '$footer',
+export const ModalBackground = styled(Card, {
   position: 'absolute',
-  margin: '0',
-  background: '$white',
   top: '0',
   right: '0',
   left: '0',
   bottom: '0',
-  overflow: 'hidden',
-  '@m': {
-    boxShadow: '$3',
-    top: '$4',
-    br: '$5',
-    gridColumnStart: '2',
-    gridColumnEnd: 'span 6',
-  },
-  '@l': {
-    top: '$6',
-    gridColumnStart: '7',
-    gridColumnEnd: 'span 5',
-  },
 })
 
-export const Modal: React.FC<ModalProps> = ({ children, ...props }) => {
+export const Modal: React.FC<ModalProps> = ({
+  layoutId,
+  children,
+  ...props
+}) => {
   const { toggleScrollLock } = useContext(LayoutScrollContext)
-  const ref = useRef(toggleScrollLock)
   useEffect(() => {
     //lock the layout when the modal opens
     toggleScrollLock()
-    //unlock the layout when the modal unmounts
-    return () => ref.current()
+    //unlock the layout when the modal unmounts, pass true to stop it updating the current position to 0
+    return () => {
+      toggleScrollLock(true)
+    }
   }, [])
-  return ClientOnlyPortal({
-    children: (
-      <BackDrop>
-        <Container css={{ height: '50%' }}>
-          <ModalBackground>{children}</ModalBackground>
-        </Container>
-      </BackDrop>
-    ),
-    selector: '#portal-modal',
-  })
+  return (
+    <BackDrop
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Container css={{ height: '50%', mt: '300px' }}>
+        <ModalBackground as={motion.div} layoutId={layoutId} />
+        <Container layout>{children}</Container>
+      </Container>
+    </BackDrop>
+  )
 }
