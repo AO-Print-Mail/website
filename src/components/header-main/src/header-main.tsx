@@ -1,7 +1,7 @@
 import React, { forwardRef, useState, useContext } from 'react'
 import { styled, Container, Logo, Flex, Box } from '@theme'
 import { m as motion } from 'framer-motion'
-import { MenuButton } from '@components/button'
+import { Button, MenuButton } from '@components/button'
 import Link from 'next/link'
 import { MobileNavigation } from '@components/mobile-navigation'
 import { DesktopNavigation } from '@components/desktop-navigation'
@@ -110,6 +110,7 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
                 <DesktopNavigation
                   css={{ display: 'none', '@l': { display: 'flex' } }}
                 />
+                <Button>Get a quote</Button>
                 <MenuButton
                   open={menuIsOpen}
                   aria-expanded={menuIsOpen}

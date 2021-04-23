@@ -15,7 +15,7 @@ const BackDrop = styled(motion.div, {
   width: '100%',
   bottom: '0',
   left: '0',
-  background: '$DA80',
+  background: '$DA60',
   zIndex: '$4',
   backdropFilter: 'blur(12px)',
   moz: {
@@ -49,23 +49,34 @@ export const ModalBackground = styled(Card, {
   bottom: '0',
 })
 
+const modalMotionVariants: Variants = {
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: 20 },
+}
+
 export const Modal: React.FC<ModalProps> = ({
   layoutId,
   children,
   ...props
 }) => {
   const { toggleScrollLock } = useContext(LayoutScrollContext)
-  const controls = useAnimation()
+  const backDropControls = useAnimation()
+  const modalControls = !layoutId ? useAnimation() : null
   const [isPresent, safeToRemove] = usePresence()
+  async function modalAnimateOut() {
+    modalControls && modalControls.start('hidden')
+    await backDropControls.start('hidden')
+  }
   async function handleUnmount() {
     toggleScrollLock(true)
-    await controls.start('hidden')
+    await modalAnimateOut()
     safeToRemove()
   }
   useEffect(() => {
     //lock the layout when the modal opens
     toggleScrollLock()
-    controls.start('visible')
+    backDropControls.start('visible')
+    modalControls && modalControls.start('visible')
     //unlock the layout when the modal unmounts, pass true to stop it updating the current position to 0
   }, [])
   useEffect(() => {
@@ -77,11 +88,16 @@ export const Modal: React.FC<ModalProps> = ({
     children: (
       <BackDrop
         initial="hidden"
-        animate={controls}
+        animate={backDropControls}
         variants={backdropMotionVariants}
       >
         <Container layout css={{ height: '50%', mt: '300px' }}>
-          <ModalBackground as={motion.div} layoutId={layoutId} />
+          <ModalBackground
+            as={motion.div}
+            layoutId={layoutId}
+            variants={modalControls ? { modalMotionVariants } : undefined}
+            animate={modalControls}
+          />
           <Container layout>{children}</Container>
         </Container>
       </BackDrop>
