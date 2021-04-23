@@ -27,7 +27,7 @@ interface LayoutProps {
   layoutElement?: string
 }
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async () => {
   const data = await request({
     query: 'GetFavicons',
   })
@@ -68,9 +68,8 @@ export const Layout: React.FC<LayoutProps> = ({
     }
   }, [scrollLock])
   useEffect(() => {
-    setShowNav(true)
     let listener
-    const update = function () {
+    function update() {
       if (!scrollLock) {
         if (scrollY.get() < 100) {
           setShowNav(true)
@@ -87,7 +86,6 @@ export const Layout: React.FC<LayoutProps> = ({
         }
       }
     }
-
     function focusHeader() {
       setShowNav(true)
     }
@@ -108,10 +106,14 @@ export const Layout: React.FC<LayoutProps> = ({
   }, [])
 
   const toggleScrollLock = (skipPositionSet: boolean = false) => {
-    if (!scrollLock && !skipPositionSet) {
+    const scrollIsLocked = !scrollLock
+    if (scrollIsLocked && !skipPositionSet) {
       scrollPosition.set(scrollY.get())
     }
     toggleScroll()
+    if (!scrollIsLocked) {
+      setShowNav(true)
+    }
   }
 
   return (
