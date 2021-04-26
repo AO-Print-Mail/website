@@ -1,12 +1,12 @@
 import { styled, CSS, Card, Heading4, Paragraph3 } from '@theme'
 import { Button } from '@components/button'
-import { useEffect, useState } from 'react'
 import { Modal } from '@components/modal'
 import {
   AnimatePresence,
   AnimateSharedLayout,
   m as motion,
   useAnimation,
+  useCycle,
   Variants,
 } from 'framer-motion'
 
@@ -45,27 +45,24 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
   paragraph,
   ...props
 }) => {
-  const controls = useAnimation()
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const contentControls = useAnimation()
+  const [modalIsOpen, toggleModalIsOpen] = useCycle(false, true)
   async function toggleModal(e: React.MouseEvent) {
     e.preventDefault()
-    const hidden = modalIsOpen
-    await controls.start('hidden')
-    setModalIsOpen(!modalIsOpen)
-    setTimeout(controls.start, 600, 'visible')
+    await contentControls.start('hidden')
+    toggleModalIsOpen()
+    setTimeout(contentControls.start, 500, 'visible')
   }
-  useEffect(() => {}, [modalIsOpen])
+  //useEffect(() => {}, [modalIsOpen])
   return (
     <AnimateSharedLayout>
       <Bg as={motion.div} layoutId="quoteCta" {...props}>
         <AnimatePresence>
           {modalIsOpen && (
-            <Modal layoutId="quoteCta">
-              <Button onClick={toggleModal}>Close</Button>
-            </Modal>
+            <Modal toggle={toggleModal} layoutId="quoteCta"></Modal>
           )}
         </AnimatePresence>
-        <Content animate={controls} variants={contentVariants}>
+        <Content animate={contentControls} variants={contentVariants}>
           <Heading4 alignCenter color="primary" css={{ mt: '$3' }}>
             {heading || 'Get a quote for your next job'}
           </Heading4>

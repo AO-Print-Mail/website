@@ -1,12 +1,14 @@
 import { useContext, useEffect } from 'react'
 import { ClientOnlyPortal } from '@lib/react'
-import { styled, Container, Card } from '@theme'
+import { styled, Container, Card, PageWrapper, Close } from '@theme'
 import { LayoutScrollContext } from '@components/layout'
 import { m as motion, useAnimation, usePresence, Variants } from 'framer-motion'
+import { Button } from '@components/button'
 
 interface ModalProps {
   layoutId?: string
   children?: React.ReactElement
+  toggle?: (e?: React.MouseEvent) => void
 }
 
 const BackDrop = styled(motion.div, {
@@ -15,9 +17,9 @@ const BackDrop = styled(motion.div, {
   width: '100%',
   bottom: '0',
   left: '0',
-  background: '$DA60',
+  background: '$DA50',
   zIndex: '$4',
-  backdropFilter: 'blur(12px)',
+  backdropFilter: 'blur(16px)',
   moz: {
     background: '$DA80',
   },
@@ -44,39 +46,40 @@ export const ModalWrapper = styled(Container, {
 export const ModalBackground = styled(Card, {
   position: 'absolute',
   top: '0',
-  right: '0',
   left: '0',
   bottom: '0',
+  width: '100%',
 })
 
 const modalMotionVariants: Variants = {
   visible: { opacity: 1, y: 0 },
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 48 },
 }
 
 export const Modal: React.FC<ModalProps> = ({
   layoutId,
   children,
+  toggle,
   ...props
 }) => {
   const { toggleScrollLock } = useContext(LayoutScrollContext)
   const backDropControls = useAnimation()
-  const modalControls = !layoutId ? useAnimation() : null
+  const modalControls = useAnimation()
   const [isPresent, safeToRemove] = usePresence()
   async function modalAnimateOut() {
-    modalControls && modalControls.start('hidden')
+    !layoutId && modalControls.start('hidden')
     await backDropControls.start('hidden')
+    safeToRemove()
   }
   async function handleUnmount() {
     toggleScrollLock(true)
-    await modalAnimateOut()
-    safeToRemove()
+    setTimeout(modalAnimateOut, 50)
   }
   useEffect(() => {
     //lock the layout when the modal opens
     toggleScrollLock()
     backDropControls.start('visible')
-    modalControls && modalControls.start('visible')
+    !layoutId && modalControls.start('visible')
     //unlock the layout when the modal unmounts, pass true to stop it updating the current position to 0
   }, [])
   useEffect(() => {
@@ -90,15 +93,42 @@ export const Modal: React.FC<ModalProps> = ({
         initial="hidden"
         animate={backDropControls}
         variants={backdropMotionVariants}
+        onClick={toggle}
       >
-        <Container layout css={{ height: '50%', mt: '300px' }}>
-          <ModalBackground
+        <Container css={{ height: '50%', mt: '300px' }}>
+          <Card
             as={motion.div}
             layoutId={layoutId}
-            variants={modalControls ? { modalMotionVariants } : undefined}
-            animate={modalControls}
-          />
-          <Container layout>{children}</Container>
+            initial={layoutId && modalMotionVariants}
+            animate={layoutId && modalControls}
+            variants={modalMotionVariants}
+            css={{ height: '100%' }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Container
+              css={{ position: 'relative', py: '$2' }}
+              as={motion.div}
+              layout
+            >
+              {children}
+              {toggle && (
+                <Button
+                  leftIcon={<Close />}
+                  size="small"
+                  style="naked"
+                  color="dark"
+                  css={{
+                    position: 'absolute',
+                    right: '$3',
+                    '@m': { right: '$4' },
+                  }}
+                  onClick={toggle}
+                >
+                  Close
+                </Button>
+              )}
+            </Container>
+          </Card>
         </Container>
       </BackDrop>
     ),
