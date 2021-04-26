@@ -31,7 +31,6 @@ const NavLinkText = styled(Paragraph, {
   color: '$B80',
   lineHeight: '24px',
   textDecoration: 'none',
-  fontSize: '$p4d',
   '&:hover': {
     color: '$DBA60',
   },

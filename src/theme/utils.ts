@@ -265,7 +265,7 @@ export default {
   },
   moz: (config: typeof stitchesConfig) => (value: CSS) => {
     return {
-      '@-moz-document url-prefix()': value,
+      '@supports (-moz-appearance:none)': value,
     }
   },
 }

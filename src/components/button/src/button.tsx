@@ -141,6 +141,9 @@ const ButtonBg = styled(ResetButton, {
         fontSize: '$p4m',
         '@m': { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
         '@l': { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
+        '&:focus': {
+          '&:before': { br: '$3' },
+        },
       },
       icon: {
         fontSize: '$p4m',

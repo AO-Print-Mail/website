@@ -1,7 +1,19 @@
-import { useRef, useEffect, useState } from 'react'
+//import { useRef, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 
-export function ClientOnlyPortal({ children, selector }) {
+interface PortalArgs {
+  children: React.ReactElement
+  selector?: string
+}
+
+export function ClientOnlyPortal({
+  children,
+  selector = '#portal-modal',
+}: PortalArgs) {
+  /*
+  
+  Using a ref to ensure the portal only fires in the client would stop layout animations flowing through the portal on mount
+  
   const ref = useRef()
   const [mounted, setMounted] = useState(false)
 
@@ -10,5 +22,8 @@ export function ClientOnlyPortal({ children, selector }) {
     setMounted(true)
   }, [selector])
 
-  return mounted ? createPortal(children, ref.current) : null
+*/
+  return document
+    ? createPortal(children, document.querySelector(selector))
+    : null
 }
