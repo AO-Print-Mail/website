@@ -48,7 +48,7 @@ const Arrow = styled(ArrowForward, {
 
 const LinkText: React.FC<LinkTextProps> = ({ text, css, link, ...props }) => {
   return (
-    <Link href={link} passHref>
+    <Link href={'/' + link} passHref>
       <Flex
         as="a"
         css={{ mt: '$4', textDecoration: 'none', ...css }}
