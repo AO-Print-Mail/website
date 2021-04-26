@@ -1,14 +1,13 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState, useContext } from 'react'
 import { styled, Container, Logo, Flex, Box } from '@theme'
-import { m as motion } from 'framer-motion'
-import { MenuButton } from '@components/button'
+import { AnimatePresence, m as motion, useCycle } from 'framer-motion'
+import { Button, MenuButton } from '@components/button'
 import Link from 'next/link'
 import { MobileNavigation } from '@components/mobile-navigation'
 import { DesktopNavigation } from '@components/desktop-navigation'
-
+import { LayoutScrollContext } from '@components/layout'
+import { Modal } from '@components/modal'
 interface HeaderMainProps {
-  menuIsOpen: boolean
-  toggleMenu: () => void
   show?: boolean
 }
 
@@ -34,7 +33,7 @@ const Header = styled('header', {
   boxShadow: '0px 6px 12px $colors$DBA15',
   py: '$3',
   height: '100%',
-  '@m': { pb: '$4' },
+  '@l': { pb: '$4' },
   moz: {
     backgroundColor: '$white',
   },
@@ -43,9 +42,9 @@ const Header = styled('header', {
 const NavContainer = styled('div', {
   flex: '1 1',
   alignSelf: 'flex-end',
-  ml: '$6',
+  ml: '$3',
   '@xl': {
-    ml: '$7',
+    ml: '$6',
   },
 })
 
@@ -65,7 +64,21 @@ const spring = {
 }
 
 export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
-  ({ menuIsOpen, toggleMenu, show, ...props }, ref) => {
+  ({ show, ...props }, ref) => {
+    const [menuIsOpen, setMenuIsOpen] = useState(false)
+    const { toggleScrollLock } = useContext(LayoutScrollContext)
+    const [modalIsOpen, toggleModalIsOpen] = useCycle(false, true)
+
+    function toggleMenu() {
+      toggleScrollLock()
+      setMenuIsOpen(!menuIsOpen)
+    }
+
+    async function toggleQuoteModal(e: React.MouseEvent) {
+      e.preventDefault()
+      toggleModalIsOpen()
+    }
+
     return (
       <HeaderOuter
         as={motion.header}
@@ -98,12 +111,31 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
               <Flex
                 css={{
                   justifyContent: 'flex-end',
-                  '@l': { justifyContent: 'space-between' },
+                  '@l': {
+                    justifyContent: 'space-between',
+                    alignItems: 'baseline',
+                    fontSize: '$p4d',
+                  },
                 }}
               >
                 <DesktopNavigation
-                  css={{ display: 'none', '@l': { display: 'flex' } }}
+                  css={{ display: 'none', mt: '$4', '@l': { display: 'flex' } }}
                 />
+
+                <Button
+                  css={{ display: 'none', '@m': { display: 'inline-flex' } }}
+                  onClick={toggleQuoteModal}
+                >
+                  Get a quote
+                </Button>
+                <AnimatePresence>
+                  {modalIsOpen && (
+                    <Modal toggle={toggleQuoteModal}>
+                      <Button onClick={toggleQuoteModal}>Close</Button>
+                    </Modal>
+                  )}
+                </AnimatePresence>
+
                 <MenuButton
                   open={menuIsOpen}
                   aria-expanded={menuIsOpen}
@@ -112,7 +144,7 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
                     e.preventDefault()
                     toggleMenu()
                   }}
-                  css={{ py: '$2', '@l': { display: 'none' } }}
+                  css={{ py: '$2', ml: '$3', '@l': { display: 'none' } }}
                 />
               </Flex>
             </NavContainer>

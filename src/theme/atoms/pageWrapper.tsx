@@ -9,4 +9,5 @@ export const PageWrapper = styled('main', {
   justifyContent: 'stretch',
   alignItems: 'stretch',
   boxSizing: 'content-box',
+  position: 'relative',
 })

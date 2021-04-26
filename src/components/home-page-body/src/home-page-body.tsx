@@ -15,7 +15,6 @@ import { Image, ResponsiveImageType } from 'react-datocms'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ComponentProps } from 'react'
-import { StyledInstance } from '@stitches/react'
 
 interface HomePageBodyProps {
   cardData: CardProps[]
@@ -49,10 +48,10 @@ const Arrow = styled(ArrowForward, {
 
 const LinkText: React.FC<LinkTextProps> = ({ text, css, link, ...props }) => {
   return (
-    <Link href={link} passHref>
+    <Link href={'/' + link} passHref>
       <Flex
         as="a"
-        css={{ mt: '$4', flex: '0 0 100%', textDecoration: 'none', ...css }}
+        css={{ mt: '$4', textDecoration: 'none', ...css }}
         {...props}
       >
         {/*@ts-ignore */}
@@ -133,11 +132,18 @@ const Card: React.FC<CardProps> = ({
           {title || 'Direct Mail'}
         </Title>
         <CardImage
-          pictureStyle={{ objectFit: 'cover', width: '100%', height: 'auto' }}
+          pictureStyle={{
+            objectFit: 'contain',
+            minWidth: '100%',
+            height: '100%',
+          }}
           data={image}
         />
 
-        <Paragraph4 className={leftColumn} css={{ color: 'inherit', mt: '$1' }}>
+        <Paragraph4
+          className={leftColumn}
+          css={{ color: 'inherit', mt: '$1', flex: '1 0 100%' }}
+        >
           {description ||
             'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.'}
         </Paragraph4>

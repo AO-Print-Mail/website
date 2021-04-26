@@ -1,4 +1,12 @@
-import { styled, Container, Heading1, Box, HomePattern, Heading2 } from '@theme'
+import {
+  styled,
+  Container,
+  Heading1,
+  Box,
+  HomePattern,
+  Heading2,
+  Card,
+} from '@theme'
 import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
@@ -8,6 +16,8 @@ import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 import { ClientLogoBanner } from '@components/client-logo-banner'
+import { Button } from '@components/button'
+import { Modal } from '@components/modal'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -116,7 +126,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           </HeroText>
         </Container>
       </Box>
-      <Box css={{ my: '$7' }}>
+      <Box>
         <HomePageBody
           cardData={data.cardData}
           featureSections={featureSections}
@@ -126,7 +136,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         <Container>
           <QuoteCta
             css={{ mb: '$7' }}
-            paragraph="Get a competitive quote for your next job now. Our friendly team of experts are standing by to complete yourproject with ease and to make the process as seamless as possible."
+            paragraph="Get a competitive quote for your next job now. Our friendly team of experts are standing by to complete your project with ease and to make the process as seamless as possible."
           />
           <ClientLogoBanner />
         </Container>
