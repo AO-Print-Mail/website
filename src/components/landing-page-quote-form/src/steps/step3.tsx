@@ -88,12 +88,13 @@ export const Step3Form: React.FC<Step3Props> = ({
   const { state, actions } = useStateMachine({
     updateDirectMailForm,
   })
-  const { register, handleSubmit, formState, errors } = useForm<
+  const { register, handleSubmit, formState } = useForm<
     ContactInformation & MetaInformation
   >({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   })
+  const { errors } = formState
 
   const onSubmit = (data: ContactInformation & MetaInformation) => {
     progress.set(100)
@@ -132,22 +133,22 @@ export const Step3Form: React.FC<Step3Props> = ({
       <Box css={{ my: '$4', pb: '$2' }}>
         <Flex css={{ mx: '-$2' }}>
           <Input
-            ref={register}
+            {...register('firstName')}
             id="firstName"
             name="firstName"
             placeholder="Jane"
-            defaultValue={firstName}
+            defaultValue={firstName || ''}
             css={{ px: '$2', flexBasis: '50% ' }}
             errors={errors}
           >
             First name
           </Input>
           <Input
-            ref={register}
+            {...register('lastName')}
             id="lastName"
             name="lastName"
             placeholder="Appleseed"
-            defaultValue={lastName}
+            defaultValue={lastName || ''}
             css={{ px: '$2', flexBasis: '50%' }}
             errors={errors}
           >
@@ -155,22 +156,22 @@ export const Step3Form: React.FC<Step3Props> = ({
           </Input>
         </Flex>
         <Input
-          ref={register}
+          {...register('companyName')}
           id="companyName"
           name="companyName"
           placeholder="Acme inc"
-          defaultValue={companyName}
+          defaultValue={companyName || ''}
           errors={errors}
         >
           Company name
         </Input>
         <Input
-          ref={register}
+          {...register('email')}
           id="email"
           name="email"
           placeholder="jane@example.com.au"
           type="email"
-          defaultValue={email}
+          defaultValue={email || ''}
           errors={errors}
         >
           Email address
@@ -182,13 +183,13 @@ export const Step3Form: React.FC<Step3Props> = ({
           inputMode="numeric"
           guide={false}
           type="text"
-          defaultValue={phone}
+          defaultValue={phone || ''}
           errors={errors}
+          {...register('phone')}
           render={(textMaskRef, props) => (
             <Input
               ref={(node) => {
                 textMaskRef(node)
-                register(node)
               }}
               name="phone"
               {...props}
@@ -199,7 +200,7 @@ export const Step3Form: React.FC<Step3Props> = ({
         />
       </Box>
       <Checkbox
-        ref={register}
+        {...register('joinMailingList')}
         id="joinMailingList"
         name="joinMailingList"
         defaultChecked={joinMailingList}
@@ -209,7 +210,11 @@ export const Step3Form: React.FC<Step3Props> = ({
       <p aria-hidden="true" className={classes.visuallyHidden()}>
         <label>
           Skip this field if you’re human:
-          <input tabIndex={-1} ref={register} name="bot-field-step3" />
+          <input
+            tabIndex={-1}
+            {...register('bot-field-step3')}
+            name="bot-field-step3"
+          />
         </label>
       </p>
     </form>

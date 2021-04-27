@@ -129,11 +129,7 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
                   Get a quote
                 </Button>
                 <AnimatePresence>
-                  {modalIsOpen && (
-                    <Modal toggle={toggleQuoteModal}>
-                      <Button onClick={toggleQuoteModal}>Close</Button>
-                    </Modal>
-                  )}
+                  {modalIsOpen && <Modal toggle={toggleQuoteModal}></Modal>}
                 </AnimatePresence>
 
                 <MenuButton

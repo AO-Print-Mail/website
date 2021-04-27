@@ -2902,8 +2902,8 @@ input StringFilter {
 
 input StringMatchesFilter {
   pattern: String!
-  caseSensitive: BooleanType
-  regexp: BooleanType
+  caseSensitive: BooleanType = false
+  regexp: BooleanType = true
 }
 
 """Specifies how to filter Structured Text fields"""

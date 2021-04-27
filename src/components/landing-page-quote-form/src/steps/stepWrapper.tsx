@@ -63,6 +63,9 @@ const Content = styled('div', {
   '@l': {
     position: 'static',
     top: '$3',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'stretch',
   },
 })
 
@@ -116,7 +119,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
           variants={contentContainerVariants}
           css={{
             maxWidth: '32rem',
-            flex: '1',
+            flex: '1 1 100%',
             overflow: 'auto',
             minHeight: '0',
           }}
