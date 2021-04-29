@@ -8,6 +8,7 @@ import {
   Heading,
 } from '@theme'
 import { isParagraph } from 'datocms-structured-text-utils'
+import React from 'react'
 import {
   renderRule,
   StructuredText,
@@ -38,13 +39,9 @@ const structuredTextRulez = [
   )),
 ]
 
-export const ArticleSummary: React.FC<ArticleSummaryProps> = ({
-  title,
-  lastUpdated,
-  summary,
-  breadcrumbLinks,
-  ...props
-}) => {
+export const ArticleSummary: React.FC<
+  ArticleSummaryProps & React.ComponentProps<typeof Box>
+> = ({ title, lastUpdated, summary, breadcrumbLinks, ...props }) => {
   return (
     <Box {...props}>
       {breadcrumbLinks && <Breadcrumbs links={breadcrumbLinks} />}

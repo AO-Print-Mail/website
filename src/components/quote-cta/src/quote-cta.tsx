@@ -53,7 +53,6 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
     toggleModalIsOpen()
     setTimeout(contentControls.start, 500, 'visible')
   }
-  //useEffect(() => {}, [modalIsOpen])
   return (
     <AnimateSharedLayout>
       <Bg as={motion.div} layoutId="quoteCta" {...props}>

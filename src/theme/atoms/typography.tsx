@@ -222,7 +222,7 @@ export const Paragraph = styled('p', {
       },
       4: {
         color: '$DA70',
-        fontSize: '$p4',
+        fontSize: '$p4m',
         lineHeight: '$5',
         marginBottom: '-0.33em',
         letterSpacing: '$reg',

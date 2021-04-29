@@ -1,6 +1,5 @@
 import { GraphQLClient } from 'graphql-request';
 import * as Dom from 'graphql-request/dist/types.dom';
-import { print } from 'graphql';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -4141,52 +4140,53 @@ export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
 
 
 const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
+
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     GetAboutUs(variables?: GetAboutUsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAboutUsQuery> {
-      return withWrapper(() => client.request<GetAboutUsQuery>(print(GetAboutUsDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetAboutUsQuery>(GetAboutUsDocument, variables, requestHeaders));
     },
     GetBlogPage(variables?: GetBlogPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPageQuery> {
-      return withWrapper(() => client.request<GetBlogPageQuery>(print(GetBlogPageDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetBlogPageQuery>(GetBlogPageDocument, variables, requestHeaders));
     },
     getBlogPostSummaries(variables?: GetBlogPostSummariesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostSummariesQuery> {
-      return withWrapper(() => client.request<GetBlogPostSummariesQuery>(print(GetBlogPostSummariesDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetBlogPostSummariesQuery>(GetBlogPostSummariesDocument, variables, requestHeaders));
     },
     getBlogPost(variables: GetBlogPostQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostQuery> {
-      return withWrapper(() => client.request<GetBlogPostQuery>(print(GetBlogPostDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetBlogPostQuery>(GetBlogPostDocument, variables, requestHeaders));
     },
     getBlogPostPaths(variables?: GetBlogPostPathsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostPathsQuery> {
-      return withWrapper(() => client.request<GetBlogPostPathsQuery>(print(GetBlogPostPathsDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetBlogPostPathsQuery>(GetBlogPostPathsDocument, variables, requestHeaders));
     },
     GetContactPage(variables?: GetContactPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetContactPageQuery> {
-      return withWrapper(() => client.request<GetContactPageQuery>(print(GetContactPageDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetContactPageQuery>(GetContactPageDocument, variables, requestHeaders));
     },
     GetFavicons(variables?: GetFaviconsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetFaviconsQuery> {
-      return withWrapper(() => client.request<GetFaviconsQuery>(print(GetFaviconsDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetFaviconsQuery>(GetFaviconsDocument, variables, requestHeaders));
     },
     GetHomePage(variables?: GetHomePageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetHomePageQuery> {
-      return withWrapper(() => client.request<GetHomePageQuery>(print(GetHomePageDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetHomePageQuery>(GetHomePageDocument, variables, requestHeaders));
     },
     GetLandingPage(variables: GetLandingPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPageQuery> {
-      return withWrapper(() => client.request<GetLandingPageQuery>(print(GetLandingPageDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetLandingPageQuery>(GetLandingPageDocument, variables, requestHeaders));
     },
     GetLandingPages(variables?: GetLandingPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPagesQuery> {
-      return withWrapper(() => client.request<GetLandingPagesQuery>(print(GetLandingPagesDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetLandingPagesQuery>(GetLandingPagesDocument, variables, requestHeaders));
     },
     GetLegalListPage(variables?: GetLegalListPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalListPageQuery> {
-      return withWrapper(() => client.request<GetLegalListPageQuery>(print(GetLegalListPageDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetLegalListPageQuery>(GetLegalListPageDocument, variables, requestHeaders));
     },
     GetLegalPage(variables: GetLegalPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalPageQuery> {
-      return withWrapper(() => client.request<GetLegalPageQuery>(print(GetLegalPageDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetLegalPageQuery>(GetLegalPageDocument, variables, requestHeaders));
     },
     GetLegalPages(variables?: GetLegalPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalPagesQuery> {
-      return withWrapper(() => client.request<GetLegalPagesQuery>(print(GetLegalPagesDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetLegalPagesQuery>(GetLegalPagesDocument, variables, requestHeaders));
     },
     GetServicePage(variables: GetServicePageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetServicePageQuery> {
-      return withWrapper(() => client.request<GetServicePageQuery>(print(GetServicePageDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetServicePageQuery>(GetServicePageDocument, variables, requestHeaders));
     },
     GetServicePages(variables?: GetServicePagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetServicePagesQuery> {
-      return withWrapper(() => client.request<GetServicePagesQuery>(print(GetServicePagesDocument), variables, requestHeaders));
+      return withWrapper(() => client.request<GetServicePagesQuery>(GetServicePagesDocument, variables, requestHeaders));
     }
   };
 }

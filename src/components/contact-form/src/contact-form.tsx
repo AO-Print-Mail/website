@@ -86,7 +86,12 @@ const Background = styled(Card, {
 })
 
 export const ContactForm: React.FC<ContactFormProps> = (props) => {
-  const { register, handleSubmit, errors, reset } = useForm<typeof inputs>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<typeof inputs>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   })
@@ -164,7 +169,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
         <Box css={{ my: '$4', pb: '$2' }}>
           <Flex css={{ mx: '-$2' }}>
             <Input
-              ref={register}
+              {...register('firstName')}
               id="firstName"
               name="firstName"
               placeholder="Jane"
@@ -175,7 +180,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
               First name
             </Input>
             <Input
-              ref={register}
+              {...register('lastName')}
               id="lastName"
               name="lastName"
               placeholder="Appleseed"
@@ -187,7 +192,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             </Input>
           </Flex>
           <Input
-            ref={register}
+            {...register('companyName')}
             id="companyName"
             name="companyName"
             placeholder="Acme inc"
@@ -197,7 +202,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             Company name
           </Input>
           <Input
-            ref={register}
+            {...register('email')}
             id="email"
             name="email"
             placeholder="jane@example.com.au"
@@ -216,11 +221,11 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             type="text"
             defaultValue={inputs.phone}
             errors={errors}
+            {...register('phone')}
             render={(textMaskRef, props) => (
               <Input
                 ref={(node) => {
                   textMaskRef(node)
-                  register(node)
                 }}
                 name="phone"
                 {...props}
@@ -230,24 +235,24 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             )}
           />
           <Box css={{ mt: '$3' }}>
-            <InputLabel as="InputLabel" size="4" htmlFor="message">
+            <InputLabel as="label" size="4" htmlFor="message">
               Message (optional)
             </InputLabel>
             <TextArea
+              {...register('message')}
               resizeVertical
               id="message"
               name="message"
               rows={8}
               cols={30}
               placeholder="Please include any additional information that is applicable to your job."
-              ref={register}
               autoComplete="off"
               defaultValue={inputs.message}
               css={{ width: '100%' }}
             />
           </Box>
           <Checkbox
-            ref={register}
+            {...register('joinMailingList')}
             id="joinMailingList"
             name="joinMailingList"
             defaultChecked={inputs.joinMailingList}
@@ -259,7 +264,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
         <p aria-hidden="true" className={classes.visuallyHidden()}>
           <label>
             Skip this field if you’re human:
-            <input tabIndex={-1} ref={register} name="bot-field" />
+            <input tabIndex={-1} {...register('bot-field')} name="bot-field" />
           </label>
         </p>
         <Button

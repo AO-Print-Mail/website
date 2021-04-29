@@ -69,7 +69,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="format1"
           name="mailFormat"
-          ref={register}
+          {...register('mailFormat')}
           value="flyers/postcards"
           defaultChecked={mailFormat === 'flyers/postcards'}
         >
@@ -78,7 +78,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="format2"
           name="mailFormat"
-          ref={register}
+          {...register('mailFormat')}
           value="brochures"
           defaultChecked={mailFormat === 'brochures'}
         >
@@ -87,7 +87,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="format3"
           name="mailFormat"
-          ref={register}
+          {...register('mailFormat')}
           value="letters"
           defaultChecked={mailFormat === 'letters'}
         >
@@ -96,7 +96,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="format4"
           name="mailFormat"
-          ref={register}
+          {...register('mailFormat')}
           value="plastic wrap"
           defaultChecked={mailFormat === 'plastic wrap'}
         >
@@ -105,7 +105,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="format5"
           name="mailFormat"
-          ref={register}
+          {...register('mailFormat')}
           value="other"
           defaultChecked={mailFormat === 'other'}
         >
@@ -119,7 +119,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="services1"
           name="services"
-          ref={register}
+          {...register('services')}
           value="Print and mail"
           defaultChecked={services === 'Print and mail'}
         >
@@ -128,7 +128,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="services2"
           name="services"
-          ref={register}
+          {...register('services')}
           value="Mail only"
           defaultChecked={services === 'Mail only'}
         >
@@ -147,7 +147,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <Input
           name="itemQuantity"
           id="quantity"
-          ref={register}
+          {...register('itemQuantity')}
           type="number"
           defaultValue={itemQuantity}
         />
@@ -157,7 +157,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="frequency1"
           name="frequency"
-          ref={register}
+          {...register('frequency')}
           value="One-off"
           defaultChecked={frequency === 'One-off'}
         >
@@ -166,7 +166,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="frequency2"
           name="frequency"
-          ref={register}
+          {...register('frequency')}
           value="daily"
           defaultChecked={frequency === 'daily'}
         >
@@ -175,7 +175,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="frequency3"
           name="frequency"
-          ref={register}
+          {...register('frequency')}
           value="weekly"
           defaultChecked={frequency === 'weekly'}
         >
@@ -184,7 +184,7 @@ export const Step1Form: React.FC<Step1Props> = ({
         <RadioButton
           id="frequency4"
           name="frequency"
-          ref={register}
+          {...register('frequency')}
           value="monthly"
           defaultChecked={frequency === 'monthly'}
         >

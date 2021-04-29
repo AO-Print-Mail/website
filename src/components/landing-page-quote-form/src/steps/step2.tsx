@@ -79,7 +79,7 @@ export const Step2Form: React.FC<Step2Props> = ({
             <RadioButton
               id="artworkReady1"
               name="artworkReady"
-              ref={register}
+              {...register('artworkReady')}
               value="yes"
               defaultChecked={artworkReady === 'yes'}
             >
@@ -88,7 +88,7 @@ export const Step2Form: React.FC<Step2Props> = ({
             <RadioButton
               id="artworkReady2"
               name="artworkReady"
-              ref={register}
+              {...register('artworkReady')}
               value="no"
               defaultChecked={artworkReady === 'no'}
             >
@@ -97,7 +97,7 @@ export const Step2Form: React.FC<Step2Props> = ({
             <RadioButton
               id="artworkReady3"
               name="artworkReady"
-              ref={register}
+              {...register('artworkReady')}
               value="interested in print design"
               defaultChecked={artworkReady === 'interested in print design'}
             >
@@ -113,7 +113,7 @@ export const Step2Form: React.FC<Step2Props> = ({
         <RadioButton
           id="addressDataReady1"
           name="addressDataReady"
-          ref={register}
+          {...register('addressDataReady')}
           value="yes"
           defaultChecked={addressDataReady === 'yes'}
         >
@@ -122,7 +122,7 @@ export const Step2Form: React.FC<Step2Props> = ({
         <RadioButton
           id="addressDataReady2"
           name="addressDataReady"
-          ref={register}
+          {...register('addressDataReady')}
           value="no"
           defaultChecked={addressDataReady === 'no'}
         >
@@ -131,7 +131,7 @@ export const Step2Form: React.FC<Step2Props> = ({
         <RadioButton
           id="addressDataReady3"
           name="addressDataReady"
-          ref={register}
+          {...register('addressDataReady')}
           value="interested in buying a list"
           defaultChecked={addressDataReady === 'interested in buying a list'}
         >
@@ -153,7 +153,7 @@ export const Step2Form: React.FC<Step2Props> = ({
           rows={8}
           cols={30}
           placeholder="Please include any additional information that is applicable to your job."
-          ref={register}
+          {...register('additionalInformation')}
           autoComplete="off"
           defaultValue={additionalInformation}
           css={{ width: '100%' }}
