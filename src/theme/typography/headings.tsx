@@ -117,7 +117,7 @@ const Heading = styled('h1', {
     marginTop: '$6',
   },
   variants: {
-    size: { ...headingSizes },
+    level: { ...headingSizes },
     color: {
       primary: {
         color: '$DBA100',
@@ -156,6 +156,10 @@ function setComponentProps<T>(
   ))
 }
 
+export const Heading21 = setComponentProps<HTMLHeadingElement>(Heading, {
+  as: 'h1',
+  size: '1',
+})
 export const Heading2 = setComponentProps<HTMLHeadingElement>(Heading, {
   as: 'h2',
   size: '2',

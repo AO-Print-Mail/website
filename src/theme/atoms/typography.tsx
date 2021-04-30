@@ -2,7 +2,7 @@ import { styled, css } from '@theme'
 import { forwardRef } from 'react'
 import { ResetButton } from './resetButton'
 
-export const Heading = styled('h1', {
+const Heading = styled('h1', {
   color: '$DA100',
   fontWeight: '$semibold',
   fontFamily: '$heading',
@@ -115,27 +115,27 @@ export const Heading = styled('h1', {
   ],
 })
 
-export const Heading1 = forwardRef<
+const Heading1 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="1" as="h1" ref={ref} {...props} />)
-export const Heading2 = forwardRef<
+const Heading2 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="2" as="h2" ref={ref} {...props} />)
-export const Heading3 = forwardRef<
+const Heading3 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="3" as="h3" ref={ref} {...props} />)
-export const Heading4 = forwardRef<
+const Heading4 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="4" as="h4" ref={ref} {...props} />)
-export const Heading5 = forwardRef<
+const Heading5 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="5" as="h5" ref={ref} {...props} />)
-export const Heading6 = forwardRef<
+const Heading6 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >(({ as = 'h6', ...props }, ref) => (
