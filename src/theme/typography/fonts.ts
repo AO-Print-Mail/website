@@ -1,26 +1,26 @@
 export const fontSizes = {
   /* HEADING */
   //mobile
-  h1m: '48px',
-  h2m: '42px',
-  h3m: '38px',
-  h4m: '33px',
-  h5m: '28px',
-  h6m: '23px',
+  h1m: '27px',
+  h2m: '24px',
+  h3m: '22px',
+  h4m: '20px',
+  h5m: '19px',
+  h6m: '17px',
   //tablet
-  h1t: '56px',
-  h2t: '47px',
-  h3t: '41px',
-  h4t: '36px',
-  h5t: '30px',
-  h6t: '25px',
+  h1t: '30px',
+  h2t: '27px',
+  h3t: '24px',
+  h4t: '22px',
+  h5t: '20px',
+  h6t: '18px',
   //desktop
-  h1d: '72px',
-  h2d: '62px',
-  h3d: '54px',
-  h4d: '45px',
-  h5d: '38px',
-  h6d: '32px',
+  h1d: '36px',
+  h2d: '32px',
+  h3d: '28px',
+  h4d: '25px',
+  h5d: '23px',
+  h6d: '21px',
   /* PARAGRAPH */
   //mobile
   p1m: '22px',
@@ -40,6 +40,19 @@ export const fontSizes = {
   p3d: '21px',
   p4d: '18px',
   p5d: '16px',
+  /* TITLE */
+  //mobile
+  t1m: '48px',
+  t2m: '38px',
+  t3m: '33px',
+  //tablet
+  t1t: '56px',
+  t2t: '41px',
+  t3t: '36px',
+  //desktop
+  t1d: '72px',
+  t2d: '54px',
+  t3d: '45px',
 }
 
 export const fonts = {
@@ -63,7 +76,62 @@ export const lineHeights = {
   3: '1.25',
   4: '1.4',
   5: '1.5',
+  /* HEADING */
+  //mobile
+  h1m: '32px',
+  h2m: '28px',
+  h3m: '28px',
+  h4m: '24px',
+  h5m: '24px',
+  h6m: '24px',
+  //tablet
+  h1t: '36px',
+  h2t: '32px',
+  h3t: '32px',
+  h4t: '28px',
+  h5t: '24px',
+  h6t: '24px',
+  //desktop
+  h1d: '44px',
+  h2d: '40px',
+  h3d: '36px',
+  h4d: '32px',
+  h5d: '32px',
+  h6d: '28px',
+  /* PARAGRAPH */
+  //mobile
+  p1m: '22px',
+  p2m: '20px',
+  p3m: '18px',
+  p4m: '16px',
+  p5m: '14px',
+  //tablet
+  p1t: '25px',
+  p2t: '21px',
+  p3t: '19px',
+  p4t: '17px',
+  p5t: '15px',
+  //desktop
+  p1d: '28px',
+  p2d: '24px',
+  p3d: '21px',
+  p4d: '18px',
+  p5d: '16px',
+  /* TITLE */
+  //mobile
+  t1m: '56px',
+  t2m: '44px',
+  t3m: '40px',
+  //tablet
+  t1t: '64px',
+  t2t: '48px',
+  t3t: '44px',
+  //desktop
+  t1d: '80px',
+  t2d: '64px',
+  t3d: '52px',
 }
+
 export const letterSpacings = {
   xcosy: '-0.015em',
   cosy: '-0.01em',

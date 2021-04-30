@@ -1,5 +1,5 @@
 import { colors } from './colors'
-import * as fonts from './fonts'
+import * as fonts from '../typography/fonts'
 import { space, sizes } from './space'
 
 export const theme = {
