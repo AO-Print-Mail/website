@@ -6,7 +6,7 @@ import {
   Column,
   ColumnWrapper,
   Container,
-  Heading,
+  Heading2,
   Heading1,
   Paragraph,
   Phone,
@@ -38,7 +38,7 @@ const Th = styled('th', {
   py: '$1',
   textAlign: 'left',
   pr: '$4',
-  color: '$DBA85',
+  color: '$DBA75',
   fontWeight: '$semibold',
 })
 const Td = styled('td', {
@@ -53,9 +53,10 @@ const Ul = styled('ul', {
 
 const OpeningHoursTable: React.FC<{ data: typeof openingHours }> = ({
   data,
+  ...props
 }) => {
   return (
-    <table>
+    <Box as="table" {...props}>
       <tbody>
         {data.map(({ day, hours }) => {
           return (
@@ -76,7 +77,7 @@ const OpeningHoursTable: React.FC<{ data: typeof openingHours }> = ({
           )
         })}
       </tbody>
-    </table>
+    </Box>
   )
 }
 const Img = styled(Image, {
@@ -130,9 +131,9 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   '@l': { width: 'auto', float: 'none' },
                 }}
               >
-                <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
+                <Heading2 level="6" css={{ fontWeight: 'bold' }}>
                   Call us:
-                </Heading>
+                </Heading2>
                 <Button
                   as="a"
                   href="tel:+61296456777"
@@ -150,9 +151,10 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   '@l': { width: 'auto', float: 'none' },
                 }}
               >
-                <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
+                <Heading2 level="6" css={{ fontWeight: 'bold' }}>
                   Opening hours:
-                </Heading>
+                </Heading2>
+                <Spacer />
                 <OpeningHoursTable data={openingHours} />
               </Box>
               <Box
@@ -166,9 +168,9 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   '@l': { width: 'auto', float: 'none' },
                 }}
               >
-                <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
+                <Heading2 level="6" css={{ fontWeight: 'bold' }}>
                   Visit Us:
-                </Heading>
+                </Heading2>
                 <Paragraph size="4" color="primary">
                   9 Clearview Pl
                   <br />

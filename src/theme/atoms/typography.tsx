@@ -1,6 +1,7 @@
 import { styled, css } from '@theme'
 import { forwardRef } from 'react'
 import { ResetButton } from './resetButton'
+import { InputLabel } from './Input'
 
 const Heading = styled('h1', {
   color: '$DA100',
@@ -268,10 +269,11 @@ export const Paragraph = styled('p', {
   'li &': {
     m: '0',
   },
-  [`${ResetButton} &`]: {
+  [`button &, label &`]: {
     m: '0 !important',
     p: '0 !important',
     letterSpacing: '$reg !important',
+    lineHeight: '1 !important',
   },
   'label&, input&, span&': {
     m: '0',

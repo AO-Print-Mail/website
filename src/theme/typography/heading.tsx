@@ -3,7 +3,7 @@ import { Component, forwardRef } from 'react'
 import { styled, CSS } from '..'
 
 const headingSizes: CSS = {
-  1: {
+  '1': {
     fontSize: '$h1m',
     lineHeight: '$h1m',
     marginBottom: '-9px',
@@ -105,16 +105,16 @@ const headingSizes: CSS = {
   },
 }
 
-const Heading = styled('h1', {
+export const Heading = styled('h1', {
   fontWeight: '$bold',
-  marginTop: '$4',
+  marginTop: '$3',
   overflow: 'visible',
   letterSpacing: '$cosy',
   '@m': {
-    marginTop: '$5',
+    marginTop: '$3',
   },
   '@l': {
-    marginTop: '$6',
+    marginTop: '$4',
   },
   variants: {
     level: { ...headingSizes },
@@ -140,10 +140,6 @@ const Heading = styled('h1', {
   ],
 })
 
-interface DefaultProps {
-  as?: string
-}
-
 function setComponentProps<T>(
   Component: React.FC<any>,
   defaultProps: StitchesVariants<Component>
@@ -151,32 +147,33 @@ function setComponentProps<T>(
   Pick<any, string | number | symbol> & React.RefAttributes<HTMLHeadingElement>
 > {
   //@ts-expect-error
-  return forwardRef<T, StitchesVariants<Component>>((componentProps, ref) => (
-    <Component ref={ref} {...defaultProps} {...componentProps} />
-  ))
+  return forwardRef<T, StitchesVariants<Component>>((componentProps, ref) => {
+    const _props = Object.assign({}, defaultProps, componentProps)
+    return <Component ref={ref} {..._props} />
+  })
 }
 
-export const Heading21 = setComponentProps<HTMLHeadingElement>(Heading, {
+export const Heading1 = setComponentProps<HTMLHeadingElement>(Heading, {
   as: 'h1',
-  size: '1',
+  level: '1',
 })
 export const Heading2 = setComponentProps<HTMLHeadingElement>(Heading, {
   as: 'h2',
-  size: '2',
+  level: '2',
 })
 export const Heading3 = setComponentProps<HTMLHeadingElement>(Heading, {
   as: 'h3',
-  size: '3',
+  level: '3',
 })
 export const Heading4 = setComponentProps<HTMLHeadingElement>(Heading, {
   as: 'h4',
-  size: '4',
+  level: '4',
 })
 export const Heading5 = setComponentProps<HTMLHeadingElement>(Heading, {
   as: 'h5',
-  size: '5',
+  level: '5',
 })
 export const Heading6 = setComponentProps<HTMLHeadingElement>(Heading, {
   as: 'h6',
-  size: '6',
+  level: '6',
 })

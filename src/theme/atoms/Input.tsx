@@ -1,6 +1,6 @@
 import { forwardRef, ReactNode } from 'react'
-import { styled, Paragraph5, Box, CSS } from '..'
-import { Paragraph3 } from './typography'
+import { visuallyHidden } from '@theme/utilityClasses'
+import { styled, Paragraph3, Paragraph4, Paragraph5, Box, CSS } from '..'
 
 interface InputProps
   extends React.ComponentProps<typeof TextAreaStyles & typeof InputStyles> {
@@ -13,6 +13,7 @@ interface InputProps
   name: string
   type?: string
   css?: CSS
+  required?: boolean
 }
 
 export const InputStyles = styled(Paragraph3, {
@@ -71,9 +72,11 @@ export const TextAreaStyles = styled(InputStyles, {
   },
 })
 
-export const InputLabel = styled(Paragraph5, {
+export const InputLabel = styled(Paragraph4, {
   color: '$DA70',
-  display: 'block',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'baseline',
 })
 
 export const TextArea = forwardRef<HTMLInputElement, InputProps>(
@@ -91,6 +94,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       type,
       placeholder,
       errors,
+      required,
       ...props
     },
     ref
@@ -119,6 +123,12 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <Box css={{ mt: '$3' }} {...props}>
         <InputLabel as="label" htmlFor={id}>
           {children}
+          {!required && (
+            <>
+              <span className={visuallyHidden()}>—</span>
+              <Paragraph5 css={{ color: '$DA50' }}>optional</Paragraph5>
+            </>
+          )}
         </InputLabel>
         {_input}
         {error && (

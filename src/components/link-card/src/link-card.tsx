@@ -7,7 +7,7 @@ import {
   Spacer,
   Paragraph4,
   Paragraph,
-  Heading,
+  Heading6,
 } from '@theme'
 import {
   Image,
@@ -84,7 +84,7 @@ const textRules = [
   )),
 ]
 
-const Title = styled(Heading, {
+const Title = styled(Heading6, {
   color: '$DBA90',
   mt: '$2',
   lineHeight: '$3',
@@ -119,8 +119,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
 }) => {
   return (
     <CardBackground {...props}>
-      <Spacer />
-      <Title as="h1" level="6">
+      <Heading6 as="h1">
         <a
           href={link}
           style={{
@@ -131,7 +130,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
         >
           {title}
         </a>
-      </Title>
+      </Heading6>
       <Spacer />
       <Flex
         css={{
