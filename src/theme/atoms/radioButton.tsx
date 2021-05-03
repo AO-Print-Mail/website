@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 import { styled } from '..'
-import { Paragraph4 } from './typography'
+import { Paragraph } from './typography'
 
 interface RadioButtonProps {
   id?: string
@@ -42,7 +42,7 @@ const Block = styled('div', {
   },
 })
 
-const Label = styled(Paragraph4, {
+const Label = styled(Paragraph, {
   py: '$2',
   px: '$2',
   display: 'block',
@@ -65,7 +65,7 @@ export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
           checked={checked}
           ref={ref}
         />
-        <Label as="label" htmlFor={id}>
+        <Label as="label" size="s" htmlFor={id}>
           {children}
         </Label>
       </Block>

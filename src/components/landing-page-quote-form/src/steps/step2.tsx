@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, Paragraph3, RadioButton, TextArea } from '@theme'
+import { Flex, Box, Paragraph, RadioButton, TextArea } from '@theme'
 import { FormStepControls } from '../bottomBarControls'
 import { updateDirectMailForm } from '@lib/little-state-machine'
 import { MotionValue } from 'framer-motion'
@@ -72,9 +72,9 @@ export const Step2Form: React.FC<Step2Props> = ({
     <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>
       {requiresArtwork && (
         <>
-          <Paragraph3 css={{ color: '$DA80' }}>
+          <Paragraph css={{ color: '$DA80' }}>
             Do you have artwork ready for printing?
-          </Paragraph3>
+          </Paragraph>
           <Flex wrap css={{ mt: '$3', pb: '$2' }}>
             <RadioButton
               id="artworkReady1"
@@ -106,9 +106,9 @@ export const Step2Form: React.FC<Step2Props> = ({
           </Flex>
         </>
       )}
-      <Paragraph3 css={{ color: '$DA80' }}>
+      <Paragraph css={{ color: '$DA80' }}>
         Is your recipient data file ready?
-      </Paragraph3>
+      </Paragraph>
       <Flex wrap css={{ mt: '$3', pb: '$2' }}>
         <RadioButton
           id="addressDataReady1"
@@ -138,13 +138,13 @@ export const Step2Form: React.FC<Step2Props> = ({
           Interested in buying a list
         </RadioButton>
       </Flex>
-      <Paragraph3
+      <Paragraph
         as="label"
         htmlFor="additionalInformation"
         css={{ color: '$DA80', display: 'block' }}
       >
         Your brief (optional)
-      </Paragraph3>
+      </Paragraph>
       <Box css={{ mt: '$3', pb: '$2' }}>
         <TextArea
           resizeVertical

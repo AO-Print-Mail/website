@@ -1,7 +1,5 @@
 import { styled, css } from '@theme'
 import { forwardRef } from 'react'
-import { ResetButton } from './resetButton'
-import { InputLabel } from './Input'
 
 const Heading = styled('h1', {
   color: '$DA100',
@@ -287,19 +285,19 @@ export const Paragraph1 = forwardRef<
 export const Paragraph2 = forwardRef<
   HTMLParagraphElement,
   React.ComponentProps<typeof Paragraph>
->((props, ref) => <Paragraph size="2" ref={ref} {...props} />)
+>((props, ref) => <Paragraph size="l" ref={ref} {...props} />)
 export const Paragraph3 = forwardRef<
   HTMLParagraphElement,
   React.ComponentProps<typeof Paragraph>
->((props, ref) => <Paragraph size="3" ref={ref} {...props} />)
+>((props, ref) => <Paragraph size="m" ref={ref} {...props} />)
 export const Paragraph4 = forwardRef<
   HTMLParagraphElement,
   React.ComponentProps<typeof Paragraph>
->((props, ref) => <Paragraph size="4" ref={ref} {...props} />)
+>((props, ref) => <Paragraph size="s" ref={ref} {...props} />)
 export const Paragraph5 = forwardRef<
   HTMLParagraphElement,
   React.ComponentProps<typeof Paragraph>
->((props, ref) => <Paragraph size="5" ref={ref} {...props} />)
+>((props, ref) => <Paragraph size="xs" ref={ref} {...props} />)
 
 export const UI = forwardRef<
   HTMLSpanElement,

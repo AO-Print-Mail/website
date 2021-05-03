@@ -1,7 +1,7 @@
 import {
   Box,
   Heading4,
-  Paragraph3,
+  Paragraph,
   MailIllustration,
   styled,
   Container,
@@ -145,13 +145,12 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               <Heading4
                 as={motion.h2}
                 alignCenter
-                color="primary"
                 css={{ mt: '0' }}
                 variants={contentChildrenVariants}
               >
                 Get a {keyword} quote online
               </Heading4>
-              <Paragraph3
+              <Paragraph
                 as={motion.p}
                 alignCenter
                 css={{ color: '$DA70', mt: '$3' }}
@@ -159,8 +158,8 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               >
                 You can expect to receive a quote on the same day so that your
                 job can start asap.
-              </Paragraph3>
-              <Paragraph3
+              </Paragraph>
+              <Paragraph
                 as={motion.p}
                 alignCenter
                 css={{ color: '$DA70' }}
@@ -168,7 +167,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               >
                 We’ll contact you to clarify any important details that help us
                 plan the right approach and best price.
-              </Paragraph3>
+              </Paragraph>
             </Container>
           </motion.div>
         </Content>

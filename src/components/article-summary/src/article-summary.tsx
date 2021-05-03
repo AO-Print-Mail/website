@@ -1,12 +1,4 @@
-import {
-  Breadcrumbs,
-  Box,
-  Spacer,
-  styled,
-  Paragraph5,
-  Paragraph4,
-  Title,
-} from '@theme'
+import { Breadcrumbs, Box, Spacer, styled, Paragraph, Title } from '@theme'
 import { isParagraph } from 'datocms-structured-text-utils'
 import React from 'react'
 import {
@@ -22,15 +14,15 @@ interface ArticleSummaryProps {
   breadcrumbLinks?: { name: string; url: string }[]
 }
 
-const Updated = styled(Paragraph5, {
+const Updated = styled(Paragraph, {
   color: '$DBA70',
 })
 
 const structuredTextRulez = [
   renderRule(isParagraph, ({ key, children }) => (
-    <Paragraph4 css={{ color: '$DBA80' }} key={key}>
+    <Paragraph size="m" key={key}>
       {children}
-    </Paragraph4>
+    </Paragraph>
   )),
 ]
 
@@ -44,7 +36,7 @@ export const ArticleSummary: React.FC<
       <Title color="primaryGradient" css={{ my: '0' }}>
         {title}
       </Title>
-      {lastUpdated && <Updated>Last updated {lastUpdated}</Updated>}
+      {lastUpdated && <Updated size="s">Last updated {lastUpdated}</Updated>}
       <StructuredText data={summary} customRules={structuredTextRulez} />
     </Box>
   )

@@ -1,7 +1,7 @@
 import {
   styled,
   FlatCard,
-  Paragraph4,
+  Paragraph,
   UnorderedList,
   ListItem,
   BreakoutTextHolder,
@@ -43,7 +43,9 @@ export const TwoColumnList: React.FC<TwoColumnListProps> = ({
         <TwoColUl>
           {items.map((item) => (
             <Li icon="CheckLeaf" key={item}>
-              <Paragraph4 css={{ mt: '0' }}>{item}</Paragraph4>
+              <Paragraph size="s" css={{ mt: '0' }}>
+                {item}
+              </Paragraph>
             </Li>
           ))}
         </TwoColUl>

@@ -61,7 +61,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
     >
       <Container as="section" css={{ py: '$3', '@l': { display: 'flex' } }}>
         <HeroText>
-          <Heading1 color="primary">{data.title}</Heading1>
+          <Heading1>{data.title}</Heading1>
           <StructuredText
             data={data.content.document}
             customRules={structuredTextRules({

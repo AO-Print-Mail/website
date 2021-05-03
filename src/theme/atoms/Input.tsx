@@ -1,6 +1,6 @@
 import { forwardRef, ReactNode } from 'react'
 import { visuallyHidden } from '@theme/utils/utilityClasses'
-import { styled, Paragraph3, Paragraph4, Paragraph5, Box, CSS } from '..'
+import { styled, Paragraph, Box, CSS } from '..'
 
 interface InputProps
   extends React.ComponentProps<typeof TextAreaStyles & typeof InputStyles> {
@@ -16,7 +16,7 @@ interface InputProps
   required?: boolean
 }
 
-export const InputStyles = styled(Paragraph3, {
+export const InputStyles = styled(Paragraph, {
   willChange: 'border-color',
   backgroundColor: '$DA10',
   px: 'calc($3 - 2px)',
@@ -72,7 +72,7 @@ export const TextAreaStyles = styled(InputStyles, {
   },
 })
 
-export const InputLabel = styled(Paragraph4, {
+export const InputLabel = styled(Paragraph, {
   color: '$DA70',
   display: 'flex',
   justifyContent: 'space-between',
@@ -121,12 +121,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     }
     return (
       <Box css={{ mt: '$3' }} {...props}>
-        <InputLabel as="label" htmlFor={id}>
+        <InputLabel as="label" size="s" htmlFor={id}>
           {children}
           {!required && (
             <>
               <span className={visuallyHidden()}>—</span>
-              <Paragraph5 css={{ color: '$DA50' }}>optional</Paragraph5>
+              <Paragraph size="xs" css={{ color: '$DA50' }}>
+                optional
+              </Paragraph>
             </>
           )}
         </InputLabel>
@@ -141,12 +143,13 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
               br: '$2',
             }}
           >
-            <Paragraph5
+            <Paragraph
+              size="xs"
               css={{ my: '0', display: 'inline-block', color: '$white' }}
               role="alert"
             >
               {errors[name].message}
-            </Paragraph5>
+            </Paragraph>
           </Box>
         )}
       </Box>

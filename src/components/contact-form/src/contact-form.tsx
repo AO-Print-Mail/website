@@ -157,7 +157,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
                 Thanks for your message{firstName && `, ${firstName}`}!
               </Heading2>
               <Paragraph
-                size="4"
+                size="s"
                 css={{ color: '$LA90', mt: '$6' }}
                 alignCenter
               >
@@ -167,7 +167,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
           </Flex>
         </SuccessBackground>
       )}
-      <Heading2 marginTop="small" level="4" color="primary">
+      <Heading2 marginTop="small" level="4">
         Send a message
       </Heading2>
       <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>
@@ -242,7 +242,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             )}
           />
           <Box css={{ mt: '$3' }}>
-            <InputLabel as="label" size="4" htmlFor="message">
+            <InputLabel as="label" size="s" htmlFor="message">
               Message
             </InputLabel>
             <TextArea
@@ -274,13 +274,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             <input tabIndex={-1} {...register('bot-field')} name="bot-field" />
           </label>
         </p>
-        <Button
-          fullWidth
-          size="cta"
-          isLoading={submitting}
-          type="submit"
-          color="primary"
-        >
+        <Button fullWidth size="cta" isLoading={submitting} type="submit">
           Send Message
         </Button>
       </form>

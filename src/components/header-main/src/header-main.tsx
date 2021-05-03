@@ -99,7 +99,6 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
             <Link href="/">
               <a style={{ flex: '0 0' }}>
                 <Logo
-                  color="primary"
                   size={{
                     '@initial': 'regular',
                     '@l': 'large',

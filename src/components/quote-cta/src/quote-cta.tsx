@@ -1,13 +1,4 @@
-import {
-  styled,
-  CSS,
-  Card,
-  Heading4,
-  Paragraph3,
-  Title,
-  Spacer,
-  TextHolder,
-} from '@theme'
+import { styled, CSS, Card, Paragraph, Title, Spacer, TextHolder } from '@theme'
 import { Button } from '@components/button'
 import { Modal } from '@components/modal'
 import {
@@ -79,10 +70,10 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
             {heading || 'Get a quote for your next job'}
           </Title>
           <TextHolder>
-            <Paragraph3 alignCenter color="primary">
+            <Paragraph alignCenter size="m">
               {paragraph ||
                 'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. '}
-            </Paragraph3>
+            </Paragraph>
           </TextHolder>
           <Spacer size="large" />
           <Button

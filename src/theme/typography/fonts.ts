@@ -100,23 +100,23 @@ export const lineHeights = {
   h6d: '28px',
   /* PARAGRAPH */
   //mobile
-  p1m: '22px',
-  p2m: '20px',
-  p3m: '18px',
-  p4m: '16px',
-  p5m: '14px',
+  p1m: '32px',
+  p2m: '28px',
+  p3m: '26px',
+  p4m: '24px',
+  p5m: '22px',
   //tablet
-  p1t: '25px',
-  p2t: '21px',
-  p3t: '19px',
-  p4t: '17px',
-  p5t: '15px',
+  p1t: '36px',
+  p2t: '28px',
+  p3t: '26px',
+  p4t: '25px',
+  p5t: '22px',
   //desktop
-  p1d: '28px',
-  p2d: '24px',
-  p3d: '21px',
-  p4d: '18px',
-  p5d: '16px',
+  p1d: '40px',
+  p2d: '32px',
+  p3d: '28px',
+  p4d: '28px',
+  p5d: '24px',
   /* TITLE */
   //mobile
   t1m: '56px',
@@ -127,7 +127,7 @@ export const lineHeights = {
   t2t: '48px',
   t3t: '44px',
   //desktop
-  t1d: '80px',
+  t1d: '76px',
   t2d: '64px',
   t3d: '52px',
 }

@@ -1,14 +1,4 @@
-import {
-  styled,
-  Container,
-  Heading1,
-  Box,
-  HomePattern,
-  Heading2,
-  Card,
-  Title,
-  Spacer,
-} from '@theme'
+import { styled, Container, Box, Heading2, Title, Spacer } from '@theme'
 import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
@@ -18,8 +8,6 @@ import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 import { ClientLogoBanner } from '@components/client-logo-banner'
-import { Button } from '@components/button'
-import { Modal } from '@components/modal'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -55,8 +43,7 @@ const ParagraphText = ({ data, size }) => {
     <StructuredText
       data={data}
       customRules={structuredTextRules({
-        headingProps: { color: 'primary' },
-        paragraphProps: { size, color: 'primary' },
+        paragraphProps: { size },
         listItemProps: {
           icon: 'CheckLeaf',
           iconProps: {
@@ -77,8 +64,8 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       key={f.heading}
       css={{ '@initial': { px: '$2' }, '@m': { px: '$3' }, '@l': { px: '$4' } }}
     >
-      <Heading2 color="primary">{f.heading}</Heading2>
-      <ParagraphText data={f.paragraph} size="3" />
+      <Heading2>{f.heading}</Heading2>
+      <ParagraphText data={f.paragraph} size="m" />
     </Box>
   ))
   return (
@@ -106,7 +93,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
             <Title>{data.mainHeading}</Title>
             <Spacer />
             <Box css={{ maxWidth: '60ch' }}>
-              <ParagraphText data={data.heroParagraph} size={'2'} />
+              <ParagraphText data={data.heroParagraph} size="l" />
             </Box>
           </HeroText>
         </Container>

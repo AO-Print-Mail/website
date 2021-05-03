@@ -3,13 +3,12 @@ import {
   css,
   styled,
   Heading4,
-  Paragraph4,
+  Paragraph,
   Box,
   Container,
   Flex,
   ArrowForward,
   Card as CardBg,
-  Paragraph,
 } from '@theme'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import Link from 'next/link'
@@ -55,7 +54,7 @@ const LinkText: React.FC<LinkTextProps> = ({ text, css, link, ...props }) => {
         {...props}
       >
         {/*@ts-ignore */}
-        <Paragraph ui size="4" className="linkText" css={{ color: '$blue' }}>
+        <Paragraph size="s" className="linkText" css={{ color: '$blue' }}>
           {text}
         </Paragraph>
         <Arrow className="arrowForward" />
@@ -128,7 +127,7 @@ const Card: React.FC<CardProps> = ({
   return (
     <Box {...props}>
       <CardBackground>
-        <Title className={leftColumn} color="primary" css={{ mt: '0' }}>
+        <Title className={leftColumn} css={{ mt: '0' }}>
           {title || 'Direct Mail'}
         </Title>
         <CardImage
@@ -140,13 +139,14 @@ const Card: React.FC<CardProps> = ({
           data={image}
         />
 
-        <Paragraph4
+        <Paragraph
+          size="s"
           className={leftColumn}
           css={{ color: 'inherit', mt: '$1', flex: '1 0 100%' }}
         >
           {description ||
             'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.'}
-        </Paragraph4>
+        </Paragraph>
         <LinkText text={linkText || 'Read more'} link={link} />
       </CardBackground>
     </Box>

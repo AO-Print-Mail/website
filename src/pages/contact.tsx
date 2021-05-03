@@ -141,7 +141,6 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   as="a"
                   href="tel:+61296456777"
                   leftIcon={<Phone size="matchFontSize" />}
-                  color="primary"
                   style="naked"
                   offset="left"
                 >
@@ -182,7 +181,7 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                 >
                   Visit Us:
                 </Heading2>
-                <Paragraph size="4" color="primary">
+                <Paragraph size="s">
                   9 Clearview Pl
                   <br />
                   Brookvale

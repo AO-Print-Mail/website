@@ -65,7 +65,7 @@ const ConfiguredText = ({ data, size }) => {
       renderBlock={structuredTextBlockRules}
       customRules={structuredTextRules({
         headingProps: { color: 'primary' },
-        paragraphProps: { size, color: 'primary' },
+        paragraphProps: { size },
         listItemProps: {
           icon: 'CheckLeaf',
           iconProps: {
@@ -127,10 +127,10 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
           }}
         >
           <HeroText>
-            <Title color="primary">{data.mainHeading}</Title>
+            <Title>{data.mainHeading}</Title>
             <Spacer />
             <Box css={{ maxWidth: '60ch', mt: '$4' }}>
-              <ConfiguredText data={data.heroParagraph} size="2" />
+              <ConfiguredText data={data.heroParagraph} size="l" />
             </Box>
           </HeroText>
         </Container>
@@ -154,8 +154,7 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
               data={data.pageContent}
               customRules={structuredTextRules({
                 paragraphProps: {
-                  size: '3',
-                  color: 'primary',
+                  size: 'm',
                 },
               })}
               //@ts-expect-error

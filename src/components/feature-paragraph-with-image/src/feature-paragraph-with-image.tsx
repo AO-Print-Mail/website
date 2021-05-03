@@ -4,7 +4,7 @@ import {
   styled,
   css,
   CSS,
-  Heading3,
+  Heading2,
   Column,
   ColumnWrapper,
 } from '@theme'
@@ -63,16 +63,11 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
     >
       <Column css={{ '@m': { pr: '$2' } }}>
         <TextHolder>
-          <Heading3 as="h2" css={{ mt: '$2' }} color="primary">
+          <Heading2 as="h2" css={{ mt: '$2' }}>
             {heading}
-          </Heading3>
+          </Heading2>
           <StructuredText
-            customRules={structuredTextRules({
-              paragraphProps: {
-                color: 'primary',
-                size: '3',
-              },
-            })}
+            customRules={structuredTextRules({})}
             data={paragraph.value}
           />
         </TextHolder>

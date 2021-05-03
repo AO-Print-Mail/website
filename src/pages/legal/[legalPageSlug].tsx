@@ -28,37 +28,37 @@ const isHeading = () =>
     switch (node.level) {
       case 1:
         return (
-          <Paragraph size="1" color="primary" semiBold as="h1" key={key}>
+          <Paragraph size="1" semiBold as="h1" key={key}>
             {children}
           </Paragraph>
         )
       case 2:
         return (
-          <Paragraph size="1" color="primary" semiBold as="h2" key={key}>
+          <Paragraph size="1" semiBold as="h2" key={key}>
             {children}
           </Paragraph>
         )
       case 3:
         return (
-          <Paragraph size="2" color="primary" semiBold as="h3" key={key}>
+          <Paragraph size="l" semiBold as="h3" key={key}>
             {children}
           </Paragraph>
         )
       case 4:
         return (
-          <Paragraph size="2" color="primary" semiBold as="h4" key={key}>
+          <Paragraph size="l" semiBold as="h4" key={key}>
             {children}
           </Paragraph>
         )
       case 5:
         return (
-          <Paragraph size="2" color="primary" semiBold as="h5" key={key}>
+          <Paragraph size="l" semiBold as="h5" key={key}>
             {children}
           </Paragraph>
         )
       case 6:
         return (
-          <Paragraph size="2" color="primary" semiBold as="h6" key={key}>
+          <Paragraph size="l" semiBold as="h6" key={key}>
             {children}
           </Paragraph>
         )

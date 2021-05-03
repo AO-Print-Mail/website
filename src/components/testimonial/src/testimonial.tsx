@@ -1,7 +1,7 @@
 import {
   styled,
   CSS,
-  Paragraph4,
+  Paragraph,
   TextHolder,
   Flex,
   Box,
@@ -43,7 +43,7 @@ const ProfileWrapper = styled(Flex, {
   },
 })
 
-const ProfileText = styled(Paragraph4, {
+const ProfileText = styled(Paragraph, {
   my: '$1',
   variants: {
     name: {
@@ -101,8 +101,12 @@ export const Testimonial: React.FC<TestimonialProps> = ({
             <ProfileWrapper>
               <Photo data={image} />
               <Box css={{ my: '$4' }}>
-                <ProfileText name>{name}</ProfileText>
-                <ProfileText color="light">{company}</ProfileText>
+                <ProfileText size="s" name>
+                  {name}
+                </ProfileText>
+                <ProfileText size="s" color="light">
+                  {company}
+                </ProfileText>
               </Box>
             </ProfileWrapper>
           </TextHolder>
