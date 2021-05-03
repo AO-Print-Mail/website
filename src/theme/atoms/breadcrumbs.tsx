@@ -4,7 +4,7 @@ import { Flex } from './layout'
 import { Paragraph5 } from './typography'
 import Link from 'next/link'
 import { ChevronRight } from '@theme/icons'
-import { visuallyHidden } from '@theme/utilityClasses'
+import { visuallyHidden } from '@theme/utils/utilityClasses'
 
 export interface BreadcrumbsProps {
   links: { name: string; url: string }[]

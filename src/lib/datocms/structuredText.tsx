@@ -18,11 +18,7 @@ import {
   isSpan as isSpanGuard,
 } from 'datocms-structured-text-utils'
 import dynamic from 'next/dynamic'
-import {
-  renderRule,
-  StructuredText as ConfigurableText,
-  StructuredTextDocument,
-} from 'react-datocms'
+import { renderRule, StructuredText as ConfigurableText } from 'react-datocms'
 
 const BlockQuote = dynamic(
   import('@theme/atoms/blockquote').then((res) => res.BlockQuote)
@@ -52,7 +48,7 @@ type structuredTextConfig = {
     fromLevel: number
   }
   paragraphProps?: React.ComponentProps<typeof Paragraph> & {
-    size?: '1' | '2' | '3' | '4' | '5'
+    size?: 'l' | 'm' | 's' | 'xs'
   }
   listItemProps?: React.ComponentProps<typeof ListItem>
   blockquoteProps?: React.ComponentProps<typeof BlockQuote>
@@ -80,14 +76,13 @@ const defaults = {
           key={key}
           level={setLevel(fromSize, node.level)}
           as={`h${setLevel(fromLevel, node.level)}`}
-          color="primary"
           children={children}
           {...props}
         />
       )
     }),
   isParagraph: ({
-    paragraphProps: { size, ...props } = { size: '3' },
+    paragraphProps: { size, ...props } = { size: 'm' },
   }: structuredTextConfig) =>
     renderRule(isParagraphGuard, ({ children, key }) => (
       <Paragraph key={key} children={children} size={size} {...props} />
@@ -165,8 +160,8 @@ export const structuredTextRules = ({
     k(propConfig)
   )
 }
-interface StructuredTextProps
-  extends React.ComponentProps<typeof ConfigurableText> {
+type ConfigurableTextParams = Parameters<typeof ConfigurableText>[0]
+interface StructuredTextProps extends ConfigurableTextParams {
   config?: structuredTextConfig & { ruleOverrides?: Partial<typeof defaults> }
 }
 
@@ -198,28 +193,3 @@ export const StructuredText: React.FC<StructuredTextProps> = ({
     />
   )
 }
-
-/*
-const configKeys = ({ headingProps }) => {
-  const config = {
-    isHeading: {},
-    isParagraph: {},
-    isBlockquote: {},
-    isList: {},
-    isListItem: {},
-    Span: {},
-    Node: {},
-    isBlock: {},
-    isCode: {},
-    isDocument: {},
-    isInlineItem: {},
-    isThematicBreak: {},
-    isStructuredText: {},
-    isInlineNode: {},
-    isItemLink: {},
-    isLink: {},
-    isRoot: {},
-    isSpan: {},
-  }
-}
- */

@@ -97,7 +97,7 @@ const NavSection: React.FC<NavSectionProps> = ({
   return (
     <Box css={{ borderTop: '1px dashed $colors$DBA30', pt: '$5', pb: '$4' }}>
       <Container as="section">
-        <SectionLabel size="3" as="h3">
+        <SectionLabel size="m" as="h3">
           {section_label}
         </SectionLabel>
         <Flex

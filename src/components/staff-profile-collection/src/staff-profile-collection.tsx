@@ -6,11 +6,12 @@ import {
   styled,
   Flex,
   Box,
-  Paragraph1,
-  Paragraph3,
+  Paragraph,
   ColumnWrapper,
   Column,
   FlatCard,
+  Heading3,
+  Spacer,
 } from '@theme'
 
 interface StaffProfileCollectionProps {
@@ -40,13 +41,6 @@ const Avatar = styled(Image, {
   },
 })
 
-const Name = styled(Paragraph1, {
-  fontWeight: '700',
-  color: '$darkBlue',
-  textGradient: 'linear-gradient(272.88deg, #0072CE 14.59%, #00237D 101%)',
-  my: '$0',
-})
-
 export const NameBadge: React.FC<NameBadgeProps> = ({
   name,
   jobTitle,
@@ -56,15 +50,12 @@ export const NameBadge: React.FC<NameBadgeProps> = ({
     <Flex>
       <Avatar data={avatar.responsiveImage} />
       <Box css={{ alignSelf: 'center' }}>
-        <Name>{name}</Name>
-        <Paragraph3
-          css={{
-            my: '$0',
-            color: '$DBA80',
-          }}
-        >
+        <Heading3 color="primaryGradient" marginTop="none">
+          {name}
+        </Heading3>
+        <Paragraph size="m" marginTop="small">
           {jobTitle}
-        </Paragraph3>
+        </Paragraph>
       </Box>
     </Flex>
   )
@@ -84,7 +75,7 @@ const Col = styled(Column, {
 })
 
 const BiographyStRules = structuredTextRules({
-  paragraphProps: { size: '4' },
+  paragraphProps: { size: 's' },
 })
 
 export const StaffProfile: React.FC<StaffProfileProps> = ({

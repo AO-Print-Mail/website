@@ -5,7 +5,7 @@ import {
   Column,
   ColumnWrapper,
   TextHolder,
-  Heading,
+  Heading3,
 } from '@theme'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
@@ -39,7 +39,7 @@ const Text = ({ data }) => {
     <StructuredText
       data={data}
       customRules={structuredTextRules({
-        paragraphProps: { size: '4', color: 'primary' },
+        paragraphProps: { size: 's' },
       })}
     />
   )
@@ -62,17 +62,13 @@ export const SideBySideParagraphs: React.FC<SideBySideParagraphsProps> = ({
         <ColWrap>
           <Col>
             <TextHolder>
-              <Heading level="6" as="h3" color="primary">
-                {leftHeading}
-              </Heading>
+              <Heading3>{leftHeading}</Heading3>
               <Text data={leftParagraph}></Text>
             </TextHolder>
           </Col>
           <Col>
             <TextHolder>
-              <Heading level="6" as="h3" color="primary">
-                {rightHeading}
-              </Heading>
+              <Heading3>{rightHeading}</Heading3>
               <Text data={rightParagraph}></Text>
             </TextHolder>
           </Col>

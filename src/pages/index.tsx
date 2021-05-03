@@ -1,12 +1,4 @@
-import {
-  styled,
-  Container,
-  Heading1,
-  Box,
-  HomePattern,
-  Heading2,
-  Card,
-} from '@theme'
+import { styled, Container, Box, Heading2, Title, Spacer } from '@theme'
 import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
@@ -16,8 +8,6 @@ import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 import { ClientLogoBanner } from '@components/client-logo-banner'
-import { Button } from '@components/button'
-import { Modal } from '@components/modal'
 
 interface PageProps {
   data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
@@ -53,8 +43,7 @@ const ParagraphText = ({ data, size }) => {
     <StructuredText
       data={data}
       customRules={structuredTextRules({
-        headingProps: { color: 'primary' },
-        paragraphProps: { size, color: 'primary' },
+        paragraphProps: { size },
         listItemProps: {
           icon: 'CheckLeaf',
           iconProps: {
@@ -75,8 +64,8 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       key={f.heading}
       css={{ '@initial': { px: '$2' }, '@m': { px: '$3' }, '@l': { px: '$4' } }}
     >
-      <Heading2 color="primary">{f.heading}</Heading2>
-      <ParagraphText data={f.paragraph} size="3" />
+      <Heading2>{f.heading}</Heading2>
+      <ParagraphText data={f.paragraph} size="m" />
     </Box>
   ))
   return (
@@ -95,33 +84,16 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       >
         <Container
           css={{
-            pt: '$6',
+            pt: '$7',
             '@m': { height: '680px' },
-            '@l': { display: 'flex', height: '768px', pt: '$5' },
+            '@l': { display: 'flex', height: '768px' },
           }}
         >
-          <HomePattern
-            css={{
-              height: '240px',
-              width: 'auto',
-              position: 'absolute',
-              right: '-$7',
-              top: '$7',
-              display: 'none',
-              '@s': { right: '-$6', height: '300px' },
-              '@m': {
-                top: '0',
-                display: 'block',
-                height: '100%',
-                right: '-$10',
-              },
-              '@l': { right: '-$4', top: '0' },
-            }}
-          />
           <HeroText>
-            <Heading1 color="primary">{data.mainHeading}</Heading1>
+            <Title>{data.mainHeading}</Title>
+            <Spacer />
             <Box css={{ maxWidth: '60ch' }}>
-              <ParagraphText data={data.heroParagraph} size={'2'} />
+              <ParagraphText data={data.heroParagraph} size="l" />
             </Box>
           </HeroText>
         </Container>

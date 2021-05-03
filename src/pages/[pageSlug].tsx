@@ -1,11 +1,12 @@
 import { request } from '@lib/datocms/datocms'
 import {
-  Heading1,
   Box,
   Container,
   styled,
   TextHolder,
   BreakoutTextHolder,
+  Title,
+  Spacer,
 } from '@theme'
 import { Layout } from '@components/layout'
 import { ClientLogoBanner } from '@components/client-logo-banner'
@@ -64,7 +65,7 @@ const ConfiguredText = ({ data, size }) => {
       renderBlock={structuredTextBlockRules}
       customRules={structuredTextRules({
         headingProps: { color: 'primary' },
-        paragraphProps: { size, color: 'primary' },
+        paragraphProps: { size },
         listItemProps: {
           icon: 'CheckLeaf',
           iconProps: {
@@ -120,15 +121,16 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
       >
         <Container
           css={{
-            pt: '$6',
+            pt: '$7',
             '@m': { height: '680px' },
-            '@l': { display: 'flex', height: '768px', pt: '$5' },
+            '@l': { display: 'flex', height: '768px' },
           }}
         >
           <HeroText>
-            <Heading1 color="primary">{data.mainHeading}</Heading1>
+            <Title>{data.mainHeading}</Title>
+            <Spacer />
             <Box css={{ maxWidth: '60ch', mt: '$4' }}>
-              <ConfiguredText data={data.heroParagraph} size="2" />
+              <ConfiguredText data={data.heroParagraph} size="l" />
             </Box>
           </HeroText>
         </Container>
@@ -152,8 +154,7 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
               data={data.pageContent}
               customRules={structuredTextRules({
                 paragraphProps: {
-                  size: '3',
-                  color: 'primary',
+                  size: 'm',
                 },
               })}
               //@ts-expect-error

@@ -92,7 +92,7 @@ const Legal: React.FC<PageProps> = ({ data }) => {
           <TextHolder
             css={{ mt: '$7', '@m': { mt: '$8' }, '@l': { ml: '8.33%' } }}
           >
-            <Heading1 color="primary">{data.legalPage.title}</Heading1>
+            <Heading1>{data.legalPage.title}</Heading1>
           </TextHolder>
         </Container>
       </Box>

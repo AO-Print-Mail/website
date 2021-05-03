@@ -9,7 +9,7 @@ import type {
   FullWidthCalloutRecord,
 } from './__generated__/types'
 import dynamic from 'next/dynamic'
-import { fullWidth } from '@theme/utilityClasses'
+import { fullWidth } from '@theme/utils/utilityClasses'
 
 export type BlockRecord =
   | TestimonialRecord

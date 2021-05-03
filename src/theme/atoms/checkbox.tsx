@@ -42,7 +42,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <Flex {...props}>
         {_checkbox}
-        <LabelStyles size="5" as="label" htmlFor={id}>
+        <LabelStyles size="xs" as="label" htmlFor={id}>
           {children}
         </LabelStyles>
       </Flex>

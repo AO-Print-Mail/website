@@ -1,7 +1,7 @@
 import { StitchesCss, StitchesVariants, createCss } from '@stitches/react'
 import { breakpoints as media } from './breakpoints'
 import { theme } from './tokens'
-import utils from './utils'
+import utils from './utils/utils'
 
 export const stitchesConfig = createCss({
   prefix: '',

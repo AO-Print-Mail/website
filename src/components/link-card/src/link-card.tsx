@@ -5,9 +5,8 @@ import {
   styled,
   CSS,
   Spacer,
-  Paragraph4,
   Paragraph,
-  Heading,
+  Heading6,
 } from '@theme'
 import {
   Image,
@@ -70,7 +69,7 @@ const Arrow = styled(ArrowForward, {
 const CtaLink: React.FC<LinkTextProps> = ({ text, css }) => {
   return (
     <Flex as="span" css={{ mt: '$4', ...css }}>
-      <LinkText size="4">{text}</LinkText>
+      <LinkText size="s">{text}</LinkText>
       <Arrow />
     </Flex>
   )
@@ -78,13 +77,13 @@ const CtaLink: React.FC<LinkTextProps> = ({ text, css }) => {
 
 const textRules = [
   renderRule(isParagraph, (node) => (
-    <Paragraph4 css={{ color: 'inherit', mt: '$1' }} key={node.key}>
+    <Paragraph size="s" css={{ color: 'inherit', mt: '$1' }} key={node.key}>
       {node.children}
-    </Paragraph4>
+    </Paragraph>
   )),
 ]
 
-const Title = styled(Heading, {
+const Title = styled(Heading6, {
   color: '$DBA90',
   mt: '$2',
   lineHeight: '$3',
@@ -119,8 +118,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
 }) => {
   return (
     <CardBackground {...props}>
-      <Spacer />
-      <Title as="h1" level="6">
+      <Heading6 as="h1">
         <a
           href={link}
           style={{
@@ -131,7 +129,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
         >
           {title}
         </a>
-      </Title>
+      </Heading6>
       <Spacer />
       <Flex
         css={{

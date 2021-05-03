@@ -1,4 +1,4 @@
-import { css } from '.'
+import { css } from '..'
 
 export const visuallyHidden = css({
   clip: 'rect(0 0 0 0)',

@@ -1,14 +1,13 @@
 import Head from 'next/head'
-import { isBrowser } from '@utils'
-
-import '../styles/font-face.css'
+import dynamic from 'next/dynamic'
+import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { StateMachineProvider, createStore } from 'little-state-machine'
 import { store } from '@lib/little-state-machine'
 import { LazyMotion, domMax } from 'framer-motion'
-import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import { UserData } from '@lib/react'
 import { globalStyles } from '@theme'
-import dynamic from 'next/dynamic'
+import { isBrowser } from '@utils'
+import '../styles/font-face.css'
 
 export function reportWebVitals(metric: NextWebVitalsMetric) {
   console.log(JSON.stringify(metric, null, 2))

@@ -1,8 +1,7 @@
 import { styled, css } from '@theme'
 import { forwardRef } from 'react'
-import { ResetButton } from './resetButton'
 
-export const Heading = styled('h1', {
+const Heading = styled('h1', {
   color: '$DA100',
   fontWeight: '$semibold',
   fontFamily: '$heading',
@@ -115,27 +114,27 @@ export const Heading = styled('h1', {
   ],
 })
 
-export const Heading1 = forwardRef<
+const Heading1 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="1" as="h1" ref={ref} {...props} />)
-export const Heading2 = forwardRef<
+const Heading2 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="2" as="h2" ref={ref} {...props} />)
-export const Heading3 = forwardRef<
+const Heading3 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="3" as="h3" ref={ref} {...props} />)
-export const Heading4 = forwardRef<
+const Heading4 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="4" as="h4" ref={ref} {...props} />)
-export const Heading5 = forwardRef<
+const Heading5 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >((props, ref) => <Heading level="5" as="h5" ref={ref} {...props} />)
-export const Heading6 = forwardRef<
+const Heading6 = forwardRef<
   HTMLHeadingElement,
   React.ComponentProps<typeof Heading>
 >(({ as = 'h6', ...props }, ref) => (
@@ -268,10 +267,11 @@ export const Paragraph = styled('p', {
   'li &': {
     m: '0',
   },
-  [`${ResetButton} &`]: {
+  [`button &, label &`]: {
     m: '0 !important',
     p: '0 !important',
     letterSpacing: '$reg !important',
+    lineHeight: '1 !important',
   },
   'label&, input&, span&': {
     m: '0',
@@ -285,19 +285,19 @@ export const Paragraph1 = forwardRef<
 export const Paragraph2 = forwardRef<
   HTMLParagraphElement,
   React.ComponentProps<typeof Paragraph>
->((props, ref) => <Paragraph size="2" ref={ref} {...props} />)
+>((props, ref) => <Paragraph size="l" ref={ref} {...props} />)
 export const Paragraph3 = forwardRef<
   HTMLParagraphElement,
   React.ComponentProps<typeof Paragraph>
->((props, ref) => <Paragraph size="3" ref={ref} {...props} />)
+>((props, ref) => <Paragraph size="m" ref={ref} {...props} />)
 export const Paragraph4 = forwardRef<
   HTMLParagraphElement,
   React.ComponentProps<typeof Paragraph>
->((props, ref) => <Paragraph size="4" ref={ref} {...props} />)
+>((props, ref) => <Paragraph size="s" ref={ref} {...props} />)
 export const Paragraph5 = forwardRef<
   HTMLParagraphElement,
   React.ComponentProps<typeof Paragraph>
->((props, ref) => <Paragraph size="5" ref={ref} {...props} />)
+>((props, ref) => <Paragraph size="xs" ref={ref} {...props} />)
 
 export const UI = forwardRef<
   HTMLSpanElement,
