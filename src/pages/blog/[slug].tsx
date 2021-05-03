@@ -1,4 +1,4 @@
-import { ThenArg } from '@utils/src'
+import { Awaited } from '@utils/src'
 import { request } from '@lib/datocms/datocms'
 import {
   GetBlogPostQuery,
@@ -20,7 +20,7 @@ import { StructuredText } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
 const Img = styled(Image, {

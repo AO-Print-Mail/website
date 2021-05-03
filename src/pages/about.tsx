@@ -1,4 +1,4 @@
-import { ThenArg } from '@utils/src'
+import { Awaited } from '@utils/src'
 import { styled, Container, Box, Title, Spacer } from '@theme'
 import { Layout } from '@components/layout'
 import { GetAboutUsQuery } from '@lib/datocms/__generated__/types'
@@ -7,7 +7,7 @@ import { StructuredText } from '@lib/datocms/structuredText'
 import { structuredTextBlockRules } from '@lib/datocms/blockRules'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
 const HeroText = styled('div', {

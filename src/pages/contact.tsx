@@ -1,4 +1,4 @@
-import { ThenArg } from '@utils/src'
+import { Awaited } from '@utils/src'
 import { Layout } from '@components/layout'
 import {
   ArrowForward,
@@ -22,7 +22,7 @@ import Image from 'next/image'
 import { ContactForm } from '@components/contact-form'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
 const openingHours = [

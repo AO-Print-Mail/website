@@ -1,6 +1,6 @@
 export type Merge<T, P> = P & Omit<T, keyof P>
 
-export type ThenArg<T> = T extends PromiseLike<infer U> ? U : T
+export type Awaited<T> = T extends PromiseLike<infer U> ? Awaited<U> : T
 
 export type UnionStringArray<T extends Readonly<string[]>> = T[number]
 

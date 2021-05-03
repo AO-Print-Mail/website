@@ -3,14 +3,15 @@ import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
-import { ThenArg } from '@utils/src'
+import type { Awaited } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 import { ClientLogoBanner } from '@components/client-logo-banner'
+import { ArticleListCard } from '@components/article-list-card'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
 const HeroText = styled('div', {
@@ -98,7 +99,10 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           </HeroText>
         </Container>
       </Box>
-      <Box>
+      <Container>
+        <ArticleListCard data={data.cardData} />
+      </Container>
+      <Box css={{ mt: '$10' }}>
         <HomePageBody
           cardData={data.cardData}
           featureSections={featureSections}

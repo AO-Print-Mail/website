@@ -15,7 +15,7 @@ import {
   GetServicePageQuery,
   GetServicePagesQuery,
 } from '@lib/datocms/__generated__/types'
-import { ThenArg } from '@utils/src'
+import { Awaited } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
 import {
@@ -28,7 +28,7 @@ const Printer = dynamic(import('../svg/printer.svg'))
 const Inserter = dynamic(import('../svg/inserter.svg'))
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
   pageSlug: string
 }
 

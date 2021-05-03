@@ -7,14 +7,14 @@ import {
   GetLandingPagesQuery,
   GetLandingPageQuery,
 } from '@lib/datocms/__generated__/types'
-import { ThenArg } from '@utils/src'
+import { Awaited } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
 import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 import { Header } from '@components/header-landing'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
   pageSlug: string
 }
 
