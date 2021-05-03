@@ -1,5 +1,5 @@
 import { forwardRef, ReactNode } from 'react'
-import { visuallyHidden } from '@theme/utilityClasses'
+import { visuallyHidden } from '@theme/utils/utilityClasses'
 import { styled, Paragraph3, Paragraph4, Paragraph5, Box, CSS } from '..'
 
 interface InputProps

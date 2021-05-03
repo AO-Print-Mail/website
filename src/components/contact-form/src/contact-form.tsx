@@ -167,7 +167,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
           </Flex>
         </SuccessBackground>
       )}
-      <Heading2 level="4" color="primary">
+      <Heading2 marginTop="small" level="4" color="primary">
         Send a message
       </Heading2>
       <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>

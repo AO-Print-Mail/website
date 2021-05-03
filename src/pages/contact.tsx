@@ -13,6 +13,7 @@ import {
   Spacer,
   styled,
   TextHolder,
+  Title,
 } from '@theme'
 import { request } from '@lib/datocms/datocms'
 import { GetContactPageQuery } from '@lib/datocms/__generated__/types'
@@ -106,10 +107,8 @@ const Contact: React.FC<PageProps> = ({ data }) => {
             '@m': { minHeight: '400px' },
           }}
         >
-          <TextHolder
-            css={{ mt: '$7', '@m': { mt: '$8' }, '@l': { ml: '8.33%' } }}
-          >
-            <Heading1 color="primary">Contact Us</Heading1>
+          <TextHolder css={{ mt: '$7', '@l': { ml: '8.33%' } }}>
+            <Title color="primaryGradient">{data.contactPage.title}</Title>
           </TextHolder>
         </Container>
       </Box>
@@ -131,7 +130,11 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   '@l': { width: 'auto', float: 'none' },
                 }}
               >
-                <Heading2 level="6" css={{ fontWeight: 'bold' }}>
+                <Heading2
+                  marginTop="small"
+                  level="6"
+                  css={{ fontWeight: 'bold' }}
+                >
                   Call us:
                 </Heading2>
                 <Button
@@ -151,7 +154,11 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   '@l': { width: 'auto', float: 'none' },
                 }}
               >
-                <Heading2 level="6" css={{ fontWeight: 'bold' }}>
+                <Heading2
+                  level="6"
+                  marginTop="small"
+                  css={{ fontWeight: 'bold' }}
+                >
                   Opening hours:
                 </Heading2>
                 <Spacer />
@@ -168,7 +175,11 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   '@l': { width: 'auto', float: 'none' },
                 }}
               >
-                <Heading2 level="6" css={{ fontWeight: 'bold' }}>
+                <Heading2
+                  level="6"
+                  marginTop="small"
+                  css={{ fontWeight: 'bold' }}
+                >
                   Visit Us:
                 </Heading2>
                 <Paragraph size="4" color="primary">

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { As, ComponentWithAs, PropsOf, RightJoinProps } from './system/types'
+import { As, ComponentWithAs, PropsOf, RightJoinProps } from '../system/types'
 
 export function forwardRef<Props extends object, Component extends As>(
   component: React.ForwardRefRenderFunction<

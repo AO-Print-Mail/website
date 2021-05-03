@@ -1,5 +1,14 @@
 import { ThenArg } from '@utils/src'
-import { styled, Container, Heading1, Box, HomePattern, Heading2 } from '@theme'
+import {
+  styled,
+  Container,
+  Heading1,
+  Box,
+  HomePattern,
+  Heading2,
+  Title,
+  Spacer,
+} from '@theme'
 import { Layout } from '@components/layout'
 import { GetAboutUsQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
@@ -87,8 +96,9 @@ const AboutUsPage: React.FC<PageProps> = ({ data }) => {
           }}
         >
           <HeroText>
-            <Heading1 color="primary">{data.mainHeading}</Heading1>
-            <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
+            <Title color="primaryGradient">{data.mainHeading}</Title>
+            <Spacer />
+            <Box css={{ maxWidth: '60ch' }}>
               <ConfiguredText data={data.heroParagraph} size="2" />
             </Box>
           </HeroText>

@@ -5,7 +5,7 @@ import {
   styled,
   Paragraph5,
   Paragraph4,
-  Heading1,
+  Title,
 } from '@theme'
 import { isParagraph } from 'datocms-structured-text-utils'
 import React from 'react'
@@ -21,11 +21,6 @@ interface ArticleSummaryProps {
   summary: StructuredTextDocument
   breadcrumbLinks?: { name: string; url: string }[]
 }
-
-const Title = styled(Heading1, {
-  textGradient: 'linear-gradient(272.88deg, #0072CE 14.59%, #00237D 101%)',
-  my: '0',
-})
 
 const Updated = styled(Paragraph5, {
   color: '$DBA70',
@@ -46,7 +41,9 @@ export const ArticleSummary: React.FC<
     <Box {...props}>
       {breadcrumbLinks && <Breadcrumbs links={breadcrumbLinks} />}
       <Spacer size={breadcrumbLinks ? 'small' : 'large'} />
-      <Title>{title}</Title>
+      <Title color="primaryGradient" css={{ my: '0' }}>
+        {title}
+      </Title>
       {lastUpdated && <Updated>Last updated {lastUpdated}</Updated>}
       <StructuredText data={summary} customRules={structuredTextRulez} />
     </Box>

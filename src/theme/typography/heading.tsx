@@ -1,9 +1,8 @@
-import { StitchesVariants } from '@stitches/core'
-import { Component, forwardRef } from 'react'
+import { setComponentProps } from '@theme/utils/setComponentProps'
 import { styled, CSS } from '..'
 
 const headingSizes: CSS = {
-  '1': {
+  1: {
     fontSize: '$h1m',
     lineHeight: '$h1m',
     marginBottom: '-9px',
@@ -107,14 +106,14 @@ const headingSizes: CSS = {
 
 export const Heading = styled('h1', {
   fontWeight: '$bold',
-  marginTop: '$3',
+  marginTop: '$4',
   overflow: 'visible',
   letterSpacing: '$cosy',
   '@m': {
-    marginTop: '$3',
+    marginTop: '$5',
   },
   '@l': {
-    marginTop: '$4',
+    marginTop: '$6',
   },
   variants: {
     level: { ...headingSizes },
@@ -125,10 +124,33 @@ export const Heading = styled('h1', {
       light: {
         color: '$LA100',
       },
+      primaryGradient: {
+        textGradient:
+          'linear-gradient(272.88deg, #0072CE 14.59%, #00237D 101%)',
+      },
+      lightGradient: {
+        textGradient:
+          'linear-gradient(272.88deg, #B6DDF6 14.59%, #0072CE 101%)',
+      },
+      orangeGradient: {
+        textGradient: 'linear-gradient(90deg, #EE3131 0.03%, #F89E33 100.02%)',
+      },
     },
     alignLeft: { true: { textAlign: 'left' } },
     alignRight: { true: { textAlign: 'right' } },
     alignCenter: { true: { textAlign: 'center' } },
+    marginTop: {
+      none: { mt: '0' },
+      small: {
+        mt: '$2',
+        '@m': {
+          marginTop: '$3',
+        },
+        '@l': {
+          marginTop: '$4',
+        },
+      },
+    },
   },
   compoundVariants: [
     { level: '1', color: 'light', css: { color: '$LA100' } },
@@ -139,19 +161,6 @@ export const Heading = styled('h1', {
     { level: '6', color: 'light', css: { color: '$LA80' } },
   ],
 })
-
-function setComponentProps<T>(
-  Component: React.FC<any>,
-  defaultProps: StitchesVariants<Component>
-): React.ForwardRefExoticComponent<
-  Pick<any, string | number | symbol> & React.RefAttributes<HTMLHeadingElement>
-> {
-  //@ts-expect-error
-  return forwardRef<T, StitchesVariants<Component>>((componentProps, ref) => {
-    const _props = Object.assign({}, defaultProps, componentProps)
-    return <Component ref={ref} {..._props} />
-  })
-}
 
 export const Heading1 = setComponentProps<HTMLHeadingElement>(Heading, {
   as: 'h1',

@@ -8,10 +8,9 @@ import {
   Column,
   ColumnWrapper,
   FullWidthFeatureContainer,
-  Heading,
+  Title,
 } from '@theme'
 import { Image, ResponsiveImageType } from 'react-datocms'
-import Pattern from '@svg/cornerPatternDark.svg'
 
 interface TestimonialProps {
   image: ResponsiveImageType
@@ -20,31 +19,6 @@ interface TestimonialProps {
   testimonial: string
   css?: CSS
 }
-
-const Background = styled('div', {
-  position: 'relative',
-  background: '$N90',
-  minHeight: '$10',
-  pt: '$7',
-  pb: '$6',
-})
-
-const BackgroundImage = styled(Pattern, {
-  opacity: '0.8',
-  position: 'absolute',
-  pointerEvents: 'none',
-  maxWidth: '100%',
-  width: '75%',
-  top: '0',
-  left: '0',
-  '@m': {
-    width: '50%',
-  },
-  '@l': {
-    width: 'auto',
-    height: '$10',
-  },
-})
 
 const Photo = styled(Image, {
   objectFit: 'cover',
@@ -95,7 +69,7 @@ const TestimonialTextHolder = styled(ColumnWrapper, {
   },
 })
 
-const Quote = styled(Heading, {
+const Quote = styled(Title, {
   color: '$white',
   mx: '0',
   p: '0',
@@ -117,7 +91,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
       <TestimonialTextHolder>
         <Column>
           <TextHolder>
-            <Quote level="6" as="blockquote">
+            <Quote level="3" as="blockquote">
               {testimonial}
             </Quote>
           </TextHolder>

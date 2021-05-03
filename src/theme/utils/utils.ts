@@ -1,5 +1,5 @@
-import { theme, stitchesConfig, CSS } from '.'
-import { colors } from './tokens/colors'
+import { theme, stitchesConfig, CSS } from '..'
+import { colors } from '../tokens/colors'
 
 const gradients = {
   $orange: '90deg, #EE3131 0%, #F89E33 100.02%',

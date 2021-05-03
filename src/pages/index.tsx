@@ -6,6 +6,8 @@ import {
   HomePattern,
   Heading2,
   Card,
+  Title,
+  Spacer,
 } from '@theme'
 import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
@@ -95,31 +97,14 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       >
         <Container
           css={{
-            pt: '$6',
+            pt: '$7',
             '@m': { height: '680px' },
-            '@l': { display: 'flex', height: '768px', pt: '$5' },
+            '@l': { display: 'flex', height: '768px' },
           }}
         >
-          <HomePattern
-            css={{
-              height: '240px',
-              width: 'auto',
-              position: 'absolute',
-              right: '-$7',
-              top: '$7',
-              display: 'none',
-              '@s': { right: '-$6', height: '300px' },
-              '@m': {
-                top: '0',
-                display: 'block',
-                height: '100%',
-                right: '-$10',
-              },
-              '@l': { right: '-$4', top: '0' },
-            }}
-          />
           <HeroText>
-            <Heading1 color="primary">{data.mainHeading}</Heading1>
+            <Title>{data.mainHeading}</Title>
+            <Spacer />
             <Box css={{ maxWidth: '60ch' }}>
               <ParagraphText data={data.heroParagraph} size={'2'} />
             </Box>
