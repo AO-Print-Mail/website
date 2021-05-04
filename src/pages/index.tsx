@@ -123,7 +123,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         </Container>
       </Box>
       <Container>
-        <ArticleListCard data={data.cardData} />
+        <ArticleListCard data={data.cardData} css={{ top: '-$4' }} />
       </Container>
       <Box css={{ mt: '$10' }}>
         <HomePageBody

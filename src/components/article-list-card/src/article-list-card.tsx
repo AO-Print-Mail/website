@@ -1,42 +1,80 @@
 import React from 'react'
 import { Image, ResponsiveImageType } from 'react-datocms'
-import { Box, Card, CSS, Heading2, Paragraph, styled } from '@theme'
+import {
+  Box,
+  Card,
+  CtaLink,
+  Heading2,
+  HoverGroupFlex,
+  Paragraph,
+  styled,
+} from '@theme'
 
-interface ArticleListCardProps {
+interface ArticleListCardProps
+  extends Partial<React.ComponentProps<typeof CardBackground>> {
   data: CardProps[]
 }
 
-interface CardProps {
+interface CardProps
+  extends Partial<React.ComponentProps<typeof ServiceEntryLayout>> {
   title?: string
   image?: ResponsiveImageType
   description?: string
   link?: string
   linkText?: string
-  css?: CSS
 }
 
-const CardBackground = styled(Card, {})
+const CardBackground = styled(Card, {
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+})
 
-const ServiceEntryLayout = styled(Box, {})
+const ServiceEntryLayout = styled(HoverGroupFlex, {
+  py: '$3',
+  flex: '0 0 auto',
+  [`&:not(:last-child)`]: {
+    borderBottom: 'solid blue',
+  },
+})
 const ServiceEntryText = styled(Box, {})
-const ServiceImage = styled(Image, {})
+const ServiceImage = styled(Image, {
+  br: '$3',
+  flex: '0 0 $sizes$10',
+  mr: '$3',
+})
 
-const ServiceEntry: React.FC<CardProps> = ({ image, title, description }) => {
+const ServiceEntry: React.FC<CardProps> = ({
+  image,
+  title,
+  description,
+  linkText,
+  link,
+  ...props
+}) => {
   return (
-    <ServiceEntryLayout>
+    <ServiceEntryLayout {...props}>
       <ServiceImage data={image} />
       <ServiceEntryText>
-        <Heading2>{title}</Heading2>
-        <Paragraph size="small">{description}</Paragraph>
+        <Heading2 marginTop="none">{title}</Heading2>
+        <Paragraph size="small" css={{ color: '$DA70' }}>
+          {description}
+        </Paragraph>
+        <CtaLink text={linkText} to={link} />
       </ServiceEntryText>
     </ServiceEntryLayout>
   )
 }
 
-export const ArticleListCard: React.FC<ArticleListCardProps> = (props) => {
+export const ArticleListCard: React.FC<ArticleListCardProps> = ({
+  data,
+  ...props
+}) => {
   return (
-    <CardBackground css={{ position: 'relative', top: '-$4' }}>
-      hello
+    <CardBackground {...props}>
+      {data.map((d) => (
+        <ServiceEntry {...d} key={d.title} />
+      ))}
     </CardBackground>
   )
 }

@@ -25,7 +25,7 @@ const Cta: React.FC<LinkTextProps> = ({ href, text, ...props }) => {
     <HoverGroupFlex
       as={LinkEl}
       css={{
-        color: '$blue',
+        color: '$blue !important',
         [`&:hover, ${HoverGroupFlex}:hover &, ${HoverGroup}:hover &`]: {
           color: '$B40 !important',
         },
