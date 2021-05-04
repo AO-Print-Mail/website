@@ -1,12 +1,13 @@
 import {
   Card as CardBg,
   Flex,
-  ArrowForward,
   styled,
   CSS,
   Spacer,
   Paragraph,
   Heading6,
+  CtaLink,
+  HoverGroup,
 } from '@theme'
 import {
   Image,
@@ -16,19 +17,12 @@ import {
 } from 'react-datocms'
 import { isParagraph } from 'datocms-structured-text-utils'
 
-interface LinkCardProps {
+interface LinkCardProps extends Partial<React.ComponentProps<typeof CtaLink>> {
   title?: string
   image?: ResponsiveImageType
   description?: unknown
-  link?: string
-  linkText?: string
   css?: CSS
   onClick?: (e: React.MouseEvent) => void
-}
-
-interface LinkTextProps {
-  text: string
-  css?: CSS
 }
 
 const CardBackground = styled(CardBg, {
@@ -45,36 +39,6 @@ const CardBackground = styled(CardBg, {
   },
 })
 
-const LinkText = styled(Paragraph, {
-  m: '0',
-  color: '$blue',
-  [`&:hover, ${CardBackground}:hover &`]: {
-    color: '$B40',
-  },
-})
-
-const Arrow = styled(ArrowForward, {
-  opacity: '1',
-  willChange: 'transform',
-  transition: 'transform 0.2s ease-out',
-  color: '$blue',
-  ml: '$2',
-  alignSelf: 'center',
-  [`&:hover, ${CardBackground}:hover &`]: {
-    transform: 'translateX($space$1)',
-    color: '$B40',
-  },
-})
-
-const CtaLink: React.FC<LinkTextProps> = ({ text, css }) => {
-  return (
-    <Flex as="span" css={{ mt: '$4', ...css }}>
-      <LinkText size="s">{text}</LinkText>
-      <Arrow />
-    </Flex>
-  )
-}
-
 const textRules = [
   renderRule(isParagraph, (node) => (
     <Paragraph size="s" css={{ color: 'inherit', mt: '$1' }} key={node.key}>
@@ -82,13 +46,6 @@ const textRules = [
     </Paragraph>
   )),
 ]
-
-const Title = styled(Heading6, {
-  color: '$DBA90',
-  mt: '$2',
-  lineHeight: '$3',
-  flex: '0 0',
-})
 
 const ImgWrapper = styled('div', {
   order: '-1',
@@ -99,7 +56,7 @@ const ImgWrapper = styled('div', {
 const Img = styled(Image, {
   transition: 'transform 0.2s ease-out',
   willChange: 'transform',
-  [`${CardBackground}:hover &`]: {
+  [`${HoverGroup}:hover &`]: {
     transform: 'scale(1.01)',
   },
 })
@@ -112,13 +69,12 @@ export const LinkCard: React.FC<LinkCardProps> = ({
   description,
   image,
   link,
-  linkText,
   title,
   ...props
 }) => {
   return (
-    <CardBackground {...props}>
-      <Heading6 as="h1">
+    <CardBackground as={HoverGroup} {...props}>
+      <Heading6 as="h2" marginTop="small">
         <a
           href={link}
           style={{
@@ -139,6 +95,7 @@ export const LinkCard: React.FC<LinkCardProps> = ({
         }}
       >
         <Summary data={description} />
+        <Spacer size="large" />
         <CtaLink text="Read more" />
       </Flex>
       {image && (

@@ -7,7 +7,7 @@ import {
   StructuredTextDocument,
 } from 'react-datocms'
 
-interface ArticleSummaryProps {
+interface ArticleSummaryProps extends React.ComponentProps<typeof Box> {
   title: string
   lastUpdated?: string
   summary: StructuredTextDocument
@@ -26,9 +26,13 @@ const structuredTextRulez = [
   )),
 ]
 
-export const ArticleSummary: React.FC<
-  ArticleSummaryProps & React.ComponentProps<typeof Box>
-> = ({ title, lastUpdated, summary, breadcrumbLinks, ...props }) => {
+export const ArticleSummary: React.FC<ArticleSummaryProps> = ({
+  title,
+  lastUpdated,
+  summary,
+  breadcrumbLinks,
+  ...props
+}) => {
   return (
     <Box {...props}>
       {breadcrumbLinks && <Breadcrumbs links={breadcrumbLinks} />}
@@ -37,7 +41,9 @@ export const ArticleSummary: React.FC<
         {title}
       </Title>
       {lastUpdated && <Updated size="s">Last updated {lastUpdated}</Updated>}
-      <StructuredText data={summary} customRules={structuredTextRulez} />
+      <Box css={{ '@m': { pr: '$4' }, '@l': { pr: '$5' } }}>
+        <StructuredText data={summary} customRules={structuredTextRulez} />
+      </Box>
     </Box>
   )
 }

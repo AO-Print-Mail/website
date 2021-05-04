@@ -126,7 +126,7 @@ export const Paragraph = styled('p', {
         color: '$LA75',
       },
       primary: {
-        color: '$DBA80',
+        color: '$DBA75',
       },
     },
     lead: {

@@ -1,4 +1,12 @@
-import { styled, Container, Box, Heading2, Title, Spacer } from '@theme'
+import {
+  styled,
+  Container,
+  Box,
+  Heading2,
+  Title,
+  Spacer,
+  TextHolder,
+} from '@theme'
 import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
@@ -9,6 +17,7 @@ import { structuredTextRules } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 import { ArticleListCard } from '@components/article-list-card'
+import { ArticleSummary } from '@components/article-summary'
 
 interface PageProps {
   data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
@@ -90,13 +99,27 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
             '@l': { display: 'flex', height: '768px' },
           }}
         >
-          <HeroText>
+          <TextHolder
+            css={{
+              mt: '$6',
+              '@m': { mr: '16.67%' },
+              '@l': { mr: '33.3%' },
+              '@xl': { mr: '50%' },
+            }}
+          >
+            <ArticleSummary
+              title={data.mainHeading}
+              summary={data.heroParagraph.value}
+            />
+          </TextHolder>
+
+          {/* <HeroText>
             <Title>{data.mainHeading}</Title>
-            <Spacer />
+            <Spacer size="large" />
             <Box css={{ maxWidth: '60ch' }}>
-              <ParagraphText data={data.heroParagraph} size="l" />
+              <ParagraphText data={data.heroParagraph} size="m" />
             </Box>
-          </HeroText>
+          </HeroText> */}
         </Container>
       </Box>
       <Container>

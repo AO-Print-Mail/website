@@ -69,6 +69,7 @@ const LegalPage: React.FC<PageProps> = ({ data }) => {
   return (
     <Layout
       canonicalPath={`https://www.aomail.com.au/legal/${data.legalPageSlug}`}
+      //@ts-expect-error
       metaData={data._seoMetaTags}
       layoutElement="article"
     >
@@ -98,7 +99,7 @@ const LegalPage: React.FC<PageProps> = ({ data }) => {
               as="section"
               breadcrumbLinks={[{ name: 'Legal', url: '/legal' }]}
               title={data.title}
-              summary={data.summary}
+              summary={data.summary.value}
             />
           </TextHolder>
         </Container>

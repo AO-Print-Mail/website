@@ -1,5 +1,6 @@
-import type { ResponsiveImageType } from 'react-datocms'
-import { Box, Card, CSS } from '@theme'
+import React from 'react'
+import { Image, ResponsiveImageType } from 'react-datocms'
+import { Box, Card, CSS, Heading2, Paragraph, styled } from '@theme'
 
 interface ArticleListCardProps {
   data: CardProps[]
@@ -14,6 +15,28 @@ interface CardProps {
   css?: CSS
 }
 
+const CardBackground = styled(Card, {})
+
+const ServiceEntryLayout = styled(Box, {})
+const ServiceEntryText = styled(Box, {})
+const ServiceImage = styled(Image, {})
+
+const ServiceEntry: React.FC<CardProps> = ({ image, title, description }) => {
+  return (
+    <ServiceEntryLayout>
+      <ServiceImage data={image} />
+      <ServiceEntryText>
+        <Heading2>{title}</Heading2>
+        <Paragraph size="small">{description}</Paragraph>
+      </ServiceEntryText>
+    </ServiceEntryLayout>
+  )
+}
+
 export const ArticleListCard: React.FC<ArticleListCardProps> = (props) => {
-  return <Card css={{ position: 'relative', top: '$3' }}>hello</Card>
+  return (
+    <CardBackground css={{ position: 'relative', top: '-$4' }}>
+      hello
+    </CardBackground>
+  )
 }
