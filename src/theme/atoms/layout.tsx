@@ -67,5 +67,9 @@ export const BreakoutTextHolder = styled('div', {
   '@l': { mx: '-$4' },
 })
 
-export const HoverGroup = styled(Box, {})
-export const HoverGroupFlex = styled(Flex, {})
+export const HoverGroup = styled(Box, {
+  cursor: 'pointer',
+})
+export const HoverGroupFlex = styled(Flex, {
+  cursor: 'pointer',
+})

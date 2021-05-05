@@ -41,7 +41,7 @@ export const ArticleSummary: React.FC<ArticleSummaryProps> = ({
         {title}
       </Title>
       {lastUpdated && <Updated size="s">Last updated {lastUpdated}</Updated>}
-      <Box css={{ '@m': { pr: '$4' }, '@l': { pr: '$5' } }}>
+      <Box css={{ '@m': { pr: '$5' }, '@l': { pr: '$6' } }}>
         <StructuredText data={summary} customRules={structuredTextRulez} />
       </Box>
     </Box>

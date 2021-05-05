@@ -12,7 +12,6 @@ export const theme = {
     regular: '2px',
     bold: '3px',
   },
-  borderStyles: {},
   radii: {
     '1': '2px',
     '2': '4px',

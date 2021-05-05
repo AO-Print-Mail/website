@@ -95,13 +95,13 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         <Container
           css={{
             pt: '$7',
-            '@m': { height: '680px' },
-            '@l': { display: 'flex', height: '768px' },
+            pb: '$9',
+            '@m': { minHeight: '680px' },
+            '@l': { display: 'flex', pt: '$8', pb: '$9' },
           }}
         >
           <TextHolder
             css={{
-              mt: '$6',
               '@m': { mr: '16.67%' },
               '@l': { mr: '33.3%' },
               '@xl': { mr: '50%' },
@@ -112,25 +112,15 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
               summary={data.heroParagraph.value}
             />
           </TextHolder>
-
-          {/* <HeroText>
-            <Title>{data.mainHeading}</Title>
-            <Spacer size="large" />
-            <Box css={{ maxWidth: '60ch' }}>
-              <ParagraphText data={data.heroParagraph} size="m" />
-            </Box>
-          </HeroText> */}
         </Container>
       </Box>
       <Container>
-        <ArticleListCard data={data.cardData} css={{ top: '-$4' }} />
-      </Container>
-      <Box css={{ mt: '$10' }}>
-        <HomePageBody
-          cardData={data.cardData}
-          featureSections={featureSections}
+        <ArticleListCard
+          data={data.cardData}
+          css={{ top: '-$7', '@l': { top: '-$6' } }}
         />
-      </Box>
+      </Container>
+      <Box css={{ mt: '$10' }}></Box>
       <Box css={{ my: '$7' }}>
         <Container>
           <QuoteCta

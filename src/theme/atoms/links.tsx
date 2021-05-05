@@ -22,29 +22,30 @@ export const ResetLink = styled('a', {
 const Cta: React.FC<LinkTextProps> = ({ href, text, ...props }) => {
   const LinkEl = href ? ResetLink : 'span'
   return (
-    <HoverGroupFlex
-      as={LinkEl}
-      css={{
-        color: '$blue !important',
-        [`&:hover, ${HoverGroupFlex}:hover &, ${HoverGroup}:hover &`]: {
-          color: '$B40 !important',
-        },
-      }}
-      {...props}
-    >
+    <HoverGroupFlex as={LinkEl} {...props}>
       {/* <Arrow /> */}
-      <Paragraph size="s" css={{ color: 'inherit', m: 0 }}>
+      <Paragraph
+        size="s"
+        css={{
+          color: '$blue',
+          m: 0,
+          [`&:hover, ${HoverGroupFlex}:hover &, ${HoverGroup}:hover &`]: {
+            color: '$B40',
+          },
+        }}
+      >
         {text}
       </Paragraph>
       <ArrowForward
         css={{
           willChange: 'transform',
           transition: 'transform 0.2s ease-out',
-          color: 'inherit',
+          color: '$blue',
           ml: '$2',
           alignSelf: 'center',
           [`${HoverGroupFlex}:hover &, ${HoverGroup}:hover &`]: {
             transform: 'translateX($space$1)',
+            color: '$B40 ',
           },
         }}
       />

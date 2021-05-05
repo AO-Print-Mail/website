@@ -17,4 +17,5 @@ export const FlatCard = styled('div', {
 
 export const Card = styled(FlatCard, {
   boxShadow: '$3',
+  border: 'solid 1px $DA10',
 })
