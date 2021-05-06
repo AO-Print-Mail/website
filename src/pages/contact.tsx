@@ -7,7 +7,6 @@ import {
   ColumnWrapper,
   Container,
   Heading2,
-  Heading1,
   Paragraph,
   Phone,
   Spacer,
@@ -184,9 +183,7 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                 <Paragraph size="s">
                   9 Clearview Pl
                   <br />
-                  Brookvale
-                  <br />
-                  Sydney NSW 2100
+                  Brookvale NSW 2100
                 </Paragraph>
                 <Spacer size="large" />
                 <Button
