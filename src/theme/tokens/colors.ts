@@ -111,8 +111,8 @@ export const colors = {
   BA40: 'rgba(0, 114, 206, 0.25)',
   BA75: 'rgba(0, 114, 206, 0.6)',
   //gradients
-  'dotted-vertical':
-    'linear-gradient(90deg, $N30, $N30 50%, $transparent 50%, $transparent)',
   'dotted-horizontal':
+    'linear-gradient(90deg, $N30, $N30 50%, $transparent 50%, $transparent)',
+  'dotted-vertical':
     'linear-gradient(180deg, $N30, $N30 50%, $transparent 50%, $transparent)',
 }

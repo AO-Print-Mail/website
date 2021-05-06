@@ -21,6 +21,8 @@ const HeaderOuter = styled('div', {
     expanded: {
       true: {
         bottom: '0',
+        display: 'flex',
+        flexDirection: 'column',
       },
     },
   },
@@ -144,7 +146,7 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
               </Flex>
             </NavContainer>
           </Container>
-          <Box as={motion.nav} css={{ '@l': { display: 'none' } }} layout>
+          <Box as={motion.div} css={{ '@l': { display: 'none' } }} layout>
             <MobileNavigation id="drawer-menu" navIsOpen={menuIsOpen} />
           </Box>
         </Header>

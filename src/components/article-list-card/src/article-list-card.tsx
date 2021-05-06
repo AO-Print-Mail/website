@@ -56,12 +56,12 @@ const BottomBorder = styled('span', {
   width: '100%',
   height: '1px',
   [`${ServiceEntryLayout}:not(:first-child) &`]: {
-    background: '$dotted-vertical',
+    background: '$dotted-horizontal',
     backgroundSize: '16px 1px',
   },
   '@l': {
     [`${ServiceEntryLayout}:not(:first-child) &`]: {
-      background: '$dotted-horizontal',
+      background: '$dotted-vertical',
       backgroundSize: '1px 16px',
       height: '100%',
       width: '1px',

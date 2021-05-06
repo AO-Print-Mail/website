@@ -23,31 +23,6 @@ interface PageProps {
   data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
-const HeroText = styled('div', {
-  willChange: 'opacity',
-  '@s': {
-    pr: '$2',
-    pl: '$2',
-    pt: '$3',
-    pb: '$6',
-  },
-  '@m': {
-    pr: '$2',
-    pl: '$3',
-    pt: '$6',
-    width: '75%',
-  },
-  '@l': {
-    pr: '$2',
-    pl: '$4',
-    width: '50%',
-  },
-  '@xl': {
-    pr: '$3',
-    pl: '$4',
-  },
-})
-
 const ParagraphText = ({ data, size }) => {
   return (
     <StructuredText
