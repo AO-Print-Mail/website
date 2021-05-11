@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import {
   Box,
@@ -103,8 +103,12 @@ const ServiceEntry: React.FC<CardProps> = ({
   link,
   ...props
 }) => {
+  const linkRef: React.Ref<HTMLAnchorElement> = useRef()
+  const handleLinkClick = (e: React.MouseEvent) => {
+    linkRef.current.click()
+  }
   return (
-    <ServiceEntryLayout {...props}>
+    <ServiceEntryLayout {...props} onClick={handleLinkClick}>
       <BottomBorder aria-hidden />
       <ServiceImage pictureStyle={{ objectFit: 'cover' }} data={image} />
       <ServiceEntryText>
@@ -119,7 +123,7 @@ const ServiceEntry: React.FC<CardProps> = ({
           {description}
         </Paragraph>
         <Spacer />
-        <CtaLink text={linkText} to={link} />
+        <CtaLink ref={linkRef} text={linkText} to={link} />
       </ServiceEntryText>
     </ServiceEntryLayout>
   )

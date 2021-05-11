@@ -62,7 +62,11 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
       <Bg as={motion.div} layoutId="quoteCta" {...props}>
         <AnimatePresence>
           {modalIsOpen && (
-            <Modal toggle={toggleModal} layoutId="quoteCta"></Modal>
+            <Modal
+              mobileWidth="full"
+              toggle={toggleModal}
+              layoutId="quoteCta"
+            ></Modal>
           )}
         </AnimatePresence>
         <Content animate={contentControls} variants={contentVariants}>
