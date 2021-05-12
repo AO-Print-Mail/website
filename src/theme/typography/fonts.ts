@@ -108,13 +108,13 @@ export const lineHeights = {
   //tablet
   p1t: '36px',
   p2t: '28px',
-  p3t: '26px',
-  p4t: '25px',
-  p5t: '22px',
+  p3t: '28px',
+  p4t: '24px',
+  p5t: '24px',
   //desktop
   p1d: '40px',
   p2d: '32px',
-  p3d: '28px',
+  p3d: '32px',
   p4d: '28px',
   p5d: '24px',
   /* TITLE */
