@@ -27,7 +27,7 @@ import { m as motion } from 'framer-motion'
 const FormImage = styled('div', {
   display: 'block',
   position: 'absolute',
-  height: '$12',
+  height: '$10',
   alignSelf: 'flex-end',
   right: '-40px',
   top: '-40px',

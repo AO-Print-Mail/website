@@ -38,6 +38,7 @@ const ModalWrapper = styled(Container, {
         maxWidth: 'auto',
         height: 'auto',
         tlbr: '0',
+        minWidth: '100%',
         px: '0',
         '@l': {
           position: 'relative',
@@ -122,7 +123,6 @@ export const Modal: React.FC<ModalProps> = ({
         animate={backDropControls}
         variants={backdropMotionVariants}
         onClick={toggle}
-        mobileWidth={mobileWidth}
       >
         <ModalWrapper as={motion.div} mobileWidth={mobileWidth}>
           <ModalBackground

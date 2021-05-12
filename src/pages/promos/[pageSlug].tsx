@@ -11,6 +11,7 @@ import { Awaited } from '@utils/src'
 import { StructuredText } from '@lib/datocms/structuredText'
 import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 import { Header } from '@components/header-landing'
+import { QuoteFormDirectMail } from '@components/quote-form-direct-mail'
 
 interface PageProps {
   data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
@@ -81,7 +82,8 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
             }}
           />
         </HeroText>
-        <LandingPageQuoteForm keyword="direct mail" />
+        {/* <LandingPageQuoteForm keyword="direct mail" /> */}
+        <QuoteFormDirectMail />
       </Container>
     </Layout>
   )
