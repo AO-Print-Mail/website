@@ -17,11 +17,15 @@ const ScreenWrapper = styled(motion.div, {
   position: 'fixed',
   tlbr: '0',
   zIndex: '$4',
+  overflow: 'auto',
 })
 
 const BackDrop = styled(motion.div, {
-  position: 'absolute',
-  tlbr: '0',
+  position: 'sticky',
+  top: '0',
+  left: '0',
+  right: '0',
+  minHeight: '100vh',
   background: '$DA50',
   backdropFilter: 'blur(16px)',
   moz: {
@@ -30,22 +34,26 @@ const BackDrop = styled(motion.div, {
 })
 
 const ModalWrapper = styled(Container, {
-  top: '25%',
-  height: '50%',
+  boxSizing: 'margin-box',
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  right: '0',
+  py: '$6',
+  height: '200%',
+  '@l': {
+    py: '$7',
+  },
   variants: {
     mobileWidth: {
       full: {
-        position: 'absolute',
-        maxWidth: 'auto',
-        height: 'auto',
-        tlbr: '0',
-        minWidth: '100%',
-        px: '0',
-        '@l': {
-          position: 'relative',
-          height: '50%',
-          top: '25%',
-          px: '$5',
+        '@m_max': {
+          position: 'absolute',
+          maxWidth: 'auto',
+          height: 'auto',
+          tlbr: '0',
+          minWidth: '100%',
+          p: '0',
         },
       },
       contain: {},
