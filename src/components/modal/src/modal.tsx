@@ -4,7 +4,6 @@ import { styled, Container, Card, Close, TextHolder } from '@theme'
 import { LayoutScrollContext } from '@components/layout'
 import { m as motion, useAnimation, usePresence, Variants } from 'framer-motion'
 import { Button } from '@components/button'
-import { StitchesVariants } from '@stitches/core'
 
 interface ModalProps {
   layoutId?: string
@@ -65,6 +64,13 @@ const backdropMotionVariants: Variants = {
 export const ModalBackground = styled(Card, {
   height: '100%',
   zIndex: '1',
+  mx: 'auto',
+  '@l': {
+    width: '83.33%',
+  },
+  '@xl': {
+    width: '66.67%',
+  },
   variants: {
     mobileWidth: {
       full: {
@@ -130,12 +136,11 @@ export const Modal: React.FC<ModalProps> = ({
 
   return ClientOnlyPortal({
     children: (
-      <ScreenWrapper>
+      <ScreenWrapper onClick={toggle}>
         <BackDrop
           initial="hidden"
           animate={backDropControls}
           variants={backdropMotionVariants}
-          onClick={toggle}
         />
         <ModalWrapper as={motion.div} mobileWidth={mobileWidth}>
           <ModalBackground

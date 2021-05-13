@@ -15,7 +15,6 @@ import {
 } from '@theme'
 import { ArticleSummary } from '@components/article-summary'
 import { Image } from 'react-datocms'
-import dynamic from 'next/dynamic'
 import { StructuredText } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 
@@ -75,7 +74,6 @@ const Blog: React.FC<PageProps> = ({ data }) => {
               lastUpdated={data.lastUpdated}
               summary={data.summary.value}
               breadcrumbLinks={[{ name: 'Blog', url: '/blog' }]}
-              //@ts-expect-error
               as="section"
             />
           </TextHolder>
