@@ -1,16 +1,22 @@
-import { Card, styled } from '@theme'
 import { useEffect, useRef } from 'react'
+import { Card, styled } from '@theme'
 
 export interface WrapperProps extends React.ComponentProps<typeof Frame> {}
 
-const Frame = styled(Card, {
+export const Frame = styled(Card, {
   position: 'fixed',
   zIndex: '$3',
   left: '0',
   right: '0',
   bottom: '0',
   minHeight: '$8',
+  transform: 'translateY(100%)',
+  transition: 'transform 0.2s ease-out',
+  '&.visible': {
+    transform: 'translateY(0)',
+  },
   '@l': {
+    transform: 'translateY(0)',
     minHeight: '42rem',
     height: '100%',
     maxHeight: '100%',

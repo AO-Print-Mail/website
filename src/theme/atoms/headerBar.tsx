@@ -9,5 +9,4 @@ export const HeaderBar = styled(ContentWrapper, {
   borderBottomWidth: '$thin',
   borderBottomColor: '$N30',
   borderBottomStyle: 'solid',
-  zIndex: '$3',
 })

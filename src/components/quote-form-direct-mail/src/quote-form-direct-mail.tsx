@@ -16,24 +16,25 @@ export const QuoteFormDirectMail: React.FC<QuoteFormDirectMailProps> = (
 ) => {
   const [modalIsOpen, toggleModal] = useCycle(false, true)
   const handleToggle = (e: React.MouseEvent) => {
+    e.preventDefault()
     toggleModal()
   }
   return (
     <AnimateSharedLayout>
       <Wrapper as={motion.div} layoutId="quote-modal">
-        <Button layout onClick={handleToggle}>
+        <Button as={motion.button} layout onClick={handleToggle}>
           Open
         </Button>
-        <AnimatePresence>
-          {modalIsOpen && (
-            <Modal
-              mobileWidth="full"
-              toggle={handleToggle}
-              layoutId="quote-modal"
-            ></Modal>
-          )}
-        </AnimatePresence>
       </Wrapper>
+      <AnimatePresence>
+        {modalIsOpen && (
+          <Modal
+            mobileWidth="full"
+            toggle={handleToggle}
+            layoutId="quote-modal"
+          ></Modal>
+        )}
+      </AnimatePresence>
     </AnimateSharedLayout>
   )
 }

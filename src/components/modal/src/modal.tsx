@@ -14,14 +14,16 @@ interface ModalProps {
   mobileWidth?: 'full' | 'contain'
 }
 
-const BackDrop = styled(motion.div, {
+const ScreenWrapper = styled(motion.div, {
   position: 'fixed',
-  top: '0',
-  width: '100%',
-  bottom: '0',
-  left: '0',
-  background: '$DA50',
+  tlbr: '0',
   zIndex: '$4',
+})
+
+const BackDrop = styled(motion.div, {
+  position: 'absolute',
+  tlbr: '0',
+  background: '$DA50',
   backdropFilter: 'blur(16px)',
   moz: {
     background: '$DA80',
@@ -62,6 +64,7 @@ const backdropMotionVariants: Variants = {
 
 export const ModalBackground = styled(Card, {
   height: '100%',
+  zIndex: '1',
   variants: {
     mobileWidth: {
       full: {
@@ -116,21 +119,28 @@ export const Modal: React.FC<ModalProps> = ({
       handleUnmount()
     }
   }, [isPresent])
+
+  const animationProps = layoutId
+    ? { layoutId }
+    : {
+        initial: 'hidden',
+        animate: modalControls,
+        variants: modalMotionVariants,
+      }
+
   return ClientOnlyPortal({
     children: (
-      <BackDrop
-        initial="hidden"
-        animate={backDropControls}
-        variants={backdropMotionVariants}
-        onClick={toggle}
-      >
+      <ScreenWrapper>
+        <BackDrop
+          initial="hidden"
+          animate={backDropControls}
+          variants={backdropMotionVariants}
+          onClick={toggle}
+        />
         <ModalWrapper as={motion.div} mobileWidth={mobileWidth}>
           <ModalBackground
             as={motion.div}
-            layoutId={layoutId}
-            initial={layoutId && modalMotionVariants}
-            animate={layoutId && modalControls}
-            variants={modalMotionVariants}
+            {...animationProps}
             mobileWidth={mobileWidth}
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
@@ -159,7 +169,7 @@ export const Modal: React.FC<ModalProps> = ({
             </TextHolder>
           </ModalBackground>
         </ModalWrapper>
-      </BackDrop>
+      </ScreenWrapper>
     ),
     selector: '#portal-modal',
   })
