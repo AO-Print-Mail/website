@@ -12,6 +12,9 @@ export const Frame = styled(Card, {
   minHeight: '$8',
   transform: 'translateY(100%)',
   transition: 'transform 0.2s ease-out',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'stretch',
   '&.visible': {
     transform: 'translateY(0)',
   },
@@ -19,7 +22,6 @@ export const Frame = styled(Card, {
     transform: 'translateY(0)',
     minHeight: '42rem',
     height: '100%',
-    maxHeight: '100%',
     position: 'relative',
     top: '$3',
     ml: '$3',

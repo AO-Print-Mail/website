@@ -40,10 +40,14 @@ const ModalWrapper = styled(Container, {
   left: '0',
   right: '0',
   py: '$6',
-  height: '200%',
+  height: '480px',
+  '@s': { height: '640px' },
+  '@m': { height: '848px', py: '$7' },
   '@l': {
-    py: '$7',
+    height: '768px',
+    py: '$6',
   },
+  '@xl': { height: '912px', py: '$7' },
   variants: {
     mobileWidth: {
       full: {
@@ -70,6 +74,7 @@ const backdropMotionVariants: Variants = {
 }
 
 export const ModalBackground = styled(Card, {
+  position: 'relative',
   height: '100%',
   zIndex: '1',
   mx: 'auto',
@@ -158,7 +163,13 @@ export const Modal: React.FC<ModalProps> = ({
             onClick={(e: React.MouseEvent) => e.stopPropagation()}
           >
             <TextHolder
-              css={{ position: 'relative', py: '$2' }}
+              css={{
+                py: '$2',
+                height: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'stretch',
+              }}
               as={motion.div}
               layout
             >
@@ -171,8 +182,8 @@ export const Modal: React.FC<ModalProps> = ({
                   color="dark"
                   css={{
                     position: 'absolute',
-                    right: '$3',
-                    '@m': { right: '$4' },
+                    right: '0',
+                    p: 'inherit',
                   }}
                   onClick={toggle}
                 >

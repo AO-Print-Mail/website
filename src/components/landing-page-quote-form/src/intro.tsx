@@ -192,7 +192,6 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
                   changeStep('1')
                 }
               }}
-              toggleIsOpen={toggleIsOpen}
             />
           </Box>
         </Container>
@@ -230,7 +229,6 @@ export const BlankSkeletonScreen = () => (
             buttonOnClick={(e: React.PointerEvent) => {
               e.preventDefault()
             }}
-            toggleIsOpen={() => undefined}
           />
         </Box>
       </Container>

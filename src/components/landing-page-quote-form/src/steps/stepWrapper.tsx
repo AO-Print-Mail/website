@@ -48,11 +48,9 @@ export const Background = styled('div', {
 })
 
 const Content = styled('div', {
-  flex: '1 1 100%',
-  pt: '$3',
-  height: '0px',
-  position: 'absolute',
-  top: '-100%',
+  flex: '1 1',
+  mt: '$5',
+  '@m': { mt: '$6' },
   variants: {
     isOpen: {
       true: {
@@ -103,7 +101,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
 }) => {
   const isNotDesktop = !breakpoints.includes('l')
   return (
-    <Background layout isOpen={isOpen} as={motion.div}>
+    <>
       {success && (
         <SuccessBackground
           as={motion.div}
@@ -112,32 +110,18 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
         />
       )}
       <Content as={motion.div} layout isOpen={isOpen}>
-        {header && <Box css={{ mb: '$3' }}>{header}</Box>}
-        <Container
-          animate={isNotDesktop ? (isOpen ? 'open' : 'closed') : undefined}
-          as={motion.div}
-          variants={contentContainerVariants}
-          css={{
-            maxWidth: '32rem',
-            flex: '1 1 100%',
-            overflow: 'auto',
-            minHeight: '0',
-          }}
-        >
-          {main}
-        </Container>
+        {main}
       </Content>
       {footer && (
-        <Box as={motion.div} layout>
-          <Container
-            as={motion.div}
-            layout
-            css={{ maxWidth: '32rem', flex: '0 0' }}
-          >
-            {footer}
-          </Container>
-        </Box>
+        <Container
+          as={motion.div}
+          layout
+          css={{ maxWidth: '32rem', flex: '0 0' }}
+        >
+          {footer}
+        </Container>
       )}
-    </Background>
+      {!success && header}
+    </>
   )
 }
