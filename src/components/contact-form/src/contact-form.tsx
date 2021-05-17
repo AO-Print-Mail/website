@@ -8,7 +8,6 @@ import {
   classes,
   TextArea,
   InputLabel,
-  Heading,
   Paragraph,
   Heading2,
 } from '@theme'

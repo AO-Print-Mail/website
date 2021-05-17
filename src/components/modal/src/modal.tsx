@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { ClientOnlyPortal } from '@lib/react'
 import { styled, Container, Card, Close, TextHolder } from '@theme'
-import { LayoutScrollContext } from '@components/layout'
+import { LayoutScrollContext } from '@components/layout/src/layoutScrollContext'
 import { m as motion, useAnimation, usePresence, Variants } from 'framer-motion'
 import { Button } from '@components/button'
 

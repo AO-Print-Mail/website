@@ -1,12 +1,10 @@
+import { ArrowForward } from '@theme/icons'
+import { styled } from '@theme/stitches.config'
+import { Paragraph } from '@theme/typography'
 import Link from 'next/link'
-import {
-  styled,
-  Paragraph,
-  HoverGroup,
-  HoverGroupFlex,
-  ArrowForward,
-} from '@theme'
+
 import { forwardRef } from 'react'
+import { HoverGroup, HoverGroupFlex } from './layout'
 
 interface LinkTextProps
   extends Partial<React.ComponentProps<typeof HoverGroupFlex>> {

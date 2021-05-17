@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
-import { styled } from '..'
-import { Paragraph } from './typography'
+import { styled } from '@theme/stitches.config'
+import { Paragraph } from '@theme/typography'
 
 interface RadioButtonProps {
   id?: string

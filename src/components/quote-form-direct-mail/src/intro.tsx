@@ -1,13 +1,11 @@
 import {
   Box,
-  Heading3,
   Paragraph,
   MailIllustration,
   styled,
   Container,
   Close,
   Spacer,
-  Flex,
   Heading2,
 } from '@theme'
 import { FormStepControls } from '../../landing-page-quote-form/src/bottomBarControls'
@@ -53,15 +51,20 @@ const FormImage = styled('div', {
 
 const Content = styled('div', {
   flex: '1 1',
+  opacity: '0',
+  position: 'absolute',
+  transition: { opacity: '0.2s ease-in-out' },
+  '@l': {
+    position: 'static',
+    opacity: '1',
+  },
   variants: {
     isOpen: {
       true: {
         position: 'static',
+        opacity: '1',
       },
     },
-  },
-  '@l': {
-    position: 'static',
   },
 })
 
@@ -119,48 +122,49 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
       <FormImage layout isOpen={isDesktop || isOpen} as={motion.div}>
         <MailIllustration layout as={motion.svg} css={{ height: '100%' }} />
       </FormImage>
-      {(isDesktop || isOpen) && (
-        <Content as={motion.div} layout isOpen={isDesktop || isOpen}>
-          <motion.div layout animate={isDesktop || isOpen ? 'open' : 'closed'}>
-            <Container
-              as={motion.div}
-              variants={contentContainerVariants}
-              css={{ maxWidth: '32rem', pt: '$6', '@s': { pt: '$7' } }}
+      <Content as={motion.div} layout isOpen={isDesktop || isOpen}>
+        {/* <motion.div layout animate={isDesktop || isOpen ? 'open' : 'closed'}> */}
+        <motion.div layout>
+          <Container
+            as={motion.div}
+            variants={contentContainerVariants}
+            css={{ maxWidth: '32rem', pt: '$6', '@s': { pt: '$7' } }}
+            initial="closed"
+            animate="open"
+          >
+            <Heading2
+              as={motion.h2}
+              alignCenter
+              color="primaryGradient"
+              css={{ mt: '0' }}
+              variants={contentChildrenVariants}
             >
-              <Heading2
-                as={motion.h2}
-                alignCenter
-                color="primaryGradient"
-                css={{ mt: '0' }}
-                variants={contentChildrenVariants}
-              >
-                Get a {keyword} quote online
-              </Heading2>
-              <Spacer size="small" />
+              Get a {keyword} quote online
+            </Heading2>
+            <Spacer size="small" />
+            <Paragraph
+              as={motion.p}
+              alignCenter
+              size="m"
+              variants={contentChildrenVariants}
+            >
+              You can expect to receive a quote on the same day so that your job
+              can start asap.
+            </Paragraph>
+            {!!breakpoints.length && (
               <Paragraph
                 as={motion.p}
                 alignCenter
                 size="m"
                 variants={contentChildrenVariants}
               >
-                You can expect to receive a quote on the same day so that your
-                job can start asap.
+                We’ll contact you to clarify any important details that help us
+                plan the right approach and best price.
               </Paragraph>
-              {!!breakpoints.length && (
-                <Paragraph
-                  as={motion.p}
-                  alignCenter
-                  size="m"
-                  variants={contentChildrenVariants}
-                >
-                  We’ll contact you to clarify any important details that help
-                  us plan the right approach and best price.
-                </Paragraph>
-              )}
-            </Container>
-          </motion.div>
-        </Content>
-      )}
+            )}
+          </Container>
+        </motion.div>
+      </Content>
 
       <Container css={{ maxWidth: '32rem', zIndex: '$1', flex: '0 0' }}>
         <Box as={motion.div} layout>
@@ -171,7 +175,6 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               !isDesktop && isOpen ? 'Continue your Quote' : 'Start your quote'
             }
             buttonOnClick={handleClick}
-            toggleIsOpen={toggleIsOpen}
           />
         </Box>
       </Container>
@@ -225,7 +228,6 @@ export const BlankSkeletonScreen = () => (
           buttonOnClick={(e: React.PointerEvent) => {
             e.preventDefault()
           }}
-          toggleIsOpen={() => undefined}
         />
       </Box>
     </Container>

@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
-import { createContext, useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Head from 'next/head'
-import { PageWrapper, ContentWrapper, CSS } from '@theme'
 import { Footer } from '@components/footer'
 import { request } from '@lib/datocms/datocms'
 import { renderMetaTags, SeoMetaTagType } from 'react-datocms'
@@ -13,6 +12,9 @@ import {
   useCycle,
   m as motion,
 } from 'framer-motion'
+import { CSS } from '@theme/stitches.config'
+import { ContentWrapper, PageWrapper } from '@theme/atoms'
+import { LayoutScrollContext } from './layoutScrollContext'
 
 interface LayoutProps {
   title?: string
@@ -33,11 +35,6 @@ export const getStaticProps: GetStaticProps = async () => {
   })
   return { props: data }
 }
-
-export const LayoutScrollContext = createContext({
-  scrollLock: false,
-  toggleScrollLock: undefined,
-})
 
 export const Layout: React.FC<LayoutProps> = ({
   title,

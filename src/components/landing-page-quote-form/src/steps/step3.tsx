@@ -238,7 +238,6 @@ export const Step3Controls: React.FC<Step3Props> = ({
       }}
       buttonColor="success"
       formName={FORM_NAME}
-      toggleIsOpen={toggleIsOpen}
     />
   )
 }

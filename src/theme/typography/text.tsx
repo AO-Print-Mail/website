@@ -1,6 +1,5 @@
-import { styled, css } from '@theme'
-import { ResetButton } from '@theme/atoms'
-import { CSS } from '@theme/stitches.config'
+import { ResetButton } from '@theme/atoms/resetButton'
+import { CSS, styled } from '@theme/stitches.config'
 
 const textSizes: CSS = {
   l: {

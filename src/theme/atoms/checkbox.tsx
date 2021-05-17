@@ -1,7 +1,7 @@
-import { Check } from '@theme/icons'
 import { forwardRef, ReactNode } from 'react'
-import { styled, Flex, CSS } from '..'
-import { Paragraph } from './typography'
+import { styled, CSS } from '@theme/stitches.config'
+import { Paragraph } from '@theme/typography/text'
+import { Flex } from './layout'
 
 interface CheckboxProps {
   id: string

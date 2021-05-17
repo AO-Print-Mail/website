@@ -1,5 +1,5 @@
+import { CSS, styled } from '@theme/stitches.config'
 import { setComponentProps } from '@theme/utils/setComponentProps'
-import { styled, CSS } from '..'
 
 const headingSizes: CSS = {
   1: {

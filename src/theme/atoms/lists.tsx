@@ -1,4 +1,4 @@
-import { styled, CSS } from '..'
+import { styled, CSS } from '@theme/stitches.config'
 import React, { forwardRef } from 'react'
 import * as icons from '../icons'
 

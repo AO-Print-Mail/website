@@ -1,12 +1,13 @@
 import React, { forwardRef, useState, useContext } from 'react'
-import { styled, Container, Logo, Flex, Box } from '@theme'
 import { AnimatePresence, m as motion, useCycle } from 'framer-motion'
 import { Button, MenuButton } from '@components/button'
 import Link from 'next/link'
 import { MobileNavigation } from '@components/mobile-navigation'
 import { DesktopNavigation } from '@components/desktop-navigation'
-import { LayoutScrollContext } from '@components/layout'
 import { Modal } from '@components/modal'
+import { styled } from '@theme/stitches.config'
+import { Box, Container, Flex, Logo } from '@theme/atoms'
+import { LayoutScrollContext } from '@components/layout/src/layoutScrollContext'
 interface HeaderMainProps {
   show?: boolean
 }

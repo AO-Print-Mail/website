@@ -1,4 +1,4 @@
-import { css, styled } from '@theme'
+import { css, styled } from '@theme/stitches.config'
 
 export const Box = styled('div', {
   variants: {

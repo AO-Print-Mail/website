@@ -1,6 +1,8 @@
 import { forwardRef, ReactNode } from 'react'
 import { visuallyHidden } from '@theme/utils/utilityClasses'
-import { styled, Paragraph, Box, CSS } from '..'
+import { Box } from '@theme/atoms/layout'
+import { CSS, styled } from '@theme/stitches.config'
+import { Paragraph } from '@theme/typography/text'
 
 interface InputProps
   extends React.ComponentProps<typeof TextAreaStyles & typeof InputStyles> {

@@ -1,4 +1,4 @@
-import { styled, ThemeVariants } from '@theme'
+import { styled, ThemeVariants } from '@theme/stitches.config'
 
 export type ContentWrapperVariants = ThemeVariants<typeof ContentWrapper>
 

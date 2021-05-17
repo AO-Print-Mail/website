@@ -19,6 +19,7 @@ import {
 } from 'datocms-structured-text-utils'
 import dynamic from 'next/dynamic'
 import { renderRule, StructuredText as ConfigurableText } from 'react-datocms'
+import { Heading, List, listItemProps, Paragraph } from '@theme'
 
 const BlockQuote = dynamic(
   import('@theme/atoms/blockquote').then((res) => res.BlockQuote)
@@ -32,15 +33,6 @@ const OrderedList = dynamic(
 const ListItem = dynamic(
   import('@theme/atoms/lists').then((res) => res.ListItem)
 )
-
-const strikethroughClass = dynamic(
-  import('@theme/atoms/typography').then((res) => res.strikethroughClass)
-)
-const underlineClass = dynamic(
-  import('@theme/atoms/typography').then((res) => res.underlineClass)
-)
-
-import { Heading, List, listItemProps, Paragraph } from '@theme'
 
 type structuredTextConfig = {
   headingProps?: React.ComponentProps<typeof Heading> & {

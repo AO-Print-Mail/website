@@ -49,6 +49,7 @@ export const Background = styled('div', {
 
 const Content = styled('div', {
   flex: '1 1',
+  alignSelf: 'center',
   mt: '$5',
   '@m': { mt: '$6' },
   variants: {

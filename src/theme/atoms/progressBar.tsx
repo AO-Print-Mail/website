@@ -1,4 +1,4 @@
-import { styled, CSS } from '..'
+import { styled, CSS } from '@theme/stitches.config'
 import { m as motion, MotionValue, MotionProps } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { set } from 'shelljs'

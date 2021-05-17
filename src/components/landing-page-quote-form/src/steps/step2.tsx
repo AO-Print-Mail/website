@@ -180,7 +180,6 @@ export const Step2Controls: React.FC<Step2Props> = ({
         }
       }}
       formName={FORM_NAME}
-      toggleIsOpen={toggleIsOpen}
     />
   )
 }
