@@ -1,18 +1,20 @@
-import React, { useRef } from 'react'
+import React, { MutableRefObject, useRef } from 'react'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import {
   Box,
   Card,
   CtaLink,
   Heading3,
+  HoverGroup,
   HoverGroupFlex,
   Paragraph,
   Spacer,
   styled,
 } from '@theme'
+import { title } from 'node:process'
 
 interface ArticleListCardProps
-  extends Partial<React.ComponentProps<typeof CardBackground>> {
+  extends Partial<React.ComponentProps<typeof Background>> {
   data: CardProps[]
 }
 
@@ -22,9 +24,10 @@ interface CardProps extends Partial<React.ComponentProps<typeof Box>> {
   description?: string
   link?: string
   linkText?: string
+  linkRef?: (t: React.Ref<HTMLAnchorElement>) => void
 }
 
-const CardBackground = styled(Card, {
+const Background = styled('div', {
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
@@ -37,30 +40,39 @@ const CardBackground = styled(Card, {
   },
 })
 
-const ServiceEntryLayout = styled(HoverGroupFlex, {
+const ItemWrapper = styled('div', {
+  display: 'flex',
   py: '$4',
-  flex: '0 0 auto',
+  flex: '1 1',
   position: 'relative',
   '@l': {
-    flexDirection: 'column',
-    flex: '1 1',
     px: '$5',
     py: '$0',
   },
 })
+const ServiceEntryLayout = styled(HoverGroupFlex, {
+  flex: '0 0 100%',
+  position: 'relative',
+  '@l': {
+    flexDirection: 'column',
+    flex: '1 1',
+  },
+})
 
 const BottomBorder = styled('span', {
+  display: 'none',
   position: 'absolute',
   top: '0',
   left: '0',
   width: '100%',
   height: '1px',
-  [`${ServiceEntryLayout}:not(:first-child) &`]: {
+  [`${ItemWrapper}:not(:first-child) > &`]: {
+    display: 'block',
     background: '$dotted-horizontal',
     backgroundSize: '16px 1px',
   },
   '@l': {
-    [`${ServiceEntryLayout}:not(:first-child) &`]: {
+    [`${ItemWrapper}:not(:first-child) > &`]: {
       background: '$dotted-vertical',
       backgroundSize: '1px 16px',
       height: '100%',
@@ -101,15 +113,11 @@ const ServiceEntry: React.FC<CardProps> = ({
   description,
   linkText,
   link,
+  linkRef,
   ...props
 }) => {
-  const linkRef: React.Ref<HTMLAnchorElement> = useRef()
-  const handleLinkClick = (e: React.MouseEvent) => {
-    linkRef.current.click()
-  }
   return (
-    <ServiceEntryLayout {...props} onClick={handleLinkClick}>
-      <BottomBorder aria-hidden />
+    <ServiceEntryLayout>
       <ServiceImage pictureStyle={{ objectFit: 'cover' }} data={image} />
       <ServiceEntryText>
         <Heading3 marginTop={{ '@initial': 'none', '@l': 'small' }}>
@@ -123,21 +131,68 @@ const ServiceEntry: React.FC<CardProps> = ({
           {description}
         </Paragraph>
         <Spacer />
-        <CtaLink ref={linkRef} text={linkText} to={link} />
+        <CtaLink
+          //@ts-expect-error
+          ref={linkRef}
+          text={linkText}
+          to={link}
+        />
       </ServiceEntryText>
     </ServiceEntryLayout>
   )
 }
 
+export const CardList: React.FC<React.ComponentProps<typeof Background>> = ({
+  children,
+  ...props
+}) => {
+  const linkRefs = useRef({})
+  function setLinkRef(refId: string) {
+    return function (el: React.Ref<HTMLAnchorElement>) {
+      linkRefs.current[refId] = el
+    }
+  }
+  function handleClick(refId: string) {
+    return function (e: React.MouseEvent) {
+      e.preventDefault()
+      linkRefs.current[refId].click()
+    }
+  }
+  return (
+    children && (
+      <Background as={Card} {...props}>
+        {React.Children.map(children, (child, i) => {
+          const id = child.key || i.toString()
+          return (
+            <ItemWrapper
+              key={id}
+              onClick={handleClick(id)}
+              css={{ position: 'relative' }}
+            >
+              <BottomBorder aria-hidden />
+
+              {React.cloneElement(child, {
+                linkRef: setLinkRef(id),
+                onClick: handleClick(id),
+              })}
+            </ItemWrapper>
+          )
+        })}
+      </Background>
+    )
+  )
+}
+
 export const ArticleListCard: React.FC<ArticleListCardProps> = ({
   data,
+  children,
   ...props
 }) => {
   return (
-    <CardBackground {...props}>
+    <CardList {...props}>
       {data.map((d) => (
-        <ServiceEntry {...d} key={d.title} />
+        <ServiceEntry key={d.title} {...d} />
       ))}
-    </CardBackground>
+    </CardList>
   )
 }

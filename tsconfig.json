@@ -39,7 +39,7 @@
   ],
   "ts-node": {
     "compilerOptions": {
-      "module": "es6",
+      "module": "CommonJS",
       "resolveJsonModule": true,
       "noImplicitAny": false
     }
