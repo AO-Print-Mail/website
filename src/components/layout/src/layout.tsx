@@ -14,7 +14,7 @@ import {
 } from 'framer-motion'
 import { CSS } from '@theme/stitches.config'
 import { ContentWrapper, PageWrapper } from '@theme/atoms'
-import { LayoutScrollContext } from './layoutScrollContext'
+import { LayoutContext } from './layoutContext'
 
 interface LayoutProps {
   title?: string
@@ -114,7 +114,9 @@ export const Layout: React.FC<LayoutProps> = ({
   }
 
   return (
-    <LayoutScrollContext.Provider value={{ scrollLock, toggleScrollLock }}>
+    <LayoutContext.Provider
+      value={{ scrollLock, toggleScrollLock, showNav, setShowNav }}
+    >
       <Head>
         {meta}
         <link rel="canonical" href={canonicalPath} />
@@ -142,6 +144,6 @@ export const Layout: React.FC<LayoutProps> = ({
           footerCss={footerCss}
         />
       </PageWrapper>
-    </LayoutScrollContext.Provider>
+    </LayoutContext.Provider>
   )
 }

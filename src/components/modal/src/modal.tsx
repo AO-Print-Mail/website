@@ -1,9 +1,19 @@
 import React, { useContext, useEffect } from 'react'
 import { ClientOnlyPortal } from '@lib/react'
-import { styled, Container, Card, Close, TextHolder } from '@theme'
-import { LayoutScrollContext } from '@components/layout/src/layoutScrollContext'
+import {
+  styled,
+  Container,
+  Card,
+  Close,
+  TextHolder,
+  Flex,
+  ColumnWrapper,
+  Column,
+} from '@theme'
+import { LayoutContext } from '@components/layout/src/layoutContext'
 import { m as motion, useAnimation, usePresence, Variants } from 'framer-motion'
 import { Button } from '@components/button'
+import { StitchesVariants } from '@stitches/core'
 
 interface ModalProps {
   layoutId?: string
@@ -11,21 +21,20 @@ interface ModalProps {
   toggle?: (e?: React.MouseEvent) => void
   showCloseButton?: boolean
   mobileWidth?: 'full' | 'contain'
+  width?: StitchesVariants<typeof ModalWrapper>
 }
 
-const ScreenWrapper = styled(motion.div, {
+const ScreenWrapper = styled('div', {
   position: 'fixed',
   tlbr: '0',
-  zIndex: '$4',
+  zIndex: '$5',
   overflow: 'auto',
 })
 
 const BackDrop = styled(motion.div, {
-  position: 'sticky',
-  top: '0',
-  left: '0',
-  right: '0',
-  minHeight: '100vh',
+  zIndex: '$4',
+  position: 'fixed',
+  tlbr: '0',
   background: '$DA50',
   backdropFilter: 'blur(16px)',
   moz: {
@@ -33,38 +42,54 @@ const BackDrop = styled(motion.div, {
   },
 })
 
-const ModalWrapper = styled(Container, {
-  boxSizing: 'margin-box',
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  right: '0',
-  py: '$6',
+const ModalWrapper = styled('div', {
+  position: 'relative',
+  my: '$6',
+  mx: 'auto',
   height: '480px',
   '@s': { height: '640px' },
-  '@m': { height: '848px', py: '$7' },
+  '@m': { height: '848px' },
   '@l': {
-    height: '768px',
-    py: '$6',
+    height: '640px',
   },
-  '@xl': { height: '912px', py: '$7' },
+  '@xl': { height: '768px' },
   variants: {
+    width: {
+      s: {
+        width: '100%',
+        '@m': { width: '83.33%' },
+        '@l': { width: '66.67%' },
+        '@xl': { width: '50%' },
+      },
+      m: {
+        width: '100%',
+        '@l': { width: '83.33%' },
+        '@xl': { width: '66.67%' },
+      },
+      l: { width: '100%', '@xl': { width: '83.33%' } },
+      full: { width: '100%' },
+    },
+    height: {
+      s: { width: '' },
+      m: { width: '' },
+      l: { width: '' },
+    },
     mobileWidth: {
       full: {
         '@m_max': {
-          position: 'absolute',
-          maxWidth: 'auto',
-          height: 'auto',
-          tlbr: '0',
-          minWidth: '100%',
+          minHeight: '100vh',
+          width: '100vw',
+          my: '0',
+          mx: '50%',
+          left: '-50vw',
+          right: '-50vw',
           p: '0',
         },
       },
-      contain: {},
     },
   },
   defaultVariants: {
-    mobileWidth: 'contain',
+    width: 'full',
   },
 })
 
@@ -74,22 +99,14 @@ const backdropMotionVariants: Variants = {
 }
 
 export const ModalBackground = styled(Card, {
-  position: 'relative',
-  height: '100%',
-  zIndex: '1',
-  mx: 'auto',
-  '@l': {
-    width: '83.33%',
-  },
-  '@xl': {
-    width: '66.67%',
-  },
+  position: 'absolute',
+  tlbr: '0',
   variants: {
     mobileWidth: {
       full: {
-        br: '0',
-        '@l': {
-          br: '$5',
+        '@m_max': {
+          m: 0,
+          br: '0',
         },
       },
       contain: {},
@@ -110,10 +127,11 @@ export const Modal: React.FC<ModalProps> = ({
   children,
   toggle,
   mobileWidth,
-  showCloseButton = true,
+  width,
+  showCloseButton = false,
   ...props
 }) => {
-  const { toggleScrollLock } = useContext(LayoutScrollContext)
+  const { toggleScrollLock, setShowNav } = useContext(LayoutContext)
   const backDropControls = useAnimation()
   const modalControls = useAnimation()
   const [isPresent, safeToRemove] = usePresence()
@@ -123,15 +141,17 @@ export const Modal: React.FC<ModalProps> = ({
     safeToRemove()
   }
   async function handleUnmount() {
-    toggleScrollLock(true)
+    toggleScrollLock()
     setTimeout(modalAnimateOut, 50)
   }
-  useEffect(() => {
-    //lock the layout when the modal opens
+  function handleMount() {
     toggleScrollLock()
+    setTimeout(setShowNav, 50, false)
     backDropControls.start('visible')
     !layoutId && modalControls.start('visible')
-    //unlock the layout when the modal unmounts, pass true to stop it updating the current position to 0
+  }
+  useEffect(() => {
+    handleMount()
   }, [])
   useEffect(() => {
     if (!isPresent) {
@@ -146,54 +166,70 @@ export const Modal: React.FC<ModalProps> = ({
         animate: modalControls,
         variants: modalMotionVariants,
       }
-
+  function stopPropagationOnClick(e: React.MouseEvent) {
+    e.stopPropagation()
+  }
   return ClientOnlyPortal({
     children: (
-      <ScreenWrapper onClick={toggle}>
+      <>
         <BackDrop
           initial="hidden"
           animate={backDropControls}
           variants={backdropMotionVariants}
         />
-        <ModalWrapper as={motion.div} mobileWidth={mobileWidth}>
-          <ModalBackground
-            as={motion.div}
-            {...animationProps}
-            mobileWidth={mobileWidth}
-            onClick={(e: React.MouseEvent) => e.stopPropagation()}
-          >
-            <TextHolder
-              css={{
-                py: '$2',
-                height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'stretch',
-              }}
-              as={motion.div}
-              layout
-            >
-              {children}
-              {showCloseButton && toggle && (
-                <Button
-                  leftIcon={<Close />}
-                  size="small"
-                  style="naked"
-                  color="dark"
-                  css={{
-                    position: 'absolute',
-                    right: '0',
-                    p: 'inherit',
-                  }}
-                  onClick={toggle}
+        <ScreenWrapper onClick={toggle}>
+          <Container>
+            <ColumnWrapper css={{ display: 'block' }}>
+              <Column>
+                <ModalWrapper
+                  as={motion.div}
+                  mobileWidth={mobileWidth}
+                  onClick={stopPropagationOnClick}
+                  width={width}
                 >
-                  Close
-                </Button>
-              )}
-            </TextHolder>
-          </ModalBackground>
-        </ModalWrapper>
-      </ScreenWrapper>
+                  <ModalBackground
+                    as={motion.div}
+                    layout
+                    {...animationProps}
+                    mobileWidth={mobileWidth}
+                  />
+                  <TextHolder
+                    css={{
+                      position: 'relative',
+                      py: '$2',
+                      height: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'stretch',
+                      zIndex: '1000',
+                    }}
+                    as={motion.div}
+                    layout
+                  >
+                    {children}
+                    {showCloseButton && toggle && (
+                      <Button
+                        leftIcon={<Close />}
+                        size="small"
+                        style="naked"
+                        color="dark"
+                        css={{
+                          position: 'absolute',
+                          right: '0',
+                          p: 'inherit',
+                        }}
+                        onClick={toggle}
+                      >
+                        Close
+                      </Button>
+                    )}
+                  </TextHolder>
+                </ModalWrapper>
+              </Column>
+            </ColumnWrapper>
+          </Container>
+        </ScreenWrapper>
+      </>
     ),
     selector: '#portal-modal',
   })

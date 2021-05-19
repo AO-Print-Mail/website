@@ -9,6 +9,7 @@ import {
   useCycle,
   Variants,
 } from 'framer-motion'
+import { QuoteForm } from '@components/quote-form'
 
 interface QuoteCtaProps {
   heading?: string
@@ -60,17 +61,19 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
   return (
     <AnimateSharedLayout>
       <Bg as={motion.div} layoutId="quoteCta" {...props}>
-        <AnimatePresence>
-          {modalIsOpen && (
-            <Modal
-              mobileWidth="full"
-              toggle={toggleModal}
-              layoutId="quoteCta"
-            ></Modal>
-          )}
-        </AnimatePresence>
-        <Content animate={contentControls} variants={contentVariants}>
-          <Title level="3" alignCenter>
+        <QuoteForm
+          modalLayoutId="quoteCta"
+          active={modalIsOpen}
+          toggle={toggleModal}
+        />
+        <Content layout animate={contentControls} variants={contentVariants}>
+          <Title
+            layout
+            layoutId="quote-title"
+            as={motion.h2}
+            level="3"
+            alignCenter
+          >
             {heading || 'Get a quote for your next job'}
           </Title>
           <TextHolder>

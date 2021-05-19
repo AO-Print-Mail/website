@@ -4,7 +4,6 @@ export type ContainerVariants = ThemeVariants<typeof Container>
 
 export const Container = styled('div', {
   position: 'relative',
-  width: '100%',
   mx: 'auto',
   px: '$3',
   '@m': {

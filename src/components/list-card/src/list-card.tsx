@@ -1,17 +1,15 @@
-import React, { MutableRefObject, useRef } from 'react'
+import React, { useRef } from 'react'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import {
   Box,
   Card,
   CtaLink,
   Heading3,
-  HoverGroup,
   HoverGroupFlex,
   Paragraph,
   Spacer,
   styled,
 } from '@theme'
-import { title } from 'node:process'
 
 interface ArticleListCardProps
   extends Partial<React.ComponentProps<typeof Background>> {
@@ -142,7 +140,7 @@ const ServiceEntry: React.FC<CardProps> = ({
   )
 }
 
-export const CardList: React.FC<React.ComponentProps<typeof Background>> = ({
+export const ListCard: React.FC<React.ComponentProps<typeof Background>> = ({
   children,
   ...props
 }) => {
@@ -158,29 +156,28 @@ export const CardList: React.FC<React.ComponentProps<typeof Background>> = ({
       linkRefs.current[refId].click()
     }
   }
-  return (
-    children && (
-      <Background as={Card} {...props}>
-        {React.Children.map(children, (child, i) => {
-          const id = child.key || i.toString()
-          return (
-            <ItemWrapper
-              key={id}
-              onClick={handleClick(id)}
-              css={{ position: 'relative' }}
-            >
-              <BottomBorder aria-hidden />
+  return children ? (
+    <Background as={Card} {...props}>
+      {React.Children.map(children, (child, i) => {
+        const id = child.key || i.toString()
+        const innerChild = React.cloneElement(child, {
+          onClick: handleClick(id),
+          linkRef: setLinkRef(id),
+        })
+        return (
+          <ItemWrapper
+            key={id}
+            onClick={handleClick(id)}
+            css={{ position: 'relative' }}
+          >
+            <BottomBorder aria-hidden />
 
-              {React.cloneElement(child, {
-                linkRef: setLinkRef(id),
-                onClick: handleClick(id),
-              })}
-            </ItemWrapper>
-          )
-        })}
-      </Background>
-    )
-  )
+            {innerChild}
+          </ItemWrapper>
+        )
+      })}
+    </Background>
+  ) : null
 }
 
 export const ArticleListCard: React.FC<ArticleListCardProps> = ({
@@ -189,10 +186,10 @@ export const ArticleListCard: React.FC<ArticleListCardProps> = ({
   ...props
 }) => {
   return (
-    <CardList {...props}>
+    <ListCard {...props}>
       {data.map((d) => (
         <ServiceEntry key={d.title} {...d} />
       ))}
-    </CardList>
+    </ListCard>
   )
 }

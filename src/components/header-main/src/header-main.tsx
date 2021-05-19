@@ -7,7 +7,7 @@ import { DesktopNavigation } from '@components/desktop-navigation'
 import { Modal } from '@components/modal'
 import { styled } from '@theme/stitches.config'
 import { Box, Container, Flex, Logo } from '@theme/atoms'
-import { LayoutScrollContext } from '@components/layout/src/layoutScrollContext'
+import { LayoutContext } from '@components/layout/src/layoutContext'
 interface HeaderMainProps {
   show?: boolean
 }
@@ -69,7 +69,7 @@ const spring = {
 export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
   ({ show, ...props }, ref) => {
     const [menuIsOpen, setMenuIsOpen] = useState(false)
-    const { toggleScrollLock } = useContext(LayoutScrollContext)
+    const { toggleScrollLock } = useContext(LayoutContext)
     const [modalIsOpen, toggleModalIsOpen] = useCycle(false, true)
 
     function toggleMenu() {

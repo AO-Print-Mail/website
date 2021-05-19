@@ -16,7 +16,7 @@ import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 import { ClientLogoBanner } from '@components/client-logo-banner'
-import { ArticleListCard } from '@components/article-list-card'
+import { ArticleListCard } from '@components/list-card'
 import { ArticleSummary } from '@components/article-summary'
 
 interface PageProps {
