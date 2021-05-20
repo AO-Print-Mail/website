@@ -1,6 +1,7 @@
+import React from 'react'
+import { m as motion, useAnimation } from 'framer-motion'
 import { Modal } from '@components/modal'
 import { AnimatePresence } from 'framer-motion'
-import React from 'react'
 import { SelectService } from './select-service'
 
 interface QuoteFormProps {
@@ -15,6 +16,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
   toggle,
   ...props
 }) => {
+  const innerContentControls = useAnimation()
   return (
     <AnimatePresence>
       {active && (
@@ -23,8 +25,12 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
           mobileWidth="full"
           width="l"
           layoutId={modalLayoutId}
+          showCloseButton={true}
+          as={motion.div}
+          animate={innerContentControls}
+          initial="hidden"
         >
-          <SelectService />
+          <SelectService {...props} />
         </Modal>
       )}
     </AnimatePresence>

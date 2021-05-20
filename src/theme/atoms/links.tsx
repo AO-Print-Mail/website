@@ -1,5 +1,5 @@
 import { ArrowForward } from '@theme/icons'
-import { styled } from '@theme/stitches.config'
+import { css, styled } from '@theme/stitches.config'
 import { Paragraph } from '@theme/typography'
 import Link from 'next/link'
 
@@ -13,20 +13,25 @@ interface LinkTextProps
   to?: string
 }
 
-export const ResetLink = styled('a', {
+export const resetLink = css('a', {
   textDecoration: 'none',
   color: 'unset',
 })
 
 const Cta: React.FC<LinkTextProps> = forwardRef(
   ({ href, text, ...props }, ref) => {
-    const LinkEl = href ? ResetLink : 'span'
+    const LinkEl = href ? 'a' : 'span'
+    const classNames = { ...resetLink(), ...props.className }
     return (
       <HoverGroupFlex
         ref={ref}
-        as={ResetLink}
+        as={LinkEl}
         href={href}
-        css={{ display: 'inline-flex', alignSelf: 'flex-start' }}
+        css={{
+          display: 'inline-flex',
+          alignSelf: 'flex-start',
+        }}
+        className={classNames}
         {...props}
       >
         <Paragraph

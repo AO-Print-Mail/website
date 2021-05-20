@@ -33,7 +33,7 @@ const serviceData = [
 ]
 
 const ListCardVariants: Variants = {
-  hidden: { opacity: 0, transition: { when: 'afterChildren' } },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: { when: 'beforeChildren', staggerChildren: 0.2, delay: 0.3 },
@@ -102,6 +102,7 @@ const ServiceEntry = ({ linkRef = '', name, description, cta, ...props }) => {
         onClick={(e) => alert('fucker')}
         as={motion.a}
         variants={serviceChildrenVariants}
+        href="#"
       />
     </ServiceEntryLayout>
   )

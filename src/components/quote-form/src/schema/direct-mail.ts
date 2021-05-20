@@ -1,0 +1,136 @@
+export const directMailSchema = {
+  id: 'direct-mail',
+  conversion_value: '200',
+  service_name: 'Direct Mail',
+  created_at: 976843952,
+  last_updated: 923498576,
+  submitted_at: 294359873,
+  steps: [
+    {
+      step_id: 'format',
+      step_title: 'What format would you like to send?',
+      mandatory: false,
+      fields: [
+        {
+          field_type: 'button-select',
+          display: 'row-wrap',
+          field_id: 'format',
+          format: 'string',
+          label: 'Choose a format',
+          default: '(not provided)',
+          select_options: [
+            'Flyers',
+            'Letters',
+            'Postcards',
+            'Brochures',
+            'Invoices/Bills',
+            'Reports',
+            'Plastic wrapped items',
+            'Art',
+            'Magazines',
+            'Product Samples',
+            'Retail / eCommerce Products',
+            'Books',
+            'Something else',
+          ],
+        },
+      ],
+    },
+    {
+      step_id: 'send_type',
+      step_title: 'How will your mail be delivered?',
+      mandatory: false,
+      fields: [
+        {
+          field_type: 'button-select',
+          display: 'row-wrap',
+          field_id: 'delivery_type',
+          format: 'string',
+          label: 'Choose a delivery type',
+          default: '(not provided)',
+          select_options: [
+            { label: 'Addressed/Bulk Mail', id: 'addressed' },
+            { label: 'Unaddressed Mail', id: 'unaddressed' },
+            { label: 'Unsure/Other', id: 'other' },
+          ],
+        },
+      ],
+    },
+    {
+      step_id: 'quantity',
+      step_title: 'How many are you sending?',
+      mandatory: false,
+      fields: [
+        {
+          field_type: 'input',
+          field_id: 'quantity',
+          format: 'number',
+          label: 'Enter an exact quanitity',
+          input_type: 'number',
+          pattern: '[0-9]*',
+          autoComplete_field: {
+            field_type: 'button-select',
+            field_id: 'popular-quantities',
+            display: 'row-wrap',
+            label: 'Or, choose a popular quanitity',
+            placeholder: '1000',
+            text_mask: '',
+            select_options: [
+              { label: '500', id: '500' },
+              { label: '1000', id: '1000' },
+              { label: '2000', id: '2000' },
+              { label: '2000', id: '2000' },
+              { label: '2000', id: '2000' },
+              { label: '2000', id: '2000' },
+            ],
+          },
+        },
+      ],
+    },
+    {
+      step_id: 'add_printing',
+      step_title: 'Do you require printing?',
+      mandatory: false,
+      fields: [
+        {
+          field_type: 'button-select',
+          display: 'row-wrap',
+          field_id: 'format',
+          format: 'string',
+          label: 'Please choose a service',
+          default: '(not provided)',
+          select_options: [
+            { label: 'Print & Mail', id: 'print_mail' },
+            { label: 'Mail only', id: 'mail_only' },
+            { label: 'Unsure', id: 'unsure' },
+          ],
+        },
+      ],
+    },
+    { schema_id: 'personal-information' },
+    {
+      step_id: 'additional_information',
+      step_title: 'Additional information',
+      mandatory: false,
+      fields: [
+        {
+          field_type: 'textarea',
+          field_id: 'additional-information',
+          format: 'string',
+          label: 'Your brief',
+          default: '(not provided)',
+          placeholder:
+            'Please include any information or requirements that will help us to prepare your quote in an accurate and timely manner.',
+          select_options: [
+            { label: 'Print & Mail', id: 'print_mail' },
+            { label: 'Mail only', id: 'mail_only' },
+            { label: 'Unsure', id: 'unsure' },
+          ],
+        },
+      ],
+    },
+  ],
+  success_title: 'Request sent!',
+  success_description:
+    'Thanks for requesting a quote for our mail services. Our team is reviewing your requirements and will be in touch with you very soon!',
+}

@@ -6,7 +6,7 @@ import {
   Card,
   Close,
   TextHolder,
-  Flex,
+  Box,
   ColumnWrapper,
   Column,
 } from '@theme'
@@ -15,7 +15,7 @@ import { m as motion, useAnimation, usePresence, Variants } from 'framer-motion'
 import { Button } from '@components/button'
 import { StitchesVariants } from '@stitches/core'
 
-interface ModalProps {
+interface ModalProps extends React.ComponentProps<typeof TextHolder> {
   layoutId?: string
   children?: React.ReactElement
   toggle?: (e?: React.MouseEvent) => void
@@ -47,6 +47,7 @@ const ModalWrapper = styled('div', {
   my: '$6',
   mx: 'auto',
   height: '480px',
+
   '@s': { height: '640px' },
   '@m': { height: '848px' },
   '@l': {
@@ -122,6 +123,12 @@ const modalMotionVariants: Variants = {
   hidden: { opacity: 0, y: 48 },
 }
 
+const closeButtonVariants: Variants = {
+  visible: { opacity: 1, y: 0, transition: { delay: 0.3 } },
+  hidden: { opacity: 0, transition: { duration: 0.2 } },
+  clicked: { opacity: 0, scale: 1.5, transition: { duration: 0.2 } },
+}
+
 export const Modal: React.FC<ModalProps> = ({
   layoutId,
   children,
@@ -131,25 +138,34 @@ export const Modal: React.FC<ModalProps> = ({
   showCloseButton = false,
   ...props
 }) => {
+  const hasCloseButton = toggle && showCloseButton
+
   const { toggleScrollLock, setShowNav } = useContext(LayoutContext)
   const backDropControls = useAnimation()
   const modalControls = useAnimation()
+  const closeButtonControls = useAnimation()
+
   const [isPresent, safeToRemove] = usePresence()
+
   async function modalAnimateOut() {
     !layoutId && modalControls.start('hidden')
     await backDropControls.start('hidden')
     safeToRemove()
   }
+
   async function handleUnmount() {
     toggleScrollLock()
     setTimeout(modalAnimateOut, 50)
   }
+
   function handleMount() {
     toggleScrollLock()
     setTimeout(setShowNav, 50, false)
     backDropControls.start('visible')
     !layoutId && modalControls.start('visible')
+    closeButtonControls.start('visible')
   }
+
   useEffect(() => {
     handleMount()
   }, [])
@@ -166,9 +182,20 @@ export const Modal: React.FC<ModalProps> = ({
         animate: modalControls,
         variants: modalMotionVariants,
       }
+
   function stopPropagationOnClick(e: React.MouseEvent) {
     e.stopPropagation()
   }
+
+  async function handleToggle(e: React.MouseEvent) {
+    await closeButtonControls.start('clicked')
+    toggle(e)
+  }
+
+  function handleClick(e: React.MouseEvent) {
+    handleToggle(e)
+  }
+
   return ClientOnlyPortal({
     children: (
       <>
@@ -177,7 +204,7 @@ export const Modal: React.FC<ModalProps> = ({
           animate={backDropControls}
           variants={backdropMotionVariants}
         />
-        <ScreenWrapper onClick={toggle}>
+        <ScreenWrapper onClick={handleClick}>
           <Container>
             <ColumnWrapper css={{ display: 'block' }}>
               <Column>
@@ -196,32 +223,39 @@ export const Modal: React.FC<ModalProps> = ({
                   <TextHolder
                     css={{
                       position: 'relative',
-                      py: '$2',
+                      py: '$3',
                       height: '100%',
                       display: 'flex',
                       flexDirection: 'column',
                       justifyContent: 'stretch',
-                      zIndex: '1000',
+                      zIndex: '$3',
+                      overflow: 'hidden',
                     }}
-                    as={motion.div}
-                    layout
+                    {...props}
                   >
                     {children}
-                    {showCloseButton && toggle && (
-                      <Button
-                        leftIcon={<Close />}
-                        size="small"
-                        style="naked"
-                        color="dark"
+                    {hasCloseButton && (
+                      <Box
                         css={{
                           position: 'absolute',
                           right: '0',
                           p: 'inherit',
                         }}
-                        onClick={toggle}
+                        as={motion.div}
+                        variants={closeButtonVariants}
+                        animate={closeButtonControls}
+                        initial={'hidden'}
                       >
-                        Close
-                      </Button>
+                        <Button
+                          leftIcon={<Close />}
+                          size="small"
+                          style="naked"
+                          color="dark"
+                          onClick={handleClick}
+                        >
+                          Close
+                        </Button>
+                      </Box>
                     )}
                   </TextHolder>
                 </ModalWrapper>
