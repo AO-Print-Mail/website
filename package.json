@@ -28,6 +28,7 @@
     "framer-motion": "^4.1.16",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
+    "isomorphic-unfetch": "^3.1.0",
     "little-state-machine": "^4.0.2",
     "next": "^10.2.0",
     "next-compose-plugins": "^2.2.1",
@@ -49,6 +50,7 @@
     "throttle-debounce": "^3.0.1",
     "unified": "^9.2.0",
     "unified-stream": "^1.0.6",
+    "uuid": "^8.3.2",
     "yarn": "^1.22.10",
     "yup": "^0.32.9"
   },
@@ -73,6 +75,7 @@
     "@types/node": "^14.14.22",
     "@types/react": "^17.0.0",
     "@types/shelljs": "^0.8.8",
+    "@types/uuid": "^8.3.0",
     "@typescript-eslint/eslint-plugin": "^4.14.1",
     "@typescript-eslint/parser": "^4.14.1",
     "aws-lambda": "^1.0.6",

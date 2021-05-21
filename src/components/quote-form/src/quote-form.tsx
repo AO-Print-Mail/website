@@ -3,6 +3,7 @@ import { m as motion, useAnimation } from 'framer-motion'
 import { Modal } from '@components/modal'
 import { AnimatePresence } from 'framer-motion'
 import { SelectService } from './select-service'
+import { Quote } from './quote'
 
 interface QuoteFormProps {
   active: boolean
@@ -31,6 +32,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
           initial="hidden"
         >
           <SelectService {...props} />
+          <Quote />
         </Modal>
       )}
     </AnimatePresence>

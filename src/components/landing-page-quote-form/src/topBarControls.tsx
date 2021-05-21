@@ -11,6 +11,7 @@ import {
 import router from 'next/router'
 import { Button } from '@components/button'
 import { m as motion, MotionValue, Variants } from 'framer-motion'
+import React from 'react'
 
 export interface TopBarControlsProps {
   progress: MotionValue<number>
@@ -73,7 +74,7 @@ export const TopBarControls: React.FC<TopBarControlsProps> = ({
             leftIcon={<ArrowBack css={{ color: '$N80' }} as={motion.svg} />}
             style="naked"
             color="dark"
-            onClick={(e) => {
+            onClick={(e: React.MouseEvent) => {
               e.preventDefault()
               router.back()
             }}

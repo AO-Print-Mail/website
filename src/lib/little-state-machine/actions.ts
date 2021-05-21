@@ -1,7 +1,6 @@
 import { GlobalState } from 'little-state-machine'
 import { store } from './store'
 import { QuoteFormInputData } from '@components/landing-page-quote-form'
-import { GlobalContext } from 'datocms-html-to-structured-text/dist/types/types'
 
 export function updateDirectMailForm(
   state: GlobalState,
@@ -49,3 +48,9 @@ export function resetFormData(
 export function updateUserData(state: GlobalState, payload): GlobalState {
   return { ...state, userData: { ...state.userData, ...payload } }
 }
+
+export function createQuote(state: GlobalState, payload): GlobalState {
+  return { ...state, quoteRequests: [...state.quoteRequests, payload] }
+}
+
+//export function updateQuote(state: GlobalState, payload): GlobalState {}

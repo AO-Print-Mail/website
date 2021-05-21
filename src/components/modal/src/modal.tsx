@@ -17,7 +17,6 @@ import { StitchesVariants } from '@stitches/core'
 
 interface ModalProps extends React.ComponentProps<typeof TextHolder> {
   layoutId?: string
-  children?: React.ReactElement
   toggle?: (e?: React.MouseEvent) => void
   showCloseButton?: boolean
   mobileWidth?: 'full' | 'contain'

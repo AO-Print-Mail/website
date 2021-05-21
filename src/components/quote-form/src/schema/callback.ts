@@ -37,4 +37,7 @@ export const callback = {
       ],
     },
   ],
+  success_title: 'We will call you ASAP',
+  success_description:
+    'Thanks for requesting a callback. One of our team will call you very soon.',
 }

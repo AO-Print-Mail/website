@@ -1,17 +1,19 @@
 export const directMailSchema = {
-  id: 'direct_mail',
-  conversion_value: 200,
-  service_name: 'Direct Mail',
+  id: 'print',
+  description:
+    'High quality printing of marketing, stationary and packging artifacts. Fast turnaround.',
+  cta: 'Start a print quote',
+  service_name: 'Business Printing',
   steps: [
     {
-      step_id: 'mail_format',
+      step_id: 'print_format',
       step_title: 'What format would you like to send?',
       mandatory: false,
       fields: [
         {
           field_type: 'button_select',
           display: 'row_wrap',
-          field_id: 'mail_format',
+          field_id: 'print_format',
           format: 'string',
           label: 'Choose a format',
           default: '(not provided)',
@@ -22,45 +24,25 @@ export const directMailSchema = {
             { label: 'Brochures', id: 'brochures' },
             { label: 'Invoices/Bills', id: 'invoices' },
             { label: 'Reports', id: 'reports' },
-            { label: 'Plastic wrapped items', id: 'plastic_wrap' },
+            { label: 'Business Cards', id: 'business_card' },
             { label: 'Art', id: 'art' },
             { label: 'Magazines', id: 'magazines' },
-            { label: 'Product Samples', id: 'product_samples' },
-            { label: 'Retail/eCommerce Products', id: 'products' },
-            { label: 'Books', id: 'books' },
+            { label: 'Packaging', id: 'packaging' },
+            { label: 'Envelopes', id: 'envelopes' },
+            { label: 'ID Cards', id: 'id_cards' },
             { label: 'Something else', id: 'other' },
           ],
         },
       ],
     },
     {
-      step_id: 'delivery_type',
-      step_title: 'How will your mail be delivered?',
-      mandatory: false,
-      fields: [
-        {
-          field_type: 'button_select',
-          display: 'row_wrap',
-          field_id: 'delivery_type',
-          format: 'string',
-          label: 'Choose a delivery type',
-          default: '(not provided)',
-          select_options: [
-            { label: 'Addressed/Bulk Mail', id: 'addressed' },
-            { label: 'Unaddressed Mail', id: 'unaddressed' },
-            { label: 'Unsure/Other', id: 'other' },
-          ],
-        },
-      ],
-    },
-    {
-      step_id: 'mail_quantity',
+      step_id: 'print_quantity',
       step_title: 'How many are you sending?',
       mandatory: false,
       fields: [
         {
           field_type: 'input',
-          field_id: 'mail_quantity',
+          field_id: 'print_quantity',
           format: 'number',
           label: 'Enter an exact quanitity',
           input_type: 'number',
@@ -97,26 +79,6 @@ export const directMailSchema = {
         { label: '2 weeks or more', id: '2_weeks' },
         { label: 'Next week', id: 'next_week' },
         { label: 'Urgently!', id: 'urgently' },
-      ],
-    },
-    {
-      step_id: 'mail_service',
-      step_title: 'Do you require printing?',
-      mandatory: false,
-      fields: [
-        {
-          field_type: 'button_select',
-          display: 'row_wrap',
-          field_id: 'mail_service',
-          format: 'string',
-          label: 'Please choose a service',
-          default: '(not provided)',
-          select_options: [
-            { label: 'Print & Mail', id: 'print_mail' },
-            { label: 'Mail only', id: 'mail' },
-            { label: 'Unsure', value: 'Print & Mail', id: 'unsure' },
-          ],
-        },
       ],
     },
     { schema_id: 'personal_information' },
