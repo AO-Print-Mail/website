@@ -117,11 +117,16 @@ export const SelectService: React.FC<SelectServiceProps> = (props) => {
         initial="hidden"
         animate="visible"
         exit="hidden"
-        alignCenter
+        css={{
+          mt: '$5',
+          pt: '$4',
+          textAlign: 'left',
+          '@l': { textAlign: 'center' },
+        }}
       >
         Choose a service to get started
       </Heading2>
-      <Spacer size="large" />
+      <Spacer size={{ '@initial': 'small', '@m': 'large' }} />
       <ListCard
         as={motion.div}
         variants={ListCardVariants}
@@ -145,6 +150,7 @@ export const SelectService: React.FC<SelectServiceProps> = (props) => {
           initial={'hidden'}
           animate={'visible'}
           exit={'hidden'}
+          offset="left"
         >
           Get a callback instead
         </Button>

@@ -1,6 +1,6 @@
 import { styled, CSS } from '@theme/stitches.config'
 import { m as motion, MotionValue, MotionProps } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import { set } from 'shelljs'
 
 export interface ProgressBarProps extends MotionProps {
@@ -32,32 +32,31 @@ const Fill = styled('div', {
   willChange: 'transform',
 })
 
-export const ProgressBar: React.FC<ProgressBarProps> = ({
-  progress,
-  ...props
-}) => {
-  const [{ newProgress, previousProgress }, setProgress] = useState({
-    newProgress: 0,
-    previousProgress: 0,
-  })
-  useEffect(() => {
-    const updateProgress = () =>
-      setProgress({
-        newProgress: progress.get(),
-        previousProgress: progress.getPrevious(),
-      })
-    updateProgress()
-    const listener = progress.onChange(updateProgress)
-    return listener
-  }, [])
+export const ProgressBar = forwardRef<HTMLDivElement, ProgressBarProps>(
+  ({ progress, ...props }, ref) => {
+    const [{ newProgress, previousProgress }, setProgress] = useState({
+      newProgress: 0,
+      previousProgress: 0,
+    })
+    useEffect(() => {
+      const updateProgress = () =>
+        setProgress({
+          newProgress: progress.get(),
+          previousProgress: progress.getPrevious(),
+        })
+      updateProgress()
+      const listener = progress.onChange(updateProgress)
+      return listener
+    }, [])
 
-  return (
-    <Bg {...props}>
-      <Fill
-        as={motion.div}
-        initial={{ x: `-${100 - previousProgress}%` }}
-        animate={{ x: `-${100 - newProgress}%` }}
-      />
-    </Bg>
-  )
-}
+    return (
+      <Bg ref={ref} {...props}>
+        <Fill
+          as={motion.div}
+          initial={{ x: `-${100 - previousProgress}%` }}
+          animate={{ x: `-${100 - newProgress}%` }}
+        />
+      </Bg>
+    )
+  }
+)

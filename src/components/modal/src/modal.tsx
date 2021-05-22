@@ -69,14 +69,15 @@ const ModalWrapper = styled('div', {
       l: { width: '100%', '@xl': { width: '83.33%' } },
       full: { width: '100%' },
     },
-    height: {
-      s: { width: '' },
-      m: { width: '' },
-      l: { width: '' },
-    },
+    // height: {
+    //   s: { height: '' },
+    //   m: { height: '' },
+    //   l: { height: '' },
+    // },
     mobileWidth: {
       full: {
         '@m_max': {
+          height: 'auto',
           minHeight: '100vh',
           width: '100vw',
           my: '0',
@@ -100,6 +101,7 @@ const backdropMotionVariants: Variants = {
 
 export const ModalBackground = styled(Card, {
   position: 'absolute',
+  p: '0',
   tlbr: '0',
   variants: {
     mobileWidth: {
@@ -220,9 +222,10 @@ export const Modal: React.FC<ModalProps> = ({
                     mobileWidth={mobileWidth}
                   />
                   <TextHolder
+                    padX="xLarge"
+                    padY="default"
                     css={{
                       position: 'relative',
-                      py: '$3',
                       height: '100%',
                       display: 'flex',
                       flexDirection: 'column',

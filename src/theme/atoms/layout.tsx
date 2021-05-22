@@ -39,9 +39,47 @@ export const ColumnWrapper = styled(Flex, {
 })
 
 export const TextHolder = styled('div', {
-  p: '$2',
-  '@m': { p: '$3' },
-  '@l': { p: '$4' },
+  variants: {
+    padX: {
+      default: {
+        px: '$2',
+        '@m': { px: '$3' },
+        '@l': { px: '$4' },
+      },
+      large: {
+        px: '$3',
+        '@m': { px: '$4' },
+        '@l': { px: '$5' },
+      },
+      xLarge: {
+        px: '$3',
+        '@s': { px: '$4' },
+        '@m': { px: '$5' },
+        '@l': { px: '$6' },
+      },
+    },
+    padY: {
+      default: {
+        py: '$2',
+        '@m': { py: '$3' },
+        '@l': { py: '$4' },
+      },
+      large: {
+        py: '$3',
+        '@m': { py: '$4' },
+        '@l': { py: '$5' },
+      },
+      xLarge: {
+        py: '$3',
+        '@s': { py: '$4' },
+        '@m': { py: '$5' },
+        '@l': { py: '$6' },
+      },
+    },
+  },
+  defaultvariants: {
+    padX: 'default',
+  },
 })
 
 export const TextHolderClass = css({

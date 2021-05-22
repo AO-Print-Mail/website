@@ -106,15 +106,9 @@ const headingSizes: CSS = {
 
 export const Heading = styled('h1', {
   fontWeight: '$bold',
-  marginTop: '$4',
+  mt: '$4',
   overflow: 'visible',
   letterSpacing: '$cosy',
-  '@m': {
-    marginTop: '$5',
-  },
-  '@l': {
-    marginTop: '$6',
-  },
   variants: {
     level: { ...headingSizes },
     color: {
@@ -136,18 +130,29 @@ export const Heading = styled('h1', {
         textGradient: 'linear-gradient(90deg, #EE3131 0.03%, #F89E33 100.02%)',
       },
     },
-    alignLeft: { true: { textAlign: 'left' } },
-    alignRight: { true: { textAlign: 'right' } },
-    alignCenter: { true: { textAlign: 'center' } },
+    alignLeft: { true: { textAlign: 'left' }, false: { textAlign: 'auto' } },
+    alignRight: { true: { textAlign: 'right' }, false: { textAlign: 'auto' } },
+    alignCenter: {
+      true: { textAlign: 'center' },
+      false: { textAlign: 'auto' },
+    },
     marginTop: {
       none: { mt: '0' },
+      default: {
+        '@m': {
+          mt: '$5',
+        },
+        '@l': {
+          mt: '$6',
+        },
+      },
       small: {
         mt: '$2',
         '@m': {
-          marginTop: '$3',
+          mt: '$3',
         },
         '@l': {
-          marginTop: '$4',
+          mt: '$4',
         },
       },
     },
@@ -160,6 +165,11 @@ export const Heading = styled('h1', {
     { level: '5', color: 'light', css: { color: '$LA80' } },
     { level: '6', color: 'light', css: { color: '$LA80' } },
   ],
+  defaultVariants: {
+    marginTop: 'normal',
+    alignRight: 'false',
+    alignCenter: 'false',
+  },
 })
 
 export const Heading1 = setComponentProps<HTMLHeadingElement>(Heading, {

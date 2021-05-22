@@ -30,11 +30,10 @@ const Background = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   py: '0',
-  px: '$4',
   '@l': {
     flexDirection: 'row',
     py: '$5',
-    px: '$2',
+    mx: '-$5',
   },
 })
 
