@@ -29,6 +29,7 @@ export const FormController: React.FC<FormControllerProps> = ({
 
   const { query } = useRouter()
 
+  //MOVE THIS TO USE EFFECT BECAUSE STATE IS ASYNCHRONOUS
   const prevQuote = useMemo(
     () =>
       state.quoteRequests.find(
