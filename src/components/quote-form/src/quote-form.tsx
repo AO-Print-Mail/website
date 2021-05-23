@@ -2,8 +2,7 @@ import React from 'react'
 import { m as motion, useAnimation } from 'framer-motion'
 import { Modal } from '@components/modal'
 import { AnimatePresence } from 'framer-motion'
-import { SelectService } from './select-service'
-import { Quote } from './quote'
+import { FormController } from './formControler/formController'
 
 interface QuoteFormProps {
   active: boolean
@@ -24,15 +23,14 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
         <Modal
           toggle={toggle}
           mobileWidth="full"
-          width="l"
+          width="m"
           layoutId={modalLayoutId}
           showCloseButton={true}
           as={motion.div}
           animate={innerContentControls}
           initial="hidden"
         >
-          <SelectService {...props} />
-          <Quote />
+          <FormController toggle={toggle} />
         </Modal>
       )}
     </AnimatePresence>

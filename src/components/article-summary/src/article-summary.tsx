@@ -1,4 +1,6 @@
-import { Breadcrumbs, Box, Spacer, styled, Paragraph, Title } from '@theme'
+import { Breadcrumbs, Box, Spacer } from '@theme/atoms'
+import { Paragraph, Title } from '@theme/typography'
+import { styled } from '@theme/stitches.config'
 import { isParagraph } from 'datocms-structured-text-utils'
 import React from 'react'
 import {

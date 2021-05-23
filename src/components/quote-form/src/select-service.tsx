@@ -1,6 +1,6 @@
 import { Button } from '@components/button'
 import { ListCard } from '@components/list-card'
-import { Box, CtaLink, Flex, HoverGroupFlex, Spacer } from '@theme/atoms'
+import { CtaLink, Flex, HoverGroupFlex, Spacer } from '@theme/atoms'
 import { Phone } from '@theme/icons'
 import { styled } from '@theme/stitches.config'
 import { Heading2, Heading3, Paragraph } from '@theme/typography'
@@ -118,7 +118,7 @@ export const SelectService: React.FC<SelectServiceProps> = (props) => {
         animate="visible"
         exit="hidden"
         css={{
-          mt: '$5',
+          mt: '0',
           pt: '$4',
           textAlign: 'left',
           '@l': { textAlign: 'center' },
@@ -133,9 +133,10 @@ export const SelectService: React.FC<SelectServiceProps> = (props) => {
         initial="hidden"
         animate="visible"
         exit="hidden"
+        css={{ mx: '-$5' }}
       >
         {serviceData.map((d) => (
-          <ServiceEntry {...d} />
+          <ServiceEntry {...d} key={d.id} />
         ))}
       </ListCard>
       <Flex css={{ flex: '1 1 100%', alignItems: 'flex-end', mb: '$3' }}>

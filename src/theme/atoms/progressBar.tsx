@@ -1,12 +1,9 @@
 import { styled, CSS } from '@theme/stitches.config'
-import { m as motion, MotionValue, MotionProps } from 'framer-motion'
+import { m as motion, MotionValue } from 'framer-motion'
 import { forwardRef, useEffect, useState } from 'react'
-import { set } from 'shelljs'
 
-export interface ProgressBarProps extends MotionProps {
+export interface ProgressBarProps extends React.ComponentProps<typeof Bg> {
   progress: MotionValue<number>
-  css?: CSS
-  as: any
 }
 
 const Bg = styled('div', {
@@ -16,9 +13,10 @@ const Bg = styled('div', {
   overflow: 'hidden',
   '-webkit-mask-image': '-webkit-radial-gradient(white, black)',
   position: 'relative',
-  mx: '$4',
+  mx: '$2',
+  '@m': { mx: '$3' },
+  '@l': { mx: '$4' },
   my: '$2',
-  width: '100%',
 })
 
 const Fill = styled('div', {

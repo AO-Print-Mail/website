@@ -25,5 +25,11 @@ export const Quote: React.FC<QuoteProps> = () => {
   useEffect(() => {
     getQuote('print').then((res) => setQuote(res))
   }, [])
-  return <>{Math.sin((Math.PI / 2) * 0.1)}</>
+  return (
+    <>
+      {JSON.stringify(quote)}
+      <br />
+      {Math.sin((Math.PI / 2) * 0.1)}
+    </>
+  )
 }

@@ -1,15 +1,16 @@
 import React, { useRef } from 'react'
 import { Image, ResponsiveImageType } from 'react-datocms'
 import {
+  Border,
   Box,
   Card,
   CtaLink,
-  Heading3,
   HoverGroupFlex,
-  Paragraph,
+  ListCardWrapper,
   Spacer,
-  styled,
-} from '@theme'
+} from '@theme/atoms'
+import { Heading3, Paragraph } from '@theme/typography'
+import { styled } from '@theme/stitches.config'
 
 interface ArticleListCardProps
   extends Partial<React.ComponentProps<typeof Background>> {
@@ -33,20 +34,9 @@ const Background = styled('div', {
   '@l': {
     flexDirection: 'row',
     py: '$5',
-    mx: '-$5',
   },
 })
 
-const ItemWrapper = styled('div', {
-  display: 'flex',
-  py: '$4',
-  flex: '1 1',
-  position: 'relative',
-  '@l': {
-    px: '$5',
-    py: '$0',
-  },
-})
 const ServiceEntryLayout = styled(HoverGroupFlex, {
   flex: '0 0 100%',
   position: 'relative',
@@ -56,27 +46,27 @@ const ServiceEntryLayout = styled(HoverGroupFlex, {
   },
 })
 
-const BottomBorder = styled('span', {
-  display: 'none',
-  position: 'absolute',
-  top: '0',
-  left: '0',
-  width: '100%',
-  height: '1px',
-  [`${ItemWrapper}:not(:first-child) > &`]: {
-    display: 'block',
-    background: '$dotted-horizontal',
-    backgroundSize: '16px 1px',
-  },
-  '@l': {
-    [`${ItemWrapper}:not(:first-child) > &`]: {
-      background: '$dotted-vertical',
-      backgroundSize: '1px 16px',
-      height: '100%',
-      width: '1px',
-    },
-  },
-})
+// const BottomBorder = styled('span', {
+//   display: 'none',
+//   position: 'absolute',
+//   top: '0',
+//   left: '0',
+//   width: '100%',
+//   height: '1px',
+//   [`${ListCardWrapper}:not(:first-child) > &`]: {
+//     display: 'block',
+//     background: '$dotted-horizontal',
+//     backgroundSize: '16px 1px',
+//   },
+//   '@l': {
+//     [`${ListCardWrapper}:not(:first-child) > &`]: {
+//       background: '$dotted-vertical',
+//       backgroundSize: '1px 16px',
+//       height: '100%',
+//       width: '1px',
+//     },
+//   },
+// })
 
 const ServiceEntryText = styled(Box, {
   '@l': {
@@ -164,15 +154,14 @@ export const ListCard: React.FC<React.ComponentProps<typeof Background>> = ({
           linkRef: setLinkRef(id),
         })
         return (
-          <ItemWrapper
-            key={id}
-            onClick={handleClick(id)}
-            css={{ position: 'relative' }}
-          >
-            <BottomBorder aria-hidden />
+          <ListCardWrapper key={id} onClick={handleClick(id)}>
+            <Border
+              position={{ '@initial': 'bottom', '@l': 'right' }}
+              aria-hidden
+            />
 
             {innerChild}
-          </ItemWrapper>
+          </ListCardWrapper>
         )
       })}
     </Background>

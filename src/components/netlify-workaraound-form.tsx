@@ -2,7 +2,7 @@ export interface NetlifyWorkaroundFormProps {
   formFields: { [k: string]: any }
   name: string
 }
-import { classes } from '@theme'
+import { visuallyHidden } from '@theme/utils/utilityClasses'
 import { useStateMachine } from 'little-state-machine'
 
 export const NetlifyWorkaroundForm: React.FC<NetlifyWorkaroundFormProps> = ({
@@ -19,7 +19,7 @@ export const NetlifyWorkaroundForm: React.FC<NetlifyWorkaroundFormProps> = ({
       name={name}
       aria-hidden="true"
       hidden
-      className={classes.visuallyHidden()}
+      className={visuallyHidden()}
     >
       <input
         type="hidden"

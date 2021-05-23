@@ -1,12 +1,4 @@
-import {
-  styled,
-  Container,
-  Box,
-  Heading2,
-  Title,
-  Spacer,
-  TextHolder,
-} from '@theme'
+import { Container, Box, Heading2, TextHolder } from '@theme'
 import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'

@@ -1,7 +1,8 @@
 import { m as motion } from 'framer-motion'
 import React, { forwardRef } from 'react'
 import { Button } from './button'
-import { styled, CSS, Paragraph } from '@theme'
+import { styled, CSS } from '@theme/stitches.config'
+import { Paragraph } from '@theme/typography'
 
 interface MenuButtonProps {
   open: boolean

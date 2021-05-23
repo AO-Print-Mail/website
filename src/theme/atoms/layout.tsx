@@ -39,6 +39,7 @@ export const ColumnWrapper = styled(Flex, {
 })
 
 export const TextHolder = styled('div', {
+  position: 'relative',
   variants: {
     padX: {
       default: {

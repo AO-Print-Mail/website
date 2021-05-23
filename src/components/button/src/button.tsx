@@ -1,15 +1,9 @@
-import {
-  styled,
-  ResetButton,
-  theme,
-  CSS,
-  Paragraph,
-  keyframes,
-  classes,
-} from '@theme'
-import { forwardRef } from 'react'
-import * as React from 'react'
+import { cloneElement, forwardRef, isValidElement } from 'react'
+import { styled, CSS, theme, keyframes } from '@theme/stitches.config'
+import { visuallyHidden } from '@theme/utils/utilityClasses'
 import { __DEV__ } from '@utils/src'
+import { ResetButton } from '@theme/atoms/resetButton'
+import { Paragraph } from '@theme/typography'
 
 interface ButtonProps extends React.ComponentProps<typeof ButtonBg> {
   style?: 'naked' | 'solid' | 'border' | 'icon'
@@ -361,8 +355,8 @@ interface ButtonIconProps {
 
 const ButtonIcon: React.FC<ButtonIconProps> = ({ children, ...props }) => {
   const Span = styled('span', {})
-  const _children = React.isValidElement(children)
-    ? React.cloneElement(children, {
+  const _children = isValidElement(children)
+    ? cloneElement(children, {
         'aria-hidden': true,
       })
     : children
@@ -385,7 +379,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         {...props}
       >
         <ButtonIcon>{icon || children}</ButtonIcon>
-        <span className={classes.visuallyHidden()}>{label}</span>
+        <span className={visuallyHidden()}>{label}</span>
       </ButtonBg>
     )
   }

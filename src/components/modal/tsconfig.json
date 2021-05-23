@@ -1,6 +1,6 @@
 {
   "extends": "../../../tsconfig.json",
-  "include": ["src"],
+  "include": ["src", "../../theme/atoms/controlLayout.tsx"],
   "exclude": [
     "**/*.spec.ts",
     "**/*.spec.tsx",
