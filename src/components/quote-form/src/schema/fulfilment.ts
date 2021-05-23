@@ -1,9 +1,5 @@
-export const directMailSchema = {
+export const fufilmentSchema = {
   id: 'fulfilment',
-  description:
-    'Warehousing, preparation and distribution of packaged items including handline pick & pack, printing and mail logistics.',
-  cta: 'Start a fulfilment quote',
-  service_name: 'Fulfilment Services',
   steps: [
     {
       step_id: 'fulfilment_type',
@@ -16,7 +12,7 @@ export const directMailSchema = {
           field_id: 'fulfilment_type',
           format: 'string',
           label: 'What type of fulfilment do you require',
-          default: '(not provided)',
+          defaultValue: '(not provided)',
           select_options: [
             { label: 'eCommerce / 3PL', value: '3pl', id: '3pl' },
             {
@@ -49,7 +45,7 @@ export const directMailSchema = {
           field_id: 'additional_information',
           format: 'string',
           label: 'Your brief',
-          default: '(not provided)',
+          defaultValue: '(not provided)',
           placeholder:
             'Please include any information or requirements that will help us to prepare your quote in an accurate and timely manner.',
         },

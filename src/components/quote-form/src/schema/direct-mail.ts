@@ -1,7 +1,5 @@
 export const directMailSchema = {
   id: 'direct_mail',
-  conversion_value: 200,
-  service_name: 'Direct Mail',
   steps: [
     {
       step_id: 'mail_format',
@@ -14,7 +12,7 @@ export const directMailSchema = {
           field_id: 'mail_format',
           format: 'string',
           label: 'Choose a format',
-          default: '(not provided)',
+          defaultValue: '(not provided)',
           select_options: [
             { label: 'Flyers', id: 'flyers' },
             { label: 'Letters', id: 'letters' },
@@ -44,7 +42,7 @@ export const directMailSchema = {
           field_id: 'delivery_type',
           format: 'string',
           label: 'Choose a delivery type',
-          default: '(not provided)',
+          defaultValue: '(not provided)',
           select_options: [
             { label: 'Addressed/Bulk Mail', id: 'addressed' },
             { label: 'Unaddressed Mail', id: 'unaddressed' },
@@ -90,7 +88,7 @@ export const directMailSchema = {
       field_id: 'deadline',
       format: 'string',
       label: 'When do you need it by?',
-      default: '(not provided)',
+      defaultValue: '(not provided)',
       select_options: [
         { label: 'No deadline yet', id: 'none' },
         { label: '3 weeks or more', id: '3_weeks' },
@@ -110,7 +108,7 @@ export const directMailSchema = {
           field_id: 'mail_service',
           format: 'string',
           label: 'Please choose a service',
-          default: '(not provided)',
+          defaultValue: '(not provided)',
           select_options: [
             { label: 'Print & Mail', id: 'print_mail' },
             { label: 'Mail only', id: 'mail' },
@@ -130,7 +128,7 @@ export const directMailSchema = {
           field_id: 'additional_information',
           format: 'string',
           label: 'Your brief',
-          default: '(not provided)',
+          defaultValue: '(not provided)',
           placeholder:
             'Please include any information or requirements that will help us to prepare your quote in an accurate and timely manner.',
         },

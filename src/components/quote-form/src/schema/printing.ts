@@ -1,9 +1,5 @@
-export const directMailSchema = {
+export const printSchema = {
   id: 'print',
-  description:
-    'High quality printing of marketing, stationary and packging artifacts. Fast turnaround.',
-  cta: 'Start a print quote',
-  service_name: 'Business Printing',
   steps: [
     {
       step_id: 'print_format',
@@ -16,7 +12,7 @@ export const directMailSchema = {
           field_id: 'print_format',
           format: 'string',
           label: 'Choose a format',
-          default: '(not provided)',
+          defaultValue: '(not provided)',
           select_options: [
             { label: 'Flyers', id: 'flyers' },
             { label: 'Letters', id: 'letters' },
@@ -72,7 +68,7 @@ export const directMailSchema = {
       field_id: 'deadline',
       format: 'string',
       label: 'When do you need it by?',
-      default: '(not provided)',
+      defaultValue: '(not provided)',
       select_options: [
         { label: 'No deadline yet', id: 'none' },
         { label: '3 weeks or more', id: '3_weeks' },
@@ -92,7 +88,7 @@ export const directMailSchema = {
           field_id: 'additional_information',
           format: 'string',
           label: 'Your brief',
-          default: '(not provided)',
+          defaultValue: '(not provided)',
           placeholder:
             'Please include any information or requirements that will help us to prepare your quote in an accurate and timely manner.',
         },

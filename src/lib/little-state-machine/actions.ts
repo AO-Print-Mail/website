@@ -1,6 +1,7 @@
 import { GlobalState } from 'little-state-machine'
 import { store } from './store'
 import { QuoteFormInputData } from '@components/landing-page-quote-form'
+import { Quote } from '@components/quote-form/src/types'
 
 export function updateDirectMailForm(
   state: GlobalState,
@@ -49,7 +50,11 @@ export function updateUserData(state: GlobalState, payload): GlobalState {
   return { ...state, userData: { ...state.userData, ...payload } }
 }
 
-export function createQuote(state: GlobalState, payload): GlobalState {
+export function createQuote(
+  state: GlobalState,
+  payload: Partial<Quote> &
+    Pick<Quote, 'service_id' | 'id' | 'created_at' | 'current_step'>
+): GlobalState {
   return { ...state, quoteRequests: [...state.quoteRequests, payload] }
 }
 

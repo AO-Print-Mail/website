@@ -1,8 +1,6 @@
-import { serviceTypes } from '../quote'
-
 export interface Quote {
   id: string
-  service_id: string
+  service_id: ServiceType
   created_at: Date
   updated_at?: Date
   validated_at?: Date
@@ -10,8 +8,10 @@ export interface Quote {
   submission_response?: 'Success' | 'Error'
   is_valid?: boolean
   validation_messages?: ValidationMessage[]
-  quote_request?: MailSubmission | PrintSubmission | FulfilmentSubmission
+  brief?: MailSubmission | PrintSubmission | FulfilmentSubmission
   contact_information?: ContactInformation
+  current_step: string
+  previous_step?: string
 }
 
 export interface ContactInformation {

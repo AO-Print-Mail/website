@@ -61,6 +61,7 @@ export const contactInformationSchema = {
       fields: [
         {
           field_type: 'input',
+          input_type: 'email',
           field_id: 'email',
           default: '',
           format: 'email',
@@ -77,6 +78,7 @@ export const contactInformationSchema = {
       fields: [
         {
           field_type: 'input',
+          input_type: 'tel',
           field_id: 'email',
           default: '',
           format: 'phone',
