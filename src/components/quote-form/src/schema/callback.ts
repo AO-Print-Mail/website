@@ -1,15 +1,18 @@
-export const callback = {
-  id: 'quick_callback',
+import { Schema } from '../types/schemaTypes'
+
+export const callback: Schema = {
+  id: 'callback',
   conversion_value: 50,
-  service_name: '',
   steps: [
     {
       step_id: 'callback',
+      step_type: 'step',
       step_title: 'Get a callback',
       mandatory: true,
       fields: [
         {
           field_type: 'input',
+          field_id: 'first_name',
           required: true,
           format: 'string',
           label: 'First name',
@@ -19,6 +22,7 @@ export const callback = {
         },
         {
           field_type: 'input',
+          field_id: 'last_name',
           required: false,
           format: 'string',
           label: 'Last name',

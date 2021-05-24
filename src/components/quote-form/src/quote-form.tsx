@@ -59,13 +59,14 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
 
   async function getQuoteInitialisationData(_service = service) {
     if (quoteId) {
+      //TODO: Handle invalid quote IDs
       setQuoteData({
         initialData,
         step,
         quoteId,
-        service: getQuoteByID(state, quoteId).service_id,
+        service: getQuoteByID(state, quoteId)?.service_id,
       })
-      return
+      return true
     }
     if (!isValidServiceType(_service)) return null
     const existingId = getExistingQuoteByService(_service)
@@ -76,7 +77,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
         quoteId: existingId,
         service: _service,
       })
-      return
+      return true
     }
     const newQuoteData = await newQuote({ service_id: _service })
     actions.createQuote(newQuoteData)
@@ -89,6 +90,7 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
   }
 
   function handleSelectedService(serviceType: ServiceType) {
+    console.log('clicked')
     getQuoteInitialisationData(serviceType)
   }
 

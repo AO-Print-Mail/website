@@ -1,8 +1,11 @@
-export const fufilmentSchema = {
+import { Schema } from '../types/schemaTypes'
+
+export const fufilmentSchema: Schema = {
   id: 'fulfilment',
   steps: [
     {
       step_id: 'fulfilment_type',
+      step_type: 'step',
       step_title: 'What format would you like to send?',
       mandatory: false,
       fields: [
@@ -34,9 +37,10 @@ export const fufilmentSchema = {
         },
       ],
     },
-    { schema_id: 'personal_information' },
+    { schema_id: 'contact_information', step_type: 'link' },
     {
       step_id: 'additional_information',
+      step_type: 'step',
       step_title: 'Additional information',
       mandatory: false,
       fields: [

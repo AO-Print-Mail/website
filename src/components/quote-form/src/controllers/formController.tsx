@@ -2,12 +2,13 @@ import { ModalLayout } from '@components/modal/src/layout'
 import { useMotionValue } from 'framer-motion'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
-import { schemas } from '../schema'
 import { useStateMachine } from 'little-state-machine'
 import { createQuote } from '@lib/little-state-machine/actions'
-import { useEffect, useMemo } from 'react'
-import { newQuote } from '../scripts/newQuote'
-import { FormSeedData, ServiceType } from '../types'
+import { useEffect, useMemo, useState } from 'react'
+import { FormSeedData, Quote, ServiceType } from '../types'
+import { loadSchema, resolveSchema } from '../scripts/loadSchema'
+import { getQuoteByID } from '../scripts/getQuoteById'
+import { Schema } from '../types/schemaTypes'
 
 const Controls = dynamic(
   import('../components/controls').then((res) => res.Controls)
@@ -28,45 +29,29 @@ export const FormController: React.FC<FormControllerProps> = ({
   step,
   ...props
 }) => {
-  const { state } = useStateMachine({ createQuote })
+  const { state } = useStateMachine()
+  const [schema, setSchema] = useState<Schema>()
+  const progress = useMotionValue(0)
   const { query } = useRouter()
+  const quote = useMemo(() => getQuoteByID(state, quoteId), [state])
 
-  const formSchema = useMemo(() => schemas[service], [service])
-
-  async function setQuoteData(serviceType?: ServiceType) {
-    let existingQuote
-    if (serviceType && state.quoteRequests.length > 0) {
-      existingQuote = state.quoteRequests.find(
-        (q) =>
-          q.service_id === serviceType && q.submission_response !== 'Success'
-      )
-      const { id, current_step } = existingQuote
-      return [id, current_step]
-    }
+  async function init() {
+    const svcSchema = await resolveSchema(service)
+    setSchema(svcSchema)
   }
 
-  //belongs outside in the layout somewhere
-  function validateStepQuery(): string | false {
-    if (!query || !query['quote'] || !query['service']) {
-      return false
-    }
-    const { step, service } = query
-  }
-
-  async function startFormSteps(serviceType: ServiceType) {
-    Promise.all([loadSchema(serviceType), setQuoteData(serviceType)])
-  }
-
-  const progress = useMotionValue(60)
+  useEffect(() => {
+    loadSchema(service).then((res) => {
+      setSchema(res)
+    })
+  }, [service])
 
   return (
     <ModalLayout
       controls={<Controls handleClose={toggle} progress={progress} />}
-      //hideControlsBorder={true}
       {...props}
     >
       {/* <FormStep /> */}
-      {quoteId}
     </ModalLayout>
   )
 }

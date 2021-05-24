@@ -80,6 +80,7 @@ const ServiceEntry = ({
   cta,
   setSelectedService,
   id,
+  handleClick,
   ...props
 }) => {
   return (
@@ -111,11 +112,7 @@ const ServiceEntry = ({
         //@ts-expect-error
         ref={linkRef}
         text={cta}
-        onClick={(e: React.MouseEvent) => {
-          e.preventDefault()
-          e.stopPropagation()
-          setSelectedService(id)
-        }}
+        onClick={handleClick(id)}
         as={motion.a}
         variants={serviceChildrenVariants}
         href="#"
@@ -127,6 +124,12 @@ const ServiceEntry = ({
 export const SelectService: React.FC<SelectServiceProps> = ({
   setSelectedService,
 }) => {
+  function handleClick(id: ServiceType) {
+    return function (e: React.MouseEvent) {
+      e.preventDefault()
+      setSelectedService(id)
+    }
+  }
   return (
     <>
       <Heading2
@@ -158,6 +161,7 @@ export const SelectService: React.FC<SelectServiceProps> = ({
             {...d}
             key={d.id}
             setSelectedService={setSelectedService}
+            handleClick={handleClick}
           />
         ))}
       </ListCard>
@@ -174,6 +178,7 @@ export const SelectService: React.FC<SelectServiceProps> = ({
           animate={'visible'}
           exit={'hidden'}
           offset="left"
+          onClick={handleClick('callback')}
         >
           Get a callback instead
         </Button>

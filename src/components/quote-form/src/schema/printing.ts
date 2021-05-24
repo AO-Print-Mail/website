@@ -1,8 +1,11 @@
-export const printSchema = {
+import { Schema } from '../types/schemaTypes'
+
+export const printSchema: Schema = {
   id: 'print',
   steps: [
     {
       step_id: 'print_format',
+      step_type: 'step',
       step_title: 'What format would you like to send?',
       mandatory: false,
       fields: [
@@ -33,6 +36,7 @@ export const printSchema = {
     },
     {
       step_id: 'print_quantity',
+      step_type: 'step',
       step_title: 'How many are you sending?',
       mandatory: false,
       fields: [
@@ -43,7 +47,7 @@ export const printSchema = {
           label: 'Enter an exact quanitity',
           input_type: 'number',
           pattern: '[0-9]*',
-          autoComplete_field: {
+          auto_complete_field: {
             field_type: 'button_select',
             field_id: 'popular_quantities',
             display: 'row_wrap',
@@ -63,23 +67,31 @@ export const printSchema = {
       ],
     },
     {
-      field_type: 'button_select',
-      display: 'row_wrap',
-      field_id: 'deadline',
-      format: 'string',
-      label: 'When do you need it by?',
-      defaultValue: '(not provided)',
-      select_options: [
-        { label: 'No deadline yet', id: 'none' },
-        { label: '3 weeks or more', id: '3_weeks' },
-        { label: '2 weeks or more', id: '2_weeks' },
-        { label: 'Next week', id: 'next_week' },
-        { label: 'Urgently!', id: 'urgently' },
+      step_id: 'deadline',
+      step_type: 'step',
+      step_title: 'When do you need it delivered by?',
+      fields: [
+        {
+          field_type: 'button_select',
+          display: 'row_wrap',
+          field_id: 'deadline',
+          format: 'string',
+          label: 'Choose an option',
+          defaultValue: '(not provided)',
+          select_options: [
+            { label: 'No deadline yet', id: 'none' },
+            { label: '3 weeks or more', id: '3_weeks' },
+            { label: '2 weeks or more', id: '2_weeks' },
+            { label: 'Next week', id: 'next_week' },
+            { label: 'Urgently!', id: 'urgently' },
+          ],
+        },
       ],
     },
-    { schema_id: 'personal_information' },
+    { schema_id: 'contact_information', step_type: 'link' },
     {
       step_id: 'additional_information',
+      step_type: 'step',
       step_title: 'Additional information',
       mandatory: false,
       fields: [

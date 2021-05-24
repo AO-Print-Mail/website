@@ -1,8 +1,11 @@
-export const contactInformationSchema = {
+import { Schema } from '../types/schemaTypes'
+
+export const contactInformationSchema: Schema = {
   id: 'contact_information',
   steps: [
     {
       step_id: 'name',
+      step_type: 'step',
       step_title: 'Please enter your name',
       mandatory: true,
       fields: [
@@ -30,6 +33,7 @@ export const contactInformationSchema = {
     },
     {
       step_id: 'preferred_contact',
+      step_type: 'step',
       step_title: 'How should we contact you?',
       mandatory: true,
       fields: [
@@ -55,6 +59,7 @@ export const contactInformationSchema = {
     },
     {
       step_id: 'email',
+      step_type: 'step',
       step_title: 'Email address',
       mandatory: true,
       skip: true,
@@ -72,6 +77,7 @@ export const contactInformationSchema = {
     },
     {
       step_id: 'phone',
+      step_type: 'step',
       step_title: 'Telephone number',
       mandatory: true,
       skip: true,
