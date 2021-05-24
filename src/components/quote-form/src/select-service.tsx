@@ -5,6 +5,7 @@ import { Phone } from '@theme/icons'
 import { styled } from '@theme/stitches.config'
 import { Heading2, Heading3, Paragraph } from '@theme/typography'
 import { m as motion, Variants } from 'framer-motion'
+import React from 'react'
 import { ServiceType } from './types'
 
 interface SelectServiceProps {
@@ -110,8 +111,9 @@ const ServiceEntry = ({
         //@ts-expect-error
         ref={linkRef}
         text={cta}
-        onClick={(e) => {
+        onClick={(e: React.MouseEvent) => {
           e.preventDefault()
+          e.stopPropagation()
           setSelectedService(id)
         }}
         as={motion.a}
