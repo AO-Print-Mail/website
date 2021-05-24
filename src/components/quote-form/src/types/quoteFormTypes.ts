@@ -24,6 +24,10 @@ export interface ContactInformation {
 
 export type ServiceType = 'print' | 'mail' | 'fulfilment' | 'callback'
 
+export type FormSeedData = Partial<
+  Quote['contact_information'] & Quote['brief']
+>
+
 type PreferredContactMethod = 'phone' | 'email'
 
 interface ValidationMessage {

@@ -4,6 +4,12 @@ import { directMailSchema } from './direct-mail'
 import { fufilmentSchema } from './fulfilment'
 import { printSchema } from './printing'
 
+export type QuoteSchema =
+  | typeof directMailSchema
+  | typeof printSchema
+  | typeof callback
+  | typeof fufilmentSchema
+
 export const schemas = {
   direct_mail: directMailSchema,
   contact_information: contactInformationSchema,

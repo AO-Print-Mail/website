@@ -5,8 +5,11 @@ import { Phone } from '@theme/icons'
 import { styled } from '@theme/stitches.config'
 import { Heading2, Heading3, Paragraph } from '@theme/typography'
 import { m as motion, Variants } from 'framer-motion'
+import { ServiceType } from './types'
 
-interface SelectServiceProps {}
+interface SelectServiceProps {
+  setSelectedService: (serviceType: ServiceType) => void
+}
 
 const serviceData = [
   {
@@ -69,7 +72,15 @@ const ServiceEntryLayout = styled(HoverGroupFlex, {
   },
 })
 
-const ServiceEntry = ({ linkRef = '', name, description, cta, ...props }) => {
+const ServiceEntry = ({
+  linkRef = '',
+  name,
+  description,
+  cta,
+  setSelectedService,
+  id,
+  ...props
+}) => {
   return (
     <ServiceEntryLayout
       as={motion.div}
@@ -99,7 +110,10 @@ const ServiceEntry = ({ linkRef = '', name, description, cta, ...props }) => {
         //@ts-expect-error
         ref={linkRef}
         text={cta}
-        onClick={(e) => alert('fucker')}
+        onClick={(e) => {
+          e.preventDefault()
+          setSelectedService(id)
+        }}
         as={motion.a}
         variants={serviceChildrenVariants}
         href="#"
@@ -108,7 +122,9 @@ const ServiceEntry = ({ linkRef = '', name, description, cta, ...props }) => {
   )
 }
 
-export const SelectService: React.FC<SelectServiceProps> = (props) => {
+export const SelectService: React.FC<SelectServiceProps> = ({
+  setSelectedService,
+}) => {
   return (
     <>
       <Heading2
@@ -136,7 +152,11 @@ export const SelectService: React.FC<SelectServiceProps> = (props) => {
         css={{ mx: '-$5' }}
       >
         {serviceData.map((d) => (
-          <ServiceEntry {...d} key={d.id} />
+          <ServiceEntry
+            {...d}
+            key={d.id}
+            setSelectedService={setSelectedService}
+          />
         ))}
       </ListCard>
       <Flex css={{ flex: '1 1 100%', alignItems: 'flex-end', mb: '$3' }}>
