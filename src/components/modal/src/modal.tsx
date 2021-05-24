@@ -12,7 +12,7 @@ import { LayoutContext } from '@components/layout/src/layoutContext'
 import { m as motion, useAnimation, usePresence, Variants } from 'framer-motion'
 import { StitchesVariants } from '@stitches/core'
 
-interface ModalProps extends React.ComponentProps<typeof TextHolder> {
+export interface ModalProps extends React.ComponentProps<typeof TextHolder> {
   layoutId?: string
   toggle?: (e?: React.MouseEvent) => void
   showCloseButton?: boolean
@@ -49,7 +49,6 @@ const ModalWrapper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-start',
-
   '@s': { height: '640px' },
   '@m': { height: '848px' },
   '@l': {
@@ -178,7 +177,7 @@ export const Modal: React.FC<ModalProps> = ({
   }, [isPresent])
 
   const [bgAnimations, wpAnimations] = layoutId
-    ? [{ layout: true, layoutId }, {}]
+    ? [{ layoutId }, {}]
     : [
         {
           variants: modalMotionVariants,
@@ -227,6 +226,7 @@ export const Modal: React.FC<ModalProps> = ({
                 >
                   <ModalBackground
                     as={motion.div}
+                    layout
                     {...bgAnimations}
                     mobileWidth={mobileWidth}
                   />

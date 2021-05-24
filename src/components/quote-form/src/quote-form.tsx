@@ -1,14 +1,19 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { m as motion, useAnimation } from 'framer-motion'
-import { Modal } from '@components/modal'
+import { Modal, ModalProps } from '@components/modal'
 import { AnimatePresence } from 'framer-motion'
-import { FormController } from './controllers/formController'
+import {
+  FormController,
+  FormControllerProps,
+} from './controllers/formController'
 import { useStateMachine } from 'little-state-machine'
+import { createQuote } from '@lib/little-state-machine'
 import { FormSeedData, Quote, ServiceType } from './types'
 import { SelectService } from './select-service'
 import { ModalLayout } from '@components/modal/src/layout'
 import { CloseControls } from '@theme/atoms'
-import { serviceTypes } from './scripts/newQuote'
+import { newQuote, serviceTypes } from './scripts/newQuote'
+import { getQuoteByID } from './scripts/getQuoteById'
 
 interface QuoteFormProps {
   active: boolean
@@ -30,12 +35,14 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
   step,
   ...props
 }) => {
-  const { state } = useStateMachine()
-  const [selectedService, setSelectedService] = useState<ServiceType>()
+  const { state, actions } = useStateMachine({ createQuote })
+  const [quoteData, setQuoteData] = useState<
+    Pick<FormControllerProps, 'service' | 'initialData' | 'quoteId' | 'step'>
+  >()
   const innerContentControls = useAnimation()
 
   function isValidServiceType(serviceType?: ServiceType) {
-    return serviceTypes.includes(serviceType)
+    return serviceType && serviceTypes.includes(serviceType)
   }
 
   //TODO: display a quote continue screen if previous quote exists
@@ -50,65 +57,71 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
     }
   }
 
-  function handleSelectedService(serviceType: ServiceType) {
-    setSelectedService(serviceType)
-  }
-
-  function getQuoteInitialisationData() {
-    const data = { initialData, step }
-    if (quoteId) return { ...data, quoteId }
-    const _service = service || selectedService
-    if (!isValidServiceType) return null
-    const existingId = getExistingQuoteByService(_service)
-    if (existingId) return { ...data, quoteId: existingId }
-    if (_service) return { ...data, service: _service }
-    return null
-  }
-
-  const _children = useMemo(() => {
-    if (active) {
-      console.log('incoming')
-      const quoteData = getQuoteInitialisationData()
-      if (quoteData) {
-        return (
-          <Modal
-            toggle={toggle}
-            mobileWidth="full"
-            width="m"
-            layoutId={modalLayoutId}
-            showCloseButton={true}
-            as={motion.div}
-            animate={innerContentControls}
-            initial="hidden"
-            {...props}
-          >
-            <FormController {...quoteData} toggle={toggle} />
-          </Modal>
-        )
-      }
-      return (
-        <Modal
-          toggle={toggle}
-          mobileWidth="full"
-          width="l"
-          layoutId={modalLayoutId}
-          showCloseButton={true}
-          as={motion.div}
-          animate={innerContentControls}
-          initial="hidden"
-          {...props}
-        >
-          <ModalLayout
-            controls={<CloseControls handleClose={toggle} />}
-            hideControlsBorder
-          >
-            <SelectService setSelectedService={handleSelectedService} />
-          </ModalLayout>
-        </Modal>
-      )
+  async function getQuoteInitialisationData(_service = service) {
+    if (quoteId) {
+      setQuoteData({
+        initialData,
+        step,
+        quoteId,
+        service: getQuoteByID(state, quoteId).service_id,
+      })
+      return
     }
-    return null
-  }, [active, selectedService, quoteId, service])
+    if (!isValidServiceType(_service)) return null
+    const existingId = getExistingQuoteByService(_service)
+    if (existingId) {
+      setQuoteData({
+        initialData,
+        step,
+        quoteId: existingId,
+        service: _service,
+      })
+      return
+    }
+    const newQuoteData = await newQuote({ service_id: _service })
+    actions.createQuote(newQuoteData)
+    setQuoteData({
+      initialData,
+      step,
+      quoteId: newQuoteData.id,
+      service: newQuoteData.service_id,
+    })
+  }
 
-  return <AnimatePresence>{_children}</AnimatePresence>
+  function handleSelectedService(serviceType: ServiceType) {
+    getQuoteInitialisationData(serviceType)
+  }
+
+  useEffect(() => {
+    if (!active) setQuoteData(null)
+    if (active) getQuoteInitialisationData()
+  }, [active])
+
+  const hasQuoteData = quoteData?.quoteId
+
+  const modalProps: ModalProps = {
+    toggle,
+    mobileWidth: 'full',
+    layoutId: modalLayoutId,
+    ...props,
+  }
+
+  return (
+    <AnimatePresence>
+      {active && (
+        <Modal width={hasQuoteData ? 'm' : 'l'} {...modalProps}>
+          {hasQuoteData ? (
+            <FormController {...quoteData} toggle={toggle} />
+          ) : (
+            <ModalLayout
+              controls={<CloseControls handleClose={toggle} />}
+              hideControlsBorder
+            >
+              <SelectService setSelectedService={handleSelectedService} />
+            </ModalLayout>
+          )}
+        </Modal>
+      )}
+    </AnimatePresence>
+  )
 }

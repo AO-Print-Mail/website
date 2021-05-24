@@ -13,9 +13,9 @@ const Controls = dynamic(
   import('../components/controls').then((res) => res.Controls)
 )
 
-interface FormControllerProps {
+export interface FormControllerProps {
   toggle: (e: React.MouseEvent) => void
-  service?: ServiceType
+  service: ServiceType
   quoteId?: string
   initialData?: FormSeedData
   step: string
@@ -28,29 +28,13 @@ export const FormController: React.FC<FormControllerProps> = ({
   step,
   ...props
 }) => {
-  const { state, actions } = useStateMachine({ createQuote })
-
+  const { state } = useStateMachine({ createQuote })
   const { query } = useRouter()
 
   const formSchema = useMemo(() => schemas[service], [service])
 
-  function getQuoteById() {
-    if (quoteId) {
-      return state.quoteRequests.find((quote) => quoteId === quote.id)
-    }
-  }
-
-  // useEffect(() => {
-  //   if (!prevQuote) {
-  //     newQuote({ service_id: service }).then((res) => {
-  //       const newQuote = Object.assign({}, { current_step: step }, res)
-  //       actions.createQuote(newQuote)
-  //     })
-  //   }
-  // }, [])
-
   async function setQuoteData(serviceType?: ServiceType) {
-    let existingQuote: Quote
+    let existingQuote
     if (serviceType && state.quoteRequests.length > 0) {
       existingQuote = state.quoteRequests.find(
         (q) =>
@@ -82,7 +66,7 @@ export const FormController: React.FC<FormControllerProps> = ({
       {...props}
     >
       {/* <FormStep /> */}
-      {service}
+      {quoteId}
     </ModalLayout>
   )
 }
