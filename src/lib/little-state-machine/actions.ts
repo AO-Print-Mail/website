@@ -58,4 +58,28 @@ export function createQuote(
   return { ...state, quoteRequests: [...state.quoteRequests, payload] }
 }
 
-//export function updateQuote(state: GlobalState, payload): GlobalState {}
+export function updateQuote(state: GlobalState, payload: Quote): GlobalState {
+  const i = state.quoteRequests.findIndex((quote) => quote.id === payload.id)
+  if (i < 0) return state
+  return {
+    ...state,
+    quoteRequests: [
+      ...state.quoteRequests.slice(0, i),
+      payload,
+      ...state.quoteRequests.slice(i + 1),
+    ],
+  }
+}
+
+export function deleteQuote(state: GlobalState, payload: { quoteId: string }) {
+  const i = state.quoteRequests.findIndex(
+    (quote) => quote.id === payload.quoteId
+  )
+  return {
+    ...state,
+    quoteRequests: [
+      ...state.quoteRequests.slice(0, i),
+      ...state.quoteRequests.slice(i + 1),
+    ],
+  }
+}

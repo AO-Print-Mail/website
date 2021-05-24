@@ -1,14 +1,21 @@
 import { UseFormRegister } from 'react-hook-form'
 
-export type Field = ButtonSelectType | InputType
+export type Field = ButtonSelectType | InputType | TextareaType
 
-export interface ButtonSelectType extends InputType {
+export interface ButtonSelectType extends DefaultFieldType {
   field_type: 'button_select'
   display?: string
   select_options: Option[]
 }
 
-export interface InputType {
+export interface InputType extends DefaultFieldType {
+  field_type: 'input'
+}
+export interface TextareaType extends DefaultFieldType {
+  field_type: 'textarea'
+}
+
+interface DefaultFieldType {
   field_type: string
   field_id: string
   format?: 'string' | 'phone' | 'email' | 'number'

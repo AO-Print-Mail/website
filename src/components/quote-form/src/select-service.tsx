@@ -154,7 +154,7 @@ export const SelectService: React.FC<SelectServiceProps> = ({
         initial="hidden"
         animate="visible"
         exit="hidden"
-        css={{ mx: '-$5' }}
+        css={{ '@l': { mx: '-$5' } }}
       >
         {serviceData.map((d) => (
           <ServiceEntry

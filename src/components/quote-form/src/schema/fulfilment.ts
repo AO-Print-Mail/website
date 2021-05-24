@@ -6,7 +6,7 @@ export const fufilmentSchema: Schema = {
     {
       step_id: 'fulfilment_type',
       step_type: 'step',
-      step_title: 'What format would you like to send?',
+      step_title: 'How would you best describe your fulfilment needs?',
       mandatory: false,
       fields: [
         {

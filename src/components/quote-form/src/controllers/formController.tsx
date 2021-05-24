@@ -1,17 +1,21 @@
 import { ModalLayout } from '@components/modal/src/layout'
 import { useMotionValue } from 'framer-motion'
-import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { useStateMachine } from 'little-state-machine'
-import { createQuote } from '@lib/little-state-machine/actions'
 import { useEffect, useMemo, useState } from 'react'
 import { FormSeedData, Quote, ServiceType } from '../types'
 import { loadSchema, resolveSchema } from '../scripts/loadSchema'
 import { getQuoteByID } from '../scripts/getQuoteById'
-import { Schema } from '../types/schemaTypes'
+import { ResolvedSchema, Schema, Step } from '../types/schemaTypes'
+import { useQuerySteps } from '../hooks/useQuerySteps'
+import { updateQuote } from '@lib/little-state-machine/actions'
+import { Controls } from '../components/controls'
+import { FormStep } from '../components/formStep'
 
-const Controls = dynamic(
-  import('../components/controls').then((res) => res.Controls)
+const WorkaroundForm = dynamic(() =>
+  import('@components/netlify-workaraound-form').then(
+    (res) => res.NetlifyWorkaroundForm
+  )
 )
 
 export interface FormControllerProps {
@@ -29,29 +33,65 @@ export const FormController: React.FC<FormControllerProps> = ({
   step,
   ...props
 }) => {
-  const { state } = useStateMachine()
-  const [schema, setSchema] = useState<Schema>()
+  const { state, actions } = useStateMachine({ updateQuote })
+  const [schema, setSchema] = useState<ResolvedSchema>()
+
   const progress = useMotionValue(0)
-  const { query } = useRouter()
   const quote = useMemo(() => getQuoteByID(state, quoteId), [state])
 
+  const schemaSteps = schema?.steps
+  const schemaStepIds = schemaSteps?.map((s) => s.step_id)
+  const {
+    currentIndex,
+    currentStep,
+    stepControls,
+    readyToSubmit,
+    exitSteps,
+    stepProgress,
+  } = useQuerySteps(schemaStepIds)
+
+  const thisStep = schemaSteps?.[currentIndex]
+
   async function init() {
-    const svcSchema = await resolveSchema(service)
-    setSchema(svcSchema)
+    const resolvedSchema = await resolveSchema(service)
+    setSchema(resolvedSchema)
+  }
+
+  function setQuoteStep(newStep: string) {
+    const newQuoteData = Object.assign({}, quote, {
+      current_step: newStep,
+    })
+    actions.updateQuote(newQuoteData)
   }
 
   useEffect(() => {
-    loadSchema(service).then((res) => {
-      setSchema(res)
-    })
+    setQuoteStep(currentStep)
+  }, [currentStep])
+
+  useEffect(() => {
+    init()
   }, [service])
 
-  return (
+  useEffect(() => {
+    console.log(currentStep)
+  })
+
+  useEffect(() => {
+    progress.set(stepProgress)
+  }, [stepProgress])
+
+  return stepControls ? (
     <ModalLayout
-      controls={<Controls handleClose={toggle} progress={progress} />}
+      controls={
+        <Controls
+          handleClose={toggle}
+          progress={progress}
+          handlePrevious={stepControls.prevStep}
+        />
+      }
       {...props}
     >
-      {/* <FormStep /> */}
+      <FormStep {...thisStep} stepControls={stepControls}></FormStep>
     </ModalLayout>
-  )
+  ) : null
 }

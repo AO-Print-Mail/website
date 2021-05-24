@@ -81,7 +81,7 @@ const ModalWrapper = styled('div', {
         '@m_max': {
           height: 'auto',
           minHeight: '100vh',
-          width: '100vw',
+          minWidth: '100vw',
           my: '0',
           mx: '50%',
           left: '-50vw',

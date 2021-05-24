@@ -10,6 +10,7 @@ import {
   Variants,
 } from 'framer-motion'
 import { QuoteForm } from '@components/quote-form'
+import { useEffect } from 'react'
 
 interface QuoteCtaProps {
   heading?: string

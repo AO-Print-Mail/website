@@ -7,14 +7,19 @@ import React from 'react'
 
 interface ControlsProps {
   progress: MotionValue
-  handleClose: (e: React.MouseEvent) => void
+  handleClose: (e?: React.MouseEvent) => void
+  handlePrevious: (e?: React.MouseEvent) => void
 }
 
 export const Controls: React.FC<ControlsProps> = ({
   progress,
   handleClose,
-  ...props
+  handlePrevious,
 }) => {
+  function handleCloseClick(e: React.MouseEvent) {
+    e.preventDefault()
+    handlePrevious(e)
+  }
   return (
     <ControlLayout
       leftChild={
@@ -26,10 +31,7 @@ export const Controls: React.FC<ControlsProps> = ({
           leftIcon={<ArrowBack css={{ color: '$N80' }} />}
           style="naked"
           color="dark"
-          onClick={(e: React.MouseEvent) => {
-            e.preventDefault()
-            router.back()
-          }}
+          onClick={handleCloseClick}
           offset="left"
         >
           Back

@@ -1,4 +1,3 @@
-import { ServiceType } from '../types'
 import { Schema, ResolvedSchema, Step, SchemaLink } from '../types/schemaTypes'
 
 const asyncSchemas: { [key: string]: Promise<Schema> } = {
@@ -23,10 +22,6 @@ function isStep(step: Step | SchemaLink): step is Step {
   return step.step_type === 'step'
 }
 
-function filterStepLinks(stepAry: (Step | SchemaLink)[]) {
-  return stepAry.filter(isLinkStep)
-}
-
 function filterSteps(stepAry: (Step | SchemaLink)[]) {
   return stepAry.filter(isStep)
 }
@@ -36,14 +31,6 @@ async function loadLinkedSteps(schemaName: Schema['id']) {
   return filterSteps(steps)
 }
 
-// async function resolveLinkedSteps(acc: Step[], step: Step | SchemaLink) {
-//   if (isLinkStep(step)) {
-//     const linkedSteps = await loadLinkedSteps(step.schema_id)
-//     return [...acc, ...linkedSteps]
-//   }
-//   return [...acc, step]
-// }
-
 async function resolveLinkedSteps(
   steps: (Step | SchemaLink)[]
 ): Promise<Step[]> {
@@ -51,7 +38,7 @@ async function resolveLinkedSteps(
   for (const step of steps) {
     if (isLinkStep(step)) {
       const linkedSteps = await loadLinkedSteps(step.schema_id)
-      resolved.push(linkedSteps)
+      resolved.push(...linkedSteps)
     } else {
       resolved.push(step)
     }

@@ -160,13 +160,11 @@ interface StructuredTextProps extends ConfigurableTextParams {
 export const renderInlineRecordRules: React.ComponentProps<
   typeof ConfigurableText
 >['renderInlineRecord'] = (node) => {
-  console.log(JSON.stringify({ INLINE: node }))
   return <div></div>
 }
 export const renderLinkToRules: React.ComponentProps<
   typeof ConfigurableText
 >['renderLinkToRecord'] = (node) => {
-  console.log(JSON.stringify({ LINKTO: node }))
   return <div></div>
 }
 

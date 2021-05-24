@@ -6,7 +6,7 @@ export const printSchema: Schema = {
     {
       step_id: 'print_format',
       step_type: 'step',
-      step_title: 'What format would you like to send?',
+      step_title: 'What format would you like to print?',
       mandatory: false,
       fields: [
         {

@@ -2,18 +2,22 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { m as motion, useAnimation } from 'framer-motion'
 import { Modal, ModalProps } from '@components/modal'
 import { AnimatePresence } from 'framer-motion'
-import {
-  FormController,
-  FormControllerProps,
-} from './controllers/formController'
+import type { FormControllerProps } from './controllers/formController'
 import { useStateMachine } from 'little-state-machine'
 import { createQuote } from '@lib/little-state-machine'
 import { FormSeedData, Quote, ServiceType } from './types'
-import { SelectService } from './select-service'
 import { ModalLayout } from '@components/modal/src/layout'
 import { CloseControls } from '@theme/atoms'
 import { newQuote, serviceTypes } from './scripts/newQuote'
 import { getQuoteByID } from './scripts/getQuoteById'
+import dynamic from 'next/dynamic'
+
+const FormController = dynamic(
+  import('./controllers/formController').then((res) => res.FormController)
+)
+const SelectService = dynamic(
+  import('./select-service').then((res) => res.SelectService)
+)
 
 interface QuoteFormProps {
   active: boolean
@@ -90,7 +94,6 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
   }
 
   function handleSelectedService(serviceType: ServiceType) {
-    console.log('clicked')
     getQuoteInitialisationData(serviceType)
   }
 
@@ -107,6 +110,10 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
     layoutId: modalLayoutId,
     ...props,
   }
+
+  useEffect(() => {
+    console.log('quoteformRender')
+  })
 
   return (
     <AnimatePresence>
