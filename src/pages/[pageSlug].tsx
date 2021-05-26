@@ -24,13 +24,13 @@ import {
 } from '@lib/datocms/blockRules'
 import dynamic from 'next/dynamic'
 
-const Printer = dynamic(import('../svg/printer.svg'))
-const Inserter = dynamic(import('../svg/inserter.svg'))
+const Printer = dynamic(() => import('../svg/printer.svg'))
+const Inserter = dynamic(() => import('../svg/inserter.svg'))
 
 const heroGraphics = {
-  printing: dynamic(import('../svg/printHero.svg')),
-  'direct-mail': dynamic(import('../svg/directMailHero.svg')),
-  'package-fulfilment': dynamic(import('../svg/fulfilmentHero.svg')),
+  printing: dynamic(() => import('../svg/printHero.svg')),
+  'direct-mail': dynamic(() => import('../svg/directMailHero.svg')),
+  'package-fulfilment': dynamic(() => import('../svg/fulfilmentHero.svg')),
 }
 
 interface PageProps {

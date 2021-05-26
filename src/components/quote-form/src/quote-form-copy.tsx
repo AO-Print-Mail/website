@@ -10,10 +10,10 @@ import { newQuote, serviceTypes } from './scripts/newQuote'
 import { getQuoteByID } from './scripts/getQuoteById'
 import dynamic from 'next/dynamic'
 
-const FormController = dynamic(
+const FormController = dynamic(() =>
   import('./controllers/formController').then((res) => res.FormController)
 )
-const SelectService = dynamic(
+const SelectService = dynamic(() =>
   import('./select-service').then((res) => res.SelectService)
 )
 

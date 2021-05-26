@@ -21,16 +21,16 @@ import dynamic from 'next/dynamic'
 import { renderRule, StructuredText as ConfigurableText } from 'react-datocms'
 import { Heading, List, listItemProps, Paragraph } from '@theme'
 
-const BlockQuote = dynamic(
+const BlockQuote = dynamic(() =>
   import('@theme/atoms/blockquote').then((res) => res.BlockQuote)
 )
-const UnorderedList = dynamic(
+const UnorderedList = dynamic(() =>
   import('@theme/atoms/lists').then((res) => res.UnorderedList)
 )
-const OrderedList = dynamic(
+const OrderedList = dynamic(() =>
   import('@theme/atoms/lists').then((res) => res.OrderedList)
 )
-const ListItem = dynamic(
+const ListItem = dynamic(() =>
   import('@theme/atoms/lists').then((res) => res.ListItem)
 )
 

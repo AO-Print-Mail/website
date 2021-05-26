@@ -19,16 +19,18 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useState } from 'react'
 import { encode } from '@lib/netlify/utils'
 import { Button } from '@components/button'
-import {  m as motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useStateMachine } from 'little-state-machine'
 import { ModalLayout } from '@components/modal/src/layout'
 
-const WorkaroundForm = dynamic(() =>
-  import('@components/netlify-workaraound-form').then(
-    (res) => res.NetlifyWorkaroundForm
-  )
+const WorkaroundForm = dynamic(
+  () =>
+    import('@components/netlify-workaraound-form').then(
+      (res) => res.NetlifyWorkaroundForm
+    ),
+  { ssr: false }
 )
 
 const FORM_NAME = 'quoteForm'
