@@ -8,6 +8,7 @@ import { Modal } from '@components/modal'
 import { styled } from '@theme/stitches.config'
 import { Box, Container, Flex, Logo } from '@theme/atoms'
 import { LayoutContext } from '@components/layout/src/layoutContext'
+import { QuoteButton } from '@components/quoteButton'
 interface HeaderMainProps {
   show?: boolean
 }
@@ -123,16 +124,9 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
                 <DesktopNavigation
                   css={{ display: 'none', mt: '$4', '@l': { display: 'flex' } }}
                 />
-
-                <Button
+                <QuoteButton
                   css={{ display: 'none', '@m': { display: 'inline-flex' } }}
-                  onClick={toggleQuoteModal}
-                >
-                  Get a quote
-                </Button>
-                <AnimatePresence>
-                  {modalIsOpen && <Modal toggle={toggleQuoteModal}></Modal>}
-                </AnimatePresence>
+                />
 
                 <MenuButton
                   open={menuIsOpen}
