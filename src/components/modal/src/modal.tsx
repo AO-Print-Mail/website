@@ -1,5 +1,5 @@
 import { LayoutContext } from '@components/layout/src/layoutContext'
-import type { ModalProps } from '@components/modal'
+import type { ModalProps } from '@components/modal/src/modalBody'
 import { AnimatePresence, useCycle } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
@@ -22,7 +22,6 @@ interface QuoteFormProps extends ModalProps {
 }
 
 export const Modal: React.FC<QuoteFormProps> = ({
-  step,
   width,
   opens,
   children,
@@ -39,7 +38,6 @@ export const Modal: React.FC<QuoteFormProps> = ({
 
   const modalProps: ModalProps = {
     toggle: toggleModal,
-    mobileWidth: 'full',
     layoutId,
     ...props,
   }

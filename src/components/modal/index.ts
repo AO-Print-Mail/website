@@ -1,1 +1,1 @@
-export * from './src/modalBody'
+export * from './src/modal'

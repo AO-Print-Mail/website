@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useStateMachine } from 'little-state-machine'
 import {
-  AnimatePresence,
   AnimateSharedLayout,
   m as motion,
   useCycle,
@@ -31,7 +30,6 @@ export const QuoteFormDirectMail: React.FC<QuoteFormDirectMailProps> = (
 ) => {
   const breakpoints = useBreakpoints()
   const progress = useMotionValue(0)
-  const [modalIsOpen, toggleModal] = useCycle(false, true)
   const [isSubmitting, setSubmitting] = useState(false)
   const router = useRouter()
   const {
@@ -42,9 +40,12 @@ export const QuoteFormDirectMail: React.FC<QuoteFormDirectMailProps> = (
   const { actions } = useStateMachine({ resetFormData })
 
   const handleReset = () => actions.resetFormData('directMailForm')
-  const handleToggle = (e: React.MouseEvent) => {
-    e.preventDefault()
-    toggleModal()
+
+  function handleClick(toggle: () => void) {
+    return function (e?: React.MouseEvent) {
+      e.preventDefault()
+      toggle
+    }
   }
 
   function setStep(newStep?: string) {
@@ -69,10 +70,8 @@ export const QuoteFormDirectMail: React.FC<QuoteFormDirectMailProps> = (
 
   const formControls = {
     step,
-    isOpen: modalIsOpen,
     isSubmitting,
     changeStep: setStep,
-    toggleIsOpen: toggleModal,
     setSubmitting,
     progress,
     keyword: 'Direct Mail',
@@ -81,25 +80,37 @@ export const QuoteFormDirectMail: React.FC<QuoteFormDirectMailProps> = (
 
   return (
     <AnimateSharedLayout>
-      <Wrapper as={motion.div} layoutId="quote-modal">
-        <QuoteIntro {...formControls} />
-      </Wrapper>
-      <AnimatePresence>
-        {modalIsOpen && (
-          <Modal
-            mobileWidth="full"
-            toggle={handleToggle}
-            layoutId="quote-modal"
-            showCloseButton={false}
-          >
-            {step ? (
-              <FormStepper {...formControls} />
-            ) : (
-              <QuoteIntro {...formControls} />
-            )}
-          </Modal>
+      <Modal
+        mobileWidth="full"
+        layoutId="quote-modal"
+        showCloseButton={false}
+        opens={({ modalIsOpen, toggleModal }) =>
+          step ? (
+            <FormStepper
+              toggleIsOpen={handleClick(toggleModal)}
+              isOpen={modalIsOpen}
+              {...formControls}
+            />
+          ) : (
+            <QuoteIntro
+              toggleIsOpen={handleClick(toggleModal)}
+              isOpen={modalIsOpen}
+              {...formControls}
+            />
+          )
+        }
+      >
+        {({ modalIsOpen, toggleModal }) => (
+          <Wrapper as={motion.div} layoutId="quote-modal">
+            <QuoteIntro
+              toggleIsOpen={handleClick(toggleModal)}
+              isOpen={modalIsOpen}
+              {...formControls}
+            />
+          </Wrapper>
         )}
-      </AnimatePresence>
+      </Modal>
+      )
     </AnimateSharedLayout>
   )
 }

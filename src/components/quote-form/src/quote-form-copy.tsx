@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { ModalProps } from '@components/modal'
 import type { FormControllerProps } from './controllers/formController'
 import { useStateMachine } from 'little-state-machine'
 import { createQuote } from '@lib/little-state-machine'
@@ -100,13 +99,6 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
   }, [active])
 
   const hasQuoteData = quoteData?.quoteId
-
-  const modalProps: ModalProps = {
-    toggle,
-    mobileWidth: 'full',
-    layoutId: modalLayoutId,
-    ...props,
-  }
 
   useEffect(() => {
     console.log('quoteformRender')
