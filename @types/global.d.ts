@@ -40,7 +40,7 @@ declare global {
   }
 }
 
-declare module '*.svg' {
+module '*.svg' {
   const content: any
   export default content
 }

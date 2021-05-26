@@ -1,16 +1,13 @@
 import { styled, CSS, Card, Paragraph, Title, Spacer, TextHolder } from '@theme'
 import { Button } from '@components/button'
-import { Modal } from '@components/modal'
 import {
-  AnimatePresence,
   AnimateSharedLayout,
   m as motion,
   useAnimation,
   useCycle,
   Variants,
 } from 'framer-motion'
-import { QuoteForm } from '@components/quote-form'
-import { useEffect } from 'react'
+import { TempQuoteForm as QuoteForm } from '@components/temp-quote-form'
 
 interface QuoteCtaProps {
   heading?: string
@@ -62,11 +59,7 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
   return (
     <AnimateSharedLayout>
       <Bg as={motion.div} layoutId="quoteCta" {...props}>
-        <QuoteForm
-          modalLayoutId="quoteCta"
-          active={modalIsOpen}
-          toggle={toggleModal}
-        />
+        <QuoteForm active={modalIsOpen} toggle={toggleModal} />
         <Content layout animate={contentControls} variants={contentVariants}>
           <Title
             layout

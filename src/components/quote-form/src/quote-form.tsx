@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { m as motion, useAnimation } from 'framer-motion'
 import { Modal, ModalProps } from '@components/modal'
 import { AnimatePresence } from 'framer-motion'
 import type { FormControllerProps } from './controllers/formController'
@@ -43,7 +42,6 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
   const [quoteData, setQuoteData] = useState<
     Pick<FormControllerProps, 'service' | 'initialData' | 'quoteId' | 'step'>
   >()
-  const innerContentControls = useAnimation()
 
   function isValidServiceType(serviceType?: ServiceType) {
     return serviceType && serviceTypes.includes(serviceType)

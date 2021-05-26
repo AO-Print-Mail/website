@@ -71,11 +71,6 @@ const ModalWrapper = styled('div', {
       l: { width: '100%', '@xl': { width: '83.33%' } },
       full: { width: '100%' },
     },
-    // height: {
-    //   s: { height: '' },
-    //   m: { height: '' },
-    //   l: { height: '' },
-    // },
     mobileWidth: {
       full: {
         '@m_max': {

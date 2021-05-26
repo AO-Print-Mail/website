@@ -27,6 +27,12 @@ import dynamic from 'next/dynamic'
 const Printer = dynamic(import('../svg/printer.svg'))
 const Inserter = dynamic(import('../svg/inserter.svg'))
 
+const heroGraphics = {
+  printing: dynamic(import('../svg/printHero.svg')),
+  'direct-mail': dynamic(import('../svg/directMailHero.svg')),
+  'package-fulfilment': dynamic(import('../svg/fulfilmentHero.svg')),
+}
+
 interface PageProps {
   data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
   pageSlug: string
@@ -81,7 +87,7 @@ const ConfiguredText = ({ data, size }) => {
   )
 }
 
-const ServicePage: React.FC<PageProps> = ({ data }) => {
+const ServicePage: React.FC<PageProps> = ({ data, pageSlug }) => {
   const Illustration = (props) => {
     if (data.illustration === 'inserter') {
       return <Inserter {...props} />
@@ -104,6 +110,42 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
     </>
   )
 
+  const HeroImageWrapper = styled('div', {
+    position: 'relative',
+    verticalAlign: 'top',
+    bottom: '-$1',
+    height: '$11',
+    left: '$3',
+    mt: '$4',
+    p: 0,
+    '@s': {
+      height: '$12',
+      mt: '0',
+    },
+    '@m': {
+      height: '400px',
+      left: '36vw',
+      top: '-8vw',
+    },
+    '@l': {
+      position: 'absolute',
+      height: '480px',
+      left: '50%',
+      top: 'auto',
+      bottom: '0',
+    },
+  })
+
+  const HeroSvg = styled(heroGraphics[pageSlug], {
+    height: '100%',
+  })
+
+  const HeroImage = () => (
+    <HeroImageWrapper>
+      <HeroSvg />
+    </HeroImageWrapper>
+  )
+
   return (
     <Layout
       beforeFooter={beforeFooter}
@@ -122,17 +164,22 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
         <Container
           css={{
             pt: '$7',
-            '@m': { height: '680px' },
-            '@l': { display: 'flex', height: '768px' },
+            '@m': { height: '768px' },
+            '@l': { display: 'flex', height: '640px' },
           }}
         >
           <HeroText>
-            <Title>{data.mainHeading}</Title>
+            <Title
+              css={{ marginTop: '0', '@m': { mt: '$2' }, '@l': { mt: '$4' } }}
+            >
+              {data.mainHeading}
+            </Title>
             <Spacer />
             <Box css={{ maxWidth: '60ch', mt: '$4' }}>
               <ConfiguredText data={data.heroParagraph} size="l" />
             </Box>
           </HeroText>
+          <HeroImage />
         </Container>
       </Box>
       <Box>

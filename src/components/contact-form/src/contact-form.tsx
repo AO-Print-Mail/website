@@ -125,11 +125,10 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
       body: encode({ 'form-name': FORM_NAME, ...data, ...userData }),
     })
       .then(() => {
-        const newPath = router.pathname.replace('[pageSlug]', '/contact')
         router.push(
           {
-            pathname: `${newPath}`,
-            query: { success: 'true' },
+            pathname: router.pathname,
+            query: { success: 'true', ...router.query },
           },
           null,
           { shallow: true }
