@@ -19,11 +19,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useState } from 'react'
 import { encode } from '@lib/netlify/utils'
 import { Button } from '@components/button'
-import { AnimatePresence, m as motion } from 'framer-motion'
+import {  m as motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useStateMachine } from 'little-state-machine'
-import { Modal, ModalProps } from '@components/modal'
 import { ModalLayout } from '@components/modal/src/layout'
 
 const WorkaroundForm = dynamic(() =>
@@ -151,268 +150,251 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
         reset()
       })
   }
-  const modalProps: ModalProps = {
-    toggle,
-    mobileWidth: 'full',
-    layoutId: modalLayoutId,
-    ...props,
-  }
   return (
-    <AnimatePresence>
-      {active && (
-        <Modal width="m" {...modalProps} css={{ height: 'auto' }}>
-          <ModalLayout
-            hideControlsBorder
-            controls={<CloseControls handleClose={toggle} />}
+    <ModalLayout
+      hideControlsBorder
+      controls={<CloseControls handleClose={toggle} />}
+    >
+      <Background {...props}>
+        {router.query['success'] && (
+          <SuccessBackground
+            as={motion.div}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
-            <Background {...props}>
-              {router.query['success'] && (
-                <SuccessBackground
-                  as={motion.div}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
+            <Flex css={{ alignItems: 'center', height: '100%' }}>
+              <Box css={{ flex: '1 1', pb: '$9' }}>
+                <Heading2 alignCenter css={{ color: '$white' }}>
+                  Thanks for your message{firstName && `, ${firstName}`}!
+                </Heading2>
+                <Paragraph
+                  size="s"
+                  css={{ color: '$LA90', mt: '$6' }}
+                  alignCenter
                 >
-                  <Flex css={{ alignItems: 'center', height: '100%' }}>
-                    <Box css={{ flex: '1 1', pb: '$9' }}>
-                      <Heading2 alignCenter css={{ color: '$white' }}>
-                        Thanks for your message{firstName && `, ${firstName}`}!
-                      </Heading2>
-                      <Paragraph
-                        size="s"
-                        css={{ color: '$LA90', mt: '$6' }}
-                        alignCenter
-                      >
-                        We'll get back to you very soon.
-                      </Paragraph>
-                    </Box>
-                  </Flex>
-                </SuccessBackground>
+                  We'll get back to you very soon.
+                </Paragraph>
+              </Box>
+            </Flex>
+          </SuccessBackground>
+        )}
+        <Heading2 marginTop="small" level="4">
+          Request a quote
+        </Heading2>
+        <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>
+          <Box css={{ my: '$4', pb: '$2' }}>
+            <Flex css={{ mx: '-$2' }}>
+              <Input
+                {...register('firstName')}
+                id="firstName"
+                name="firstName"
+                placeholder="Jane"
+                defaultValue={inputs.firstName}
+                css={{ px: '$2', flexBasis: '50%' }}
+                errors={errors}
+                required
+              >
+                First name
+              </Input>
+              <Input
+                {...register('lastName')}
+                id="lastName"
+                name="lastName"
+                placeholder="Appleseed"
+                defaultValue={inputs.lastName}
+                css={{ px: '$2', flexBasis: '50%' }}
+                errors={errors}
+              >
+                Last name
+              </Input>
+            </Flex>
+            <Input
+              {...register('companyName')}
+              id="companyName"
+              name="companyName"
+              placeholder="Acme inc"
+              defaultValue={inputs.companyName}
+              errors={errors}
+            >
+              Company name
+            </Input>
+            <Input
+              {...register('email')}
+              id="email"
+              name="email"
+              placeholder="jane@example.com.au"
+              type="email"
+              defaultValue={inputs.email}
+              errors={errors}
+              required
+            >
+              Email address
+            </Input>
+            <MaskedInput
+              id="phone"
+              placeholder="04xx xxx xxx"
+              mask={mobileMask}
+              inputMode="numeric"
+              guide={false}
+              type="text"
+              defaultValue={inputs.phone}
+              errors={errors}
+              {...register('phone')}
+              render={(textMaskRef, props) => (
+                <Input
+                  ref={(node) => {
+                    textMaskRef(node)
+                  }}
+                  name="phone"
+                  {...props}
+                >
+                  Contact number
+                </Input>
               )}
-              <Heading2 marginTop="small" level="4">
-                Request a quote
-              </Heading2>
-              <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>
-                <Box css={{ my: '$4', pb: '$2' }}>
-                  <Flex css={{ mx: '-$2' }}>
-                    <Input
-                      {...register('firstName')}
-                      id="firstName"
-                      name="firstName"
-                      placeholder="Jane"
-                      defaultValue={inputs.firstName}
-                      css={{ px: '$2', flexBasis: '50%' }}
-                      errors={errors}
-                      required
-                    >
-                      First name
-                    </Input>
-                    <Input
-                      {...register('lastName')}
-                      id="lastName"
-                      name="lastName"
-                      placeholder="Appleseed"
-                      defaultValue={inputs.lastName}
-                      css={{ px: '$2', flexBasis: '50%' }}
-                      errors={errors}
-                    >
-                      Last name
-                    </Input>
-                  </Flex>
-                  <Input
-                    {...register('companyName')}
-                    id="companyName"
-                    name="companyName"
-                    placeholder="Acme inc"
-                    defaultValue={inputs.companyName}
-                    errors={errors}
-                  >
-                    Company name
-                  </Input>
-                  <Input
-                    {...register('email')}
-                    id="email"
-                    name="email"
-                    placeholder="jane@example.com.au"
-                    type="email"
-                    defaultValue={inputs.email}
-                    errors={errors}
-                    required
-                  >
-                    Email address
-                  </Input>
-                  <MaskedInput
-                    id="phone"
-                    placeholder="04xx xxx xxx"
-                    mask={mobileMask}
-                    inputMode="numeric"
-                    guide={false}
-                    type="text"
-                    defaultValue={inputs.phone}
-                    errors={errors}
-                    {...register('phone')}
-                    render={(textMaskRef, props) => (
-                      <Input
-                        ref={(node) => {
-                          textMaskRef(node)
-                        }}
-                        name="phone"
-                        {...props}
-                      >
-                        Contact number
-                      </Input>
-                    )}
-                  />
-                  <InputLabel
-                    css={{ mt: '$8' }}
-                    size="s"
-                    as="label"
-                    htmlFor="service"
-                  >
-                    Which service do you need?
-                  </InputLabel>
-                  <Flex wrap css={{ pb: '$3' }}>
-                    <RadioButton
-                      id="services1"
-                      name="service"
-                      {...register('service')}
-                      value="Print and mail"
-                    >
-                      Printing and mailing
-                    </RadioButton>
-                    <RadioButton
-                      id="services2"
-                      name="service"
-                      {...register('service')}
-                      value="Mail"
-                    >
-                      Mailing only
-                    </RadioButton>
-                    <RadioButton
-                      id="services3"
-                      name="service"
-                      {...register('service')}
-                      value="Print"
-                    >
-                      Printing only
-                    </RadioButton>
-                    <RadioButton
-                      id="services4"
-                      name="service"
-                      {...register('service')}
-                      value="Fulfilment"
-                    >
-                      Fulfilment
-                    </RadioButton>
-                  </Flex>
-                  <InputLabel as="label" htmlFor="deadline">
-                    How urgent is the job?
-                  </InputLabel>
-                  <Flex wrap css={{ mt: '$3', pb: '$3' }}>
-                    <RadioButton
-                      id="deadline1"
-                      name="deadline"
-                      {...register('deadline')}
-                      value="none"
-                    >
-                      No deadline yet
-                    </RadioButton>
-                    <RadioButton
-                      id="deadline2"
-                      name="deadline"
-                      {...register('deadline')}
-                      value="3_weeks"
-                    >
-                      3 weeks or more
-                    </RadioButton>
-                    <RadioButton
-                      id="deadline3"
-                      name="deadline"
-                      {...register('deadline')}
-                      value="'2_weeks"
-                    >
-                      2 weeks or more
-                    </RadioButton>
-                    <RadioButton
-                      id="deadline4"
-                      name="deadline"
-                      {...register('deadline')}
-                      value="next_week"
-                    >
-                      Next week
-                    </RadioButton>
-                    <RadioButton
-                      id="deadline5"
-                      name="deadline"
-                      {...register('deadline')}
-                      value="urgently"
-                    >
-                      Urgently!
-                    </RadioButton>
-                  </Flex>
-                  <InputLabel as="label" htmlFor="quantity">
-                    How many items?
-                  </InputLabel>
+            />
+            <InputLabel
+              css={{ mt: '$8' }}
+              size="s"
+              as="label"
+              htmlFor="service"
+            >
+              Which service do you need?
+            </InputLabel>
+            <Flex wrap css={{ pb: '$3' }}>
+              <RadioButton
+                id="services1"
+                name="service"
+                {...register('service')}
+                value="Print and mail"
+              >
+                Printing and mailing
+              </RadioButton>
+              <RadioButton
+                id="services2"
+                name="service"
+                {...register('service')}
+                value="Mail"
+              >
+                Mailing only
+              </RadioButton>
+              <RadioButton
+                id="services3"
+                name="service"
+                {...register('service')}
+                value="Print"
+              >
+                Printing only
+              </RadioButton>
+              <RadioButton
+                id="services4"
+                name="service"
+                {...register('service')}
+                value="Fulfilment"
+              >
+                Fulfilment
+              </RadioButton>
+            </Flex>
+            <InputLabel as="label" htmlFor="deadline">
+              How urgent is the job?
+            </InputLabel>
+            <Flex wrap css={{ mt: '$3', pb: '$3' }}>
+              <RadioButton
+                id="deadline1"
+                name="deadline"
+                {...register('deadline')}
+                value="none"
+              >
+                No deadline yet
+              </RadioButton>
+              <RadioButton
+                id="deadline2"
+                name="deadline"
+                {...register('deadline')}
+                value="3_weeks"
+              >
+                3 weeks or more
+              </RadioButton>
+              <RadioButton
+                id="deadline3"
+                name="deadline"
+                {...register('deadline')}
+                value="'2_weeks"
+              >
+                2 weeks or more
+              </RadioButton>
+              <RadioButton
+                id="deadline4"
+                name="deadline"
+                {...register('deadline')}
+                value="next_week"
+              >
+                Next week
+              </RadioButton>
+              <RadioButton
+                id="deadline5"
+                name="deadline"
+                {...register('deadline')}
+                value="urgently"
+              >
+                Urgently!
+              </RadioButton>
+            </Flex>
+            <InputLabel as="label" htmlFor="quantity">
+              How many items?
+            </InputLabel>
 
-                  <Box css={{ mt: '$3', pb: '$2' }}>
-                    <Input
-                      name="itemQuantity"
-                      id="quantity"
-                      {...register('quantity')}
-                      type="number"
-                    />
-                  </Box>
-                  <Box css={{ mt: '$3' }}>
-                    <InputLabel as="label" size="s" htmlFor="message">
-                      Message
-                    </InputLabel>
-                    <TextArea
-                      {...register('message')}
-                      resizeVertical
-                      id="message"
-                      name="message"
-                      rows={8}
-                      cols={30}
-                      placeholder="Please include any additional information that is applicable to your job."
-                      autoComplete="off"
-                      defaultValue={inputs.message}
-                      css={{ width: '100%' }}
-                    />
-                  </Box>
-                  <Checkbox
-                    {...register('joinMailingList')}
-                    id="joinMailingList"
-                    name="joinMailingList"
-                    defaultChecked={inputs.joinMailingList}
-                    css={{ mt: '$3' }}
-                  >
-                    Keep me up to date with news and special offers
-                  </Checkbox>
-                </Box>
-                <p aria-hidden="true" className={classes.visuallyHidden()}>
-                  <label>
-                    Skip this field if you’re human:
-                    <input
-                      tabIndex={-1}
-                      {...register('bot-field')}
-                      name="bot-field"
-                    />
-                  </label>
-                </p>
-                <Button
-                  fullWidth
-                  size="cta"
-                  isLoading={submitting}
-                  type="submit"
-                >
-                  Request quote
-                </Button>
-              </form>
-              <WorkaroundForm formFields={inputs} name={FORM_NAME} />
-            </Background>
-          </ModalLayout>
-        </Modal>
-      )}
-    </AnimatePresence>
+            <Box css={{ mt: '$3', pb: '$2' }}>
+              <Input
+                name="itemQuantity"
+                id="quantity"
+                {...register('quantity')}
+                type="number"
+              />
+            </Box>
+            <Box css={{ mt: '$3' }}>
+              <InputLabel as="label" size="s" htmlFor="message">
+                Message
+              </InputLabel>
+              <TextArea
+                {...register('message')}
+                resizeVertical
+                id="message"
+                name="message"
+                rows={8}
+                cols={30}
+                placeholder="Please include any additional information that is applicable to your job."
+                autoComplete="off"
+                defaultValue={inputs.message}
+                css={{ width: '100%' }}
+              />
+            </Box>
+            <Checkbox
+              {...register('joinMailingList')}
+              id="joinMailingList"
+              name="joinMailingList"
+              defaultChecked={inputs.joinMailingList}
+              css={{ mt: '$3' }}
+            >
+              Keep me up to date with news and special offers
+            </Checkbox>
+          </Box>
+          <p aria-hidden="true" className={classes.visuallyHidden()}>
+            <label>
+              Skip this field if you’re human:
+              <input
+                tabIndex={-1}
+                {...register('bot-field')}
+                name="bot-field"
+              />
+            </label>
+          </p>
+          <Button fullWidth size="cta" isLoading={submitting} type="submit">
+            Request quote
+          </Button>
+        </form>
+        <WorkaroundForm formFields={inputs} name={FORM_NAME} />
+      </Background>
+    </ModalLayout>
   )
 }

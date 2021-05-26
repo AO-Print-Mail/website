@@ -1,6 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Modal, ModalProps } from '@components/modal'
-import { AnimatePresence } from 'framer-motion'
 import type { FormControllerProps } from './controllers/formController'
 import { useStateMachine } from 'little-state-machine'
 import { createQuote } from '@lib/little-state-machine'
@@ -30,13 +28,11 @@ interface QuoteFormProps {
 
 export const QuoteForm: React.FC<QuoteFormProps> = ({
   active,
-  modalLayoutId,
   toggle,
   quoteId,
   service,
   initialData,
   step,
-  ...props
 }) => {
   const { state, actions } = useStateMachine({ createQuote })
   const [quoteData, setQuoteData] = useState<
@@ -102,33 +98,18 @@ export const QuoteForm: React.FC<QuoteFormProps> = ({
 
   const hasQuoteData = quoteData?.quoteId
 
-  const modalProps: ModalProps = {
-    toggle,
-    mobileWidth: 'full',
-    layoutId: modalLayoutId,
-    ...props,
-  }
-
   useEffect(() => {
     console.log('quoteformRender')
   })
 
-  return (
-    <AnimatePresence>
-      {active && (
-        <Modal width={hasQuoteData ? 'm' : 'l'} {...modalProps}>
-          {hasQuoteData ? (
-            <FormController {...quoteData} toggle={toggle} />
-          ) : (
-            <ModalLayout
-              controls={<CloseControls handleClose={toggle} />}
-              hideControlsBorder
-            >
-              <SelectService setSelectedService={handleSelectedService} />
-            </ModalLayout>
-          )}
-        </Modal>
-      )}
-    </AnimatePresence>
+  return hasQuoteData ? (
+    <FormController {...quoteData} toggle={toggle} />
+  ) : (
+    <ModalLayout
+      controls={<CloseControls handleClose={toggle} />}
+      hideControlsBorder
+    >
+      <SelectService setSelectedService={handleSelectedService} />
+    </ModalLayout>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { ClientOnlyPortal } from '@lib/react'
 import {
   styled,
@@ -8,35 +8,18 @@ import {
   ColumnWrapper,
   Column,
 } from '@theme'
-import { LayoutContext } from '@components/layout/src/layoutContext'
-import {
-  AnimatePresence,
-  m as motion,
-  useAnimation,
-  usePresence,
-  Variants,
-} from 'framer-motion'
+import { m as motion, useAnimation, usePresence, Variants } from 'framer-motion'
 import { StitchesVariants } from '@stitches/core'
-
-type ModalRenderProps = ({
-  modalIsOpen,
-  toggleModal,
-}: {
-  modalIsOpen: boolean
-  toggleModal: () => void
-}) => React.ReactNode
 
 export interface ModalProps extends React.ComponentProps<typeof TextHolder> {
   layoutId?: string
-  toggle?: (e?: React.MouseEvent) => void
+  toggle?: () => void
   showCloseButton?: boolean
   mobileWidth?: 'full' | 'contain'
   width?: StitchesVariants<typeof ModalWrapper>
   controls?: React.ReactNode
   main?: React.ReactNode
   hideControlsBorder?: boolean
-  opens: ModalRenderProps
-  children: ModalRenderProps
 }
 
 const ScreenWrapper = styled('div', {
@@ -61,17 +44,23 @@ const ModalWrapper = styled('div', {
   position: 'relative',
   my: '$6',
   mx: 'auto',
-  height: '480px',
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'flex-start',
-  '@s': { height: '640px' },
-  '@m': { height: '848px' },
-  '@l': {
-    height: '640px',
-  },
-  '@xl': { height: '768px' },
+
   variants: {
+    height: {
+      contain: {
+        height: '480px',
+        '@s': { height: '640px' },
+        '@m': { height: '848px' },
+        '@l': {
+          height: '640px',
+        },
+        '@xl': { height: '768px' },
+      },
+    },
+
     width: {
       s: {
         width: '100%',
@@ -87,11 +76,7 @@ const ModalWrapper = styled('div', {
       l: { width: '100%', '@xl': { width: '83.33%' } },
       full: { width: '100%' },
     },
-    // height: {
-    //   s: { height: '' },
-    //   m: { height: '' },
-    //   l: { height: '' },
-    // },
+
     mobileWidth: {
       full: {
         '@m_max': {
@@ -142,13 +127,7 @@ const modalMotionVariants: Variants = {
   hidden: { opacity: 0, y: 48 },
 }
 
-const closeButtonVariants: Variants = {
-  visible: { opacity: 1, y: 0, transition: { delay: 0.3 } },
-  hidden: { opacity: 0, transition: { duration: 0.2 } },
-  clicked: { opacity: 0, scale: 1.5, transition: { duration: 0.2 } },
-}
-
-export const Modal: React.FC<ModalProps> = ({
+export const ModalBody: React.FC<ModalProps> = ({
   layoutId,
   children,
   toggle,
@@ -158,14 +137,12 @@ export const Modal: React.FC<ModalProps> = ({
   main,
   controls,
   hideControlsBorder,
-  opens,
   ...props
 }) => {
-  const [modalIsOpen, toggleModal] = useState<boolean>()
-  const [isPresent, safeToRemove] = usePresence()
-  const { toggleScrollLock, setShowNav } = useContext(LayoutContext)
   const backDropControls = useAnimation()
   const closeButtonControls = useAnimation()
+
+  const [isPresent, safeToRemove] = usePresence()
 
   async function modalAnimateOut() {
     await backDropControls.start('hidden')
@@ -173,13 +150,10 @@ export const Modal: React.FC<ModalProps> = ({
   }
 
   async function handleUnmount() {
-    toggleScrollLock()
     setTimeout(modalAnimateOut, 50)
   }
 
   function handleMount() {
-    toggleScrollLock()
-    setTimeout(setShowNav, 50, false)
     backDropControls.start('visible')
     closeButtonControls.start('visible')
   }
@@ -212,51 +186,48 @@ export const Modal: React.FC<ModalProps> = ({
     e.stopPropagation()
   }
 
-  async function handleClick() {
+  async function handleToggle() {
     await closeButtonControls.start('clicked')
-    toggleModal(!modalIsOpen)
+    toggle()
+  }
+
+  function handleClick() {
+    handleToggle()
   }
 
   return ClientOnlyPortal({
     children: (
       <>
-        {children({ modalIsOpen, toggleModal: handleClick })}
-        <AnimatePresence>
-          {modalIsOpen && (
-            <>
-              <BackDrop
-                initial="hidden"
-                animate={backDropControls}
-                variants={backdropMotionVariants}
-              />
-              <ScreenWrapper onClick={handleClick}>
-                <Container>
-                  <ColumnWrapper css={{ display: 'block' }}>
-                    <Column>
-                      <ModalWrapper
-                        as={motion.div}
-                        mobileWidth={mobileWidth}
-                        onClick={stopPropagationOnClick}
-                        width={width}
-                        {...wpAnimations}
-                        {...props}
-                      >
-                        <ModalBackground
-                          as={motion.div}
-                          layout
-                          {...bgAnimations}
-                          mobileWidth={mobileWidth}
-                        />
-                        {opens({ modalIsOpen, toggleModal: handleClick })}
-                      </ModalWrapper>
-                    </Column>
-                  </ColumnWrapper>
-                </Container>
-              </ScreenWrapper>
-              )
-            </>
-          )}
-        </AnimatePresence>
+        <BackDrop
+          initial="hidden"
+          animate={backDropControls}
+          variants={backdropMotionVariants}
+        />
+        <ScreenWrapper onClick={handleClick}>
+          <Container>
+            <ColumnWrapper css={{ display: 'block' }}>
+              <Column>
+                <ModalWrapper
+                  as={motion.div}
+                  mobileWidth={mobileWidth}
+                  onClick={stopPropagationOnClick}
+                  width={width}
+                  {...wpAnimations}
+                  {...props}
+                >
+                  <ModalBackground
+                    as={motion.div}
+                    layoutId={layoutId}
+                    layout
+                    {...bgAnimations}
+                    mobileWidth={mobileWidth}
+                  />
+                  {children}
+                </ModalWrapper>
+              </Column>
+            </ColumnWrapper>
+          </Container>
+        </ScreenWrapper>
       </>
     ),
     selector: '#portal-modal',

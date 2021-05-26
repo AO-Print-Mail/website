@@ -1,6 +1,6 @@
 import { Button } from './button'
-import { QuoteForm } from './quote-form'
-import { Modal } from '@components/modal/src/modal-copy'
+import { Modal } from './modal/src/modal'
+import { TempQuoteForm as QuoteForm } from './temp-quote-form'
 
 export interface QuoteButtonProps extends React.ComponentProps<typeof Button> {}
 
