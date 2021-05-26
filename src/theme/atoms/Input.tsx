@@ -16,6 +16,8 @@ interface InputProps
   type?: string
   css?: CSS
   required?: boolean
+  onChange?: (any) => void
+  onBlur?: (any) => void
 }
 
 export const InputStyles = styled(Paragraph, {
@@ -97,12 +99,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       placeholder,
       errors,
       required,
+      onChange,
+      onBlur,
       ...props
     },
     ref
   ) => {
     const inputProps = !children && props
-    const error = errors && !!errors[name]
+    const error = errors?.[name]
     const _input = (
       <InputStyles
         id={id}
@@ -115,6 +119,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         state={error && 'error'}
         aria-invalid={error ? 'true' : 'false'}
+        onChange={onChange}
+        onBlur={onBlur}
         {...inputProps}
       />
     )

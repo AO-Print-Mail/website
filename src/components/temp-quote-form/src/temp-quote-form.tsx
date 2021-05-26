@@ -60,7 +60,7 @@ const schema = yup.object().shape({
   lastName: yup.string(),
   service: yup.string(),
   deadline: yup.string(),
-  quanitity: yup.string(),
+  quantity: yup.string(),
   companyName: yup.string(),
   email: yup
     .string()
@@ -74,7 +74,6 @@ const schema = yup.object().shape({
           .max(14, 'The telephone number you entered seems too long.')
       : yup.string()
   ),
-
   message: yup.string(),
   'bot-field': yup.string(),
   joinMailingList: yup.boolean(),
@@ -190,7 +189,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               <Input
                 {...register('firstName')}
                 id="firstName"
-                name="firstName"
                 placeholder="Jane"
                 defaultValue={inputs.firstName}
                 css={{ px: '$2', flexBasis: '50%' }}
@@ -202,7 +200,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               <Input
                 {...register('lastName')}
                 id="lastName"
-                name="lastName"
                 placeholder="Appleseed"
                 defaultValue={inputs.lastName}
                 css={{ px: '$2', flexBasis: '50%' }}
@@ -214,7 +211,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
             <Input
               {...register('companyName')}
               id="companyName"
-              name="companyName"
               placeholder="Acme inc"
               defaultValue={inputs.companyName}
               errors={errors}
@@ -224,7 +220,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
             <Input
               {...register('email')}
               id="email"
-              name="email"
               placeholder="jane@example.com.au"
               type="email"
               defaultValue={inputs.email}
@@ -242,13 +237,13 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               type="text"
               defaultValue={inputs.phone}
               errors={errors}
-              {...register('phone')}
               render={(textMaskRef, props) => (
                 <Input
+                  {...register('phone')}
                   ref={(node) => {
                     textMaskRef(node)
+                    register('phone').ref(node)
                   }}
-                  name="phone"
                   {...props}
                 >
                   Contact number
@@ -266,23 +261,16 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
             <Flex wrap css={{ pb: '$3' }}>
               <RadioButton
                 id="services1"
-                name="service"
                 {...register('service')}
                 value="Print and mail"
               >
                 Printing and mailing
               </RadioButton>
-              <RadioButton
-                id="services2"
-                name="service"
-                {...register('service')}
-                value="Mail"
-              >
+              <RadioButton id="services2" {...register('service')} value="Mail">
                 Mailing only
               </RadioButton>
               <RadioButton
                 id="services3"
-                name="service"
                 {...register('service')}
                 value="Print"
               >
@@ -290,20 +278,18 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               </RadioButton>
               <RadioButton
                 id="services4"
-                name="service"
                 {...register('service')}
                 value="Fulfilment"
               >
                 Fulfilment
               </RadioButton>
             </Flex>
-            <InputLabel as="label" htmlFor="deadline">
+            <InputLabel as="label" size="s" htmlFor="deadline">
               How urgent is the job?
             </InputLabel>
             <Flex wrap css={{ mt: '$3', pb: '$3' }}>
               <RadioButton
                 id="deadline1"
-                name="deadline"
                 {...register('deadline')}
                 value="none"
               >
@@ -311,7 +297,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               </RadioButton>
               <RadioButton
                 id="deadline2"
-                name="deadline"
                 {...register('deadline')}
                 value="3_weeks"
               >
@@ -319,7 +304,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               </RadioButton>
               <RadioButton
                 id="deadline3"
-                name="deadline"
                 {...register('deadline')}
                 value="'2_weeks"
               >
@@ -327,7 +311,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               </RadioButton>
               <RadioButton
                 id="deadline4"
-                name="deadline"
                 {...register('deadline')}
                 value="next_week"
               >
@@ -335,24 +318,18 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               </RadioButton>
               <RadioButton
                 id="deadline5"
-                name="deadline"
                 {...register('deadline')}
                 value="urgently"
               >
                 Urgently!
               </RadioButton>
             </Flex>
-            <InputLabel as="label" htmlFor="quantity">
-              How many items?
-            </InputLabel>
 
             <Box css={{ mt: '$3', pb: '$2' }}>
-              <Input
-                name="itemQuantity"
-                id="quantity"
-                {...register('quantity')}
-                type="number"
-              />
+              <InputLabel as="label" size="s" htmlFor="quantity">
+                How many items?
+              </InputLabel>
+              <Input name="quantity" {...register('quantity')} type="number" />
             </Box>
             <Box css={{ mt: '$3' }}>
               <InputLabel as="label" size="s" htmlFor="message">
@@ -362,7 +339,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
                 {...register('message')}
                 resizeVertical
                 id="message"
-                name="message"
                 rows={8}
                 cols={30}
                 placeholder="Please include any additional information that is applicable to your job."
@@ -374,7 +350,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
             <Checkbox
               {...register('joinMailingList')}
               id="joinMailingList"
-              name="joinMailingList"
               defaultChecked={inputs.joinMailingList}
               css={{ mt: '$3' }}
             >
@@ -384,11 +359,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
           <p aria-hidden="true" className={classes.visuallyHidden()}>
             <label>
               Skip this field if you’re human:
-              <input
-                tabIndex={-1}
-                {...register('bot-field')}
-                name="bot-field"
-              />
+              <input tabIndex={-1} {...register('bot-field')} />
             </label>
           </p>
           <Button fullWidth size="cta" isLoading={submitting} type="submit">

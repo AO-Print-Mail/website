@@ -9,6 +9,8 @@ interface RadioButtonProps {
   checked?: boolean
   defaultChecked?: boolean
   children?: React.ReactNode
+  onChange?: (any) => void
+  onBlur?: (any) => void
 }
 
 const HiddenRadio = styled('input', {
@@ -53,7 +55,20 @@ const Label = styled(Paragraph, {
 })
 
 export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
-  ({ id, children, value, name, defaultChecked, checked, ...props }, ref) => {
+  (
+    {
+      id,
+      children,
+      value,
+      name,
+      defaultChecked,
+      checked,
+      onChange,
+      onBlur,
+      ...props
+    },
+    ref
+  ) => {
     return (
       <Block {...props}>
         <HiddenRadio
@@ -64,6 +79,8 @@ export const RadioButton = forwardRef<HTMLInputElement, RadioButtonProps>(
           defaultChecked={defaultChecked}
           checked={checked}
           ref={ref}
+          onChange={onChange}
+          onBlur={onBlur}
         />
         <Label as="label" size="s" htmlFor={id}>
           {children}

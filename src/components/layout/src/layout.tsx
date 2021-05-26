@@ -49,10 +49,10 @@ export const Layout: React.FC<LayoutProps> = ({
   ...props
 }) => {
   const [scrollLock, toggleScroll] = useCycle(false, true)
+  const [velocityListener, setVelocityListener] = useState<boolean>(true)
   const [showNav, setShowNav] = useState(true)
   const scrollPosition = useMotionValue(0)
   const headerRef = useRef<HTMLDivElement>()
-
   //@ts-ignore
   const meta = renderMetaTags(metaData.concat(data?.site?.favicon || []))
 
@@ -62,27 +62,27 @@ export const Layout: React.FC<LayoutProps> = ({
     if (!scrollLock) {
       const top = scrollPosition.get()
       window.scroll({ top })
+      setTimeout(setVelocityListener, 500, true)
     }
   }, [scrollLock])
   useEffect(() => {
     let listener
     function update() {
-      if (!scrollLock) {
-        if (scrollY.get() < 100) {
-          setShowNav(true)
-          return
-        }
-        const velocity = scrollY.getVelocity()
-        if (velocity > 100) {
-          setShowNav(false)
-          return
-        }
-        if (velocity < -100) {
-          setShowNav(true)
-          return
-        }
+      if (scrollY.get() < 100) {
+        setShowNav(true)
+        return
+      }
+      const velocity = scrollY.getVelocity()
+      if (velocityListener && velocity > 100) {
+        setShowNav(false)
+        return
+      }
+      if (velocity < -100) {
+        setShowNav(true)
+        return
       }
     }
+
     function focusHeader() {
       setShowNav(true)
     }
@@ -108,9 +108,7 @@ export const Layout: React.FC<LayoutProps> = ({
       scrollPosition.set(scrollY.get())
     }
     toggleScroll()
-    if (!scrollIsLocked) {
-      setShowNav(true)
-    }
+    setVelocityListener(false)
   }
 
   return (

@@ -10,6 +10,8 @@ interface CheckboxProps {
   children?: ReactNode
   name: string
   css?: CSS
+  onChange?: (any) => void
+  onBlur?: (any) => void
 }
 
 const CheckboxStyles = styled('input', {
@@ -23,7 +25,10 @@ const CheckboxStyles = styled('input', {
 const LabelStyles = styled(Paragraph, { color: '$DA70' })
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ id, checked, defaultChecked, children, name, ...props }, ref) => {
+  (
+    { id, checked, defaultChecked, children, name, onChange, onBlur, ...props },
+    ref
+  ) => {
     const inputProps = !children && props
     const _checkbox = (
       <CheckboxStyles
@@ -33,6 +38,8 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         name={name}
         checked={checked}
         ref={ref}
+        onChange={onChange}
+        onBlur={onBlur}
         {...inputProps}
       />
     )
