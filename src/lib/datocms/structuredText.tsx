@@ -19,7 +19,7 @@ import {
 } from 'datocms-structured-text-utils'
 import dynamic from 'next/dynamic'
 import { renderRule, StructuredText as ConfigurableText } from 'react-datocms'
-import { Heading, List, listItemProps, Paragraph } from '@theme'
+import { Heading, List, Paragraph } from '@theme'
 
 const BlockQuote = dynamic(() =>
   import('@theme/atoms/blockquote').then((res) => res.BlockQuote)

@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useStateMachine } from 'little-state-machine'
-import {
-  AnimateSharedLayout,
-  m as motion,
-  useCycle,
-  useMotionValue,
-} from 'framer-motion'
+import { AnimateSharedLayout, m as motion, useMotionValue } from 'framer-motion'
 import dynamic from 'next/dynamic'
 
 import { resetFormData } from '@lib/little-state-machine/actions'

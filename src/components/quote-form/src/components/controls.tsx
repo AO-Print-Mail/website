@@ -2,7 +2,6 @@ import { Button } from '@components/button'
 import { ControlLayout, ProgressBar } from '@theme/atoms'
 import { ArrowBack, Close } from '@theme/icons'
 import { MotionValue } from 'framer-motion'
-import router from 'next/router'
 import React from 'react'
 
 interface ControlsProps {
