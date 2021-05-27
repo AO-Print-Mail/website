@@ -9,6 +9,7 @@ interface MobileNavigationProps {
   as?: any
   layout?: boolean
   id?: string
+  toggleNav?: (e?: React.MouseEvent) => void
 }
 
 const staticData = [
@@ -69,6 +70,7 @@ const BottomBorder = styled('span', {
 interface NavSectionProps {
   section_label: string
   menu_items: typeof staticData[0]['menu_items']
+  toggleNav?: (e?: React.MouseEvent) => void
 }
 
 const SectionLabel = styled(Heading4, {
@@ -82,22 +84,21 @@ const SectionLabel = styled(Heading4, {
   },
 })
 
-const SectionLink: React.FC<typeof staticData[0]['menu_items'][0]> = ({
-  name,
-  link,
-}) => {
+const SectionLink: React.FC<
+  typeof staticData[0]['menu_items'][0] &
+    Pick<MobileNavigationProps, 'toggleNav'>
+> = ({ name, link, toggleNav }) => {
   return (
     <Box as="li" css={{ flex: '0 0 50%', '& > a': { textDecoration: 'none' } }}>
-      <Link href={link}>
-        <a>
-          <Button
-            style="naked"
-            as="span"
-            css={{ display: 'inline-block', mt: '$3', py: '$2' }}
-          >
-            {name}
-          </Button>
-        </a>
+      <Link href={link} passHref>
+        <Button
+          style="naked"
+          as="a"
+          css={{ display: 'inline-block', mt: '$3', py: '$2' }}
+          onClick={toggleNav}
+        >
+          {name}
+        </Button>
       </Link>
     </Box>
   )
@@ -106,6 +107,7 @@ const SectionLink: React.FC<typeof staticData[0]['menu_items'][0]> = ({
 const NavSection: React.FC<NavSectionProps> = ({
   section_label,
   menu_items,
+  toggleNav,
 }) => {
   return (
     <Box css={{ pt: '$5', pb: '$4', position: 'relative' }}>
@@ -124,7 +126,7 @@ const NavSection: React.FC<NavSectionProps> = ({
           wrap
         >
           {menu_items.map((item) => (
-            <SectionLink key={item.name} {...item} />
+            <SectionLink key={item.name} {...item} toggleNav={toggleNav} />
           ))}
         </Flex>
       </Container>
