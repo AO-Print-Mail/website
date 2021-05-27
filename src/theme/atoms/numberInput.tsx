@@ -1,6 +1,5 @@
 import { forwardRef, ReactNode } from 'react'
-import { styled } from '..'
-import { Paragraph } from './typography'
+import { styled, Paragraph } from '..'
 
 interface NumberInputProps {
   id: string

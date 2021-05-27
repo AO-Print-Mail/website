@@ -1,14 +1,14 @@
 import { styled, CSS, Card, Paragraph, Title, Spacer, TextHolder } from '@theme'
 import { Button } from '@components/button'
-import { Modal } from '@components/modal'
 import {
-  AnimatePresence,
   AnimateSharedLayout,
   m as motion,
   useAnimation,
-  useCycle,
   Variants,
 } from 'framer-motion'
+import { TempQuoteForm as QuoteForm } from '@components/temp-quote-form'
+import { Modal } from '@components/modal/src/modal'
+import React from 'react'
 
 interface QuoteCtaProps {
   heading?: string
@@ -50,49 +50,73 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
   ...props
 }) => {
   const contentControls = useAnimation()
-  const [modalIsOpen, toggleModalIsOpen] = useCycle(false, true)
-  async function toggleModal(e: React.MouseEvent) {
-    e.preventDefault()
-    await contentControls.start('hidden')
-    toggleModalIsOpen()
-    setTimeout(contentControls.start, 500, 'visible')
+
+  function handleOpenModal({ modalIsOpen, toggleModal }) {
+    return async function (e: React.MouseEvent) {
+      if (!modalIsOpen) {
+        e.preventDefault()
+        await contentControls.start('hidden')
+        toggleModal()
+      }
+    }
+  }
+  function handleCloseModal({ modalIsOpen, toggleModal }) {
+    return async function (e: React.MouseEvent) {
+      if (modalIsOpen) {
+        e.preventDefault()
+        toggleModal()
+        setTimeout(contentControls.start, 300, 'visible')
+      }
+    }
   }
   return (
     <AnimateSharedLayout>
-      <Bg as={motion.div} layoutId="quoteCta" {...props}>
-        <AnimatePresence>
-          {modalIsOpen && (
-            <Modal
-              mobileWidth="full"
-              toggle={toggleModal}
-              layoutId="quoteCta"
-            ></Modal>
-          )}
-        </AnimatePresence>
-        <Content animate={contentControls} variants={contentVariants}>
-          <Title level="3" alignCenter>
-            {heading || 'Get a quote for your next job'}
-          </Title>
-          <TextHolder>
-            <Paragraph alignCenter size="m">
-              {paragraph ||
-                'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. '}
-            </Paragraph>
-          </TextHolder>
-          <Spacer size="large" />
-          <Button
-            css={{
-              '@initial': { minWidth: '75%', height: '$5' },
-              '@s': { minWidth: '50%' },
-              '@m': { minWidth: '$12' },
-            }}
-            type="primary"
-            onClick={toggleModal}
-          >
-            Start your quote
-          </Button>
-        </Content>
-      </Bg>
+      <Modal
+        opens={({ modalIsOpen, toggleModal }) => (
+          <QuoteForm
+            toggle={handleCloseModal({ modalIsOpen, toggleModal })}
+            active={modalIsOpen}
+          />
+        )}
+      >
+        {({ modalIsOpen, toggleModal }) => (
+          <Bg as={motion.div} layoutId="quoteCta" {...props}>
+            <Content
+              layout
+              animate={contentControls}
+              variants={contentVariants}
+            >
+              <Title
+                layout
+                layoutId="quote-title"
+                as={motion.h2}
+                level="3"
+                alignCenter
+              >
+                {heading || 'Get a quote for your next job'}
+              </Title>
+              <TextHolder>
+                <Paragraph alignCenter size="m">
+                  {paragraph ||
+                    'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. '}
+                </Paragraph>
+              </TextHolder>
+              <Spacer size="large" />
+              <Button
+                css={{
+                  '@initial': { minWidth: '75%', height: '$5' },
+                  '@s': { minWidth: '50%' },
+                  '@m': { minWidth: '$12' },
+                }}
+                type="primary"
+                onClick={handleOpenModal({ modalIsOpen, toggleModal })}
+              >
+                Start your quote
+              </Button>
+            </Content>
+          </Bg>
+        )}
+      </Modal>
     </AnimateSharedLayout>
   )
 }

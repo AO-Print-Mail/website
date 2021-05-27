@@ -1,6 +1,4 @@
-import { styled, ThemeVariants } from '..'
-
-export type ResetButtonVariants = ThemeVariants<typeof ResetButton>
+import { styled } from '@theme/stitches.config'
 
 export const ResetButton = styled('button', {
   // Reset

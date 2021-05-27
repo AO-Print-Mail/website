@@ -23,9 +23,16 @@ import {
   ModularContent,
 } from '@lib/datocms/blockRules'
 import dynamic from 'next/dynamic'
+import { QuoteButton } from '@components/quoteButton'
 
-const Printer = dynamic(import('../svg/printer.svg'))
-const Inserter = dynamic(import('../svg/inserter.svg'))
+const Printer = dynamic(() => import('../svg/printer.svg'))
+const Inserter = dynamic(() => import('../svg/inserter.svg'))
+
+const heroGraphics = {
+  printing: dynamic(() => import('../svg/printHero.svg')),
+  'direct-mail': dynamic(() => import('../svg/directMailHero.svg')),
+  'package-fulfilment': dynamic(() => import('../svg/fulfilmentHero.svg')),
+}
 
 interface PageProps {
   data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
@@ -57,7 +64,7 @@ const HeroText = styled('div', {
   },
 })
 
-const ConfiguredText = ({ data, size }) => {
+export const ConfiguredText = ({ data, size }) => {
   return (
     <StructuredText
       data={data}
@@ -81,7 +88,7 @@ const ConfiguredText = ({ data, size }) => {
   )
 }
 
-const ServicePage: React.FC<PageProps> = ({ data }) => {
+const ServicePage: React.FC<PageProps> = ({ data, pageSlug }) => {
   const Illustration = (props) => {
     if (data.illustration === 'inserter') {
       return <Inserter {...props} />
@@ -104,6 +111,18 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
     </>
   )
 
+  const HeroSvg = styled(heroGraphics[pageSlug], {
+    position: 'absolute',
+    bottom: '-$7',
+    minHeight: '600px',
+    left: '50%',
+    display: 'none',
+    '@l': {
+      display: 'block',
+      height: '80%',
+    },
+  })
+
   return (
     <Layout
       beforeFooter={beforeFooter}
@@ -117,22 +136,34 @@ const ServicePage: React.FC<PageProps> = ({ data }) => {
           backgroundColor: '$N10',
           position: 'relative',
           overflow: 'hidden',
+          minHeight: '640px',
         }}
       >
         <Container
           css={{
             pt: '$7',
-            '@m': { height: '680px' },
-            '@l': { display: 'flex', height: '768px' },
           }}
         >
           <HeroText>
-            <Title>{data.mainHeading}</Title>
+            <Title
+              css={{ marginTop: '0', '@m': { mt: '$2' }, '@l': { mt: '$4' } }}
+            >
+              {data.mainHeading}
+            </Title>
             <Spacer />
             <Box css={{ maxWidth: '60ch', mt: '$4' }}>
-              <ConfiguredText data={data.heroParagraph} size="l" />
+              <ConfiguredText data={data.heroParagraph} size="m" />
             </Box>
+            <QuoteButton
+              css={{
+                my: '$6',
+                width: '$11',
+                minHeight: '$5',
+                '@m': { width: '$12' },
+              }}
+            />
           </HeroText>
+          <HeroSvg />
         </Container>
       </Box>
       <Box>

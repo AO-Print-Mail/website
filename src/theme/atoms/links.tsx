@@ -1,34 +1,43 @@
+import { ArrowForward } from '@theme/icons'
+import { css, styled } from '@theme/stitches.config'
+import { Paragraph } from '@theme/typography'
 import Link from 'next/link'
-import {
-  styled,
-  Paragraph,
-  HoverGroup,
-  HoverGroupFlex,
-  ArrowForward,
-} from '@theme'
-import { forwardRef } from 'react'
+
+import React, { forwardRef } from 'react'
+import { HoverGroup, HoverGroupFlex } from './layout'
 
 interface LinkTextProps
   extends Partial<React.ComponentProps<typeof HoverGroupFlex>> {
   text: string
   href?: string
   to?: string
+  onClick?: (e: React.MouseEvent) => void
 }
 
-export const ResetLink = styled('a', {
+export const resetLink = css('a', {
   textDecoration: 'none',
   color: 'unset',
 })
 
 const Cta: React.FC<LinkTextProps> = forwardRef(
-  ({ href, text, ...props }, ref) => {
-    const LinkEl = href ? ResetLink : 'span'
+  ({ href, text, onClick, ...props }, ref) => {
+    const LinkEl = href ? 'a' : 'span'
+    const classNames = { ...resetLink(), ...props.className }
+    function handleClick(e: React.MouseEvent) {
+      e.stopPropagation()
+      onClick && onClick(e)
+    }
     return (
       <HoverGroupFlex
         ref={ref}
-        as={ResetLink}
+        as={LinkEl}
+        onClick={handleClick}
         href={href}
-        css={{ display: 'inline-flex', alignSelf: 'flex-start' }}
+        css={{
+          display: 'inline-flex',
+          alignSelf: 'flex-start',
+        }}
+        className={classNames}
         {...props}
       >
         <Paragraph

@@ -1,4 +1,5 @@
-import { styled, ContentWrapper } from '..'
+import { styled } from '@theme/stitches.config'
+import { ContentWrapper } from './contentWrapper'
 
 export const HeaderBar = styled(ContentWrapper, {
   position: 'relative',
@@ -9,5 +10,4 @@ export const HeaderBar = styled(ContentWrapper, {
   borderBottomWidth: '$thin',
   borderBottomColor: '$N30',
   borderBottomStyle: 'solid',
-  zIndex: '$3',
 })

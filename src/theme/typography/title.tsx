@@ -1,5 +1,4 @@
-import { styled } from '@theme'
-import type { CSS } from '@theme/stitches.config'
+import { CSS, styled } from '@theme/stitches.config'
 
 const titleSizes: CSS = {
   1: {

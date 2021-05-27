@@ -19,28 +19,20 @@ import {
 } from 'datocms-structured-text-utils'
 import dynamic from 'next/dynamic'
 import { renderRule, StructuredText as ConfigurableText } from 'react-datocms'
+import { Heading, List, Paragraph } from '@theme'
 
-const BlockQuote = dynamic(
+const BlockQuote = dynamic(() =>
   import('@theme/atoms/blockquote').then((res) => res.BlockQuote)
 )
-const UnorderedList = dynamic(
+const UnorderedList = dynamic(() =>
   import('@theme/atoms/lists').then((res) => res.UnorderedList)
 )
-const OrderedList = dynamic(
+const OrderedList = dynamic(() =>
   import('@theme/atoms/lists').then((res) => res.OrderedList)
 )
-const ListItem = dynamic(
+const ListItem = dynamic(() =>
   import('@theme/atoms/lists').then((res) => res.ListItem)
 )
-
-const strikethroughClass = dynamic(
-  import('@theme/atoms/typography').then((res) => res.strikethroughClass)
-)
-const underlineClass = dynamic(
-  import('@theme/atoms/typography').then((res) => res.underlineClass)
-)
-
-import { Heading, List, listItemProps, Paragraph } from '@theme'
 
 type structuredTextConfig = {
   headingProps?: React.ComponentProps<typeof Heading> & {
@@ -168,13 +160,11 @@ interface StructuredTextProps extends ConfigurableTextParams {
 export const renderInlineRecordRules: React.ComponentProps<
   typeof ConfigurableText
 >['renderInlineRecord'] = (node) => {
-  console.log(JSON.stringify({ INLINE: node }))
   return <div></div>
 }
 export const renderLinkToRules: React.ComponentProps<
   typeof ConfigurableText
 >['renderLinkToRecord'] = (node) => {
-  console.log(JSON.stringify({ LINKTO: node }))
   return <div></div>
 }
 

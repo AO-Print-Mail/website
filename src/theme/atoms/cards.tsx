@@ -1,4 +1,4 @@
-import { styled, css, CSS } from '..'
+import { styled, CSS } from '@theme/stitches.config'
 
 interface BlockQuoteProps {
   css?: CSS
@@ -17,5 +17,4 @@ export const FlatCard = styled('div', {
 
 export const Card = styled(FlatCard, {
   boxShadow: '$3',
-  border: 'solid 1px $DA10',
 })

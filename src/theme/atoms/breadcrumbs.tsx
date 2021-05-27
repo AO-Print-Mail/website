@@ -1,16 +1,16 @@
 import { forwardRef } from 'react'
-import { styled } from '..'
+import { styled } from '@theme/stitches.config'
 import { Flex } from './layout'
-import { Paragraph5 } from './typography'
+import { Paragraph } from '@theme/typography/text'
 import Link from 'next/link'
-import { ChevronRight } from '@theme/icons'
+import { ChevronRight } from '@theme/icons/arrows'
 import { visuallyHidden } from '@theme/utils/utilityClasses'
 
 export interface BreadcrumbsProps {
   links: { name: string; url: string }[]
 }
 
-const A = styled(Paragraph5, {
+const A = styled(Paragraph, {
   color: '$DBA70',
   textDecoration: 'none',
   p: '$1',
@@ -46,7 +46,7 @@ export const Breadcrumbs = forwardRef<HTMLDivElement, BreadcrumbsProps>(
             <Li key={i}>
               {i > 0 && <Symbol />}
               <Link key={i} href={link.url} passHref>
-                <A as="a">
+                <A size="5" as="a">
                   <span className={visuallyHidden()}>Back to</span>
                   {link.name}
                   <span className={visuallyHidden()}>page</span>

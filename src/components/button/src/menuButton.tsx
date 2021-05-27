@@ -1,7 +1,8 @@
 import { m as motion } from 'framer-motion'
-import React from 'react'
+import React, { forwardRef } from 'react'
 import { Button } from './button'
-import { styled, CSS, Paragraph } from '@theme'
+import { styled, CSS } from '@theme/stitches.config'
+import { Paragraph } from '@theme/typography'
 
 interface MenuButtonProps {
   open: boolean
@@ -51,21 +52,20 @@ const MenuButtonIcon: React.FC<MenuButtonProps> = ({ open }) => {
   )
 }
 
-export const MenuButton: React.FC<MenuButtonProps> = ({
-  open,
-  onClick,
-  ...props
-}) => {
-  return (
-    <Button
-      style="naked"
-      //@ts-expect-error
-      css={{ color: '$DBA85' }}
-      rightIcon={<MenuButtonIcon open={open} />}
-      onClick={onClick}
-      {...props}
-    >
-      <Paragraph>{open ? 'Close' : 'Menu'}</Paragraph>
-    </Button>
-  )
-}
+export const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
+  ({ open, onClick, ...props }, ref) => {
+    return (
+      <Button
+        style="naked"
+        //@ts-expect-error
+        css={{ color: '$DBA85' }}
+        rightIcon={<MenuButtonIcon open={open} />}
+        onClick={onClick}
+        ref={ref}
+        {...props}
+      >
+        <Paragraph>{open ? 'Close' : 'Menu'}</Paragraph>
+      </Button>
+    )
+  }
+)

@@ -116,7 +116,15 @@ const Contact: React.FC<PageProps> = ({ data }) => {
           css={{
             flexFlow: 'column nowrap',
             mb: '-$5',
-            '@l': { flexFlow: 'row nowrap', mx: '8.33%', mb: '-$6' },
+            '@s_max': {
+              p: '0',
+              mx: '-$4',
+            },
+            '@l': {
+              flexFlow: 'row nowrap',
+              mb: '-$6',
+              justifyContent: 'stretch',
+            },
           }}
         >
           <Column css={{ pb: '$5', '@l': { flex: '0 0 40%' } }}>
@@ -203,10 +211,13 @@ const Contact: React.FC<PageProps> = ({ data }) => {
           <Column
             css={{
               zIndex: '$1',
+              mx: '0',
+              p: '0',
               '@m': { mx: '8.33%' },
               '@l': {
                 position: 'relative',
                 top: '-$4',
+                mx: '0',
                 flex: '0 0 60%',
               },
             }}

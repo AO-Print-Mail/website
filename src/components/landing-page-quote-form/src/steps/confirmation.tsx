@@ -6,13 +6,20 @@ import {
   resetFormData,
   updateFeedbackFormForm,
 } from '@lib/little-state-machine'
+import { BreakpointsAry } from '@lib/react/breakpoints'
+import { FormStepControls } from '../bottomBarControls'
 
 export interface ConfirmationPageProps extends QuoteFormInputData {
   changeStep: (step?: string) => unknown
+  keyword: 'string'
+  toggleIsOpen: () => void
+  isOpen: boolean
+  breakpoints: BreakpointsAry
 }
 
 export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
   changeStep,
+  keyword,
   ...props
 }) => {
   const { state, actions } = useStateMachine({
@@ -37,7 +44,7 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
           job!
         </Paragraph>
         <Paragraph size="s" css={{ color: '$LA90' }} alignCenter>
-          A direct mail specialist is reviewing your requirements. Please keep
+          A {keyword} specialist is reviewing your requirements. Please keep
           checking your inbox for your quote to arrive.
         </Paragraph>
         <Paragraph size="s" css={{ color: '$LA90' }} alignCenter>
@@ -46,5 +53,20 @@ export const ConfirmationPage: React.FC<ConfirmationPageProps> = ({
         </Paragraph>
       </Box>
     </Box>
+  )
+}
+
+export const SuccessControls: React.FC<Partial<ConfirmationPageProps>> = ({
+  isOpen,
+  toggleIsOpen,
+}) => {
+  return (
+    <FormStepControls
+      isSubmitting={false}
+      isOpen={isOpen}
+      buttonLabel="Close"
+      buttonColor="light"
+      buttonOnClick={toggleIsOpen}
+    />
   )
 }

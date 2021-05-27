@@ -1,10 +1,11 @@
 import 'little-state-machine'
-import {
+import type {
   QuoteFormInputData,
   FeedbackFormData,
 } from '@components/landing-page-quote-form-copy'
+import type { Quote } from '@components/quote-form/src/types'
 
-module 'little-state-machine' {
+declare module 'little-state-machine' {
   interface GlobalState {
     userData: {
       hutk: string
@@ -25,6 +26,7 @@ module 'little-state-machine' {
       hsa_net: string
       hsa_ver: string
     }
+    quoteRequests: Quote[]
     formData: {
       directMailForm: QuoteFormInputData
       feedbackForm: QuoteFormInputData
@@ -36,4 +38,9 @@ declare global {
   interface Window {
     dataLayer?: object[]
   }
+}
+
+module '*.svg' {
+  const content: any
+  export default content
 }

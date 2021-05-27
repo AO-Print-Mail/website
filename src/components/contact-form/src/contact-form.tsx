@@ -8,14 +8,13 @@ import {
   classes,
   TextArea,
   InputLabel,
-  Heading,
   Paragraph,
   Heading2,
 } from '@theme'
 import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import MaskedInput from 'react-text-mask'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { encode } from '@lib/netlify/utils'
 import { Button } from '@components/button'
@@ -61,7 +60,6 @@ const schema = yup.object().shape({
           .max(14, 'The telephone number you entered seems too long.')
       : yup.string()
   ),
-
   message: yup.string(),
   'bot-field': yup.string(),
   joinMailingList: yup.boolean(),
@@ -126,11 +124,10 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
       body: encode({ 'form-name': FORM_NAME, ...data, ...userData }),
     })
       .then(() => {
-        const newPath = router.pathname.replace('[pageSlug]', '/contact')
         router.push(
           {
-            pathname: `${newPath}`,
-            query: { success: 'true' },
+            pathname: router.pathname,
+            query: { success: 'true', ...router.query },
           },
           null,
           { shallow: true }
@@ -142,6 +139,8 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
         reset()
       })
   }
+
+  const { ref: phoneRef, ...phoneFormProps } = register('phone')
   return (
     <Background {...props}>
       {router.query['success'] && (
@@ -228,14 +227,15 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             type="text"
             defaultValue={inputs.phone}
             errors={errors}
-            {...register('phone')}
             render={(textMaskRef, props) => (
               <Input
                 ref={(node) => {
                   textMaskRef(node)
+                  phoneRef(node)
                 }}
                 name="phone"
                 {...props}
+                {...phoneFormProps}
               >
                 Contact number
               </Input>
@@ -271,7 +271,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
         <p aria-hidden="true" className={classes.visuallyHidden()}>
           <label>
             Skip this field if you’re human:
-            <input tabIndex={-1} {...register('bot-field')} name="bot-field" />
+            <input tabIndex={-1} {...register('bot-field')} />
           </label>
         </p>
         <Button fullWidth size="cta" isLoading={submitting} type="submit">

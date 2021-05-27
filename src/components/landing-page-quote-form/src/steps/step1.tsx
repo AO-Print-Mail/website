@@ -210,7 +210,6 @@ export const Step1Controls: React.FC<Step1Props> = ({
         }
       }}
       formName={FORM_NAME}
-      toggleIsOpen={toggleIsOpen}
     />
   )
 }

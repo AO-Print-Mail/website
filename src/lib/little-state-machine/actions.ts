@@ -1,7 +1,7 @@
 import { GlobalState } from 'little-state-machine'
 import { store } from './store'
 import { QuoteFormInputData } from '@components/landing-page-quote-form'
-import { GlobalContext } from 'datocms-html-to-structured-text/dist/types/types'
+import { Quote } from '@components/quote-form/src/types'
 
 export function updateDirectMailForm(
   state: GlobalState,
@@ -48,4 +48,38 @@ export function resetFormData(
 
 export function updateUserData(state: GlobalState, payload): GlobalState {
   return { ...state, userData: { ...state.userData, ...payload } }
+}
+
+export function createQuote(
+  state: GlobalState,
+  payload: Partial<Quote> &
+    Pick<Quote, 'service_id' | 'id' | 'created_at' | 'current_step'>
+): GlobalState {
+  return { ...state, quoteRequests: [...state.quoteRequests, payload] }
+}
+
+export function updateQuote(state: GlobalState, payload: Quote): GlobalState {
+  const i = state.quoteRequests.findIndex((quote) => quote.id === payload.id)
+  if (i < 0) return state
+  return {
+    ...state,
+    quoteRequests: [
+      ...state.quoteRequests.slice(0, i),
+      payload,
+      ...state.quoteRequests.slice(i + 1),
+    ],
+  }
+}
+
+export function deleteQuote(state: GlobalState, payload: { quoteId: string }) {
+  const i = state.quoteRequests.findIndex(
+    (quote) => quote.id === payload.quoteId
+  )
+  return {
+    ...state,
+    quoteRequests: [
+      ...state.quoteRequests.slice(0, i),
+      ...state.quoteRequests.slice(i + 1),
+    ],
+  }
 }

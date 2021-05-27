@@ -27,7 +27,7 @@ import { m as motion } from 'framer-motion'
 const FormImage = styled('div', {
   display: 'block',
   position: 'absolute',
-  height: '$12',
+  height: '$10',
   alignSelf: 'flex-end',
   right: '-40px',
   top: '-40px',
@@ -192,7 +192,6 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
                   changeStep('1')
                 }
               }}
-              toggleIsOpen={toggleIsOpen}
             />
           </Box>
         </Container>
@@ -230,7 +229,6 @@ export const BlankSkeletonScreen = () => (
             buttonOnClick={(e: React.PointerEvent) => {
               e.preventDefault()
             }}
-            toggleIsOpen={() => undefined}
           />
         </Box>
       </Container>

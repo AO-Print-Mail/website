@@ -1,5 +1,5 @@
 const withPlugins = require('next-compose-plugins')
-
+const CircularDependencyPlugin = require('circular-dependency-plugin')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
@@ -25,6 +25,17 @@ module.exports = withPlugins([withBundleAnalyzer], {
         },
       ],
     })
+    if (!options.isServer) {
+      const CircularDependencyPlugin = require('circular-dependency-plugin')
+      config.plugins.push(
+        new CircularDependencyPlugin({
+          exclude: /node_modules/,
+          failOnError: true,
+          allowAsyncCycles: false,
+          cwd: process.cwd(),
+        })
+      )
+    }
     return config
   },
 })

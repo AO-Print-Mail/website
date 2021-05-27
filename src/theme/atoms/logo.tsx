@@ -1,4 +1,4 @@
-import { styled, ThemeVariants, CSS } from '..'
+import { styled, ThemeVariants, CSS } from '@theme/stitches.config'
 
 type LogoProps = {
   color?: ThemeVariants<typeof Leaf>

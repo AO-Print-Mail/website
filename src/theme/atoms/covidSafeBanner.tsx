@@ -1,5 +1,5 @@
-import { CSS } from '@theme/stitches.config'
-import { styled, ThemeVariants, Paragraph } from '..'
+import { CSS, styled } from '@theme/stitches.config'
+import { Paragraph } from '@theme/typography/text'
 import { CovidSafe } from '../icons'
 
 export interface CovidSafeBannerProps {

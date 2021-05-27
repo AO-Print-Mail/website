@@ -11,7 +11,6 @@ import {
   Column,
   FlatCard,
   Heading3,
-  Spacer,
 } from '@theme'
 
 interface StaffProfileCollectionProps {
