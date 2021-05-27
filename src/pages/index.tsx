@@ -1,6 +1,5 @@
 import { Container, Box, Heading2, TextHolder, styled } from '@theme'
 import { Layout } from '@components/layout'
-import { HomePageBody } from '@components/home-page-body'
 import { ModularContent } from '@lib/datocms/blockRules'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
