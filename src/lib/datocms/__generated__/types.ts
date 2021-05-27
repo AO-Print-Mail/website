@@ -94,12 +94,12 @@ export type BlogArticleModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
-  summary?: Maybe<StructuredTextFilter>;
   article?: Maybe<StructuredTextFilter>;
-  seoMeta?: Maybe<SeoFilter>;
-  title?: Maybe<StringFilter>;
-  slug?: Maybe<SlugFilter>;
   mainImage?: Maybe<FileFilter>;
+  summary?: Maybe<StructuredTextFilter>;
+  seoMeta?: Maybe<SeoFilter>;
+  slug?: Maybe<SlugFilter>;
+  title?: Maybe<StringFilter>;
   OR?: Maybe<Array<Maybe<BlogArticleModelFilter>>>;
 };
 
@@ -524,6 +524,8 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']>;
 };
 
+export type HomepageModelContentSectionsField = FeatureParagraphImageRecord | FeatureParagraphRecord;
+
 export type HomepageModelHeroParagraphField = {
   __typename?: 'HomepageModelHeroParagraphField';
   blocks: Array<LandingPageV1Record>;
@@ -545,7 +547,7 @@ export type HomepageRecord = {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  contentSections?: Maybe<Array<Maybe<FeatureParagraphRecord>>>;
+  contentSections?: Maybe<Array<Maybe<HomepageModelContentSectionsField>>>;
   createdAt: Scalars['DateTime'];
   heroParagraph?: Maybe<HomepageModelHeroParagraphField>;
   id: Scalars['ItemId'];
@@ -1889,11 +1891,11 @@ export type LandingPageV1ModelFilter = {
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
   preview?: Maybe<JsonFilter>;
-  pageContent?: Maybe<TextFilter>;
-  pageMeta?: Maybe<SeoFilter>;
-  title?: Maybe<StringFilter>;
-  pageSlug?: Maybe<SlugFilter>;
   canonicalPath?: Maybe<SlugFilter>;
+  pageMeta?: Maybe<SeoFilter>;
+  pageSlug?: Maybe<SlugFilter>;
+  title?: Maybe<StringFilter>;
+  pageContent?: Maybe<TextFilter>;
   OR?: Maybe<Array<Maybe<LandingPageV1ModelFilter>>>;
 };
 
@@ -2009,13 +2011,13 @@ export type LegalPageModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
-  legalText?: Maybe<StructuredTextFilter>;
   summary?: Maybe<StructuredTextFilter>;
-  pageMeta?: Maybe<SeoFilter>;
-  title?: Maybe<StringFilter>;
-  preview?: Maybe<JsonFilter>;
-  canonicalPath?: Maybe<SlugFilter>;
   legalPageSlug?: Maybe<SlugFilter>;
+  legalText?: Maybe<StructuredTextFilter>;
+  canonicalPath?: Maybe<SlugFilter>;
+  preview?: Maybe<JsonFilter>;
+  title?: Maybe<StringFilter>;
+  pageMeta?: Maybe<SeoFilter>;
   OR?: Maybe<Array<Maybe<LegalPageModelFilter>>>;
 };
 
@@ -2513,15 +2515,15 @@ export type ServiceModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
-  preview?: Maybe<JsonFilter>;
-  title?: Maybe<StringFilter>;
-  pageMeta?: Maybe<SeoFilter>;
-  pageSlug?: Maybe<SlugFilter>;
-  canonicalPath?: Maybe<SlugFilter>;
-  heroParagraph?: Maybe<StructuredTextFilter>;
-  pageContent?: Maybe<StructuredTextFilter>;
-  mainHeading?: Maybe<StringFilter>;
   illustration?: Maybe<StringFilter>;
+  pageContent?: Maybe<StructuredTextFilter>;
+  heroParagraph?: Maybe<StructuredTextFilter>;
+  mainHeading?: Maybe<StringFilter>;
+  canonicalPath?: Maybe<SlugFilter>;
+  pageSlug?: Maybe<SlugFilter>;
+  pageMeta?: Maybe<SeoFilter>;
+  title?: Maybe<StringFilter>;
+  preview?: Maybe<JsonFilter>;
   OR?: Maybe<Array<Maybe<ServiceModelFilter>>>;
 };
 
@@ -2559,12 +2561,12 @@ export enum ServiceModelOrderBy {
   updatedAt_DESC = 'updatedAt_DESC',
   _isValid_ASC = '_isValid_ASC',
   _isValid_DESC = '_isValid_DESC',
-  title_ASC = 'title_ASC',
-  title_DESC = 'title_DESC',
+  illustration_ASC = 'illustration_ASC',
+  illustration_DESC = 'illustration_DESC',
   mainHeading_ASC = 'mainHeading_ASC',
   mainHeading_DESC = 'mainHeading_DESC',
-  illustration_ASC = 'illustration_ASC',
-  illustration_DESC = 'illustration_DESC'
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC'
 }
 
 export type ServiceModelPageContentBlocksField = FeatureParagraphImageRecord | SideBySidePRecord | TestimonialRecord | TwoColumnListRecord;
@@ -2735,10 +2737,10 @@ export type StaffProfileModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
-  jobTitle?: Maybe<StringFilter>;
-  biography?: Maybe<StructuredTextFilter>;
-  name?: Maybe<StringFilter>;
   avatar?: Maybe<FileFilter>;
+  biography?: Maybe<StructuredTextFilter>;
+  jobTitle?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
   OR?: Maybe<Array<Maybe<StaffProfileModelFilter>>>;
 };
 
@@ -3585,13 +3587,9 @@ export type GetHomePageQuery = (
         & Pick<ServiceRecord, 'pageSlug'>
       )> }
     )>>>, contentSections?: Maybe<Array<Maybe<(
-      { __typename?: 'FeatureParagraphRecord' }
-      & Pick<FeatureParagraphRecord, 'heading'>
-      & { paragraph?: Maybe<(
-        { __typename?: 'FeatureParagraphModelParagraphField' }
-        & Pick<FeatureParagraphModelParagraphField, 'value'>
-      )> }
-    )>>> }
+      { __typename?: 'FeatureParagraphImageRecord' }
+      & FeatureParagraphImageRecordFragmentFragment
+    ) | { __typename?: 'FeatureParagraphRecord' }>>> }
   )> }
 );
 
@@ -3765,7 +3763,7 @@ export const FeatureParagraphImageRecordFragmentFragmentDoc = gql`
     value
   }
   image {
-    responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
+    responsiveImage(imgixParams: {fit: crop, w: 480, h: 480, auto: format}) {
       ...responsiveImageFragment
     }
   }
@@ -3997,15 +3995,15 @@ export const GetHomePageDocument = gql`
       }
     }
     contentSections {
-      heading
-      paragraph {
-        value
+      ... on FeatureParagraphImageRecord {
+        ...featureParagraphImageRecordFragment
       }
     }
   }
 }
     ${MetaTagsFragmentFragmentDoc}
-${ResponsiveImageFragmentFragmentDoc}`;
+${ResponsiveImageFragmentFragmentDoc}
+${FeatureParagraphImageRecordFragmentFragmentDoc}`;
 export const GetLandingPageDocument = gql`
     query GetLandingPage($pageSlug: String!) {
   landingPageV1(filter: {pageSlug: {eq: $pageSlug}}) {

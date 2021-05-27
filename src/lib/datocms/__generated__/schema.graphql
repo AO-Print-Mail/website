@@ -59,12 +59,12 @@ input BlogArticleModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
-  summary: StructuredTextFilter
   article: StructuredTextFilter
-  seoMeta: SeoFilter
-  title: StringFilter
-  slug: SlugFilter
   mainImage: FileFilter
+  summary: StructuredTextFilter
+  seoMeta: SeoFilter
+  slug: SlugFilter
+  title: StringFilter
   OR: [BlogArticleModelFilter]
 }
 
@@ -486,6 +486,8 @@ type GlobalSeoField {
   twitterAccount: String
 }
 
+union HomepageModelContentSectionsField = FeatureParagraphImageRecord | FeatureParagraphRecord
+
 type HomepageModelHeroParagraphField {
   blocks: [LandingPageV1Record!]!
   links: [LandingPageV1Record!]!
@@ -509,7 +511,7 @@ type HomepageRecord {
   _status: ItemStatus!
   _unpublishingScheduledAt: DateTime
   _updatedAt: DateTime!
-  contentSections: [FeatureParagraphRecord]
+  contentSections: [HomepageModelContentSectionsField]
   createdAt: DateTime!
   heroParagraph: HomepageModelHeroParagraphField
   id: ItemId!
@@ -1981,11 +1983,11 @@ input LandingPageV1ModelFilter {
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
   preview: JsonFilter
-  pageContent: TextFilter
-  pageMeta: SeoFilter
-  title: StringFilter
-  pageSlug: SlugFilter
   canonicalPath: SlugFilter
+  pageMeta: SeoFilter
+  pageSlug: SlugFilter
+  title: StringFilter
+  pageContent: TextFilter
   OR: [LandingPageV1ModelFilter]
 }
 
@@ -2091,13 +2093,13 @@ input LegalPageModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
-  legalText: StructuredTextFilter
   summary: StructuredTextFilter
-  pageMeta: SeoFilter
-  title: StringFilter
-  preview: JsonFilter
-  canonicalPath: SlugFilter
   legalPageSlug: SlugFilter
+  legalText: StructuredTextFilter
+  canonicalPath: SlugFilter
+  preview: JsonFilter
+  title: StringFilter
+  pageMeta: SeoFilter
   OR: [LegalPageModelFilter]
 }
 
@@ -2583,15 +2585,15 @@ input ServiceModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
-  preview: JsonFilter
-  title: StringFilter
-  pageMeta: SeoFilter
-  pageSlug: SlugFilter
-  canonicalPath: SlugFilter
-  heroParagraph: StructuredTextFilter
-  pageContent: StructuredTextFilter
-  mainHeading: StringFilter
   illustration: StringFilter
+  pageContent: StructuredTextFilter
+  heroParagraph: StructuredTextFilter
+  mainHeading: StringFilter
+  canonicalPath: SlugFilter
+  pageSlug: SlugFilter
+  pageMeta: SeoFilter
+  title: StringFilter
+  preview: JsonFilter
   OR: [ServiceModelFilter]
 }
 
@@ -2628,12 +2630,12 @@ enum ServiceModelOrderBy {
   updatedAt_DESC
   _isValid_ASC
   _isValid_DESC
-  title_ASC
-  title_DESC
-  mainHeading_ASC
-  mainHeading_DESC
   illustration_ASC
   illustration_DESC
+  mainHeading_ASC
+  mainHeading_DESC
+  title_ASC
+  title_DESC
 }
 
 union ServiceModelPageContentBlocksField = FeatureParagraphImageRecord | SideBySidePRecord | TestimonialRecord | TwoColumnListRecord
@@ -2789,10 +2791,10 @@ input StaffProfileModelFilter {
   _updatedAt: UpdatedAtFilter
   updatedAt: UpdatedAtFilter
   _isValid: BooleanFilter
-  jobTitle: StringFilter
-  biography: StructuredTextFilter
-  name: StringFilter
   avatar: FileFilter
+  biography: StructuredTextFilter
+  jobTitle: StringFilter
+  name: StringFilter
   OR: [StaffProfileModelFilter]
 }
 
