@@ -1,4 +1,4 @@
-import { ThenArg } from '@utils/src'
+import { Awaited } from '@utils/src'
 import { Layout } from '@components/layout'
 import {
   ArrowForward,
@@ -6,13 +6,13 @@ import {
   Column,
   ColumnWrapper,
   Container,
-  Heading,
-  Heading1,
+  Heading2,
   Paragraph,
   Phone,
   Spacer,
   styled,
   TextHolder,
+  Title,
 } from '@theme'
 import { request } from '@lib/datocms/datocms'
 import { GetContactPageQuery } from '@lib/datocms/__generated__/types'
@@ -21,7 +21,7 @@ import Image from 'next/image'
 import { ContactForm } from '@components/contact-form'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
 const openingHours = [
@@ -38,7 +38,7 @@ const Th = styled('th', {
   py: '$1',
   textAlign: 'left',
   pr: '$4',
-  color: '$DBA85',
+  color: '$DBA75',
   fontWeight: '$semibold',
 })
 const Td = styled('td', {
@@ -53,9 +53,10 @@ const Ul = styled('ul', {
 
 const OpeningHoursTable: React.FC<{ data: typeof openingHours }> = ({
   data,
+  ...props
 }) => {
   return (
-    <table>
+    <Box as="table" {...props}>
       <tbody>
         {data.map(({ day, hours }) => {
           return (
@@ -76,7 +77,7 @@ const OpeningHoursTable: React.FC<{ data: typeof openingHours }> = ({
           )
         })}
       </tbody>
-    </table>
+    </Box>
   )
 }
 const Img = styled(Image, {
@@ -105,10 +106,8 @@ const Contact: React.FC<PageProps> = ({ data }) => {
             '@m': { minHeight: '400px' },
           }}
         >
-          <TextHolder
-            css={{ mt: '$7', '@m': { mt: '$8' }, '@l': { ml: '8.33%' } }}
-          >
-            <Heading1 color="primary">Contact Us</Heading1>
+          <TextHolder css={{ mt: '$7', '@l': { ml: '8.33%' } }}>
+            <Title color="primaryGradient">{data.contactPage.title}</Title>
           </TextHolder>
         </Container>
       </Box>
@@ -117,7 +116,15 @@ const Contact: React.FC<PageProps> = ({ data }) => {
           css={{
             flexFlow: 'column nowrap',
             mb: '-$5',
-            '@l': { flexFlow: 'row nowrap', mx: '8.33%', mb: '-$6' },
+            '@s_max': {
+              p: '0',
+              mx: '-$4',
+            },
+            '@l': {
+              flexFlow: 'row nowrap',
+              mb: '-$6',
+              justifyContent: 'stretch',
+            },
           }}
         >
           <Column css={{ pb: '$5', '@l': { flex: '0 0 40%' } }}>
@@ -130,14 +137,17 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   '@l': { width: 'auto', float: 'none' },
                 }}
               >
-                <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
+                <Heading2
+                  marginTop="small"
+                  level="6"
+                  css={{ fontWeight: 'bold' }}
+                >
                   Call us:
-                </Heading>
+                </Heading2>
                 <Button
                   as="a"
                   href="tel:+61296456777"
                   leftIcon={<Phone size="matchFontSize" />}
-                  color="primary"
                   style="naked"
                   offset="left"
                 >
@@ -150,9 +160,14 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   '@l': { width: 'auto', float: 'none' },
                 }}
               >
-                <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
+                <Heading2
+                  level="6"
+                  marginTop="small"
+                  css={{ fontWeight: 'bold' }}
+                >
                   Opening hours:
-                </Heading>
+                </Heading2>
+                <Spacer />
                 <OpeningHoursTable data={openingHours} />
               </Box>
               <Box
@@ -166,15 +181,17 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   '@l': { width: 'auto', float: 'none' },
                 }}
               >
-                <Heading level="5" as="h2" css={{ color: '$DBA90' }}>
+                <Heading2
+                  level="6"
+                  marginTop="small"
+                  css={{ fontWeight: 'bold' }}
+                >
                   Visit Us:
-                </Heading>
-                <Paragraph size="4" color="primary">
+                </Heading2>
+                <Paragraph size="s">
                   9 Clearview Pl
                   <br />
-                  Brookvale
-                  <br />
-                  Sydney NSW 2100
+                  Brookvale NSW 2100
                 </Paragraph>
                 <Spacer size="large" />
                 <Button
@@ -194,10 +211,13 @@ const Contact: React.FC<PageProps> = ({ data }) => {
           <Column
             css={{
               zIndex: '$1',
+              mx: '0',
+              p: '0',
               '@m': { mx: '8.33%' },
               '@l': {
                 position: 'relative',
                 top: '-$4',
+                mx: '0',
                 flex: '0 0 60%',
               },
             }}

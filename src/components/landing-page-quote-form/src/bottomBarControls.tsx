@@ -7,7 +7,6 @@ export interface FormStepControlsProps {
   isOpen: boolean
   isSubmitting: boolean
   formName?: string
-  toggleIsOpen: () => void
   buttonLabel: string
   buttonOnClick: (e: React.PointerEvent) => void
   buttonColor?: string
@@ -17,7 +16,6 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
   isOpen,
   isSubmitting,
   formName,
-  toggleIsOpen,
   buttonLabel,
   buttonOnClick,
   buttonColor,
@@ -29,10 +27,9 @@ export const FormStepControls: React.FC<FormStepControlsProps> = ({
       <Flex
         as={motion.div}
         css={{
-          pt: '$3',
           flex: '0 0',
-          pb: '$3',
-          '@l': { mx: '$6', pb: '$6' },
+          pb: '$2',
+          '@l': { mx: '$6' },
         }}
       >
         <Button

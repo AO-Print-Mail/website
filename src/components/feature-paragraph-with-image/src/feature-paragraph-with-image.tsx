@@ -4,7 +4,7 @@ import {
   styled,
   css,
   CSS,
-  Heading3,
+  Heading2,
   Column,
   ColumnWrapper,
 } from '@theme'
@@ -61,18 +61,18 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
       }}
       {...props}
     >
-      <Column css={{ '@m': { pr: '$2' } }}>
+      <Column
+        css={{
+          '@m': { pr: '$2' },
+          '@xl': imagePosition === 'left' ? { mr: '8.33%' } : { ml: '8.33%' },
+        }}
+      >
         <TextHolder>
-          <Heading3 as="h2" css={{ mt: '$2' }} color="primary">
+          <Heading2 as="h2" css={{ mt: '$2' }}>
             {heading}
-          </Heading3>
+          </Heading2>
           <StructuredText
-            customRules={structuredTextRules({
-              paragraphProps: {
-                color: 'primary',
-                size: '3',
-              },
-            })}
+            customRules={structuredTextRules({})}
             data={paragraph.value}
           />
         </TextHolder>
@@ -83,8 +83,9 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
             alignSelf: 'center',
             flex: '0 0 auto',
           },
-          '@m': { flex: '0 0 50%' },
-          '@l': { flex: '0 0 50%', order: imagePosition === 'left' ? '-1' : 1 },
+          '@m': { flex: '0 0 40%' },
+          '@l': { flex: '0 0 40%', order: imagePosition === 'left' ? '-1' : 1 },
+          //'@xl': imagePosition === 'left' ? { ml: '8.33%' } : { mr: '8.33%' },
         }}
         {...props}
       >

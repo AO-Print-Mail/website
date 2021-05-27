@@ -24,6 +24,6 @@ export function ClientOnlyPortal({
 
 */
   return document
-    ? createPortal(children, document.querySelector(selector))
+    ? createPortal(children, document?.querySelector(selector))
     : null
 }

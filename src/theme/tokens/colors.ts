@@ -9,6 +9,7 @@ export const colors = {
   orange: '#FE9339',
   green: '#558C46',
   red: '#F92539',
+  transparent: 'rgba(255, 255, 255, 0)',
   //neutrals
   N10: '#F7F7F7',
   N20: '#EFF0F0',
@@ -110,4 +111,8 @@ export const colors = {
   BA40: 'rgba(0, 114, 206, 0.25)',
   BA75: 'rgba(0, 114, 206, 0.6)',
   //gradients
+  'dotted-horizontal':
+    'linear-gradient(90deg, $N30, $N30 50%, $transparent 50%, $transparent)',
+  'dotted-vertical':
+    'linear-gradient(180deg, $N30, $N30 50%, $transparent 50%, $transparent)',
 }

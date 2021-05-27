@@ -34,13 +34,6 @@ const NavLinkText = styled(Paragraph, {
   '&:hover': {
     color: '$DBA60',
   },
-  '&:focus': {
-    color: 'red',
-  },
-})
-
-const Anchor = styled('a', {
-  textDecoration: 'none,',
 })
 
 const NavLink: React.FC<{ name: string; link: string }> = ({
@@ -58,10 +51,8 @@ const NavLink: React.FC<{ name: string; link: string }> = ({
       }}
       as="li"
     >
-      <Link href={link}>
-        <a>
-          <NavLinkText>{name}</NavLinkText>
-        </a>
+      <Link href={link} passHref>
+        <NavLinkText as="a">{name}</NavLinkText>
       </Link>
     </Box>
   )

@@ -1,4 +1,4 @@
-import { styled, Paragraph4 } from '@theme'
+import { styled, Paragraph } from '@theme'
 import * as clientLogos from './logos'
 
 interface ClientLogoBannerProps {}
@@ -19,7 +19,7 @@ const Logos = styled('div', {
   },
 })
 
-const LeadText = styled(Paragraph4, {
+const LeadText = styled(Paragraph, {
   color: '$DA70',
   mt: '$4',
   '@l': {
@@ -63,7 +63,7 @@ export const ClientLogoBanner: React.FC<ClientLogoBannerProps> = (props) => {
   const bannerLogos = logoList.map((name) => [name, clientLogos[name]])
   return (
     <Banner>
-      <LeadText>
+      <LeadText size="s">
         Serving over 700 Australian and global brands, including:
       </LeadText>
       <Logos>

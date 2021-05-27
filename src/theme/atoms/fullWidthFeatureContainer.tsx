@@ -1,6 +1,6 @@
 import Pattern from '@svg/cornerPatternDark.svg'
-import { styled, Container } from '@theme'
-import { CSS } from '@theme'
+import { styled, CSS } from '@theme/stitches.config'
+import { Container } from './container'
 
 const Background = styled('div', {
   position: 'relative',

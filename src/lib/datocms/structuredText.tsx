@@ -18,33 +18,21 @@ import {
   isSpan as isSpanGuard,
 } from 'datocms-structured-text-utils'
 import dynamic from 'next/dynamic'
-import {
-  renderRule,
-  StructuredText as ConfigurableText,
-  StructuredTextDocument,
-} from 'react-datocms'
+import { renderRule, StructuredText as ConfigurableText } from 'react-datocms'
+import { Heading, List, Paragraph } from '@theme'
 
-const BlockQuote = dynamic(
+const BlockQuote = dynamic(() =>
   import('@theme/atoms/blockquote').then((res) => res.BlockQuote)
 )
-const UnorderedList = dynamic(
+const UnorderedList = dynamic(() =>
   import('@theme/atoms/lists').then((res) => res.UnorderedList)
 )
-const OrderedList = dynamic(
+const OrderedList = dynamic(() =>
   import('@theme/atoms/lists').then((res) => res.OrderedList)
 )
-const ListItem = dynamic(
+const ListItem = dynamic(() =>
   import('@theme/atoms/lists').then((res) => res.ListItem)
 )
-
-const strikethroughClass = dynamic(
-  import('@theme/atoms/typography').then((res) => res.strikethroughClass)
-)
-const underlineClass = dynamic(
-  import('@theme/atoms/typography').then((res) => res.underlineClass)
-)
-
-import { Heading, List, listItemProps, Paragraph } from '@theme'
 
 type structuredTextConfig = {
   headingProps?: React.ComponentProps<typeof Heading> & {
@@ -52,7 +40,7 @@ type structuredTextConfig = {
     fromLevel: number
   }
   paragraphProps?: React.ComponentProps<typeof Paragraph> & {
-    size?: '1' | '2' | '3' | '4' | '5'
+    size?: 'l' | 'm' | 's' | 'xs'
   }
   listItemProps?: React.ComponentProps<typeof ListItem>
   blockquoteProps?: React.ComponentProps<typeof BlockQuote>
@@ -80,14 +68,13 @@ const defaults = {
           key={key}
           level={setLevel(fromSize, node.level)}
           as={`h${setLevel(fromLevel, node.level)}`}
-          color="primary"
           children={children}
           {...props}
         />
       )
     }),
   isParagraph: ({
-    paragraphProps: { size, ...props } = { size: '3' },
+    paragraphProps: { size, ...props } = { size: 'm' },
   }: structuredTextConfig) =>
     renderRule(isParagraphGuard, ({ children, key }) => (
       <Paragraph key={key} children={children} size={size} {...props} />
@@ -165,21 +152,19 @@ export const structuredTextRules = ({
     k(propConfig)
   )
 }
-interface StructuredTextProps
-  extends React.ComponentProps<typeof ConfigurableText> {
+type ConfigurableTextParams = Parameters<typeof ConfigurableText>[0]
+interface StructuredTextProps extends ConfigurableTextParams {
   config?: structuredTextConfig & { ruleOverrides?: Partial<typeof defaults> }
 }
 
 export const renderInlineRecordRules: React.ComponentProps<
   typeof ConfigurableText
 >['renderInlineRecord'] = (node) => {
-  console.log(JSON.stringify({ INLINE: node }))
   return <div></div>
 }
 export const renderLinkToRules: React.ComponentProps<
   typeof ConfigurableText
 >['renderLinkToRecord'] = (node) => {
-  console.log(JSON.stringify({ LINKTO: node }))
   return <div></div>
 }
 
@@ -198,28 +183,3 @@ export const StructuredText: React.FC<StructuredTextProps> = ({
     />
   )
 }
-
-/*
-const configKeys = ({ headingProps }) => {
-  const config = {
-    isHeading: {},
-    isParagraph: {},
-    isBlockquote: {},
-    isList: {},
-    isListItem: {},
-    Span: {},
-    Node: {},
-    isBlock: {},
-    isCode: {},
-    isDocument: {},
-    isInlineItem: {},
-    isThematicBreak: {},
-    isStructuredText: {},
-    isInlineNode: {},
-    isItemLink: {},
-    isLink: {},
-    isRoot: {},
-    isSpan: {},
-  }
-}
- */

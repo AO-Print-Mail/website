@@ -1,5 +1,5 @@
 import { request } from '@lib/datocms/datocms'
-import { Heading1, Box, Container, styled } from '@theme'
+import { Title, Box, Container, styled, Spacer } from '@theme'
 import { Layout } from '@components/layout'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 import { ReviewsIoWidget } from '@components/reviews-io-widget'
@@ -7,14 +7,14 @@ import {
   GetLandingPagesQuery,
   GetLandingPageQuery,
 } from '@lib/datocms/__generated__/types'
-import { ThenArg } from '@utils/src'
-import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredText'
+import { Awaited } from '@utils/src'
+import { StructuredText } from '@lib/datocms/structuredText'
 import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 import { Header } from '@components/header-landing'
+import { QuoteFormDirectMail } from '@components/quote-form-direct-mail'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
   pageSlug: string
 }
 
@@ -36,6 +36,7 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       <Container>
         <ClientLogoBanner />
       </Container>
+      <Spacer size="large" />
       <Box css={{ backgroundColor: '$white', py: '$4' }}>
         <Container>
           <ReviewsIoWidget />
@@ -61,11 +62,12 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
     >
       <Container as="section" css={{ py: '$3', '@l': { display: 'flex' } }}>
         <HeroText>
-          <Heading1 color="primary">{data.title}</Heading1>
+          <Title level="2">{data.title}</Title>
+          <Spacer />
           <StructuredText
             data={data.content.document}
-            customRules={structuredTextRules({
-              paragraphProps: { size: '2', css: { maxWidth: '60ch' } },
+            config={{
+              paragraphProps: { size: 'm', css: { maxWidth: '50ch' } },
               headingProps: { color: 'primary' },
               listItemProps: {
                 icon: 'CheckLeaf',
@@ -77,10 +79,11 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
                   },
                 },
               },
-            })}
+            }}
           />
         </HeroText>
-        <LandingPageQuoteForm keyword="direct mail" />
+        {/* <LandingPageQuoteForm keyword="direct mail" /> */}
+        <QuoteFormDirectMail />
       </Container>
     </Layout>
   )

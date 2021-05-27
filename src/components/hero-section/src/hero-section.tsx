@@ -25,7 +25,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
         <TextHolder
           css={{ mt: '$7', '@m': { mt: '$8' }, '@l': { ml: '8.33%' } }}
         >
-          <Heading level="1" as="h1" color="primary">
+          <Heading level="1" as="h1">
             {title}
           </Heading>
         </TextHolder>

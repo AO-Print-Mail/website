@@ -6,7 +6,7 @@ import remark2rehype from 'remark-rehype'
 import html from 'rehype-stringify'
 var parse5 = require('parse5')
 import { parse5ToStructuredText } from 'datocms-html-to-structured-text'
-export type { ThenArg } from '@utils/src/types.ts'
+export type { Awaited } from '@utils/src/types'
 var gfm = require('remark-gfm')
 var breaks = require('remark-breaks')
 const processor = unified()

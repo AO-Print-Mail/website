@@ -1,12 +1,14 @@
 import React, { forwardRef, useState, useContext } from 'react'
-import { styled, Container, Logo, Flex, Box } from '@theme'
 import { AnimatePresence, m as motion, useCycle } from 'framer-motion'
 import { Button, MenuButton } from '@components/button'
 import Link from 'next/link'
 import { MobileNavigation } from '@components/mobile-navigation'
 import { DesktopNavigation } from '@components/desktop-navigation'
-import { LayoutScrollContext } from '@components/layout'
 import { Modal } from '@components/modal'
+import { styled } from '@theme/stitches.config'
+import { Box, Container, Flex, Logo } from '@theme/atoms'
+import { LayoutContext } from '@components/layout/src/layoutContext'
+import { QuoteButton } from '@components/quoteButton'
 interface HeaderMainProps {
   show?: boolean
 }
@@ -21,6 +23,8 @@ const HeaderOuter = styled('div', {
     expanded: {
       true: {
         bottom: '0',
+        display: 'flex',
+        flexDirection: 'column',
       },
     },
   },
@@ -66,7 +70,7 @@ const spring = {
 export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
   ({ show, ...props }, ref) => {
     const [menuIsOpen, setMenuIsOpen] = useState(false)
-    const { toggleScrollLock } = useContext(LayoutScrollContext)
+    const { toggleScrollLock } = useContext(LayoutContext)
     const [modalIsOpen, toggleModalIsOpen] = useCycle(false, true)
 
     function toggleMenu() {
@@ -99,7 +103,6 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
             <Link href="/">
               <a style={{ flex: '0 0' }}>
                 <Logo
-                  color="primary"
                   size={{
                     '@initial': 'regular',
                     '@l': 'large',
@@ -121,16 +124,9 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
                 <DesktopNavigation
                   css={{ display: 'none', mt: '$4', '@l': { display: 'flex' } }}
                 />
-
-                <Button
+                <QuoteButton
                   css={{ display: 'none', '@m': { display: 'inline-flex' } }}
-                  onClick={toggleQuoteModal}
-                >
-                  Get a quote
-                </Button>
-                <AnimatePresence>
-                  {modalIsOpen && <Modal toggle={toggleQuoteModal}></Modal>}
-                </AnimatePresence>
+                />
 
                 <MenuButton
                   open={menuIsOpen}
@@ -145,7 +141,7 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
               </Flex>
             </NavContainer>
           </Container>
-          <Box as={motion.nav} css={{ '@l': { display: 'none' } }} layout>
+          <Box as={motion.div} css={{ '@l': { display: 'none' } }} layout>
             <MobileNavigation id="drawer-menu" navIsOpen={menuIsOpen} />
           </Box>
         </Header>

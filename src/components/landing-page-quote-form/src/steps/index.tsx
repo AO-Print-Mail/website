@@ -15,7 +15,7 @@ import { FormSteps } from '../landing-page-quote-form'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
 import { Box } from '@theme'
 import { StepWrapper } from './stepWrapper'
-import { ConfirmationPage } from './confirmation'
+import { ConfirmationPage, SuccessControls } from './confirmation'
 import { __DEV__ } from '@utils'
 
 export type QuoteFormInputData = JobInformation &
@@ -112,24 +112,14 @@ export const FormStepper: React.FC<FormStepsProps> = ({
       break
     case 'success':
       Main = ConfirmationPage
-      Footer = null
+      Footer = SuccessControls
       break
     default:
       changeStep()
   }
 
   return (
-    <Box
-      css={{
-        '@l': {
-          //height: 'calc(800px - 20vh)',
-          position: 'realtive',
-          top: '$5',
-        },
-      }}
-      as={motion.div}
-      layout
-    >
+    <>
       <StepWrapper
         isSubmitting={isSubmitting}
         isOpen={isOpen}
@@ -162,11 +152,12 @@ export const FormStepper: React.FC<FormStepsProps> = ({
               isSubmitting={isSubmitting}
               isOpen={isOpen}
               toggleIsOpen={toggleIsOpen}
+              breakpoints={breakpoints}
             ></Footer>
           )
         }
       />
       <WorkaroundForm name="directMailForm" formFields={formData} />
-    </Box>
+    </>
   )
 }

@@ -1,4 +1,4 @@
-import { Box, CSS, FullWidthFeatureContainer, Heading1, styled } from '@theme'
+import { Box, CSS, FullWidthFeatureContainer, styled, Title } from '@theme'
 import { FullWidthCalloutRecord } from '@lib/datocms/__generated__/types'
 import { StructuredText, renderRule } from 'react-datocms'
 import { isParagraph } from 'datocms-structured-text-utils'
@@ -10,7 +10,7 @@ interface MissionCalloutProps {
   className?: unknown
 }
 
-const CalloutText = styled(Heading1, {
+const CalloutText = styled(Title, {
   color: '$LA90',
 })
 const BoldText = styled('span', {

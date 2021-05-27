@@ -20,6 +20,7 @@ export const store: GlobalState = {
     hsa_net: '',
     hsa_ver: '',
   },
+  quoteRequests: [],
   formData: {
     directMailForm: {
       mailFormat: 'not provided',

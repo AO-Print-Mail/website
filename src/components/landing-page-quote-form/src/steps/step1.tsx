@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, RadioButton, Input, Paragraph3 } from '@theme'
+import { Flex, Box, RadioButton, Input, Paragraph } from '@theme'
 import type { FormSteps } from '../landing-page-quote-form'
 import { FormStepControls } from '../bottomBarControls'
 import { updateDirectMailForm } from '@lib/little-state-machine'
@@ -64,7 +64,7 @@ export const Step1Form: React.FC<Step1Props> = ({
 
   return (
     <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>
-      <Paragraph3 css={{ color: '$DA80' }}>What are you sending?</Paragraph3>
+      <Paragraph>What are you sending?</Paragraph>
       <Flex wrap css={{ mt: '$3', pb: '$3' }}>
         <RadioButton
           id="format1"
@@ -112,9 +112,7 @@ export const Step1Form: React.FC<Step1Props> = ({
           Something else
         </RadioButton>
       </Flex>
-      <Paragraph3 css={{ color: '$DA80' }}>
-        Which services do you need?
-      </Paragraph3>
+      <Paragraph>Which services do you need?</Paragraph>
       <Flex wrap css={{ mt: '$3', pb: '$3' }}>
         <RadioButton
           id="services1"
@@ -135,13 +133,13 @@ export const Step1Form: React.FC<Step1Props> = ({
           Mailing only
         </RadioButton>
       </Flex>
-      <Paragraph3
+      <Paragraph
         as="label"
         htmlFor="quantity"
         css={{ display: 'block', color: '$DA80' }}
       >
         How many items? (approximate is fine)
-      </Paragraph3>
+      </Paragraph>
 
       <Box css={{ mt: '$3', pb: '$2' }}>
         <Input
@@ -152,7 +150,7 @@ export const Step1Form: React.FC<Step1Props> = ({
           defaultValue={itemQuantity}
         />
       </Box>
-      <Paragraph3 css={{ color: '$DA80' }}>How often?</Paragraph3>
+      <Paragraph css={{ color: '$DA80' }}>How often?</Paragraph>
       <Flex wrap css={{ mt: '$3', pb: '$3' }}>
         <RadioButton
           id="frequency1"
@@ -212,7 +210,6 @@ export const Step1Controls: React.FC<Step1Props> = ({
         }
       }}
       formName={FORM_NAME}
-      toggleIsOpen={toggleIsOpen}
     />
   )
 }

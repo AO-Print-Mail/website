@@ -9,7 +9,7 @@ import type {
   FullWidthCalloutRecord,
 } from './__generated__/types'
 import dynamic from 'next/dynamic'
-import { fullWidth } from '@theme/utilityClasses'
+import { fullWidth } from '@theme/utils/utilityClasses'
 
 export type BlockRecord =
   | TestimonialRecord
@@ -20,32 +20,32 @@ export type BlockRecord =
   | StaffProfileCollectionRecord
   | FullWidthCalloutRecord
 
-const FeatureParagraphImage = dynamic(
+const FeatureParagraphImage = dynamic(() =>
   import('@components/feature-paragraph-with-image').then(
     (res) => res.FeatureParagraphWithImage
   )
 )
 
-const TwoColumnList = dynamic(
+const TwoColumnList = dynamic(() =>
   import('@components/two-column-list').then((res) => res.TwoColumnList)
 )
-const Testimonial = dynamic(
+const Testimonial = dynamic(() =>
   import('@components/testimonial').then((res) => res.Testimonial)
 )
-const SideBySideParagraphs = dynamic(
+const SideBySideParagraphs = dynamic(() =>
   import('@components/side-by-side-paragraphs').then(
     (res) => res.SideBySideParagraphs
   )
 )
-const QuoteCta = dynamic(
+const QuoteCta = dynamic(() =>
   import('@components/quote-cta').then((res) => res.QuoteCta)
 )
-const StaffProfileCollection = dynamic(
+const StaffProfileCollection = dynamic(() =>
   import('@components/staff-profile-collection').then(
     (res) => res.StaffProfileCollection
   )
 )
-const MissionCallout = dynamic(
+const MissionCallout = dynamic(() =>
   import('@components/mission-callout').then((res) => res.MissionCallout)
 )
 

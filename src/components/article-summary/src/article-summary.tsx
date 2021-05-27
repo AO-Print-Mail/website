@@ -1,12 +1,6 @@
-import {
-  Breadcrumbs,
-  Box,
-  Spacer,
-  styled,
-  Paragraph5,
-  Paragraph4,
-  Heading,
-} from '@theme'
+import { Breadcrumbs, Box, Spacer } from '@theme/atoms'
+import { Paragraph, Title } from '@theme/typography'
+import { styled } from '@theme/stitches.config'
 import { isParagraph } from 'datocms-structured-text-utils'
 import React from 'react'
 import {
@@ -15,40 +9,43 @@ import {
   StructuredTextDocument,
 } from 'react-datocms'
 
-interface ArticleSummaryProps {
+interface ArticleSummaryProps extends React.ComponentProps<typeof Box> {
   title: string
   lastUpdated?: string
   summary: StructuredTextDocument
   breadcrumbLinks?: { name: string; url: string }[]
 }
 
-const Title = styled(Heading, {
-  textGradient: 'linear-gradient(272.88deg, #0072CE 14.59%, #00237D 101%)',
-  my: '0',
-})
-
-const Updated = styled(Paragraph5, {
+const Updated = styled(Paragraph, {
   color: '$DBA70',
 })
 
 const structuredTextRulez = [
   renderRule(isParagraph, ({ key, children }) => (
-    <Paragraph4 css={{ color: '$DBA80' }} key={key}>
+    <Paragraph size="m" key={key}>
       {children}
-    </Paragraph4>
+    </Paragraph>
   )),
 ]
 
-export const ArticleSummary: React.FC<
-  ArticleSummaryProps & React.ComponentProps<typeof Box>
-> = ({ title, lastUpdated, summary, breadcrumbLinks, ...props }) => {
+export const ArticleSummary: React.FC<ArticleSummaryProps> = ({
+  title,
+  lastUpdated,
+  summary,
+  breadcrumbLinks,
+  ...props
+}) => {
   return (
     <Box {...props}>
       {breadcrumbLinks && <Breadcrumbs links={breadcrumbLinks} />}
       <Spacer size={breadcrumbLinks ? 'small' : 'large'} />
-      <Title as="h1">{title}</Title>
-      {lastUpdated && <Updated>Last updated {lastUpdated}</Updated>}
-      <StructuredText data={summary} customRules={structuredTextRulez} />
+      <Title color="primaryGradient" css={{ my: '0' }}>
+        {title}
+      </Title>
+      {lastUpdated && <Updated size="s">Last updated {lastUpdated}</Updated>}
+      <Box css={{ '@m': { pr: '$5' }, '@l': { pr: '$6' } }}>
+        <StructuredText data={summary} customRules={structuredTextRulez} />
+      </Box>
     </Box>
   )
 }

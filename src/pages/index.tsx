@@ -1,50 +1,30 @@
-import {
-  styled,
-  Container,
-  Heading1,
-  Box,
-  HomePattern,
-  Heading2,
-  Card,
-} from '@theme'
+import { Container, Box, Heading2, TextHolder, styled } from '@theme'
 import { Layout } from '@components/layout'
 import { HomePageBody } from '@components/home-page-body'
+import { ModularContent } from '@lib/datocms/blockRules'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
-import { ThenArg } from '@utils/src'
+import type { Awaited } from '@utils/src'
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 import { ClientLogoBanner } from '@components/client-logo-banner'
-import { Button } from '@components/button'
-import { Modal } from '@components/modal'
+import { ArticleListCard } from '@components/list-card'
+import { ArticleSummary } from '@components/article-summary'
+import { default as DH } from '@svg/desktop-hero.svg'
+import { QuoteButton } from '@components/quoteButton'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
-const HeroText = styled('div', {
-  willChange: 'opacity',
-  '@s': {
-    pr: '$2',
-    pl: '$2',
-    pt: '$3',
-    pb: '$6',
-  },
-  '@m': {
-    pr: '$2',
-    pl: '$3',
-    pt: '$6',
-    width: '75%',
-  },
+const DesktopHero = styled(DH, {
+  position: 'absolute',
+  top: '0',
+  height: '1024px',
+  display: 'none',
   '@l': {
-    pr: '$2',
-    pl: '$4',
-    width: '50%',
-  },
-  '@xl': {
-    pr: '$3',
-    pl: '$4',
+    display: 'block',
   },
 })
 
@@ -53,8 +33,7 @@ const ParagraphText = ({ data, size }) => {
     <StructuredText
       data={data}
       customRules={structuredTextRules({
-        headingProps: { color: 'primary' },
-        paragraphProps: { size, color: 'primary' },
+        paragraphProps: { size },
         listItemProps: {
           icon: 'CheckLeaf',
           iconProps: {
@@ -70,15 +49,6 @@ const ParagraphText = ({ data, size }) => {
   )
 }
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
-  const featureSections = data.contentSections.map((f) => (
-    <Box
-      key={f.heading}
-      css={{ '@initial': { px: '$2' }, '@m': { px: '$3' }, '@l': { px: '$4' } }}
-    >
-      <Heading2 color="primary">{f.heading}</Heading2>
-      <ParagraphText data={f.paragraph} size="3" />
-    </Box>
-  ))
   return (
     <Layout
       canonicalPath="https://www.aomail.com.au"
@@ -95,42 +65,45 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       >
         <Container
           css={{
-            pt: '$6',
-            '@m': { height: '680px' },
-            '@l': { display: 'flex', height: '768px', pt: '$5' },
+            pt: '$7',
+            pb: '$7',
+            '@m': { minHeight: '680px' },
+            '@l': { display: 'flex', pt: '$8' },
           }}
         >
-          <HomePattern
+          <DesktopHero />
+          <TextHolder
             css={{
-              height: '240px',
-              width: 'auto',
-              position: 'absolute',
-              right: '-$7',
-              top: '$7',
-              display: 'none',
-              '@s': { right: '-$6', height: '300px' },
-              '@m': {
-                top: '0',
-                display: 'block',
-                height: '100%',
-                right: '-$10',
-              },
-              '@l': { right: '-$4', top: '0' },
+              '@m': { mr: '16.67%' },
+              '@l': { mr: '33.3%' },
+              '@xl': { mr: '50%' },
             }}
-          />
-          <HeroText>
-            <Heading1 color="primary">{data.mainHeading}</Heading1>
-            <Box css={{ maxWidth: '60ch' }}>
-              <ParagraphText data={data.heroParagraph} size={'2'} />
-            </Box>
-          </HeroText>
+          >
+            <ArticleSummary
+              title={data.mainHeading}
+              summary={data.heroParagraph.value}
+            />
+            <QuoteButton
+              css={{
+                mt: '$6',
+                width: '$11',
+                minHeight: '$5',
+                '@m': { width: '$12' },
+              }}
+            />
+          </TextHolder>
         </Container>
       </Box>
-      <Box>
-        <HomePageBody
-          cardData={data.cardData}
-          featureSections={featureSections}
+      <Container>
+        <ArticleListCard
+          data={data.cardData}
+          css={{ top: '-$7', '@l': { top: '-$6' } }}
         />
+      </Container>
+      <Box css={{ mt: '$6' }}>
+        <Container>
+          <ModularContent data={data.contentSections} />
+        </Container>
       </Box>
       <Box css={{ my: '$7' }}>
         <Container>

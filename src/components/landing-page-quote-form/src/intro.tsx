@@ -1,11 +1,12 @@
 import {
   Box,
-  Heading4,
-  Paragraph3,
+  Heading3,
+  Paragraph,
   MailIllustration,
   styled,
   Container,
   Close,
+  Spacer,
 } from '@theme'
 import { FormStepControls } from './bottomBarControls'
 import type { BreakpointsAry } from '@lib/react/breakpoints'
@@ -26,7 +27,7 @@ import { m as motion } from 'framer-motion'
 const FormImage = styled('div', {
   display: 'block',
   position: 'absolute',
-  height: '$12',
+  height: '$10',
   alignSelf: 'flex-end',
   right: '-40px',
   top: '-40px',
@@ -100,7 +101,7 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
 }) => {
   const isNotDesktop = !breakpoints.includes('l')
   return (
-    <Box>
+    <Box {...props}>
       <Background layout isOpen={isOpen} as={motion.div}>
         <FormImage layout isOpen={isOpen} as={motion.div}>
           <MailIllustration layout as={motion.svg} css={{ height: '100%' }} />
@@ -142,33 +143,34 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               variants={contentContainerVariants}
               css={{ maxWidth: '32rem', pt: '$10' }}
             >
-              <Heading4
+              <Heading3
                 as={motion.h2}
                 alignCenter
-                color="primary"
+                color="primaryGradient"
                 css={{ mt: '0' }}
                 variants={contentChildrenVariants}
               >
                 Get a {keyword} quote online
-              </Heading4>
-              <Paragraph3
+              </Heading3>
+              <Spacer size="small" />
+              <Paragraph
                 as={motion.p}
                 alignCenter
-                css={{ color: '$DA70', mt: '$3' }}
+                size="m"
                 variants={contentChildrenVariants}
               >
                 You can expect to receive a quote on the same day so that your
                 job can start asap.
-              </Paragraph3>
-              <Paragraph3
+              </Paragraph>
+              <Paragraph
                 as={motion.p}
                 alignCenter
-                css={{ color: '$DA70' }}
+                size="m"
                 variants={contentChildrenVariants}
               >
                 We’ll contact you to clarify any important details that help us
                 plan the right approach and best price.
-              </Paragraph3>
+              </Paragraph>
             </Container>
           </motion.div>
         </Content>
@@ -178,7 +180,9 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
               isOpen={isNotDesktop && isOpen}
               isSubmitting={isSubmitting}
               buttonLabel={
-                isNotDesktop && isOpen ? 'Continue' : 'Start your quote'
+                isNotDesktop && isOpen
+                  ? 'Continue your Quote'
+                  : 'Start your quote'
               }
               buttonOnClick={(e: React.PointerEvent) => {
                 e.preventDefault()
@@ -188,7 +192,6 @@ export const QuoteIntro: React.FC<QuoteIntroProps> = ({
                   changeStep('1')
                 }
               }}
-              toggleIsOpen={toggleIsOpen}
             />
           </Box>
         </Container>
@@ -226,7 +229,6 @@ export const BlankSkeletonScreen = () => (
             buttonOnClick={(e: React.PointerEvent) => {
               e.preventDefault()
             }}
-            toggleIsOpen={() => undefined}
           />
         </Box>
       </Container>

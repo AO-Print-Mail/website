@@ -8,13 +8,13 @@ import {
   classes,
   TextArea,
   InputLabel,
-  Heading,
   Paragraph,
+  Heading2,
 } from '@theme'
 import * as yup from 'yup'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import MaskedInput from 'react-text-mask'
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { encode } from '@lib/netlify/utils'
 import { Button } from '@components/button'
@@ -52,11 +52,14 @@ const schema = yup.object().shape({
     .string()
     .email('Please provide a valid email address')
     .required('We need an email to send your quote!'),
-  phone: yup
-    .string()
-    .required(`Please enter a telephone number`)
-    .min(9, 'Please enter a full telephone number')
-    .max(14, 'The telephone number you entered seems too long.'),
+  phone: yup.lazy((value) =>
+    value.length > 0
+      ? yup
+          .string()
+          .min(9, 'Please enter a full telephone number')
+          .max(14, 'The telephone number you entered seems too long.')
+      : yup.string()
+  ),
   message: yup.string(),
   'bot-field': yup.string(),
   joinMailingList: yup.boolean(),
@@ -121,11 +124,10 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
       body: encode({ 'form-name': FORM_NAME, ...data, ...userData }),
     })
       .then(() => {
-        const newPath = router.pathname.replace('[pageSlug]', '/contact')
         router.push(
           {
-            pathname: `${newPath}`,
-            query: { success: 'true' },
+            pathname: router.pathname,
+            query: { success: 'true', ...router.query },
           },
           null,
           { shallow: true }
@@ -137,6 +139,8 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
         reset()
       })
   }
+
+  const { ref: phoneRef, ...phoneFormProps } = register('phone')
   return (
     <Background {...props}>
       {router.query['success'] && (
@@ -148,11 +152,11 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
         >
           <Flex css={{ alignItems: 'center', height: '100%' }}>
             <Box css={{ flex: '1 1', pb: '$9' }}>
-              <Heading as="h2" level="5" alignCenter css={{ color: '$white' }}>
+              <Heading2 alignCenter css={{ color: '$white' }}>
                 Thanks for your message{firstName && `, ${firstName}`}!
-              </Heading>
+              </Heading2>
               <Paragraph
-                size="4"
+                size="s"
                 css={{ color: '$LA90', mt: '$6' }}
                 alignCenter
               >
@@ -162,9 +166,9 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
           </Flex>
         </SuccessBackground>
       )}
-      <Heading color="primary" as="h2" level="5">
+      <Heading2 marginTop="small" level="4">
         Send a message
-      </Heading>
+      </Heading2>
       <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>
         <Box css={{ my: '$4', pb: '$2' }}>
           <Flex css={{ mx: '-$2' }}>
@@ -176,6 +180,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
               defaultValue={inputs.firstName}
               css={{ px: '$2', flexBasis: '50%' }}
               errors={errors}
+              required
             >
               First name
             </Input>
@@ -209,6 +214,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             type="email"
             defaultValue={inputs.email}
             errors={errors}
+            required
           >
             Email address
           </Input>
@@ -221,22 +227,23 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             type="text"
             defaultValue={inputs.phone}
             errors={errors}
-            {...register('phone')}
             render={(textMaskRef, props) => (
               <Input
                 ref={(node) => {
                   textMaskRef(node)
+                  phoneRef(node)
                 }}
                 name="phone"
                 {...props}
+                {...phoneFormProps}
               >
                 Contact number
               </Input>
             )}
           />
           <Box css={{ mt: '$3' }}>
-            <InputLabel as="label" size="4" htmlFor="message">
-              Message (optional)
+            <InputLabel as="label" size="s" htmlFor="message">
+              Message
             </InputLabel>
             <TextArea
               {...register('message')}
@@ -264,16 +271,10 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
         <p aria-hidden="true" className={classes.visuallyHidden()}>
           <label>
             Skip this field if you’re human:
-            <input tabIndex={-1} {...register('bot-field')} name="bot-field" />
+            <input tabIndex={-1} {...register('bot-field')} />
           </label>
         </p>
-        <Button
-          fullWidth
-          size="cta"
-          isLoading={submitting}
-          type="submit"
-          color="primary"
-        >
+        <Button fullWidth size="cta" isLoading={submitting} type="submit">
           Send Message
         </Button>
       </form>

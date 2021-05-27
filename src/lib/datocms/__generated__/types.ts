@@ -94,12 +94,12 @@ export type BlogArticleModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
-  summary?: Maybe<StructuredTextFilter>;
   article?: Maybe<StructuredTextFilter>;
-  seoMeta?: Maybe<SeoFilter>;
-  title?: Maybe<StringFilter>;
-  slug?: Maybe<SlugFilter>;
   mainImage?: Maybe<FileFilter>;
+  summary?: Maybe<StructuredTextFilter>;
+  seoMeta?: Maybe<SeoFilter>;
+  slug?: Maybe<SlugFilter>;
+  title?: Maybe<StringFilter>;
   OR?: Maybe<Array<Maybe<BlogArticleModelFilter>>>;
 };
 
@@ -524,6 +524,8 @@ export type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']>;
 };
 
+export type HomepageModelContentSectionsField = FeatureParagraphImageRecord | FeatureParagraphRecord;
+
 export type HomepageModelHeroParagraphField = {
   __typename?: 'HomepageModelHeroParagraphField';
   blocks: Array<LandingPageV1Record>;
@@ -545,7 +547,7 @@ export type HomepageRecord = {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
-  contentSections?: Maybe<Array<Maybe<FeatureParagraphRecord>>>;
+  contentSections?: Maybe<Array<Maybe<HomepageModelContentSectionsField>>>;
   createdAt: Scalars['DateTime'];
   heroParagraph?: Maybe<HomepageModelHeroParagraphField>;
   id: Scalars['ItemId'];
@@ -1889,11 +1891,11 @@ export type LandingPageV1ModelFilter = {
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
   preview?: Maybe<JsonFilter>;
-  pageContent?: Maybe<TextFilter>;
-  pageMeta?: Maybe<SeoFilter>;
-  title?: Maybe<StringFilter>;
-  pageSlug?: Maybe<SlugFilter>;
   canonicalPath?: Maybe<SlugFilter>;
+  pageMeta?: Maybe<SeoFilter>;
+  pageSlug?: Maybe<SlugFilter>;
+  title?: Maybe<StringFilter>;
+  pageContent?: Maybe<TextFilter>;
   OR?: Maybe<Array<Maybe<LandingPageV1ModelFilter>>>;
 };
 
@@ -2009,13 +2011,13 @@ export type LegalPageModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
-  legalText?: Maybe<StructuredTextFilter>;
   summary?: Maybe<StructuredTextFilter>;
-  pageMeta?: Maybe<SeoFilter>;
-  title?: Maybe<StringFilter>;
-  preview?: Maybe<JsonFilter>;
-  canonicalPath?: Maybe<SlugFilter>;
   legalPageSlug?: Maybe<SlugFilter>;
+  legalText?: Maybe<StructuredTextFilter>;
+  canonicalPath?: Maybe<SlugFilter>;
+  preview?: Maybe<JsonFilter>;
+  title?: Maybe<StringFilter>;
+  pageMeta?: Maybe<SeoFilter>;
   OR?: Maybe<Array<Maybe<LegalPageModelFilter>>>;
 };
 
@@ -2513,15 +2515,15 @@ export type ServiceModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
-  preview?: Maybe<JsonFilter>;
-  title?: Maybe<StringFilter>;
-  pageMeta?: Maybe<SeoFilter>;
-  pageSlug?: Maybe<SlugFilter>;
-  canonicalPath?: Maybe<SlugFilter>;
-  heroParagraph?: Maybe<StructuredTextFilter>;
-  pageContent?: Maybe<StructuredTextFilter>;
-  mainHeading?: Maybe<StringFilter>;
   illustration?: Maybe<StringFilter>;
+  pageContent?: Maybe<StructuredTextFilter>;
+  heroParagraph?: Maybe<StructuredTextFilter>;
+  mainHeading?: Maybe<StringFilter>;
+  canonicalPath?: Maybe<SlugFilter>;
+  pageSlug?: Maybe<SlugFilter>;
+  pageMeta?: Maybe<SeoFilter>;
+  title?: Maybe<StringFilter>;
+  preview?: Maybe<JsonFilter>;
   OR?: Maybe<Array<Maybe<ServiceModelFilter>>>;
 };
 
@@ -2559,12 +2561,12 @@ export enum ServiceModelOrderBy {
   updatedAt_DESC = 'updatedAt_DESC',
   _isValid_ASC = '_isValid_ASC',
   _isValid_DESC = '_isValid_DESC',
-  title_ASC = 'title_ASC',
-  title_DESC = 'title_DESC',
+  illustration_ASC = 'illustration_ASC',
+  illustration_DESC = 'illustration_DESC',
   mainHeading_ASC = 'mainHeading_ASC',
   mainHeading_DESC = 'mainHeading_DESC',
-  illustration_ASC = 'illustration_ASC',
-  illustration_DESC = 'illustration_DESC'
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC'
 }
 
 export type ServiceModelPageContentBlocksField = FeatureParagraphImageRecord | SideBySidePRecord | TestimonialRecord | TwoColumnListRecord;
@@ -2735,10 +2737,10 @@ export type StaffProfileModelFilter = {
   _updatedAt?: Maybe<UpdatedAtFilter>;
   updatedAt?: Maybe<UpdatedAtFilter>;
   _isValid?: Maybe<BooleanFilter>;
-  jobTitle?: Maybe<StringFilter>;
-  biography?: Maybe<StructuredTextFilter>;
-  name?: Maybe<StringFilter>;
   avatar?: Maybe<FileFilter>;
+  biography?: Maybe<StructuredTextFilter>;
+  jobTitle?: Maybe<StringFilter>;
+  name?: Maybe<StringFilter>;
   OR?: Maybe<Array<Maybe<StaffProfileModelFilter>>>;
 };
 
@@ -3585,13 +3587,9 @@ export type GetHomePageQuery = (
         & Pick<ServiceRecord, 'pageSlug'>
       )> }
     )>>>, contentSections?: Maybe<Array<Maybe<(
-      { __typename?: 'FeatureParagraphRecord' }
-      & Pick<FeatureParagraphRecord, 'heading'>
-      & { paragraph?: Maybe<(
-        { __typename?: 'FeatureParagraphModelParagraphField' }
-        & Pick<FeatureParagraphModelParagraphField, 'value'>
-      )> }
-    )>>> }
+      { __typename?: 'FeatureParagraphImageRecord' }
+      & FeatureParagraphImageRecordFragmentFragment
+    ) | { __typename?: 'FeatureParagraphRecord' }>>> }
   )> }
 );
 
@@ -3765,7 +3763,7 @@ export const FeatureParagraphImageRecordFragmentFragmentDoc = gql`
     value
   }
   image {
-    responsiveImage(imgixParams: {fit: fill, w: 360, h: 360, auto: format}) {
+    responsiveImage(imgixParams: {fit: crop, w: 480, h: 480, auto: format}) {
       ...responsiveImageFragment
     }
   }
@@ -3997,15 +3995,15 @@ export const GetHomePageDocument = gql`
       }
     }
     contentSections {
-      heading
-      paragraph {
-        value
+      ... on FeatureParagraphImageRecord {
+        ...featureParagraphImageRecordFragment
       }
     }
   }
 }
     ${MetaTagsFragmentFragmentDoc}
-${ResponsiveImageFragmentFragmentDoc}`;
+${ResponsiveImageFragmentFragmentDoc}
+${FeatureParagraphImageRecordFragmentFragmentDoc}`;
 export const GetLandingPageDocument = gql`
     query GetLandingPage($pageSlug: String!) {
   landingPageV1(filter: {pageSlug: {eq: $pageSlug}}) {
@@ -4136,57 +4134,57 @@ export const GetServicePagesDocument = gql`
 }
     `;
 
-export type SdkFunctionWrapper = <T>(action: () => Promise<T>) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
 
 
-const defaultWrapper: SdkFunctionWrapper = sdkFunction => sdkFunction();
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     GetAboutUs(variables?: GetAboutUsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetAboutUsQuery> {
-      return withWrapper(() => client.request<GetAboutUsQuery>(GetAboutUsDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetAboutUsQuery>(GetAboutUsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetAboutUs');
     },
     GetBlogPage(variables?: GetBlogPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPageQuery> {
-      return withWrapper(() => client.request<GetBlogPageQuery>(GetBlogPageDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetBlogPageQuery>(GetBlogPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetBlogPage');
     },
     getBlogPostSummaries(variables?: GetBlogPostSummariesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostSummariesQuery> {
-      return withWrapper(() => client.request<GetBlogPostSummariesQuery>(GetBlogPostSummariesDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetBlogPostSummariesQuery>(GetBlogPostSummariesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getBlogPostSummaries');
     },
     getBlogPost(variables: GetBlogPostQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostQuery> {
-      return withWrapper(() => client.request<GetBlogPostQuery>(GetBlogPostDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetBlogPostQuery>(GetBlogPostDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getBlogPost');
     },
     getBlogPostPaths(variables?: GetBlogPostPathsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetBlogPostPathsQuery> {
-      return withWrapper(() => client.request<GetBlogPostPathsQuery>(GetBlogPostPathsDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetBlogPostPathsQuery>(GetBlogPostPathsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getBlogPostPaths');
     },
     GetContactPage(variables?: GetContactPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetContactPageQuery> {
-      return withWrapper(() => client.request<GetContactPageQuery>(GetContactPageDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetContactPageQuery>(GetContactPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetContactPage');
     },
     GetFavicons(variables?: GetFaviconsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetFaviconsQuery> {
-      return withWrapper(() => client.request<GetFaviconsQuery>(GetFaviconsDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetFaviconsQuery>(GetFaviconsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetFavicons');
     },
     GetHomePage(variables?: GetHomePageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetHomePageQuery> {
-      return withWrapper(() => client.request<GetHomePageQuery>(GetHomePageDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetHomePageQuery>(GetHomePageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetHomePage');
     },
     GetLandingPage(variables: GetLandingPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPageQuery> {
-      return withWrapper(() => client.request<GetLandingPageQuery>(GetLandingPageDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetLandingPageQuery>(GetLandingPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetLandingPage');
     },
     GetLandingPages(variables?: GetLandingPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLandingPagesQuery> {
-      return withWrapper(() => client.request<GetLandingPagesQuery>(GetLandingPagesDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetLandingPagesQuery>(GetLandingPagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetLandingPages');
     },
     GetLegalListPage(variables?: GetLegalListPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalListPageQuery> {
-      return withWrapper(() => client.request<GetLegalListPageQuery>(GetLegalListPageDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetLegalListPageQuery>(GetLegalListPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetLegalListPage');
     },
     GetLegalPage(variables: GetLegalPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalPageQuery> {
-      return withWrapper(() => client.request<GetLegalPageQuery>(GetLegalPageDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetLegalPageQuery>(GetLegalPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetLegalPage');
     },
     GetLegalPages(variables?: GetLegalPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalPagesQuery> {
-      return withWrapper(() => client.request<GetLegalPagesQuery>(GetLegalPagesDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetLegalPagesQuery>(GetLegalPagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetLegalPages');
     },
     GetServicePage(variables: GetServicePageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetServicePageQuery> {
-      return withWrapper(() => client.request<GetServicePageQuery>(GetServicePageDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetServicePageQuery>(GetServicePageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetServicePage');
     },
     GetServicePages(variables?: GetServicePagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetServicePagesQuery> {
-      return withWrapper(() => client.request<GetServicePagesQuery>(GetServicePagesDocument, variables, requestHeaders));
+      return withWrapper((wrappedRequestHeaders) => client.request<GetServicePagesQuery>(GetServicePagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetServicePages');
     }
   };
 }

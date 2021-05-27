@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { styled, theme, CSS } from '..'
+import { styled, theme, CSS } from '@theme/stitches.config'
 import { toCamelCase } from '@utils/src/text-transforms'
 
 export interface IconProps {

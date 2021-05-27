@@ -1,5 +1,5 @@
-import { CSS } from '@theme/stitches.config'
-import { styled, ThemeVariants, Paragraph5 } from '..'
+import { CSS, styled } from '@theme/stitches.config'
+import { Paragraph } from '@theme/typography/text'
 import { CovidSafe } from '../icons'
 
 export interface CovidSafeBannerProps {
@@ -21,9 +21,12 @@ export const CovidSafeBanner: React.FC<CovidSafeBannerProps> = (props) => {
   return (
     <Background {...props}>
       <CovidSafe css={{ flex: '0 0 $10', size: '$9' }} />
-      <Paragraph5 css={{ ml: '$4', color: '$LA80', mt: '0', flex: '0 1 100%' }}>
+      <Paragraph
+        size="xs"
+        css={{ ml: '$4', color: '$LA80', mt: '0', flex: '0 1 100%' }}
+      >
         A&amp;O is fully open for business and operating with a COVID safe plan.
-      </Paragraph5>
+      </Paragraph>
     </Background>
   )
 }

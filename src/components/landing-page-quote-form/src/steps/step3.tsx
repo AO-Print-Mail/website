@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useStateMachine } from 'little-state-machine'
-import { Flex, Box, Paragraph3, styled, Input, Checkbox, classes } from '@theme'
+import { Flex, Box, Paragraph, Input, Checkbox, classes } from '@theme'
 import { updateDirectMailForm } from '@lib/little-state-machine'
 import MaskedInput from 'react-text-mask'
 import * as yup from 'yup'
@@ -127,9 +127,9 @@ export const Step3Form: React.FC<Step3Props> = ({
   }, [formState])
   return (
     <form id={FORM_NAME} onSubmit={handleSubmit(onSubmit)}>
-      <Paragraph3 css={{ color: '$DA80', mt: '$2' }}>
+      <Paragraph css={{ color: '$DA80', mt: '$2' }}>
         Your contact information
-      </Paragraph3>
+      </Paragraph>
       <Box css={{ my: '$4', pb: '$2' }}>
         <Flex css={{ mx: '-$2' }}>
           <Input
@@ -238,7 +238,6 @@ export const Step3Controls: React.FC<Step3Props> = ({
       }}
       buttonColor="success"
       formName={FORM_NAME}
-      toggleIsOpen={toggleIsOpen}
     />
   )
 }

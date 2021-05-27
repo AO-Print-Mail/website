@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { CSS, styled, Box, Container, Flex, Paragraph } from '@theme'
+import { CSS, styled, Box, Container, Flex, Heading4 } from '@theme'
 import { Button } from '@components/button'
 interface MobileNavigationProps {
   navIsOpen: boolean
@@ -50,9 +50,20 @@ const NavWrapper = styled('div', {
         pointerEvents: 'auto',
         opacity: 1,
         mt: '$4',
+        height: '100%',
       },
     },
   },
+})
+
+const BottomBorder = styled('span', {
+  position: 'absolute',
+  top: '0',
+  left: '0',
+  width: '100%',
+  height: '1px',
+  background: '$dotted-horizontal',
+  backgroundSize: '16px 1px',
 })
 
 interface NavSectionProps {
@@ -60,9 +71,11 @@ interface NavSectionProps {
   menu_items: typeof staticData[0]['menu_items']
 }
 
-const SectionLabel = styled(Paragraph, {
+const SectionLabel = styled(Heading4, {
   color: '$DA40',
   fontWeight: '$semibold',
+  mt: '0',
+  mb: '0',
   ml: '$2',
   '@m': {
     ml: '$3',
@@ -95,11 +108,10 @@ const NavSection: React.FC<NavSectionProps> = ({
   menu_items,
 }) => {
   return (
-    <Box css={{ borderTop: '1px dashed $colors$DBA30', pt: '$5', pb: '$4' }}>
+    <Box css={{ pt: '$5', pb: '$4', position: 'relative' }}>
+      <BottomBorder />
       <Container as="section">
-        <SectionLabel size="3" as="h3">
-          {section_label}
-        </SectionLabel>
+        <SectionLabel as="h3">{section_label}</SectionLabel>
         <Flex
           as="ul"
           css={{
@@ -127,13 +139,15 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
 }) => {
   return (
     <NavWrapper open={navIsOpen} {...props}>
-      {data.map((section) => (
-        <NavSection
-          key={section.section_label}
-          section_label={section.section_label}
-          menu_items={section.menu_items}
-        />
-      ))}
+      <Flex column css={{ height: '100%', justifyContents: 'space-between' }}>
+        {data.map((section) => (
+          <NavSection
+            key={section.section_label}
+            section_label={section.section_label}
+            menu_items={section.menu_items}
+          />
+        ))}
+      </Flex>
     </NavWrapper>
   )
 }

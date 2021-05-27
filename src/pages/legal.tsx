@@ -1,4 +1,4 @@
-import { ThenArg } from '@utils/src'
+import { Awaited } from '@utils/src'
 import { request } from '@lib/datocms/datocms'
 import {
   GetBlogPostSummariesQuery,
@@ -21,7 +21,7 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
 const PREFETCH_ARTICLES = 3
@@ -92,7 +92,7 @@ const Legal: React.FC<PageProps> = ({ data }) => {
           <TextHolder
             css={{ mt: '$7', '@m': { mt: '$8' }, '@l': { ml: '8.33%' } }}
           >
-            <Heading1 color="primary">{data.legalPage.title}</Heading1>
+            <Heading1>{data.legalPage.title}</Heading1>
           </TextHolder>
         </Container>
       </Box>

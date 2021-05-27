@@ -1,18 +1,13 @@
-import { ThenArg } from '@utils/src'
-import { styled, Container, Heading1, Box, HomePattern, Heading2 } from '@theme'
+import { Awaited } from '@utils/src'
+import { styled, Container, Box, Title, Spacer } from '@theme'
 import { Layout } from '@components/layout'
 import { GetAboutUsQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
-import { StructuredText } from 'react-datocms'
-import { structuredTextRules } from '@lib/datocms/structuredText'
-import {
-  structuredTextBlockRules,
-  ModularContent,
-} from '@lib/datocms/blockRules'
-import { ClientLogoBanner } from '@components/client-logo-banner'
+import { StructuredText } from '@lib/datocms/structuredText'
+import { structuredTextBlockRules } from '@lib/datocms/blockRules'
 
 interface PageProps {
-  data?: ThenArg<ReturnType<typeof getStaticProps>>['props']['data']
+  data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
 
 const HeroText = styled('div', {
@@ -44,11 +39,9 @@ const ConfiguredText = ({ data, size }) => {
   return (
     <StructuredText
       data={data}
-      //@ts-expect-error
-      renderBlock={structuredTextBlockRules}
-      customRules={structuredTextRules({
+      config={{
         headingProps: { color: 'primary', css: { ml: '8.335%' } },
-        paragraphProps: { size, color: 'primary' },
+        paragraphProps: { size },
         listItemProps: {
           icon: 'CheckLeaf',
           iconProps: {
@@ -59,7 +52,9 @@ const ConfiguredText = ({ data, size }) => {
             },
           },
         },
-      })}
+      }}
+      //@ts-expect-error
+      renderBlock={structuredTextBlockRules}
     />
   )
 }
@@ -87,15 +82,16 @@ const AboutUsPage: React.FC<PageProps> = ({ data }) => {
           }}
         >
           <HeroText>
-            <Heading1 color="primary">{data.mainHeading}</Heading1>
-            <Box css={{ maxWidth: '60ch', mt: '-$4' }}>
-              <ConfiguredText data={data.heroParagraph} size="2" />
+            <Title color="primaryGradient">{data.mainHeading}</Title>
+            <Spacer />
+            <Box css={{ maxWidth: '60ch' }}>
+              <ConfiguredText data={data.heroParagraph} size="l" />
             </Box>
           </HeroText>
         </Container>
       </Box>
       <Container>
-        <ConfiguredText data={data.pageContent} size="2" />
+        <ConfiguredText data={data.pageContent} size="l" />
       </Container>
     </Layout>
   )

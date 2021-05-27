@@ -9,27 +9,28 @@ export default class Document extends NextDocument {
   static async getInitialProps(ctx) {
     try {
       const initialProps = await NextDocument.getInitialProps(ctx)
+      let ssrStyles = getCssString()
       if (process.env.NODE_ENV === 'production') {
-        const ssrStyles = getCssString()
-        const prefixedStyles = await postcss([autoprefixer({})])
+        ssrStyles = await postcss([autoprefixer({})])
           .process(ssrStyles, { from: undefined })
           .then((style) => {
             return style.css
           })
-        return {
-          ...initialProps,
-          styles: (
-            <>
-              {initialProps.styles}
+      }
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {process.env.NODE_ENV === 'production' && (
               <style
                 id="stitches"
-                dangerouslySetInnerHTML={{ __html: prefixedStyles }}
+                dangerouslySetInnerHTML={{ __html: ssrStyles }}
               />
-            </>
-          ),
-        }
+            )}
+          </>
+        ),
       }
-      return initialProps
     } finally {
     }
   }

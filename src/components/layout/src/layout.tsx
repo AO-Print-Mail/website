@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
-import { createContext, useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Head from 'next/head'
-import { PageWrapper, ContentWrapper, CSS } from '@theme'
 import { Footer } from '@components/footer'
 import { request } from '@lib/datocms/datocms'
 import { renderMetaTags, SeoMetaTagType } from 'react-datocms'
@@ -13,6 +12,9 @@ import {
   useCycle,
   m as motion,
 } from 'framer-motion'
+import { CSS } from '@theme/stitches.config'
+import { ContentWrapper, PageWrapper } from '@theme/atoms'
+import { LayoutContext } from './layoutContext'
 
 interface LayoutProps {
   title?: string
@@ -34,11 +36,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return { props: data }
 }
 
-export const LayoutScrollContext = createContext({
-  scrollLock: false,
-  toggleScrollLock: undefined,
-})
-
 export const Layout: React.FC<LayoutProps> = ({
   title,
   description,
@@ -52,10 +49,10 @@ export const Layout: React.FC<LayoutProps> = ({
   ...props
 }) => {
   const [scrollLock, toggleScroll] = useCycle(false, true)
+  const [velocityListener, setVelocityListener] = useState<boolean>(true)
   const [showNav, setShowNav] = useState(true)
   const scrollPosition = useMotionValue(0)
   const headerRef = useRef<HTMLDivElement>()
-
   //@ts-ignore
   const meta = renderMetaTags(metaData.concat(data?.site?.favicon || []))
 
@@ -65,27 +62,27 @@ export const Layout: React.FC<LayoutProps> = ({
     if (!scrollLock) {
       const top = scrollPosition.get()
       window.scroll({ top })
+      setTimeout(setVelocityListener, 500, true)
     }
   }, [scrollLock])
   useEffect(() => {
     let listener
     function update() {
-      if (!scrollLock) {
-        if (scrollY.get() < 100) {
-          setShowNav(true)
-          return
-        }
-        const velocity = scrollY.getVelocity()
-        if (velocity > 100) {
-          setShowNav(false)
-          return
-        }
-        if (velocity < -100) {
-          setShowNav(true)
-          return
-        }
+      if (scrollY.get() < 100) {
+        setShowNav(true)
+        return
+      }
+      const velocity = scrollY.getVelocity()
+      if (velocityListener && velocity > 100) {
+        setShowNav(false)
+        return
+      }
+      if (velocity < -100) {
+        setShowNav(true)
+        return
       }
     }
+
     function focusHeader() {
       setShowNav(true)
     }
@@ -111,13 +108,13 @@ export const Layout: React.FC<LayoutProps> = ({
       scrollPosition.set(scrollY.get())
     }
     toggleScroll()
-    if (!scrollIsLocked) {
-      setShowNav(true)
-    }
+    setVelocityListener(false)
   }
 
   return (
-    <LayoutScrollContext.Provider value={{ scrollLock, toggleScrollLock }}>
+    <LayoutContext.Provider
+      value={{ scrollLock, toggleScrollLock, showNav, setShowNav }}
+    >
       <Head>
         {meta}
         <link rel="canonical" href={canonicalPath} />
@@ -145,6 +142,6 @@ export const Layout: React.FC<LayoutProps> = ({
           footerCss={footerCss}
         />
       </PageWrapper>
-    </LayoutScrollContext.Provider>
+    </LayoutContext.Provider>
   )
 }

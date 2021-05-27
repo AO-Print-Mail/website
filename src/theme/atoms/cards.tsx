@@ -1,4 +1,4 @@
-import { styled, css, CSS } from '..'
+import { styled, CSS } from '@theme/stitches.config'
 
 interface BlockQuoteProps {
   css?: CSS

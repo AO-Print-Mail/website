@@ -142,7 +142,7 @@ const Section: React.FC<{ data: typeof staticData[0]['menu_items'] }> = ({
       {data.map((d) => (
         <Link href={d.link} key={d.name} prefetch={false}>
           <a style={{ textDecoration: 'none' }}>
-            <LinkText size="5">{d.name}</LinkText>
+            <LinkText size="xs">{d.name}</LinkText>
           </a>
         </Link>
       ))}
@@ -186,7 +186,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
               as="section"
               css={{ mt: '$4' }}
             >
-              <SectionLabel size="4" as="h3">
+              <SectionLabel size="s" as="h3">
                 {section.section_label}
               </SectionLabel>
               <Section data={section.menu_items} />
@@ -238,7 +238,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                 size="small"
                 css={{ mt: '$3', color: '$LA60' }}
               >
-                <Paragraph size="5" color="light" css={{ my: 0 }}>
+                <Paragraph size="xs" color="light" css={{ my: 0 }}>
                   9 Clearview Pl
                   <br />
                   Brookvale NSW 2100
@@ -253,7 +253,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                 size="small"
                 css={{ mt: '$2', color: '$LA60' }}
               >
-                <Paragraph size="5" color="light" css={{ my: 0 }}>
+                <Paragraph size="xs" color="light" css={{ my: 0 }}>
                   (02) 9645 6777
                 </Paragraph>
               </Button>
@@ -291,7 +291,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
             >
               <CovidSafeBanner css={{ m: '0', width: '100%' }} />
               <Paragraph
-                size="5"
+                size="xs"
                 css={{ color: '$LA40', mt: '$3', '@m': { textAlign: 'right' } }}
               >
                 &copy; ANO PTY Ltd. All rights reserved.
@@ -335,7 +335,7 @@ export const Footer: React.FC<FooterProps> = ({
             offset="left"
             css={{ mt: '$3', color: '$LA60' }}
           >
-            <Paragraph size="4" color="light" css={{ my: 0 }}>
+            <Paragraph size="s" color="light" css={{ my: 0 }}>
               9 Clearview Pl
               <br />
               Brookvale NSW 2100
@@ -383,7 +383,7 @@ export const Footer: React.FC<FooterProps> = ({
       <ContentWrapper css={{ backgroundColor: '$black' }}>
         <Container>
           <Paragraph
-            size="5"
+            size="xs"
             css={{ color: '$LA60', my: '$2', pb: `$1`, ...footerCss }}
           >
             &copy; ANO PTY Ltd. All rights reserved.

@@ -1,4 +1,4 @@
-import { global } from '@theme'
+import { global } from '@theme/stitches.config'
 export const globalStyles = global({
   html: { lineHeight: '1.15', textSizeAdjust: '100%' },
   body: {
