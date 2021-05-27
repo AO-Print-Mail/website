@@ -33,7 +33,7 @@ const WorkaroundForm = dynamic(
   { ssr: false }
 )
 
-const FORM_NAME = 'quoteForm'
+const FORM_NAME = 'tempQuoteForm'
 
 interface TempQuoteFormProps {
   toggle: (e: React.MouseEvent) => void
@@ -46,7 +46,7 @@ const inputs = {
   lastName: '',
   companyName: '',
   email: '',
-  phone: '',
+  //phone: '',
   deadline: '',
   service: '',
   quantity: '',
@@ -66,14 +66,14 @@ const schema = yup.object().shape({
     .string()
     .email('Please provide a valid email address')
     .required('We need an email to send your quote!'),
-  phone: yup.lazy((value) =>
-    value.length > 0
-      ? yup
-          .string()
-          .min(9, 'Please enter a full telephone number')
-          .max(14, 'The telephone number you entered seems too long.')
-      : yup.string()
-  ),
+  // phone: yup.lazy((value) =>
+  //   value.length > 0
+  //     ? yup
+  //         .string()
+  //         .min(9, 'Please enter a full telephone number')
+  //         .max(14, 'The telephone number you entered seems too long.')
+  //     : yup.string()
+  // ),
   message: yup.string(),
   'bot-field': yup.string(),
   joinMailingList: yup.boolean(),
@@ -151,6 +151,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
         reset()
       })
   }
+  //const { ref: phoneRef, ...rest } = register('phone')
   return (
     <ModalLayout
       hideControlsBorder
@@ -228,28 +229,28 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
             >
               Email address
             </Input>
-            <MaskedInput
+            {/* <MaskedInput
               id="phone"
               placeholder="04xx xxx xxx"
               mask={mobileMask}
-              inputMode="numeric"
               guide={false}
               type="text"
               defaultValue={inputs.phone}
-              errors={errors}
               render={(textMaskRef, props) => (
                 <Input
-                  {...register('phone')}
-                  ref={(node) => {
-                    textMaskRef(node)
-                    register('phone').ref(node)
-                  }}
+                inputMode="numeric"
+                ref={(node) => {
+                  textMaskRef(node)
+                  phoneRef(node)
+                }}
+                errors={errors}
                   {...props}
+                  {...rest}
                 >
                   Contact number
                 </Input>
               )}
-            />
+            /> */}
             <InputLabel
               css={{ mt: '$8' }}
               size="s"

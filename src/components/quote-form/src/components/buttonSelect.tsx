@@ -21,7 +21,7 @@ export const ButtonSelect: React.FC<ButtonSelectProps> = ({
             id={option.id}
             name={field_id}
             {...register(field_id)}
-            value={option.value || option.label}
+            value={option.label}
             defaultChecked={defaultValue === (option.value || option.label)}
           >
             {option.label}
