@@ -102,7 +102,10 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       </Container>
       <Box css={{ mt: '$6' }}>
         <Container>
-          <ModularContent data={data.contentSections} />
+          <ModularContent
+            //@ts-ignore
+            data={data.contentSections}
+          />
         </Container>
       </Box>
       <Box css={{ my: '$7' }}>
