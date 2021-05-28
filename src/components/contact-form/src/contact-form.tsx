@@ -18,10 +18,12 @@ import MaskedInput from 'react-text-mask'
 import { useState } from 'react'
 import { encode } from '@lib/netlify/utils'
 import { Button } from '@components/button'
-import { m as motion } from 'framer-motion'
+import { AnimatePresence, m as motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useStateMachine } from 'little-state-machine'
+import { FormSuccess } from '@components/notifications/confirmations/formSuccess'
+import { CircleLoader } from '@theme/atoms/CircleLoader'
 
 const WorkaroundForm = dynamic(() =>
   import('@components/netlify-workaraound-form').then(
@@ -52,14 +54,7 @@ const schema = yup.object().shape({
     .string()
     .email('Please provide a valid email address')
     .required('We need an email to send your quote!'),
-  phone: yup.lazy((value) =>
-    value.length > 0
-      ? yup
-          .string()
-          .min(9, 'Please enter a full telephone number')
-          .max(14, 'The telephone number you entered seems too long.')
-      : yup.string()
-  ),
+  phone: yup.string(),
   message: yup.string(),
   'bot-field': yup.string(),
   joinMailingList: yup.boolean(),
@@ -98,6 +93,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
     resolver: yupResolver(schema),
     mode: 'onBlur',
   })
+
   const router = useRouter()
   const SuccessBackground = styled(Background, {
     position: 'absolute',
@@ -135,37 +131,27 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
       })
       .catch((error) => console.error(error))
       .finally(() => {
+        const { success, ...queries } = router.query
         setSubmitting(false)
         reset()
+        // setTimeout(router.push, 4000, {
+        //   pathname: router.pathname,
+        //   query: queries,
+        // })
       })
   }
 
   const { ref: phoneRef, ...phoneFormProps } = register('phone')
   return (
     <Background {...props}>
-      {router.query['success'] && (
-        <SuccessBackground
-          as={motion.div}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <Flex css={{ alignItems: 'center', height: '100%' }}>
-            <Box css={{ flex: '1 1', pb: '$9' }}>
-              <Heading2 alignCenter css={{ color: '$white' }}>
-                Thanks for your message{firstName && `, ${firstName}`}!
-              </Heading2>
-              <Paragraph
-                size="s"
-                css={{ color: '$LA90', mt: '$6' }}
-                alignCenter
-              >
-                We'll get back to you very soon.
-              </Paragraph>
-            </Box>
-          </Flex>
-        </SuccessBackground>
-      )}
+      <AnimatePresence>
+        {router.query['success'] && (
+          <FormSuccess
+            heading="Thanks for your message!"
+            paragraph="We'll get back to you very soon."
+          />
+        )}
+      </AnimatePresence>
       <Heading2 marginTop="small" level="4">
         Send a message
       </Heading2>
@@ -229,13 +215,13 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             errors={errors}
             render={(textMaskRef, props) => (
               <Input
+                {...phoneFormProps}
                 ref={(node) => {
                   textMaskRef(node)
                   phoneRef(node)
                 }}
-                name="phone"
                 {...props}
-                {...phoneFormProps}
+                name="phone"
               >
                 Contact number
               </Input>
@@ -270,11 +256,17 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
         </Box>
         <p aria-hidden="true" className={classes.visuallyHidden()}>
           <label>
-            Skip this field if you’re human:
+            Ignore this field if you’re human:
             <input tabIndex={-1} {...register('bot-field')} />
           </label>
         </p>
-        <Button fullWidth size="cta" isLoading={submitting} type="submit">
+        <Button
+          fullWidth
+          size="cta"
+          isLoading={submitting}
+          type="submit"
+          rightIcon={<CircleLoader />}
+        >
           Send Message
         </Button>
       </form>
