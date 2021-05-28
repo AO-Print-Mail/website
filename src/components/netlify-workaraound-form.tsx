@@ -28,7 +28,7 @@ export const NetlifyWorkaroundForm: React.FC<NetlifyWorkaroundFormProps> = ({
         name="form-name"
         value={name}
       />
-      {Object.entries({ ...userData, ...formFields }).map(([name, value]) => (
+      {Object.entries({ ...formFields, ...userData }).map(([name, value]) => (
         <input
           type="hidden"
           hidden

@@ -1,6 +1,5 @@
 import { Container, Box, Heading2, TextHolder, styled } from '@theme'
 import { Layout } from '@components/layout'
-import { HomePageBody } from '@components/home-page-body'
 import { ModularContent } from '@lib/datocms/blockRules'
 import { GetHomePageQuery } from '@lib/datocms/__generated__/types'
 import { request } from '@lib/datocms/datocms'
@@ -66,9 +65,9 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
         <Container
           css={{
             pt: '$7',
-            pb: '$7',
+            pb: '$8',
             '@m': { minHeight: '680px' },
-            '@l': { display: 'flex', pt: '$8' },
+            '@l': { display: 'flex', py: '$7' },
           }}
         >
           <DesktopHero />
@@ -102,7 +101,10 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
       </Container>
       <Box css={{ mt: '$6' }}>
         <Container>
-          <ModularContent data={data.contentSections} />
+          <ModularContent
+            //@ts-ignore
+            data={data.contentSections}
+          />
         </Container>
       </Box>
       <Box css={{ my: '$7' }}>

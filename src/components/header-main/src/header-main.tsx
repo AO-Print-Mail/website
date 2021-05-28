@@ -1,10 +1,9 @@
-import React, { forwardRef, useState, useContext } from 'react'
-import { AnimatePresence, m as motion, useCycle } from 'framer-motion'
-import { Button, MenuButton } from '@components/button'
+import React, { forwardRef, useState, useContext, useEffect } from 'react'
+import { m as motion } from 'framer-motion'
+import { MenuButton } from '@components/button'
 import Link from 'next/link'
 import { MobileNavigation } from '@components/mobile-navigation'
 import { DesktopNavigation } from '@components/desktop-navigation'
-import { Modal } from '@components/modal'
 import { styled } from '@theme/stitches.config'
 import { Box, Container, Flex, Logo } from '@theme/atoms'
 import { LayoutContext } from '@components/layout/src/layoutContext'
@@ -12,6 +11,7 @@ import { QuoteButton } from '@components/quoteButton'
 interface HeaderMainProps {
   show?: boolean
 }
+import { useRouter } from 'next/router'
 
 const HeaderOuter = styled('div', {
   position: 'fixed',
@@ -71,17 +71,20 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
   ({ show, ...props }, ref) => {
     const [menuIsOpen, setMenuIsOpen] = useState(false)
     const { toggleScrollLock } = useContext(LayoutContext)
-    const [modalIsOpen, toggleModalIsOpen] = useCycle(false, true)
+    const router = useRouter()
 
-    function toggleMenu() {
+    function handleMenuClick(e?: React.MouseEvent) {
+      e?.preventDefault()
       toggleScrollLock()
       setMenuIsOpen(!menuIsOpen)
     }
 
-    async function toggleQuoteModal(e: React.MouseEvent) {
-      e.preventDefault()
-      toggleModalIsOpen()
-    }
+    //close the menu if the route changes (navigating within dynmic links would leave it open)
+    useEffect(() => {
+      if (menuIsOpen) {
+        handleMenuClick()
+      }
+    }, [router])
 
     return (
       <HeaderOuter
@@ -132,17 +135,18 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
                   open={menuIsOpen}
                   aria-expanded={menuIsOpen}
                   aria-controls="drawer-menu"
-                  onClick={(e) => {
-                    e.preventDefault()
-                    toggleMenu()
-                  }}
+                  onClick={handleMenuClick}
                   css={{ py: '$2', ml: '$3', '@l': { display: 'none' } }}
                 />
               </Flex>
             </NavContainer>
           </Container>
           <Box as={motion.div} css={{ '@l': { display: 'none' } }} layout>
-            <MobileNavigation id="drawer-menu" navIsOpen={menuIsOpen} />
+            <MobileNavigation
+              id="drawer-menu"
+              navIsOpen={menuIsOpen}
+              toggleNav={handleMenuClick}
+            />
           </Box>
         </Header>
       </HeaderOuter>
