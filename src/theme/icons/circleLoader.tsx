@@ -1,3 +1,4 @@
+import { Icon } from '@theme/icons/icon'
 import { styled } from '@theme/stitches.config'
 import {
   animate,
@@ -11,7 +12,6 @@ export interface CircleLoaderProps {
   progress?: MotionValue
 }
 
-const Svg = styled('svg', {})
 const ProgressCircle = styled(motion.circle, {
   stroke: '$white',
 })
@@ -30,21 +30,25 @@ export const CircleLoader: React.FC<CircleLoaderProps> = ({
     }
   }, [])
   return (
-    <Svg
+    <Icon
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       <BackgroundCircle cx="12" cy="12" r="10" strokeWidth="4" />
+
       <ProgressCircle
         cx="12"
         cy="12"
         r="10"
         strokeWidth="4"
         strokeDasharray="0 1"
-        style={{ pathLength: 0.25, pathOffset: progressValue }}
+        style={{
+          strokeDashArray: '0.25 0.75',
+          strokeDashOffset: progressValue,
+        }}
       />
-    </Svg>
+    </Icon>
   )
 }

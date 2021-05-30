@@ -2,17 +2,15 @@ import { forwardRef } from 'react'
 import { styled, theme, CSS } from '@theme/stitches.config'
 import { toCamelCase } from '@utils/src/text-transforms'
 
-export interface IconProps {
+export interface IconProps extends React.ComponentProps<typeof Svg> {
   viewBox?: string
   color?: string | keyof typeof theme['colors']
   size?: string | keyof typeof theme['sizes']
   focusable?: boolean
-  css?: CSS
   role?: string
   title?: string
   description?: string
   displayName?: string
-  as?: unknown
   [a: string]: any
 }
 export const Svg = styled('svg', {

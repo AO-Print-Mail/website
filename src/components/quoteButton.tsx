@@ -1,3 +1,4 @@
+import { CircleLoader } from '@theme/icons/circleLoader'
 import { Button } from './button'
 import { Modal } from './modal/src/modal'
 import { TempQuoteForm as QuoteForm } from './temp-quote-form'

@@ -15,7 +15,7 @@ import * as yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import MaskedInput from 'react-text-mask'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { encode } from '@lib/netlify/utils'
 import { Button } from '@components/button'
 import { AnimatePresence, m as motion } from 'framer-motion'
@@ -23,7 +23,9 @@ import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useStateMachine } from 'little-state-machine'
 import { FormSuccess } from '@components/notifications/confirmations/formSuccess'
-import { CircleLoader } from '@theme/atoms/CircleLoader'
+import { CircleLoader } from '@theme/icons/circleLoader'
+import { check } from 'prettier'
+import { useEffect } from 'react'
 
 const WorkaroundForm = dynamic(() =>
   import('@components/netlify-workaraound-form').then(
@@ -75,6 +77,17 @@ const mobileMask = [
   /\d/,
 ]
 
+const submissionMessages = {
+  heading: {
+    success: 'Thanks for your message!',
+    error: 'There was a problem sending your submission',
+  },
+  paragraph: {
+    success: `We'll get back to you very soon`,
+    error: `Please try again, or email us at info@aomail.com.au`,
+  },
+}
+
 const Background = styled(Card, {
   boxShadow: '$1',
   px: '$4',
@@ -95,17 +108,11 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
   })
 
   const router = useRouter()
-  const SuccessBackground = styled(Background, {
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    bottom: '0',
-    left: '0',
-    background: '$green',
-    zIndex: '$3',
-  })
   const [submitting, setSubmitting] = useState(false)
-  const [firstName, setFirstname] = useState('')
+  const [submission, setSubmission] = useState({
+    result: 'error',
+    message: null,
+  })
 
   const {
     state: { userData },
@@ -113,45 +120,58 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
 
   const onSubmit = (data: typeof inputs) => {
     setSubmitting(true)
-    setFirstname(data.firstName)
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': FORM_NAME, ...data, ...userData }),
     })
       .then(() => {
+        setSubmission({ result: 'success', message: 'null' })
         router.push(
           {
             pathname: router.pathname,
-            query: { success: 'true', ...router.query },
+            query: { submission: 'success', ...router.query },
           },
           null,
           { shallow: true }
         )
       })
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        setSubmission({ result: 'error', message: error }), console.error(error)
+        router.push(
+          {
+            pathname: router.pathname,
+            query: { submission: 'error', ...router.query },
+          },
+          null,
+          { shallow: true }
+        )
+      })
       .finally(() => {
-        const { success, ...queries } = router.query
         setSubmitting(false)
         reset()
-        // setTimeout(router.push, 4000, {
-        //   pathname: router.pathname,
-        //   query: queries,
-        // })
       })
   }
+
+  function removeSubmissionState(e?: React.MouseEvent) {
+    const { submission: subm, ...queries } = router.query
+    router.push({ pathname: router.pathname, query: queries }, null, {
+      shallow: true,
+    })
+    setSubmission({
+      result: null,
+      message: null,
+    })
+  }
+  // useEffect(() => {
+  //   if (router?.query?.submission && !submission.result) {
+  //     removeSubmissionState()
+  //   }
+  // }, [router])
 
   const { ref: phoneRef, ...phoneFormProps } = register('phone')
   return (
     <Background {...props}>
-      <AnimatePresence>
-        {router.query['success'] && (
-          <FormSuccess
-            heading="Thanks for your message!"
-            paragraph="We'll get back to you very soon."
-          />
-        )}
-      </AnimatePresence>
       <Heading2 marginTop="small" level="4">
         Send a message
       </Heading2>
@@ -260,17 +280,21 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             <input tabIndex={-1} {...register('bot-field')} />
           </label>
         </p>
-        <Button
-          fullWidth
-          size="cta"
-          isLoading={submitting}
-          type="submit"
-          rightIcon={<CircleLoader />}
-        >
+        <Button fullWidth size="cta" isLoading={submitting} type="submit">
           Send Message
         </Button>
       </form>
       <WorkaroundForm formFields={inputs} name={FORM_NAME} />
+      <AnimatePresence>
+        {submission.result && (
+          <FormSuccess
+            heading={submissionMessages.heading?.[submission.result]}
+            paragraph={submissionMessages.paragraph?.[submission.result]}
+            handleClose={removeSubmissionState}
+            error={submission.result === 'error'}
+          />
+        )}
+      </AnimatePresence>
     </Background>
   )
 }

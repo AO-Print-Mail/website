@@ -1,23 +1,30 @@
 import { Box, Flex, ProgressBar, Spacer } from '@theme/atoms'
-import { Close, SuccessCheck } from '@theme/icons'
+import { Close, ErrorCheck, SuccessCheck } from '@theme/icons'
 import { Variants, m as motion, useMotionValue, animate } from 'framer-motion'
 import { styled } from '@theme/stitches.config'
 import { Paragraph } from '@theme/typography'
 import { Button } from '@components/button'
 import React, { useEffect } from 'react'
-import { CircleLoader } from '@theme/atoms/CircleLoader'
 
 export interface FormSuccessProps {
   heading: string
   paragraph: string
   handleClose: (e?: React.MouseEvent) => void
+  error?: boolean
 }
 
 const ParentAnimationVariants: Variants = {
-  hidden: { opacity: 0 },
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: 'afterChildren',
+      staggerChildren: 0.2,
+      staggerDirection: -1,
+    },
+  },
   visible: {
     opacity: 1,
-    transition: { when: 'beforeChildren', staggerChildren: 0.5 },
+    transition: { when: 'beforeChildren', staggerChildren: 0.4 },
   },
 }
 const ChildAnimationVariants: Variants = {
@@ -29,6 +36,7 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({
   heading,
   paragraph,
   handleClose,
+  error,
   ...props
 }) => {
   const progress = useMotionValue(0)
@@ -37,40 +45,40 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({
     handleClose(e)
   }
   useEffect(() => {
-    animate(progress, 100, { duration: 4, onComplete: handleClose })
+    !error && animate(progress, 100, { duration: 4, onComplete: handleClose })
   }, [])
   return (
     <Flex
       as={motion.div}
       initial="hidden"
       animate="visible"
+      exit="hidden"
       variants={ParentAnimationVariants}
       css={{
         height: '100%',
         alignItems: 'center',
         flexDirection: 'column',
         width: '100%',
-        p: '$4',
-        position: 'relative',
+        p: '$6',
+        background: '$white',
+        position: 'absolute',
+        tlbr: '0',
       }}
     >
-      <ProgressBar
-        css={{
-          position: 'absolute',
-          lbr: '0',
-          br: 0,
-          '&.*': {
-            br: '0',
-          },
-        }}
-        progress={progress}
-      />
-      <SuccessCheck
-        css={{ size: '$9' }}
-        as={motion.svg}
-        variants={ChildAnimationVariants}
-      />
-      <Box css={{ pb: '$4' }}>
+      {error ? (
+        <ErrorCheck
+          css={{ size: '$9', flex: '0 0 auto' }}
+          as={motion.svg}
+          variants={ChildAnimationVariants}
+        />
+      ) : (
+        <SuccessCheck
+          css={{ size: '$9', flex: '0 0 auto' }}
+          as={motion.svg}
+          variants={ChildAnimationVariants}
+        />
+      )}
+      <Box css={{ pb: '$4', flex: '1 1 auto' }}>
         <Paragraph
           alignCenter
           size="l"
@@ -87,17 +95,23 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({
         >
           {paragraph}
         </Paragraph>
+        {error && (
+          <Button
+            css={{ display: 'block', mx: 'auto', mt: '$6' }}
+            onClick={handleClose}
+          >
+            Close
+          </Button>
+        )}
       </Box>
-      <Button
-        rightIcon={<CircleLoader />}
-        as={motion.button}
-        onClick={handleClick}
-        variants={ChildAnimationVariants}
-      >
-        Close
-      </Button>
-      <Spacer size="large" />
-      <Spacer size="large" />
+      {!error && (
+        <ProgressBar
+          css={{
+            alignSelf: 'stretch',
+          }}
+          progress={progress}
+        />
+      )}
     </Flex>
   )
 }
