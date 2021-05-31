@@ -142,11 +142,7 @@ export const HeaderMain = forwardRef<HTMLDivElement, HeaderMainProps>(
             </NavContainer>
           </Container>
           <Box as={motion.div} css={{ '@l': { display: 'none' } }} layout>
-            <MobileNavigation
-              id="drawer-menu"
-              navIsOpen={menuIsOpen}
-              toggleNav={handleMenuClick}
-            />
+            <MobileNavigation id="drawer-menu" navIsOpen={menuIsOpen} />
           </Box>
         </Header>
       </HeaderOuter>
