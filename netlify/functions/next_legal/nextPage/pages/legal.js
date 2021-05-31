@@ -147,7 +147,7 @@ const FormSuccess = (_ref) => {
 
 /***/ }),
 
-/***/ 15320:
+/***/ 20494:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 
@@ -182,8 +182,75 @@ var AnimatePresence = __webpack_require__(53869);
 var next_router = __webpack_require__(11163);
 // EXTERNAL MODULE: ./node_modules/little-state-machine/dist/little-state-machine.js
 var little_state_machine = __webpack_require__(11240);
-// EXTERNAL MODULE: ./src/components/modal/src/layout.tsx
-var layout = __webpack_require__(21893);
+// EXTERNAL MODULE: ./src/theme/atoms/index.ts
+var atoms = __webpack_require__(34176);
+// EXTERNAL MODULE: ./src/theme/stitches.config.ts + 5 modules
+var stitches_config = __webpack_require__(54944);
+// EXTERNAL MODULE: ./node_modules/framer-motion/dist/es/render/dom/motion-minimal.js + 20 modules
+var motion_minimal = __webpack_require__(49772);
+;// CONCATENATED MODULE: ./src/components/modal/src/layout.tsx
+
+
+
+
+
+
+const ContentWrapper = (0,stitches_config/* styled */.zo)(atoms/* TextHolder */.L5, {
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'stretch',
+  zIndex: '$3',
+  overflow: 'hidden'
+});
+const borderMotionVariants = {
+  visible: {
+    opacity: 1,
+    y: 0
+  },
+  hidden: {
+    opacity: 0,
+    y: 48
+  }
+};
+const ModalLayout = ({
+  controls,
+  main,
+  hideControlsBorder,
+  children
+}) => {
+  return /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
+    children: [controls && /*#__PURE__*/jsx_runtime.jsx(atoms/* TextHolder */.L5, {
+      padX: "xLarge",
+      padY: "default",
+      css: {
+        flex: '0 0 auto',
+        py: '$2',
+        '@m': {
+          py: '$3'
+        }
+      },
+      children: controls
+    }), controls && !hideControlsBorder && /*#__PURE__*/jsx_runtime.jsx(atoms/* Border */.OC, {
+      as: motion_minimal.m.span,
+      inherit: true,
+      "aria-hidden": true,
+      intial: "hidden",
+      animate: "visible",
+      exit: "hidden",
+      css: {
+        position: 'relative'
+      },
+      variants: borderMotionVariants
+    }), (main || children) && /*#__PURE__*/jsx_runtime.jsx(ContentWrapper, {
+      padX: "xLarge",
+      padY: "default",
+      css: {
+        flex: '1 1 auto'
+      },
+      children: main || children
+    })]
+  });
+};
 // EXTERNAL MODULE: ./src/components/notifications/confirmations/formSuccess.tsx
 var formSuccess = __webpack_require__(25673);
 ;// CONCATENATED MODULE: ./src/components/temp-quote-form/src/temp-quote-form.tsx
@@ -377,7 +444,7 @@ const TempQuoteForm = (_ref) => {
   } = _register,
         phoneFormProps = _objectWithoutProperties(_register, ["ref"]);
 
-  return /*#__PURE__*/jsx_runtime.jsx(layout/* ModalLayout */.P, {
+  return /*#__PURE__*/jsx_runtime.jsx(ModalLayout, {
     hideControlsBorder: true,
     controls: /*#__PURE__*/jsx_runtime.jsx(theme/* CloseControls */.wY, {
       handleClose: toggle
@@ -627,7 +694,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_link_card__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(80662);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(11163);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(67294);
-/* harmony import */ var _components_temp_quote_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(15320);
+/* harmony import */ var _components_temp_quote_form__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(20494);
 /* harmony import */ var next_dynamic__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(5152);
 
 
@@ -845,7 +912,7 @@ async function getStaticProps({
 
 /***/ }),
 
-/***/ 46668:
+/***/ 48347:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -938,11 +1005,11 @@ __webpack_require__.r(__webpack_exports__);
         rewrites: combinedRewrites,
         i18n: undefined,
         page: "/legal",
-        buildId: "5QM5N7MyeaFl-_82uHmZ2",
-        escapedBuildId: "5QM5N7MyeaFl\-_82uHmZ2",
+        buildId: "UkD_Cs6c4nTMyvVdMGNko",
+        escapedBuildId: "UkD_Cs6c4nTMyvVdMGNko",
         basePath: "",
         pageIsDynamic: false,
-        encodedPreviewProps: {previewModeId:"f42222999b849f86cc87e7417a938051",previewModeSigningKey:"2e7f3773ced62b40245dfeb5f8f1cd4e7bf9e415939ba9b4e028fecfcfeba52d",previewModeEncryptionKey:"2e5354f0133facdf3c2efe566b23365a4bb13bd3f7f400b187d7866b68e3f540"}
+        encodedPreviewProps: {previewModeId:"f4be9476d949992a880ef02a282f89b7",previewModeSigningKey:"803bd9ffc92d4f65c1d7aaa60c1ce64966ff936e8f6bf0db898c19bbd6022629",previewModeEncryptionKey:"2926eb1e303ac195eac94257bb89d2ea25feb676007948f0b73b94f17976a033"}
       })
       
     
@@ -1124,7 +1191,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,6071,8697,269,1428,3473,5252,9566,7522,5596,7589,1587,4090,3239,2749,9286,3355], function() { return __webpack_require__(46668); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,6071,8697,269,1428,3473,2317,9566,7522,5596,7589,1587,4090,3239,2749,9286,3355], function() { return __webpack_require__(48347); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -1277,7 +1344,7 @@ module.exports = require("zlib");;
 /******/ 		// "1" means "loaded", otherwise not loaded yet
 /******/ 		var installedChunks = {
 /******/ 			3270: 1,
-/******/ 			5320: 1
+/******/ 			494: 1
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.O.require = function(chunkId) { return installedChunks[chunkId]; };
@@ -1325,7 +1392,7 @@ module.exports = require("zlib");;
 /******/ 			__webpack_require__.e(269);
 /******/ 			__webpack_require__.e(1428);
 /******/ 			__webpack_require__.e(3473);
-/******/ 			__webpack_require__.e(5252);
+/******/ 			__webpack_require__.e(2317);
 /******/ 			__webpack_require__.e(9566);
 /******/ 			__webpack_require__.e(7522);
 /******/ 			__webpack_require__.e(5596);

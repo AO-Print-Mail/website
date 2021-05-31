@@ -230,7 +230,7 @@ async function getStaticProps({
 
 /***/ }),
 
-/***/ 34330:
+/***/ 71886:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -323,11 +323,11 @@ __webpack_require__.r(__webpack_exports__);
         rewrites: combinedRewrites,
         i18n: undefined,
         page: "/blog/[slug]",
-        buildId: "5QM5N7MyeaFl-_82uHmZ2",
-        escapedBuildId: "5QM5N7MyeaFl\-_82uHmZ2",
+        buildId: "UkD_Cs6c4nTMyvVdMGNko",
+        escapedBuildId: "UkD_Cs6c4nTMyvVdMGNko",
         basePath: "",
         pageIsDynamic: true,
-        encodedPreviewProps: {previewModeId:"f42222999b849f86cc87e7417a938051",previewModeSigningKey:"2e7f3773ced62b40245dfeb5f8f1cd4e7bf9e415939ba9b4e028fecfcfeba52d",previewModeEncryptionKey:"2e5354f0133facdf3c2efe566b23365a4bb13bd3f7f400b187d7866b68e3f540"}
+        encodedPreviewProps: {previewModeId:"f4be9476d949992a880ef02a282f89b7",previewModeSigningKey:"803bd9ffc92d4f65c1d7aaa60c1ce64966ff936e8f6bf0db898c19bbd6022629",previewModeEncryptionKey:"2926eb1e303ac195eac94257bb89d2ea25feb676007948f0b73b94f17976a033"}
       })
       
     
@@ -509,7 +509,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,5026,3735,5172,1428,3473,5252,9566,5320,3608,7522,7615,7589,1587,6895,7289,3902,1930], function() { return __webpack_require__(34330); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,5026,3735,5172,1428,3473,2317,9566,494,3608,7522,7615,7589,1587,6895,7289,3902,1930], function() { return __webpack_require__(71886); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -711,9 +711,9 @@ module.exports = require("zlib");;
 /******/ 			__webpack_require__.e(5172);
 /******/ 			__webpack_require__.e(1428);
 /******/ 			__webpack_require__.e(3473);
-/******/ 			__webpack_require__.e(5252);
+/******/ 			__webpack_require__.e(2317);
 /******/ 			__webpack_require__.e(9566);
-/******/ 			__webpack_require__.e(5320);
+/******/ 			__webpack_require__.e(494);
 /******/ 			__webpack_require__.e(3608);
 /******/ 			__webpack_require__.e(7522);
 /******/ 			__webpack_require__.e(7615);

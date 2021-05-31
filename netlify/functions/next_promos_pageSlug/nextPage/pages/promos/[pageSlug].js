@@ -156,7 +156,7 @@ function deleteQuote(state, payload) {
 
 /***/ }),
 
-/***/ 5035:
+/***/ 8844:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -178,10 +178,10 @@ var datocms = __webpack_require__(12660);
 var theme = __webpack_require__(38135);
 // EXTERNAL MODULE: ./src/components/layout/index.ts + 9 modules
 var layout = __webpack_require__(33801);
-// EXTERNAL MODULE: ./src/components/client-logo-banner/src/client-logo-banner.tsx + 1 modules
-var client_logo_banner = __webpack_require__(72444);
-// EXTERNAL MODULE: ./src/components/reviews-io-widget/src/reviews-io-widget.tsx
-var reviews_io_widget = __webpack_require__(86858);
+// EXTERNAL MODULE: ./src/components/client-logo-banner/index.ts + 2 modules
+var client_logo_banner = __webpack_require__(87115);
+// EXTERNAL MODULE: ./src/components/reviews-io-widget/index.ts + 1 modules
+var reviews_io_widget = __webpack_require__(28148);
 // EXTERNAL MODULE: ./src/lib/datocms/structuredText.tsx
 var structuredText = __webpack_require__(36330);
 // EXTERNAL MODULE: ./node_modules/next/link.js
@@ -376,6 +376,8 @@ const Wrapper = (_ref) => {
 };
 // EXTERNAL MODULE: ./src/components/modal/src/modal.tsx
 var modal = __webpack_require__(95778);
+;// CONCATENATED MODULE: ./src/components/modal/index.ts
+
 // EXTERNAL MODULE: ./src/components/landing-page-quote-form/src/bottomBarControls.tsx
 var bottomBarControls = __webpack_require__(86562);
 ;// CONCATENATED MODULE: ./src/components/quote-form-direct-mail/src/intro.tsx
@@ -1342,7 +1344,7 @@ const toCamelCase = str => str.replace(/(?:^\w|[A-Z]|\b\w)/g, (ltr, idx) => idx 
 
 /***/ }),
 
-/***/ 21745:
+/***/ 91438:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1385,7 +1387,7 @@ __webpack_require__.r(__webpack_exports__);
       const appMod = __webpack_require__(77370)
       let App = appMod.default || appMod.then && appMod.then(mod => mod.default);
 
-      const compMod = __webpack_require__(5035)
+      const compMod = __webpack_require__(8844)
 
       const Component = compMod.default || compMod.then && compMod.then(mod => mod.default)
       /* harmony default export */ __webpack_exports__["default"] = (Component);
@@ -1436,11 +1438,11 @@ __webpack_require__.r(__webpack_exports__);
         rewrites: combinedRewrites,
         i18n: undefined,
         page: "/promos/[pageSlug]",
-        buildId: "5QM5N7MyeaFl-_82uHmZ2",
-        escapedBuildId: "5QM5N7MyeaFl\-_82uHmZ2",
+        buildId: "UkD_Cs6c4nTMyvVdMGNko",
+        escapedBuildId: "UkD_Cs6c4nTMyvVdMGNko",
         basePath: "",
         pageIsDynamic: true,
-        encodedPreviewProps: {previewModeId:"f42222999b849f86cc87e7417a938051",previewModeSigningKey:"2e7f3773ced62b40245dfeb5f8f1cd4e7bf9e415939ba9b4e028fecfcfeba52d",previewModeEncryptionKey:"2e5354f0133facdf3c2efe566b23365a4bb13bd3f7f400b187d7866b68e3f540"}
+        encodedPreviewProps: {previewModeId:"f4be9476d949992a880ef02a282f89b7",previewModeSigningKey:"803bd9ffc92d4f65c1d7aaa60c1ce64966ff936e8f6bf0db898c19bbd6022629",previewModeEncryptionKey:"2926eb1e303ac195eac94257bb89d2ea25feb676007948f0b73b94f17976a033"}
       })
       
     
@@ -1641,7 +1643,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7099,5026,3735,108,1428,3473,5252,5320,3608,7522,5596,7615,7589,1587,77,2444,7289,6858], function() { return __webpack_require__(21745); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7099,5026,3735,108,1428,3473,2317,494,3608,7522,5596,7615,7589,1587,77,7115,7289,8148], function() { return __webpack_require__(91438); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -1842,8 +1844,8 @@ module.exports = require("zlib");;
 /******/ 			__webpack_require__.e(108);
 /******/ 			__webpack_require__.e(1428);
 /******/ 			__webpack_require__.e(3473);
-/******/ 			__webpack_require__.e(5252);
-/******/ 			__webpack_require__.e(5320);
+/******/ 			__webpack_require__.e(2317);
+/******/ 			__webpack_require__.e(494);
 /******/ 			__webpack_require__.e(3608);
 /******/ 			__webpack_require__.e(7522);
 /******/ 			__webpack_require__.e(5596);
@@ -1851,9 +1853,9 @@ module.exports = require("zlib");;
 /******/ 			__webpack_require__.e(7589);
 /******/ 			__webpack_require__.e(1587);
 /******/ 			__webpack_require__.e(77);
-/******/ 			__webpack_require__.e(2444);
+/******/ 			__webpack_require__.e(7115);
 /******/ 			__webpack_require__.e(7289);
-/******/ 			__webpack_require__.e(6858);
+/******/ 			__webpack_require__.e(8148);
 /******/ 			return next();
 /******/ 		};
 /******/ 	}();

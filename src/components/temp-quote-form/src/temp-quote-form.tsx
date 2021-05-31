@@ -107,6 +107,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<typeof tempQuoteFormInputs>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
@@ -122,6 +123,14 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
   const {
     state: { userData },
   } = useStateMachine({})
+
+  const watchService = watch('service')
+
+  useEffect(() => {
+    if (window && watchService) {
+      window.dataLayer.push({ service: watchService })
+    }
+  }, [watchService])
 
   const onSubmit = (data: typeof tempQuoteFormInputs) => {
     setSubmitting(true)
