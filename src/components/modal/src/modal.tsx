@@ -23,6 +23,7 @@ interface QuoteFormProps extends ModalProps {
 
 export const Modal: React.FC<QuoteFormProps> = ({
   width,
+  height,
   opens,
   children,
   layoutId,
@@ -47,7 +48,7 @@ export const Modal: React.FC<QuoteFormProps> = ({
       {children({ modalIsOpen, toggleModal })}
       <AnimatePresence>
         {modalIsOpen && (
-          <ModalBody width {...modalProps}>
+          <ModalBody width={width} height={height} {...modalProps}>
             {opens({ modalIsOpen, toggleModal })}
           </ModalBody>
         )}

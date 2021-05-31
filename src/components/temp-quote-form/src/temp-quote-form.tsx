@@ -7,7 +7,6 @@ import {
   classes,
   TextArea,
   InputLabel,
-  Paragraph,
   Heading2,
   RadioButton,
   CloseControls,
@@ -16,10 +15,10 @@ import * as yup from 'yup'
 import { useForm } from 'react-hook-form'
 import MaskedInput from 'react-text-mask'
 import { yupResolver } from '@hookform/resolvers/yup'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { encode } from '@lib/netlify/utils'
 import { Button } from '@components/button'
-import { m as motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useStateMachine } from 'little-state-machine'
@@ -34,12 +33,15 @@ const WorkaroundForm = dynamic(
   { ssr: false }
 )
 
-const FORM_NAME = 'tempQuoteForm'
+const FORM_NAME = 't_request-quote'
 
 interface TempQuoteFormProps {
   toggle: (e: React.MouseEvent) => void
   modalLayoutId?: string
   active: boolean
+
+  onSubmissionComplete?: () => void
+  onSubmissionClose?: () => void
 }
 
 const inputs = {
@@ -88,12 +90,25 @@ const mobileMask = [
   /\d/,
 ]
 
+const submissionMessages = {
+  heading: {
+    success: 'Your quote request was sent!',
+    error: 'There was a problem sending your quote request',
+  },
+  paragraph: {
+    success: `Thank so much for requesting a quote. A team member will be in touch with you very soon to confirm the details of your brief. We aim to provide a quote within 4 hours.`,
+    error: `Please try again, or email us at sales@aomail.com.au`,
+  },
+}
+
 const Background = styled('div', {})
 
 export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
   toggle,
   modalLayoutId,
   active,
+  onSubmissionClose,
+  onSubmissionComplete,
   ...props
 }) => {
   const {
@@ -106,16 +121,12 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
     mode: 'onBlur',
   })
   const router = useRouter()
-  const SuccessBackground = styled(Background, {
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    bottom: '0',
-    left: '0',
-    zIndex: '$3',
-  })
   const [submitting, setSubmitting] = useState(false)
-  const [firstName, setFirstname] = useState('')
+  const [submission, setSubmission] = useState({
+    result: null,
+    message: null,
+    form: FORM_NAME,
+  })
 
   const {
     state: { userData },
@@ -123,28 +134,65 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
 
   const onSubmit = (data: typeof inputs) => {
     setSubmitting(true)
-    setFirstname(data.firstName)
     fetch('/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: encode({ 'form-name': FORM_NAME, ...data, ...userData }),
     })
       .then(() => {
+        setSubmission({ result: 'success', message: 'null', form: FORM_NAME })
         router.push(
           {
             pathname: router.pathname,
-            query: { success: 'true', ...router.query },
+            query: {
+              submission: 'success',
+              form: submission.form,
+              ...router.query,
+            },
           },
           null,
           { shallow: true }
         )
       })
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        setSubmission({ result: 'error', message: error, form: FORM_NAME }),
+          console.error(error)
+        router.push(
+          {
+            pathname: router.pathname,
+            query: {
+              submission: 'error',
+              form: submission.form,
+              ...router.query,
+            },
+          },
+          null,
+          { shallow: true }
+        )
+      })
       .finally(() => {
+        onSubmissionComplete()
         setSubmitting(false)
         reset()
       })
   }
+  function removeSubmissionState(e?: React.MouseEvent) {
+    const { form, submission: subm, ...queries } = router.query
+    router.push({ pathname: router.pathname, query: queries }, null, {
+      shallow: true,
+    })
+    setSubmission({
+      result: null,
+      message: null,
+      form: FORM_NAME,
+    })
+    onSubmissionClose()
+  }
+  useEffect(() => {
+    if (router?.query?.submission && !submission.result) {
+      removeSubmissionState()
+    }
+  }, [router])
   const { ref: phoneRef, ...phoneFormProps } = register('phone')
   return (
     <ModalLayout
@@ -152,12 +200,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
       controls={<CloseControls handleClose={toggle} />}
     >
       <Background {...props}>
-        {router.query['success'] && (
-          <FormSuccess
-            heading="Thanks for your message!"
-            paragraph="We'll get back to you very soon."
-          />
-        )}
         <Heading2 marginTop="small" level="4">
           Request a quote
         </Heading2>
@@ -346,6 +388,16 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
           </Button>
         </form>
         <WorkaroundForm formFields={inputs} name={FORM_NAME} />
+        <AnimatePresence>
+          {submission.result && (
+            <FormSuccess
+              heading={submissionMessages.heading?.[submission.result]}
+              paragraph={submissionMessages.paragraph?.[submission.result]}
+              handleClose={removeSubmissionState}
+              error={submission.result === 'error'}
+            />
+          )}
+        </AnimatePresence>
       </Background>
     </ModalLayout>
   )

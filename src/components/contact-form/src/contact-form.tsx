@@ -8,7 +8,6 @@ import {
   classes,
   TextArea,
   InputLabel,
-  Paragraph,
   Heading2,
 } from '@theme'
 import * as yup from 'yup'
@@ -18,13 +17,11 @@ import MaskedInput from 'react-text-mask'
 import React, { useState } from 'react'
 import { encode } from '@lib/netlify/utils'
 import { Button } from '@components/button'
-import { AnimatePresence, m as motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useStateMachine } from 'little-state-machine'
 import { FormSuccess } from '@components/notifications/confirmations/formSuccess'
-import { CircleLoader } from '@theme/icons/circleLoader'
-import { check } from 'prettier'
 import { useEffect } from 'react'
 
 const WorkaroundForm = dynamic(() =>
@@ -110,8 +107,9 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
   const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
   const [submission, setSubmission] = useState({
-    result: 'error',
+    result: null,
     message: null,
+    form: FORM_NAME,
   })
 
   const {
@@ -126,22 +124,31 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
       body: encode({ 'form-name': FORM_NAME, ...data, ...userData }),
     })
       .then(() => {
-        setSubmission({ result: 'success', message: 'null' })
+        setSubmission({ result: 'success', message: 'null', form: FORM_NAME })
         router.push(
           {
             pathname: router.pathname,
-            query: { submission: 'success', ...router.query },
+            query: {
+              submission: 'success',
+              form: submission.form,
+              ...router.query,
+            },
           },
           null,
           { shallow: true }
         )
       })
       .catch((error) => {
-        setSubmission({ result: 'error', message: error }), console.error(error)
+        setSubmission({ result: 'error', message: error, form: FORM_NAME }),
+          console.error(error)
         router.push(
           {
             pathname: router.pathname,
-            query: { submission: 'error', ...router.query },
+            query: {
+              submission: 'error',
+              form: submission.form,
+              ...router.query,
+            },
           },
           null,
           { shallow: true }
@@ -154,20 +161,21 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
   }
 
   function removeSubmissionState(e?: React.MouseEvent) {
-    const { submission: subm, ...queries } = router.query
+    const { form, submission: subm, ...queries } = router.query
     router.push({ pathname: router.pathname, query: queries }, null, {
       shallow: true,
     })
     setSubmission({
       result: null,
       message: null,
+      form: FORM_NAME,
     })
   }
-  // useEffect(() => {
-  //   if (router?.query?.submission && !submission.result) {
-  //     removeSubmissionState()
-  //   }
-  // }, [router])
+  useEffect(() => {
+    if (router?.query?.submission && !submission.result) {
+      removeSubmissionState()
+    }
+  }, [router])
 
   const { ref: phoneRef, ...phoneFormProps } = register('phone')
   return (

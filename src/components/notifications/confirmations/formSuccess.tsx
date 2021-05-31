@@ -78,7 +78,7 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({
           variants={ChildAnimationVariants}
         />
       )}
-      <Box css={{ pb: '$4', flex: '1 1 auto' }}>
+      <Box css={{ pb: '$4', flex: '1 1 640px', maxWidth: '640px' }}>
         <Paragraph
           alignCenter
           size="l"

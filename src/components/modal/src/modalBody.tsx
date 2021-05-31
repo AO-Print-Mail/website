@@ -59,6 +59,9 @@ const ModalWrapper = styled('div', {
         },
         '@xl': { height: '768px' },
       },
+      fitContent: {
+        height: 'auto',
+      },
     },
 
     width: {
@@ -94,6 +97,7 @@ const ModalWrapper = styled('div', {
   },
   defaultVariants: {
     width: 'full',
+    height: 'fitContent',
   },
 })
 
@@ -133,6 +137,7 @@ export const ModalBody: React.FC<ModalProps> = ({
   toggle,
   mobileWidth,
   width,
+  height,
   showCloseButton = false,
   main,
   controls,
@@ -212,6 +217,7 @@ export const ModalBody: React.FC<ModalProps> = ({
                   mobileWidth={mobileWidth}
                   onClick={stopPropagationOnClick}
                   width={width}
+                  height={height}
                   {...wpAnimations}
                   {...props}
                 >
