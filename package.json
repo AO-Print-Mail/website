@@ -54,10 +54,10 @@
     "unified-stream": "^1.0.6",
     "uuid": "^8.3.2",
     "yarn": "^1.22.10",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "node-plop": "^0.26.2"
   },
   "devDependencies": {
-    "node-plop": "^0.26.2",
     "@babel/core": "^7.12.13",
     "@graphql-codegen/cli": "^1.20.1",
     "@graphql-codegen/schema-ast": "^1.18.1",
