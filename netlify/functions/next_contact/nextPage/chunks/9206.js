@@ -75,6 +75,9 @@ const ModalWrapper = (0,_theme__WEBPACK_IMPORTED_MODULE_3__/* .styled */ .zo)('d
         '@xl': {
           height: '768px'
         }
+      },
+      fitContent: {
+        height: 'auto'
       }
     },
     width: {
@@ -125,7 +128,8 @@ const ModalWrapper = (0,_theme__WEBPACK_IMPORTED_MODULE_3__/* .styled */ .zo)('d
     }
   },
   defaultVariants: {
-    width: 'full'
+    width: 'full',
+    height: 'fitContent'
   }
 });
 const backdropMotionVariants = {
@@ -172,12 +176,13 @@ const ModalBody = (_ref) => {
     toggle,
     mobileWidth,
     width,
+    height,
     showCloseButton = false,
     main,
     controls,
     hideControlsBorder
   } = _ref,
-      props = _objectWithoutProperties(_ref, ["layoutId", "children", "toggle", "mobileWidth", "width", "showCloseButton", "main", "controls", "hideControlsBorder"]);
+      props = _objectWithoutProperties(_ref, ["layoutId", "children", "toggle", "mobileWidth", "width", "height", "showCloseButton", "main", "controls", "hideControlsBorder"]);
 
   const backDropControls = (0,framer_motion__WEBPACK_IMPORTED_MODULE_5__/* .useAnimation */ ._)();
   const closeButtonControls = (0,framer_motion__WEBPACK_IMPORTED_MODULE_5__/* .useAnimation */ ._)();
@@ -248,7 +253,8 @@ const ModalBody = (_ref) => {
                 as: framer_motion__WEBPACK_IMPORTED_MODULE_4__.m.div,
                 mobileWidth: mobileWidth,
                 onClick: stopPropagationOnClick,
-                width: width
+                width: width,
+                height: height
               }, wpAnimations), props), {}, {
                 children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(ModalBackground, _objectSpread(_objectSpread({
                   as: framer_motion__WEBPACK_IMPORTED_MODULE_4__.m.div,

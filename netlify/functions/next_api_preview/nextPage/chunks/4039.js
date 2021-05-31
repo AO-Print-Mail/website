@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(85893);
 /* harmony import */ var _theme_utils_utilityClasses__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(35222);
-/* harmony import */ var little_state_machine__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(11240);
+/* harmony import */ var _lib_little_state_machine_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(94138);
 
 
 
@@ -26,18 +26,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 const NetlifyWorkaroundForm = ({
   formFields,
-  name
+  name,
+  withUserData = true
 }) => {
-  const {
-    state: {
-      userData
-    }
-  } = (0,little_state_machine__WEBPACK_IMPORTED_MODULE_2__/* .useStateMachine */ .j_)({});
+  const fields = withUserData ? _objectSpread(_objectSpread({}, formFields), _lib_little_state_machine_store__WEBPACK_IMPORTED_MODULE_2__/* .store.userData */ .h.userData) : formFields;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", {
     method: "POST",
     "data-netlify": "true",
     name: name,
     "aria-hidden": "true",
+    "netlify-honeypot": "bot-field",
     hidden: true,
     className: (0,_theme_utils_utilityClasses__WEBPACK_IMPORTED_MODULE_1__.visuallyHidden)(),
     children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
@@ -46,7 +44,7 @@ const NetlifyWorkaroundForm = ({
       "aria-hidden": "true",
       name: "form-name",
       value: name
-    }), Object.entries(_objectSpread(_objectSpread({}, userData), formFields)).map(([name, value]) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
+    }), Object.entries(fields).map(([name, value]) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx("input", {
       type: "hidden",
       hidden: true,
       "aria-hidden": "true",
