@@ -9,8 +9,6 @@ import * as React from 'react'
 import { RunOptions } from 'axe-core'
 import { toHaveNoViolations, axe } from 'jest-axe'
 
-expect.extend(toHaveNoViolations)
-
 type UI = Parameters<typeof rtlRender>[0]
 
 // UI-less passthrough fallback to prevent using conditional logic in render

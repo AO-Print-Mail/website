@@ -32,7 +32,7 @@ const WorkaroundForm = dynamic(() =>
 
 const FORM_NAME = 'contactForm'
 
-interface ContactFormProps {}
+interface ContactFormProps extends React.ComponentProps<typeof Background> {}
 
 const inputs = {
   firstName: '',

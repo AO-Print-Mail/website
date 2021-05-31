@@ -5,12 +5,11 @@ import {
   UnorderedList,
   ListItem,
   BreakoutTextHolder,
-  CSS,
 } from '@theme'
 
-interface TwoColumnListProps {
+interface TwoColumnListProps
+  extends React.ComponentProps<typeof BreakoutTextHolder> {
   items: string[]
-  css?: CSS
 }
 
 const TwoColUl = styled(UnorderedList, {

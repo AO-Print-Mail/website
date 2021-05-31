@@ -2,13 +2,11 @@ import React from 'react'
 import Link from 'next/link'
 import { CSS, styled, Box, Container, Flex, Heading4 } from '@theme'
 import { Button } from '@components/button'
-interface MobileNavigationProps {
+interface MobileNavigationProps
+  extends React.ComponentProps<typeof NavWrapper> {
   navIsOpen: boolean
   data?: typeof staticData
-  css?: CSS
-  as?: any
   layout?: boolean
-  id?: string
   toggleNav?: (e?: React.MouseEvent) => void
 }
 

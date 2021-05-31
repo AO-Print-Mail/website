@@ -26,7 +26,7 @@ import { FormSuccess } from '@components/notifications/confirmations/formSuccess
 
 const FORM_NAME = 't_request-quote'
 
-interface TempQuoteFormProps {
+interface TempQuoteFormProps extends React.ComponentProps<typeof ModalLayout> {
   toggle: (e: React.MouseEvent) => void
   modalLayoutId?: string
   active: boolean
@@ -92,8 +92,6 @@ const submissionMessages = {
   },
 }
 
-const Background = styled('div', {})
-
 export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
   toggle,
   modalLayoutId,
@@ -107,6 +105,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<typeof tempQuoteFormInputs>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
@@ -122,6 +121,14 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
   const {
     state: { userData },
   } = useStateMachine({})
+
+  const watchService = watch('service')
+
+  useEffect(() => {
+    if (window && watchService) {
+      window.dataLayer.push({ service: watchService })
+    }
+  }, [watchService])
 
   const onSubmit = (data: typeof tempQuoteFormInputs) => {
     setSubmitting(true)
@@ -189,8 +196,9 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
     <ModalLayout
       hideControlsBorder
       controls={<CloseControls handleClose={toggle} />}
+      {...props}
     >
-      <Background {...props}>
+      <Box>
         <Heading2 marginTop="small" level="4">
           Request a quote
         </Heading2>
@@ -388,7 +396,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
             />
           )}
         </AnimatePresence>
-      </Background>
+      </Box>
     </ModalLayout>
   )
 }

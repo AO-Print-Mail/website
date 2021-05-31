@@ -8,7 +8,7 @@ import { styled } from '@theme/stitches.config'
 import { Box, Container, Flex, Logo } from '@theme/atoms'
 import { LayoutContext } from '@components/layout/src/layoutContext'
 import { QuoteButton } from '@components/quoteButton'
-interface HeaderMainProps {
+interface HeaderMainProps extends React.ComponentProps<typeof HeaderOuter> {
   show?: boolean
 }
 import { useRouter } from 'next/router'

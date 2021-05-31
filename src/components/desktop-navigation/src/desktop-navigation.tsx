@@ -2,10 +2,8 @@ import { Box, styled, CSS, Paragraph } from '@theme'
 import Link from 'next/link'
 import React from 'react'
 
-interface DesktopNavigationProps {
-  css?: CSS
-  id?: string
-}
+interface DesktopNavigationProps
+  extends React.ComponentProps<typeof MenuWrapper> {}
 
 const staticData = [
   {

@@ -30,9 +30,15 @@ export const UserData = ({}) => {
       }
       return acc
     }
+
     const trackingData = Object.entries(router.query).reduce(filterParams, {})
+    for (const k in { ...state.userData, ...trackingData }) {
+      if (trackingData?.[k])
+        window.dataLayer.push({ event: k, value: trackingData?.[k] })
+    }
     actions.updateUserData(trackingData)
   }, [router])
+
   useSetCookieToState('hubspotutk', 'hubspotUserToken', 'hutk')
   return null
 }

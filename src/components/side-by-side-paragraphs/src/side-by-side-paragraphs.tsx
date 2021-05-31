@@ -10,12 +10,11 @@ import {
 import { StructuredText } from 'react-datocms'
 import { structuredTextRules } from '@lib/datocms/structuredText'
 
-interface SideBySideParagraphsProps {
+interface SideBySideParagraphsProps extends React.ComponentProps<typeof Bg> {
   leftHeading: string
   leftParagraph: unknown
   rightHeading: string
   rightParagraph: unknown
-  css?: CSS
 }
 
 const ColWrap = styled(ColumnWrapper, {

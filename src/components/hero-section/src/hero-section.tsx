@@ -1,6 +1,6 @@
 import { Box, Container, TextHolder, Heading } from '@theme'
 
-interface HeroSectionProps {
+interface HeroSectionProps extends React.ComponentProps<typeof Box> {
   title: string
   subtext: string
 }

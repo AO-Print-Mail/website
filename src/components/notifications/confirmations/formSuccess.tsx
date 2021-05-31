@@ -6,7 +6,7 @@ import { Paragraph } from '@theme/typography'
 import { Button } from '@components/button'
 import React, { useEffect } from 'react'
 
-export interface FormSuccessProps {
+export interface FormSuccessProps extends React.ComponentProps<typeof Flex> {
   heading: string
   paragraph: string
   handleClose: (e?: React.MouseEvent) => void
@@ -64,6 +64,7 @@ export const FormSuccess: React.FC<FormSuccessProps> = ({
         position: 'absolute',
         tlbr: '0',
       }}
+      {...props}
     >
       {error ? (
         <ErrorCheck

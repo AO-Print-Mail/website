@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Button } from '../../button'
 import { Phone } from '@theme/icons/phone'
 
-interface HeaderProps {
+interface HeaderProps extends React.ComponentProps<typeof HeaderBar> {
   sticky?: boolean
   blur?: boolean
 }
