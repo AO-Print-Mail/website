@@ -135,6 +135,7 @@ const NavSection: React.FC<NavSectionProps> = ({
 export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   navIsOpen,
   data = staticData,
+  toggleNav,
   ...props
 }) => {
   return (
@@ -145,6 +146,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
             key={section.section_label}
             section_label={section.section_label}
             menu_items={section.menu_items}
+            toggleNav={toggleNav}
           />
         ))}
       </Flex>
