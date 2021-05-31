@@ -260,7 +260,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
               <Flex css={{ justifyContent: 'flex-start' }}>
                 <IconButton
                   as="a"
-                  href=""
+                  href="https://www.facebook.com/aoprintmail"
                   color="light"
                   style="naked"
                   size="small"
@@ -271,7 +271,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                 </IconButton>
                 <IconButton
                   as="a"
-                  href=""
+                  href="https://www.linkedin.com/company/aomail"
                   color="light"
                   style="naked"
                   size="small"

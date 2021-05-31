@@ -348,7 +348,7 @@ const MainFooter = (_ref) => {
               },
               children: [/*#__PURE__*/jsx_runtime.jsx(components_button/* IconButton */.hU, {
                 as: "a",
-                href: "",
+                href: "https://www.facebook.com/aoprintmail",
                 color: "light",
                 style: "naked",
                 size: "small",
@@ -362,7 +362,7 @@ const MainFooter = (_ref) => {
                 })
               }), /*#__PURE__*/jsx_runtime.jsx(components_button/* IconButton */.hU, {
                 as: "a",
-                href: "",
+                href: "https://www.linkedin.com/company/aomail",
                 color: "light",
                 style: "naked",
                 size: "small",

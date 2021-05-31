@@ -1,5 +1,5 @@
 exports.id = 7289;
-exports.ids = [7289];
+exports.ids = [7289,6330];
 exports.modules = {
 
 /***/ 36330:

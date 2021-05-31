@@ -26,27 +26,6 @@ const DesktopHero = styled(DH, {
     display: 'block',
   },
 })
-
-const ParagraphText = ({ data, size }) => {
-  return (
-    <StructuredText
-      data={data}
-      customRules={structuredTextRules({
-        paragraphProps: { size },
-        listItemProps: {
-          icon: 'CheckLeaf',
-          iconProps: {
-            css: {
-              color: '$green',
-              size: '1.125em',
-              marginBottom: '0.125em',
-            },
-          },
-        },
-      })}
-    />
-  )
-}
 const LandingPageContent: React.FC<PageProps> = ({ data }) => {
   return (
     <Layout
@@ -93,13 +72,13 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           </TextHolder>
         </Container>
       </Box>
-      <Container>
+      <Container css={{ mb: '-$6' }}>
         <ArticleListCard
           data={data.cardData}
           css={{ top: '-$7', '@l': { top: '-$6' } }}
         />
       </Container>
-      <Box css={{ mt: '$6' }}>
+      <Box>
         <Container>
           <ModularContent
             //@ts-ignore
@@ -107,10 +86,10 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
           />
         </Container>
       </Box>
-      <Box css={{ my: '$7' }}>
+      <Box css={{ my: '$5' }}>
         <Container>
           <QuoteCta
-            css={{ mb: '$7' }}
+            css={{ mb: '$4' }}
             paragraph="Get a competitive quote for your next job now. Our friendly team of experts are standing by to complete your project with ease and to make the process as seamless as possible."
           />
           <ClientLogoBanner />

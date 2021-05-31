@@ -438,12 +438,12 @@ const Th = (0,theme/* styled */.zo)('th', {
   py: '$1',
   textAlign: 'left',
   pr: '$4',
-  color: '$DBA75',
+  color: '$DA75',
   fontWeight: '$semibold'
 });
 const Td = (0,theme/* styled */.zo)('td', {
   py: '$1',
-  color: '$DBA80'
+  color: '$DA80'
 });
 const Ul = (0,theme/* styled */.zo)('ul', {
   listStyle: 'none',
@@ -492,7 +492,7 @@ const Contact = ({
   data
 }) => {
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(layout/* Layout */.A, {
-    canonicalPath: "https://www.aomail.com.au/blog" //@ts-ignore
+    canonicalPath: "https://www.aomail.com.au/contact" //@ts-ignore
     ,
     metaData: data.contactPage._seoMetaTags,
     children: [/*#__PURE__*/jsx_runtime.jsx(theme/* Box */.xu, {
@@ -1185,7 +1185,7 @@ var typography_text = __webpack_require__(31950);
 
 /***/ }),
 
-/***/ 47239:
+/***/ 6120:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1278,11 +1278,11 @@ __webpack_require__.r(__webpack_exports__);
         rewrites: combinedRewrites,
         i18n: undefined,
         page: "/contact",
-        buildId: "5Gjs7nmNpdkWMjYIyCqze",
-        escapedBuildId: "5Gjs7nmNpdkWMjYIyCqze",
+        buildId: "5QM5N7MyeaFl-_82uHmZ2",
+        escapedBuildId: "5QM5N7MyeaFl\-_82uHmZ2",
         basePath: "",
         pageIsDynamic: false,
-        encodedPreviewProps: {previewModeId:"84e625f6e1d2d695184c9d1d7cdd7329",previewModeSigningKey:"cdd8ad36dd8bba9713b01bbe16f88042fbc8d151bcb8ea731aa458f309be0d87",previewModeEncryptionKey:"5c3da32d4e7bca66796b03a3e82462c131c5e96bc17c2af32d605f5b6ebd7494"}
+        encodedPreviewProps: {previewModeId:"f42222999b849f86cc87e7417a938051",previewModeSigningKey:"2e7f3773ced62b40245dfeb5f8f1cd4e7bf9e415939ba9b4e028fecfcfeba52d",previewModeEncryptionKey:"2e5354f0133facdf3c2efe566b23365a4bb13bd3f7f400b187d7866b68e3f540"}
       })
       
     
@@ -1464,7 +1464,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,8697,3873,1428,3473,5252,9566,5320,3608,7522,5596,1587,4090,77,1801,3239], function() { return __webpack_require__(47239); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,8697,3873,1428,3473,5252,9566,5320,3608,7522,5596,1587,4090,77,1801,3239], function() { return __webpack_require__(6120); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};

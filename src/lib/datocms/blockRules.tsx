@@ -95,7 +95,7 @@ export function structuredTextBlockRules({
         <Container key={record.id}>
           <QuoteCta
             heading={record.heading}
-            css={{ my: '$7' }}
+            css={{ my: '$5' }}
             paragraph={record.subtext}
           />
         </Container>

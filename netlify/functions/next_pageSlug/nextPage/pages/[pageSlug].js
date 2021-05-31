@@ -288,7 +288,7 @@ var utilityClasses = __webpack_require__(35222);
 
 
 
-const FeatureParagraphImage = (0,dynamic.default)(() => __webpack_require__.e(/* import() */ 2786).then(__webpack_require__.bind(__webpack_require__, 72786)).then(res => res.FeatureParagraphWithImage), {
+const FeatureParagraphImage = (0,dynamic.default)(() => Promise.all(/* import() */[__webpack_require__.e(6330), __webpack_require__.e(2786)]).then(__webpack_require__.bind(__webpack_require__, 72786)).then(res => res.FeatureParagraphWithImage), {
   loadableGenerated: {
     webpack: () => [/*require.resolve*/(72786)],
     modules: ["../lib/datocms/blockRules.tsx -> " + '@components/feature-paragraph-with-image']
@@ -306,7 +306,7 @@ const Testimonial = (0,dynamic.default)(() => __webpack_require__.e(/* import() 
     modules: ["../lib/datocms/blockRules.tsx -> " + '@components/testimonial']
   }
 });
-const SideBySideParagraphs = (0,dynamic.default)(() => __webpack_require__.e(/* import() */ 381).then(__webpack_require__.bind(__webpack_require__, 381)).then(res => res.SideBySideParagraphs), {
+const SideBySideParagraphs = (0,dynamic.default)(() => Promise.all(/* import() */[__webpack_require__.e(6330), __webpack_require__.e(381)]).then(__webpack_require__.bind(__webpack_require__, 381)).then(res => res.SideBySideParagraphs), {
   loadableGenerated: {
     webpack: () => [/*require.resolve*/(381)],
     modules: ["../lib/datocms/blockRules.tsx -> " + '@components/side-by-side-paragraphs']
@@ -318,7 +318,7 @@ const QuoteCta = (0,dynamic.default)(() => Promise.all(/* import() */[__webpack_
     modules: ["../lib/datocms/blockRules.tsx -> " + '@components/quote-cta']
   }
 });
-const StaffProfileCollection = (0,dynamic.default)(() => __webpack_require__.e(/* import() */ 5517).then(__webpack_require__.bind(__webpack_require__, 45517)).then(res => res.StaffProfileCollection), {
+const StaffProfileCollection = (0,dynamic.default)(() => Promise.all(/* import() */[__webpack_require__.e(6330), __webpack_require__.e(5517)]).then(__webpack_require__.bind(__webpack_require__, 45517)).then(res => res.StaffProfileCollection), {
   loadableGenerated: {
     webpack: () => [/*require.resolve*/(45517)],
     modules: ["../lib/datocms/blockRules.tsx -> " + '@components/staff-profile-collection']
@@ -373,7 +373,7 @@ function structuredTextBlockRules({
         children: /*#__PURE__*/jsx_runtime.jsx(QuoteCta, {
           heading: record.heading,
           css: {
-            my: '$7'
+            my: '$5'
           },
           paragraph: record.subtext
         })
@@ -542,7 +542,7 @@ const ServicePage = ({
   const beforeFooter = /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
     children: [/*#__PURE__*/jsx_runtime.jsx(theme/* Container */.W2, {
       css: {
-        mb: '$7'
+        mb: '$5'
       },
       children: /*#__PURE__*/jsx_runtime.jsx(client_logo_banner/* ClientLogoBanner */.Y, {})
     }), /*#__PURE__*/jsx_runtime.jsx(theme/* Box */.xu, {
@@ -578,7 +578,9 @@ const ServicePage = ({
         backgroundColor: '$N10',
         position: 'relative',
         overflow: 'hidden',
-        minHeight: '640px'
+        '@m:': {
+          minHeight: '640px'
+        }
       },
       children: /*#__PURE__*/(0,jsx_runtime.jsxs)(theme/* Container */.W2, {
         css: {
@@ -891,7 +893,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 98789:
+/***/ 93079:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -984,11 +986,11 @@ __webpack_require__.r(__webpack_exports__);
         rewrites: combinedRewrites,
         i18n: undefined,
         page: "/[pageSlug]",
-        buildId: "5Gjs7nmNpdkWMjYIyCqze",
-        escapedBuildId: "5Gjs7nmNpdkWMjYIyCqze",
+        buildId: "5QM5N7MyeaFl-_82uHmZ2",
+        escapedBuildId: "5QM5N7MyeaFl\-_82uHmZ2",
         basePath: "",
         pageIsDynamic: true,
-        encodedPreviewProps: {previewModeId:"84e625f6e1d2d695184c9d1d7cdd7329",previewModeSigningKey:"cdd8ad36dd8bba9713b01bbe16f88042fbc8d151bcb8ea731aa458f309be0d87",previewModeEncryptionKey:"5c3da32d4e7bca66796b03a3e82462c131c5e96bc17c2af32d605f5b6ebd7494"}
+        encodedPreviewProps: {previewModeId:"f42222999b849f86cc87e7417a938051",previewModeSigningKey:"2e7f3773ced62b40245dfeb5f8f1cd4e7bf9e415939ba9b4e028fecfcfeba52d",previewModeEncryptionKey:"2e5354f0133facdf3c2efe566b23365a4bb13bd3f7f400b187d7866b68e3f540"}
       })
       
     
@@ -1170,7 +1172,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,5026,1428,3473,5252,9566,5320,3608,5596,7615,77,2444,5429,1801,6858], function() { return __webpack_require__(98789); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,5026,1428,3473,5252,9566,5320,3608,5596,7615,77,2444,5429,1801,6858], function() { return __webpack_require__(93079); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -1322,7 +1324,8 @@ module.exports = require("zlib");;
 /******/ 		// object to store loaded chunks
 /******/ 		// "1" means "loaded", otherwise not loaded yet
 /******/ 		var installedChunks = {
-/******/ 			4472: 1
+/******/ 			4472: 1,
+/******/ 			6330: 1
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.O.require = function(chunkId) { return installedChunks[chunkId]; };

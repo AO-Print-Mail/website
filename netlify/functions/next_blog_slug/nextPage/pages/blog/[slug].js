@@ -230,7 +230,7 @@ async function getStaticProps({
 
 /***/ }),
 
-/***/ 86614:
+/***/ 34330:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -323,11 +323,11 @@ __webpack_require__.r(__webpack_exports__);
         rewrites: combinedRewrites,
         i18n: undefined,
         page: "/blog/[slug]",
-        buildId: "5Gjs7nmNpdkWMjYIyCqze",
-        escapedBuildId: "5Gjs7nmNpdkWMjYIyCqze",
+        buildId: "5QM5N7MyeaFl-_82uHmZ2",
+        escapedBuildId: "5QM5N7MyeaFl\-_82uHmZ2",
         basePath: "",
         pageIsDynamic: true,
-        encodedPreviewProps: {previewModeId:"84e625f6e1d2d695184c9d1d7cdd7329",previewModeSigningKey:"cdd8ad36dd8bba9713b01bbe16f88042fbc8d151bcb8ea731aa458f309be0d87",previewModeEncryptionKey:"5c3da32d4e7bca66796b03a3e82462c131c5e96bc17c2af32d605f5b6ebd7494"}
+        encodedPreviewProps: {previewModeId:"f42222999b849f86cc87e7417a938051",previewModeSigningKey:"2e7f3773ced62b40245dfeb5f8f1cd4e7bf9e415939ba9b4e028fecfcfeba52d",previewModeEncryptionKey:"2e5354f0133facdf3c2efe566b23365a4bb13bd3f7f400b187d7866b68e3f540"}
       })
       
     
@@ -509,7 +509,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,5026,3735,5172,1428,3473,5252,9566,5320,3608,7522,7615,7589,1587,6895,7289,3902,1930], function() { return __webpack_require__(86614); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,5026,3735,5172,1428,3473,5252,9566,5320,3608,7522,7615,7589,1587,6895,7289,3902,1930], function() { return __webpack_require__(34330); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};

@@ -38,12 +38,12 @@ const Th = styled('th', {
   py: '$1',
   textAlign: 'left',
   pr: '$4',
-  color: '$DBA75',
+  color: '$DA75',
   fontWeight: '$semibold',
 })
 const Td = styled('td', {
   py: '$1',
-  color: '$DBA80',
+  color: '$DA80',
 })
 const Ul = styled('ul', {
   listStyle: 'none',

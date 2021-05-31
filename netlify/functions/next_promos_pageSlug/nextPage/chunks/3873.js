@@ -22,7 +22,7 @@ var _react = _interopRequireDefault(__webpack_require__(67294));
 
 var _head = _interopRequireDefault(__webpack_require__(57947));
 
-var _toBase = __webpack_require__(95748);
+var _toBase = __webpack_require__(47239);
 
 var _imageConfig = __webpack_require__(5655);
 
@@ -470,7 +470,7 @@ function defaultLoader({
 
 /***/ }),
 
-/***/ 95748:
+/***/ 47239:
 /***/ (function(__unused_webpack_module, exports) {
 
 "use strict";
