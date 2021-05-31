@@ -10,10 +10,9 @@ import { TempQuoteForm as QuoteForm } from '@components/temp-quote-form'
 import { Modal } from '@components/modal/src/modal'
 import React from 'react'
 
-interface QuoteCtaProps {
+interface QuoteCtaProps extends React.ComponentProps<typeof Bg> {
   heading?: string
   paragraph?: string
-  css?: CSS
 }
 
 const Bg = styled(Card, {

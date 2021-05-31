@@ -1,0 +1,24 @@
+/get-quick-quote.html / 302
+/get-quote / 302
+/privacy.html /privacy
+/terms-and-conditions.html /terms-and-conditions
+/about.html /about
+/contact.html /contact
+/news.html /blog
+/our-customers.html /
+/news/*.html /blog/:splat
+/team-members/steven-hulme /
+/team-members/steve-hulme /
+/print.html /printing
+/services/print-services /printing
+/flyer-distribution.html /direct-mail
+/services/direct-mail-services /direct-mail
+/fulfilment.html /package-fulfilment
+/mail.html /direct-mail
+/services.html /direct-mail
+/sitemap.html /sitemap.xml
+/ano-adbox.html /direct-mail
+/ano-wide-format.html /direct-mail
+/sample-mail.html /direct-mail
+/direct-mail /direct-mail
+/services/mail-services /direct-mail

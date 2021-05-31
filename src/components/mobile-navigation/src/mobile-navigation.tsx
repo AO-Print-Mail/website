@@ -2,13 +2,11 @@ import React from 'react'
 import Link from 'next/link'
 import { CSS, styled, Box, Container, Flex, Heading4 } from '@theme'
 import { Button } from '@components/button'
-interface MobileNavigationProps {
+interface MobileNavigationProps
+  extends React.ComponentProps<typeof NavWrapper> {
   navIsOpen: boolean
   data?: typeof staticData
-  css?: CSS
-  as?: any
   layout?: boolean
-  id?: string
   toggleNav?: (e?: React.MouseEvent) => void
 }
 
@@ -137,6 +135,7 @@ const NavSection: React.FC<NavSectionProps> = ({
 export const MobileNavigation: React.FC<MobileNavigationProps> = ({
   navIsOpen,
   data = staticData,
+  toggleNav,
   ...props
 }) => {
   return (
@@ -147,6 +146,7 @@ export const MobileNavigation: React.FC<MobileNavigationProps> = ({
             key={section.section_label}
             section_label={section.section_label}
             menu_items={section.menu_items}
+            toggleNav={toggleNav}
           />
         ))}
       </Flex>

@@ -12,8 +12,8 @@ import { structuredTextRules } from '@lib/datocms/structuredText'
 import { StructuredText } from 'react-datocms'
 import { Image } from 'react-datocms'
 
-interface FeatureParagraphWithImageProps {
-  css?: CSS
+interface FeatureParagraphWithImageProps
+  extends React.ComponentProps<typeof ColumnWrapper> {
   image?: FeatureParagraphImageRecord['image']
   heading?: string
   paragraph?: FeatureParagraphImageRecord['paragraph']

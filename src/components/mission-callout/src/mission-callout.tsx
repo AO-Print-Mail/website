@@ -3,10 +3,9 @@ import { FullWidthCalloutRecord } from '@lib/datocms/__generated__/types'
 import { StructuredText, renderRule } from 'react-datocms'
 import { isParagraph } from 'datocms-structured-text-utils'
 import type { Span, Node } from 'datocms-structured-text-utils'
-interface MissionCalloutProps {
+interface MissionCalloutProps
+  extends React.ComponentProps<typeof FullWidthFeatureContainer> {
   data?: Pick<FullWidthCalloutRecord, 'id' | 'subheading' | 'callout'>
-  css?: CSS
-  key?: unknown
   className?: unknown
 }
 

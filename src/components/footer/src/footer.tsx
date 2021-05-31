@@ -16,8 +16,7 @@ import {
 import { Button, IconButton } from '@components/button'
 import Link from 'next/link'
 
-interface FooterProps {
-  css?: CSS
+interface FooterProps extends React.ComponentProps<typeof FooterWrapper> {
   beforeFooter?: React.ReactNode
   footerCss?: CSS
   landing?: boolean

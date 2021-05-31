@@ -26,7 +26,7 @@ import { FormSuccess } from '@components/notifications/confirmations/formSuccess
 
 const FORM_NAME = 't_request-quote'
 
-interface TempQuoteFormProps {
+interface TempQuoteFormProps extends React.ComponentProps<typeof ModalLayout> {
   toggle: (e: React.MouseEvent) => void
   modalLayoutId?: string
   active: boolean
@@ -91,8 +91,6 @@ const submissionMessages = {
     error: `Please try again, or email us at sales@aomail.com.au`,
   },
 }
-
-const Background = styled('div', {})
 
 export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
   toggle,
@@ -198,8 +196,9 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
     <ModalLayout
       hideControlsBorder
       controls={<CloseControls handleClose={toggle} />}
+      {...props}
     >
-      <Background {...props}>
+      <Box>
         <Heading2 marginTop="small" level="4">
           Request a quote
         </Heading2>
@@ -397,7 +396,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
             />
           )}
         </AnimatePresence>
-      </Background>
+      </Box>
     </ModalLayout>
   )
 }
