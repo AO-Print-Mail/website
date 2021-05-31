@@ -4,7 +4,7 @@ import { Button } from './button'
 import { styled } from '@theme/stitches.config'
 import { Paragraph } from '@theme/typography'
 
-interface MenuButtonProps {
+interface MenuButtonProps extends React.ComponentProps<typeof Button> {
   open: boolean
   onClick?: (e: React.MouseEvent) => void
 }
