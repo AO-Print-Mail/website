@@ -128,7 +128,7 @@ const ServicePage: React.FC<PageProps> = ({ data, pageSlug }) => {
       beforeFooter={beforeFooter}
       //@ts-ignore
       metaData={data._seoMetaTags}
-      canonicalPath={data.canonicalPath}
+      canonicalPath={`https://www.aomail.com.au/${data.canonicalPath}`}
     >
       <Box
         as="section"
