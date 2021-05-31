@@ -132,7 +132,6 @@
     "buffer": false,
     "node-plop": false,
     "shelljs": false,
-    "graphql-tag": false,
     "@testing-library/react": false,
     "jest": false,
     "jest-axe": false,
