@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "predev": "yarn gen:gql",
+    "predev": "yarn gen:gql -w",
     "build": "next build",
     "postbuild": "next-sitemap",
     "start": "next start",
@@ -47,7 +47,6 @@
     "next": "^10.2.0",
     "next-compose-plugins": "^2.2.1",
     "next-offline": "^5.0.3",
-    "node-plop": "^0.26.2",
     "parse5": "^6.0.1",
     "postcss": "^8.2.4",
     "public-ip": "^4.0.3",
@@ -62,16 +61,13 @@
     "remark-gfm": "^1.0.0",
     "remark-parse": "^9.0.0",
     "remark-rehype": "^8.0.0",
-    "shelljs": "^0.8.4",
     "throttle-debounce": "^3.0.1",
     "typescript": "^4.3.2",
     "unified": "^9.2.0",
     "unified-stream": "^1.0.6",
     "uuid": "^8.3.2",
     "yarn": "^1.22.10",
-    "yup": "^0.32.9",
-    "node-plop": "^0.26.2",
-    "shelljs": "^0.8.4"
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
@@ -115,7 +111,9 @@
     "ts-node": "^9.1.1",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
     "unist-util-inspect": "^6.0.1",
-    "vfile-reporter": "^6.0.2"
+    "vfile-reporter": "^6.0.2",
+    "shelljs": "^0.8.4",
+    "node-plop": "^0.26.2"
   },
   "browser": {
     "parse5": false,
