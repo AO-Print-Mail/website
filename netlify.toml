@@ -6,3 +6,124 @@
 [functions]
   node_bundler = "esbuild"
   directory = "netlify/functions/"
+  
+[[redirects]]
+from = "/get-quick-quote.html"
+to = "/"
+status = 302
+force = false
+[[redirects]]
+from = "/get-quote"
+to = "/"
+status = 302
+force = false
+[[redirects]]
+from = "/privacy.html"
+to = "/privacy"
+status = 301
+force = false
+[[redirects]]
+from = "/terms-and-conditions.html"
+to = "/terms-and-conditions"
+status = 301
+force = false
+[[redirects]]
+from = "/about.html"
+to = "/about"
+status = 301
+force = false
+[[redirects]]
+from = "/contact.html"
+to = "/contact"
+status = 301
+force = false
+[[redirects]]
+from = "/news.html"
+to = "/blog"
+status = 301
+force = false
+[[redirects]]
+from = "/our-customers.html"
+to = "/"
+status = 301
+force = false
+[[redirects]]
+from = "/news/*.html"
+to = "/blog/:splat"
+status = 301
+force = false
+[[redirects]]
+from = "/team-members/steven-hulme"
+to = "/"
+status = 301
+force = false
+[[redirects]]
+from = "/team-members/steve-hulme"
+to = "/"
+status = 301
+force = false
+[[redirects]]
+from = "/print.html"
+to = "/printing"
+status = 301
+force = false
+[[redirects]]
+from = "/services/print-services"
+to = "/printing"
+status = 301
+force = false
+[[redirects]]
+from = "/flyer-distribution.html"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/services/direct-mail-services"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/fulfilment.html"
+to = "/package-fulfilment"
+status = 301
+force = false
+[[redirects]]
+from = "/mail.html"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/services.html"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/sitemap.html"
+to = "/sitemap.xml"
+status = 301
+force = false
+[[redirects]]
+from = "/ano-adbox.html"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/ano-wide-format.html"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/sample-mail.html"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/direct-mail"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/services/mail-services"
+to = "/direct-mail"
+status = 301
+force = false
