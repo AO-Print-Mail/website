@@ -8,7 +8,7 @@
   directory = "netlify/functions/"
   
 [[redirects]]
-from = "/get-quick-quote.html"
+from = "/get-quick-quote"
 to = "/"
 status = 302
 force = false
@@ -18,37 +18,22 @@ to = "/"
 status = 302
 force = false
 [[redirects]]
-from = "/privacy.html"
-to = "/privacy"
-status = 301
-force = false
-[[redirects]]
-from = "/terms-and-conditions.html"
-to = "/terms-and-conditions"
-status = 301
-force = false
-[[redirects]]
-from = "/about.html"
-to = "/about"
-status = 301
-force = false
-[[redirects]]
-from = "/contact.html"
-to = "/contact"
-status = 301
-force = false
-[[redirects]]
-from = "/news.html"
+from = "/news"
 to = "/blog"
 status = 301
 force = false
 [[redirects]]
-from = "/our-customers.html"
+from = "/our-customers"
 to = "/"
-status = 301
+status = 302
 force = false
 [[redirects]]
 from = "/news/*.html"
+to = "/blog/:splat"
+status = 301
+force = false
+[[redirects]]
+from = "/news/*"
 to = "/blog/:splat"
 status = 301
 force = false
@@ -63,7 +48,7 @@ to = "/"
 status = 301
 force = false
 [[redirects]]
-from = "/print.html"
+from = "/print"
 to = "/printing"
 status = 301
 force = false
@@ -73,9 +58,9 @@ to = "/printing"
 status = 301
 force = false
 [[redirects]]
-from = "/flyer-distribution.html"
+from = "/flyer-distribution"
 to = "/direct-mail"
-status = 301
+status = 302
 force = false
 [[redirects]]
 from = "/services/direct-mail-services"
@@ -88,14 +73,14 @@ to = "/package-fulfilment"
 status = 301
 force = false
 [[redirects]]
-from = "/mail.html"
+from = "/mail"
 to = "/direct-mail"
 status = 301
 force = false
 [[redirects]]
-from = "/services.html"
+from = "/services"
 to = "/direct-mail"
-status = 301
+status = 30
 force = false
 [[redirects]]
 from = "/sitemap.html"
@@ -103,17 +88,17 @@ to = "/sitemap.xml"
 status = 301
 force = false
 [[redirects]]
-from = "/ano-adbox.html"
+from = "/ano-adbox"
 to = "/direct-mail"
 status = 301
 force = false
 [[redirects]]
-from = "/ano-wide-format.html"
+from = "/ano-wide-format"
 to = "/direct-mail"
 status = 301
 force = false
 [[redirects]]
-from = "/sample-mail.html"
+from = "/sample-mail"
 to = "/direct-mail"
 status = 301
 force = false
