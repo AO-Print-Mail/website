@@ -67,7 +67,9 @@
     "unified-stream": "^1.0.6",
     "uuid": "^8.3.2",
     "yarn": "^1.22.10",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "shelljs": "^0.8.4",
+    "node-plop": "^0.26.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.13",
@@ -111,9 +113,7 @@
     "ts-node": "^9.1.1",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
     "unist-util-inspect": "^6.0.1",
-    "vfile-reporter": "^6.0.2",
-    "shelljs": "^0.8.4",
-    "node-plop": "^0.26.2"
+    "vfile-reporter": "^6.0.2"
   },
   "browser": {
     "parse5": false,

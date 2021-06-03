@@ -35,7 +35,7 @@
     "node_modules",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "scripts/plopfile.js"
+    "**/plopfile.js"
   ],
   "ts-node": {
     "compilerOptions": {
