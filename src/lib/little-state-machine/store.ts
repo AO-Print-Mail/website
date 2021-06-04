@@ -4,7 +4,7 @@ export const store: GlobalState = {
   userData: {
     hutk: '',
     gclid: '',
-    ipAddress: '',
+    //ipAddress: '',
     utm_term: '',
     utm_campaign: '',
     utm_source: '',
