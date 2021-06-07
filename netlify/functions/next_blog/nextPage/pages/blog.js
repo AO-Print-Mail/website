@@ -1,10 +1,10 @@
 /******/ (function() { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 49597:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getStaticProps": function() { return /* binding */ getStaticProps; }
@@ -148,9 +148,85 @@ async function getStaticProps({
 
 /***/ }),
 
-/***/ 631:
+/***/ 34176:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "xu": function() { return /* reexport safe */ _layout__WEBPACK_IMPORTED_MODULE_0__.xu; },
+/* harmony export */   "sg": function() { return /* reexport safe */ _layout__WEBPACK_IMPORTED_MODULE_0__.sg; },
+/* harmony export */   "fh": function() { return /* reexport safe */ _layout__WEBPACK_IMPORTED_MODULE_0__.fh; },
+/* harmony export */   "kC": function() { return /* reexport safe */ _layout__WEBPACK_IMPORTED_MODULE_0__.kC; },
+/* harmony export */   "C8": function() { return /* reexport safe */ _layout__WEBPACK_IMPORTED_MODULE_0__.C8; },
+/* harmony export */   "L5": function() { return /* reexport safe */ _layout__WEBPACK_IMPORTED_MODULE_0__.L5; },
+/* harmony export */   "W2": function() { return /* reexport safe */ _container__WEBPACK_IMPORTED_MODULE_1__.W; },
+/* harmony export */   "TR": function() { return /* reexport safe */ _logo__WEBPACK_IMPORTED_MODULE_3__.T; },
+/* harmony export */   "FE": function() { return /* reexport safe */ _pageWrapper__WEBPACK_IMPORTED_MODULE_4__.F; },
+/* harmony export */   "eu": function() { return /* reexport safe */ _links__WEBPACK_IMPORTED_MODULE_5__.eu; },
+/* harmony export */   "vs": function() { return /* reexport safe */ _contentWrapper__WEBPACK_IMPORTED_MODULE_6__.v; },
+/* harmony export */   "DY": function() { return /* reexport safe */ _covidSafeBanner__WEBPACK_IMPORTED_MODULE_7__.D; },
+/* harmony export */   "EU": function() { return /* reexport safe */ _radioButton__WEBPACK_IMPORTED_MODULE_10__.E; },
+/* harmony export */   "II": function() { return /* reexport safe */ _Input__WEBPACK_IMPORTED_MODULE_11__.II; },
+/* harmony export */   "AZ": function() { return /* reexport safe */ _Input__WEBPACK_IMPORTED_MODULE_11__.AZ; },
+/* harmony export */   "Kx": function() { return /* reexport safe */ _Input__WEBPACK_IMPORTED_MODULE_11__.Kx; },
+/* harmony export */   "XZ": function() { return /* reexport safe */ _checkbox__WEBPACK_IMPORTED_MODULE_12__.X; },
+/* harmony export */   "ko": function() { return /* reexport safe */ _progressBar__WEBPACK_IMPORTED_MODULE_13__.k; },
+/* harmony export */   "Zb": function() { return /* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_15__.Z; },
+/* harmony export */   "LZ": function() { return /* reexport safe */ _spacer__WEBPACK_IMPORTED_MODULE_18__.L; },
+/* harmony export */   "OC": function() { return /* reexport safe */ _border__WEBPACK_IMPORTED_MODULE_19__.O; },
+/* harmony export */   "wY": function() { return /* reexport safe */ _controlLayout__WEBPACK_IMPORTED_MODULE_21__.w; }
+/* harmony export */ });
+/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(92640);
+/* harmony import */ var _container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(7211);
+/* harmony import */ var _resetButton__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(70827);
+/* harmony import */ var _logo__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(91238);
+/* harmony import */ var _pageWrapper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(62918);
+/* harmony import */ var _links__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(23608);
+/* harmony import */ var _contentWrapper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(78224);
+/* harmony import */ var _covidSafeBanner__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(82264);
+/* harmony import */ var _blockquote__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(98102);
+/* harmony import */ var _lists__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(14559);
+/* harmony import */ var _radioButton__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(20203);
+/* harmony import */ var _Input__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(26952);
+/* harmony import */ var _checkbox__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(99672);
+/* harmony import */ var _progressBar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(78882);
+/* harmony import */ var _headerBar__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(54771);
+/* harmony import */ var _cards__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(10049);
+/* harmony import */ var _fullWidthFeatureContainer__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(7522);
+/* harmony import */ var _breadcrumbs__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(5596);
+/* harmony import */ var _spacer__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(64480);
+/* harmony import */ var _border__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(77860);
+/* harmony import */ var _listCardWrapper__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(84546);
+/* harmony import */ var _controlLayout__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(71000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ 77156:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "getStaticProps": function() { return /* binding */ getStaticProps; },
@@ -241,20 +317,29 @@ __webpack_require__.r(__webpack_exports__);
         rewrites: combinedRewrites,
         i18n: undefined,
         page: "/blog",
-        buildId: "VXSL37vejTUCwsco7WiIr",
-        escapedBuildId: "VXSL37vejTUCwsco7WiIr",
+        buildId: "UkD_Cs6c4nTMyvVdMGNko",
+        escapedBuildId: "UkD_Cs6c4nTMyvVdMGNko",
         basePath: "",
         pageIsDynamic: false,
-        encodedPreviewProps: {previewModeId:"39730ab9481f9026b008be2abcece585",previewModeSigningKey:"99949977aa80c07eb6a52002c87dd2619e637e9929ff738da537412caf63b9cd",previewModeEncryptionKey:"29c8b2285b47bb7d64bcb6b006de95b50183e25e09839db7e8ef92864839793f"}
+        encodedPreviewProps: {previewModeId:"f4be9476d949992a880ef02a282f89b7",previewModeSigningKey:"803bd9ffc92d4f65c1d7aaa60c1ce64966ff936e8f6bf0db898c19bbd6022629",previewModeEncryptionKey:"2926eb1e303ac195eac94257bb89d2ea25feb676007948f0b73b94f17976a033"}
       })
       
     
 
 /***/ }),
 
+/***/ 11163:
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+module.exports = __webpack_require__(72441)
+
+
+/***/ }),
+
 /***/ 64293:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("buffer");;
 
 /***/ }),
@@ -262,6 +347,7 @@ module.exports = require("buffer");;
 /***/ 45532:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("critters");;
 
 /***/ }),
@@ -269,6 +355,7 @@ module.exports = require("critters");;
 /***/ 76417:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("crypto");;
 
 /***/ }),
@@ -276,6 +363,7 @@ module.exports = require("crypto");;
 /***/ 76200:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("dgram");;
 
 /***/ }),
@@ -283,6 +371,7 @@ module.exports = require("dgram");;
 /***/ 28614:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("events");;
 
 /***/ }),
@@ -290,6 +379,7 @@ module.exports = require("events");;
 /***/ 35747:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("fs");;
 
 /***/ }),
@@ -297,6 +387,7 @@ module.exports = require("fs");;
 /***/ 98605:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("http");;
 
 /***/ }),
@@ -304,6 +395,7 @@ module.exports = require("http");;
 /***/ 57211:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("https");;
 
 /***/ }),
@@ -311,6 +403,7 @@ module.exports = require("https");;
 /***/ 11631:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("net");;
 
 /***/ }),
@@ -318,6 +411,7 @@ module.exports = require("net");;
 /***/ 33700:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("next/dist/compiled/@ampproject/toolbox-optimizer");;
 
 /***/ }),
@@ -325,6 +419,7 @@ module.exports = require("next/dist/compiled/@ampproject/toolbox-optimizer");;
 /***/ 12087:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("os");;
 
 /***/ }),
@@ -332,6 +427,7 @@ module.exports = require("os");;
 /***/ 85622:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("path");;
 
 /***/ }),
@@ -339,6 +435,7 @@ module.exports = require("path");;
 /***/ 71191:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("querystring");;
 
 /***/ }),
@@ -346,6 +443,7 @@ module.exports = require("querystring");;
 /***/ 92413:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("stream");;
 
 /***/ }),
@@ -353,6 +451,7 @@ module.exports = require("stream");;
 /***/ 24304:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("string_decoder");;
 
 /***/ }),
@@ -360,6 +459,7 @@ module.exports = require("string_decoder");;
 /***/ 4016:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("tls");;
 
 /***/ }),
@@ -367,6 +467,7 @@ module.exports = require("tls");;
 /***/ 78835:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("url");;
 
 /***/ }),
@@ -374,6 +475,7 @@ module.exports = require("url");;
 /***/ 31669:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("util");;
 
 /***/ }),
@@ -381,6 +483,7 @@ module.exports = require("util");;
 /***/ 78761:
 /***/ (function(module) {
 
+"use strict";
 module.exports = require("zlib");;
 
 /***/ })
@@ -427,7 +530,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,1522,6187,6071,8697,1428,3473,9185,3903,7522,5596,2549,1587,3992,2749,9286,662], function() { return __webpack_require__(631); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,8697,1428,3473,2317,9566,494,7522,5596,7589,1587,4090,3239,2749,9286,3355], function() { return __webpack_require__(77156); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -620,22 +723,25 @@ module.exports = require("zlib");;
 /******/ 		__webpack_require__.x = function() {
 /******/ 			__webpack_require__.e(7057);
 /******/ 			__webpack_require__.e(4475);
-/******/ 			__webpack_require__.e(1522);
-/******/ 			__webpack_require__.e(6187);
+/******/ 			__webpack_require__.e(168);
+/******/ 			__webpack_require__.e(7109);
+/******/ 			__webpack_require__.e(7099);
 /******/ 			__webpack_require__.e(6071);
 /******/ 			__webpack_require__.e(8697);
 /******/ 			__webpack_require__.e(1428);
 /******/ 			__webpack_require__.e(3473);
-/******/ 			__webpack_require__.e(9185);
-/******/ 			__webpack_require__.e(3903);
+/******/ 			__webpack_require__.e(2317);
+/******/ 			__webpack_require__.e(9566);
+/******/ 			__webpack_require__.e(494);
 /******/ 			__webpack_require__.e(7522);
 /******/ 			__webpack_require__.e(5596);
-/******/ 			__webpack_require__.e(2549);
+/******/ 			__webpack_require__.e(7589);
 /******/ 			__webpack_require__.e(1587);
-/******/ 			__webpack_require__.e(3992);
+/******/ 			__webpack_require__.e(4090);
+/******/ 			__webpack_require__.e(3239);
 /******/ 			__webpack_require__.e(2749);
 /******/ 			__webpack_require__.e(9286);
-/******/ 			__webpack_require__.e(662);
+/******/ 			__webpack_require__.e(3355);
 /******/ 			return next();
 /******/ 		};
 /******/ 	}();

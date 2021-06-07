@@ -39,14 +39,16 @@ var reactTextMask_default = /*#__PURE__*/__webpack_require__.n(reactTextMask);
 var react = __webpack_require__(67294);
 // EXTERNAL MODULE: ./src/lib/netlify/utils.ts
 var utils = __webpack_require__(42871);
-// EXTERNAL MODULE: ./node_modules/framer-motion/dist/es/render/dom/motion-minimal.js + 20 modules
-var motion_minimal = __webpack_require__(49772);
+// EXTERNAL MODULE: ./node_modules/framer-motion/dist/es/components/AnimatePresence/index.js + 2 modules
+var AnimatePresence = __webpack_require__(53869);
 // EXTERNAL MODULE: ./node_modules/next/dynamic.js
 var dynamic = __webpack_require__(5152);
 // EXTERNAL MODULE: ./node_modules/next/router.js
 var next_router = __webpack_require__(11163);
 // EXTERNAL MODULE: ./node_modules/little-state-machine/dist/little-state-machine.js
 var little_state_machine = __webpack_require__(11240);
+// EXTERNAL MODULE: ./src/components/notifications/confirmations/formSuccess.tsx
+var formSuccess = __webpack_require__(25673);
 ;// CONCATENATED MODULE: ./src/components/contact-form/src/contact-form.tsx
 
 
@@ -60,6 +62,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -95,12 +99,22 @@ const schema = lib/* object */.Ry().shape({
   lastName: lib/* string */.Z_(),
   companyName: lib/* string */.Z_(),
   email: lib/* string */.Z_().email('Please provide a valid email address').required('We need an email to send your quote!'),
-  phone: lib/* lazy */.Vo(value => value.length > 0 ? lib/* string */.Z_().min(9, 'Please enter a full telephone number').max(14, 'The telephone number you entered seems too long.') : lib/* string */.Z_()),
+  phone: lib/* string */.Z_(),
   message: lib/* string */.Z_(),
   'bot-field': lib/* string */.Z_(),
   joinMailingList: lib/* boolean */.O7()
 });
 const mobileMask = [/\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/];
+const submissionMessages = {
+  heading: {
+    success: 'Thanks for your message!',
+    error: 'There was a problem sending your submission'
+  },
+  paragraph: {
+    success: `We'll get back to you very soon`,
+    error: `Please try again, or email us at info@aomail.com.au`
+  }
+};
 const Background = (0,theme/* styled */.zo)(theme/* Card */.Zb, {
   boxShadow: '$1',
   px: '$4',
@@ -113,6 +127,8 @@ const Background = (0,theme/* styled */.zo)(theme/* Card */.Zb, {
   }
 });
 const ContactForm = props => {
+  var _submissionMessages$h, _submissionMessages$p;
+
   const {
     register,
     handleSubmit,
@@ -125,23 +141,18 @@ const ContactForm = props => {
     mode: 'onBlur'
   });
   const router = (0,next_router.useRouter)();
-  const SuccessBackground = (0,theme/* styled */.zo)(Background, {
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    bottom: '0',
-    left: '0',
-    background: '$green',
-    zIndex: '$3'
-  });
   const {
     0: submitting,
     1: setSubmitting
   } = (0,react.useState)(false);
   const {
-    0: firstName,
-    1: setFirstname
-  } = (0,react.useState)('');
+    0: submission,
+    1: setSubmission
+  } = (0,react.useState)({
+    result: null,
+    message: null,
+    form: FORM_NAME
+  });
   const {
     state: {
       userData
@@ -149,8 +160,8 @@ const ContactForm = props => {
   } = (0,little_state_machine/* useStateMachine */.j_)({});
 
   const onSubmit = data => {
+    console.log(JSON.stringify(data, null, 4));
     setSubmitting(true);
-    setFirstname(data.firstName);
     fetch('/', {
       method: 'POST',
       headers: {
@@ -160,19 +171,69 @@ const ContactForm = props => {
         'form-name': FORM_NAME
       }, data), userData))
     }).then(() => {
+      setSubmission({
+        result: 'success',
+        message: 'null',
+        form: FORM_NAME
+      });
       router.push({
         pathname: router.pathname,
         query: _objectSpread({
-          success: 'true'
+          submission: 'success',
+          form: submission.form
         }, router.query)
       }, null, {
         shallow: true
       });
-    }).catch(error => console.error(error)).finally(() => {
+    }).catch(error => {
+      setSubmission({
+        result: 'error',
+        message: error,
+        form: FORM_NAME
+      }), console.error(error);
+      router.push({
+        pathname: router.pathname,
+        query: _objectSpread({
+          submission: 'error',
+          form: submission.form
+        }, router.query)
+      }, null, {
+        shallow: true
+      });
+    }).finally(() => {
       setSubmitting(false);
       reset();
     });
   };
+
+  function removeSubmissionState(e) {
+    const _router$query = router.query,
+          {
+      form,
+      submission: subm
+    } = _router$query,
+          queries = _objectWithoutProperties(_router$query, ["form", "submission"]);
+
+    router.push({
+      pathname: router.pathname,
+      query: queries
+    }, null, {
+      shallow: true
+    });
+    setSubmission({
+      result: null,
+      message: null,
+      form: FORM_NAME
+    });
+  }
+
+  (0,react.useEffect)(() => {
+    var _router$query2;
+
+    if (router !== null && router !== void 0 && (_router$query2 = router.query) !== null && _router$query2 !== void 0 && _router$query2.submission && !submission.result) {
+      removeSubmissionState();
+    }
+  }, [router]);
 
   const _register = register('phone'),
         {
@@ -181,45 +242,7 @@ const ContactForm = props => {
         phoneFormProps = _objectWithoutProperties(_register, ["ref"]);
 
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(Background, _objectSpread(_objectSpread({}, props), {}, {
-    children: [router.query['success'] && /*#__PURE__*/jsx_runtime.jsx(SuccessBackground, {
-      as: motion_minimal.m.div,
-      initial: {
-        opacity: 0
-      },
-      animate: {
-        opacity: 1
-      },
-      exit: {
-        opacity: 0
-      },
-      children: /*#__PURE__*/jsx_runtime.jsx(theme/* Flex */.kC, {
-        css: {
-          alignItems: 'center',
-          height: '100%'
-        },
-        children: /*#__PURE__*/(0,jsx_runtime.jsxs)(theme/* Box */.xu, {
-          css: {
-            flex: '1 1',
-            pb: '$9'
-          },
-          children: [/*#__PURE__*/(0,jsx_runtime.jsxs)(theme/* Heading2 */.XJ, {
-            alignCenter: true,
-            css: {
-              color: '$white'
-            },
-            children: ["Thanks for your message", firstName && `, ${firstName}`, "!"]
-          }), /*#__PURE__*/jsx_runtime.jsx(theme/* Paragraph */.nv, {
-            size: "s",
-            css: {
-              color: '$LA90',
-              mt: '$6'
-            },
-            alignCenter: true,
-            children: "We'll get back to you very soon."
-          })]
-        })
-      })
-    }), /*#__PURE__*/jsx_runtime.jsx(theme/* Heading2 */.XJ, {
+    children: [/*#__PURE__*/jsx_runtime.jsx(theme/* Heading2 */.XJ, {
       marginTop: "small",
       level: "4",
       children: "Send a message"
@@ -275,7 +298,7 @@ const ContactForm = props => {
           errors: errors,
           required: true,
           children: "Email address"
-        })), /*#__PURE__*/jsx_runtime.jsx((reactTextMask_default()), {
+        })), /*#__PURE__*/jsx_runtime.jsx((reactTextMask_default()), _objectSpread(_objectSpread({
           id: "phone",
           placeholder: "04xx xxx xxx",
           mask: mobileMask,
@@ -283,17 +306,17 @@ const ContactForm = props => {
           guide: false,
           type: "text",
           defaultValue: inputs.phone,
-          errors: errors,
-          render: (textMaskRef, props) => /*#__PURE__*/jsx_runtime.jsx(theme/* Input */.II, _objectSpread(_objectSpread(_objectSpread({
+          errors: errors
+        }, phoneFormProps), {}, {
+          render: (textMaskRef, props) => /*#__PURE__*/jsx_runtime.jsx(theme/* Input */.II, _objectSpread(_objectSpread({}, props), {}, {
             ref: node => {
               textMaskRef(node);
               phoneRef(node);
             },
-            name: "phone"
-          }, props), phoneFormProps), {}, {
+            name: "phone",
             children: "Contact number"
           }))
-        }), /*#__PURE__*/(0,jsx_runtime.jsxs)(theme/* Box */.xu, {
+        })), /*#__PURE__*/(0,jsx_runtime.jsxs)(theme/* Box */.xu, {
           css: {
             mt: '$3'
           },
@@ -328,7 +351,7 @@ const ContactForm = props => {
         "aria-hidden": "true",
         className: theme/* classes.visuallyHidden */.Sh.visuallyHidden(),
         children: /*#__PURE__*/(0,jsx_runtime.jsxs)("label", {
-          children: ["Skip this field if you\u2019re human:", /*#__PURE__*/jsx_runtime.jsx("input", _objectSpread({
+          children: ["Ignore this field if you\u2019re human:", /*#__PURE__*/jsx_runtime.jsx("input", _objectSpread({
             tabIndex: -1
           }, register('bot-field')))]
         })
@@ -342,6 +365,13 @@ const ContactForm = props => {
     }), /*#__PURE__*/jsx_runtime.jsx(WorkaroundForm, {
       formFields: inputs,
       name: FORM_NAME
+    }), /*#__PURE__*/jsx_runtime.jsx(AnimatePresence/* AnimatePresence */.M, {
+      children: submission.result && /*#__PURE__*/jsx_runtime.jsx(formSuccess/* FormSuccess */.M, {
+        heading: (_submissionMessages$h = submissionMessages.heading) === null || _submissionMessages$h === void 0 ? void 0 : _submissionMessages$h[submission.result],
+        paragraph: (_submissionMessages$p = submissionMessages.paragraph) === null || _submissionMessages$p === void 0 ? void 0 : _submissionMessages$p[submission.result],
+        handleClose: removeSubmissionState,
+        error: submission.result === 'error'
+      })
     })]
   }));
 };
@@ -408,12 +438,12 @@ const Th = (0,theme/* styled */.zo)('th', {
   py: '$1',
   textAlign: 'left',
   pr: '$4',
-  color: '$DBA75',
+  color: '$DA75',
   fontWeight: '$semibold'
 });
 const Td = (0,theme/* styled */.zo)('td', {
   py: '$1',
-  color: '$DBA80'
+  color: '$DA80'
 });
 const Ul = (0,theme/* styled */.zo)('ul', {
   listStyle: 'none',
@@ -462,7 +492,7 @@ const Contact = ({
   data
 }) => {
   return /*#__PURE__*/(0,jsx_runtime.jsxs)(layout/* Layout */.A, {
-    canonicalPath: "https://www.aomail.com.au/blog" //@ts-ignore
+    canonicalPath: "https://www.aomail.com.au/contact" //@ts-ignore
     ,
     metaData: data.contactPage._seoMetaTags,
     children: [/*#__PURE__*/jsx_runtime.jsx(theme/* Box */.xu, {
@@ -696,6 +726,7 @@ async function getStaticProps({
 /* harmony export */   "AZ": function() { return /* reexport safe */ _Input__WEBPACK_IMPORTED_MODULE_11__.AZ; },
 /* harmony export */   "Kx": function() { return /* reexport safe */ _Input__WEBPACK_IMPORTED_MODULE_11__.Kx; },
 /* harmony export */   "XZ": function() { return /* reexport safe */ _checkbox__WEBPACK_IMPORTED_MODULE_12__.X; },
+/* harmony export */   "ko": function() { return /* reexport safe */ _progressBar__WEBPACK_IMPORTED_MODULE_13__.k; },
 /* harmony export */   "Zb": function() { return /* reexport safe */ _cards__WEBPACK_IMPORTED_MODULE_15__.Z; },
 /* harmony export */   "LZ": function() { return /* reexport safe */ _spacer__WEBPACK_IMPORTED_MODULE_18__.L; },
 /* harmony export */   "OC": function() { return /* reexport safe */ _border__WEBPACK_IMPORTED_MODULE_19__.O; },
@@ -798,42 +829,6 @@ const ChevronRight = (0,_createIcon__WEBPACK_IMPORTED_MODULE_0__/* .createIcon *
     title: 'Chevron Right'
   }
 });
-
-/***/ }),
-
-/***/ 63239:
-/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Phone": function() { return /* reexport safe */ _phone__WEBPACK_IMPORTED_MODULE_0__.L; },
-/* harmony export */   "CovidSafe": function() { return /* reexport safe */ _covidSafe__WEBPACK_IMPORTED_MODULE_1__.J; },
-/* harmony export */   "ArrowForward": function() { return /* reexport safe */ _arrows__WEBPACK_IMPORTED_MODULE_6__.ZJ; },
-/* harmony export */   "Close": function() { return /* reexport safe */ _close__WEBPACK_IMPORTED_MODULE_7__.x; },
-/* harmony export */   "Facebook": function() { return /* reexport safe */ _facebook__WEBPACK_IMPORTED_MODULE_9__.s; },
-/* harmony export */   "LinkedIn": function() { return /* reexport safe */ _linkedIn__WEBPACK_IMPORTED_MODULE_10__.y; }
-/* harmony export */ });
-/* harmony import */ var _phone__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(97919);
-/* harmony import */ var _covidSafe__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38040);
-/* harmony import */ var _createIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(20017);
-/* harmony import */ var _check__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(25407);
-/* harmony import */ var _checkLeaf__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(78638);
-/* harmony import */ var _mailIllustration__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(42638);
-/* harmony import */ var _arrows__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(15211);
-/* harmony import */ var _close__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(78313);
-/* harmony import */ var _patterns__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(16852);
-/* harmony import */ var _facebook__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(38475);
-/* harmony import */ var _linkedIn__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(6879);
-
-
-
-
-
-
-
-
-
-
-
 
 /***/ }),
 
@@ -1190,7 +1185,7 @@ var typography_text = __webpack_require__(31950);
 
 /***/ }),
 
-/***/ 58360:
+/***/ 43245:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 __webpack_require__.r(__webpack_exports__);
@@ -1283,11 +1278,11 @@ __webpack_require__.r(__webpack_exports__);
         rewrites: combinedRewrites,
         i18n: undefined,
         page: "/contact",
-        buildId: "VXSL37vejTUCwsco7WiIr",
-        escapedBuildId: "VXSL37vejTUCwsco7WiIr",
+        buildId: "UkD_Cs6c4nTMyvVdMGNko",
+        escapedBuildId: "UkD_Cs6c4nTMyvVdMGNko",
         basePath: "",
         pageIsDynamic: false,
-        encodedPreviewProps: {previewModeId:"39730ab9481f9026b008be2abcece585",previewModeSigningKey:"99949977aa80c07eb6a52002c87dd2619e637e9929ff738da537412caf63b9cd",previewModeEncryptionKey:"29c8b2285b47bb7d64bcb6b006de95b50183e25e09839db7e8ef92864839793f"}
+        encodedPreviewProps: {previewModeId:"f4be9476d949992a880ef02a282f89b7",previewModeSigningKey:"803bd9ffc92d4f65c1d7aaa60c1ce64966ff936e8f6bf0db898c19bbd6022629",previewModeEncryptionKey:"2926eb1e303ac195eac94257bb89d2ea25feb676007948f0b73b94f17976a033"}
       })
       
     
@@ -1469,7 +1464,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,1522,6187,6071,8697,5675,1428,3473,9185,3903,3608,7522,5596,1587,3992,77,1801], function() { return __webpack_require__(58360); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,8697,3873,1428,3473,2317,9566,494,3608,7522,5596,1587,4090,77,1801,3239], function() { return __webpack_require__(43245); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -1662,22 +1657,25 @@ module.exports = require("zlib");;
 /******/ 		__webpack_require__.x = function() {
 /******/ 			__webpack_require__.e(7057);
 /******/ 			__webpack_require__.e(4475);
-/******/ 			__webpack_require__.e(1522);
-/******/ 			__webpack_require__.e(6187);
+/******/ 			__webpack_require__.e(168);
+/******/ 			__webpack_require__.e(7109);
+/******/ 			__webpack_require__.e(7099);
 /******/ 			__webpack_require__.e(6071);
 /******/ 			__webpack_require__.e(8697);
-/******/ 			__webpack_require__.e(5675);
+/******/ 			__webpack_require__.e(3873);
 /******/ 			__webpack_require__.e(1428);
 /******/ 			__webpack_require__.e(3473);
-/******/ 			__webpack_require__.e(9185);
-/******/ 			__webpack_require__.e(3903);
+/******/ 			__webpack_require__.e(2317);
+/******/ 			__webpack_require__.e(9566);
+/******/ 			__webpack_require__.e(494);
 /******/ 			__webpack_require__.e(3608);
 /******/ 			__webpack_require__.e(7522);
 /******/ 			__webpack_require__.e(5596);
 /******/ 			__webpack_require__.e(1587);
-/******/ 			__webpack_require__.e(3992);
+/******/ 			__webpack_require__.e(4090);
 /******/ 			__webpack_require__.e(77);
 /******/ 			__webpack_require__.e(1801);
+/******/ 			__webpack_require__.e(3239);
 /******/ 			return next();
 /******/ 		};
 /******/ 	}();

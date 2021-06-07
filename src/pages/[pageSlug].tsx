@@ -100,7 +100,7 @@ const ServicePage: React.FC<PageProps> = ({ data, pageSlug }) => {
   }
   const beforeFooter = (
     <>
-      <Container css={{ mb: '$7' }}>
+      <Container css={{ mb: '$5' }}>
         <ClientLogoBanner />
       </Container>
       <Box css={{ backgroundColor: '$white', py: '$4' }}>
@@ -128,7 +128,7 @@ const ServicePage: React.FC<PageProps> = ({ data, pageSlug }) => {
       beforeFooter={beforeFooter}
       //@ts-ignore
       metaData={data._seoMetaTags}
-      canonicalPath={data.canonicalPath}
+      canonicalPath={`https://www.aomail.com.au/${data.canonicalPath}`}
     >
       <Box
         as="section"
@@ -136,7 +136,7 @@ const ServicePage: React.FC<PageProps> = ({ data, pageSlug }) => {
           backgroundColor: '$N10',
           position: 'relative',
           overflow: 'hidden',
-          minHeight: '640px',
+          '@m:': { minHeight: '640px' },
         }}
       >
         <Container

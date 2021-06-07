@@ -1,7 +1,7 @@
 import { styled, Paragraph } from '@theme'
 import * as clientLogos from './logos'
 
-interface ClientLogoBannerProps {}
+interface ClientLogoBannerProps extends React.ComponentProps<typeof Banner> {}
 
 const Logos = styled('div', {
   position: 'relative',

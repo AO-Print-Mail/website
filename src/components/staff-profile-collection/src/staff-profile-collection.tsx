@@ -13,11 +13,12 @@ import {
   Heading3,
 } from '@theme'
 
-interface StaffProfileCollectionProps {
+interface StaffProfileCollectionProps
+  extends React.ComponentProps<typeof ColumnWrapper> {
   data: StaffProfileProps[]
 }
 
-interface StaffProfileProps {
+interface StaffProfileProps extends React.ComponentProps<typeof FlatCard> {
   name?: string
   jobTitle?: string
   biography?: StaffProfileModelBiographyField
@@ -99,6 +100,7 @@ export const StaffProfile: React.FC<StaffProfileProps> = ({
 }
 export const StaffProfileCollection: React.FC<StaffProfileCollectionProps> = ({
   data,
+  ...props
 }) => {
   return (
     <ColumnWrapper
@@ -110,6 +112,7 @@ export const StaffProfileCollection: React.FC<StaffProfileCollectionProps> = ({
           mx: '8.33%',
         },
       }}
+      {...props}
     >
       {data.map((staff) => {
         return (

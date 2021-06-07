@@ -1,23 +1,27 @@
+import { visuallyHidden } from '@theme/utils/utilityClasses'
+import { store } from '@lib/little-state-machine/store'
+
 export interface NetlifyWorkaroundFormProps {
   formFields: { [k: string]: any }
   name: string
+  withUserData?: boolean
 }
-import { visuallyHidden } from '@theme/utils/utilityClasses'
-import { useStateMachine } from 'little-state-machine'
 
 export const NetlifyWorkaroundForm: React.FC<NetlifyWorkaroundFormProps> = ({
   formFields,
   name,
+  withUserData = true,
 }) => {
-  const {
-    state: { userData },
-  } = useStateMachine({})
+  const fields = withUserData
+    ? { ...formFields, ...store.userData }
+    : formFields
   return (
     <form
       method="POST"
       data-netlify="true"
       name={name}
       aria-hidden="true"
+      netlify-honeypot="bot-field"
       hidden
       className={visuallyHidden()}
     >
@@ -28,7 +32,7 @@ export const NetlifyWorkaroundForm: React.FC<NetlifyWorkaroundFormProps> = ({
         name="form-name"
         value={name}
       />
-      {Object.entries({ ...formFields, ...userData }).map(([name, value]) => (
+      {Object.entries(fields).map(([name, value]) => (
         <input
           type="hidden"
           hidden

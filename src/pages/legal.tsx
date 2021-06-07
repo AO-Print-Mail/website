@@ -1,8 +1,6 @@
 import { Awaited } from '@utils/src'
 import { request } from '@lib/datocms/datocms'
 import {
-  GetBlogPostSummariesQuery,
-  GetBlogPageQuery,
   GetLegalPagesQuery,
   GetLegalListPageQuery,
 } from '@lib/datocms/__generated__/types'
@@ -19,6 +17,14 @@ import {
 import { LinkCard } from '@components/link-card'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { tempQuoteFormInputs } from '@components/temp-quote-form'
+import dynamic from 'next/dynamic'
+
+const WorkaroundForm = dynamic(() =>
+  import('@components/netlify-workaraound-form').then(
+    (res) => res.NetlifyWorkaroundForm
+  )
+)
 
 interface PageProps {
   data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
@@ -56,7 +62,9 @@ const Legal: React.FC<PageProps> = ({ data }) => {
     () => {
       data.articleSummaries
         .slice(0, PREFETCH_ARTICLES)
-        .forEach((article) => router.prefetch(`/blog/${article.legalPageSlug}`))
+        .forEach((article) =>
+          router.prefetch(`/legal/${article.legalPageSlug}`)
+        )
     },
     //need to add param here if filtering is being used
     //if queries being made on the client, need to check package.json[browser]
@@ -114,6 +122,8 @@ const Legal: React.FC<PageProps> = ({ data }) => {
           })}
         </ListWrapper>
       </Container>
+      {/* HIDING THESE WORKAROUND FORMS ON THIS PAGE BECAUSE SEO ISN't IMPORTANT HERE */}
+      <WorkaroundForm formFields={tempQuoteFormInputs} name="t_request-quote" />
     </Layout>
   )
 }

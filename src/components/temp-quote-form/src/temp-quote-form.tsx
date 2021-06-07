@@ -19,23 +19,14 @@ import React, { useEffect, useState } from 'react'
 import { encode } from '@lib/netlify/utils'
 import { Button } from '@components/button'
 import { AnimatePresence } from 'framer-motion'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 import { useStateMachine } from 'little-state-machine'
 import { ModalLayout } from '@components/modal/src/layout'
 import { FormSuccess } from '@components/notifications/confirmations/formSuccess'
 
-const WorkaroundForm = dynamic(
-  () =>
-    import('@components/netlify-workaraound-form').then(
-      (res) => res.NetlifyWorkaroundForm
-    ),
-  { ssr: false }
-)
-
 const FORM_NAME = 't_request-quote'
 
-interface TempQuoteFormProps {
+interface TempQuoteFormProps extends React.ComponentProps<typeof ModalLayout> {
   toggle: (e: React.MouseEvent) => void
   modalLayoutId?: string
   active: boolean
@@ -44,7 +35,7 @@ interface TempQuoteFormProps {
   onSubmissionClose?: () => void
 }
 
-const inputs = {
+export const tempQuoteFormInputs = {
   firstName: '',
   lastName: '',
   companyName: '',
@@ -101,8 +92,6 @@ const submissionMessages = {
   },
 }
 
-const Background = styled('div', {})
-
 export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
   toggle,
   modalLayoutId,
@@ -116,7 +105,8 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<typeof inputs>({
+    watch,
+  } = useForm<typeof tempQuoteFormInputs>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   })
@@ -132,7 +122,15 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
     state: { userData },
   } = useStateMachine({})
 
-  const onSubmit = (data: typeof inputs) => {
+  const watchService = watch('service')
+
+  useEffect(() => {
+    if (window && watchService) {
+      window.dataLayer.push({ service: watchService })
+    }
+  }, [watchService])
+
+  const onSubmit = (data: typeof tempQuoteFormInputs) => {
     setSubmitting(true)
     fetch('/', {
       method: 'POST',
@@ -198,8 +196,9 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
     <ModalLayout
       hideControlsBorder
       controls={<CloseControls handleClose={toggle} />}
+      {...props}
     >
-      <Background {...props}>
+      <Box>
         <Heading2 marginTop="small" level="4">
           Request a quote
         </Heading2>
@@ -210,7 +209,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
                 {...register('firstName')}
                 id="firstName"
                 placeholder="Jane"
-                defaultValue={inputs.firstName}
+                defaultValue={tempQuoteFormInputs.firstName}
                 css={{ px: '$2', flexBasis: '50%' }}
                 errors={errors}
                 required
@@ -221,7 +220,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
                 {...register('lastName')}
                 id="lastName"
                 placeholder="Appleseed"
-                defaultValue={inputs.lastName}
+                defaultValue={tempQuoteFormInputs.lastName}
                 css={{ px: '$2', flexBasis: '50%' }}
                 errors={errors}
               >
@@ -232,7 +231,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               {...register('companyName')}
               id="companyName"
               placeholder="Acme inc"
-              defaultValue={inputs.companyName}
+              defaultValue={tempQuoteFormInputs.companyName}
               errors={errors}
             >
               Company name
@@ -242,7 +241,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               id="email"
               placeholder="jane@example.com.au"
               type="email"
-              defaultValue={inputs.email}
+              defaultValue={tempQuoteFormInputs.email}
               errors={errors}
               required
             >
@@ -255,7 +254,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               inputMode="numeric"
               guide={false}
               type="text"
-              defaultValue={inputs.phone}
+              defaultValue={tempQuoteFormInputs.phone}
               errors={errors}
               render={(textMaskRef, props) => (
                 <Input
@@ -364,14 +363,14 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
                 cols={30}
                 placeholder="Please include any additional information that is applicable to your job."
                 autoComplete="off"
-                defaultValue={inputs.message}
+                defaultValue={tempQuoteFormInputs.message}
                 css={{ width: '100%' }}
               />
             </Box>
             <Checkbox
               {...register('joinMailingList')}
               id="joinMailingList"
-              defaultChecked={inputs.joinMailingList}
+              defaultChecked={tempQuoteFormInputs.joinMailingList}
               css={{ mt: '$3' }}
             >
               Keep me up to date with news and special offers
@@ -387,7 +386,6 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
             Request quote
           </Button>
         </form>
-        <WorkaroundForm formFields={inputs} name={FORM_NAME} />
         <AnimatePresence>
           {submission.result && (
             <FormSuccess
@@ -398,7 +396,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
             />
           )}
         </AnimatePresence>
-      </Background>
+      </Box>
     </ModalLayout>
   )
 }

@@ -17,7 +17,6 @@ interface ButtonProps extends React.ComponentProps<typeof ButtonBg> {
   iconSpacing?: keyof typeof theme['space']
   as?: string
   href?: string
-  css?: CSS
   children?: React.ReactNode
   type?: 'submit' | 'reset' | 'button'
 }

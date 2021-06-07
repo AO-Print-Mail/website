@@ -12,12 +12,12 @@ import {
 } from '@theme'
 import { Image, ResponsiveImageType } from 'react-datocms'
 
-interface TestimonialProps {
+interface TestimonialProps
+  extends React.ComponentProps<typeof FullWidthFeatureContainer> {
   image: ResponsiveImageType
   name: string
   company: string
   testimonial: string
-  css?: CSS
 }
 
 const Photo = styled(Image, {

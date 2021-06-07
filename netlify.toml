@@ -1,8 +1,114 @@
 [build]
-  command = "npm run build"
   publish = "out"
 [context.production.environment]
   NEXT_SERVERLESS = "true"
   NODE_ENV = "production"
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+[functions]
+  node_bundler = "esbuild"
+  directory = "netlify/functions/"
+  
+[[redirects]]
+from = "/get-quick-quote"
+to = "/"
+status = 302
+force = false
+[[redirects]]
+from = "/get-quote"
+to = "/"
+status = 302
+force = false
+[[redirects]]
+from = "/news"
+to = "/blog"
+status = 301
+force = false
+[[redirects]]
+from = "/our-customers"
+to = "/"
+status = 302
+force = false
+[[redirects]]
+from = "/news/*.html"
+to = "/blog/:splat"
+status = 301
+force = false
+[[redirects]]
+from = "/news/*"
+to = "/blog/:splat"
+status = 301
+force = false
+[[redirects]]
+from = "/team-members/steven-hulme"
+to = "/"
+status = 301
+force = false
+[[redirects]]
+from = "/team-members/steve-hulme"
+to = "/"
+status = 301
+force = false
+[[redirects]]
+from = "/print"
+to = "/printing"
+status = 301
+force = false
+[[redirects]]
+from = "/services/print-services"
+to = "/printing"
+status = 301
+force = false
+[[redirects]]
+from = "/flyer-distribution"
+to = "/direct-mail"
+status = 302
+force = false
+[[redirects]]
+from = "/services/direct-mail-services"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/fulfilment.html"
+to = "/package-fulfilment"
+status = 301
+force = false
+[[redirects]]
+from = "/mail"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/services"
+to = "/direct-mail"
+status = 30
+force = false
+[[redirects]]
+from = "/sitemap.html"
+to = "/sitemap.xml"
+status = 301
+force = false
+[[redirects]]
+from = "/ano-adbox"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/ano-wide-format"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/sample-mail"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/direct-mail"
+to = "/direct-mail"
+status = 301
+force = false
+[[redirects]]
+from = "/services/mail-services"
+to = "/direct-mail"
+status = 301
+force = false

@@ -12,12 +12,12 @@ exports.modules = {
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(85893);
 /* harmony import */ var _theme__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(38135);
 /* harmony import */ var _components_button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(75843);
-/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(49772);
-/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(35172);
-/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(49540);
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(49772);
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(35172);
+/* harmony import */ var framer_motion__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(85646);
 /* harmony import */ var _components_temp_quote_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(20494);
-/* harmony import */ var _components_modal_src_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(95778);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(67294);
+/* harmony import */ var _components_modal_src_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(95778);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(67294);
 
 
 
@@ -53,7 +53,7 @@ const Bg = (0,_theme__WEBPACK_IMPORTED_MODULE_1__/* .styled */ .zo)(_theme__WEBP
     px: '25%'
   }
 });
-const Content = (0,_theme__WEBPACK_IMPORTED_MODULE_1__/* .styled */ .zo)(framer_motion__WEBPACK_IMPORTED_MODULE_5__.m.div, {
+const Content = (0,_theme__WEBPACK_IMPORTED_MODULE_1__/* .styled */ .zo)(framer_motion__WEBPACK_IMPORTED_MODULE_6__.m.div, {
   display: 'flex',
   flexFlow: 'column nowrap',
   alignItems: 'center'
@@ -75,7 +75,7 @@ const QuoteCta = (_ref) => {
   } = _ref,
       props = _objectWithoutProperties(_ref, ["heading", "paragraph"]);
 
-  const contentControls = (0,framer_motion__WEBPACK_IMPORTED_MODULE_6__/* .useAnimation */ ._)();
+  const contentControls = (0,framer_motion__WEBPACK_IMPORTED_MODULE_7__/* .useAnimation */ ._)();
 
   function handleOpenModal({
     modalIsOpen,
@@ -103,8 +103,8 @@ const QuoteCta = (_ref) => {
     };
   }
 
-  return /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(framer_motion__WEBPACK_IMPORTED_MODULE_7__/* .AnimateSharedLayout */ .s, {
-    children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_modal_src_modal__WEBPACK_IMPORTED_MODULE_8__/* .Modal */ .u, {
+  return /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(framer_motion__WEBPACK_IMPORTED_MODULE_8__/* .AnimateSharedLayout */ .s, {
+    children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_components_modal_src_modal__WEBPACK_IMPORTED_MODULE_4__/* .Modal */ .u, {
       opens: ({
         modalIsOpen,
         toggleModal
@@ -119,7 +119,7 @@ const QuoteCta = (_ref) => {
         modalIsOpen,
         toggleModal
       }) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(Bg, _objectSpread(_objectSpread({
-        as: framer_motion__WEBPACK_IMPORTED_MODULE_5__.m.div,
+        as: framer_motion__WEBPACK_IMPORTED_MODULE_6__.m.div,
         layoutId: "quoteCta"
       }, props), {}, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(Content, {
@@ -129,7 +129,7 @@ const QuoteCta = (_ref) => {
           children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_theme__WEBPACK_IMPORTED_MODULE_1__/* .Title */ .Dx, {
             layout: true,
             layoutId: "quote-title",
-            as: framer_motion__WEBPACK_IMPORTED_MODULE_5__.m.h2,
+            as: framer_motion__WEBPACK_IMPORTED_MODULE_6__.m.h2,
             level: "3",
             alignCenter: true,
             children: heading || 'Get a quote for your next job'

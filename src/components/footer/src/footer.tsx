@@ -16,8 +16,7 @@ import {
 import { Button, IconButton } from '@components/button'
 import Link from 'next/link'
 
-interface FooterProps {
-  css?: CSS
+interface FooterProps extends React.ComponentProps<typeof FooterWrapper> {
   beforeFooter?: React.ReactNode
   footerCss?: CSS
   landing?: boolean
@@ -260,7 +259,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
               <Flex css={{ justifyContent: 'flex-start' }}>
                 <IconButton
                   as="a"
-                  href=""
+                  href="https://www.facebook.com/aoprintmail"
                   color="light"
                   style="naked"
                   size="small"
@@ -271,7 +270,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                 </IconButton>
                 <IconButton
                   as="a"
-                  href=""
+                  href="https://www.linkedin.com/company/aomail"
                   color="light"
                   style="naked"
                   size="small"

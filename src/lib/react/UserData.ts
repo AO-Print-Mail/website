@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import publicIp from 'public-ip'
+//import publicIp from 'public-ip'
 import { useStateMachine } from 'little-state-machine'
 import { updateUserData } from '@lib/little-state-machine/actions'
 import { useSetCookieToState } from './cookies'
@@ -9,15 +9,14 @@ export const UserData = ({}) => {
   const { state, actions } = useStateMachine({ updateUserData })
   const router = useRouter()
 
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const ip = await publicIp.v4()
+  //     //fetch the user ip and add to state
+  //     actions.updateUserData({ ipAddress: ip })
+  //   })()
+  // }, [])
   useEffect(() => {
-    ;(async () => {
-      const ip = await publicIp.v4()
-      //fetch the user ip and add to state
-      actions.updateUserData({ ipAddress: ip })
-    })()
-  }, [])
-  useEffect(() => {
-    //fetch the user IP and add to state
     const trackingParams = Object.keys(state.userData).filter((key) =>
       key.match(/^[utm_|hsa_|gclid]/)
     )
@@ -30,9 +29,15 @@ export const UserData = ({}) => {
       }
       return acc
     }
+
     const trackingData = Object.entries(router.query).reduce(filterParams, {})
+    for (const k in { ...state.userData, ...trackingData }) {
+      if (trackingData?.[k])
+        window.dataLayer.push({ event: k, value: trackingData[k] })
+    }
     actions.updateUserData(trackingData)
   }, [router])
+
   useSetCookieToState('hubspotutk', 'hubspotUserToken', 'hutk')
   return null
 }

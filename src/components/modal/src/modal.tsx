@@ -16,12 +16,12 @@ type ModalRenderProps = ({
   modalIsOpen: boolean
   toggleModal: () => void
 }) => React.ReactNode
-interface QuoteFormProps extends ModalProps {
+interface ModelOpenerProps extends ModalProps {
   opens: ModalRenderProps
   children: ModalRenderProps
 }
 
-export const Modal: React.FC<QuoteFormProps> = ({
+export const Modal: React.FC<ModelOpenerProps> = ({
   width,
   height,
   opens,

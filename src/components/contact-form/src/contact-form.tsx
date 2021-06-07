@@ -32,7 +32,7 @@ const WorkaroundForm = dynamic(() =>
 
 const FORM_NAME = 'contactForm'
 
-interface ContactFormProps {}
+interface ContactFormProps extends React.ComponentProps<typeof Background> {}
 
 const inputs = {
   firstName: '',
@@ -117,6 +117,7 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
   } = useStateMachine({})
 
   const onSubmit = (data: typeof inputs) => {
+    console.log(JSON.stringify(data, null, 4))
     setSubmitting(true)
     fetch('/', {
       method: 'POST',
@@ -241,14 +242,14 @@ export const ContactForm: React.FC<ContactFormProps> = (props) => {
             type="text"
             defaultValue={inputs.phone}
             errors={errors}
+            {...phoneFormProps}
             render={(textMaskRef, props) => (
               <Input
-                {...phoneFormProps}
+                {...props}
                 ref={(node) => {
                   textMaskRef(node)
                   phoneRef(node)
                 }}
-                {...props}
                 name="phone"
               >
                 Contact number

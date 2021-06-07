@@ -9,7 +9,6 @@ import {
 } from '@lib/datocms/__generated__/types'
 import { Awaited } from '@utils/src'
 import { StructuredText } from '@lib/datocms/structuredText'
-import { LandingPageQuoteForm } from '@components/landing-page-quote-form'
 import { Header } from '@components/header-landing'
 import { QuoteFormDirectMail } from '@components/quote-form-direct-mail'
 

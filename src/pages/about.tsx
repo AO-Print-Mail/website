@@ -40,7 +40,10 @@ const ConfiguredText = ({ data, size }) => {
     <StructuredText
       data={data}
       config={{
-        headingProps: { color: 'primary', css: { ml: '8.335%' } },
+        headingProps: {
+          color: 'primary',
+          css: { mt: '$7', '@xl': { ml: '8.335%' } },
+        },
         paragraphProps: { size },
         listItemProps: {
           icon: 'CheckLeaf',

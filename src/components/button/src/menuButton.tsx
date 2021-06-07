@@ -1,13 +1,12 @@
 import { m as motion } from 'framer-motion'
 import React, { forwardRef } from 'react'
 import { Button } from './button'
-import { styled, CSS } from '@theme/stitches.config'
+import { styled } from '@theme/stitches.config'
 import { Paragraph } from '@theme/typography'
 
-interface MenuButtonProps {
+interface MenuButtonProps extends React.ComponentProps<typeof Button> {
   open: boolean
   onClick?: (e: React.MouseEvent) => void
-  css?: CSS
 }
 
 const pathVariants = {
@@ -57,7 +56,6 @@ export const MenuButton = forwardRef<HTMLButtonElement, MenuButtonProps>(
     return (
       <Button
         style="naked"
-        //@ts-expect-error
         css={{ color: '$DBA85' }}
         rightIcon={<MenuButtonIcon open={open} />}
         onClick={onClick}
