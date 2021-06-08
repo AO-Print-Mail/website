@@ -125,6 +125,12 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
   const watchService = watch('service')
 
   useEffect(() => {
+    if (window) {
+      window.dataLayer.push({ event: 'quote_form_opened' })
+    }
+  }, [])
+
+  useEffect(() => {
     if (window && watchService) {
       window.dataLayer.push({ service: watchService })
     }
@@ -139,6 +145,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
     })
       .then(() => {
         setSubmission({ result: 'success', message: 'null', form: FORM_NAME })
+        window?.dataLayer.push({ event: 'quote_form_submitted' })
         router.push(
           {
             pathname: router.pathname,
@@ -155,6 +162,7 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
       .catch((error) => {
         setSubmission({ result: 'error', message: error, form: FORM_NAME }),
           console.error(error)
+        window?.dataLayer.push({ event: 'quote_form_submission_error' })
         router.push(
           {
             pathname: router.pathname,
