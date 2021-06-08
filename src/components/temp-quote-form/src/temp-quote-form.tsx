@@ -125,14 +125,18 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
   const watchService = watch('service')
 
   useEffect(() => {
-    if (window) {
-      window.dataLayer.push({ event: 'quote_form_opened' })
+    window?.dataLayer.push({ event: 'quote_form_opened' })
+    return () => {
+      window?.dataLayer.push({ event: 'quote_form_closed' })
     }
   }, [])
 
   useEffect(() => {
     if (window && watchService) {
-      window.dataLayer.push({ service: watchService })
+      window.dataLayer.push({
+        event: 'service_category_selected',
+        service: watchService,
+      })
     }
   }, [watchService])
 
@@ -264,19 +268,22 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               type="text"
               defaultValue={tempQuoteFormInputs.phone}
               errors={errors}
-              render={(textMaskRef, props) => (
-                <Input
-                  {...phoneFormProps}
-                  ref={(node) => {
-                    textMaskRef(node)
-                    phoneRef(node)
-                  }}
-                  {...props}
-                  name="phone"
-                >
-                  Contact number
-                </Input>
-              )}
+              {...phoneFormProps}
+              render={(textMaskRef, props) => {
+                console.log(JSON.stringify(props))
+                return (
+                  <Input
+                    ref={(node) => {
+                      textMaskRef(node)
+                      phoneRef(node)
+                    }}
+                    {...props}
+                    name="phone"
+                  >
+                    Contact number
+                  </Input>
+                )
+              }}
             />
             <InputLabel
               css={{ mt: '$8' }}
