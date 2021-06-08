@@ -1,5 +1,6 @@
 [build]
   publish = "out"
+  NEXT_IMAGE_ALLOWED_DOMAINS = "maps.googleapis.com"
 [context.production.environment]
   NEXT_SERVERLESS = "true"
   NODE_ENV = "production"

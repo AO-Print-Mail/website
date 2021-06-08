@@ -18,4 +18,4 @@ export const encode = (obj: { [key: string]: any }): string =>
 export const serverUrl =
   __DEV__ && !process.env.NETLIFY
     ? 'http://localhost:3000'
-    : 'https://offers.aomail.com.au'
+    : 'https://www.aomail.com.au'

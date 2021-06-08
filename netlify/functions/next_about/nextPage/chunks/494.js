@@ -21,6 +21,12 @@ exports.modules = {
 
 
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
 function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
@@ -80,7 +86,7 @@ const FormSuccess = (_ref) => {
       onComplete: handleClose
     });
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_theme_atoms__WEBPACK_IMPORTED_MODULE_1__/* .Flex */ .kC, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(_theme_atoms__WEBPACK_IMPORTED_MODULE_1__/* .Flex */ .kC, _objectSpread(_objectSpread({
     as: framer_motion__WEBPACK_IMPORTED_MODULE_8__.m.div,
     initial: "hidden",
     animate: "visible",
@@ -95,7 +101,8 @@ const FormSuccess = (_ref) => {
       background: '$white',
       position: 'absolute',
       tlbr: '0'
-    },
+    }
+  }, props), {}, {
     children: [error ? /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx(_theme_icons__WEBPACK_IMPORTED_MODULE_2__.ErrorCheck, {
       css: {
         size: '$9',
@@ -143,7 +150,7 @@ const FormSuccess = (_ref) => {
       },
       progress: progress
     })]
-  });
+  }));
 };
 
 /***/ }),
@@ -321,7 +328,6 @@ const submissionMessages = {
     error: `Please try again, or email us at sales@aomail.com.au`
   }
 };
-const Background = (0,theme/* styled */.zo)('div', {});
 const TempQuoteForm = (_ref) => {
   var _submissionMessages$h, _submissionMessages$p;
 
@@ -340,7 +346,8 @@ const TempQuoteForm = (_ref) => {
     formState: {
       errors
     },
-    reset
+    reset,
+    watch
   } = (0,index_esm/* useForm */.cI)({
     resolver: (0,yup/* yupResolver */.X)(schema),
     mode: 'onBlur'
@@ -363,6 +370,21 @@ const TempQuoteForm = (_ref) => {
       userData
     }
   } = (0,little_state_machine/* useStateMachine */.j_)({});
+  const watchService = watch('service');
+  (0,react.useEffect)(() => {
+    if (window) {
+      window.dataLayer.push({
+        event: 'quote_form_opened'
+      });
+    }
+  }, []);
+  (0,react.useEffect)(() => {
+    if (window && watchService) {
+      window.dataLayer.push({
+        service: watchService
+      });
+    }
+  }, [watchService]);
 
   const onSubmit = data => {
     setSubmitting(true);
@@ -375,10 +397,15 @@ const TempQuoteForm = (_ref) => {
         'form-name': FORM_NAME
       }, data), userData))
     }).then(() => {
+      var _window;
+
       setSubmission({
         result: 'success',
         message: 'null',
         form: FORM_NAME
+      });
+      (_window = window) === null || _window === void 0 ? void 0 : _window.dataLayer.push({
+        event: 'quote_form_submitted'
       });
       router.push({
         pathname: router.pathname,
@@ -390,11 +417,16 @@ const TempQuoteForm = (_ref) => {
         shallow: true
       });
     }).catch(error => {
+      var _window2;
+
       setSubmission({
         result: 'error',
         message: error,
         form: FORM_NAME
       }), console.error(error);
+      (_window2 = window) === null || _window2 === void 0 ? void 0 : _window2.dataLayer.push({
+        event: 'quote_form_submission_error'
+      });
       router.push({
         pathname: router.pathname,
         query: _objectSpread({
@@ -447,12 +479,13 @@ const TempQuoteForm = (_ref) => {
   } = _register,
         phoneFormProps = _objectWithoutProperties(_register, ["ref"]);
 
-  return /*#__PURE__*/jsx_runtime.jsx(ModalLayout, {
+  return /*#__PURE__*/jsx_runtime.jsx(ModalLayout, _objectSpread(_objectSpread({
     hideControlsBorder: true,
     controls: /*#__PURE__*/jsx_runtime.jsx(theme/* CloseControls */.wY, {
       handleClose: toggle
-    }),
-    children: /*#__PURE__*/(0,jsx_runtime.jsxs)(Background, _objectSpread(_objectSpread({}, props), {}, {
+    })
+  }, props), {}, {
+    children: /*#__PURE__*/(0,jsx_runtime.jsxs)(theme/* Box */.xu, {
       children: [/*#__PURE__*/jsx_runtime.jsx(theme/* Heading2 */.XJ, {
         marginTop: "small",
         level: "4",
@@ -661,8 +694,8 @@ const TempQuoteForm = (_ref) => {
           error: submission.result === 'error'
         })
       })]
-    }))
-  });
+    })
+  }));
 };
 ;// CONCATENATED MODULE: ./src/components/temp-quote-form/index.ts
 
@@ -680,7 +713,7 @@ const TempQuoteForm = (_ref) => {
 /* harmony import */ var _utils_src__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(78161);
 
 const encode = obj => Object.entries(obj).map(([key, val]) => `${typeof val === 'string' ? `${encodeURIComponent(key)}=${encodeURIComponent(val)}` : val !== null && typeof val === 'object' ? `${encode(val)}` : ''}`, '').join('&');
-const serverUrl = _utils_src__WEBPACK_IMPORTED_MODULE_0__.__DEV__ && !process.env.NETLIFY ? 'http://localhost:3000' : 'https://offers.aomail.com.au';
+const serverUrl = _utils_src__WEBPACK_IMPORTED_MODULE_0__.__DEV__ && !process.env.NETLIFY ? 'http://localhost:3000' : 'https://www.aomail.com.au';
 
 /***/ })
 

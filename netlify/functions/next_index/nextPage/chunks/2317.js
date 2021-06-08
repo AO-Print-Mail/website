@@ -708,9 +708,10 @@ const NavSection = ({
 const MobileNavigation = (_ref) => {
   let {
     navIsOpen,
-    data = mobile_navigation_staticData
+    data = mobile_navigation_staticData,
+    toggleNav
   } = _ref,
-      props = mobile_navigation_objectWithoutProperties(_ref, ["navIsOpen", "data"]);
+      props = mobile_navigation_objectWithoutProperties(_ref, ["navIsOpen", "data", "toggleNav"]);
 
   return /*#__PURE__*/jsx_runtime.jsx(NavWrapper, mobile_navigation_objectSpread(mobile_navigation_objectSpread({
     open: navIsOpen
@@ -723,7 +724,8 @@ const MobileNavigation = (_ref) => {
       },
       children: data.map(section => /*#__PURE__*/jsx_runtime.jsx(NavSection, {
         section_label: section.section_label,
-        menu_items: section.menu_items
+        menu_items: section.menu_items,
+        toggleNav: toggleNav
       }, section.section_label))
     })
   }));
@@ -1022,8 +1024,7 @@ const HeaderMain = /*#__PURE__*/(0,react.forwardRef)((_ref, ref) => {
         layout: true,
         children: /*#__PURE__*/jsx_runtime.jsx(MobileNavigation, {
           id: "drawer-menu",
-          navIsOpen: menuIsOpen,
-          toggleNav: handleMenuClick
+          navIsOpen: menuIsOpen
         })
       })]
     })

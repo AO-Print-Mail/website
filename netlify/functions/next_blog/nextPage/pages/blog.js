@@ -223,7 +223,65 @@ async function getStaticProps({
 
 /***/ }),
 
-/***/ 77156:
+/***/ 38135:
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "iv": function() { return /* reexport safe */ _stitches_config__WEBPACK_IMPORTED_MODULE_0__.iv; },
+/* harmony export */   "wU": function() { return /* reexport safe */ _stitches_config__WEBPACK_IMPORTED_MODULE_0__.wU; },
+/* harmony export */   "zo": function() { return /* reexport safe */ _stitches_config__WEBPACK_IMPORTED_MODULE_0__.zo; },
+/* harmony export */   "nL": function() { return /* reexport safe */ _typography__WEBPACK_IMPORTED_MODULE_1__.nL; },
+/* harmony export */   "XJ": function() { return /* reexport safe */ _typography__WEBPACK_IMPORTED_MODULE_1__.XJ; },
+/* harmony export */   "k8": function() { return /* reexport safe */ _typography__WEBPACK_IMPORTED_MODULE_1__.k8; },
+/* harmony export */   "Cd": function() { return /* reexport safe */ _typography__WEBPACK_IMPORTED_MODULE_1__.Cd; },
+/* harmony export */   "nv": function() { return /* reexport safe */ _typography__WEBPACK_IMPORTED_MODULE_1__.nv; },
+/* harmony export */   "W0": function() { return /* reexport safe */ _globals__WEBPACK_IMPORTED_MODULE_2__.W; },
+/* harmony export */   "s1": function() { return /* reexport safe */ _icons__WEBPACK_IMPORTED_MODULE_3__.Facebook; },
+/* harmony export */   "yh": function() { return /* reexport safe */ _icons__WEBPACK_IMPORTED_MODULE_3__.LinkedIn; },
+/* harmony export */   "LP": function() { return /* reexport safe */ _icons__WEBPACK_IMPORTED_MODULE_3__.Phone; },
+/* harmony export */   "xu": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.xu; },
+/* harmony export */   "Zb": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.Zb; },
+/* harmony export */   "XZ": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.XZ; },
+/* harmony export */   "wY": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.wY; },
+/* harmony export */   "sg": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.sg; },
+/* harmony export */   "fh": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.fh; },
+/* harmony export */   "W2": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.W2; },
+/* harmony export */   "vs": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.vs; },
+/* harmony export */   "DY": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.DY; },
+/* harmony export */   "eu": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.eu; },
+/* harmony export */   "kC": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.kC; },
+/* harmony export */   "C8": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.C8; },
+/* harmony export */   "II": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.II; },
+/* harmony export */   "AZ": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.AZ; },
+/* harmony export */   "TR": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.TR; },
+/* harmony export */   "EU": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.EU; },
+/* harmony export */   "LZ": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.LZ; },
+/* harmony export */   "Kx": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.Kx; },
+/* harmony export */   "L5": function() { return /* reexport safe */ _atoms__WEBPACK_IMPORTED_MODULE_4__.L5; },
+/* harmony export */   "Sh": function() { return /* reexport module object */ _utils_utilityClasses__WEBPACK_IMPORTED_MODULE_6__; }
+/* harmony export */ });
+/* harmony import */ var _stitches_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(54944);
+/* harmony import */ var _typography__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(79973);
+/* harmony import */ var _globals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(18988);
+/* harmony import */ var _icons__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(63239);
+/* harmony import */ var _atoms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(34176);
+/* harmony import */ var _utils_forwardRef__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(62626);
+/* harmony import */ var _utils_utilityClasses__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(35222);
+/* harmony import */ var _breakpoints__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(89704);
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ 65398:
 /***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -317,11 +375,11 @@ __webpack_require__.r(__webpack_exports__);
         rewrites: combinedRewrites,
         i18n: undefined,
         page: "/blog",
-        buildId: "UkD_Cs6c4nTMyvVdMGNko",
-        escapedBuildId: "UkD_Cs6c4nTMyvVdMGNko",
+        buildId: "BfetTQrycQHqq6JytuH1Q",
+        escapedBuildId: "BfetTQrycQHqq6JytuH1Q",
         basePath: "",
         pageIsDynamic: false,
-        encodedPreviewProps: {previewModeId:"f4be9476d949992a880ef02a282f89b7",previewModeSigningKey:"803bd9ffc92d4f65c1d7aaa60c1ce64966ff936e8f6bf0db898c19bbd6022629",previewModeEncryptionKey:"2926eb1e303ac195eac94257bb89d2ea25feb676007948f0b73b94f17976a033"}
+        encodedPreviewProps: {previewModeId:"f92900b15b6a260a5403187ed5c8d368",previewModeSigningKey:"6b46b98cbda26a9a3743855f1e7b655ca54a8f5a499aa368bb57dd1ee62b46f2",previewModeEncryptionKey:"ca8e0103eb636123020b51f35ae0eea7cf9bc717a941e2839385061c0a816a67"}
       })
       
     
@@ -360,14 +418,6 @@ module.exports = require("crypto");;
 
 /***/ }),
 
-/***/ 76200:
-/***/ (function(module) {
-
-"use strict";
-module.exports = require("dgram");;
-
-/***/ }),
-
 /***/ 28614:
 /***/ (function(module) {
 
@@ -397,14 +447,6 @@ module.exports = require("http");;
 
 "use strict";
 module.exports = require("https");;
-
-/***/ }),
-
-/***/ 11631:
-/***/ (function(module) {
-
-"use strict";
-module.exports = require("net");;
 
 /***/ }),
 
@@ -453,14 +495,6 @@ module.exports = require("stream");;
 
 "use strict";
 module.exports = require("string_decoder");;
-
-/***/ }),
-
-/***/ 4016:
-/***/ (function(module) {
-
-"use strict";
-module.exports = require("tls");;
 
 /***/ }),
 
@@ -530,7 +564,7 @@ module.exports = require("zlib");;
 /******/ 	__webpack_require__.x = function() {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,4475,168,7109,7099,6071,8697,1428,3473,2317,9566,494,7522,5596,7589,1587,4090,3239,2749,9286,3355], function() { return __webpack_require__(77156); })
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, [7057,7129,168,7109,7099,6071,8697,1428,1606,2317,9566,494,7522,5596,7589,1587,4090,3239,2749,9286,4042], function() { return __webpack_require__(65398); })
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -722,14 +756,14 @@ module.exports = require("zlib");;
 /******/ 		var next = __webpack_require__.x;
 /******/ 		__webpack_require__.x = function() {
 /******/ 			__webpack_require__.e(7057);
-/******/ 			__webpack_require__.e(4475);
+/******/ 			__webpack_require__.e(7129);
 /******/ 			__webpack_require__.e(168);
 /******/ 			__webpack_require__.e(7109);
 /******/ 			__webpack_require__.e(7099);
 /******/ 			__webpack_require__.e(6071);
 /******/ 			__webpack_require__.e(8697);
 /******/ 			__webpack_require__.e(1428);
-/******/ 			__webpack_require__.e(3473);
+/******/ 			__webpack_require__.e(1606);
 /******/ 			__webpack_require__.e(2317);
 /******/ 			__webpack_require__.e(9566);
 /******/ 			__webpack_require__.e(494);
@@ -741,7 +775,7 @@ module.exports = require("zlib");;
 /******/ 			__webpack_require__.e(3239);
 /******/ 			__webpack_require__.e(2749);
 /******/ 			__webpack_require__.e(9286);
-/******/ 			__webpack_require__.e(3355);
+/******/ 			__webpack_require__.e(4042);
 /******/ 			return next();
 /******/ 		};
 /******/ 	}();
