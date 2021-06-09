@@ -37,6 +37,7 @@ export function Header({ sticky = false, ...props }: HeaderProps) {
           href="tel:+61296456777"
           leftIcon={<Phone size="matchFontSize" />}
           style="naked"
+          clickEvent="telephone_number_clicked"
         >
           (02) 9645 6777
         </Button>

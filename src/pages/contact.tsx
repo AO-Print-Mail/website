@@ -150,6 +150,7 @@ const Contact: React.FC<PageProps> = ({ data }) => {
                   leftIcon={<Phone size="matchFontSize" />}
                   style="naked"
                   offset="left"
+                  clickEvent="telephone_number_clicked"
                 >
                   (02) 9645 6777
                 </Button>

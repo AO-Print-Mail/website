@@ -1,4 +1,4 @@
-import { cloneElement, forwardRef, isValidElement } from 'react'
+import React, { cloneElement, forwardRef, isValidElement } from 'react'
 import { styled, CSS, theme, keyframes } from '@theme/stitches.config'
 import { visuallyHidden } from '@theme/utils/utilityClasses'
 import { __DEV__ } from '@utils/src'
@@ -19,6 +19,7 @@ interface ButtonProps extends React.ComponentProps<typeof ButtonBg> {
   href?: string
   children?: React.ReactNode
   type?: 'submit' | 'reset' | 'button'
+  clickEvent?: string
 }
 
 export const NakedButton = styled(ResetButton, {
@@ -299,10 +300,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       leftIcon,
       rightIcon,
       children,
+      clickEvent,
+      onClick,
       ...props
     },
     ref
   ) => {
+    function handleClick(e: React.MouseEvent) {
+      if (clickEvent) {
+        window?.dataLayer.push({ event: clickEvent })
+      }
+      if (onClick) {
+        onClick(e)
+      }
+    }
     const LeftIcn = leftIcon && (
       <ButtonIcon
         css={
@@ -335,7 +346,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       )
 
     return (
-      <ButtonBg style={style} color={color} size={size} ref={ref} {...props}>
+      <ButtonBg
+        style={style}
+        color={color}
+        size={size}
+        ref={ref}
+        {...props}
+        onClick={handleClick}
+      >
         {!isLoading && LeftIcn && LeftIcn}
         {!isLoading ? _children : <Spinner />}
         {!isLoading && RightIcn && RightIcn}
@@ -368,13 +386,35 @@ export interface IconButtonProps extends ButtonProps {
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ size, color, style, icon, children, label, ...props }, ref) => {
+  (
+    {
+      size,
+      color,
+      style,
+      icon,
+      children,
+      label,
+      onClick,
+      clickEvent,
+      ...props
+    },
+    ref
+  ) => {
+    function handleClick(e: React.MouseEvent) {
+      if (clickEvent) {
+        window?.dataLayer.push({ event: clickEvent })
+      }
+      if (onClick) {
+        onClick(e)
+      }
+    }
     return (
       <ButtonBg
         style={style}
         color={color}
         size={size || 'icon'}
         ref={ref}
+        onClick={handleClick}
         {...props}
       >
         <ButtonIcon>{icon || children}</ButtonIcon>
