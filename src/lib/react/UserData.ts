@@ -18,7 +18,7 @@ export const UserData = ({}) => {
   // }, [])
   useEffect(() => {
     const trackingParams = Object.keys(state.userData).filter((key) =>
-      key.match(/^[utm_|hsa_|gclid]/)
+      key.match(/^[utm_|hsa_|gclid|dclid]/)
     )
     function filterParams(acc, [key, value]) {
       if (trackingParams.includes(key)) {

@@ -5,65 +5,14 @@ import {
   GetLegalPageQuery,
 } from '@lib/datocms/__generated__/types'
 import { Layout } from '@components/layout'
-import {
-  Box,
-  Container,
-  TextHolder,
-  ColumnWrapper,
-  Column,
-  Paragraph,
-} from '@theme'
+import { Box, Container, TextHolder, ColumnWrapper, Column } from '@theme'
 import { ArticleSummary } from '@components/article-summary'
-import { renderRule } from 'react-datocms'
-import { isHeading as isHeadingGuard } from 'datocms-structured-text-utils'
 import { StructuredText } from '@lib/datocms/structuredText'
 import { QuoteCta } from '@components/quote-cta'
 
 interface PageProps {
   data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
 }
-
-const isHeading = () =>
-  renderRule(isHeadingGuard, ({ node, key, children }) => {
-    switch (node.level) {
-      case 1:
-        return (
-          <Paragraph size="1" semiBold as="h1" key={key}>
-            {children}
-          </Paragraph>
-        )
-      case 2:
-        return (
-          <Paragraph size="1" semiBold as="h2" key={key}>
-            {children}
-          </Paragraph>
-        )
-      case 3:
-        return (
-          <Paragraph size="l" semiBold as="h3" key={key}>
-            {children}
-          </Paragraph>
-        )
-      case 4:
-        return (
-          <Paragraph size="l" semiBold as="h4" key={key}>
-            {children}
-          </Paragraph>
-        )
-      case 5:
-        return (
-          <Paragraph size="l" semiBold as="h5" key={key}>
-            {children}
-          </Paragraph>
-        )
-      case 6:
-        return (
-          <Paragraph size="l" semiBold as="h6" key={key}>
-            {children}
-          </Paragraph>
-        )
-    }
-  })
 
 const LegalPage: React.FC<PageProps> = ({ data }) => {
   return (
@@ -121,9 +70,12 @@ const LegalPage: React.FC<PageProps> = ({ data }) => {
                 <StructuredText
                   data={data.legalText}
                   config={{
-                    paragraphProps: { size: '4', color: 'primary' },
-                    headingProps: { css: { mt: '$6' }, fromSize: '3' },
-                    ruleOverrides: { isHeading },
+                    paragraphProps: { size: 's' },
+                    headingProps: {
+                      css: { mt: '$6' },
+                      fromSize: '3',
+                      marginTop: 'normal',
+                    },
                   }}
                 />
               </TextHolder>

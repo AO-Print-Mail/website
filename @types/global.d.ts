@@ -10,6 +10,7 @@ declare module 'little-state-machine' {
     userData: {
       hutk: string
       gclid: string
+      dclid: string
       //ipAddress: string
       utm_term: string
       utm_campaign: string

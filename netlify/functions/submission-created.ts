@@ -35,6 +35,8 @@ const handler: Handler = async (event, context, callback) => {
     ds: 'web',
     uip: body?.data?.ip,
     ua: body?.data?.user_agent,
+    gclid: body?.data?.gclid,
+    dclid: body?.data?.dclid,
   }
 
   //Send to Universal Analytics
