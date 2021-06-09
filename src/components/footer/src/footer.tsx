@@ -251,6 +251,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                 style="naked"
                 size="small"
                 css={{ mt: '$2', color: '$LA60' }}
+                clickEvent="telephone_number_clicked"
               >
                 <Paragraph size="xs" color="light" css={{ my: 0 }}>
                   (02) 9645 6777
@@ -265,6 +266,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                   size="small"
                   css={{ mt: '$2', color: '$LA60' }}
                   label="Visit our Facebook page"
+                  clickEvent="visit_facebook_page"
                 >
                   <Facebook size="regular" />
                 </IconButton>
@@ -276,6 +278,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                   size="small"
                   css={{ mt: '$2', color: '$LA60' }}
                   label="Visit our LinkedIn page"
+                  clickEvent="visit_linkedin_page"
                 >
                   <LinkedIn size="regular" />
                 </IconButton>
@@ -334,6 +337,7 @@ export const Footer: React.FC<FooterProps> = ({
             size="small"
             offset="left"
             css={{ mt: '$3', color: '$LA60' }}
+            clickEvent="address_clicked_gtm"
           >
             <Paragraph size="s" color="light" css={{ my: 0 }}>
               9 Clearview Pl
@@ -350,6 +354,7 @@ export const Footer: React.FC<FooterProps> = ({
             size="small"
             offset="left"
             css={{ mt: '$3', color: '$LA60' }}
+            clickEvent="telephone_number_clicked"
           >
             (02) 9645 6777
           </Button>
