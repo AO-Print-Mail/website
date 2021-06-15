@@ -17,14 +17,7 @@ import {
 import { LinkCard } from '@components/link-card'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { tempQuoteFormInputs } from '@components/temp-quote-form'
 import dynamic from 'next/dynamic'
-
-const WorkaroundForm = dynamic(() =>
-  import('@components/netlify-workaraound-form').then(
-    (res) => res.NetlifyWorkaroundForm
-  )
-)
 
 interface PageProps {
   data?: Awaited<ReturnType<typeof getStaticProps>>['props']['data']
@@ -123,7 +116,6 @@ const Legal: React.FC<PageProps> = ({ data }) => {
         </ListWrapper>
       </Container>
       {/* HIDING THESE WORKAROUND FORMS ON THIS PAGE BECAUSE SEO ISN't IMPORTANT HERE */}
-      <WorkaroundForm formFields={tempQuoteFormInputs} name="t_request-quote" />
     </Layout>
   )
 }

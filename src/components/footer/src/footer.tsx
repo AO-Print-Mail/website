@@ -16,6 +16,15 @@ import {
 import { Button, IconButton } from '@components/button'
 import Link from 'next/link'
 
+import dynamic from 'next/dynamic'
+import { tempQuoteFormInputs } from '@components/temp-quote-form'
+
+const WorkaroundForm = dynamic(() =>
+  import('@components/netlify-workaraound-form').then(
+    (res) => res.NetlifyWorkaroundForm
+  )
+)
+
 interface FooterProps extends React.ComponentProps<typeof FooterWrapper> {
   beforeFooter?: React.ReactNode
   footerCss?: CSS
@@ -403,12 +412,17 @@ export const Footer: React.FC<FooterProps> = ({
         <FooterWrapper as="footer">
           {landing ? landingFooter : <MainFooter />}
         </FooterWrapper>
+        <WorkaroundForm
+          formFields={tempQuoteFormInputs}
+          name="t_request-quote"
+        />
       </FooterWrapper>
     )
   }
   return (
     <FooterWrapper as="footer" {...props}>
       {landing ? landingFooter : <MainFooter />}
+      <WorkaroundForm formFields={tempQuoteFormInputs} name="t_request-quote" />
     </FooterWrapper>
   )
 }
