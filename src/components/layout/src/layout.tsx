@@ -21,7 +21,9 @@ interface LayoutProps {
   description?: string
   beforeFooter?: React.ReactNode
   altHeader?: React.ReactNode
-  metaData?: GetFaviconsQuery['site']['favicon'] & SeoMetaTagType[]
+  metaData?: ({
+    __typename?: 'Tag'
+  } & SeoMetaTagType)[]
   data?: GetFaviconsQuery
   canonicalPath?: string
   footerCss?: CSS

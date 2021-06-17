@@ -168,7 +168,7 @@ export type BlogArticleRecord_SeoMetaTagsArgs = {
   locale?: Maybe<SiteLocale>;
 };
 
-/** Record of type Blog list page (blog_page) */
+/** Record of type Blog List Page (blog_page) */
 export type BlogPageRecord = {
   __typename?: 'BlogPageRecord';
   _createdAt: Scalars['DateTime'];
@@ -193,7 +193,7 @@ export type BlogPageRecord = {
 };
 
 
-/** Record of type Blog list page (blog_page) */
+/** Record of type Blog List Page (blog_page) */
 export type BlogPageRecord_SeoMetaTagsArgs = {
   locale?: Maybe<SiteLocale>;
 };
@@ -281,6 +281,36 @@ export type CreatedAtFilter = {
   eq?: Maybe<Scalars['DateTime']>;
   /** Exclude records with an exact match */
   neq?: Maybe<Scalars['DateTime']>;
+};
+
+/** Record of type PDF Credentials Page (credentials_page) */
+export type CredentialsPageRecord = {
+  __typename?: 'CredentialsPageRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  canonicalPath?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  pageMeta?: Maybe<SeoField>;
+  pageSlug?: Maybe<Scalars['String']>;
+  preview?: Maybe<Scalars['JsonField']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type PDF Credentials Page (credentials_page) */
+export type CredentialsPageRecord_SeoMetaTagsArgs = {
+  locale?: Maybe<SiteLocale>;
 };
 
 /** Record of type CTA (cta) */
@@ -2213,6 +2243,8 @@ export type Query = {
   /** Returns the single instance record */
   contactPage?: Maybe<ContactPageRecord>;
   /** Returns the single instance record */
+  credentialsPage?: Maybe<CredentialsPageRecord>;
+  /** Returns the single instance record */
   homepage?: Maybe<HomepageRecord>;
   /** Returns a specific record */
   landingPageV1?: Maybe<LandingPageV1Record>;
@@ -2361,6 +2393,12 @@ export type QueryBlogPageArgs = {
 
 /** The query root for this schema */
 export type QueryContactPageArgs = {
+  locale?: Maybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+export type QueryCredentialsPageArgs = {
   locale?: Maybe<SiteLocale>;
 };
 
@@ -3681,6 +3719,21 @@ export type GetLegalPagesQuery = (
   )> }
 );
 
+export type GetPdfCredentialsPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetPdfCredentialsPageQuery = (
+  { __typename?: 'Query' }
+  & { credentialsPage?: Maybe<(
+    { __typename?: 'CredentialsPageRecord' }
+    & Pick<CredentialsPageRecord, 'id' | 'pageSlug' | 'title'>
+    & { _seoMetaTags: Array<(
+      { __typename?: 'Tag' }
+      & MetaTagsFragmentFragment
+    )> }
+  )> }
+);
+
 export type GetServicePageQueryVariables = Exact<{
   pageSlug: Scalars['String'];
 }>;
@@ -4081,6 +4134,18 @@ export const GetLegalPagesDocument = gql`
   }
 }
     `;
+export const GetPdfCredentialsPageDocument = gql`
+    query GetPdfCredentialsPage {
+  credentialsPage {
+    id
+    _seoMetaTags {
+      ...metaTagsFragment
+    }
+    pageSlug
+    title
+  }
+}
+    ${MetaTagsFragmentFragmentDoc}`;
 export const GetServicePageDocument = gql`
     query GetServicePage($pageSlug: String!) {
   service(filter: {pageSlug: {eq: $pageSlug}}) {
@@ -4179,6 +4244,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetLegalPages(variables?: GetLegalPagesQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetLegalPagesQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetLegalPagesQuery>(GetLegalPagesDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetLegalPages');
+    },
+    GetPdfCredentialsPage(variables?: GetPdfCredentialsPageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetPdfCredentialsPageQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPdfCredentialsPageQuery>(GetPdfCredentialsPageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPdfCredentialsPage');
     },
     GetServicePage(variables: GetServicePageQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetServicePageQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetServicePageQuery>(GetServicePageDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetServicePage');
