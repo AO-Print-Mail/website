@@ -1,6 +1,7 @@
 [build]
-  publish = "out"
+  publish = "out/"
 [context.production.environment]
+  publish = "out/"
   NEXT_SERVERLESS = "true"
   NODE_ENV = "production"
 [functions]
