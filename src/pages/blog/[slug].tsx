@@ -96,7 +96,7 @@ const Blog: React.FC<PageProps> = ({ data }) => {
                 <StructuredText
                   data={data.article.value}
                   config={{
-                    paragraphProps: { size: '4', color: 'primary' },
+                    paragraphProps: { size: 'm' },
                     headingProps: { css: { mt: '$6' }, fromSize: '3' },
                   }}
                 />

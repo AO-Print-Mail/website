@@ -12,7 +12,7 @@ import {
 interface ArticleSummaryProps extends React.ComponentProps<typeof Box> {
   title: string
   lastUpdated?: string
-  summary: StructuredTextDocument
+  summary: string | StructuredTextDocument
   breadcrumbLinks?: { name: string; url: string }[]
 }
 
@@ -44,7 +44,11 @@ export const ArticleSummary: React.FC<ArticleSummaryProps> = ({
       </Title>
       {lastUpdated && <Updated size="s">Last updated {lastUpdated}</Updated>}
       <Box css={{ '@m': { pr: '$5' }, '@l': { pr: '$6' } }}>
-        <StructuredText data={summary} customRules={structuredTextRulez} />
+        {typeof summary === 'string' ? (
+          <Paragraph size="m">{summary}</Paragraph>
+        ) : (
+          <StructuredText data={summary} customRules={structuredTextRulez} />
+        )}
       </Box>
     </Box>
   )
