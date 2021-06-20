@@ -23,7 +23,7 @@
     "@hubspot/api-client": "^3.4.1",
     "@netlify/functions": "^0.7.2",
     "@netlify/plugin-nextjs": "^3.4.2",
-    "@stitches/react": "^0.1.9",
+    "@stitches/react": "^0.2.2",
     "@storybook/addon-actions": "^6.1.18",
     "@storybook/addon-essentials": "^6.1.18",
     "@storybook/addon-links": "^6.1.18",
