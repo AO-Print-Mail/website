@@ -159,14 +159,18 @@ export const MainFooter: React.FC<MainFooterProps> = ({
           as="nav"
           wrap
           css={{
-            '@initial': { mx: '-$2', mb: '$4', position: 'relative' },
+            mx: '-$2',
+            mb: '$4',
+            position: 'relative',
             '@m': { mx: '-$3' },
             '@l': { mx: '-$4' },
           }}
         >
           <Column
             css={{
-              '@initial': { width: '100%', mb: '$2', ml: '$2' },
+              width: '100%',
+              mb: '$2',
+              ml: '$2',
               '@l': { width: '16.6%', ml: '0', mt: '$2' },
             }}
           >
@@ -183,7 +187,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
             <Column
               key={`${section.section_label}`}
               as="section"
-              css={{ mt: '$4' }}
+              css={{ my: '$4' }}
             >
               <SectionLabel size="s" as="h3">
                 {section.section_label}
@@ -197,11 +201,9 @@ export const MainFooter: React.FC<MainFooterProps> = ({
         <Container>
           <Flex
             css={{
-              '@initial': {
-                mx: '-$2',
-                position: 'relative',
-                flexDirection: 'column',
-              },
+              mx: '-$2',
+              position: 'relative',
+              flexDirection: 'column',
               '@m': {
                 flexFlow: 'row nowrap',
                 justifyContent: 'space-between',
@@ -214,12 +216,10 @@ export const MainFooter: React.FC<MainFooterProps> = ({
           >
             <Column
               css={{
-                '@initial': {
-                  display: 'flex',
-                  width: '100%',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                },
+                display: 'flex',
+                width: '100%',
+                flexDirection: 'column',
+                alignItems: 'flex-start',
                 '@m': {
                   width: '40%',
                 },
@@ -237,7 +237,7 @@ export const MainFooter: React.FC<MainFooterProps> = ({
                 size="small"
                 css={{ mt: '$3', color: '$LA60' }}
               >
-                <Paragraph size="xs" color="light" css={{ my: 0 }}>
+                <Paragraph size="s" color="light" css={{ my: 0 }}>
                   9 Clearview Pl
                   <br />
                   Brookvale NSW 2100
@@ -283,7 +283,8 @@ export const MainFooter: React.FC<MainFooterProps> = ({
             </Column>
             <Column
               css={{
-                '@initial': { width: '100% !important', mt: '$3' },
+                width: '100% !important',
+                mt: '$3',
                 '@m': { width: '50% !important' },
                 '@l': { width: '33.3% !important', mr: '8.33%' },
               }}
