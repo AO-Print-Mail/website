@@ -46,7 +46,8 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
             pt: '$7',
             pb: '$8',
             '@m': { minHeight: '680px' },
-            '@l': { display: 'flex', py: '$7' },
+            '@l': { minHeight: '720px', display: 'flex', pt: '$8', pb: '$7' },
+            '@xl': { minHeight: '720px', display: 'flex', pt: '$8', pb: '$8' },
           }}
         >
           <DesktopHero />
