@@ -264,9 +264,9 @@ export const TempQuoteForm: React.FC<TempQuoteFormProps> = ({
               type="text"
               defaultValue={tempQuoteFormInputs.phone}
               errors={errors}
+              {...phoneFormProps}
               render={(textMaskRef, props) => (
                 <Input
-                  {...phoneFormProps}
                   ref={(node) => {
                     textMaskRef(node)
                     phoneRef(node)
