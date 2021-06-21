@@ -41,7 +41,7 @@ const CardBackground = styled(CardBg, {
 
 const textRules = [
   renderRule(isParagraph, (node) => (
-    <Paragraph size="s" css={{ color: 'inherit', mt: '$1' }} key={node.key}>
+    <Paragraph size="s" css={{ mt: '$1' }} key={node.key}>
       {node.children}
     </Paragraph>
   )),
@@ -56,8 +56,8 @@ const ImgWrapper = styled('div', {
 const Img = styled(Image, {
   transition: 'transform 0.2s ease-out',
   willChange: 'transform',
-  [`${HoverGroup}:hover &`]: {
-    transform: 'scale(1.01)',
+  [`${HoverGroup}:hover > ${ImgWrapper} &`]: {
+    transform: 'scale(1.02)',
   },
 })
 
