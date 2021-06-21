@@ -20,8 +20,6 @@ if (isBrowser()) {
   })
 }
 
-const Hubspot = dynamic(() => import('@lib/react/hubspot'), { ssr: false })
-
 function MyApp({ Component, pageProps }: AppProps) {
   globalStyles()
   return (
@@ -34,7 +32,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <UserData />
-      <Hubspot />
       <LazyMotion strict features={domMax}>
         <Component {...pageProps} />
       </LazyMotion>

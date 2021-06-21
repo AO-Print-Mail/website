@@ -85,6 +85,13 @@ export default class Document extends NextDocument {
           <NextScript />
           <div id="portal-modal" />
           <script
+            type="text/javascript"
+            id="hs-script-loader"
+            async
+            defer
+            src="//js.hs-scripts.com/8035366.js"
+          ></script>
+          <script
             src="https://widget.reviews.io/rich-snippet-reviews-widgets/dist.js"
             type="text/javascript"
           ></script>
