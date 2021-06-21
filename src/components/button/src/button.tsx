@@ -3,7 +3,7 @@ import { styled, CSS, theme, keyframes } from '@theme/stitches.config'
 import { visuallyHidden } from '@theme/utils/utilityClasses'
 import { __DEV__ } from '@utils/src'
 import { ResetButton } from '@theme/atoms/resetButton'
-import { Paragraph } from '@theme/typography'
+import { Text } from '@theme/typography'
 
 interface ButtonProps extends React.ComponentProps<typeof ButtonBg> {
   style?: 'naked' | 'solid' | 'border' | 'icon'
@@ -328,11 +328,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     )
 
     const _children =
-      typeof children === 'string' ? (
-        <Paragraph>{children}</Paragraph>
-      ) : (
-        children
-      )
+      typeof children === 'string' ? <Text>{children}</Text> : children
 
     return (
       <ButtonBg style={style} color={color} size={size} ref={ref} {...props}>

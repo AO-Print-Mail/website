@@ -260,7 +260,6 @@ export const Paragraph = styled('p', {
   [`button &, ${ResetButton} &, label &`]: {
     m: '0 !important',
     p: '0 !important',
-    lineHeight: '1 !important',
     color: 'inherit',
   },
   'label&, input&': {
