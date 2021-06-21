@@ -1,5 +1,5 @@
 import { Button } from '@components/button'
-import { StitchesVariants } from '@stitches/core'
+import { StitchesVariants } from '@stitches/react'
 import { TextHolder } from '@theme/atoms/layout'
 import { Close } from '@theme/icons'
 import { styled } from '@theme/stitches.config'

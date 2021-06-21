@@ -9,7 +9,7 @@ import {
   Column,
 } from '@theme'
 import { m as motion, useAnimation, usePresence, Variants } from 'framer-motion'
-import { StitchesVariants } from '@stitches/core'
+import { StitchesVariants } from '@stitches/react'
 
 export interface ModalProps extends React.ComponentProps<typeof TextHolder> {
   layoutId?: string
