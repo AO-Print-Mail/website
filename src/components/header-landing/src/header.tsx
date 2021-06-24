@@ -8,8 +8,6 @@ interface HeaderProps extends React.ComponentProps<typeof HeaderBar> {
   blur?: boolean
 }
 
-const NavContainer = styled('div', {})
-
 export function Header({ sticky = false, ...props }: HeaderProps) {
   return (
     <HeaderBar as="header" {...props}>
@@ -18,6 +16,7 @@ export function Header({ sticky = false, ...props }: HeaderProps) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'flex-end',
+          width: '100%',
         }}
       >
         <Link href="/">

@@ -81,7 +81,6 @@ const LandingPageContent: React.FC<PageProps> = ({ data }) => {
             }}
           />
         </HeroText>
-        {/* <LandingPageQuoteForm keyword="direct mail" /> */}
         <QuoteFormDirectMail />
       </Container>
     </Layout>

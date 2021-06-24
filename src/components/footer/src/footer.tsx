@@ -12,6 +12,7 @@ import {
   Box,
   Facebook,
   LinkedIn,
+  ColumnWrapper,
 } from '@theme'
 import { Button, IconButton } from '@components/button'
 import Link from 'next/link'
@@ -35,48 +36,6 @@ const FooterWrapper = styled(ContentWrapper, {
   },
   defaultVariants: {
     style: 'normal',
-  },
-})
-
-const LayoutGrid = styled(Container, {
-  '@m': {
-    display: 'grid',
-    gridGap: '$4',
-    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
-  },
-  '@l': {
-    gridGap: '$5',
-    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
-  },
-})
-
-const ContentColumn = styled('div', {
-  display: 'flex',
-  flexFlow: 'column nowrap',
-  alignItems: 'flex-start',
-  justifyContent: 'flex-start',
-  '@m': {
-    gridColumnStart: '1',
-    gridColumnEnd: 'span 3',
-  },
-  '@l': {
-    gridColumnEnd: 'span 2',
-  },
-})
-const row3 = css({
-  gridColumnStart: '1',
-  gridColumnEnd: 'span 4',
-  alignSelf: 'start',
-  '@s': {
-    gridColumnEnd: 'span 3',
-  },
-  '@m': {
-    gridColumnStart: '4',
-    gridColumnEnd: 'span 3',
-  },
-  '@l': {
-    gridColumnStart: '6',
-    gridColumnEnd: 'span 3',
   },
 })
 
@@ -307,16 +266,31 @@ export const MainFooter: React.FC<MainFooterProps> = ({
   )
 }
 
-export const Footer: React.FC<FooterProps> = ({
-  beforeFooter,
-  footerCss,
-  landing,
-  ...props
-}: FooterProps) => {
-  const landingFooter = (
-    <>
-      <LayoutGrid css={{ pb: '$5' }}>
-        <ContentColumn>
+const LandingFooter: React.FC<{ footerCss?: CSS }> = ({ footerCss }) => (
+  <>
+    <Container css={{ width: '100%' }}>
+      <ColumnWrapper
+        css={{
+          pb: '$5',
+          justifyContent: 'space-between',
+          flexDirection: 'column',
+          '@m': { flexDirection: 'row' },
+        }}
+      >
+        <Column
+          css={{
+            width: '100% !important',
+            mt: '$3',
+            ml: '0',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            '@m': {
+              width: '50% !important',
+            },
+            '@l': { width: '33.3% !important', mr: '8.33%' },
+          }}
+        >
           <Link href="/">
             <a>
               <Logo
@@ -358,9 +332,23 @@ export const Footer: React.FC<FooterProps> = ({
           >
             (02) 9645 6777
           </Button>
-        </ContentColumn>
-        <ContentColumn className={row3()}>
-          <CovidSafeBanner css={{ mt: '$2' }} />
+        </Column>
+        <Column
+          css={{
+            width: '100% !important',
+            mt: '$3',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            '@m': {
+              width: '50% !important',
+              alignItems: 'flex-end',
+            },
+            '@l': { width: '33.3% !important', ml: '8.33%' },
+          }}
+        >
+          <CovidSafeBanner css={{ m: '0', width: '100%' }} />
+
           <Button
             as="a"
             href="#"
@@ -368,7 +356,7 @@ export const Footer: React.FC<FooterProps> = ({
             style="naked"
             size="small"
             offset="left"
-            css={{ display: 'flex', mt: '$4', color: '$LA60' }}
+            css={{ mt: '$4', color: '$LA60' }}
           >
             Privacy and Cookie Policies
           </Button>
@@ -379,37 +367,45 @@ export const Footer: React.FC<FooterProps> = ({
             style="naked"
             size="small"
             offset="left"
-            css={{ display: 'flex', mt: '$1', color: '$LA60' }}
+            css={{ mt: '$1', color: '$LA60' }}
           >
             Terms of Service
           </Button>
-        </ContentColumn>
-      </LayoutGrid>
-      <ContentWrapper css={{ backgroundColor: '$black' }}>
-        <Container>
-          <Paragraph
-            size="xs"
-            css={{ color: '$LA60', my: '$2', pb: `$1`, ...footerCss }}
-          >
-            &copy; ANO PTY Ltd. All rights reserved.
-          </Paragraph>
-        </Container>
-      </ContentWrapper>
-    </>
-  )
+        </Column>
+      </ColumnWrapper>
+    </Container>
+    <ContentWrapper css={{ backgroundColor: '$black' }}>
+      <Container>
+        <Paragraph
+          size="xs"
+          css={{ color: '$LA60', my: '$2', pb: `$1`, ...footerCss }}
+        >
+          &copy; ANO PTY Ltd. All rights reserved.
+        </Paragraph>
+      </Container>
+    </ContentWrapper>
+  </>
+)
+
+export const Footer: React.FC<FooterProps> = ({
+  beforeFooter,
+  footerCss,
+  landing,
+  ...props
+}: FooterProps) => {
   if (beforeFooter) {
     return (
       <FooterWrapper style="none" {...props}>
         {beforeFooter}
         <FooterWrapper as="footer">
-          {landing ? landingFooter : <MainFooter />}
+          {landing ? <LandingFooter footerCss={footerCss} /> : <MainFooter />}
         </FooterWrapper>
       </FooterWrapper>
     )
   }
   return (
     <FooterWrapper as="footer" {...props}>
-      {landing ? landingFooter : <MainFooter />}
+      {landing ? <LandingFooter footerCss={footerCss} /> : <MainFooter />}
     </FooterWrapper>
   )
 }
