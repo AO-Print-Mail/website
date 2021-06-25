@@ -6,7 +6,6 @@ import {
   Paragraph,
   Phone,
   CovidSafeBanner,
-  css,
   CSS,
   Flex,
   Box,
@@ -351,7 +350,7 @@ const LandingFooter: React.FC<{ footerCss?: CSS }> = ({ footerCss }) => (
 
           <Button
             as="a"
-            href="#"
+            href="/legal/privacy"
             color="light"
             style="naked"
             size="small"
@@ -362,7 +361,7 @@ const LandingFooter: React.FC<{ footerCss?: CSS }> = ({ footerCss }) => (
           </Button>
           <Button
             as="a"
-            href="#"
+            href="/legal/terms"
             color="light"
             style="naked"
             size="small"
