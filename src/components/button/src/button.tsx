@@ -76,7 +76,7 @@ const ButtonBg = styled(ResetButton, {
   border: 'none',
   borderRadius: '$2',
   px: '$2',
-  py: '$2',
+  py: '$3',
   br: '$3',
   fontSize: '$p3m',
   '&:focus:not(:focus-visible)': {
@@ -133,6 +133,7 @@ const ButtonBg = styled(ResetButton, {
     size: {
       small: {
         fontSize: '$p4m',
+        py: '$2',
         '@m': { fontSize: '$p4t', px: '$2', py: '$2', br: '$2' },
         '@l': { fontSize: '$p4d', px: '$2', py: '$2', br: '$2' },
         '&:focus': {

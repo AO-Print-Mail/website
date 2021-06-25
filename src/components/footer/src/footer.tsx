@@ -347,7 +347,6 @@ const LandingFooter: React.FC<{ footerCss?: CSS }> = ({ footerCss }) => (
           }}
         >
           <CovidSafeBanner css={{ m: '0', width: '100%' }} />
-
           <Button
             as="a"
             href="/legal/privacy"

@@ -1,8 +1,27 @@
 import { Layout } from '@components/layout'
+import React from 'react'
 import { ClientLogoBanner } from '@components/client-logo-banner'
 import { ReviewsIoWidget } from '@components/reviews-io-widget'
 import { Header } from '@components/header-landing'
-import { Container, Spacer, Box } from '@theme'
+import {
+  Container,
+  Spacer,
+  Box,
+  Title,
+  Paragraph,
+  TextHolder,
+  css,
+  Card,
+  Phone,
+  ColumnWrapper,
+  Column,
+} from '@theme'
+import { m as motion, useAnimation, Variants } from 'framer-motion'
+import { useQuery } from '@lib/react/useQuery'
+import { useEffect } from 'react'
+import { Button } from '@components/button'
+import { VideoMeet } from '@theme/icons/videoMeet'
+import { QuoteButton } from '@components/quoteButton'
 
 const beforeFooter = (
   <>
@@ -18,7 +37,68 @@ const beforeFooter = (
   </>
 )
 
+const titleAnimation: Variants = {
+  hidden: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+  visible: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+}
+
+const childrenAnimation: Variants = {
+  hidden: {
+    opacity: 0,
+    translateY: 100,
+  },
+  visible: {
+    opacity: 1,
+    translateY: 0,
+  },
+}
+
+const AnimatedChildren: React.FC<{ children: string }> = ({
+  children,
+  ...props
+}) => {
+  const splitChildren = children.split(/\s/)
+  const _children = splitChildren.map((child, i) => (
+    <>
+      {i > 0 ? <span>&nbsp;</span> : null}
+      <motion.span
+        style={{ display: 'inline-block' }}
+        key={i}
+        variants={childrenAnimation}
+      >{`${child}`}</motion.span>
+    </>
+  ))
+  return <>{_children}</>
+}
+
+const hide = css({
+  opacity: '0',
+})
+
 const Jm: React.FC<{}> = ({}) => {
+  const {
+    processedQueries,
+    queries: { fn, an },
+  } = useQuery()
+  const titleControls = useAnimation()
+  const paragraphControls = useAnimation()
+  async function textReveal() {
+    await titleControls.start('visible')
+    paragraphControls.start('visible')
+  }
+  useEffect(() => {
+    if (processedQueries) {
+      textReveal()
+    }
+  }, [processedQueries])
   return (
     <Layout
       title="landing page"
@@ -27,7 +107,90 @@ const Jm: React.FC<{}> = ({}) => {
       landing
       altHeader={<Header />}
     >
-      <Container></Container>
+      <Container className={!processedQueries && hide()}>
+        <Title
+          as={motion.h1}
+          animate={titleControls}
+          initial="hidden"
+          variants={titleAnimation}
+          css={{ overflow: 'hidden' }}
+          alignCenter
+        >
+          <AnimatedChildren>
+            {fn ? `Welcome, ${fn}` : 'Welcome'}
+          </AnimatedChildren>
+        </Title>
+        <Spacer size="large" />
+        <ColumnWrapper>
+          <Column
+            css={{
+              width: '100%',
+              '@m': { mx: '8.33%' },
+              '@l': { mx: '16.67%' },
+              '@xl': { mx: '25%' },
+            }}
+          >
+            <TextHolder
+              as={motion.div}
+              animate={paragraphControls}
+              initial="hidden"
+              variants={titleAnimation}
+            >
+              <Paragraph as={motion.p} variants={childrenAnimation} alignCenter>
+                We’re honoured to have piqued your interest.
+              </Paragraph>
+              <Paragraph as={motion.p} variants={childrenAnimation} alignCenter>
+                Let’s get the ball rolling by firming up a convenient date to
+                jump on a Zoom meeting and find out if&nbsp;
+                {an || 'your agency'} and A&amp;O is a match made in heaven.
+              </Paragraph>
+              <Paragraph as={motion.p} variants={childrenAnimation} alignCenter>
+                Alternatively, if you have a print, mail or fulfilment brief
+                ready to go, you can send it over to us using our quote request
+                form.
+              </Paragraph>
+            </TextHolder>
+            <Spacer css={{ height: '$6' }} />
+            <Card
+              css={{
+                mb: '$6',
+                p: '$4',
+                display: 'flex',
+                flexDirection: 'column',
+                '@m': { p: '$5' },
+                '@l': { p: '$6' },
+              }}
+            >
+              <Button
+                as="a"
+                href="https://meetings.hubspot.com/gareth84/30-mins"
+                leftIcon={<VideoMeet />}
+              >
+                Meet with Gareth
+              </Button>
+
+              <Spacer />
+              <QuoteButton color="subtle">Request a quote</QuoteButton>
+              <Spacer size="small" />
+              <Paragraph>
+                Prefer to speak on the phone?
+                <br /> You can call me on:
+              </Paragraph>
+              <Spacer />
+              <Button
+                style="naked"
+                as="a"
+                leftIcon={<Phone />}
+                css={{ alignSelf: 'flex-start' }}
+                href="+61414470777"
+                offset="left"
+              >
+                0414 470 777
+              </Button>
+            </Card>
+          </Column>
+        </ColumnWrapper>
+      </Container>
     </Layout>
   )
 }

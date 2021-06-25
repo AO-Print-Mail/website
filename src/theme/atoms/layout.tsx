@@ -78,7 +78,7 @@ export const TextHolder = styled('div', {
       },
     },
   },
-  defaultvariants: {
+  defaultVariants: {
     padX: 'default',
   },
 })

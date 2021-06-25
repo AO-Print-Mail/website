@@ -3,6 +3,7 @@ import { styled, ThemeVariants } from '@theme/stitches.config'
 export type ContainerVariants = ThemeVariants<typeof Container>
 
 export const Container = styled('div', {
+  width: '100%',
   position: 'relative',
   mx: 'auto',
   px: '$3',
