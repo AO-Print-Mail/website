@@ -174,7 +174,7 @@ const ServicePage: React.FC<PageProps> = ({ data, pageSlug }) => {
           />
           <TextHolder
             css={{
-              '@initial': { mt: '$7' },
+              mt: '$7',
               '@l': {
                 mx: '16.67%',
               },

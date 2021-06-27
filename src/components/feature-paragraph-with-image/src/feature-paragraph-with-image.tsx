@@ -55,7 +55,8 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
   return (
     <ColumnWrapper
       css={{
-        '@initial': { flexDirection: 'column', mt: '$4' },
+        flexDirection: 'column',
+        mt: '$4',
         '@m': { flexDirection: 'row', alignItems: 'center', mt: '$5' },
         '@l': { mt: '$6' },
       }}
@@ -79,10 +80,8 @@ export const FeatureParagraphWithImage: React.FC<FeatureParagraphWithImageProps>
       </Column>
       <Column
         css={{
-          '@initial': {
-            alignSelf: 'center',
-            flex: '0 0 auto',
-          },
+          alignSelf: 'center',
+          flex: '0 0 auto',
           '@m': { flex: '0 0 40%' },
           '@l': { flex: '0 0 40%', order: imagePosition === 'left' ? '-1' : 1 },
           //'@xl': imagePosition === 'left' ? { ml: '8.33%' } : { mr: '8.33%' },

@@ -103,7 +103,8 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
               <Spacer size="large" />
               <Button
                 css={{
-                  '@initial': { minWidth: '75%', height: '$5' },
+                  minWidth: '75%',
+                  height: '$5',
                   '@s': { minWidth: '50%' },
                   '@m': { minWidth: '$12' },
                 }}
