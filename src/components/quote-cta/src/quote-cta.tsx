@@ -95,10 +95,13 @@ export const QuoteCta: React.FC<QuoteCtaProps> = ({
                 {heading || 'Get a quote for your next job'}
               </Title>
               <TextHolder>
-                <Paragraph alignCenter size="m">
-                  {paragraph ||
-                    'Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. '}
-                </Paragraph>
+                {paragraph ? (
+                  <Paragraph alignCenter size="m">
+                    {paragraph}
+                  </Paragraph>
+                ) : (
+                  <Spacer size="large" />
+                )}
               </TextHolder>
               <Spacer size="large" />
               <Button

@@ -19,7 +19,8 @@ import {
 } from 'datocms-structured-text-utils'
 import dynamic from 'next/dynamic'
 import { renderRule, StructuredText as ConfigurableText } from 'react-datocms'
-import { Heading, List, Paragraph } from '@theme'
+import { Anchor, Heading, List, Paragraph } from '@theme'
+import Link from 'next/link'
 
 const BlockQuote = dynamic(() =>
   import('@theme/atoms/blockquote').then((res) => res.BlockQuote)
@@ -104,23 +105,23 @@ const defaults = {
     renderRule(isLinkGuard, ({ node, key, children }) => {}),*/
 }
 
-const isStrikethrough = ({ strikethroughProps } = { strikethroughProps: {} }) =>
-  renderRule(isStrikethroughGuard, ({ children, key }) => (
-    <s key={key} children={children} {...strikethroughProps} />
-  ))
-const isCode = ({ codeProps }) =>
-  renderRule(isCodeGuard, ({ key, children, node }) => (
-    <code key={key} children={children} {...codeProps} />
-  ))
-const isBlock = (props) => renderRule(isBlockGuard, (node) => <></>)
-const isInlineItem = (props) => renderRule(isInlineItemGuard, (node) => <></>)
-const isThematicBreak = (props) =>
-  renderRule(isThematicBreakGuard, (node) => <></>)
-const isInlineNode = (props) => renderRule(isInlineNodeGuard, (node) => <></>)
-const isItemLink = (props) => renderRule(isItemLinkGuard, (node) => <></>)
-const isLink = (props) => renderRule(isLinkGuard, (node) => <></>)
-const isRoot = (props) => renderRule(isRootGuard, (node) => <></>)
-const isSpan = (props) => renderRule(isSpanGuard, (node) => <></>)
+// const isStrikethrough = ({ strikethroughProps } = { strikethroughProps: {} }) =>
+//   renderRule(isStrikethroughGuard, ({ children, key }) => (
+//     <s key={key} children={children} {...strikethroughProps} />
+//   ))
+// const isCode = ({ codeProps }) =>
+//   renderRule(isCodeGuard, ({ key, children, node }) => (
+//     <code key={key} children={children} {...codeProps} />
+//   ))
+// const isBlock = (props) => renderRule(isBlockGuard, (node) => <></>)
+// const isInlineItem = (props) => renderRule(isInlineItemGuard, (node) => <></>)
+// const isThematicBreak = (props) =>
+//  renderRule(isThematicBreakGuard, (node) => <></>)
+// const isInlineNode = (props) => renderRule(isInlineNodeGuard, (node) => <></>)
+// const isItemLink = (props) => renderRule(isItemLinkGuard, (node) => <></>)
+// const isLink = (props) => renderRule(isLinkGuard, (node) => <></>)
+// const isRoot = (props) => renderRule(isRootGuard, (node) => <></>)
+// const isSpan = (props) => renderRule(isSpanGuard, (node) => <></>)
 
 /**function (node: Node): node is Span {
       return node.type === 'span' && !!node.marks?.includes('strikethrough')
@@ -157,6 +158,15 @@ interface StructuredTextProps extends ConfigurableTextParams {
   config?: structuredTextConfig & { ruleOverrides?: Partial<typeof defaults> }
 }
 
+function getRecordDirectory(typeName: string) {
+  return (
+    {
+      LegalPageRecord: ['/legal', 'legalPageSlug'],
+      BlogPageRecord: ['/blog', 'pageSlug'],
+    }[typeName] || ['', null]
+  )
+}
+
 export const renderInlineRecordRules: React.ComponentProps<
   typeof ConfigurableText
 >['renderInlineRecord'] = (node) => {
@@ -165,7 +175,12 @@ export const renderInlineRecordRules: React.ComponentProps<
 export const renderLinkToRules: React.ComponentProps<
   typeof ConfigurableText
 >['renderLinkToRecord'] = (node) => {
-  return <div></div>
+  const [directory, slugKey] = getRecordDirectory(node.record.__typename)
+  return (
+    <Link passHref href={directory + '/' + node.record[slugKey]}>
+      <Anchor {...node.transformedMeta}>{node.children}</Anchor>
+    </Link>
+  )
 }
 
 export const StructuredText: React.FC<StructuredTextProps> = ({
@@ -176,8 +191,8 @@ export const StructuredText: React.FC<StructuredTextProps> = ({
   return (
     <ConfigurableText
       renderInlineRecord={renderInlineRecordRules}
-      customRules={structuredTextRules(config)}
       renderLinkToRecord={renderLinkToRules}
+      customRules={structuredTextRules(config)}
       data={data}
       {...props}
     />

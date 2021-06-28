@@ -34,14 +34,14 @@ export const _ListItem = styled('li', {
     mark: {
       enabled: {
         '&::before': {
-          alignSelf: 'flex-end',
+          position: 'relative',
+          top: '0.125em',
+          alignSelf: 'flex-start',
           color: '$DA70',
           left: '0',
           content: `'•'`,
-          fontSize: '1.25em',
-          lineHeight: '1',
           textAlign: 'center',
-          marginRight: '1em',
+          marginRight: '0.5em',
           verticalAlign: 'middle',
         },
       },

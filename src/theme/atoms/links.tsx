@@ -1,7 +1,7 @@
 import { ArrowForward } from '@theme/icons'
 import { css, styled } from '@theme/stitches.config'
 import { Paragraph } from '@theme/typography'
-import Link from 'next/link'
+import { default as NextLink } from 'next/link'
 
 import React, { forwardRef } from 'react'
 import { HoverGroup, HoverGroupFlex } from './layout'
@@ -75,18 +75,18 @@ export const CtaLink = forwardRef<HTMLAnchorElement, LinkTextProps>(
   ({ text, href, to, ...props }, ref) => {
     if (to) {
       return (
-        <Link href={to} passHref>
+        <NextLink href={to} passHref>
           <Cta ref={ref} href={to} text={text} {...props} />
-        </Link>
+        </NextLink>
       )
     }
     return <Cta ref={ref} href={href} text={text} {...props} />
   }
 )
 
-const StyledAnchor = styled('a', {
+export const Anchor = styled('a', {
   color: '$blue',
-  [`&:hover, ${HoverGroupFlex}:hover &, ${HoverGroup}:hover &`]: {
+  [`&:hover, ${HoverGroupFlex}:hover > &, ${HoverGroup}:hover > &`]: {
     color: '$B40',
   },
   variants: {
@@ -101,15 +101,15 @@ const StyledAnchor = styled('a', {
 export const StyledLink = forwardRef<HTMLAnchorElement, LinkTextProps>(
   ({ text, href, to, ...props }, ref) => {
     const link = (
-      <StyledAnchor ref={ref} href={href} {...props}>
+      <Anchor ref={ref} href={href} {...props}>
         {text}
-      </StyledAnchor>
+      </Anchor>
     )
     if (to)
       return (
-        <Link href={to} passHref>
+        <NextLink href={to} passHref>
           {link}
-        </Link>
+        </NextLink>
       )
     return link
   }
