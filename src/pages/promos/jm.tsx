@@ -137,11 +137,12 @@ const Jm: React.FC<{}> = ({}) => {
               variants={titleAnimation}
             >
               <Paragraph as={motion.p} variants={childrenAnimation} alignCenter>
-                We’re honoured to have piqued your interest.
+                We’re honoured to have piqued your interest. Let's get the ball
+                rolling with a zoom meeting.
               </Paragraph>
               <Paragraph as={motion.p} variants={childrenAnimation} alignCenter>
-                Let’s get the ball rolling by firming up a convenient date to
-                jump on a Zoom meeting and find out if&nbsp;
+                Tap the button below to firm up a convenient date and time, and
+                together we can find out if&nbsp;
                 {an || 'your agency'} and A&amp;O is a match made in heaven.
               </Paragraph>
               <Paragraph as={motion.p} variants={childrenAnimation} alignCenter>
